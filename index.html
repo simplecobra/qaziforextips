@@ -54,7 +54,7 @@ img{max-width:100%;display:block;height:auto}
 .hero .wrap{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:40px;align-items:center;padding-block:46px 56px}
 @media (max-width:860px){.hero .wrap{grid-template-columns:1fr}}
 .hero h1{font-size:clamp(42px,6.2vw,76px);overflow-wrap:anywhere}
-.hero .ur{font-family:var(--f-ur);direction:rtl;font-size:24px;line-height:2.2;margin-top:8px}
+.hero .ur{font-family:var(--f-ur);direction:rtl;font-size:24px;line-height:2.4;margin-top:22px}
 .hero .txt{font-size:19px;opacity:.9;max-width:34em;margin-top:6px}
 .hero .cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}
 .hero .cta .btn:not(.gold){background:transparent;color:var(--brand-ink);border-color:rgba(255,255,255,.45)}
@@ -122,7 +122,7 @@ footer .wrap{display:grid;gap:6px}
 <div class="band">
   <header class="top"><div class="wrap">
     <a class="brand" href="#home"><img src="logo.png" alt="Qazi Forex Tips logo"><b id="bname">Qazi Forex Tips</b></a>
-    <nav class="nav" aria-label="Sections"><a href="#tools">Tools</a><a href="#videos">Videos</a><a href="#learn">Learn</a><a href="#contact">Contact</a></nav>
+    <nav class="nav" aria-label="Sections"><a href="#tools">Tools</a><a href="youtube.html">YouTube</a><a href="simulator.html">Simulator</a><a href="#learn">Learn</a><a href="#contact">Contact</a></nav>
     <a class="btn gold sm" id="waTop" href="#contact" target="_blank" rel="noopener">WhatsApp</a>
   </div></header>
   <div class="hero" id="home"><div class="wrap">
@@ -146,7 +146,7 @@ footer .wrap{display:grid;gap:6px}
 
 <section id="videos"><div class="wrap">
   <div class="head"><div><div class="label">YouTube</div><h2 style="margin-top:8px">Latest lessons</h2></div>
-  <a class="btn" id="ytBtn" target="_blank" rel="noopener" hidden>Open the channel</a></div>
+  <a class="btn gold" href="youtube.html">See all lessons</a></div>
   <div class="filters" id="filters" role="group" aria-label="Filter videos by topic"></div>
   <div class="vids" id="vidList"></div>
 </div></section>
@@ -201,9 +201,8 @@ footer .wrap{display:grid;gap:6px}
       '<a class="btn gold sm" href="' + esc(href) + '"' + ext + '>' + esc(t.button || "Learn more") + '</a></div></article>';
   }).join("");
 
-  var vids = S.videos || [];
+  var vids = (S.videos || []).length ? S.videos : ((S.youtube || {}).latest || []);
   var ytId = function(u){ var m = String(u).match(/(?:v=|youtu\.be\/|shorts\/|embed\/)([\w-]{11})/); return m ? m[1] : ""; };
-  if (B.youtube) { $("ytBtn").href = B.youtube; $("ytBtn").hidden = false; }
   var topicsV = ["All"].concat(vids.map(function(v){ return v.topic; }).filter(function(t, i, a){ return t && a.indexOf(t) === i; }));
   function drawVids(f){
     var list = vids.filter(function(v){ return f === "All" || v.topic === f; });

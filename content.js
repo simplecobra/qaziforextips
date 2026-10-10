@@ -18,8 +18,8 @@ window.SITE = {
     name: "Qazi Forex Tips",
     tagline: "Gold, Price Action & Risk Management – in Urdu",
     whatsapp: "+92-323-6700010",
-    youtube: "",          // apne channel ka link, e.g. "https://www.youtube.com/@..."
-    facebook: "",         // Facebook group / page ka link
+    youtube: "https://www.youtube.com/@QaziForexTips",
+    facebook: "https://www.facebook.com/groups/qaziforextips",
     email: ""             // agar ho
   },
 
@@ -87,6 +87,150 @@ window.SITE = {
     { name: "Trading Psychology", text: "Discipline, patience and the habits that keep an account alive." }
   ],
 
-  /* ---------- 6. NEECHE KI LINE (FOOTER) ---------- */
+  /* ---------- 6. YOUTUBE PAGE (youtube.html) ----------
+     Yeh poora YouTube page isi hisse se banta hai.
+     Thumbnail (tasveer) website khud YouTube se le leti hai.
+
+     NAYI VIDEO DAALNA (sirf 2 kaam):
+       1) "latest" mein SAB SE UPAR aik line daalein.
+       2) Jis playlist mein video hai, us ki "videos" list mein bhi aik line daalein
+          (playlist mein jis number par video hai, usi jagah).
+       Line aisi hoti hai:
+       { title: "Video ka naam", link: "https://youtu.be/XXXXXXXXXXX", time: "12:34" },
+       - link: YouTube par "Share" > "Copy" se jo link milta hai, woh paste karein.
+       - time: video ki lambai (khali "" bhi chal jata hai).
+
+     NAYI PLAYLIST: neeche wala aik poora { name: ... } block copy/paste karein.
+       link: YouTube playlist ka link (button "Play all on YouTube" ke liye)          */
+  youtube: {
+    title: "Free forex lessons in Urdu & Hindi",
+    urdu: "فاریکس ٹریڈنگ مفت سیکھیں – اردو اور ہندی میں",
+    text: "Complete Price Action courses, tested strategies, live sessions and practical guides. Start from Lecture 1 and go step by step.",
+    featured: "https://youtu.be/U1bCUislVJ4",   // hero mein bari video (aam tor par sab se nayi)
+
+    latest: [
+      { title: "Best MT5 Replay Tool for Backtesting | Prop Firm Challenge Mode | Practice Like Real Market", link: "https://youtu.be/U1bCUislVJ4", time: "28:40" },
+      { title: "High Probability TREND REVERSAL Technique | Simplest and Easiest steps", link: "https://youtu.be/Npav87jvsgE", time: "55:21" },
+      { title: "Master the Fibonacci Retracement Technique: A Step-by-Step Guide. Expert Tips & Strategies", link: "https://youtu.be/3bVuDuiWMvE", time: "26:18" },
+      { title: "Rule-Based Multi-Timeframe Analysis for Forex & Stocks", link: "https://youtu.be/uVsJgH40mz4", time: "32:31" },
+      { title: "How to BACKTEST any Strategy like a PRO! (The main Reason behind Failure of a Trader)", link: "https://youtu.be/LXhMQmasz7Y", time: "24:00" },
+      { title: "When to Trade Against the Trend – A Simple Method (Urdu & Hindi)", link: "https://youtu.be/4WyfWJpBXSQ", time: "43:52" }
+    ],
+
+    playlists: [
+      {
+        name: "Price Action Mastery – Basic Level",
+        text: "Complete beginner course in Urdu & Hindi. Start here: support & resistance, trendlines, Fibonacci, SL / TP and multi-timeframe analysis.",
+        course: true,   // true = cards par "Lecture 1, 2, 3..." likha aata hai
+        link: "https://www.youtube.com/playlist?list=PLae00y7sDib6oCTqRtajkeN43LT7pQvNQ",
+        videos: [
+          { title: "Some important Points about Forex Trading (Price Action Mastery Course lecture 01)", link: "https://youtu.be/9JfvsIfslCg", time: "19:38" },
+          { title: "Importance of Price Action and Technical Analysis (Lecture 02)", link: "https://youtu.be/787D9bivMGA", time: "18:26" },
+          { title: "Why Support and Resistance Fails? Important rules to Draw Support and Resistance", link: "https://youtu.be/DDaEQcAJIEA", time: "40:35" },
+          { title: "Easiest and Important Rules to Draw Trendlines in Urdu/Hindi", link: "https://youtu.be/oj6VV-aQyHo", time: "35:32" },
+          { title: "Where to set Take Profit and Stop Loss? How to Close half trade in Profit", link: "https://youtu.be/P4WlWt2Tmjs", time: "18:38" },
+          { title: "How to Identify False Breakouts and How to Avoid them. Tips and Detailed Video in Urdu and Hindi", link: "https://youtu.be/7aLG1XgfSYA", time: "22:49" },
+          { title: "Simple Fibonacci retracement Strategy explain in Urdu Hindi (The Secret of Fibonacci)", link: "https://youtu.be/qLNsCRwyQp0", time: "14:59" },
+          { title: "Simple and Easy method to use Trend Based Fibonacci Extensions for Profit Levels", link: "https://youtu.be/wQ5GxVGwxww", time: "17:32" },
+          { title: "Most Important Lecture Don't Skip any Second. Use of Rejection and Momentum Candle for Perfect Entry", link: "https://youtu.be/jwOwHVb1nIU", time: "39:13" },
+          { title: "Money Management Plan – How to Grow a Small Account Step by Step (Forex, Crypto, Stock)", link: "https://youtu.be/558_ymM-hCg", time: "33:42" },
+          { title: "Become An Expert With Multiple Time Frame Analysis || Top Down Analysis ||", link: "https://youtu.be/DSXZkL9ygfE", time: "33:14" }
+        ]
+      },
+      {
+        name: "Price Action Mastery – Advance Level",
+        text: "After the basic course: market structure, swing levels and the chart patterns professionals trade – with entry, SL and TP rules.",
+        course: true,
+        link: "https://www.youtube.com/playlist?list=PLae00y7sDib4LJZQrca7Icna4_D1lxnZU",
+        videos: [
+          { title: "Price Channel Detailed Video: Types, Drawing and Channel Trading Strategy in Simple words", link: "https://youtu.be/53hlwsaW3og", time: "31:10" },
+          { title: "More simple! can't possible: Master these Chart Pattern Symmetrical, Ascending & Descending Triangle", link: "https://youtu.be/kCiq33-i7nk", time: "30:18" },
+          { title: "How to Spot and Trade Rising & Falling Wedges", link: "https://youtu.be/rWSzRoAk0m4", time: "35:05" },
+          { title: "How Professionals Trade Head & Shoulders Patters l How to Confirm, Recognize and Trade it URDU Hindi", link: "https://youtu.be/UXq228TiW6c", time: "26:36" },
+          { title: "Best method to trade Inverse Head & Shoulder Pattern with complete Rules of Entry,TP & SL urdu/hindi", link: "https://youtu.be/qF7NSlS-lYU", time: "21:36" },
+          { title: "Mastering Forex/ Stock Market Structure (Advanced). Key to Success in Forex/ Stock Urdu/Hindi", link: "https://youtu.be/VFo2qCSMPuU", time: "25:34" },
+          { title: "How To Identify Swing Highs & Lows (Major Swing Levels) All you Need to Know", link: "https://youtu.be/-RVBo8qiJ1Q", time: "17:36" },
+          { title: "Quasimodo Pattern for Scalpers and Day Traders", link: "https://youtu.be/vqC4EwSmtPE", time: "17:16" },
+          { title: "The Only Flag Pattern Video You Will Ever Need I Simple But Powerful Flag Pattern Trading Strategy", link: "https://youtu.be/oQZz8Ng78XM", time: "18:24" }
+        ]
+      },
+      {
+        name: "Trading Strategies",
+        text: "Complete strategies with rules: divergence, MACD, breakout, price action scalping and Gold scalping.",
+        course: false,
+        link: "https://www.youtube.com/playlist?list=PLae00y7sDib5m4Tmn2g_3enubmXc65Zja",
+        videos: [
+          { title: "Trade Divergence like a PRO – Complete Divergence Strategy", link: "https://youtu.be/ZCPiVFEoryw", time: "43:30" },
+          { title: "MACD Crossover Trading Strategy in Urdu & Hindi", link: "https://youtu.be/O1sffgWvmwg", time: "17:17" },
+          { title: "How to Trade Hidden Divergence – Complete Rules", link: "https://youtu.be/rRvvmwV_Km0", time: "23:48" },
+          { title: "Price Action Trading Strategy for Day Traders & Scalpers", link: "https://youtu.be/6ktztQxlCk4", time: "20:41" },
+          { title: "Breakout Trading Strategy – Price Action Method for Intraday Traders", link: "https://youtu.be/gsIRSLb1B8Q", time: "22:51" },
+          { title: "Dominant Breakout Method – Breakout Strategy for Forex & Stocks", link: "https://youtu.be/xHuF_uWFaww", time: "25:50" },
+          { title: "Dominant Plus – Scalping Strategy for Gold, Indices & Crypto (M5 / M15)", link: "https://youtu.be/vNwv4ZwHVMA", time: "12:03" },
+          { title: "QFT Price Action Scalping Strategy – Gold, Indices, Stocks & Forex", link: "https://youtu.be/jDDa-sa8X1E", time: "28:47" },
+          { title: "Gold Scalping Strategy on the 5-Minute Chart – Stochastic RSI", link: "https://youtu.be/5vrDSC08ox0", time: "22:30" },
+          { title: "Gold Scalping Strategy GSS-2 – Complete Rules", link: "https://youtu.be/4QHH5V2gsEQ", time: "33:25" }
+        ]
+      },
+      {
+        name: "Weekly Live Sessions",
+        text: "Full-length live session recordings: market recap, weekly analysis, market structure and Q&A.",
+        course: false,
+        link: "https://www.youtube.com/playlist?list=PLae00y7sDib4YBRj3X0qmwkgPtEUpFnuW",
+        videos: [
+          { title: "Weekly Live Session: Market Recap, Weekly Analysis, Types of Levels, Tips & Tricks and Much More", link: "https://youtu.be/P3G1W3-Y_oI", time: "59:50" },
+          { title: "Unknown Facts About Forex Trading Every Trader Should Know (Urdu / Hindi)", link: "https://youtu.be/0uPnOhdFIW8", time: "1:04:39" },
+          { title: "Weekly Live Session Recording : Forex Market Recap plus weekly Analysis GOLD GBPUSD", link: "https://youtu.be/bLVgD208gJg", time: "1:09:01" },
+          { title: "Most Important Points for Price Action Trader in Urdu and Hindi live session 22 Jan 2023", link: "https://youtu.be/wFTDiXOnfN4", time: "1:09:20" },
+          { title: "It's Time to Open Up About classic trading method. The Ultimate Guide to Forex Market Structure.", link: "https://youtu.be/eXbRWN-g8gI", time: "55:34" },
+          { title: "Increase Accuracy of Classic Trading Method. The Ultimate Guide to Forex Market Structure (Part-2)", link: "https://youtu.be/o1Y-bcvP5mU", time: "58:06" },
+          { title: "When to Trade Against the Trend – A Simple Method (Urdu & Hindi)", link: "https://youtu.be/4WyfWJpBXSQ", time: "43:52" },
+          { title: "How to BACKTEST any Strategy like a PRO! (The main Reason behind Failure of a Trader)", link: "https://youtu.be/LXhMQmasz7Y", time: "24:00" },
+          { title: "Rule-Based Multi-Timeframe Analysis for Forex & Stocks", link: "https://youtu.be/uVsJgH40mz4", time: "32:31" },
+          { title: "Master the Fibonacci Retracement Technique: A Step-by-Step Guide. Expert Tips & Strategies", link: "https://youtu.be/3bVuDuiWMvE", time: "26:18" }
+        ]
+      },
+      {
+        name: "Important Forex Videos",
+        text: "Practical guides: brokers, deposits & withdrawals, TradingView, backtesting software, lot size, news and the best time to trade.",
+        course: false,
+        link: "https://www.youtube.com/playlist?list=PLae00y7sDib7ZXxHWIHzlkcmcAU992IUw",
+        videos: [
+          { title: "Tradingview Tutorial: How to Use Tradingview for Technical Analysis (Urdu/Hindi)", link: "https://youtu.be/d4U5FhM6NLU", time: "20:34" },
+          { title: "Weekly Analysis 21 June to 25 June EURUSD, EURGBP, EURJPY. EURCAD, EURCHF", link: "https://youtu.be/oBldQaYHb6k", time: "12:37" },
+          { title: "Weekly Analysis Gold, Oil, Silver, XRPUSD, BTCUSD from 21 June to 25 June Urdu Hindi", link: "https://youtu.be/4G3RaAzSbkI", time: "10:57" },
+          { title: "Weekly Analysis GBPUSD, GBPAUD, GBPNZD, GBPCHF. GBPCAD for 21 June to 25 June 2021", link: "https://youtu.be/bGJysA4XgT8", time: "14:33" },
+          { title: "Simple method to Read and Analyze NFP News Data in Urdu/Hindi", link: "https://youtu.be/jU96IJBXrSE", time: "13:10" },
+          { title: "Thinktrader Tutorial + Download Link: Best Free Software for Backtesting Forex/ Stock Market", link: "https://youtu.be/PwWmz-5S4qE", time: "13:01" },
+          { title: "IC Markets Broker Review and Account Opening", link: "https://youtu.be/H4KgkxaiKSQ", time: "36:46" },
+          { title: "Best Broker Selection Guide. very simple steps in Urdu & Hindi I How to Select Top Broker for Forex", link: "https://youtu.be/JeUpNZjti5Q", time: "15:28" },
+          { title: "Chart Pattern Dashboard: Autochartist: Get Daily Forex/Stock Chart Pattern Signals on Mobile", link: "https://youtu.be/dOYz8pONVa0", time: "12:10" },
+          { title: "Must Watch this Video before Starting Forex Trading l Trading Myths VS Realities", link: "https://youtu.be/UnSphPChym8", time: "12:19" },
+          { title: "Strategy Optimization Tips – Improve Your Strategy Step by Step", link: "https://youtu.be/o0KRYx2WOmw", time: "13:06" },
+          { title: "IC Markets Account Opening & Verification – Step by Step", link: "https://youtu.be/Ud6u5BLeKt0", time: "16:57" },
+          { title: "Best time to trade Forex/Gold for Scalping in Pakistan/ India", link: "https://youtu.be/ULqqAMzAKhg", time: "12:35" },
+          { title: "Soft4FX Tutorial: FOREX, Stock, Crypto Best Backtesting Software (Bar Reply Forex Simulator for MT4)", link: "https://youtu.be/wHBg7w9ws-Y", time: "24:07" },
+          { title: "IC Markets | How to deposit and withdraw from IC Markets | Local Bank | Skrill l Pakistan & India", link: "https://youtu.be/0aYu58CE4Fo", time: "12:04" },
+          { title: "Trade Assistant for mt4 : Automatic Risk/Lot Size calculator: Manage your trades with just 1 click", link: "https://youtu.be/1uMbc43V_tk", time: "16:18" },
+          { title: "FP Markets Account Opening & Verification – Step by Step", link: "https://youtu.be/KBmSAZsrRa0", time: "9:36" },
+          { title: "Managing Lot Size in Forex – The Right Lot Size on Every Trade", link: "https://youtu.be/4c9gtnO5_48", time: "9:39" },
+          { title: "Best MT5 Replay Tool for Backtesting | Prop Firm Challenge Mode | Practice Like Real Market", link: "https://youtu.be/U1bCUislVJ4", time: "28:40" }
+        ]
+      },
+      {
+        name: "More videos",
+        text: "Videos from the channel that are not in a playlist yet.",
+        course: false,
+        link: "",
+        videos: [
+          { title: "High Probability TREND REVERSAL Technique | Simplest and Easiest steps", link: "https://youtu.be/Npav87jvsgE", time: "55:21" },
+          { title: "How Do I Analyze the Forex Market & Take Entries. Last Week Analysis with Explanation.", link: "https://youtu.be/Qh16-yMyp2A", time: "42:39" },
+          { title: "Qazi Forex Tips Live Stream", link: "https://youtu.be/0T4pGece544", time: "1:09:19" }
+        ]
+      }
+    ]
+  },
+
+  /* ---------- 7. NEECHE KI LINE (FOOTER) ---------- */
   disclaimer: "Trading forex and gold involves high risk. Content is for education only and is not financial advice. Past or backtest results do not guarantee future results."
 };
