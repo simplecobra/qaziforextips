@@ -231,6 +231,45 @@ window.SITE = {
     ]
   },
 
-  /* ---------- 7. NEECHE KI LINE (FOOTER) ---------- */
+  /* ---------- 7. NUMBERS (sirf SACH figures likhein) ---------- */
+  stats: [
+    { value: "2013", label: "Trading since" },
+    { value: "64th", label: "Student batch running" },
+    { value: "14K+", label: "YouTube subscribers" },
+    { value: "60+",  label: "Free video lessons" }
+  ],
+
+  /* ---------- 8. YAHAN SE SHURU KAREIN (learning path) ---------- */
+  path: [
+    { title: "Learn the basics", text: "Price Action Mastery – Basic Level. 11 lectures, from support & resistance to multi-timeframe analysis.", link: "youtube.html#pl-1", button: "Start Lecture 1" },
+    { title: "Go advanced", text: "Price Action Mastery – Advance Level. Market structure, swing levels and chart patterns with entry, SL and TP rules.", link: "youtube.html#pl-2", button: "Open the course" },
+    { title: "Pick a strategy", text: "Complete strategies with rules: divergence, breakout, price action scalping and Gold scalping.", link: "youtube.html#pl-3", button: "See strategies" },
+    { title: "Practise before you risk money", text: "Replay past markets candle by candle in the QFT Replay Simulator and build your own track record.", link: "simulator.html", button: "See the simulator" }
+  ],
+
+  /* ---------- 9. ABOUT (photo: tasveer ka naam, e.g. "qazi.jpg") ---------- */
+  about: {
+    name: "Qazi Abdul Basit",
+    role: "Forex & Gold trader · Founder, Qazi Forex Tips",
+    photo: "",
+    story: [
+      "I have been trading forex and Gold since 2013. Like every trader I went through the ups and downs, and those years taught me what keeps an account alive: clear price action, a fixed risk on every trade, and the discipline to follow a plan.",
+      "I started Qazi Forex Tips so traders in Pakistan and India can learn this in their own language. The YouTube channel has complete free courses in Urdu and Hindi, and our 64th student batch is running now.",
+      "I also build MetaTrader 5 tools for my own trading and teaching, like the QFT Replay Simulator for honest backtesting and the QFT Trade Assistant for risk-based lot sizes."
+    ],
+    skills: ["Price Action", "Gold (XAUUSD)", "Risk & Money Management", "Trading Psychology"]
+  },
+
+  /* ---------- 10. SAWAL JAWAB (FAQ) ---------- */
+  faq: [
+    { q: "I am completely new. Where should I start?", a: "Start with Price Action Mastery – Basic Level on our YouTube page and watch it in order from Lecture 1. Practise on a demo account while you learn." },
+    { q: "Are the YouTube courses free?", a: "Yes. Every course on the YouTube channel is free to watch, in Urdu and Hindi." },
+    { q: "How do I join the next student batch?", a: "Send us a message on WhatsApp at +92-323-6700010 and we will share the details of the next batch." },
+    { q: "How much money do I need to start trading?", a: "Learn and practise on a demo account first. When you go live, use only money you can afford to lose and keep the risk on each trade small, for example 1% of the account." },
+    { q: "How can I get the QFT Replay Simulator or an EA?", a: "Message us on WhatsApp. We will help you choose the right tool and guide you through setup and the licence." },
+    { q: "Do you give signals or guaranteed profits?", a: "No. We teach you to read the market and manage risk yourself. Trading carries high risk and nobody can guarantee profit." }
+  ],
+
+  /* ---------- 11. NEECHE KI LINE (FOOTER) ---------- */
   disclaimer: "Trading forex and gold involves high risk. Content is for education only and is not financial advice. Past or backtest results do not guarantee future results."
 };
