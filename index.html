@@ -170,7 +170,8 @@ footer .wrap{display:grid;gap:6px}
 
 <footer><div class="wrap"><span id="fname"></span><span id="disc"></span></div></footer>
 
-<script src="content.js"></script>
+<!-- content.js har dafa taaza load hota hai (cache ki wajah se purani likhai na dikhe) -->
+<script>document.write('<script src="content.js?v=' + Date.now() + '"><\/script>');</script>
 <script>
 (function(){
   var S = window.SITE || {}, B = S.brand || {}, H = S.hero || {};
