@@ -120,7 +120,8 @@ section{padding-block:52px;border-bottom:1px solid var(--rule)}
 @media (max-width:760px){.sub{grid-template-columns:1fr;justify-items:start}}
 
 /* player */
-dialog{border:0;padding:0;background:transparent;width:min(1000px,calc(100vw - 24px));max-height:calc(100vh - 24px);color:var(--ink)}
+dialog{border:0;padding:0;background:transparent;width:min(1000px,calc(100vw - 24px),calc((100dvh - 190px) * 16 / 9));max-height:calc(100dvh - 16px);overflow:visible;color:var(--ink)}
+@supports not (height:100dvh){dialog{width:min(1000px,calc(100vw - 24px),calc((100vh - 190px) * 16 / 9));max-height:calc(100vh - 16px)}}
 dialog::backdrop{background:rgba(8,8,10,.86)}
 .pl{background:var(--surface);border-radius:12px;overflow:hidden}
 .frame{aspect-ratio:16/9;background:#000}
@@ -129,7 +130,8 @@ dialog::backdrop{background:rgba(8,8,10,.86)}
 .pl .info b{flex:1 1 300px;font-size:17px;line-height:1.35}
 .pl .acts{display:flex;flex-wrap:wrap;gap:8px}
 .x{position:absolute;right:0;top:-44px;width:38px;height:38px;border-radius:50%;border:0;background:rgba(255,255,255,.15);color:#fff;font-size:22px;line-height:1;cursor:pointer}
-dialog .in{position:relative;margin-top:44px}
+dialog .in{position:relative;margin-top:48px}
+@media (max-width:520px){dialog{width:calc(100vw - 16px)}}
 
 footer{padding-block:28px;color:var(--muted);font-size:14px}
 footer .wrap{display:grid;gap:6px}
