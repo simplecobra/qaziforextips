@@ -249,9 +249,9 @@ window.SITE = {
 
   /* ---------- 9. ABOUT (photo: tasveer ka naam, e.g. "qazi.jpg") ---------- */
   about: {
-    name: "Qazi Abdul Basit",
-    role: "Forex & Gold trader · Founder, Qazi Forex Tips",
-    photo: "",
+    name: "Dr. Qazi Abdul Basit",
+    role: "Ph.D in Business Administration · Forex & Gold trader since 2013 · Founder, Qazi Forex Tips",
+    photo: "qazi.jpg",
     story: [
       "I have been trading forex and Gold since 2013. Like every trader I went through the ups and downs, and those years taught me what keeps an account alive: clear price action, a fixed risk on every trade, and the discipline to follow a plan.",
       "I started Qazi Forex Tips so traders in Pakistan and India can learn this in their own language. The YouTube channel has complete free courses in Urdu and Hindi, and our 64th student batch is running now.",
