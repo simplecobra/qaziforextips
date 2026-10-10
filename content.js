@@ -35,7 +35,7 @@ window.SITE = {
      paste karein, aur likhai badal dein.
        type:   "Software" ya "EA" ya "Indicator"
        badge:  "NEW" / "UPDATED" ya "" (khali)
-       image:  "img/naam.jpg" (img folder mein tasveer upload karein) ya "" (khali)
+       image:  "naam.jpg" (tasveer bhi isi jagah upload karein) ya "" (khali)
        link:   is ki apni page ka link, ya "" (to button WhatsApp kholega)        */
   tools: [
     {
@@ -44,8 +44,8 @@ window.SITE = {
       badge: "v3.01",
       text: "MT5 market replay and manual backtesting with Prop Firm Challenge mode and a professional backtest report.",
       points: ["Replay any day, candle by candle", "Risk in $ – lot follows your SL", "Money management plan from your results"],
-      image: "img/simulator.jpg",
-      link: "simulator/index.html",
+      image: "simulator.jpg",
+      link: "simulator.html",
       button: "See the simulator"
     },
     {
