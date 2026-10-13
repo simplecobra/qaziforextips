@@ -39,8 +39,25 @@
     return r ? '<div class="stars" aria-label="' + r + ' out of 5">' + "★★★★★".slice(0, r) + '<span style="opacity:.25">' + "★★★★★".slice(r) + "</span></div>" : "";
   }
 
+  /* long feedback: show ~6 lines + "Read more" */
+  var LONG = 280;
+  if (!window.__qftMore) {
+    window.__qftMore = 1;
+    var st = document.createElement("style");
+    st.textContent = ".tst p.clamp{display:-webkit-box;-webkit-line-clamp:6;-webkit-box-orient:vertical;overflow:hidden}" +
+      ".tst .more{justify-self:start;background:none;border:0;padding:0;margin:-6px 0 0;color:var(--gold);font:inherit;font-weight:600;cursor:pointer}";
+    document.head.appendChild(st);
+    document.addEventListener("click", function (e) {
+      var b = e.target.closest && e.target.closest(".tst .more"); if (!b) return;
+      var p = b.previousElementSibling, open = p.classList.toggle("clamp");
+      b.textContent = open ? "Read more" : "Show less"; b.setAttribute("aria-expanded", String(!open));
+    });
+  }
+
   function card(t) {
-    return '<figure class="tst" style="margin:0">' + stars(t.rating) + "<p>" + esc(t.text) + '</p><figcaption class="who"><b>' + esc(t.name) + "</b>" +
+    var long = String(t.text || "").length > LONG;
+    return '<figure class="tst" style="margin:0">' + stars(t.rating) + "<p" + (long ? ' class="clamp"' : "") + ">" + esc(t.text) + "</p>" +
+      (long ? '<button type="button" class="more" aria-expanded="false">Read more</button>' : "") + '<figcaption class="who"><b>' + esc(t.name) + "</b>" +
       esc([t.city, t.batch ? "Batch " + t.batch : "", t.date].filter(Boolean).join(" · ")) + "</figcaption></figure>";
   }
 
