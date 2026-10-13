@@ -51,12 +51,12 @@ window.SITE = {
     {
       name: "QFT Trade Assistant",
       type: "EA",
-      badge: "",
-      text: "Risk management trade panel for MT5: set risk in money or %, drag SL / TP lines, the lot size is calculated for you.",
-      points: ["Lot size from your risk", "SL / TP lines on the chart", "One-click orders"],
+      badge: "v3.11",
+      text: "Risk management trade panel for MT5: set risk in money or %, drag Entry / SL / TP lines, the lot size is calculated for you.",
+      points: ["Lot size from your risk", "Drag Entry / SL / TP on the chart", "One-click market & pending orders"],
       image: "",
-      link: "",
-      button: "Ask on WhatsApp"
+      link: "trade-assistant.html",
+      button: "See the Trade Assistant"
     },
     {
       name: "QFT Smart DCA EA",
@@ -69,6 +69,35 @@ window.SITE = {
       button: "Ask on WhatsApp"
     }
   ],
+
+  /* ---------- 3b. QFT TRADE ASSISTANT (trade-assistant.html + Home showcase) ----------
+     version: naya version aaye to sirf yahan number badlein.
+     shots:   screenshots ke naam. Tasveer GitHub par isi naam se upload karein,
+              website khud dikha degi. Jo tasveer nahi mili woh khud chhup jati hai.
+     video:   YouTube video ka link jab video ban jaye (abhi khali).            */
+  tradeAssistant: {
+    version: "3.11",
+    video: "",
+    shots: [
+      { file: "ta-1.png", caption: "Main panel: risk, lot size and one-click orders" },
+      { file: "ta-2.png", caption: "Entry, SL and TP lines on the chart" },
+      { file: "ta-3.png", caption: "Close tab: manage open trades" },
+      { file: "ta-4.png", caption: "Info tab: account, symbol and statistics" },
+      { file: "ta-5.png", caption: "Patterns & Strategies tabs" },
+      { file: "ta-6.png", caption: "License & Updates screen" }
+    ],
+    features: [
+      { title: "Risk in money or %", text: "Set risk in $ or as % of balance, equity, free margin, a custom amount, or the previous day, week or month. No hidden risk cap: you decide." },
+      { title: "Automatic lot size", text: "Move your SL and the lot size follows your risk. The lot turns red if the broker would not accept it." },
+      { title: "Drag Entry, SL and TP", text: "Compact lines at the right edge of the chart. Drag the entry to make a pending order, lock SL or TP with L, flip Buy/Sell with R." },
+      { title: "One-click orders", text: "Market and pending orders go straight in, with no confirmation popup. Clear English messages only when something is wrong, such as margin." },
+      { title: "Manage open trades", text: "Close tab for partial and full closes. SL and TP stay draggable on the chart after entry." },
+      { title: "Patterns & Strategies", text: "Toggle buttons mark chart patterns and strategy signals with Entry, SL and TP, each with a history score so you can judge it yourself." },
+      { title: "News on the panel", text: "Upcoming high-impact news shown in your own PC time, so you are not caught by NFP or CPI." },
+      { title: "Remembers everything", text: "Risk, RR and other settings survive an MT5 restart. Hotkeys for the main buttons and selectable panel themes." },
+      { title: "Online updates & licence", text: "Update to the newest version from inside the panel. Licence key tied to your account number." }
+    ]
+  },
 
   /* ---------- 4. YOUTUBE VIDEOS ----------
      NAYI VIDEO DAALNA: sirf title aur YouTube ka link likhein.

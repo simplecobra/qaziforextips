@@ -236,7 +236,7 @@ footer a:hover{color:var(--ink)}
 <header class="top"><div class="wrap">
   <a class="brand" href="#top"><img src="logo.png" alt="Qazi Forex Tips logo"><b>Qazi Forex Tips</b></a>
   <nav class="nav" id="nav" aria-label="Main">
-    <a href="#start">Start here</a><a href="youtube.html">Courses</a><a href="#about">About</a><a href="simulator.html">Simulator</a><a href="#tools">Tools</a><a href="#faq">FAQ</a>
+    <a href="#start">Start here</a><a href="youtube.html">Courses</a><a href="#about">About</a><a href="simulator.html">Simulator</a><a href="trade-assistant.html">Trade Assistant</a><a href="#faq">FAQ</a>
   </nav>
   <a class="btn gold sm wa-top" id="waTop" href="#contact" target="_blank" rel="noopener">WhatsApp</a>
   <button class="menu" id="menu" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
@@ -291,8 +291,24 @@ footer a:hover{color:var(--ink)}
   <div class="shot"><div class="bar"><i></i><i></i><i></i></div><img src="simulator.jpg" alt="QFT Replay Simulator running inside MetaTrader 5"></div>
 </div></section>
 
+<section id="assistant" style="padding-top:0"><div class="wrap sim">
+  <div id="taHomeVisual" style="order:0"></div>
+  <div>
+    <div class="eyebrow">QFT Trade Assistant · <span id="taVer">v3.11</span> · New</div>
+    <h2 style="margin-top:12px">Your risk fixed. Your lot calculated.</h2>
+    <p class="muted" style="margin-top:16px;font-size:18px">A risk-management trade panel for MetaTrader 5. Set your risk, drag Entry, SL and TP on the chart, and place the order with one click.</p>
+    <ul>
+      <li><span><b>Risk in $ or %</b>Balance, equity, free margin or a custom amount. You decide the risk.</span></li>
+      <li><span><b>Drag Entry, SL and TP</b>The lot size updates as you move the lines. Lock SL or TP, flip Buy and Sell.</span></li>
+      <li><span><b>One-click market &amp; pending orders</b>No popups in your way. Clear messages only on errors.</span></li>
+      <li><span><b>Manage, news, updates</b>Close tab, news on the panel, and online updates from inside MT5.</span></li>
+    </ul>
+    <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:28px"><a class="btn gold" href="trade-assistant.html">See all features</a><a class="btn" id="waTA" href="#contact" target="_blank" rel="noopener">Free 3-day demo</a></div>
+  </div>
+</div></section>
+
 <section id="tools" style="padding-top:0"><div class="wrap">
-  <div class="head"><div class="eyebrow">MT5 tools</div><h2>Expert Advisors and trade tools</h2><p>Built for our own trading and teaching. Ask on WhatsApp for details and setup.</p></div>
+  <div class="head"><div class="eyebrow">MT5 tools</div><h2>More Expert Advisors</h2><p>Built for our own trading and teaching. Ask on WhatsApp for details and setup.</p></div>
   <div class="tools" id="tools-list"></div>
 </div></section>
 
@@ -320,7 +336,7 @@ footer a:hover{color:var(--ink)}
 </main>
 
 <footer><div class="wrap">
-  <div class="row"><span id="fname"></span><nav aria-label="Footer"><a href="youtube.html">Courses</a><a href="simulator.html">Simulator</a><a href="#about">About</a><a href="#faq">FAQ</a></nav></div>
+  <div class="row"><span id="fname"></span><nav aria-label="Footer"><a href="youtube.html">Courses</a><a href="simulator.html">Simulator</a><a href="trade-assistant.html">Trade Assistant</a><a href="#about">About</a><a href="#faq">FAQ</a></nav></div>
   <p class="disc" id="disc"></p>
 </div></footer>
 
@@ -361,12 +377,52 @@ footer a:hover{color:var(--ink)}
     '<div class="chips">' + (A.skills || []).map(function(s){ return '<span class="chip">' + esc(s) + '</span>'; }).join("") + '</div>';
 
   /* tools (simulator has its own section) */
-  $("tools-list").innerHTML = (S.tools || []).filter(function(t){ return !/simulator/i.test(t.name); }).map(function(t){
+  $("tools-list").innerHTML = (S.tools || []).filter(function(t){ return !/simulator|trade assistant/i.test(t.name); }).map(function(t){
     var href = t.link || wa, ext = t.link ? "" : ' target="_blank" rel="noopener"';
     return '<article class="tool"><span class="tag">' + esc(t.type) + '</span><h3>' + esc(t.name) + '</h3><p>' + esc(t.text) + '</p>' +
       ((t.points || []).length ? '<ul>' + t.points.map(function(p){ return '<li>' + esc(p) + '</li>'; }).join("") + '</ul>' : '') +
       '<a class="btn sm" href="' + esc(href) + '"' + ext + '>' + esc(t.button || "Ask on WhatsApp") + '</a></article>';
   }).join("");
+
+
+  /* trade assistant showcase */
+  var T = S.tradeAssistant || {}, tver = T.version || "3.11";
+  $("taVer").textContent = "v" + tver;
+  $("waTA").href = wa + "?text=" + encodeURIComponent("Assalam o Alaikum, I want the free 3-day demo of QFT Trade Assistant v" + tver + ".");
+  (function(){
+    var hv = $("taHomeVisual"), sh = (T.shots || [])[0];
+    function illustration(){ hv.innerHTML = '<div class="panel"><div class="panel-head"><span class="dot"></span><b>XAUUSD</b><span class="tf">Trade Assistant lines</span><span class="ill">Illustration</span></div><canvas id="taChart" style="display:block;width:100%;height:340px" role="img" aria-label="Illustration of Entry, SL and TP lines on a chart"></canvas></div>'; drawLines($("taChart")); }
+    if (sh && sh.file) { var im = new Image(); im.onload = function(){ hv.innerHTML = '<div class="shot"><div class="bar"><i></i><i></i><i></i></div><img src="' + esc(sh.file) + '" alt="' + esc(sh.caption) + '"></div>'; }; im.onerror = illustration; im.src = sh.file; }
+    else illustration();
+  function drawLines(cv){
+      var css = function(n){ return getComputedStyle(document.documentElement).getPropertyValue(n).trim(); };
+      var dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
+      function draw(){
+        var r = cv.getBoundingClientRect(), W = r.width, H = r.height, cx = cv.getContext("2d");
+        cv.width = W * dpr; cv.height = H * dpr; cx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        var gold = css("--gold"), wine = css("--wine"), line = css("--line"), muted = css("--muted"), ink = css("--ink");
+        var seed = 11, rnd = function(){ seed = (seed * 16807) % 2147483647; return seed / 2147483647; };
+        var c = [], v = 50; for (var i = 0; i < 34; i++){ var o = v, cl = o + (rnd() - .47) * 3.2, h = Math.max(o, cl) + rnd() * 1.4, l = Math.min(o, cl) - rnd() * 1.4; c.push([o, cl, h, l]); v = cl; }
+        var entry = v, sl = entry - 6, tp = entry + 12;
+        var hi = Math.max(tp + 2, Math.max.apply(null, c.map(function(k){ return k[2]; }))), lo = Math.min(sl - 2, Math.min.apply(null, c.map(function(k){ return k[3]; })));
+        var y = function(p){ return 18 + (hi - p) / (hi - lo) * (H - 36); };
+        cx.strokeStyle = line; cx.globalAlpha = .5; for (var g = 1; g < 5; g++){ var gy = Math.round(H * g / 5) + .5; cx.beginPath(); cx.moveTo(0, gy); cx.lineTo(W, gy); cx.stroke(); } cx.globalAlpha = 1;
+        var area = W * .62, step = area / c.length, bw = Math.max(3, step * .58);
+        c.forEach(function(k, i){ var up = k[1] >= k[0], col = up ? gold : wine, x = 10 + i * step + step / 2; cx.strokeStyle = col; cx.beginPath(); cx.moveTo(Math.round(x) + .5, y(k[2])); cx.lineTo(Math.round(x) + .5, y(k[3])); cx.stroke(); var t = y(Math.max(k[0], k[1])), b = y(Math.min(k[0], k[1])); cx.fillStyle = col; cx.fillRect(x - bw / 2, t, bw, Math.max(1.5, b - t)); });
+        var x0 = area + 30;
+        cx.globalAlpha = .12; cx.fillStyle = gold; cx.fillRect(x0, y(tp), W - x0, y(entry) - y(tp)); cx.fillStyle = wine; cx.fillRect(x0, y(entry), W - x0, y(sl) - y(entry)); cx.globalAlpha = 1;
+        function hl(p, col, label){ var yy = Math.round(y(p)) + .5; cx.strokeStyle = col; cx.lineWidth = 1.5; cx.setLineDash([5, 4]); cx.beginPath(); cx.moveTo(x0 - 20, yy); cx.lineTo(W, yy); cx.stroke(); cx.setLineDash([]); cx.lineWidth = 1;
+          cx.font = "600 12px 'IBM Plex Mono', monospace"; var tw = cx.measureText(label).width + 16; cx.fillStyle = col; cx.fillRect(W - tw - 8, yy - 11, tw, 22); cx.fillStyle = col === gold ? css("--gold-ink") : (col === ink ? css("--bg") : "#fff"); cx.textBaseline = "middle"; cx.fillText(label, W - tw, yy + .5); }
+        hl(tp, gold, "TP  1 : 2");
+        hl(entry, ink, "ENTRY  BUY");
+        hl(sl, wine, "SL  risk 1%");
+        cx.fillStyle = muted; cx.font = "500 11px 'IBM Plex Mono', monospace"; cx.textBaseline = "alphabetic"; cx.fillText("Lot = risk ÷ SL distance", 10, H - 10);
+      }
+      draw(); window.addEventListener("resize", draw);
+    }
+  
+  
+  })();
 
   /* latest videos */
   $("vids").innerHTML = (Y.latest || []).slice(0, 6).map(function(v){
