@@ -292,6 +292,42 @@ footer a:hover{color:var(--ink)}
 .plan p{color:var(--muted);font-size:16px}
 .video{aspect-ratio:16/9;border-radius:14px;overflow:hidden;border:1px solid var(--line)}
 .video iframe{width:100%;height:100%;border:0;display:block}
+/* user reviews (shared logic in feedback.js) */
+.rv-head{display:flex;flex-wrap:wrap;gap:20px 32px;align-items:flex-end;justify-content:space-between;margin-bottom:28px}
+.rv-intro{display:grid;gap:12px;max-width:44em}
+.rv-sum{color:var(--muted);font-size:18px}
+.rv-actions{display:flex;flex-wrap:wrap;gap:12px}
+.rv-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-bottom:24px}
+@media (max-width:960px){.rv-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:600px){.rv-grid{grid-template-columns:minmax(0,1fr)}}
+.rv-empty{padding:22px 24px;border:1px dashed var(--line);border-radius:var(--r);color:var(--muted)}
+.rv-box{padding:30px;background:var(--surface);border:1px solid var(--line);border-radius:18px;margin-top:18px}
+@media (max-width:600px){.rv-box{padding:22px 16px}}
+.rv-box form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;position:relative}
+@media (max-width:520px){.rv-box form{grid-template-columns:minmax(0,1fr)}}
+.rv-box .full{grid-column:1/-1}
+.rv-note{font-size:15px;color:var(--muted)}
+#reviews,#rvBox{scroll-margin-top:84px}
+.tst{display:grid;gap:12px;align-content:start;padding:24px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r)}
+.tst .stars{color:var(--gold);letter-spacing:2px;font-size:18px}
+.tst p{font-size:17px;line-height:1.55}
+.tst .who{font:600 13px/1.4 var(--f-mono);color:var(--muted)}
+.tst .who b{color:var(--ink);font-family:var(--f-body);font-size:16px;display:block}
+.fld{display:grid;gap:6px;min-width:0}
+.fld label,.fld legend{font:600 12px/1.2 var(--f-mono);letter-spacing:1.2px;text-transform:uppercase;color:var(--muted)}
+.fld input,.fld textarea{width:100%;font:400 16px/1.4 var(--f-body);color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:12px 13px}
+.fld textarea{min-height:120px;resize:vertical}
+.fld input:focus,.fld textarea:focus{outline:2px solid var(--gold);outline-offset:1px;border-color:transparent}
+.rate{border:0;margin:0;padding:0;display:grid;gap:6px}
+.rate .row{display:flex;gap:4px;flex-direction:row-reverse;justify-content:flex-end}
+.rate input{position:absolute;opacity:0;width:1px;height:1px}
+.rate .row label{font-size:30px;line-height:1;color:var(--line);cursor:pointer;transition:color .1s;letter-spacing:0;text-transform:none}
+.rate .row label:hover,.rate .row label:hover~label,.rate input:checked~label{color:var(--gold)}
+.rate input:focus-visible+label{outline:2px solid var(--gold);outline-offset:2px;border-radius:4px}
+.chk{display:flex;gap:10px;align-items:flex-start;font-size:15px;color:var(--muted)}
+.chk input{width:18px;height:18px;margin-top:2px;accent-color:var(--gold);flex:none}
+.fb-err{color:var(--wine);font-weight:600;font-size:15px}
+.fb-ok{padding:14px 16px;border-radius:10px;border:1px solid color-mix(in srgb,var(--gold) 50%,transparent);background:color-mix(in srgb,var(--gold) 10%,transparent);font-weight:600}
 </style>
 </head>
 <body>
@@ -341,6 +377,8 @@ footer a:hover{color:var(--ink)}
   <div class="video" id="videoBox"></div>
 </div></section>
 
+<section id="reviews" style="padding-top:0"><div class="wrap" id="rvMount"></div></section>
+
 <section id="licence" style="padding-top:0"><div class="wrap">
   <div class="head"><div class="eyebrow">Licence</div><h2>Try it free, then choose a plan</h2><p>The licence key is tied to your MT5 account number. Message us on WhatsApp for prices and your key.</p></div>
   <div class="plans">
@@ -371,7 +409,7 @@ footer a:hover{color:var(--ink)}
 
 <a class="wa-float" id="waFloat" href="#contact" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z"/></svg></a>
 
-<script>document.write('<script src="content.js?v=' + Date.now() + '"><\/script>');</script>
+<script>document.write('<script src="content.js?v=' + Date.now() + '"><\/script><script src="feedback.js?v=' + Date.now() + '"><\/script>');</script>
 <script>
 (function(){
   var S = window.SITE || {}, B = S.brand || {}, T = S.tradeAssistant || {};
@@ -440,6 +478,9 @@ footer a:hover{color:var(--ink)}
     var m = String(T.video).match(/(?:v=|youtu\.be\/|embed\/)([\w-]{11})/);
     if (m) { $("videoBox").innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + m[1] + '?rel=0" title="QFT Trade Assistant tutorial" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen loading="lazy"></iframe>'; $("video").hidden = false; }
   }
+  /* user reviews: only Trade Assistant feedback, with its own form */
+  if (window.QFTFeedback) QFTFeedback.mountReviews(S, { mount: "rvMount", product: "trade-assistant", title: "What traders say about the Trade Assistant", waUrl: wa });
+
   $("fname").textContent = "© " + new Date().getFullYear() + " " + (B.name || "Qazi Forex Tips") + " · WhatsApp " + (B.whatsapp || "");
   $("disc").textContent = S.disclaimer || "";
 
