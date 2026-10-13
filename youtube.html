@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<script>try{var t=localStorage.getItem("qft-theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
+
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <link rel="icon" href="logo.png" type="image/png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -39,6 +41,19 @@
   --f-mono:"IBM Plex Mono",Consolas,monospace;
   --f-ur:"Noto Nastaliq Urdu","Jameel Noori Nastaleeq",serif;
 }
+:root[data-theme="light"]{
+  color-scheme:light;
+  --bg:#f5f3ee; --surface:#ffffff; --ink:#161a26; --muted:#5b6274; --rule:#ddd6ca;
+  --brand:#ece8e0; --brand-ink:#161a26; --gold:#c4911f; --gold-ink:#1c1405; --wine:#a8233f;
+  --chip:#efe6d2; --chip-ink:#7a560a; --head:#9a6f0c;
+}
+
+.theme-btn{width:44px;height:44px;border-radius:8px;border:1px solid var(--rule);background:transparent;color:var(--ink);cursor:pointer;display:grid;place-items:center;flex:none}
+.theme-btn:hover{border-color:var(--gold)}
+.theme-btn svg{width:20px;height:20px}
+.theme-btn .i-moon{display:none}
+:root[data-theme="light"] .theme-btn .i-sun{display:none}
+:root[data-theme="light"] .theme-btn .i-moon{display:block}
 *{box-sizing:border-box}
 [hidden]{display:none!important}
 html{scroll-padding-top:76px}
@@ -86,7 +101,7 @@ img{max-width:100%;display:block;height:auto}
 .hero .txt{font-size:19px;opacity:.9;max-width:32em;margin-top:6px}
 .hero .cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}
 .hero .cta .btn:not(.gold){background:transparent;color:var(--brand-ink);border-color:var(--rule)}
-.stats{display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:26px;padding-top:18px;border-top:1px solid rgba(255,255,255,.2)}
+.stats{display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:26px;padding-top:18px;border-top:1px solid var(--rule)}
 .stats div{display:grid;gap:2px}
 .stats b{font:800 30px/1 var(--f-display)}
 .stats span{font:600 11px/1.2 var(--f-mono);letter-spacing:1.4px;text-transform:uppercase;opacity:.75}
@@ -168,13 +183,14 @@ footer a{color:var(--muted)}
 <div class="band">
   <header class="top"><div class="wrap">
     <a class="brand" href="index.html"><img src="logo.png" alt="Qazi Forex Tips logo"><b id="bname">Qazi Forex Tips</b></a>
-    <nav class="nav" id="nav" aria-label="Main"><a href="index.html">Home</a><a href="youtube.html" aria-current="page">Courses</a><a href="index.html#about">About</a><a href="simulator.html">Simulator</a><a href="index.html#tools">Tools</a><a href="index.html#faq">FAQ</a></nav>
+    <nav class="nav" id="nav" aria-label="Main"><a href="index.html">Home</a><a href="youtube.html" aria-current="page">Courses</a><a href="index.html#about">About</a><a href="simulator.html">Simulator</a><a href="trade-assistant.html">Trade Assistant</a><a href="index.html#faq">FAQ</a></nav>
     <a class="btn gold sm" id="waTop" href="index.html#contact" target="_blank" rel="noopener">WhatsApp</a>
-    <button class="menu" id="menu" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    <button class="theme-btn" id="themeBtn" type="button" aria-label="Switch to light mode" title="Light / dark"><svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M4.6 4.6l1.6 1.6M17.8 17.8l1.6 1.6M2.5 12h2.2M19.3 12h2.2M4.6 19.4l1.6-1.6M17.8 6.2l1.6-1.6"/></svg><svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a8.5 8.5 0 1 0 10.7 10.7Z"/></svg></button>
+  <button class="menu" id="menu" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
   </div></header>
   <div class="hero"><div class="wrap">
     <div>
-      <div class="label" style="color:rgba(255,255,255,.75)">YouTube · Urdu &amp; Hindi</div>
+      <div class="label" style="color:var(--gold)">YouTube · Urdu &amp; Hindi</div>
       <h1 id="htitle">Free forex lessons in Urdu &amp; Hindi</h1>
       <p class="ur" id="hurdu" lang="ur">فاریکس ٹریڈنگ مفت سیکھیں – اردو اور ہندی میں</p>
       <p class="txt" id="htext">Complete Price Action courses, tested strategies, live sessions and practical guides. Start from Lecture 1 and go step by step.</p>
@@ -332,6 +348,19 @@ footer a{color:var(--muted)}
   $("subActs").innerHTML = acts;
   $("fname").textContent = "© " + new Date().getFullYear() + " " + (B.name || "") + " · WhatsApp " + (B.whatsapp || "");
   $("disc").textContent = S.disclaimer || "";
+
+  /* light / dark switch (dark is the default; the choice is remembered) */
+  (function(){
+    var btn = document.getElementById("themeBtn"), root = document.documentElement, meta = document.querySelector('meta[name="theme-color"]');
+    function sync(){ var light = root.getAttribute("data-theme") === "light"; btn.setAttribute("aria-label", light ? "Switch to dark mode" : "Switch to light mode"); if (meta) meta.setAttribute("content", light ? "#f5f3ee" : "#0d1220"); }
+    btn.addEventListener("click", function(){
+      var next = root.getAttribute("data-theme") === "light" ? "dark" : "light";
+      root.setAttribute("data-theme", next);
+      try { localStorage.setItem("qft-theme", next); } catch (e) {}
+      sync(); window.dispatchEvent(new Event("resize"));
+    });
+    sync();
+  })();
 })();
 </script>
 </body>
