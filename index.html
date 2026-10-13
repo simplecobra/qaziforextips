@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<script>try{var t=localStorage.getItem("qft-theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
+
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <link rel="icon" href="logo.png" type="image/png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -40,6 +42,25 @@
   --r:12px;
 }
 
+:root[data-theme="light"]{
+  color-scheme:light;
+  --bg:#f5f3ee; --bg2:#ece8e0; --surface:#ffffff; --line:#ddd6ca;
+  --ink:#161a26; --muted:#5b6274;
+  --gold:#c4911f; --gold-ink:#1c1405; --wine:#a8233f;
+}
+:root[data-theme="light"] .top{background:color-mix(in srgb,var(--bg) 88%,transparent)}
+:root[data-theme="light"] .panel,:root[data-theme="light"] .shot{box-shadow:0 24px 60px rgba(30,25,15,.14)}
+:root[data-theme="light"] .eyebrow{color:#9a6f0c}
+:root[data-theme="light"] .step .go,:root[data-theme="light"] .plan .k,:root[data-theme="light"] .tool .tag{color:#9a6f0c}
+:root[data-theme="light"] .photo .badge b{color:#9a6f0c}
+:root[data-theme="light"] .cta-band code{color:#9a6f0c}
+
+.theme-btn{width:44px;height:44px;border-radius:8px;border:1px solid var(--line);background:transparent;color:var(--ink);cursor:pointer;display:grid;place-items:center;flex:none}
+.theme-btn:hover{border-color:var(--gold)}
+.theme-btn svg{width:20px;height:20px}
+.theme-btn .i-moon{display:none}
+:root[data-theme="light"] .theme-btn .i-sun{display:none}
+:root[data-theme="light"] .theme-btn .i-moon{display:block}
 *{box-sizing:border-box}
 [hidden]{display:none!important}
 html{scroll-padding-top:80px;overflow-x:clip}
@@ -76,6 +97,7 @@ section{padding-block:88px}
 .nav{display:flex;gap:26px;font-weight:600;font-size:15px}
 .nav a{text-decoration:none;color:var(--muted);transition:color .15s}
 .nav a:hover{color:var(--ink)}
+.top .wrap{gap:12px}
 .menu{display:none;width:44px;height:44px;border-radius:8px;border:1px solid var(--line);background:transparent;color:var(--ink);cursor:pointer}
 .menu svg{width:22px;height:22px}
 @media (max-width:900px){
@@ -239,6 +261,7 @@ footer a:hover{color:var(--ink)}
     <a href="#start">Start here</a><a href="youtube.html">Courses</a><a href="#about">About</a><a href="simulator.html">Simulator</a><a href="trade-assistant.html">Trade Assistant</a><a href="#faq">FAQ</a>
   </nav>
   <a class="btn gold sm wa-top" id="waTop" href="#contact" target="_blank" rel="noopener">WhatsApp</a>
+  <button class="theme-btn" id="themeBtn" type="button" aria-label="Switch to light mode" title="Light / dark"><svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M4.6 4.6l1.6 1.6M17.8 17.8l1.6 1.6M2.5 12h2.2M19.3 12h2.2M4.6 19.4l1.6-1.6M17.8 6.2l1.6-1.6"/></svg><svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a8.5 8.5 0 1 0 10.7 10.7Z"/></svg></button>
   <button class="menu" id="menu" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
 </div></header>
 
@@ -516,6 +539,19 @@ footer a:hover{color:var(--ink)}
       })(t0);
     } else { prog = 1; draw(); }
     return { redraw: draw };
+  })();
+
+  /* light / dark switch (dark is the default; the choice is remembered) */
+  (function(){
+    var btn = document.getElementById("themeBtn"), root = document.documentElement, meta = document.querySelector('meta[name="theme-color"]');
+    function sync(){ var light = root.getAttribute("data-theme") === "light"; btn.setAttribute("aria-label", light ? "Switch to dark mode" : "Switch to light mode"); if (meta) meta.setAttribute("content", light ? "#f5f3ee" : "#0d1220"); }
+    btn.addEventListener("click", function(){
+      var next = root.getAttribute("data-theme") === "light" ? "dark" : "light";
+      root.setAttribute("data-theme", next);
+      try { localStorage.setItem("qft-theme", next); } catch (e) {}
+      sync(); window.dispatchEvent(new Event("resize"));
+    });
+    sync();
   })();
 })();
 </script>
