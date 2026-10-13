@@ -70,6 +70,15 @@ window.SITE = {
     }
   ],
 
+  /* ---------- 3a. DOWNLOADS (simulator.html + trade-assistant.html) ----------
+     Zip files GitHub ke "downloads" folder mein hain. Naya version aaye to:
+     1) nayi zip ISI NAAM se downloads folder mein upload karein (purani replace ho jayegi),
+     2) yahan version aur size badal dein. Link kabhi nahi badalta.            */
+  downloads: {
+    simulator:      { file: "downloads/QFT-Replay-Simulator.zip", version: "3.01", size: "5.3 MB" },
+    tradeAssistant: { file: "downloads/QFT-Trade-Assistant.zip",  version: "3.11", size: "3.9 MB" }
+  },
+
   /* ---------- 3b. QFT TRADE ASSISTANT (trade-assistant.html + Home showcase) ----------
      version: naya version aaye to sirf yahan number badlein.
      shots:   screenshots ke naam. Tasveer GitHub par isi naam se upload karein,

@@ -21,7 +21,7 @@
 <meta property="og:image" content="https://qaziforextips.com/og-trade-assistant.jpg">
 <meta name="twitter:image" content="https://qaziforextips.com/og-trade-assistant.jpg">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "SoftwareApplication", "name": "QFT Trade Assistant", "applicationCategory": "FinanceApplication", "operatingSystem": "Windows (MetaTrader 5)", "softwareVersion": "3.11", "url": "https://qaziforextips.com/trade-assistant.html", "publisher": {"@id": "https://qaziforextips.com/#org"}, "image": "https://qaziforextips.com/og-trade-assistant.jpg", "description": "Risk-management trade panel for MetaTrader 5: lot size from your risk, draggable Entry/SL/TP lines, one-click market and pending orders, trade management, news and online updates.", "author": {"@type": "Person", "name": "Dr. Qazi Abdul Basit"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://qaziforextips.com/"}, {"@type": "ListItem", "position": 2, "name": "QFT Trade Assistant", "item": "https://qaziforextips.com/trade-assistant.html"}]}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "SoftwareApplication", "name": "QFT Trade Assistant", "applicationCategory": "FinanceApplication", "operatingSystem": "Windows (MetaTrader 5)", "softwareVersion": "3.11", "url": "https://qaziforextips.com/trade-assistant.html", "downloadUrl": "https://qaziforextips.com/downloads/QFT-Trade-Assistant.zip", "fileSize": "3.9 MB", "publisher": {"@id": "https://qaziforextips.com/#org"}, "image": "https://qaziforextips.com/og-trade-assistant.jpg", "description": "Risk-management trade panel for MetaTrader 5: lot size from your risk, draggable Entry/SL/TP lines, one-click market and pending orders, trade management, news and online updates.", "author": {"@type": "Person", "name": "Dr. Qazi Abdul Basit"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://qaziforextips.com/"}, {"@type": "ListItem", "position": 2, "name": "QFT Trade Assistant", "item": "https://qaziforextips.com/trade-assistant.html"}]}]}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@600;700;800&family=Source+Sans+3:wght@400;600;700&family=IBM+Plex+Mono:wght@500;600&family=Noto+Nastaliq+Urdu:wght@600&display=swap">
@@ -292,6 +292,24 @@ footer a:hover{color:var(--ink)}
 .plan p{color:var(--muted);font-size:16px}
 .video{aspect-ratio:16/9;border-radius:14px;overflow:hidden;border:1px solid var(--line)}
 .video iframe{width:100%;height:100%;border:0;display:block}
+/* download */
+.dl-ic{width:18px;height:18px;flex:none}
+.btn:has(.dl-ic){display:inline-flex;align-items:center;gap:9px}
+.dl{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:40px;padding:36px;background:var(--surface);border:1px solid var(--line);border-radius:18px;position:relative;overflow:hidden}
+.dl::before{content:"";position:absolute;inset:auto -120px -160px auto;width:420px;height:420px;border-radius:50%;background:radial-gradient(closest-side,color-mix(in srgb,var(--gold) 16%,transparent),transparent);pointer-events:none}
+@media (max-width:900px){.dl{grid-template-columns:minmax(0,1fr);padding:26px 18px;gap:28px}}
+.dl-main{display:grid;gap:14px;align-content:start;position:relative}
+.dl-lead{color:var(--muted);font-size:18px}
+.dl-meta{display:flex;flex-wrap:wrap;gap:8px 22px;font:600 13px/1.4 var(--f-mono);color:var(--muted)}
+.dl-meta b{color:var(--ink);font-weight:600}
+.dl-btns{display:flex;flex-wrap:wrap;gap:12px;margin-top:4px}
+.dl-inc{font-size:14px;color:var(--muted)}
+.dl-steps{list-style:none;margin:0;padding:0;display:grid;gap:12px;counter-reset:d;position:relative;align-content:start}
+.dl-steps li{display:grid;grid-template-columns:40px minmax(0,1fr);gap:4px 14px;padding:16px;border:1px solid var(--line);border-radius:12px;background:var(--bg);counter-increment:d}
+.dl-steps li::before{content:counter(d);grid-row:span 2;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font:800 18px/1 var(--f-display);color:var(--gold-ink);background:var(--gold)}
+.dl-steps b{font:700 18px/1.3 var(--f-body)}
+.dl-steps span{color:var(--muted);font-size:15px}
+.dl-steps code{font:600 13px var(--f-mono);color:var(--ink);background:color-mix(in srgb,var(--gold) 14%,transparent);padding:1px 6px;border-radius:4px}
 /* user reviews (shared logic in feedback.js) */
 .rv-head{display:flex;flex-wrap:wrap;gap:20px 32px;align-items:flex-end;justify-content:space-between;margin-bottom:28px}
 .rv-intro{display:grid;gap:12px;max-width:44em}
@@ -347,7 +365,7 @@ footer a:hover{color:var(--ink)}
     <h1>QFT Trade <em>Assistant</em></h1>
     <p class="ur" lang="ur" style="font-family:var(--f-ur);direction:rtl;font-size:22px;line-height:2.3;margin-top:14px">رسک آپ طے کریں، لاٹ سائز پینل نکالے گا</p>
     <p class="lead">A risk-management trade panel for MetaTrader 5. Set your risk, drag Entry, SL and TP on the chart, and the panel works out the lot size. Orders go in with one click.</p>
-    <div class="cta"><a class="btn gold" id="waDemo" href="#" target="_blank" rel="noopener">Get the free 3-day demo</a><a class="btn" href="#features">See all features</a></div>
+    <div class="cta"><a class="btn gold" id="dlHero" href="downloads/QFT-Trade-Assistant.zip" download><svg class="dl-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></svg>Download free demo</a><a class="btn" href="#download">How to install</a></div>
     <div class="ta-facts"><span><b>MetaTrader 5</b> · any broker</span><span><b>Gold &amp; forex</b> pairs</span><span><b>Manual trading</b> · you stay in control</span></div>
   </div>
   <div class="ta-visual" id="taVisual"></div>
@@ -364,6 +382,24 @@ footer a:hover{color:var(--ink)}
     <div><b>01</b><h3>Set your risk</h3><p>Choose $ or % of balance, equity or free margin, and your reward-to-risk.</p></div>
     <div><b>02</b><h3>Place your lines</h3><p>Drag SL and TP to your levels on the chart. The lot size updates as you move them.</p></div>
     <div><b>03</b><h3>Click Buy or Sell</h3><p>Market or pending, the order goes in with the right lot. Manage it later from the Close tab.</p></div>
+  </div>
+</div></section>
+
+<section id="download" style="padding-top:0"><div class="wrap">
+  <div class="dl">
+    <div class="dl-main">
+      <div class="eyebrow">Free download</div>
+      <h2>Download the Trade Assistant</h2>
+      <p class="dl-lead">Works free for 3 days on a demo account, no key needed. For a live account, send your MT5 account number on WhatsApp and you receive your licence key.</p>
+      <div class="dl-meta"><span>Version <b id="dlVer">3.11</b></span><span>Size <b id="dlSize">3.9 MB</b></span><span><b>MetaTrader 5</b> · Windows</span></div>
+      <div class="dl-btns"><a class="btn gold" id="dlBtn" href="downloads/QFT-Trade-Assistant.zip" download><svg class="dl-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></svg>Download .zip</a><a class="btn" id="waKey" href="#" target="_blank" rel="noopener">Get a licence key</a></div>
+      <p class="dl-inc">Inside the zip: the panel (.ex5), the update library (.dll), Installation Guide (PDF + text) and Features guide (PDF).</p>
+    </div>
+    <ol class="dl-steps">
+      <li><b>Unzip and copy</b><span>MT5 → File → Open Data Folder → MQL5. Put the <code>.ex5</code> in <code>Experts</code> and the <code>.dll</code> in <code>Libraries</code>. Restart MT5.</span></li>
+      <li><b>Attach to a chart</b><span>Drag the panel onto a chart. Tick <i>Allow Algo Trading</i> and <i>Allow DLL imports</i>, then press OK.</span></li>
+      <li><b>Start trading</b><span>Demo account: free for 3 days. Live account: paste your licence key on the License page of the panel.</span></li>
+    </ol>
   </div>
 </div></section>
 
@@ -420,7 +456,12 @@ footer a:hover{color:var(--ink)}
   var ver = T.version || "3.11";
   $("ver1").textContent = "v" + ver;
   ["waTop","waFloat"].forEach(function(id){ var e = $(id); if (e) e.href = wa; });
-  $("waDemo").href = waMsg("Assalam o Alaikum, I want the free 3-day demo of QFT Trade Assistant v" + ver + ".");
+  /* download: file, version and size from content.js → downloads */
+  var D = (S.downloads || {}).tradeAssistant || {};
+  if (D.file) { $("dlBtn").href = D.file; $("dlHero").href = D.file; }
+  if (D.version) $("dlVer").textContent = D.version;
+  if (D.size) $("dlSize").textContent = D.size;
+  $("waKey").href = waMsg("Assalam o Alaikum, I downloaded QFT Trade Assistant v" + (D.version || ver) + ". Please send me a licence key. My MT5 account number is: ");
   $("waPlan").href = waMsg("Assalam o Alaikum, please share the prices of QFT Trade Assistant v" + ver + ".");
   var nav = $("nav"), menu = $("menu");
   menu.addEventListener("click", function(){ var o = nav.classList.toggle("open"); menu.setAttribute("aria-expanded", o); });
