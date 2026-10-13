@@ -269,6 +269,8 @@ footer a:hover{color:var(--ink)}
 .chk input{width:18px;height:18px;margin-top:2px;accent-color:var(--gold);flex:none}
 .fb-note{font-size:14px;color:var(--muted)}
 .fb-err{color:var(--wine);font-weight:600;font-size:15px}
+.fb-ok{padding:14px 16px;border-radius:10px;border:1px solid color-mix(in srgb,var(--gold) 50%,transparent);background:color-mix(in srgb,var(--gold) 10%,transparent);font-weight:600}
+.fb-more{justify-self:start}
 
 /* floating whatsapp */
 .wa-float{position:fixed;right:18px;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:30;width:58px;height:58px;border-radius:50%;background:#25d366;color:#fff;display:grid;place-items:center;box-shadow:0 10px 30px rgba(0,0,0,.4);transition:transform .15s}
@@ -374,12 +376,13 @@ footer a:hover{color:var(--ink)}
 <section id="feedback" style="padding-top:0"><div class="wrap">
   <div class="head" id="tstHead" hidden><div class="eyebrow">Student feedback</div><h2>What our students say</h2><p>Real words from our students, shared with their permission.</p></div>
   <div class="fb-grid" id="tstList" hidden></div>
+  <div id="tstMoreWrap" style="margin:-8px 0 28px" hidden><button class="btn sm" type="button" id="tstMore">Show more feedback</button></div>
   <div class="fb-form">
     <div style="display:grid;gap:14px;align-content:start">
       <div class="eyebrow">Share your experience</div>
       <h3 style="font-size:32px">Studied with us? Tell us how it went.</h3>
-      <p class="muted">Your feedback helps us improve the courses and helps new traders decide. It comes straight to us on WhatsApp.</p>
-      <p class="fb-note">We only show feedback on this website when you allow it, and we never change your words.</p>
+      <p class="muted">Your feedback helps us improve the courses and helps new traders decide.</p>
+      <p class="fb-note">If you tick the box, your feedback appears on this website within a few minutes, in your own words. If you do not, only our team sees it.</p>
     </div>
     <form id="fbForm" novalidate>
       <div class="fld"><label for="fbName">Your name</label><input id="fbName" name="name" autocomplete="name" required></div>
@@ -395,7 +398,9 @@ footer a:hover{color:var(--ink)}
       <div class="fld full"><label for="fbText">Your feedback (English, Urdu or Roman Urdu)</label><textarea id="fbText" name="text" required></textarea></div>
       <label class="chk full"><input type="checkbox" id="fbAllow"> I allow Qazi Forex Tips to show my name, city and feedback on the website.</label>
       <p class="fb-err full" id="fbErr" role="alert" hidden></p>
-      <div class="full" style="display:flex;flex-wrap:wrap;gap:12px;align-items:center"><button class="btn gold" type="submit">Send feedback on WhatsApp</button><span class="fb-note">Opens WhatsApp with your message ready to send.</span></div>
+      <input type="text" id="fbHp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
+      <div class="full" style="display:flex;flex-wrap:wrap;gap:12px;align-items:center"><button class="btn gold" type="submit" id="fbSend">Send feedback</button></div>
+      <p class="full fb-ok" id="fbOk" role="status" hidden></p>
     </form>
   </div>
 </div></section>
@@ -513,32 +518,68 @@ footer a:hover{color:var(--ink)}
     return '<a class="vid" href="' + esc(v.link) + '" target="_blank" rel="noopener"><div class="th"><img src="https://i.ytimg.com/vi/' + id + '/hqdefault.jpg" alt="" loading="lazy"><i></i>' + (v.time ? '<span>' + esc(v.time) + '</span>' : '') + '</div><b>' + esc(v.title) + '</b></a>';
   }).join("");
 
-  /* student feedback: approved testimonials from content.js + form that sends to WhatsApp */
+  /* student feedback: Google Form (store) + published Sheet "Public" tab (display) + manual list in content.js */
   (function(){
-    var list = (S.testimonials || []).filter(function(t){ return t && t.text; });
-    if (list.length) {
-      $("tstList").innerHTML = list.map(function(t){
-        var r = Math.max(0, Math.min(5, parseInt(t.rating, 10) || 0));
-        return '<figure class="tst" style="margin:0">' + (r ? '<div class="stars" aria-label="' + r + ' out of 5">' + "★★★★★".slice(0, r) + '<span style="opacity:.25">' + "★★★★★".slice(r) + '</span></div>' : '') +
-          '<p>' + esc(t.text) + '</p><figcaption class="who"><b>' + esc(t.name) + '</b>' + esc([t.city, t.batch ? "Batch " + t.batch : "", t.date].filter(Boolean).join(" · ")) + '</figcaption></figure>';
-      }).join("");
+    var F = S.feedbackSystem || {}, manual = (S.testimonials || []).filter(function(t){ return t && t.text; });
+    var shown = 9, all = [];
+    function stars(r){ r = Math.max(0, Math.min(5, parseInt(r, 10) || 0)); return r ? '<div class="stars" aria-label="' + r + ' out of 5">' + "★★★★★".slice(0, r) + '<span style="opacity:.25">' + "★★★★★".slice(r) + '</span></div>' : ''; }
+    function card(t){ return '<figure class="tst" style="margin:0">' + stars(t.rating) + '<p>' + esc(t.text) + '</p><figcaption class="who"><b>' + esc(t.name) + '</b>' + esc([t.city, t.batch ? "Batch " + String(t.batch).replace(/^batch\s*/i, "") : "", t.date].filter(Boolean).join(" · ")) + '</figcaption></figure>'; }
+    function draw(){
+      if (!all.length) return;
+      $("tstList").innerHTML = all.slice(0, shown).map(card).join("");
       $("tstList").hidden = false; $("tstHead").hidden = false;
+      $("tstMoreWrap").hidden = all.length <= shown;
+    }
+    $("tstMore").addEventListener("click", function(){ shown += 9; draw(); });
+    function parseCSV(txt){
+      var rows = [], row = [], f = "", q = false;
+      for (var i = 0; i < txt.length; i++){
+        var c = txt[i];
+        if (q) { if (c === '"') { if (txt[i + 1] === '"') { f += '"'; i++; } else q = false; } else f += c; }
+        else if (c === '"') q = true;
+        else if (c === ",") { row.push(f); f = ""; }
+        else if (c === "\n" || c === "\r") { if (c === "\r" && txt[i + 1] === "\n") i++; row.push(f); rows.push(row); row = []; f = ""; }
+        else f += c;
+      }
+      if (f !== "" || row.length) { row.push(f); rows.push(row); }
+      return rows;
+    }
+    var MON = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+    function monthYear(ts){
+      var m = String(ts || "").match(/(\d{1,4})[\/\-.](\d{1,2})[\/\-.](\d{2,4})/); if (!m) return "";
+      var a = +m[1], b = +m[2], c = +m[3], y, mo;
+      if (m[1].length === 4) { y = a; mo = b; } else { y = c < 100 ? 2000 + c : c; mo = a > 12 ? b : (b > 12 ? a : b); }
+      return MON[mo - 1] ? MON[mo - 1] + " " + y : "";
+    }
+    all = manual.slice();
+    draw();
+    if (F.publicCsv) {
+      fetch(F.publicCsv + "&t=" + Math.floor(Date.now() / 60000), { cache: "no-store" }).then(function(r){ return r.ok ? r.text() : ""; }).then(function(txt){
+        var rows = parseCSV(txt || ""); if (rows.length < 2) return;
+        var h = rows[0].map(function(x){ return x.trim().toLowerCase(); }), ix = function(n){ return h.indexOf(n); };
+        var live = rows.slice(1).map(function(r){ return { name: (r[ix("name")] || "").trim(), city: (r[ix("city")] || "").trim(), batch: (r[ix("batch")] || "").trim(), rating: r[ix("rating")], text: (r[ix("feedback")] || "").trim(), date: monthYear(r[ix("timestamp")]) }; })
+          .filter(function(t){ return t.name && t.text.length >= 3; });
+        all = live.concat(manual); draw();
+      }).catch(function(){});
     }
     var f = $("fbForm");
     f.addEventListener("submit", function(e){
       e.preventDefault();
+      if ($("fbHp").value) return;
       var name = $("fbName").value.trim(), text = $("fbText").value.trim(), rating = (f.querySelector('input[name="rating"]:checked') || {}).value || "";
       var err = !name ? "Please write your name." : !rating ? "Please choose a star rating." : text.length < 10 ? "Please write a few words of feedback." : "";
-      $("fbErr").textContent = err; $("fbErr").hidden = !err;
+      $("fbErr").textContent = err; $("fbErr").hidden = !err; $("fbOk").hidden = true;
       if (err) return;
-      var msg = "*Student feedback – Qazi Forex Tips*\n" +
-        "Name: " + name + "\n" +
-        ($("fbCity").value.trim() ? "City: " + $("fbCity").value.trim() + "\n" : "") +
-        ($("fbBatch").value.trim() ? "Batch: " + $("fbBatch").value.trim() + "\n" : "") +
-        "Rating: " + "⭐".repeat(+rating) + " (" + rating + "/5)\n" +
-        "Feedback: " + text + "\n" +
-        "Show on website: " + ($("fbAllow").checked ? "YES, I allow it" : "No");
-      window.open(wa + "?text=" + encodeURIComponent(msg), "_blank", "noopener");
+      var allow = $("fbAllow").checked, k = F.fields || {}, body = new URLSearchParams();
+      body.append(k.name, name.slice(0, 80)); body.append(k.city, $("fbCity").value.trim().slice(0, 60)); body.append(k.batch, $("fbBatch").value.trim().slice(0, 20));
+      body.append(k.rating, rating); body.append(k.text, text.slice(0, 1500)); body.append(k.allow, allow ? "YES" : "No");
+      var btn = $("fbSend"); btn.disabled = true; btn.textContent = "Sending…";
+      fetch(F.formAction, { method: "POST", mode: "no-cors", body: body }).then(function(){
+        $("fbOk").textContent = allow ? "Thank you, " + name + "! Your feedback has been received and will appear on this page in a few minutes." : "Thank you, " + name + "! Your feedback has been received. Only our team will see it.";
+        $("fbOk").hidden = false; f.reset();
+      }).catch(function(){
+        $("fbErr").innerHTML = 'Could not send right now. Please check your internet, or <a href="' + wa + '" target="_blank" rel="noopener">send it on WhatsApp</a>.'; $("fbErr").hidden = false;
+      }).then(function(){ btn.disabled = false; btn.textContent = "Send feedback"; });
     });
   })();
 
