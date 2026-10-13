@@ -308,9 +308,10 @@ footer a:hover{color:var(--ink)}
 .fb-form .full{grid-column:1/-1}
 .fld{display:grid;gap:6px;min-width:0}
 .fld label,.fld legend{font:600 12px/1.2 var(--f-mono);letter-spacing:1.2px;text-transform:uppercase;color:var(--muted)}
-.fld input,.fld textarea{width:100%;font:400 16px/1.4 var(--f-body);color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:12px 13px}
+.fld input,.fld textarea,.fld select{width:100%;font:400 16px/1.4 var(--f-body);color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:12px 13px}
 .fld textarea{min-height:120px;resize:vertical}
-.fld input:focus,.fld textarea:focus{outline:2px solid var(--gold);outline-offset:1px;border-color:transparent}
+.fld select{appearance:auto;cursor:pointer}
+.fld input:focus,.fld textarea:focus,.fld select:focus{outline:2px solid var(--gold);outline-offset:1px;border-color:transparent}
 .rate{border:0;margin:0;padding:0;display:grid;gap:6px}
 .rate .row{display:flex;gap:4px;flex-direction:row-reverse;justify-content:flex-end}
 .rate input{position:absolute;opacity:0;width:1px;height:1px}
@@ -358,31 +359,33 @@ footer a:hover{color:var(--ink)}
     <div class="eyebrow">Student feedback</div>
     <h1>What our <em>students</em> say</h1>
     <p class="ur" lang="ur" style="font-family:var(--f-ur);direction:rtl;font-size:22px;line-height:2.3;margin-top:12px">ہمارے سٹوڈنٹس کی رائے</p>
-    <p class="lead">Real feedback from students of our courses and batches, shared with their permission and shown in their own words.</p>
+    <p class="lead">Real feedback from students of our courses and from traders who use our tools, shared with their permission and shown in their own words.</p>
     <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:26px"><a class="btn gold" href="#share">Share your experience</a><a class="btn" href="youtube.html">See the courses</a></div>
   </div>
-  <div class="score" id="score"><span>Student rating</span><b>–</b><div class="stars" style="opacity:.3">★★★★★</div><span id="scoreTxt">Loading feedback…</span></div>
+  <div class="score" id="score"><span>Overall rating</span><b>–</b><div class="stars" style="opacity:.3">★★★★★</div><span id="scoreTxt">Loading feedback…</span></div>
 </div></section>
 
 <section id="list" style="padding-top:24px"><div class="wrap">
-  <div class="fchips" id="fchips" role="group" aria-label="Filter by batch" hidden></div>
+  <div class="fchips" id="fchips" role="group" aria-label="Filter feedback" hidden></div>
   <div class="fb-grid" id="tstList" style="margin-bottom:22px"></div>
   <div id="tstMoreWrap" hidden><button class="btn sm" type="button" id="tstMore">Show more feedback</button></div>
-  <div class="fb-empty" id="fbEmpty" hidden><b style="color:var(--ink);font-size:20px">Be the first to share your experience.</b><span>Studied with us? Your feedback will appear here within a few minutes.</span><a class="btn gold sm" href="#share">Write feedback</a></div>
+  <div class="fb-empty" id="fbEmpty" hidden><b style="color:var(--ink);font-size:20px" id="fbEmptyT">Be the first to share your experience.</b><span>Your feedback will appear here within a few minutes.</span><a class="btn gold sm" href="#share">Write feedback</a></div>
 </div></section>
 
 <section id="share" style="padding-top:0"><div class="wrap">
   <div class="fb-form">
     <div style="display:grid;gap:14px;align-content:start">
       <div class="eyebrow">Share your experience</div>
-      <h3 style="font-size:32px">Studied with us? Tell us how it went.</h3>
-      <p class="muted">Your feedback helps us improve the courses and helps new traders decide.</p>
+      <h3 style="font-size:32px">Studied with us or used our tools? Tell us how it went.</h3>
+      <p class="muted">Your feedback helps us improve the courses and tools, and helps new traders decide.</p>
+      <p class="fb-note">About a tool? Please write how the software works for you. Do not write profit amounts or results.</p>
       <p class="fb-note">If you tick the box, your feedback appears on this page within a few minutes, in your own words. If you do not, only our team sees it.</p>
     </div>
     <form id="fbForm" novalidate>
       <div class="fld"><label for="fbName">Your name</label><input id="fbName" name="name" autocomplete="name" required></div>
       <div class="fld"><label for="fbCity">City</label><input id="fbCity" name="city" autocomplete="address-level2"></div>
-      <div class="fld"><label for="fbBatch">Batch number (optional)</label><input id="fbBatch" name="batch" inputmode="numeric"></div>
+      <div class="fld full"><label for="fbAbout">Feedback about</label><select id="fbAbout"><option value="course">A course / batch</option><option value="simulator">QFT Replay Simulator</option><option value="trade-assistant">QFT Trade Assistant</option></select></div>
+      <div class="fld" id="fbBatchF"><label for="fbBatch">Batch number (optional)</label><input id="fbBatch" name="batch" inputmode="numeric"></div>
       <fieldset class="fld rate"><legend>Your rating</legend><div class="row">
         <input type="radio" name="rating" id="r5" value="5"><label for="r5" title="5 stars">★</label>
         <input type="radio" name="rating" id="r4" value="4"><label for="r4" title="4 stars">★</label>
@@ -418,27 +421,43 @@ footer a:hover{color:var(--ink)}
   var nav = $("nav"), menu = $("menu");
   menu.addEventListener("click", function(){ var o = nav.classList.toggle("open"); menu.setAttribute("aria-expanded", o); });
 
-  var all = [], filter = "All", shown = 12;
-  function view(){ return filter === "All" ? all : all.filter(function(t){ return t.batch === filter; }); }
+  var P = Q.products, all = [], filter = "all", shown = 12;
+  var about = (location.search.match(/[?&]about=([\w-]+)/) || [])[1];
+  if (about && P[about]) filter = "p:" + about;
+  function view(){
+    if (filter === "all") return all;
+    var k = filter.split(":"), key = k[0], v = k.slice(1).join(":");
+    return all.filter(function(t){ return key === "p" ? t.product === v : (t.product === "course" && t.batch === v); });
+  }
   function draw(final){
     var list = view();
-    $("tstList").innerHTML = list.slice(0, shown).map(Q.card).join("");
+    $("tstList").innerHTML = list.slice(0, shown).map(function(t){ return Q.card(t); }).join("");
     $("tstList").hidden = !list.length;
     $("tstMoreWrap").hidden = list.length <= shown;
-    $("fbEmpty").hidden = !(final && !all.length);
+    $("fbEmpty").hidden = !(final && !list.length);
     var s = Q.summary(all);
-    if (s.rated) $("score").innerHTML = '<span>Student rating</span><b>' + s.avg.toFixed(1) + '</b>' + Q.stars(Math.round(s.avg)) + '<span>' + s.count + (s.count === 1 ? ' review' : ' reviews') + ' from our students</span>';
-    else if (final) $("score").innerHTML = '<span>Student rating</span><b>New</b><div class="stars" style="opacity:.3">★★★★★</div><span>Be the first to rate us</span>';
-    var batches = all.map(function(t){ return t.batch; }).filter(function(b, i, a){ return b && a.indexOf(b) === i; }).sort(function(a, b){ return (parseInt(b, 10) || 0) - (parseInt(a, 10) || 0); });
-    if (batches.length > 1) {
-      $("fchips").innerHTML = ["All"].concat(batches).map(function(b){ return '<button type="button" aria-pressed="' + (b === filter) + '" data-b="' + Q.esc(b) + '">' + (b === "All" ? "All" : "Batch " + Q.esc(b)) + '</button>'; }).join("");
+    if (s.rated) $("score").innerHTML = '<span>Overall rating</span><b>' + s.avg.toFixed(1) + '</b>' + Q.stars(Math.round(s.avg)) + '<span>' + s.count + (s.count === 1 ? ' review' : ' reviews') + ' from students &amp; users</span>';
+    else if (final) $("score").innerHTML = '<span>Overall rating</span><b>New</b><div class="stars" style="opacity:.3">★★★★★</div><span>Be the first to rate us</span>';
+    /* chips: products that have feedback (or the one asked for), then batches */
+    var prods = Object.keys(P).filter(function(p){ return ("p:" + p) === filter || all.some(function(t){ return t.product === p; }); });
+    var batches = all.filter(function(t){ return t.product === "course"; }).map(function(t){ return t.batch; }).filter(function(b, i, a){ return b && a.indexOf(b) === i; }).sort(function(a, b){ return (parseInt(b, 10) || 0) - (parseInt(a, 10) || 0); });
+    var chips = [["all", "All"]].concat(prods.map(function(p){ return ["p:" + p, P[p].label]; }));
+    if (batches.length > 1) chips = chips.concat(batches.map(function(b){ return ["b:" + b, "Batch " + b]; }));
+    if (chips.length > 2 || filter !== "all") {
+      $("fchips").innerHTML = chips.map(function(c){ return '<button type="button" aria-pressed="' + (c[0] === filter) + '" data-f="' + Q.esc(c[0]) + '">' + Q.esc(c[1]) + '</button>'; }).join("");
       $("fchips").hidden = false;
     }
   }
-  $("fchips").addEventListener("click", function(e){ var b = e.target.closest("button"); if (!b) return; filter = b.getAttribute("data-b"); shown = 12; draw(true); });
+  $("fchips").addEventListener("click", function(e){ var b = e.target.closest("button"); if (!b) return; filter = b.getAttribute("data-f"); shown = 12; draw(true); });
   $("tstMore").addEventListener("click", function(){ shown += 12; draw(true); });
+  /* form: "Feedback about" decides whether the batch box is shown */
+  var sel = $("fbAbout");
+  if (about && P[about]) sel.value = about;
+  function syncAbout(){ $("fbBatchF").hidden = sel.value !== "course"; }
+  sel.addEventListener("change", syncAbout); syncAbout();
+  $("fbForm").addEventListener("reset", function(){ setTimeout(syncAbout, 0); });
   Q.load(S, function(list, final){ all = list; draw(final); });
-  Q.attachForm(S, { form: "fbForm", name: "fbName", city: "fbCity", batch: "fbBatch", text: "fbText", allow: "fbAllow", hp: "fbHp", send: "fbSend", err: "fbErr", ok: "fbOk" }, wa);
+  Q.attachForm(S, { form: "fbForm", name: "fbName", city: "fbCity", batch: "fbBatch", product: "fbAbout", text: "fbText", allow: "fbAllow", hp: "fbHp", send: "fbSend", err: "fbErr", ok: "fbOk" }, wa);
 
   $("fname").textContent = "© " + new Date().getFullYear() + " " + (B.name || "Qazi Forex Tips") + " · WhatsApp " + (B.whatsapp || "");
   $("disc").textContent = S.disclaimer || "";

@@ -172,6 +172,43 @@ details p{padding:0 18px 16px;color:var(--muted)}
 .copied{font:600 13px var(--f-mono);color:var(--up)}
 footer{border-top:1px solid var(--line);padding-block:30px;color:var(--muted);font-size:14px}
 footer .wrap{display:grid;gap:8px}
+/* user reviews (shared logic in feedback.js) */
+[hidden]{display:none!important}
+.rv-head{display:flex;flex-wrap:wrap;gap:20px 32px;align-items:flex-end;justify-content:space-between;margin-bottom:30px}
+.rv-intro{display:grid;gap:12px;max-width:44em}
+.rv-sum{color:var(--muted);font-size:18px}
+.rv-actions{display:flex;flex-wrap:wrap;gap:12px}
+.rv-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-bottom:22px}
+#reviews,#rvBox{scroll-margin-top:80px}
+@media (max-width:900px){.rv-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.rv-grid{grid-template-columns:1fr}}
+.rv-empty{padding:20px 22px;border:1px dashed var(--line);border-radius:8px;color:var(--muted);font-family:var(--f-mono);font-size:15px}
+.rv-box{padding:28px;background:var(--panel);border:1px solid var(--line);border-radius:10px;margin-top:18px}
+@media (max-width:600px){.rv-box{padding:20px 16px}}
+.rv-box form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;position:relative}
+@media (max-width:520px){.rv-box form{grid-template-columns:1fr}}
+.rv-box .full{grid-column:1/-1}
+.rv-note{font-size:15px;color:var(--muted)}
+.tst{display:grid;gap:12px;align-content:start;padding:24px 22px;background:var(--panel);border:1px solid var(--line);border-top:2px solid var(--gold);border-radius:8px}
+.tst .stars{color:var(--gold);letter-spacing:2px;font-size:18px}
+.tst p{font-size:17px;line-height:1.55}
+.tst .who{font:600 13px/1.4 var(--f-mono);color:var(--muted)}
+.tst .who b{color:var(--text);font-family:var(--f-body);font-size:16px;display:block}
+.fld{display:grid;gap:6px;min-width:0}
+.fld label,.fld legend{font:600 12px/1.2 var(--f-mono);letter-spacing:1.2px;text-transform:uppercase;color:var(--muted)}
+.fld input,.fld textarea{width:100%;font:400 16px/1.4 var(--f-body);color:var(--text);background:var(--ink);border:1px solid var(--line);border-radius:6px;padding:12px 13px}
+.fld textarea{min-height:120px;resize:vertical}
+.fld input:focus,.fld textarea:focus{outline:2px solid var(--gold);outline-offset:1px;border-color:transparent}
+.rate{border:0;margin:0;padding:0;display:grid;gap:6px}
+.rate .row{display:flex;gap:4px;flex-direction:row-reverse;justify-content:flex-end}
+.rate input{position:absolute;opacity:0;width:1px;height:1px}
+.rate .row label{font-size:30px;line-height:1;color:#3a4a66;cursor:pointer;transition:color .1s;letter-spacing:0;text-transform:none}
+.rate .row label:hover,.rate .row label:hover~label,.rate input:checked~label{color:var(--gold)}
+.rate input:focus-visible+label{outline:2px solid var(--gold);outline-offset:2px;border-radius:4px}
+.chk{display:flex;gap:10px;align-items:flex-start;font-size:15px;color:var(--muted)}
+.chk input{width:18px;height:18px;margin-top:2px;accent-color:var(--gold);flex:none}
+.fb-err{color:var(--down);font-weight:600;font-size:15px}
+.fb-ok{padding:14px 16px;border-radius:8px;border:1px solid color-mix(in srgb,var(--up) 50%,transparent);background:color-mix(in srgb,var(--up) 10%,transparent);font-weight:600}
 </style>
 </head>
 <body>
@@ -181,7 +218,7 @@ footer .wrap{display:grid;gap:8px}
   <div class="wrap">
     <a class="brand" href="index.html"><img src="logo.png" alt="Qazi Forex Tips logo"><span><b>QFT Replay Simulator</b><small>QAZI FOREX TIPS</small></span></a>
     <nav class="nav" aria-label="Sections">
-      <a href="index.html">Home</a><a href="#features">Features</a><a href="#challenge">Prop Firm</a><a href="#report">Report</a><a href="#plans">Plans</a><a href="#faq">FAQ</a>
+      <a href="index.html">Home</a><a href="#features">Features</a><a href="#challenge">Prop Firm</a><a href="#report">Report</a><a href="#reviews">Reviews</a><a href="#plans">Plans</a><a href="#faq">FAQ</a>
     </nav>
     <a class="btn gold sm" href="https://wa.me/923236700010" target="_blank" rel="noopener">Get the demo</a>
   </div>
@@ -293,6 +330,8 @@ footer .wrap{display:grid;gap:8px}
   </div>
 </div></section>
 
+<section id="reviews"><div class="wrap" id="rvMount"></div></section>
+
 <section id="plans"><div class="wrap">
   <div class="axis">Plans</div>
   <div class="sechead"><h2>Start with the free demo</h2>
@@ -340,7 +379,10 @@ footer .wrap{display:grid;gap:8px}
   <span>Trading involves risk. Backtest results are based on historical data and do not guarantee future results. MetaTrader 5 is a product of MetaQuotes Ltd.</span>
 </div></footer>
 
+<script>document.write('<script src="content.js?v=' + Date.now() + '"><\/script><script src="feedback.js?v=' + Date.now() + '"><\/script>');</script>
 <script>
+/* user reviews: only Replay Simulator feedback, with its own form */
+if (window.QFTFeedback && window.SITE) QFTFeedback.mountReviews(window.SITE, { mount: "rvMount", product: "simulator", title: "What traders say about the Simulator", waUrl: "https://wa.me/923236700010" });
 document.getElementById('copy').addEventListener('click', async () => {
   const t = document.getElementById('wa'), ok = document.getElementById('ok');
   try { await navigator.clipboard.writeText(t.textContent); ok.hidden = false; setTimeout(() => ok.hidden = true, 1800); }

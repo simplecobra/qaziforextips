@@ -306,7 +306,7 @@ window.SITE = {
      Kisi feedback ko chhupana ho: Sheet mein us line ke "Hide" khane mein YES likh dein.      */
   feedbackSystem: {
     formAction: "https://docs.google.com/forms/d/e/1FAIpQLSeJIBUyRHfxqj0Kn7ijzCE-GEE_zv3YM3HeMmuEOqKGXOkv7g/formResponse",
-    fields: { name: "entry.1097635637", city: "entry.1320651867", batch: "entry.1167245964", rating: "entry.1558484287", text: "entry.145154759", allow: "entry.1668224544" },
+    fields: { name: "entry.1097635637", city: "entry.1320651867", batch: "entry.1167245964", rating: "entry.1558484287", text: "entry.145154759", allow: "entry.1668224544", product: "entry.1090851567" },
     publicCsv: "https://docs.google.com/spreadsheets/d/e/2PACX-1vSARWCOQMDXkUfVVPxDncWD_8huG0N58l7UAVHNayn_2UeGDAZaiXH2G-YFNbsV1oUsvBk0ZSOUamk9/pub?gid=423830435&single=true&output=csv"
   },
 
