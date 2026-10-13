@@ -548,7 +548,7 @@ footer a:hover{color:var(--ink)}
     function monthYear(ts){
       var m = String(ts || "").match(/(\d{1,4})[\/\-.](\d{1,2})[\/\-.](\d{2,4})/); if (!m) return "";
       var a = +m[1], b = +m[2], c = +m[3], y, mo;
-      if (m[1].length === 4) { y = a; mo = b; } else { y = c < 100 ? 2000 + c : c; mo = a > 12 ? b : (b > 12 ? a : b); }
+      if (m[1].length === 4) { y = a; mo = b; } else { y = c < 100 ? 2000 + c : c; mo = a > 12 ? b : a; } /* the Sheet writes M/D/YYYY */
       return MON[mo - 1] ? MON[mo - 1] + " " + y : "";
     }
     all = manual.slice();
