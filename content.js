@@ -289,6 +289,17 @@ window.SITE = {
     skills: ["Price Action", "Gold (XAUUSD)", "Risk & Money Management", "Trading Psychology"]
   },
 
+  /* ---------- 9b. STUDENTS KI FEEDBACK (website par dikhane ke liye) ----------
+     Jab koi student WhatsApp par feedback bheje AUR "website par dikhane ki ijazat"
+     di ho, to yahan aik line daal dein. Sirf ASLI feedback, student ki ijazat se.
+     Jab tak yeh list khali hai, website par yeh section chhupa rahega.
+       rating: 1 se 5 tak (stars)
+       batch:  batch number ya "" (khali)
+     Misaal (shuru mein // hata kar chalu karein):
+     { name: "Ali Raza", city: "Lahore", batch: "62", rating: 5, text: "Price action course ne meri trading badal di.", date: "Oct 2026" },  */
+  testimonials: [
+  ],
+
   /* ---------- 10. SAWAL JAWAB (FAQ) ---------- */
   faq: [
     { q: "I am completely new. Where should I start?", a: "Start with Price Action Mastery – Basic Level on our YouTube page and watch it in order from Lecture 1. Practise on a demo account while you learn." },

@@ -239,6 +239,37 @@ footer a{text-decoration:none}
 footer a:hover{color:var(--ink)}
 .disc{font-size:13px;line-height:1.6;max-width:90ch}
 
+
+/* student feedback */
+.fb-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-bottom:28px}
+@media (max-width:960px){.fb-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:600px){.fb-grid{grid-template-columns:minmax(0,1fr)}}
+.tst{display:grid;gap:12px;align-content:start;padding:24px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r)}
+.tst .stars{color:var(--gold);letter-spacing:2px;font-size:18px}
+.tst p{font-size:17px;line-height:1.55}
+.tst .who{font:600 13px/1.4 var(--f-mono);color:var(--muted)}
+.tst .who b{color:var(--ink);font-family:var(--f-body);font-size:16px;display:block}
+.fb-form{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:40px;padding:36px;background:var(--surface);border:1px solid var(--line);border-radius:18px}
+@media (max-width:860px){.fb-form{grid-template-columns:minmax(0,1fr);padding:24px 18px;gap:22px}}
+.fb-form form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+@media (max-width:520px){.fb-form form{grid-template-columns:minmax(0,1fr)}}
+.fb-form .full{grid-column:1/-1}
+.fld{display:grid;gap:6px;min-width:0}
+.fld label,.fld legend{font:600 12px/1.2 var(--f-mono);letter-spacing:1.2px;text-transform:uppercase;color:var(--muted)}
+.fld input,.fld textarea{width:100%;font:400 16px/1.4 var(--f-body);color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:12px 13px}
+.fld textarea{min-height:120px;resize:vertical}
+.fld input:focus,.fld textarea:focus{outline:2px solid var(--gold);outline-offset:1px;border-color:transparent}
+.rate{border:0;margin:0;padding:0;display:grid;gap:6px}
+.rate .row{display:flex;gap:4px;flex-direction:row-reverse;justify-content:flex-end}
+.rate input{position:absolute;opacity:0;width:1px;height:1px}
+.rate .row label{font-size:30px;line-height:1;color:var(--line);cursor:pointer;transition:color .1s;letter-spacing:0;text-transform:none}
+.rate .row label:hover,.rate .row label:hover~label,.rate input:checked~label{color:var(--gold)}
+.rate input:focus-visible+label{outline:2px solid var(--gold);outline-offset:2px;border-radius:4px}
+.chk{display:flex;gap:10px;align-items:flex-start;font-size:15px;color:var(--muted)}
+.chk input{width:18px;height:18px;margin-top:2px;accent-color:var(--gold);flex:none}
+.fb-note{font-size:14px;color:var(--muted)}
+.fb-err{color:var(--wine);font-weight:600;font-size:15px}
+
 /* floating whatsapp */
 .wa-float{position:fixed;right:18px;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:30;width:58px;height:58px;border-radius:50%;background:#25d366;color:#fff;display:grid;place-items:center;box-shadow:0 10px 30px rgba(0,0,0,.4);transition:transform .15s}
 .wa-float:hover{transform:scale(1.07)}
@@ -340,6 +371,35 @@ footer a:hover{color:var(--ink)}
   <div class="vids" id="vids"></div>
 </div></section>
 
+<section id="feedback" style="padding-top:0"><div class="wrap">
+  <div class="head" id="tstHead" hidden><div class="eyebrow">Student feedback</div><h2>What our students say</h2><p>Real words from our students, shared with their permission.</p></div>
+  <div class="fb-grid" id="tstList" hidden></div>
+  <div class="fb-form">
+    <div style="display:grid;gap:14px;align-content:start">
+      <div class="eyebrow">Share your experience</div>
+      <h3 style="font-size:32px">Studied with us? Tell us how it went.</h3>
+      <p class="muted">Your feedback helps us improve the courses and helps new traders decide. It comes straight to us on WhatsApp.</p>
+      <p class="fb-note">We only show feedback on this website when you allow it, and we never change your words.</p>
+    </div>
+    <form id="fbForm" novalidate>
+      <div class="fld"><label for="fbName">Your name</label><input id="fbName" name="name" autocomplete="name" required></div>
+      <div class="fld"><label for="fbCity">City</label><input id="fbCity" name="city" autocomplete="address-level2"></div>
+      <div class="fld"><label for="fbBatch">Batch number (optional)</label><input id="fbBatch" name="batch" inputmode="numeric"></div>
+      <fieldset class="fld rate"><legend>Your rating</legend><div class="row">
+        <input type="radio" name="rating" id="r5" value="5"><label for="r5" title="5 stars">★</label>
+        <input type="radio" name="rating" id="r4" value="4"><label for="r4" title="4 stars">★</label>
+        <input type="radio" name="rating" id="r3" value="3"><label for="r3" title="3 stars">★</label>
+        <input type="radio" name="rating" id="r2" value="2"><label for="r2" title="2 stars">★</label>
+        <input type="radio" name="rating" id="r1" value="1"><label for="r1" title="1 star">★</label>
+      </div></fieldset>
+      <div class="fld full"><label for="fbText">Your feedback (English, Urdu or Roman Urdu)</label><textarea id="fbText" name="text" required></textarea></div>
+      <label class="chk full"><input type="checkbox" id="fbAllow"> I allow Qazi Forex Tips to show my name, city and feedback on the website.</label>
+      <p class="fb-err full" id="fbErr" role="alert" hidden></p>
+      <div class="full" style="display:flex;flex-wrap:wrap;gap:12px;align-items:center"><button class="btn gold" type="submit">Send feedback on WhatsApp</button><span class="fb-note">Opens WhatsApp with your message ready to send.</span></div>
+    </form>
+  </div>
+</div></section>
+
 <section id="faq"><div class="wrap faq-wrap">
   <div class="head" style="align-content:start"><div class="eyebrow">Questions</div><h2>What new traders ask us</h2><p>Still have a question? Message us on WhatsApp.</p></div>
   <div class="faq" id="faq-list"></div>
@@ -359,7 +419,7 @@ footer a:hover{color:var(--ink)}
 </main>
 
 <footer><div class="wrap">
-  <div class="row"><span id="fname"></span><nav aria-label="Footer"><a href="youtube.html">Courses</a><a href="simulator.html">Simulator</a><a href="trade-assistant.html">Trade Assistant</a><a href="#about">About</a><a href="#faq">FAQ</a></nav></div>
+  <div class="row"><span id="fname"></span><nav aria-label="Footer"><a href="youtube.html">Courses</a><a href="simulator.html">Simulator</a><a href="trade-assistant.html">Trade Assistant</a><a href="#about">About</a><a href="#feedback">Feedback</a><a href="#faq">FAQ</a></nav></div>
   <p class="disc" id="disc"></p>
 </div></footer>
 
@@ -452,6 +512,35 @@ footer a:hover{color:var(--ink)}
     var id = ytId(v.link); if (!id) return "";
     return '<a class="vid" href="' + esc(v.link) + '" target="_blank" rel="noopener"><div class="th"><img src="https://i.ytimg.com/vi/' + id + '/hqdefault.jpg" alt="" loading="lazy"><i></i>' + (v.time ? '<span>' + esc(v.time) + '</span>' : '') + '</div><b>' + esc(v.title) + '</b></a>';
   }).join("");
+
+  /* student feedback: approved testimonials from content.js + form that sends to WhatsApp */
+  (function(){
+    var list = (S.testimonials || []).filter(function(t){ return t && t.text; });
+    if (list.length) {
+      $("tstList").innerHTML = list.map(function(t){
+        var r = Math.max(0, Math.min(5, parseInt(t.rating, 10) || 0));
+        return '<figure class="tst" style="margin:0">' + (r ? '<div class="stars" aria-label="' + r + ' out of 5">' + "★★★★★".slice(0, r) + '<span style="opacity:.25">' + "★★★★★".slice(r) + '</span></div>' : '') +
+          '<p>' + esc(t.text) + '</p><figcaption class="who"><b>' + esc(t.name) + '</b>' + esc([t.city, t.batch ? "Batch " + t.batch : "", t.date].filter(Boolean).join(" · ")) + '</figcaption></figure>';
+      }).join("");
+      $("tstList").hidden = false; $("tstHead").hidden = false;
+    }
+    var f = $("fbForm");
+    f.addEventListener("submit", function(e){
+      e.preventDefault();
+      var name = $("fbName").value.trim(), text = $("fbText").value.trim(), rating = (f.querySelector('input[name="rating"]:checked') || {}).value || "";
+      var err = !name ? "Please write your name." : !rating ? "Please choose a star rating." : text.length < 10 ? "Please write a few words of feedback." : "";
+      $("fbErr").textContent = err; $("fbErr").hidden = !err;
+      if (err) return;
+      var msg = "*Student feedback – Qazi Forex Tips*\n" +
+        "Name: " + name + "\n" +
+        ($("fbCity").value.trim() ? "City: " + $("fbCity").value.trim() + "\n" : "") +
+        ($("fbBatch").value.trim() ? "Batch: " + $("fbBatch").value.trim() + "\n" : "") +
+        "Rating: " + "⭐".repeat(+rating) + " (" + rating + "/5)\n" +
+        "Feedback: " + text + "\n" +
+        "Show on website: " + ($("fbAllow").checked ? "YES, I allow it" : "No");
+      window.open(wa + "?text=" + encodeURIComponent(msg), "_blank", "noopener");
+    });
+  })();
 
   /* faq */
   $("faq-list").innerHTML = (S.faq || []).map(function(f, i){ return '<details' + (i === 0 ? ' open' : '') + '><summary>' + esc(f.q) + '</summary><p>' + esc(f.a) + '</p></details>'; }).join("");
