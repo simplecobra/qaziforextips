@@ -94,7 +94,7 @@ section{padding-block:88px}
 .brand{display:flex;align-items:center;gap:11px;text-decoration:none;margin-right:auto;min-width:0}
 .brand img{width:42px;height:42px;border-radius:50%;box-shadow:0 0 0 2px var(--gold);flex:none}
 .brand b{font:800 21px/1 var(--f-display);text-transform:uppercase;letter-spacing:.6px;white-space:nowrap}
-.nav{display:flex;gap:26px;font-weight:600;font-size:15px}
+.nav{display:flex;gap:20px;font-weight:600;font-size:15px}
 .nav a{text-decoration:none;color:var(--muted);transition:color .15s}
 .nav a:hover{color:var(--ink)}
 .top .wrap{gap:12px}
@@ -291,7 +291,7 @@ footer a:hover{color:var(--ink)}
 <header class="top"><div class="wrap">
   <a class="brand" href="#top"><img src="logo.png" alt="Qazi Forex Tips logo"><b>Qazi Forex Tips</b></a>
   <nav class="nav" id="nav" aria-label="Main">
-    <a href="#start">Start here</a><a href="youtube.html">Courses</a><a href="#about">About</a><a href="simulator.html">Simulator</a><a href="trade-assistant.html">Trade Assistant</a><a href="#faq">FAQ</a>
+    <a href="#start">Start here</a><a href="youtube.html">Courses</a><a href="#about">About</a><a href="simulator.html">Simulator</a><a href="trade-assistant.html">Trade Assistant</a><a href="feedback.html">Feedback</a><a href="#faq">FAQ</a>
   </nav>
   <a class="btn gold sm wa-top" id="waTop" href="#contact" target="_blank" rel="noopener">WhatsApp</a>
   <button class="theme-btn" id="themeBtn" type="button" aria-label="Switch to light mode" title="Light / dark"><svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M4.6 4.6l1.6 1.6M17.8 17.8l1.6 1.6M2.5 12h2.2M19.3 12h2.2M4.6 19.4l1.6-1.6M17.8 6.2l1.6-1.6"/></svg><svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a8.5 8.5 0 1 0 10.7 10.7Z"/></svg></button>
@@ -374,34 +374,11 @@ footer a:hover{color:var(--ink)}
 </div></section>
 
 <section id="feedback" style="padding-top:0"><div class="wrap">
-  <div class="head" id="tstHead" hidden><div class="eyebrow">Student feedback</div><h2>What our students say</h2><p>Real words from our students, shared with their permission.</p></div>
+  <div class="vhead"><div class="head"><div class="eyebrow">Student feedback</div><h2>What our students say</h2><p id="fbSum">Real feedback from our students, shared with their permission.</p></div><a class="btn" href="feedback.html">See all feedback →</a></div>
   <div class="fb-grid" id="tstList" hidden></div>
-  <div id="tstMoreWrap" style="margin:-8px 0 28px" hidden><button class="btn sm" type="button" id="tstMore">Show more feedback</button></div>
-  <div class="fb-form">
-    <div style="display:grid;gap:14px;align-content:start">
-      <div class="eyebrow">Share your experience</div>
-      <h3 style="font-size:32px">Studied with us? Tell us how it went.</h3>
-      <p class="muted">Your feedback helps us improve the courses and helps new traders decide.</p>
-      <p class="fb-note">If you tick the box, your feedback appears on this website within a few minutes, in your own words. If you do not, only our team sees it.</p>
-    </div>
-    <form id="fbForm" novalidate>
-      <div class="fld"><label for="fbName">Your name</label><input id="fbName" name="name" autocomplete="name" required></div>
-      <div class="fld"><label for="fbCity">City</label><input id="fbCity" name="city" autocomplete="address-level2"></div>
-      <div class="fld"><label for="fbBatch">Batch number (optional)</label><input id="fbBatch" name="batch" inputmode="numeric"></div>
-      <fieldset class="fld rate"><legend>Your rating</legend><div class="row">
-        <input type="radio" name="rating" id="r5" value="5"><label for="r5" title="5 stars">★</label>
-        <input type="radio" name="rating" id="r4" value="4"><label for="r4" title="4 stars">★</label>
-        <input type="radio" name="rating" id="r3" value="3"><label for="r3" title="3 stars">★</label>
-        <input type="radio" name="rating" id="r2" value="2"><label for="r2" title="2 stars">★</label>
-        <input type="radio" name="rating" id="r1" value="1"><label for="r1" title="1 star">★</label>
-      </div></fieldset>
-      <div class="fld full"><label for="fbText">Your feedback (English, Urdu or Roman Urdu)</label><textarea id="fbText" name="text" required></textarea></div>
-      <label class="chk full"><input type="checkbox" id="fbAllow"> I allow Qazi Forex Tips to show my name, city and feedback on the website.</label>
-      <p class="fb-err full" id="fbErr" role="alert" hidden></p>
-      <input type="text" id="fbHp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
-      <div class="full" style="display:flex;flex-wrap:wrap;gap:12px;align-items:center"><button class="btn gold" type="submit" id="fbSend">Send feedback</button></div>
-      <p class="full fb-ok" id="fbOk" role="status" hidden></p>
-    </form>
+  <div class="fb-form" style="grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:20px">
+    <div style="display:grid;gap:8px"><h3 style="font-size:28px">Studied with us? Share your experience.</h3><p class="muted">It takes one minute. With your permission, it appears on our website in your own words.</p></div>
+    <a class="btn gold" href="feedback.html#share">Write feedback</a>
   </div>
 </div></section>
 
@@ -424,7 +401,7 @@ footer a:hover{color:var(--ink)}
 </main>
 
 <footer><div class="wrap">
-  <div class="row"><span id="fname"></span><nav aria-label="Footer"><a href="youtube.html">Courses</a><a href="simulator.html">Simulator</a><a href="trade-assistant.html">Trade Assistant</a><a href="#about">About</a><a href="#feedback">Feedback</a><a href="#faq">FAQ</a></nav></div>
+  <div class="row"><span id="fname"></span><nav aria-label="Footer"><a href="youtube.html">Courses</a><a href="simulator.html">Simulator</a><a href="trade-assistant.html">Trade Assistant</a><a href="#about">About</a><a href="feedback.html">Feedback</a><a href="#faq">FAQ</a></nav></div>
   <p class="disc" id="disc"></p>
 </div></footer>
 
@@ -432,7 +409,7 @@ footer a:hover{color:var(--ink)}
 
 
 <!-- content.js har dafa taaza load hota hai -->
-<script>document.write('<script src="content.js?v=' + Date.now() + '"><\/script>');</script>
+<script>document.write('<script src="content.js?v=' + Date.now() + '"><\/script><script src="feedback.js?v=' + Date.now() + '"><\/script>');</script>
 <script>
 (function(){
   var S = window.SITE || {}, B = S.brand || {}, Y = S.youtube || {}, A = S.about || {};
@@ -518,70 +495,13 @@ footer a:hover{color:var(--ink)}
     return '<a class="vid" href="' + esc(v.link) + '" target="_blank" rel="noopener"><div class="th"><img src="https://i.ytimg.com/vi/' + id + '/hqdefault.jpg" alt="" loading="lazy"><i></i>' + (v.time ? '<span>' + esc(v.time) + '</span>' : '') + '</div><b>' + esc(v.title) + '</b></a>';
   }).join("");
 
-  /* student feedback: Google Form (store) + published Sheet "Public" tab (display) + manual list in content.js */
-  (function(){
-    var F = S.feedbackSystem || {}, manual = (S.testimonials || []).filter(function(t){ return t && t.text; });
-    var shown = 9, all = [];
-    function stars(r){ r = Math.max(0, Math.min(5, parseInt(r, 10) || 0)); return r ? '<div class="stars" aria-label="' + r + ' out of 5">' + "★★★★★".slice(0, r) + '<span style="opacity:.25">' + "★★★★★".slice(r) + '</span></div>' : ''; }
-    function card(t){ return '<figure class="tst" style="margin:0">' + stars(t.rating) + '<p>' + esc(t.text) + '</p><figcaption class="who"><b>' + esc(t.name) + '</b>' + esc([t.city, t.batch ? "Batch " + String(t.batch).replace(/^batch\s*/i, "") : "", t.date].filter(Boolean).join(" · ")) + '</figcaption></figure>'; }
-    function draw(){
-      if (!all.length) return;
-      $("tstList").innerHTML = all.slice(0, shown).map(card).join("");
-      $("tstList").hidden = false; $("tstHead").hidden = false;
-      $("tstMoreWrap").hidden = all.length <= shown;
-    }
-    $("tstMore").addEventListener("click", function(){ shown += 9; draw(); });
-    function parseCSV(txt){
-      var rows = [], row = [], f = "", q = false;
-      for (var i = 0; i < txt.length; i++){
-        var c = txt[i];
-        if (q) { if (c === '"') { if (txt[i + 1] === '"') { f += '"'; i++; } else q = false; } else f += c; }
-        else if (c === '"') q = true;
-        else if (c === ",") { row.push(f); f = ""; }
-        else if (c === "\n" || c === "\r") { if (c === "\r" && txt[i + 1] === "\n") i++; row.push(f); rows.push(row); row = []; f = ""; }
-        else f += c;
-      }
-      if (f !== "" || row.length) { row.push(f); rows.push(row); }
-      return rows;
-    }
-    var MON = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
-    function monthYear(ts){
-      var m = String(ts || "").match(/(\d{1,4})[\/\-.](\d{1,2})[\/\-.](\d{2,4})/); if (!m) return "";
-      var a = +m[1], b = +m[2], c = +m[3], y, mo;
-      if (m[1].length === 4) { y = a; mo = b; } else { y = c < 100 ? 2000 + c : c; mo = a > 12 ? b : a; } /* the Sheet writes M/D/YYYY */
-      return MON[mo - 1] ? MON[mo - 1] + " " + y : "";
-    }
-    all = manual.slice();
-    draw();
-    if (F.publicCsv) {
-      fetch(F.publicCsv + "&t=" + Math.floor(Date.now() / 60000), { cache: "no-store" }).then(function(r){ return r.ok ? r.text() : ""; }).then(function(txt){
-        var rows = parseCSV(txt || ""); if (rows.length < 2) return;
-        var h = rows[0].map(function(x){ return x.trim().toLowerCase(); }), ix = function(n){ return h.indexOf(n); };
-        var live = rows.slice(1).map(function(r){ return { name: (r[ix("name")] || "").trim(), city: (r[ix("city")] || "").trim(), batch: (r[ix("batch")] || "").trim(), rating: r[ix("rating")], text: (r[ix("feedback")] || "").trim(), date: monthYear(r[ix("timestamp")]) }; })
-          .filter(function(t){ return t.name && t.text.length >= 3; });
-        all = live.concat(manual); draw();
-      }).catch(function(){});
-    }
-    var f = $("fbForm");
-    f.addEventListener("submit", function(e){
-      e.preventDefault();
-      if ($("fbHp").value) return;
-      var name = $("fbName").value.trim(), text = $("fbText").value.trim(), rating = (f.querySelector('input[name="rating"]:checked') || {}).value || "";
-      var err = !name ? "Please write your name." : !rating ? "Please choose a star rating." : text.length < 10 ? "Please write a few words of feedback." : "";
-      $("fbErr").textContent = err; $("fbErr").hidden = !err; $("fbOk").hidden = true;
-      if (err) return;
-      var allow = $("fbAllow").checked, k = F.fields || {}, body = new URLSearchParams();
-      body.append(k.name, name.slice(0, 80)); body.append(k.city, $("fbCity").value.trim().slice(0, 60)); body.append(k.batch, $("fbBatch").value.trim().slice(0, 20));
-      body.append(k.rating, rating); body.append(k.text, text.slice(0, 1500)); body.append(k.allow, allow ? "YES" : "No");
-      var btn = $("fbSend"); btn.disabled = true; btn.textContent = "Sending…";
-      fetch(F.formAction, { method: "POST", mode: "no-cors", body: body }).then(function(){
-        $("fbOk").textContent = allow ? "Thank you, " + name + "! Your feedback has been received and will appear on this page in a few minutes." : "Thank you, " + name + "! Your feedback has been received. Only our team will see it.";
-        $("fbOk").hidden = false; f.reset();
-      }).catch(function(){
-        $("fbErr").innerHTML = 'Could not send right now. Please check your internet, or <a href="' + wa + '" target="_blank" rel="noopener">send it on WhatsApp</a>.'; $("fbErr").hidden = false;
-      }).then(function(){ btn.disabled = false; btn.textContent = "Send feedback"; });
-    });
-  })();
+  /* student feedback preview: newest 3 (full list on feedback.html) */
+  if (window.QFTFeedback) QFTFeedback.load(S, function(list){
+    if (!list.length) return;
+    $("tstList").innerHTML = list.slice(0, 3).map(QFTFeedback.card).join(""); $("tstList").hidden = false;
+    var sm = QFTFeedback.summary(list);
+    if (sm.rated) $("fbSum").textContent = sm.avg.toFixed(1) + " ★ average from " + sm.count + (sm.count === 1 ? " review" : " reviews") + ". Real feedback, shared with permission.";
+  });
 
   /* faq */
   $("faq-list").innerHTML = (S.faq || []).map(function(f, i){ return '<details' + (i === 0 ? ' open' : '') + '><summary>' + esc(f.q) + '</summary><p>' + esc(f.a) + '</p></details>'; }).join("");
