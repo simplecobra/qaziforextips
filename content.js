@@ -83,10 +83,10 @@ window.SITE = {
      version: naya version aaye to sirf yahan number badlein.
      shots:   screenshots ke naam. Tasveer GitHub par isi naam se upload karein,
               website khud dikha degi. Jo tasveer nahi mili woh khud chhup jati hai.
-     video:   YouTube video ka link jab video ban jaye (abhi khali).            */
+     video:   YouTube tutorial ka link (Trade Assistant page par chalti hai).    */
   tradeAssistant: {
     version: "3.11",
-    video: "",
+    video: "https://youtu.be/lAOFQHaCszA",
     shots: [
       { file: "ta-1.png", caption: "Main panel: risk, lot size and one-click orders" },
       { file: "ta-2.png", caption: "Entry, SL and TP lines on the chart" },
@@ -144,9 +144,10 @@ window.SITE = {
     title: "Free forex lessons in Urdu & Hindi",
     urdu: "فاریکس ٹریڈنگ مفت سیکھیں – اردو اور ہندی میں",
     text: "Complete Price Action courses, tested strategies, live sessions and practical guides. Start from Lecture 1 and go step by step.",
-    featured: "https://youtu.be/U1bCUislVJ4",   // hero mein bari video (aam tor par sab se nayi)
+    featured: "https://youtu.be/lAOFQHaCszA",   // hero mein bari video (aam tor par sab se nayi)
 
     latest: [
+      { title: "Trade Assistant MT5 Tutorial | Setup, Chart Patterns, Signals, Lot Calculator & Prop Firm Guard", link: "https://youtu.be/lAOFQHaCszA", time: "28:10" },
       { title: "Best MT5 Replay Tool for Backtesting | Prop Firm Challenge Mode | Practice Like Real Market", link: "https://youtu.be/U1bCUislVJ4", time: "28:40" },
       { title: "High Probability TREND REVERSAL Technique | Simplest and Easiest steps", link: "https://youtu.be/Npav87jvsgE", time: "55:21" },
       { title: "Master the Fibonacci Retracement Technique: A Step-by-Step Guide. Expert Tips & Strategies", link: "https://youtu.be/3bVuDuiWMvE", time: "26:18" },
@@ -252,7 +253,8 @@ window.SITE = {
           { title: "Trade Assistant for mt4 : Automatic Risk/Lot Size calculator: Manage your trades with just 1 click", link: "https://youtu.be/1uMbc43V_tk", time: "16:18" },
           { title: "FP Markets Account Opening & Verification – Step by Step", link: "https://youtu.be/KBmSAZsrRa0", time: "9:36" },
           { title: "Managing Lot Size in Forex – The Right Lot Size on Every Trade", link: "https://youtu.be/4c9gtnO5_48", time: "9:39" },
-          { title: "Best MT5 Replay Tool for Backtesting | Prop Firm Challenge Mode | Practice Like Real Market", link: "https://youtu.be/U1bCUislVJ4", time: "28:40" }
+          { title: "Best MT5 Replay Tool for Backtesting | Prop Firm Challenge Mode | Practice Like Real Market", link: "https://youtu.be/U1bCUislVJ4", time: "28:40" },
+          { title: "Trade Assistant MT5 Tutorial | Setup, Chart Patterns, Signals, Lot Calculator & Prop Firm Guard", link: "https://youtu.be/lAOFQHaCszA", time: "28:10" }
         ]
       },
       {
