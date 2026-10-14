@@ -319,7 +319,7 @@ footer a:hover{color:var(--ink)}
 <header class="top"><div class="wrap">
   <a class="brand" href="#top"><img src="logo.png" alt="Qazi Forex Tips logo"><b>Qazi Forex Tips</b></a>
   <nav class="nav" id="nav" aria-label="Main">
-    <a href="#start">Start here</a><a href="youtube.html">Courses</a><a href="#about">About</a><a href="simulator.html">Simulator</a><a href="trade-assistant.html">Trade Assistant</a><a href="feedback.html">Feedback</a><a href="#faq">FAQ</a>
+    <a href="#start">Start here</a><a href="youtube.html">Courses</a><a href="about.html">About</a><a href="simulator.html">Simulator</a><a href="trade-assistant.html">Trade Assistant</a><a href="feedback.html">Feedback</a><a href="#faq">FAQ</a>
   </nav>
   <a class="btn gold sm wa-top" id="waTop" href="#contact" target="_blank" rel="noopener">WhatsApp</a>
   <button class="theme-btn" id="themeBtn" type="button" aria-label="Switch to light mode" title="Light / dark"><svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M4.6 4.6l1.6 1.6M17.8 17.8l1.6 1.6M2.5 12h2.2M19.3 12h2.2M4.6 19.4l1.6-1.6M17.8 6.2l1.6-1.6"/></svg><svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a8.5 8.5 0 1 0 10.7 10.7Z"/></svg></button>
@@ -357,11 +357,6 @@ footer a:hover{color:var(--ink)}
 <section class="about" id="about"><div class="wrap">
   <div class="photo" id="photo"></div>
   <div class="story" id="story"></div>
-</div></section>
-
-<section class="about team-sec" id="team" hidden><div class="wrap" style="display:block">
-  <div class="team-head"><div class="eyebrow">Our team</div><h2>The people behind QFT</h2><p>Dr. Qazi Abdul Basit leads Qazi Forex Tips. This team works with him on analysis, education and our student community.</p></div>
-  <div class="team" id="teamList"></div>
 </div></section>
 
 <section id="simulator"><div class="wrap sim">
@@ -434,7 +429,7 @@ footer a:hover{color:var(--ink)}
 </main>
 
 <footer><div class="wrap">
-  <div class="row"><span id="fname"></span><nav aria-label="Footer"><a href="youtube.html">Courses</a><a href="simulator.html">Simulator</a><a href="trade-assistant.html">Trade Assistant</a><a href="#about">About</a><a href="#team">Team</a><a href="feedback.html">Feedback</a><a href="#faq">FAQ</a></nav></div>
+  <div class="row"><span id="fname"></span><nav aria-label="Footer"><a href="youtube.html">Courses</a><a href="simulator.html">Simulator</a><a href="trade-assistant.html">Trade Assistant</a><a href="about.html">About</a><a href="about.html#team">Team</a><a href="feedback.html">Feedback</a><a href="#faq">FAQ</a></nav></div>
   <p class="disc" id="disc"></p>
 </div></footer>
 
@@ -472,20 +467,8 @@ footer a:hover{color:var(--ink)}
     (yrs > 0 ? '<div class="badge"><b>' + yrs + '+ years</b><span>in the markets</span></div>' : '');
   $("story").innerHTML = '<div class="eyebrow">About your teacher</div><h2>' + esc(A.name || "") + '</h2><div class="role">' + esc(A.role || "") + '</div>' +
     (A.story || []).map(function(p){ return '<p>' + esc(p) + '</p>'; }).join("") +
-    '<div class="chips">' + (A.skills || []).map(function(s){ return '<span class="chip">' + esc(s) + '</span>'; }).join("") + '</div>';
-
-  /* team: from content.js → team (photo or initials) */
-  var team = (S.team || []).filter(function(m){ return m && m.name; });
-  if (team.length) {
-    var ini = function(n){ var w = String(n).split(/\s+/).filter(Boolean); if (w.length > 2 && /^(muhammad|m\.)$/i.test(w[0])) w.shift(); return w.slice(0, 2).map(function(x){ return x[0]; }).join("").toUpperCase(); };
-    $("teamList").innerHTML = team.map(function(m){
-      return '<article class="tm"><div class="tm-ph">' + (m.photo ? '<img src="' + esc(m.photo) + '" alt="' + esc(m.name) + '" loading="lazy" width="640" height="800">' : '<div class="tm-ini" aria-hidden="true"><b>' + esc(ini(m.name)) + '</b></div>') + '</div>' +
-        '<div class="tm-hd"><h3>' + esc(m.name) + '</h3><span class="r">' + esc(m.role || "") + '</span></div>' +
-        '<div class="tm-bd"><p>' + esc(m.text || "") + '</p>' + (m.quote ? '<q>' + esc(m.quote) + '</q>' : '') +
-        ((m.tags || []).length ? '<div class="tm-tags">' + m.tags.map(function(t){ return '<span>' + esc(t) + '</span>'; }).join("") + '</div>' : '') + '</div></article>';
-    }).join("");
-    $("team").hidden = false;
-  }
+    '<div class="chips">' + (A.skills || []).map(function(s){ return '<span class="chip">' + esc(s) + '</span>'; }).join("") + '</div>' +
+    '<div style="margin-top:10px"><a class="btn" href="about.html">More about us &amp; our team →</a></div>';
 
   /* tools (simulator has its own section) */
   $("tools-list").innerHTML = (S.tools || []).filter(function(t){ return !/simulator|trade assistant/i.test(t.name); }).map(function(t){
