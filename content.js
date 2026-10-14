@@ -313,6 +313,12 @@ window.SITE = {
      Website ka form har feedback Google Sheet "QFT Student Feedback (Responses)" mein bhejta hai.
      Jis student ne ijazat di (YES), us ka feedback ~5 minute mein website par khud aa jata hai.
      Kisi feedback ko chhupana ho: Sheet mein us line ke "Hide" khane mein YES likh dein.      */
+  /* Team members ki feedback par saaf note (imaandari ke liye).
+     Naam bilkul wahi likhein jo feedback mein hai. */
+  feedbackNotes: {
+    "Faham Shabeer": "Batch 5 student · now part of the QFT team"
+  },
+
   feedbackSystem: {
     formAction: "https://docs.google.com/forms/d/e/1FAIpQLSeJIBUyRHfxqj0Kn7ijzCE-GEE_zv3YM3HeMmuEOqKGXOkv7g/formResponse",
     fields: { name: "entry.1097635637", city: "entry.1320651867", batch: "entry.1167245964", rating: "entry.1558484287", text: "entry.145154759", allow: "entry.1668224544", product: "entry.1090851567" },

@@ -61,6 +61,7 @@
     var st = document.createElement("style");
     st.textContent = ".tst p.clamp{display:-webkit-box;-webkit-line-clamp:6;-webkit-box-orient:vertical;overflow:hidden}" +
       ".tst .more{justify-self:start;background:none;border:0;padding:0;margin:-6px 0 0;color:var(--gold);font:inherit;font-weight:600;cursor:pointer}" +
+      ".tst .who .note{display:block;margin-top:4px;color:var(--gold);font-weight:600}" +
       ".tst .tag{justify-self:start;font:600 11px/1 var(--f-mono);letter-spacing:1px;text-transform:uppercase;color:var(--gold);border:1px solid color-mix(in srgb,var(--gold) 45%,transparent);border-radius:20px;padding:5px 9px}";
     document.head.appendChild(st);
     document.addEventListener("click", function (e) {
@@ -77,14 +78,17 @@
     return '<figure class="tst" style="margin:0">' + (tool && !opt.noTag ? '<span class="tag">' + esc(PROD[t.product].name) + "</span>" : "") +
       stars(t.rating) + "<p" + (long ? ' class="clamp"' : "") + ">" + esc(t.text) + "</p>" +
       (long ? '<button type="button" class="more" aria-expanded="false">Read more</button>' : "") + '<figcaption class="who"><b>' + esc(t.name) + "</b>" +
-      esc([t.city, !tool && t.batch ? "Batch " + t.batch : "", t.date].filter(Boolean).join(" · ")) + "</figcaption></figure>";
+      esc([t.city, !tool && t.batch && !t.note ? "Batch " + t.batch : "", t.date].filter(Boolean).join(" · ")) +
+      (t.note ? '<span class="note">' + esc(t.note) + "</span>" : "") + "</figcaption></figure>";
   }
 
   /* cb(list, final) is called once with manual entries, then again when the Sheet arrives.
      product (optional) keeps only that product's feedback. */
   function load(S, cb, product) {
-    var F = S.feedbackSystem || {};
-    var only = function (list) { return product ? list.filter(function (t) { return t.product === product; }) : list; };
+    var F = S.feedbackSystem || {}, notes = {};
+    Object.keys(S.feedbackNotes || {}).forEach(function (n) { notes[n.trim().toLowerCase()] = S.feedbackNotes[n]; });
+    var addNote = function (t) { t.note = notes[String(t.name || "").trim().toLowerCase()] || ""; return t; };
+    var only = function (list) { list.forEach(addNote); return product ? list.filter(function (t) { return t.product === product; }) : list; };
     var manual = (S.testimonials || []).filter(function (t) { return t && t.text; }).map(function (t) {
       return { name: t.name || "", city: t.city || "", batch: cleanBatch(t.batch), rating: t.rating, text: t.text, date: t.date || "", product: prodKey(t.product), sort: 0 };
     });
