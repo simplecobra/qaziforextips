@@ -1,0 +1,53 @@
+{
+ "sample": true,
+ "updated": "2026-10-15T08:30:00+05:00",
+ "bias": "bullish",
+ "headline": {
+  "en": "Holding above last week's breakout. Buy dips into support; no chasing highs before US data.",
+  "ur": "پچھلے ہفتے کے بریک آؤٹ کے اوپر قائم۔ سپورٹ پر ڈِپ میں بائے؛ امریکی ڈیٹا سے پہلے اونچائی کا پیچھا نہیں۔"
+ },
+ "levels": [
+  {
+   "n": "R2",
+   "p": 4148
+  },
+  {
+   "n": "R1",
+   "p": 4126
+  },
+  {
+   "n": "Pivot",
+   "p": 4104
+  },
+  {
+   "n": "S1",
+   "p": 4082
+  },
+  {
+   "n": "S2",
+   "p": 4060
+  }
+ ],
+ "buy": {
+  "zone": "4082 – 4086",
+  "sl": "4073",
+  "tp": "4110 / 4126",
+  "note": {
+   "en": "Only after a bullish rejection candle on M15 at S1.",
+   "ur": "صرف S1 پر M15 کی بُلش ریجیکشن کینڈل کے بعد۔"
+  }
+ },
+ "sell": {
+  "zone": "4146 – 4150",
+  "sl": "4158",
+  "tp": "4126 / 4110",
+  "note": {
+   "en": "Counter-trend: half risk, only on a clear double top at R2.",
+   "ur": "ٹرینڈ کے خلاف: آدھا رسک، صرف R2 پر واضح ڈبل ٹاپ پر۔"
+  }
+ },
+ "news": {
+  "en": "US Retail Sales and jobless claims today — no new entries 15 min before or after.",
+  "ur": "آج امریکی ریٹیل سیلز اور جاب لیس کلیمز — ۱۵ منٹ پہلے اور بعد نئی انٹری نہیں۔"
+ }
+}

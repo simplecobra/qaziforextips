@@ -1,0 +1,1372 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0d1220">
+<link rel="icon" href="apple-touch-icon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Qazi Forex Tips App</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@500;600;700&family=Source+Sans+3:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&family=Noto+Nastaliq+Urdu:wght@400;600&display=swap">
+<style>
+/* Layout: one-screen phone app — sticky brand header, scrolling view, fixed 5-tab bottom bar. Midnight Gold brand (same as qaziforextips.com). */
+:root{
+  --bg:#0d1220; --bg2:#111829; --surface:#151d30; --surface2:#1b2540; --line:#26304a;
+  --ink:#eef1f7; --muted:#9aa4ba;
+  --gold:#e7b94f; --gold-ink:#1c1405; --gold-soft:rgba(231,185,79,.14);
+  --wine:#c23b55; --wine-soft:rgba(194,59,85,.16);
+  --up:#3fbf8a; --warn:#e9a23b; --down:#e2556b; --hol:#7d8aa8;
+  --f-display:"Saira Condensed","Arial Narrow",Arial,sans-serif;
+  --f-body:"Source Sans 3","Segoe UI",Roboto,Arial,sans-serif;
+  --f-mono:"IBM Plex Mono",Consolas,"Courier New",monospace;
+  --f-ur:"Noto Nastaliq Urdu","Jameel Noori Nastaleeq","Urdu Typesetting",serif;
+  --r:12px; --nav-h:64px;
+  color-scheme:dark;
+}
+@media (prefers-color-scheme: light){ :root:not([data-theme="dark"]){
+  --bg:#f5f3ee; --bg2:#ece8e0; --surface:#ffffff; --surface2:#f7f4ee; --line:#ddd6ca;
+  --ink:#161a26; --muted:#5b6274; --gold:#b98418; --gold-ink:#1c1405; --gold-soft:rgba(185,132,24,.12);
+  --wine:#a8233f; --wine-soft:rgba(168,35,63,.10); --up:#1d8f60; --warn:#b8730f; --down:#c0344c; --hol:#6b7590;
+  color-scheme:light; } }
+:root[data-theme="light"]{
+  --bg:#f5f3ee; --bg2:#ece8e0; --surface:#ffffff; --surface2:#f7f4ee; --line:#ddd6ca;
+  --ink:#161a26; --muted:#5b6274; --gold:#b98418; --gold-ink:#1c1405; --gold-soft:rgba(185,132,24,.12);
+  --wine:#a8233f; --wine-soft:rgba(168,35,63,.10); --up:#1d8f60; --warn:#b8730f; --down:#c0344c; --hol:#6b7590;
+  color-scheme:light; }
+
+html,body{height:100%}
+body{background:var(--bg);color:var(--ink);font:16px/1.5 var(--f-body);-webkit-tap-highlight-color:transparent}
+body.ur{font-family:var(--f-ur),var(--f-body);font-size:15px;line-height:2.05}
+*{box-sizing:border-box}
+button,input,select{font:inherit;color:inherit}
+a{color:var(--gold)}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.mono,.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+[dir="ltr"]{direction:ltr;unicode-bidi:isolate}
+
+/* header */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.top-in{display:flex;align-items:center;gap:12px;padding-block:10px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));max-width:760px;margin:0 auto}
+.top img{width:38px;height:38px;border-radius:9px;background:#0b0f1a}
+.brand{flex:1;min-width:0;line-height:1.1}
+.brand b{display:block;font-family:var(--f-display);font-size:21px;letter-spacing:.02em;text-transform:uppercase}
+.brand span{font-size:12px;color:var(--muted)}
+body.ur .brand span{font-family:var(--f-ur)}
+.iconbtn{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 12px;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap}
+.iconbtn:hover{border-color:var(--gold)}
+
+main{max-width:760px;margin:0 auto;padding-block:16px calc(var(--nav-h) + 28px + env(safe-area-inset-bottom,0px));padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.view{display:grid;gap:18px}
+h2{font-family:var(--f-display);font-size:26px;line-height:1.1;margin:0;letter-spacing:.01em;text-wrap:balance}
+body.ur h2{font-family:var(--f-ur);font-size:21px;line-height:1.9}
+h3{font-family:var(--f-display);font-size:19px;margin:0;letter-spacing:.02em}
+body.ur h3{font-family:var(--f-ur);font-size:17px;line-height:1.9}
+.eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:.12em;color:var(--gold);font-weight:700}
+body.ur .eyebrow{letter-spacing:0;text-transform:none;font-size:13px}
+.muted{color:var(--muted)}
+.small{font-size:13px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px;min-width:0}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.between{justify-content:space-between}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+@media (max-width:360px){.grid2{grid-template-columns:1fr}}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:10px;padding:10px 16px;font-weight:700;cursor:pointer;text-decoration:none;border:1px solid transparent}
+.btn.gold{background:var(--gold);color:var(--gold-ink)}
+.btn.ghost{border-color:var(--line);background:transparent;color:var(--ink)}
+.btn.ghost:hover{border-color:var(--gold)}
+.pill{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:2px 10px;font-size:12px;font-weight:700;border:1px solid var(--line)}
+.dot{width:8px;height:8px;border-radius:50%;display:inline-block;flex:none}
+
+/* home hero: next news */
+.next{background:linear-gradient(135deg,var(--surface2),var(--surface));border:1px solid var(--line);border-radius:16px;padding:18px;display:grid;gap:10px;position:relative;overflow:hidden}
+.next::after{content:"";position:absolute;inset:auto -40px -60px auto;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,var(--wine-soft),transparent 70%);pointer-events:none}
+body[dir="rtl"] .next::after{inset:auto auto -60px -40px}
+.count{font-family:var(--f-mono);font-size:34px;font-weight:600;letter-spacing:.02em;color:var(--gold);font-variant-numeric:tabular-nums;direction:ltr;unicode-bidi:isolate}
+.next-title{font-weight:700;font-size:18px;line-height:1.3}
+
+/* sessions */
+.sess{display:grid;gap:8px}
+.sess-row{display:grid;grid-template-columns:92px 1fr auto;gap:10px;align-items:center;font-size:14px}
+.bar{height:8px;border-radius:99px;background:var(--bg2);position:relative;overflow:hidden}
+.bar i{position:absolute;top:0;bottom:0;border-radius:99px;background:var(--line)}
+.bar i.on{background:var(--gold)}
+.bar b{position:absolute;top:-3px;bottom:-3px;width:2px;background:var(--wine)}
+.sess-st{font-size:12px;font-weight:700;white-space:nowrap}
+.sess-st.on{color:var(--up)}.sess-st.off{color:var(--muted)}
+
+.quick{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.quick button{display:grid;gap:4px;justify-items:start;text-align:start;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:12px;cursor:pointer;min-width:0}
+.quick button:hover{border-color:var(--gold)}
+.quick b{font-size:14px;line-height:1.25}
+.quick small{color:var(--muted);font-size:12px;line-height:1.3}
+.qi{font-family:var(--f-mono);font-size:13px;color:var(--gold);font-weight:600}
+
+
+/* calendar */
+.chips{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 13px;font-size:13px;font-weight:600;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--gold);border-color:var(--gold);color:var(--gold-ink)}
+.day{display:grid;gap:8px}
+.day-h{position:sticky;top:calc(env(safe-area-inset-top,0px) + 59px);z-index:2;background:var(--bg);padding-block:6px;font-family:var(--f-display);font-size:17px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);display:flex;justify-content:space-between}
+body.ur .day-h{font-family:var(--f-ur);text-transform:none;letter-spacing:0}
+.ev{display:grid;grid-template-columns:54px 1fr;gap:12px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:12px;border-inline-start:4px solid var(--hol);cursor:pointer;text-align:start;width:100%}
+.ev.High{border-inline-start-color:var(--down)}.ev.Medium{border-inline-start-color:var(--warn)}.ev.Low{border-inline-start-color:var(--line)}
+.ev.past{opacity:.55}
+.ev-t{font-family:var(--f-mono);font-size:14px;font-weight:600;direction:ltr}
+.ev-c{font-family:var(--f-mono);font-size:12px;color:var(--muted)}
+.ev-title{font-weight:600;line-height:1.3;direction:ltr;text-align:start}
+.fp{display:flex;gap:14px;font-size:12px;color:var(--muted);margin-top:4px;flex-wrap:wrap}
+.fp span b{color:var(--ink);font-family:var(--f-mono);font-weight:600}
+.note{margin-top:8px;padding:10px;border-radius:8px;background:var(--gold-soft);font-size:14px;line-height:1.45}
+body.ur .note{line-height:2}
+.banner{border:1px dashed var(--warn);color:var(--ink);background:color-mix(in srgb,var(--warn) 10%,transparent);border-radius:10px;padding:10px 12px;font-size:13px}
+.empty{text-align:center;color:var(--muted);padding:28px 10px}
+
+/* calculators */
+.calc{display:grid;gap:14px}
+.fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.fields .full{grid-column:1/-1}
+@media (max-width:380px){.fields{grid-template-columns:1fr}}
+label.f{display:grid;gap:4px;font-size:13px;font-weight:600;color:var(--muted);min-width:0}
+label.f input,label.f select{width:100%;background:var(--bg2);border:1px solid var(--line);border-radius:9px;padding:10px 11px;font-family:var(--f-mono);font-size:16px;color:var(--ink);direction:ltr;min-width:0}
+label.f select{font-family:var(--f-body)}
+label.f input:focus,label.f select:focus{border-color:var(--gold);outline:none}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:9px;overflow:hidden}
+.seg button{border:0;background:transparent;padding:8px 14px;font-weight:700;font-size:13px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--gold);color:var(--gold-ink)}
+.result{background:var(--bg2);border:1px solid var(--line);border-radius:var(--r);padding:14px;display:grid;gap:10px}
+.big{font-family:var(--f-mono);font-size:30px;font-weight:600;color:var(--gold);line-height:1.1;direction:ltr;unicode-bidi:isolate}
+.kv{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 14px}
+.kv div{display:grid;font-size:12px;color:var(--muted)}
+.kv b{font-family:var(--f-mono);font-size:15px;color:var(--ink);font-weight:600;direction:ltr;text-align:start}
+.warn{border-radius:9px;padding:9px 11px;font-size:13px;font-weight:600;background:var(--wine-soft);color:var(--ink);border:1px solid color-mix(in srgb,var(--wine) 45%,transparent)}
+.ok{border-radius:9px;padding:9px 11px;font-size:13px;background:color-mix(in srgb,var(--up) 12%,transparent);border:1px solid color-mix(in srgb,var(--up) 40%,transparent)}
+.tip{font-size:13px;color:var(--muted);border-top:1px solid var(--line);padding-top:10px}
+table.t{width:100%;border-collapse:collapse;font-size:13px}
+table.t th,table.t td{padding:6px 8px;border-bottom:1px solid var(--line);text-align:start}
+table.t td{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.tw{overflow-x:auto;max-height:280px}
+
+/* videos */
+.vlist{display:grid;gap:10px}
+.vid{display:grid;grid-template-columns:128px 1fr;gap:12px;align-items:start;text-decoration:none;color:inherit;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:8px;min-width:0}
+.vid:hover{border-color:var(--gold)}
+.thumb{position:relative;aspect-ratio:16/9;border-radius:8px;overflow:hidden;background:linear-gradient(135deg,var(--wine-soft),var(--surface2));display:grid;place-items:center;max-width:100%}
+.thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.thumb .pl{width:30px;height:30px;border-radius:50%;background:var(--gold);display:grid;place-items:center;color:var(--gold-ink);font-size:12px}
+.thumb .du{position:absolute;bottom:4px;right:4px;background:rgba(0,0,0,.78);color:#fff;font-family:var(--f-mono);font-size:11px;padding:1px 5px;border-radius:4px}
+.vid-t{font-size:14px;font-weight:600;line-height:1.3;direction:ltr;text-align:start;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.vid-n{font-family:var(--f-mono);font-size:11px;color:var(--gold);font-weight:600}
+details.pl-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r)}
+details.pl-card summary{list-style:none;cursor:pointer;padding:14px;display:grid;gap:4px}
+details.pl-card summary::-webkit-details-marker{display:none}
+details.pl-card[open] summary{border-bottom:1px solid var(--line)}
+details.pl-card .vlist{padding:10px}
+details.pl-card .vid{background:var(--bg2)}
+
+/* software */
+.sw{display:grid;gap:10px}
+.sw ul{margin:0;padding-inline-start:18px;display:grid;gap:2px;font-size:14px}
+.sw img{border-radius:10px;border:1px solid var(--line);width:100%;max-width:100%}
+.wa{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.wa .num{font-size:16px;font-weight:600}
+
+/* more */
+.list{display:grid;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--surface)}
+.li{display:flex;gap:12px;align-items:center;justify-content:space-between;padding:13px 14px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.li:last-child{border-bottom:0}
+.about{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:center}
+.about img{width:64px;height:64px;border-radius:14px}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.stats div{background:var(--bg2);border-radius:10px;padding:10px 6px;text-align:center}
+.stats b{display:block;font-family:var(--f-display);font-size:22px;color:var(--gold);line-height:1}
+.stats span{font-size:11px;color:var(--muted);line-height:1.2;display:block;margin-top:4px}
+@media (max-width:380px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.disc{font-size:12px;color:var(--muted);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+
+/* bottom nav */
+nav.tabs{position:fixed;left:0;right:0;bottom:0;z-index:6;background:var(--surface);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px);padding-left:env(safe-area-inset-left,0px);padding-right:env(safe-area-inset-right,0px)}
+.tabs-in{max-width:760px;margin:0 auto;display:grid;grid-template-columns:repeat(6,1fr);height:var(--nav-h)}
+.tabs button{border:0;background:transparent;display:grid;place-items:center;align-content:center;gap:3px;font-size:10.5px;min-width:0;font-weight:700;color:var(--muted);cursor:pointer;letter-spacing:.02em}
+body.ur .tabs button{font-size:11px;letter-spacing:0;line-height:1.5}
+.tabs svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.tabs button[aria-current="page"]{color:var(--gold)}
+.tabs button[aria-current="page"] svg{stroke-width:2.2}
+/* checklist */
+.ck{display:grid;gap:8px}
+.ck-i{display:grid;grid-template-columns:28px 1fr auto;gap:10px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:11px 12px;cursor:pointer;text-align:start;width:100%}
+.ck-i .box{width:24px;height:24px;border-radius:7px;border:2px solid var(--line);display:grid;place-items:center;font-size:14px;font-weight:700;color:var(--gold-ink)}
+.ck-i[aria-checked="true"]{border-color:color-mix(in srgb,var(--up) 50%,var(--line))}
+.ck-i[aria-checked="true"] .box{background:var(--up);border-color:var(--up)}
+.ck-i.auto{cursor:default}
+.ck-i.bad{border-color:color-mix(in srgb,var(--down) 55%,var(--line))}
+.ck-i.bad .box{background:var(--down);border-color:var(--down);color:#fff}
+.ck-i b{font-size:14px;line-height:1.35;font-weight:600}
+.ck-i small{display:block;color:var(--muted);font-size:12px;font-weight:400;line-height:1.35}
+.tag{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);border:1px solid var(--gold-soft);border-radius:6px;padding:1px 6px;white-space:nowrap}
+.verdict{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:center;border-radius:14px;padding:14px 16px;border:1px solid var(--line);background:var(--surface)}
+.verdict .v{font-family:var(--f-display);font-size:34px;font-weight:700;line-height:1;letter-spacing:.03em}
+.verdict.go{border-color:var(--up)} .verdict.go .v{color:var(--up)}
+.verdict.wait{border-color:var(--warn)} .verdict.wait .v{color:var(--warn)}
+.verdict.no{border-color:var(--down)} .verdict.no .v{color:var(--down)}
+.meter{height:8px;border-radius:99px;background:var(--bg2);overflow:hidden}
+.meter i{display:block;height:100%;background:var(--gold);border-radius:99px}
+
+/* journal */
+.jstats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.jstats div{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px;display:grid;gap:2px;min-width:0}
+.jstats span{font-size:11px;color:var(--muted);line-height:1.3}
+.jstats b{font-family:var(--f-mono);font-size:18px;font-weight:600;direction:ltr;text-align:start}
+.pos{color:var(--up)}.neg{color:var(--down)}
+.curve{width:100%;height:120px;display:block}
+.insight{display:grid;gap:6px;font-size:14px}
+.insight p{margin:0;padding:9px 11px;border-radius:9px;background:var(--bg2);border:1px solid var(--line)}
+body.ur .insight p{line-height:2}
+.trade{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+.trade .r{font-family:var(--f-mono);font-weight:600;font-size:16px;direction:ltr}
+.trade .meta{font-size:12px;color:var(--muted)}
+.trade .sym{font-weight:700;font-size:14px}
+.dir{font-size:11px;font-weight:700;border-radius:6px;padding:2px 6px}
+.dir.buy{background:color-mix(in srgb,var(--up) 18%,transparent);color:var(--up)}
+.dir.sell{background:color-mix(in srgb,var(--down) 18%,transparent);color:var(--down)}
+.del{border:1px solid var(--line);background:transparent;border-radius:8px;padding:4px 8px;font-size:12px;cursor:pointer;color:var(--muted)}
+.del.arm{border-color:var(--down);color:var(--down);font-weight:700}
+.guard{display:grid;gap:6px;border-radius:14px;padding:14px 16px;border:1px solid var(--line);background:var(--surface)}
+.guard.stop{border-color:var(--down);background:color-mix(in srgb,var(--down) 9%,var(--surface))}
+.guard.care{border-color:var(--warn)}
+
+/* quizzes */
+.qgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.qcard{display:grid;gap:6px;text-align:start;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:12px;cursor:pointer;min-width:0}
+.qcard:hover{border-color:var(--gold)}
+.qcard b{font-size:15px;line-height:1.3}
+.qcard .sc{font-family:var(--f-mono);font-size:12px;color:var(--muted)}
+.qcard .sc.pass{color:var(--up)}
+.opt{display:block;width:100%;text-align:start;background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:11px 12px;cursor:pointer;font-size:15px;line-height:1.4}
+body.ur .opt{line-height:2}
+.opt:hover:not([disabled]){border-color:var(--gold)}
+.opt.right{border-color:var(--up);background:color-mix(in srgb,var(--up) 14%,var(--bg2))}
+.opt.wrong{border-color:var(--down);background:color-mix(in srgb,var(--down) 12%,var(--bg2))}
+.opt[disabled]{cursor:default}
+.prog{display:grid;gap:4px}
+.vrow{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center}
+.seen{width:36px;height:36px;border-radius:50%;border:2px solid var(--line);background:transparent;cursor:pointer;font-weight:700;color:var(--gold-ink)}
+.seen[aria-pressed="true"]{background:var(--up);border-color:var(--up)}
+@media (max-width:380px){.jstats{grid-template-columns:repeat(2,minmax(0,1fr))}.qgrid{grid-template-columns:1fr}}
+/* v3: gold plan, level, toggles */
+.plan{display:grid;gap:12px;border:1px solid color-mix(in srgb,var(--gold) 45%,var(--line));border-radius:16px;padding:16px;background:linear-gradient(160deg,var(--gold-soft),var(--surface) 55%)}
+.plan-h{margin:0;font-size:17px;font-weight:600;line-height:1.4}
+body.ur .plan-h{line-height:2.1}
+.lvls{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}
+.lvls.tall{grid-template-columns:1fr;gap:4px}
+.lv{display:grid;justify-items:center;gap:1px;background:var(--bg2);border-radius:9px;padding:7px 4px;border-top:3px solid var(--line)}
+.lvls.tall .lv{grid-template-columns:52px 1fr;justify-items:start;align-items:center;padding:8px 12px;border-top:0;border-left:3px solid var(--line)}
+.lv span{font-size:11px;font-weight:700;color:var(--muted)}
+.lv b{font-family:var(--f-mono);font-size:14px;font-weight:600;font-variant-numeric:tabular-nums}
+.lvls.tall .lv b{font-size:17px}
+.lv.r{border-color:var(--down)}.lv.s{border-color:var(--up)}.lv.p{border-color:var(--gold)}
+.sc-box{display:grid;gap:8px;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 12px;min-width:0}
+.lvl{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:center}
+.flame{display:grid;justify-items:center;align-content:center;width:66px;height:66px;border-radius:50%;background:radial-gradient(circle at 50% 35%,var(--gold-soft),transparent 70%),var(--bg2);border:2px solid var(--gold)}
+.flame b{font-family:var(--f-display);font-size:26px;line-height:1;color:var(--gold)}
+.flame span{font-size:10px;color:var(--muted);text-align:center;line-height:1.1}
+.sw-t{width:46px;height:26px;border-radius:99px;border:1px solid var(--line);background:var(--bg2);position:relative;cursor:pointer;flex:none}
+.sw-t i{position:absolute;top:2px;inset-inline-start:2px;width:20px;height:20px;border-radius:50%;background:var(--muted);transition:inset-inline-start .15s}
+.sw-t[aria-pressed="true"]{background:var(--gold);border-color:var(--gold)}
+.sw-t[aria-pressed="true"] i{inset-inline-start:22px;background:var(--gold-ink)}
+.li span{min-width:0;flex:1}
+@media (max-width:380px){.lvls{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (prefers-reduced-motion:no-preference){.view{animation:in .18s ease-out}@keyframes in{from{opacity:.4;transform:translateY(4px)}to{opacity:1;transform:none}}}
+</style>
+</head>
+<body>
+
+<header class="top"><div class="top-in">
+  <img src="data:image/webp;base64,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" alt="Qazi Forex Tips logo">
+  <div class="brand"><b>Qazi Forex Tips</b><span data-i="tagline"></span></div>
+  <button class="iconbtn" id="langBtn" type="button">اردو</button>
+  <button class="iconbtn" id="moreBtn" type="button" aria-label="More">⋯</button>
+</div></header>
+
+<main id="main"></main>
+
+<nav class="tabs" aria-label="Main"><div class="tabs-in" id="tabs"></div></nav>
+
+<script>
+"use strict";
+/* ============ CONTENT (videos, software) — same data as qaziforextips.com ============ */
+const C = {"brand":{"name":"Qazi Forex Tips","tagline":"Gold, Price Action & Risk Management – in Urdu","whatsapp":"+92-323-6700010","youtube":"https://www.youtube.com/@QaziForexTips","facebook":"https://www.facebook.com/groups/qaziforextips","email":""},"tools":[{"name":"QFT Replay Simulator","type":"Software","badge":"v3.01","text":"MT5 market replay and manual backtesting with Prop Firm Challenge mode and a professional backtest report.","points":["Replay any day, candle by candle","Risk in $ – lot follows your SL","Money management plan from your results"],"link":"simulator.html","button":"See the simulator"},{"name":"QFT Trade Assistant","type":"EA","badge":"v3.11","text":"Risk management trade panel for MT5: set risk in money or %, drag Entry / SL / TP lines, the lot size is calculated for you.","points":["Lot size from your risk","Drag Entry / SL / TP on the chart","One-click market & pending orders"],"link":"trade-assistant.html","button":"See the Trade Assistant"},{"name":"QFT Smart DCA EA","type":"EA","badge":"","text":"Dollar-cost averaging EA with hedge-lock protection for MT5. For experienced traders who understand the risk of averaging.","points":["Universal: any symbol","Hedge-lock protection","Basket profit target"],"link":"","button":"Ask on WhatsApp"}],"latest":[{"title":"Trade Assistant MT5 Tutorial | Setup, Chart Patterns, Signals, Lot Calculator & Prop Firm Guard","link":"https://youtu.be/lAOFQHaCszA","time":"28:10"},{"title":"Best MT5 Replay Tool for Backtesting | Prop Firm Challenge Mode | Practice Like Real Market","link":"https://youtu.be/U1bCUislVJ4","time":"28:40"},{"title":"High Probability TREND REVERSAL Technique | Simplest and Easiest steps","link":"https://youtu.be/Npav87jvsgE","time":"55:21"},{"title":"Master the Fibonacci Retracement Technique: A Step-by-Step Guide. Expert Tips & Strategies","link":"https://youtu.be/3bVuDuiWMvE","time":"26:18"},{"title":"Rule-Based Multi-Timeframe Analysis for Forex & Stocks","link":"https://youtu.be/uVsJgH40mz4","time":"32:31"},{"title":"How to BACKTEST any Strategy like a PRO! (The main Reason behind Failure of a Trader)","link":"https://youtu.be/LXhMQmasz7Y","time":"24:00"},{"title":"When to Trade Against the Trend – A Simple Method (Urdu & Hindi)","link":"https://youtu.be/4WyfWJpBXSQ","time":"43:52"}],"playlists":[{"name":"Price Action Mastery – Basic Level","text":"Complete beginner course in Urdu & Hindi. Start here: support & resistance, trendlines, Fibonacci, SL / TP and multi-timeframe analysis.","course":true,"link":"https://www.youtube.com/playlist?list=PLae00y7sDib6oCTqRtajkeN43LT7pQvNQ","videos":[{"title":"Some important Points about Forex Trading (Price Action Mastery Course lecture 01)","link":"https://youtu.be/9JfvsIfslCg","time":"19:38"},{"title":"Importance of Price Action and Technical Analysis (Lecture 02)","link":"https://youtu.be/787D9bivMGA","time":"18:26"},{"title":"Why Support and Resistance Fails? Important rules to Draw Support and Resistance","link":"https://youtu.be/DDaEQcAJIEA","time":"40:35"},{"title":"Easiest and Important Rules to Draw Trendlines in Urdu/Hindi","link":"https://youtu.be/oj6VV-aQyHo","time":"35:32"},{"title":"Where to set Take Profit and Stop Loss? How to Close half trade in Profit","link":"https://youtu.be/P4WlWt2Tmjs","time":"18:38"},{"title":"How to Identify False Breakouts and How to Avoid them. Tips and Detailed Video in Urdu and Hindi","link":"https://youtu.be/7aLG1XgfSYA","time":"22:49"},{"title":"Simple Fibonacci retracement Strategy explain in Urdu Hindi (The Secret of Fibonacci)","link":"https://youtu.be/qLNsCRwyQp0","time":"14:59"},{"title":"Simple and Easy method to use Trend Based Fibonacci Extensions for Profit Levels","link":"https://youtu.be/wQ5GxVGwxww","time":"17:32"},{"title":"Most Important Lecture Don't Skip any Second. Use of Rejection and Momentum Candle for Perfect Entry","link":"https://youtu.be/jwOwHVb1nIU","time":"39:13"},{"title":"Money Management Plan – How to Grow a Small Account Step by Step (Forex, Crypto, Stock)","link":"https://youtu.be/558_ymM-hCg","time":"33:42"},{"title":"Become An Expert With Multiple Time Frame Analysis || Top Down Analysis ||","link":"https://youtu.be/DSXZkL9ygfE","time":"33:14"}]},{"name":"Price Action Mastery – Advance Level","text":"After the basic course: market structure, swing levels and the chart patterns professionals trade – with entry, SL and TP rules.","course":true,"link":"https://www.youtube.com/playlist?list=PLae00y7sDib4LJZQrca7Icna4_D1lxnZU","videos":[{"title":"Price Channel Detailed Video: Types, Drawing and Channel Trading Strategy in Simple words","link":"https://youtu.be/53hlwsaW3og","time":"31:10"},{"title":"More simple! can't possible: Master these Chart Pattern Symmetrical, Ascending & Descending Triangle","link":"https://youtu.be/kCiq33-i7nk","time":"30:18"},{"title":"How to Spot and Trade Rising & Falling Wedges","link":"https://youtu.be/rWSzRoAk0m4","time":"35:05"},{"title":"How Professionals Trade Head & Shoulders Patters l How to Confirm, Recognize and Trade it URDU Hindi","link":"https://youtu.be/UXq228TiW6c","time":"26:36"},{"title":"Best method to trade Inverse Head & Shoulder Pattern with complete Rules of Entry,TP & SL urdu/hindi","link":"https://youtu.be/qF7NSlS-lYU","time":"21:36"},{"title":"Mastering Forex/ Stock Market Structure (Advanced). Key to Success in Forex/ Stock Urdu/Hindi","link":"https://youtu.be/VFo2qCSMPuU","time":"25:34"},{"title":"How To Identify Swing Highs & Lows (Major Swing Levels) All you Need to Know","link":"https://youtu.be/-RVBo8qiJ1Q","time":"17:36"},{"title":"Quasimodo Pattern for Scalpers and Day Traders","link":"https://youtu.be/vqC4EwSmtPE","time":"17:16"},{"title":"The Only Flag Pattern Video You Will Ever Need I Simple But Powerful Flag Pattern Trading Strategy","link":"https://youtu.be/oQZz8Ng78XM","time":"18:24"}]},{"name":"Trading Strategies","text":"Complete strategies with rules: divergence, MACD, breakout, price action scalping and Gold scalping.","course":false,"link":"https://www.youtube.com/playlist?list=PLae00y7sDib5m4Tmn2g_3enubmXc65Zja","videos":[{"title":"Trade Divergence like a PRO – Complete Divergence Strategy","link":"https://youtu.be/ZCPiVFEoryw","time":"43:30"},{"title":"MACD Crossover Trading Strategy in Urdu & Hindi","link":"https://youtu.be/O1sffgWvmwg","time":"17:17"},{"title":"How to Trade Hidden Divergence – Complete Rules","link":"https://youtu.be/rRvvmwV_Km0","time":"23:48"},{"title":"Price Action Trading Strategy for Day Traders & Scalpers","link":"https://youtu.be/6ktztQxlCk4","time":"20:41"},{"title":"Breakout Trading Strategy – Price Action Method for Intraday Traders","link":"https://youtu.be/gsIRSLb1B8Q","time":"22:51"},{"title":"Dominant Breakout Method – Breakout Strategy for Forex & Stocks","link":"https://youtu.be/xHuF_uWFaww","time":"25:50"},{"title":"Dominant Plus – Scalping Strategy for Gold, Indices & Crypto (M5 / M15)","link":"https://youtu.be/vNwv4ZwHVMA","time":"12:03"},{"title":"QFT Price Action Scalping Strategy – Gold, Indices, Stocks & Forex","link":"https://youtu.be/jDDa-sa8X1E","time":"28:47"},{"title":"Gold Scalping Strategy on the 5-Minute Chart – Stochastic RSI","link":"https://youtu.be/5vrDSC08ox0","time":"22:30"},{"title":"Gold Scalping Strategy GSS-2 – Complete Rules","link":"https://youtu.be/4QHH5V2gsEQ","time":"33:25"}]},{"name":"Weekly Live Sessions","text":"Full-length live session recordings: market recap, weekly analysis, market structure and Q&A.","course":false,"link":"https://www.youtube.com/playlist?list=PLae00y7sDib4YBRj3X0qmwkgPtEUpFnuW","videos":[{"title":"Weekly Live Session: Market Recap, Weekly Analysis, Types of Levels, Tips & Tricks and Much More","link":"https://youtu.be/P3G1W3-Y_oI","time":"59:50"},{"title":"Unknown Facts About Forex Trading Every Trader Should Know (Urdu / Hindi)","link":"https://youtu.be/0uPnOhdFIW8","time":"1:04:39"},{"title":"Weekly Live Session Recording : Forex Market Recap plus weekly Analysis GOLD GBPUSD","link":"https://youtu.be/bLVgD208gJg","time":"1:09:01"},{"title":"Most Important Points for Price Action Trader in Urdu and Hindi live session 22 Jan 2023","link":"https://youtu.be/wFTDiXOnfN4","time":"1:09:20"},{"title":"It's Time to Open Up About classic trading method. The Ultimate Guide to Forex Market Structure.","link":"https://youtu.be/eXbRWN-g8gI","time":"55:34"},{"title":"Increase Accuracy of Classic Trading Method. The Ultimate Guide to Forex Market Structure (Part-2)","link":"https://youtu.be/o1Y-bcvP5mU","time":"58:06"},{"title":"When to Trade Against the Trend – A Simple Method (Urdu & Hindi)","link":"https://youtu.be/4WyfWJpBXSQ","time":"43:52"},{"title":"How to BACKTEST any Strategy like a PRO! (The main Reason behind Failure of a Trader)","link":"https://youtu.be/LXhMQmasz7Y","time":"24:00"},{"title":"Rule-Based Multi-Timeframe Analysis for Forex & Stocks","link":"https://youtu.be/uVsJgH40mz4","time":"32:31"},{"title":"Master the Fibonacci Retracement Technique: A Step-by-Step Guide. Expert Tips & Strategies","link":"https://youtu.be/3bVuDuiWMvE","time":"26:18"}]},{"name":"Important Forex Videos","text":"Practical guides: brokers, deposits & withdrawals, TradingView, backtesting software, lot size, news and the best time to trade.","course":false,"link":"https://www.youtube.com/playlist?list=PLae00y7sDib7ZXxHWIHzlkcmcAU992IUw","videos":[{"title":"Tradingview Tutorial: How to Use Tradingview for Technical Analysis (Urdu/Hindi)","link":"https://youtu.be/d4U5FhM6NLU","time":"20:34"},{"title":"Weekly Analysis 21 June to 25 June EURUSD, EURGBP, EURJPY. EURCAD, EURCHF","link":"https://youtu.be/oBldQaYHb6k","time":"12:37"},{"title":"Weekly Analysis Gold, Oil, Silver, XRPUSD, BTCUSD from 21 June to 25 June Urdu Hindi","link":"https://youtu.be/4G3RaAzSbkI","time":"10:57"},{"title":"Weekly Analysis GBPUSD, GBPAUD, GBPNZD, GBPCHF. GBPCAD for 21 June to 25 June 2021","link":"https://youtu.be/bGJysA4XgT8","time":"14:33"},{"title":"Simple method to Read and Analyze NFP News Data in Urdu/Hindi","link":"https://youtu.be/jU96IJBXrSE","time":"13:10"},{"title":"Thinktrader Tutorial + Download Link: Best Free Software for Backtesting Forex/ Stock Market","link":"https://youtu.be/PwWmz-5S4qE","time":"13:01"},{"title":"IC Markets Broker Review and Account Opening","link":"https://youtu.be/H4KgkxaiKSQ","time":"36:46"},{"title":"Best Broker Selection Guide. very simple steps in Urdu & Hindi I How to Select Top Broker for Forex","link":"https://youtu.be/JeUpNZjti5Q","time":"15:28"},{"title":"Chart Pattern Dashboard: Autochartist: Get Daily Forex/Stock Chart Pattern Signals on Mobile","link":"https://youtu.be/dOYz8pONVa0","time":"12:10"},{"title":"Must Watch this Video before Starting Forex Trading l Trading Myths VS Realities","link":"https://youtu.be/UnSphPChym8","time":"12:19"},{"title":"Strategy Optimization Tips – Improve Your Strategy Step by Step","link":"https://youtu.be/o0KRYx2WOmw","time":"13:06"},{"title":"IC Markets Account Opening & Verification – Step by Step","link":"https://youtu.be/Ud6u5BLeKt0","time":"16:57"},{"title":"Best time to trade Forex/Gold for Scalping in Pakistan/ India","link":"https://youtu.be/ULqqAMzAKhg","time":"12:35"},{"title":"Soft4FX Tutorial: FOREX, Stock, Crypto Best Backtesting Software (Bar Reply Forex Simulator for MT4)","link":"https://youtu.be/wHBg7w9ws-Y","time":"24:07"},{"title":"IC Markets | How to deposit and withdraw from IC Markets | Local Bank | Skrill l Pakistan & India","link":"https://youtu.be/0aYu58CE4Fo","time":"12:04"},{"title":"Trade Assistant for mt4 : Automatic Risk/Lot Size calculator: Manage your trades with just 1 click","link":"https://youtu.be/1uMbc43V_tk","time":"16:18"},{"title":"FP Markets Account Opening & Verification – Step by Step","link":"https://youtu.be/KBmSAZsrRa0","time":"9:36"},{"title":"Managing Lot Size in Forex – The Right Lot Size on Every Trade","link":"https://youtu.be/4c9gtnO5_48","time":"9:39"},{"title":"Best MT5 Replay Tool for Backtesting | Prop Firm Challenge Mode | Practice Like Real Market","link":"https://youtu.be/U1bCUislVJ4","time":"28:40"},{"title":"Trade Assistant MT5 Tutorial | Setup, Chart Patterns, Signals, Lot Calculator & Prop Firm Guard","link":"https://youtu.be/lAOFQHaCszA","time":"28:10"}]},{"name":"More videos","text":"Videos from the channel that are not in a playlist yet.","course":false,"link":"","videos":[{"title":"High Probability TREND REVERSAL Technique | Simplest and Easiest steps","link":"https://youtu.be/Npav87jvsgE","time":"55:21"},{"title":"How Do I Analyze the Forex Market & Take Entries. Last Week Analysis with Explanation.","link":"https://youtu.be/Qh16-yMyp2A","time":"42:39"},{"title":"Qazi Forex Tips Live Stream","link":"https://youtu.be/0T4pGece544","time":"1:09:19"}]}]};
+/* Sample week (real Forex Factory rows captured 15 Oct 2026) — used only when the live feed can't be reached */
+const SAMPLE = [
+ ["Bank Holiday","USD","2026-10-12T07:00:00-04:00","Holiday","",""],
+ ["MPC Member Mann Speaks","GBP","2026-10-12T08:50:00-04:00","Low","",""],
+ ["FOMC Member Hammack Speaks","USD","2026-10-12T12:10:00-04:00","Low","",""],
+ ["NAB Business Confidence","AUD","2026-10-12T20:30:00-04:00","Low","","-8"],
+ ["German Final CPI m/m","EUR","2026-10-13T02:00:00-04:00","Low","0.6%","0.6%"],
+ ["NFIB Small Business Index","USD","2026-10-13T06:00:00-04:00","Low","98.1","98.7"],
+ ["Existing Home Sales","USD","2026-10-13T10:00:00-04:00","Low","3.95M","3.98M"],
+ ["CPI y/y","CNY","2026-10-13T21:30:00-04:00","Low","1.0%","0.8%"],
+ ["ECB President Lagarde Speaks","EUR","2026-10-13T22:10:00-04:00","Medium","",""],
+ ["Trade Balance","CNY","2026-10-13T22:31:00-04:00","Low","790B","809B"],
+ ["BOE Gov Bailey Speaks","GBP","2026-10-14T01:30:00-04:00","Medium","",""],
+ ["BOC Gov Macklem Speaks","CAD","2026-10-14T02:05:00-04:00","Medium","",""],
+ ["ECB President Lagarde Speaks","EUR","2026-10-14T04:30:00-04:00","Medium","",""],
+ ["New Loans","CNY","2026-10-14T05:01:00-04:00","Low","1025B","60B"],
+ ["FOMC Member Bowman Speaks","USD","2026-10-14T05:40:00-04:00","Low","",""]
+].map(r=>({title:r[0],country:r[1],date:r[2],impact:r[3],forecast:r[4],previous:r[5]}));
+const FEED = "https://nfs.faireconomy.media/ff_calendar_thisweek.json";
+const WA = "+92-323-6700010", WA_LINK = "https://wa.me/923236700010";
+
+/* ============ TEXT (English default, Urdu optional) ============ */
+const T = {
+ en:{tagline:"Gold, Price Action & Risk Management",home:"Home",news:"News",calc:"Tools",learn:"Learn",more:"More",journal:"Journal",
+  nextHigh:"Next high-impact news",noHigh:"No more high-impact news this week.",in:"in",sessions:"Market sessions",yourTime:"Times in your phone's time zone",
+  open:"Open",closed:"Closed",opensIn:"opens in",closesIn:"closes in",weekend:"Forex market is closed for the weekend.",overlap:"London + New York overlap: Gold's busiest hours.",
+  quick:"Quick tools",goldLot:"Gold lot size",goldLotS:"Lot from your risk",posSize:"Forex lot size",posSizeS:"Any major pair",rr:"Risk : Reward",rrS:"Is the trade worth it?",
+  latest:"Latest lessons",seeAll:"See all videos",software:"QFT software",
+  calTitle:"Economic calendar",calSub:"This week · Forex Factory data",all:"All",high:"High",medium:"Medium",low:"Low",goldOnly:"Gold movers (USD)",
+  forecast:"Forecast",previous:"Previous",sample:"Showing a saved sample week. The installed app loads the live calendar every hour.",
+  loading:"Loading calendar…",today:"Today",tomorrow:"Tomorrow",nothing:"No events match these filters.",updated:"Updated",
+  alertsNote:"News alerts (15 or 30 min before high-impact news) switch on in the installed Android app.",
+  c_gold:"Gold lot",c_fx:"Forex lot",c_pip:"Pip value",c_rr:"Risk:Reward",c_margin:"Margin",c_comp:"Compounding",c_dd:"Drawdown",
+  balance:"Account balance ($)",riskPct:"Risk %",riskUsd:"Risk $",entry:"Entry price",sl:"Stop loss price",tp:"Take profit price (optional)",contract:"Contract size (oz per lot)",
+  lot:"Lot size",actualRisk:"Actual risk",profitTp:"Profit at TP",slDist:"SL distance",direction:"Direction",buy:"Buy",sell:"Sell",
+  symbol:"Symbol",slPips:"Stop loss (pips)",rateOf:"Current rate of",pipVal:"Pip value / 1 lot",lots:"Lots",perPip:"Per pip",perPoint:"Per point (0.1 pip)",
+  rrRatio:"Risk : Reward",breakeven:"Break-even win rate",leverage:"Leverage (1:x)",price:"Price",marginNeed:"Margin required",
+  start:"Starting balance ($)",perMonth:"Gain per month %",months:"Months",final:"Final balance",month:"Month",
+  ddLoss:"Account loss %",ddNeed:"Gain needed to recover",loss:"Loss",need:"Gain needed",
+  w_risk:"Above 2% per trade. Professionals usually risk 0.5–2% so a losing streak can't sink the account.",
+  w_min:"Lot is below 0.01. This SL is too wide for this risk — widen the risk or wait for a tighter setup.",
+  w_side:"Take profit is on the wrong side of entry.",w_sl:"Enter an SL different from the entry.",
+  ok_round:"Lot rounded DOWN to 0.01 steps, so you never risk more than planned.",
+  t_gold:"Gold moves in dollars: 1 lot = 100 oz, so a $1 move = $100 per lot. Some brokers use a different contract size — check yours in MT5 (Symbol → Specification). Spread adds to your real risk.",
+  t_fx:"Account currency USD. For JPY, CHF, CAD and GBP-quoted pairs, type today's rate so the pip value is exact.",
+  t_rr:"With a higher R:R you can lose more trades and still grow. A 1:2 trade needs only 34% winners to break even.",
+  t_margin:"Margin is what the broker locks; it is not your risk. Your risk is set by the stop loss.",
+  t_comp:"Example only. Real months are uneven — use this to see why steady small gains beat big risky ones.",
+  t_dd:"Losses grow harder to recover the deeper they go. That is why the first rule is protecting capital.",
+  example:"Example values — enter your own",
+  vidTitle:"Free lessons",vidSub:"Urdu & Hindi · YouTube",lessons:"lessons",lecture:"Lecture",openYt:"Open playlist on YouTube",
+  swTitle:"QFT software",swSub:"MT5 tools built by our team",order:"Order on WhatsApp",page:"Details",
+  aboutT:"About",lang:"Language",theme:"Theme",system:"System",dark:"Dark",light:"Light",follow:"Follow us",website:"Website",
+  support:"WhatsApp support",copy:"Copy",copied:"Copied",version:"App version",
+  disc:"Trading forex and gold involves high risk. Content is for education only and is not financial advice. Past or backtest results do not guarantee future results."},
+ ur:{tagline:"گولڈ، پرائس ایکشن اور رسک مینجمنٹ",home:"ہوم",news:"خبریں",calc:"ٹولز",learn:"سیکھیں",more:"مزید",journal:"جرنل",
+  nextHigh:"اگلی ہائی امپیکٹ خبر",noHigh:"اس ہفتے مزید کوئی ہائی امپیکٹ خبر نہیں۔",in:"باقی",sessions:"مارکیٹ سیشنز",yourTime:"اوقات آپ کے فون کے ٹائم زون میں",
+  open:"کھلا",closed:"بند",opensIn:"کھلنے میں",closesIn:"بند ہونے میں",weekend:"ویک اینڈ کی وجہ سے فاریکس مارکیٹ بند ہے۔",overlap:"لندن اور نیویارک اوورلیپ: گولڈ کے سب سے مصروف گھنٹے۔",
+  quick:"فوری ٹولز",goldLot:"گولڈ لاٹ سائز",goldLotS:"رسک کے مطابق لاٹ",posSize:"فاریکس لاٹ سائز",posSizeS:"تمام بڑے پیئرز",rr:"رسک : ریوارڈ",rrS:"کیا ٹریڈ فائدہ مند ہے؟",
+  latest:"تازہ اسباق",seeAll:"تمام ویڈیوز",software:"QFT سافٹ ویئر",
+  calTitle:"اکنامک کیلنڈر",calSub:"یہ ہفتہ · فاریکس فیکٹری ڈیٹا",all:"تمام",high:"ہائی",medium:"میڈیم",low:"لو",goldOnly:"گولڈ پر اثر (USD)",
+  forecast:"توقع",previous:"پچھلا",sample:"محفوظ نمونہ ہفتہ دکھایا جا رہا ہے۔ انسٹال شدہ ایپ ہر گھنٹے لائیو کیلنڈر لائے گی۔",
+  loading:"کیلنڈر لوڈ ہو رہا ہے…",today:"آج",tomorrow:"کل",nothing:"ان فلٹرز کے مطابق کوئی خبر نہیں۔",updated:"اپڈیٹ",
+  alertsNote:"خبروں کے الرٹس (ہائی امپیکٹ خبر سے ۱۵ یا ۳۰ منٹ پہلے) اینڈرائیڈ ایپ میں چلیں گے۔",
+  c_gold:"گولڈ لاٹ",c_fx:"فاریکس لاٹ",c_pip:"پپ ویلیو",c_rr:"رسک:ریوارڈ",c_margin:"مارجن",c_comp:"کمپاؤنڈنگ",c_dd:"ڈرا ڈاؤن",
+  balance:"اکاؤنٹ بیلنس ($)",riskPct:"رسک %",riskUsd:"رسک $",entry:"انٹری پرائس",sl:"اسٹاپ لاس پرائس",tp:"ٹیک پرافٹ پرائس (اختیاری)",contract:"کنٹریکٹ سائز (اونس فی لاٹ)",
+  lot:"لاٹ سائز",actualRisk:"اصل رسک",profitTp:"ٹیک پرافٹ پر منافع",slDist:"اسٹاپ لاس فاصلہ",direction:"سمت",buy:"بائے",sell:"سیل",
+  symbol:"سمبل",slPips:"اسٹاپ لاس (پپس)",rateOf:"موجودہ ریٹ",pipVal:"پپ ویلیو / ۱ لاٹ",lots:"لاٹس",perPip:"فی پپ",perPoint:"فی پوائنٹ (0.1 پپ)",
+  rrRatio:"رسک : ریوارڈ",breakeven:"بریک ایون جیت کی شرح",leverage:"لیوریج (1:x)",price:"قیمت",marginNeed:"درکار مارجن",
+  start:"ابتدائی بیلنس ($)",perMonth:"ماہانہ منافع %",months:"مہینے",final:"آخری بیلنس",month:"مہینہ",
+  ddLoss:"اکاؤنٹ نقصان %",ddNeed:"واپسی کے لیے درکار منافع",loss:"نقصان",need:"درکار منافع",
+  w_risk:"فی ٹریڈ ۲٪ سے زیادہ۔ پروفیشنل ٹریڈرز عموماً ۰.۵ سے ۲٪ رسک لیتے ہیں تاکہ لگاتار نقصان اکاؤنٹ نہ ڈبو دے۔",
+  w_min:"لاٹ 0.01 سے کم ہے۔ اس رسک کے لیے اسٹاپ لاس بہت بڑا ہے — رسک بڑھائیں یا بہتر سیٹ اپ کا انتظار کریں۔",
+  w_side:"ٹیک پرافٹ انٹری کی غلط سمت میں ہے۔",w_sl:"انٹری سے مختلف اسٹاپ لاس لکھیں۔",
+  ok_round:"لاٹ کو 0.01 کے حساب سے نیچے گول کیا گیا ہے تاکہ رسک منصوبے سے زیادہ نہ ہو۔",
+  t_gold:"گولڈ ڈالرز میں چلتا ہے: ۱ لاٹ = ۱۰۰ اونس، یعنی ۱ ڈالر کی حرکت = ۱۰۰ ڈالر فی لاٹ۔ کچھ بروکرز کا کنٹریکٹ سائز مختلف ہوتا ہے — MT5 میں Specification چیک کریں۔ اسپریڈ اصل رسک میں شامل ہوتا ہے۔",
+  t_fx:"اکاؤنٹ کرنسی USD۔ JPY، CHF، CAD اور GBP والے پیئرز کے لیے آج کا ریٹ لکھیں تاکہ پپ ویلیو درست آئے۔",
+  t_rr:"زیادہ رسک ریوارڈ کے ساتھ آپ زیادہ ٹریڈز ہار کر بھی بڑھ سکتے ہیں۔ 1:2 ٹریڈ میں صرف ۳۴٪ جیت بریک ایون کے لیے کافی ہے۔",
+  t_margin:"مارجن وہ رقم ہے جو بروکر روکتا ہے؛ یہ آپ کا رسک نہیں۔ رسک اسٹاپ لاس سے طے ہوتا ہے۔",
+  t_comp:"صرف مثال۔ اصل مہینے برابر نہیں ہوتے — یہ دکھاتا ہے کہ مستقل چھوٹا منافع بڑے رسک سے بہتر ہے۔",
+  t_dd:"نقصان جتنا گہرا ہو، واپسی اتنی مشکل۔ اسی لیے پہلا اصول سرمائے کی حفاظت ہے۔",
+  example:"مثالی اعداد — اپنے اعداد لکھیں",
+  vidTitle:"مفت اسباق",vidSub:"اردو اور ہندی · یوٹیوب",lessons:"اسباق",lecture:"لیکچر",openYt:"یوٹیوب پر پلے لسٹ کھولیں",
+  swTitle:"QFT سافٹ ویئر",swSub:"ہماری ٹیم کے بنائے MT5 ٹولز",order:"واٹس ایپ پر آرڈر",page:"تفصیل",
+  aboutT:"تعارف",lang:"زبان",theme:"تھیم",system:"سسٹم",dark:"ڈارک",light:"لائٹ",follow:"ہمیں فالو کریں",website:"ویب سائٹ",
+  support:"واٹس ایپ سپورٹ",copy:"کاپی",copied:"کاپی ہو گیا",version:"ایپ ورژن",
+  disc:"فاریکس اور گولڈ ٹریڈنگ میں زیادہ رسک ہے۔ یہ مواد صرف تعلیم کے لیے ہے، مالی مشورہ نہیں۔ ماضی یا بیک ٹیسٹ کے نتائج مستقبل کی ضمانت نہیں۔"}
+};
+
+/* News explanations (what the release means, and for USD what it usually does to Gold) */
+const NOTES = [
+ {k:/non-farm|nfp|employment change|payrolls/i, en:"Jobs report. Strong jobs usually lift {c}.", ur:"روزگار کی رپورٹ۔ اچھے اعداد عموماً {c} کو مضبوط کرتے ہیں۔", g:true},
+ {k:/unemployment|jobless|claimant/i, en:"Unemployment data. Higher than forecast usually weakens {c}.", ur:"بے روزگاری کا ڈیٹا۔ توقع سے زیادہ آئے تو عموماً {c} کمزور ہوتا ہے۔", g:true, inv:true},
+ {k:/cpi|pce|inflation/i, en:"Inflation data. Higher than forecast usually strengthens {c} (rates may stay high).", ur:"مہنگائی کا ڈیٹا۔ توقع سے زیادہ آئے تو عموماً {c} مضبوط ہوتا ہے (شرح سود بلند رہ سکتی ہے)۔", g:true},
+ {k:/ppi/i, en:"Producer prices: an early inflation signal. Higher usually supports {c}.", ur:"پروڈیوسر قیمتیں: مہنگائی کا ابتدائی اشارہ۔ زیادہ آئیں تو عموماً {c} کو سہارا۔", g:true},
+ {k:/fomc statement|federal funds|rate decision|cash rate|bank rate|policy rate|interest rate|monetary policy statement|press conference|main refinancing/i, en:"Interest-rate decision: the most volatile event of the month. Spreads widen; avoid new entries just before it.", ur:"شرح سود کا فیصلہ: مہینے کا سب سے زیادہ ہلچل والا ایونٹ۔ اسپریڈ بڑھ جاتا ہے؛ عین پہلے نئی انٹری سے بچیں۔", g:true, rate:true},
+ {k:/speaks|testifies|speech/i, en:"Policymaker speech. Hints about future rates can move {c} sharply without warning.", ur:"پالیسی ساز کی تقریر۔ شرح سود کے اشارے {c} کو اچانک تیزی سے ہلا سکتے ہیں۔", g:true},
+ {k:/gdp/i, en:"Economic growth. Stronger than forecast usually lifts {c}.", ur:"معاشی ترقی۔ توقع سے بہتر ہو تو عموماً {c} مضبوط ہوتا ہے۔", g:true},
+ {k:/pmi/i, en:"Business survey. Above 50 = expanding, below 50 = shrinking.", ur:"کاروباری سروے۔ ۵۰ سے اوپر = ترقی، ۵۰ سے نیچے = سکڑاؤ۔", g:true},
+ {k:/retail sales/i, en:"Consumer spending. Stronger than forecast usually lifts {c}.", ur:"صارفین کے اخراجات۔ توقع سے بہتر ہوں تو عموماً {c} مضبوط ہوتا ہے۔", g:true},
+ {k:/holiday/i, en:"Bank holiday: thin liquidity. Moves can be slow, or sudden spikes with wide spreads.", ur:"بینک چھٹی: مارکیٹ میں کم لیکویڈیٹی۔ حرکت سست ہو سکتی ہے یا اچانک اسپائک اور بڑا اسپریڈ۔"}
+];
+const GOLD_EN=" For Gold: a stronger USD usually pushes XAUUSD down, a weaker USD pushes it up.";
+const GOLD_UR=" گولڈ کے لیے: مضبوط ڈالر عموماً XAUUSD کو نیچے اور کمزور ڈالر اوپر لے جاتا ہے۔";
+
+/* ============ STATE ============ */
+const store = {get(k,d){try{const v=localStorage.getItem("qft."+k);return v==null?d:JSON.parse(v)}catch(e){return d}},
+  set(k,v){try{localStorage.setItem("qft."+k,JSON.stringify(v))}catch(e){}}};
+const S = {tab:"home", lang:store.get("lang","en"), theme:store.get("theme","dark"), calc:"gold",
+  impact:store.get("impact","all"), cur:store.get("cur","ALL"), events:null, sample:false, updated:null};
+const t = k => (T[S.lang][k] ?? T.en[k] ?? k);
+const $ = (s,el=document) => el.querySelector(s);
+const esc = s => String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const fmt = (n,d=2) => (isFinite(n)? Number(n).toLocaleString("en-US",{minimumFractionDigits:d,maximumFractionDigits:d}) : "—");
+const urDigits = s => S.lang==="ur" ? s : s;
+
+/* ============ THEME & LANGUAGE ============ */
+function applyTheme(){ const r=document.documentElement;
+  if(S.theme==="system") r.removeAttribute("data-theme"); else r.setAttribute("data-theme",S.theme); }
+function applyLang(){ document.body.classList.toggle("ur",S.lang==="ur"); document.body.dir = S.lang==="ur"?"rtl":"ltr";
+  document.documentElement.lang = S.lang==="ur"?"ur":"en";
+  $("#langBtn").textContent = S.lang==="ur" ? "English" : "اردو";
+  document.querySelectorAll("[data-i]").forEach(el=>el.textContent=t(el.dataset.i)); }
+$("#moreBtn").onclick=()=>go("more");
+$("#langBtn").onclick=()=>{S.lang=S.lang==="en"?"ur":"en";store.set("lang",S.lang);applyLang();renderTabs();render();};
+
+/* ============ TABS ============ */
+const ICONS={home:'<path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/>',
+ news:'<rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4M7 13h3M7 17h3M14 13h3"/>',
+ calc:'<rect x="5" y="2" width="14" height="20" rx="2"/><path d="M8 6h8M8 11h2M12 11h2M16 11v6M8 15h2M12 15h2M8 19h6"/>',
+ learn:'<rect x="2" y="5" width="20" height="14" rx="3"/><path d="M10 9l5 3-5 3z"/>',
+ lab:'<path d="M9 3h6M10 3v6L4.5 19A1.5 1.5 0 0 0 6 21h12a1.5 1.5 0 0 0 1.5-2L14 9V3"/><path d="M7 15h10"/>',
+ journal:'<path d="M6 3h11a2 2 0 0 1 2 2v16l-3-2-3 2-3-2-3 2V5a2 2 0 0 1 1-2z"/><path d="M9 8h7M9 12h7M9 16h4"/>'};
+function renderTabs(){ $("#tabs").innerHTML = ["home","news","lab","calc","journal","learn"].map(k=>
+  `<button type="button" data-tab="${k}" ${S.tab===k?'aria-current="page"':''}><svg viewBox="0 0 24 24" aria-hidden="true">${ICONS[k]}</svg>${t(k)}</button>`).join("");
+  $("#tabs").querySelectorAll("button").forEach(b=>b.onclick=()=>go(b.dataset.tab)); }
+function go(tab,opt){ if(typeof rpStop==="function") rpStop(); S.tab=tab; if(opt&&opt.calc) S.calc=opt.calc; renderTabs(); render(); window.scrollTo(0,0); }
+
+/* ============ MARKET SESSIONS ============ */
+const SESS=[{n:"Sydney",tz:"Australia/Sydney",o:7,c:16},{n:"Tokyo",tz:"Asia/Tokyo",o:9,c:18},{n:"London",tz:"Europe/London",o:8,c:17},{n:"New York",tz:"America/New_York",o:8,c:17}];
+const fmtCache={};
+function zp(d,tz){ const f=fmtCache[tz]||(fmtCache[tz]=new Intl.DateTimeFormat("en-US",{timeZone:tz,hourCycle:"h23",hour:"2-digit",minute:"2-digit",weekday:"short"}));
+  const p={}; f.formatToParts(d).forEach(x=>p[x.type]=x.value); return {h:+p.hour%24,m:+p.minute,wd:p.weekday}; }
+function fxOpen(d){ const ny=zp(d,"America/New_York"); // week: Sun 17:00 – Fri 17:00 New York
+  if(ny.wd==="Sat") return false; if(ny.wd==="Sun") return ny.h>=17; if(ny.wd==="Fri") return ny.h<17; return true; }
+function sessOpen(s,d){ if(!fxOpen(d)) return false; const z=zp(d,s.tz); const wd=z.wd; if(wd==="Sat"||wd==="Sun") return false; return z.h>=s.o && z.h<s.c; }
+function nextFlip(fn,d){ const st=fn(d); for(let i=1;i<=900;i++){ const x=new Date(d.getTime()+i*5*60000); if(fn(x)!==st) return x; } return null; }
+function dur(ms){ const m=Math.max(0,Math.round(ms/60000)); const h=Math.floor(m/60); return h>0? `${h}h ${String(m%60).padStart(2,"0")}m` : `${m}m`; }
+function localHourOf(s,hour){ // where the session's open/close hour falls on today's 24h strip of the phone
+  const now=new Date(); const base=new Date(now); base.setHours(0,0,0,0);
+  for(let i=0;i<288;i++){ const x=new Date(base.getTime()+i*5*60000); const z=zp(x,s.tz); if(z.h===hour&&z.m<5) return i/12; } return null; }
+function sessionsHTML(){ const now=new Date(); const nowH=now.getHours()+now.getMinutes()/60; const pct=h=>(h/24*100).toFixed(2);
+  if(!fxOpen(now)){ const op=nextFlip(fxOpen,now); return `<div class="banner">${t("weekend")} ${op?`${t("opensIn")} <b class="mono" dir="ltr">${dur(op-now)}</b>`:""}</div>`; }
+  const rows=SESS.map(s=>{ const on=sessOpen(s,now); const fl=nextFlip(d=>sessOpen(s,d),now);
+    const a=localHourOf(s,s.o), b=localHourOf(s,s.c); let segs="";
+    if(a!=null&&b!=null){ segs = a<b ? `<i class="${on?'on':''}" style="inset-inline-start:${pct(a)}%;width:${pct(b-a)}%"></i>`
+      : `<i class="${on?'on':''}" style="inset-inline-start:${pct(a)}%;width:${pct(24-a)}%"></i><i class="${on?'on':''}" style="inset-inline-start:0;width:${pct(b)}%"></i>`; }
+    return `<div class="sess-row"><b>${s.n}</b><div class="bar" aria-hidden="true">${segs}<b style="inset-inline-start:${pct(nowH)}%"></b></div>
+      <span class="sess-st ${on?'on':'off'}">${on?t("open"):t("closed")} · ${on?t("closesIn"):t("opensIn")} <span dir="ltr">${fl?dur(fl-now):"—"}</span></span></div>`; }).join("");
+  const lon=sessOpen(SESS[2],now), ny=sessOpen(SESS[3],now);
+  return `<div class="sess">${rows}</div>${lon&&ny?`<div class="ok small">${t("overlap")}</div>`:""}<div class="small muted">${t("yourTime")} (${esc(Intl.DateTimeFormat().resolvedOptions().timeZone)})</div>`; }
+
+/* ============ CALENDAR DATA ============ */
+async function loadCalendar(force){
+  const cached=store.get("cal",null);
+  if(!force && cached && Date.now()-cached.at < 3600e3){ S.events=cached.ev; S.updated=cached.at; S.sample=false; return; }
+  try{ const r=await fetch(FEED,{cache:"no-store"}); if(!r.ok) throw 0; const ev=await r.json(); if(!Array.isArray(ev)||!ev.length) throw 0;
+    S.events=ev; S.updated=Date.now(); S.sample=false; store.set("cal",{at:S.updated,ev}); }
+  catch(e){ if(cached){S.events=cached.ev;S.updated=cached.at;S.sample=false;} else {S.events=SAMPLE;S.sample=true;S.updated=null;} } }
+function evNote(e){ const n=NOTES.find(x=>x.k.test(e.title)); if(!n) return "";
+  let s=(S.lang==="ur"?n.ur:n.en).replaceAll("{c}",e.country); if(e.country==="USD"&&n.g) s+= (S.lang==="ur"?GOLD_UR:GOLD_EN); return s; }
+const dayKey=d=>d.getFullYear()+"-"+d.getMonth()+"-"+d.getDate();
+function dayLabel(d){ const n=new Date(); const tm=new Date(n); tm.setDate(n.getDate()+1);
+  if(dayKey(d)===dayKey(n)) return t("today"); if(dayKey(d)===dayKey(tm)) return t("tomorrow");
+  return d.toLocaleDateString(S.lang==="ur"?"ur-PK":"en-GB",{weekday:"long",day:"numeric",month:"short"}); }
+const hm=d=>d.toLocaleTimeString("en-GB",{hour:"2-digit",minute:"2-digit"});
+
+/* ============ VIEWS ============ */
+function viewHome(){
+  const now=Date.now(); const ev=(S.events||[]).filter(e=>e.impact==="High"&&new Date(e.date)>now).sort((a,b)=>new Date(a.date)-new Date(b.date));
+  const nx=ev[0];
+  const vids=(C.latest||[]).slice(0,3).map((v,i)=>vidCard(v,null)).join("");
+  return `${planHTML()}${levelHTML()}<section class="next" aria-live="polite">
+     <span class="eyebrow">${t("nextHigh")}</span>
+     ${nx?`<div class="count" id="countdown" data-at="${new Date(nx.date).getTime()}">--:--:--</div>
+       <div class="next-title" dir="ltr">${esc(nx.country)} · ${esc(nx.title)}</div>
+       <div class="small muted">${dayLabel(new Date(nx.date))} · <span class="mono">${hm(new Date(nx.date))}</span> · ${t("forecast")} <b class="mono">${esc(nx.forecast||"—")}</b></div>`
+     :`<div class="next-title">${S.events?t("noHigh"):t("loading")}</div>`}
+     <div class="row"><button class="btn ghost" type="button" data-go="news">${t("calTitle")} →</button></div>
+   </section>
+   ${guardHTML()}
+   <section class="card" style="display:grid;gap:12px"><div class="row between"><h3>${t("sessions")}</h3></div><div id="sess">${sessionsHTML()}</div></section>
+   <section style="display:grid;gap:10px"><h3>${t("quick")}</h3>
+     <div class="quick">
+       <button type="button" data-golive="1"><span class="qi">LIVE</span><b>${t("lv_tab")}</b><small>XAUUSD · DXY · FX</small></button>
+       <button type="button" data-calc="check"><span class="qi">✓</span><b>${t("checklist")}</b><small>${t("checkS")}</small></button>
+       <button type="button" data-calc="gold"><span class="qi">XAU</span><b>${t("goldLot")}</b><small>${t("goldLotS")}</small></button>
+       <button type="button" data-calc="fx"><span class="qi">FX</span><b>${t("posSize")}</b><small>${t("posSizeS")}</small></button>
+       <button type="button" data-calc="rr"><span class="qi">1:R</span><b>${t("rr")}</b><small>${t("rrS")}</small></button>
+     </div></section>
+   <section style="display:grid;gap:10px"><div class="row between"><h3>${t("latest")}</h3><button class="iconbtn" type="button" data-go="learn">${t("seeAll")}</button></div><div class="vlist">${vids}</div></section>
+   <section style="display:grid;gap:10px"><h3>${t("software")}</h3>${C.tools.slice(0,2).map(swCard).join("")}</section>
+   <p class="disc">${t("disc")}</p>`; }
+
+function viewNews(){
+  const imp=["all","High","Medium","Low"], curs=["ALL","USD","EUR","GBP","JPY","AUD","CAD","CHF","NZD","CNY"];
+  let ev=(S.events||[]).slice().sort((a,b)=>new Date(a.date)-new Date(b.date));
+  if(S.impact!=="all") ev=ev.filter(e=>e.impact===S.impact);
+  if(S.cur==="GOLD") ev=ev.filter(e=>e.country==="USD"&&(e.impact==="High"||e.impact==="Medium"));
+  else if(S.cur!=="ALL") ev=ev.filter(e=>e.country===S.cur);
+  const groups={}; ev.forEach(e=>{const d=new Date(e.date);(groups[dayKey(d)]=groups[dayKey(d)]||{d,list:[]}).list.push(e)});
+  const now=Date.now();
+  const days=Object.values(groups).map(g=>`<div class="day"><div class="day-h"><span>${dayLabel(g.d)}</span><span class="mono small">${g.list.length}</span></div>
+    ${g.list.map(e=>{const d=new Date(e.date);const note=evNote(e);
+      return `<button type="button" class="ev ${esc(e.impact)} ${d<now?'past':''}" aria-expanded="false">
+       <div><div class="ev-t">${hm(d)}</div><div class="ev-c">${esc(e.country)}</div></div>
+       <div style="min-width:0"><div class="ev-title">${esc(e.title)}</div>
+        <div class="fp"><span>${t("forecast")} <b>${esc(e.forecast||"—")}</b></span><span>${t("previous")} <b>${esc(e.previous||"—")}</b></span>
+        <span class="pill"><span class="dot" style="background:var(--${e.impact==="High"?"down":e.impact==="Medium"?"warn":e.impact==="Low"?"line":"hol"})"></span>${esc(e.impact==="Holiday"?"Holiday":t(e.impact.toLowerCase()))}</span></div>
+        ${note?`<div class="note" hidden>${esc(note)}</div>`:""}</div></button>`}).join("")}</div>`).join("");
+  return `<div class="row between"><div><h2>${t("calTitle")}</h2><div class="small muted">${t("calSub")}${S.updated?` · ${t("updated")} <span class="mono">${hm(new Date(S.updated))}</span>`:""}</div></div></div>
+   ${S.sample?`<div class="banner">${t("sample")}</div>`:""}
+   <div class="chips" role="group" aria-label="Impact">${imp.map(i=>`<button type="button" class="chip" data-imp="${i}" aria-pressed="${S.impact===i}">${i==="all"?t("all"):t(i.toLowerCase())}</button>`).join("")}</div>
+   <div class="chips" role="group" aria-label="Currency"><button type="button" class="chip" data-cur="GOLD" aria-pressed="${S.cur==="GOLD"}">${t("goldOnly")}</button>${curs.map(c=>`<button type="button" class="chip" data-cur="${c}" aria-pressed="${S.cur===c}">${c==="ALL"?t("all"):c}</button>`).join("")}</div>
+   ${S.events? (days||`<div class="empty">${t("nothing")}</div>`) : `<div class="empty">${t("loading")}</div>`}
+   <p class="small muted">${t("alertsNote")}</p>`; }
+
+/* ---------- calculators (pure math, testable) ---------- */
+const CALC = {
+ gold({bal,riskMode,risk,entry,sl,tp,contract}){
+  const riskUsd = riskMode==="pct"? bal*risk/100 : risk; const dist=Math.abs(entry-sl);
+  if(!(dist>0)) return {err:"w_sl"};
+  const raw=riskUsd/(dist*contract); const lot=Math.floor(raw*100+1e-9)/100;
+  const out={riskUsd,dist,lot,raw,actual:lot*dist*contract,dir:sl<entry?"buy":"sell",riskPct:bal>0?riskUsd/bal*100:NaN};
+  if(tp>0){ const td=out.dir==="buy"? tp-entry : entry-tp; if(td<=0) out.tpErr=true; else {out.rr=td/dist; out.profit=lot*td*contract;} }
+  return out; },
+ pipValue(sym,rate){ // USD value of 1 pip for 1 standard lot (100,000)
+  const q=sym.slice(3); if(q==="USD") return 10; if(q==="JPY") return 1000/rate; if(q==="GBP") return 10*rate; return 10/rate; },
+ fx({bal,riskMode,risk,sym,slPips,rate}){
+  const riskUsd = riskMode==="pct"? bal*risk/100 : risk; const pv=CALC.pipValue(sym,rate);
+  if(!(slPips>0)||!(pv>0)) return {err:"w_sl"}; const raw=riskUsd/(slPips*pv); const lot=Math.floor(raw*100+1e-9)/100;
+  return {riskUsd,pv,raw,lot,actual:lot*slPips*pv,riskPct:bal>0?riskUsd/bal*100:NaN}; },
+ rr({entry,sl,tp}){ const r=Math.abs(entry-sl); if(!(r>0)) return {err:"w_sl"}; const dir=sl<entry?1:-1; const w=(tp-entry)*dir; if(!(w>0)) return {err:"w_side"};
+  const rr=w/r; return {rr,be:100/(1+rr),risk:r,reward:w}; },
+ margin({kind,lots,price,lev,contract}){ if(kind==="gold") return lots*contract*price/lev; if(kind==="usdq") return lots*100000*price/lev; if(kind==="usdb") return lots*100000/lev; return lots*100000*price/lev; },
+ comp({start,pct,months}){ const rows=[]; let b=start; for(let i=1;i<=months;i++){ b*=1+pct/100; rows.push([i,b]); } return rows; },
+ dd(l){ return l>=100? Infinity : (1/(1-l/100)-1)*100; }
+};
+window.QFT_CALC=CALC;
+
+const CS = Object.assign({ gold:{bal:1000,riskMode:"pct",risk:1,entry:4100,sl:4092,tp:4124,contract:100},
+  fx:{bal:1000,riskMode:"pct",risk:1,sym:"EURUSD",slPips:20,rate:150},
+  pip:{sym:"EURUSD",lots:1,rate:150},
+  rr:{entry:4100,sl:4092,tp:4124},
+  margin:{kind:"gold",lots:0.1,price:4100,lev:500,contract:100},
+  comp:{start:1000,pct:5,months:12}, dd:{loss:20} }, store.get("calc",{}));
+const RATE_FOR = q => ({JPY:"USD/JPY",CHF:"USD/CHF",CAD:"USD/CAD",GBP:"GBP/USD"}[q]);
+const RATE_DEF = {JPY:150,CHF:0.80,CAD:1.38,GBP:1.33};
+const SYMS=["EURUSD","GBPUSD","AUDUSD","NZDUSD","USDJPY","EURJPY","GBPJPY","AUDJPY","USDCHF","USDCAD","EURGBP"];
+
+const fld=(id,label,val,extra="")=>`<label class="f ${extra}">${label}<input id="${id}" inputmode="decimal" type="number" step="any" value="${esc(val)}"></label>`;
+const riskSeg=(c)=>`<div class="row between full" style="grid-column:1/-1"><span class="small muted">${t("example")}</span><div class="seg" role="group"><button type="button" data-rm="pct" aria-pressed="${c.riskMode==="pct"}">%</button><button type="button" data-rm="usd" aria-pressed="${c.riskMode==="usd"}">$</button></div></div>`;
+function warnRisk(o){ return (o.riskPct>2)?`<div class="warn">${t("w_risk")}</div>`:""; }
+
+function calcBody(){ const k=S.calc, c=CS[k];
+ if(k==="check") return checklistHTML();
+ if(k==="pivot") return pivotBody(c);
+ if(k==="prop") return propBody(c);
+ if(k==="gold"){ const o=CALC.gold(c);
+  const res = o.err?`<div class="warn">${t(o.err)}</div>`:
+   `<div class="row between"><span class="muted small">${t("lot")}</span><span class="pill" style="border-color:${o.dir==="buy"?"var(--up)":"var(--down)"}">${t(o.dir)}</span></div>
+    <div class="big">${fmt(o.lot,2)} lot</div>
+    <div class="kv"><div>${t("actualRisk")}<b>$${fmt(o.actual)}</b></div><div>${t("slDist")}<b>$${fmt(o.dist)} · ${fmt(o.dist*100,0)} pts</b></div>
+     ${o.rr?`<div>${t("rrRatio")}<b>1 : ${fmt(o.rr)}</b></div><div>${t("profitTp")}<b>$${fmt(o.profit)}</b></div>`:""}</div>
+    ${o.tpErr?`<div class="warn">${t("w_side")}</div>`:""}${o.lot<0.01?`<div class="warn">${t("w_min")}</div>`:`<div class="ok">${t("ok_round")}</div>`}${warnRisk(o)}`;
+  return `<div class="fields">${riskSeg(c)}${fld("bal",t("balance"),c.bal)}${fld("risk",c.riskMode==="pct"?t("riskPct"):t("riskUsd"),c.risk)}
+    ${fld("entry",t("entry"),c.entry)}${fld("sl",t("sl"),c.sl)}${fld("tp",t("tp"),c.tp)}${fld("contract",t("contract"),c.contract)}</div>
+    <div class="result">${res}</div><p class="tip">${t("t_gold")}</p>`; }
+ if(k==="fx"||k==="pip"){ const q=c.sym.slice(3); const needRate=q!=="USD"; const rateLabel=`${t("rateOf")} ${RATE_FOR(q)||""}`;
+  const symSel=`<label class="f">${t("symbol")}<select id="sym">${SYMS.map(s=>`<option ${s===c.sym?"selected":""}>${s}</option>`).join("")}</select></label>`;
+  if(k==="fx"){ const o=CALC.fx(c);
+   const res=o.err?`<div class="warn">${t(o.err)}</div>`:`<span class="muted small">${t("lot")}</span><div class="big">${fmt(o.lot,2)} lot</div>
+     <div class="kv"><div>${t("actualRisk")}<b>$${fmt(o.actual)}</b></div><div>${t("pipVal")}<b>$${fmt(o.pv)}</b></div></div>
+     ${o.lot<0.01?`<div class="warn">${t("w_min")}</div>`:`<div class="ok">${t("ok_round")}</div>`}${warnRisk(o)}`;
+   return `<div class="fields">${riskSeg(c)}${fld("bal",t("balance"),c.bal)}${fld("risk",c.riskMode==="pct"?t("riskPct"):t("riskUsd"),c.risk)}
+    ${symSel}${fld("slPips",t("slPips"),c.slPips)}${needRate?fld("rate",rateLabel,c.rate,"full"):""}</div><div class="result">${res}</div><p class="tip">${t("t_fx")}</p>`; }
+  const pv=CALC.pipValue(c.sym,c.rate)*c.lots;
+  return `<div class="fields">${symSel}${fld("lots",t("lots"),c.lots)}${needRate?fld("rate",rateLabel,c.rate,"full"):""}</div>
+   <div class="result"><span class="muted small">${t("perPip")}</span><div class="big">$${fmt(pv,2)}</div><div class="kv"><div>${t("perPoint")}<b>$${fmt(pv/10,3)}</b></div><div>XAUUSD · 1 lot<b>$1.00 move = $100</b></div></div></div><p class="tip">${t("t_fx")}</p>`; }
+ if(k==="rr"){ const o=CALC.rr(c);
+  const res=o.err?`<div class="warn">${t(o.err)}</div>`:`<span class="muted small">${t("rrRatio")}</span><div class="big">1 : ${fmt(o.rr)}</div>
+   <div class="kv"><div>${t("breakeven")}<b>${fmt(o.be,1)}%</b></div><div>${t("slDist")}<b>${fmt(o.risk,5).replace(/0+$/,"").replace(/\.$/,"")}</b></div></div>
+   ${o.rr<1?`<div class="warn">R:R below 1:1</div>`:""}`;
+  return `<div class="fields">${fld("entry",t("entry"),c.entry)}${fld("sl",t("sl"),c.sl)}${fld("tp",t("tp").replace(/ \(.*\)/,""),c.tp,"full")}</div><div class="result">${res}</div><p class="tip">${t("t_rr")}</p>`; }
+ if(k==="margin"){ const kinds=[["gold","Gold (XAUUSD)"],["usdq","EURUSD, GBPUSD, AUDUSD…"],["usdb","USDJPY, USDCHF, USDCAD…"],["cross","EURJPY, GBPJPY, EURGBP…"]];
+  const m=CALC.margin(c); const needPrice=c.kind!=="usdb";
+  const plabel = c.kind==="cross"? `${t("price")} (EUR/USD, GBP/USD…)` : t("price");
+  return `<div class="fields"><label class="f full">${t("symbol")}<select id="kind">${kinds.map(([v,l])=>`<option value="${v}" ${v===c.kind?"selected":""}>${l}</option>`).join("")}</select></label>
+   ${fld("lots",t("lots"),c.lots)}${fld("lev",t("leverage"),c.lev)}${needPrice?fld("price",plabel,c.price):""}${c.kind==="gold"?fld("contract",t("contract"),c.contract):""}</div>
+   <div class="result"><span class="muted small">${t("marginNeed")}</span><div class="big">$${fmt(m)}</div></div><p class="tip">${t("t_margin")}</p>`; }
+ if(k==="comp"){ const rows=CALC.comp(c); const fin=rows.length?rows[rows.length-1][1]:c.start;
+  return `<div class="fields">${fld("start",t("start"),c.start,"full")}${fld("pct",t("perMonth"),c.pct)}${fld("months",t("months"),c.months)}</div>
+   <div class="result"><span class="muted small">${t("final")}</span><div class="big">$${fmt(fin)}</div>
+   <div class="tw"><table class="t"><thead><tr><th>${t("month")}</th><th>$</th></tr></thead><tbody>${rows.slice(0,120).map(r=>`<tr><td>${r[0]}</td><td>${fmt(r[1])}</td></tr>`).join("")}</tbody></table></div></div><p class="tip">${t("t_comp")}</p>`; }
+ if(k==="dd"){ const need=CALC.dd(c.loss);
+  return `<div class="fields">${fld("loss",t("ddLoss"),c.loss,"full")}</div>
+   <div class="result"><span class="muted small">${t("ddNeed")}</span><div class="big">${isFinite(need)?fmt(need,1)+"%":"∞"}</div>
+   <div class="tw"><table class="t"><thead><tr><th>${t("loss")}</th><th>${t("need")}</th></tr></thead><tbody>${[10,20,30,40,50,60,75,90].map(l=>`<tr><td>-${l}%</td><td>+${fmt(CALC.dd(l),1)}%</td></tr>`).join("")}</tbody></table></div></div><p class="tip">${t("t_dd")}</p>`; }
+}
+function viewCalc(){ const list=[["check","checklist"],["prop","c_prop"],["gold","c_gold"],["pivot","c_pivot"],["fx","c_fx"],["pip","c_pip"],["rr","c_rr"],["margin","c_margin"],["comp","c_comp"],["dd","c_dd"]];
+  return `<h2>${t("calc")}</h2><div class="chips" role="group" aria-label="Calculator">${list.map(([k,l])=>`<button type="button" class="chip" data-c="${k}" aria-pressed="${S.calc===k}">${t(l)}</button>`).join("")}</div>
+   <section class="card calc" id="calcBody">${calcBody()}</section>`; }
+
+function ytId(u){ const m=String(u).match(/(?:youtu\.be\/|v=)([\w-]{11})/); return m?m[1]:""; }
+function vidCard(v,n){ const id=ytId(v.link);
+  return `<a class="vid" href="${esc(v.link)}" target="_blank" rel="noopener"><div class="thumb">${id?`<img src="https://i.ytimg.com/vi/${id}/mqdefault.jpg" alt="" loading="lazy" onerror="this.remove()">`:""}<span class="pl">▶</span>${v.time?`<span class="du">${esc(v.time)}</span>`:""}</div>
+   <div style="min-width:0;display:grid;gap:4px">${n?`<span class="vid-n">${t("lecture")} ${n}</span>`:""}<span class="vid-t">${esc(v.title)}</span></div></a>`; }
+function viewLearn(){
+  if(S.quiz) return quizHTML();
+  return `<div><h2>${t("vidTitle")}</h2><div class="small muted">${t("vidSub")}</div></div>${learnTop()}
+   <section style="display:grid;gap:10px"><h3>${t("latest")}</h3><div class="vlist">${C.latest.map(v=>vidCard(v)).join("")}</div></section>
+   ${C.playlists.map((p,i)=>`<details class="pl-card" ${i===0?"open":""}><summary><span class="eyebrow">${p.videos.filter(v=>SEEN.has(ytId(v.link))).length}/${p.videos.length} ${t("lessons")}</span><h3 dir="ltr" style="text-align:start">${esc(p.name)}</h3><span class="small muted" dir="ltr" style="text-align:start">${esc(p.text)}</span></summary>
+     <div class="vlist">${p.videos.map((v,j)=>vidRow(v,p.course?j+1:null)).join("")}<a class="btn ghost" href="${esc(p.link)}" target="_blank" rel="noopener">${t("openYt")}</a></div></details>`).join("")}`; }
+
+function swCard(s){ const site="https://qaziforextips.com/";
+  return `<article class="card sw"><div class="row between"><h3>${esc(s.name)}</h3><span class="pill">${esc(s.type)}${s.badge?` · ${esc(s.badge)}`:""}</span></div>
+   <p class="small" style="margin:0" dir="ltr">${esc(s.text)}</p><ul dir="ltr">${(s.points||[]).map(p=>`<li>${esc(p)}</li>`).join("")}</ul>
+   <div class="row">${s.link?`<a class="btn ghost" href="${site+esc(s.link)}" target="_blank" rel="noopener">${t("page")}</a>`:""}<a class="btn gold" href="${WA_LINK}" target="_blank" rel="noopener">${t("order")}</a></div></article>`; }
+
+function viewMore(){
+  const B=C.brand;
+  return `<section class="card" style="display:grid;gap:14px"><div class="about"><img src="data:image/webp;base64,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" alt=""><div><h3>Dr. Qazi Abdul Basit</h3><div class="small muted" dir="ltr">Ph.D in Business Administration · Forex & Gold trader since 2013 · Founder, Qazi Forex Tips</div></div></div>
+    <div class="stats"><div><b>2013</b><span>Trading since</span></div><div><b>64th</b><span>Batch running</span></div><div><b>14K+</b><span>YouTube</span></div><div><b>60+</b><span>Free lessons</span></div></div></section>
+   <section style="display:grid;gap:10px"><h3>${t("swTitle")}</h3><div class="small muted">${t("swSub")}</div>${C.tools.map(swCard).join("")}</section>
+   ${alertsHTML()}${backupHTML()}
+   <section class="card" style="display:grid;gap:10px"><h3>${t("support")}</h3><div class="wa"><span class="num" dir="ltr" id="waNum">${WA}</span><button class="iconbtn" type="button" id="copyWa">${t("copy")}</button><a class="btn gold" href="${WA_LINK}" target="_blank" rel="noopener">WhatsApp</a></div></section>
+   <div class="list">
+    <div class="li"><b>${t("lang")}</b><div class="seg"><button type="button" data-lang="en" aria-pressed="${S.lang==="en"}">English</button><button type="button" data-lang="ur" aria-pressed="${S.lang==="ur"}">اردو</button></div></div>
+    <div class="li"><b>${t("theme")}</b><div class="seg">${["dark","light","system"].map(x=>`<button type="button" data-theme-set="${x}" aria-pressed="${S.theme===x}">${t(x)}</button>`).join("")}</div></div>
+    <div class="li"><b>${t("follow")}</b><div class="row"><a href="${esc(B.youtube)}" target="_blank" rel="noopener">YouTube</a><a href="${esc(B.facebook)}" target="_blank" rel="noopener">Facebook</a><a href="https://qaziforextips.com" target="_blank" rel="noopener">${t("website")}</a></div></div>
+    <div class="li"><b>${t("version")}</b><span class="mono small">1.0.0 (prototype)</span></div>
+   </div>
+   <p class="disc">${t("disc")}</p>`; }
+
+/* ============ V2 TEXT ============ */
+Object.assign(T.en,{
+ ck_title:"Pre-trade checklist",ck_sub:"Tick only what is true. The app checks news and today's losses itself.",ck_sym:"I want to trade",
+ ck_htf:"Higher-timeframe trend agrees with my direction",ck_htf_s:"Buy in an H4/D1 uptrend, sell in a downtrend",
+ ck_level:"Price is at a key support or resistance level",ck_level_s:"Not in the middle of a range",
+ ck_signal:"Clear price-action entry signal",ck_signal_s:"Pin bar, engulfing, or break and retest",
+ ck_rr:"Risk : Reward is at least 1 : 2",ck_rr_s:"Check it in the Risk:Reward calculator",
+ ck_lot:"Lot size is calculated from my risk (2% or less)",ck_lot_s:"Never guess the lot",
+ ck_mind:"I am calm: not chasing, not trying to win back a loss",ck_mind_s:"FOMO and revenge trades break accounts",
+ ck_news:"No high-impact news within 30 minutes",ck_news_bad:"High-impact news soon:",ck_news_ok:"Clear for the next 30 minutes",ck_news_na:"Needs the live calendar (works in the app)",
+ ck_guard:"Under the daily loss limit (2 losing trades)",ck_guard_ok:"Losing trades today:",ck_guard_bad:"Daily limit hit — 2 losses today.",
+ auto:"Auto",v_go:"GO",v_wait:"WAIT",v_no:"NO TRADE",v_go_s:"Every rule is met. Place SL and TP with the order.",v_wait_s:"Missing:",v_no_s:"Too many rules missing, or news/loss limit blocks the trade.",reset:"Reset",
+ j_title:"Trading journal",j_sub:"Saved on this phone only",j_add:"Add trade",j_save:"Save trade",j_cancel:"Cancel",j_sym:"Symbol",j_dir:"Direction",j_entry:"Entry",j_sl:"Stop loss",j_exit:"Exit price",j_pnl:"Profit / loss $ (optional)",
+ j_setup:"Setup",j_emo:"How I felt",j_plan:"Followed my plan?",yes:"Yes",no:"No",j_note:"Note (optional)",j_date:"Date",
+ j_empty:"No trades yet. Add your first trade, or load example trades to see how the stats work.",j_example:"Load example trades",j_clear:"Clear all trades",j_clear2:"Tap again to delete all",j_ex_tag:"Example trades — clear them before adding your own",
+ s_trades:"Trades",s_win:"Win rate",s_avgR:"Avg R",s_totR:"Total R",s_pf:"Profit factor",s_streak:"Worst losing streak",s_usd:"Total $",
+ curve:"Equity curve (in R)",insights:"What your journal says",recent:"Recent trades",del:"Delete",del2:"Sure?",
+ in_plan:"When you followed your plan: {a} win rate, {b} avg R. When you didn't: {c} win rate, {d} avg R.",
+ in_best:"Best setup: {s} ({r} total R from {n} trades).",in_worst:"Weakest setup: {s} ({r} total R). Trade it less or study it again.",
+ in_emo:"Most losing trades happened when you felt: {e}.",in_need:"Add at least 5 trades to see insights.",
+ err_trade:"Enter entry, stop loss and exit prices. The stop loss must differ from the entry.",
+ setups:["Support / Resistance","Trendline","Breakout & retest","Fibonacci","Trend reversal","Other"],
+ emos:["Calm","Confident","Fear","Greed","FOMO","Revenge"],
+ g_ok:"Trading discipline",g_ok_s:"No losing trades today. Follow the checklist before every entry.",g_care:"Careful — 1 loss today",g_care_s:"One more loss hits your daily limit. Only A+ setups now.",
+ g_stop:"Stop trading for today",g_stop_s:"2 losing trades today. Close the charts — revenge trading is how accounts blow up.",g_today:"Today",
+ checklist:"Checklist",checkS:"GO or WAIT before entry",
+ qz_title:"Quizzes",qz_sub:"Test yourself. 4 of 5 correct to pass.",qz_best:"Best",qz_next:"Next question",qz_done:"Finish",qz_again:"Try again",qz_back:"Back to Learn",qz_pass:"Passed",qz_fail:"Review the lessons and try again",qz_q:"Question",qz_new:"5 questions",
+ lp_title:"Your progress",lp_watched:"watched",mark:"Mark as watched"
+});
+Object.assign(T.ur,{
+ ck_title:"ٹریڈ سے پہلے چیک لسٹ",ck_sub:"صرف وہی ٹِک کریں جو سچ ہو۔ خبریں اور آج کے نقصان ایپ خود چیک کرتی ہے۔",ck_sym:"میں یہ ٹریڈ کرنا چاہتا ہوں",
+ ck_htf:"بڑے ٹائم فریم کا ٹرینڈ میری سمت میں ہے",ck_htf_s:"H4/D1 اپ ٹرینڈ میں بائے، ڈاؤن ٹرینڈ میں سیل",
+ ck_level:"قیمت اہم سپورٹ یا ریزسٹنس پر ہے",ck_level_s:"رینج کے درمیان نہیں",
+ ck_signal:"واضح پرائس ایکشن انٹری سگنل",ck_signal_s:"پن بار، اینگلفنگ، یا بریک اینڈ ری ٹیسٹ",
+ ck_rr:"رسک : ریوارڈ کم از کم 1 : 2 ہے",ck_rr_s:"رسک ریوارڈ کیلکولیٹر میں چیک کریں",
+ ck_lot:"لاٹ سائز میرے رسک (۲٪ یا کم) سے نکالا ہے",ck_lot_s:"لاٹ کبھی اندازے سے نہیں",
+ ck_mind:"میں پُرسکون ہوں: نہ پیچھا کر رہا ہوں، نہ نقصان پورا کرنے کی جلدی",ck_mind_s:"FOMO اور ریوینج ٹریڈز اکاؤنٹ توڑتی ہیں",
+ ck_news:"۳۰ منٹ میں کوئی ہائی امپیکٹ خبر نہیں",ck_news_bad:"جلد ہائی امپیکٹ خبر:",ck_news_ok:"اگلے ۳۰ منٹ صاف ہیں",ck_news_na:"لائیو کیلنڈر چاہیے (ایپ میں چلے گا)",
+ ck_guard:"روزانہ نقصان کی حد سے نیچے (۲ نقصان والی ٹریڈز)",ck_guard_ok:"آج نقصان والی ٹریڈز:",ck_guard_bad:"روزانہ حد پوری — آج ۲ نقصان۔",
+ auto:"خودکار",v_go:"GO",v_wait:"WAIT",v_no:"NO TRADE",v_go_s:"تمام اصول پورے ہیں۔ آرڈر کے ساتھ SL اور TP لگائیں۔",v_wait_s:"کمی:",v_no_s:"بہت سے اصول پورے نہیں، یا خبر/نقصان کی حد ٹریڈ روک رہی ہے۔",reset:"ری سیٹ",
+ j_title:"ٹریڈنگ جرنل",j_sub:"صرف اس فون میں محفوظ",j_add:"ٹریڈ شامل کریں",j_save:"ٹریڈ محفوظ کریں",j_cancel:"منسوخ",j_sym:"سمبل",j_dir:"سمت",j_entry:"انٹری",j_sl:"اسٹاپ لاس",j_exit:"ایگزٹ پرائس",j_pnl:"منافع / نقصان $ (اختیاری)",
+ j_setup:"سیٹ اپ",j_emo:"میری کیفیت",j_plan:"پلان پر عمل کیا؟",yes:"ہاں",no:"نہیں",j_note:"نوٹ (اختیاری)",j_date:"تاریخ",
+ j_empty:"ابھی کوئی ٹریڈ نہیں۔ پہلی ٹریڈ شامل کریں، یا مثالی ٹریڈز لوڈ کر کے دیکھیں کہ اعداد کیسے بنتے ہیں۔",j_example:"مثالی ٹریڈز لوڈ کریں",j_clear:"تمام ٹریڈز حذف کریں",j_clear2:"سب حذف کرنے کے لیے دوبارہ دبائیں",j_ex_tag:"مثالی ٹریڈز — اپنی ٹریڈز سے پہلے انہیں حذف کریں",
+ s_trades:"ٹریڈز",s_win:"جیت کی شرح",s_avgR:"اوسط R",s_totR:"کل R",s_pf:"پرافٹ فیکٹر",s_streak:"لگاتار بدترین نقصان",s_usd:"کل $",
+ curve:"ایکویٹی کرو (R میں)",insights:"آپ کا جرنل کیا کہتا ہے",recent:"حالیہ ٹریڈز",del:"حذف",del2:"یقین؟",
+ in_plan:"جب پلان پر عمل کیا: جیت {a}، اوسط {b} R۔ جب نہیں کیا: جیت {c}، اوسط {d} R۔",
+ in_best:"بہترین سیٹ اپ: {s} ({n} ٹریڈز سے کل {r} R)۔",in_worst:"کمزور ترین سیٹ اپ: {s} (کل {r} R)۔ اسے کم ٹریڈ کریں یا دوبارہ سیکھیں۔",
+ in_emo:"زیادہ تر نقصان والی ٹریڈز اس کیفیت میں ہوئیں: {e}۔",in_need:"تجزیہ دیکھنے کے لیے کم از کم ۵ ٹریڈز شامل کریں۔",
+ err_trade:"انٹری، اسٹاپ لاس اور ایگزٹ پرائس لکھیں۔ اسٹاپ لاس انٹری سے مختلف ہو۔",
+ setups:["سپورٹ / ریزسٹنس","ٹرینڈ لائن","بریک اینڈ ری ٹیسٹ","فبوناچی","ٹرینڈ ریورسل","دیگر"],
+ emos:["پُرسکون","پُراعتماد","خوف","لالچ","FOMO","ریوینج"],
+ g_ok:"ٹریڈنگ ڈسپلن",g_ok_s:"آج کوئی نقصان نہیں۔ ہر انٹری سے پہلے چیک لسٹ دیکھیں۔",g_care:"احتیاط — آج ۱ نقصان",g_care_s:"ایک اور نقصان روزانہ حد پوری کر دے گا۔ اب صرف بہترین سیٹ اپ۔",
+ g_stop:"آج ٹریڈنگ بند کریں",g_stop_s:"آج ۲ نقصان والی ٹریڈز۔ چارٹ بند کریں — ریوینج ٹریڈنگ ہی اکاؤنٹ ڈبوتی ہے۔",g_today:"آج",
+ checklist:"چیک لسٹ",checkS:"انٹری سے پہلے GO یا WAIT",
+ qz_title:"کوئز",qz_sub:"خود کو جانچیں۔ پاس ہونے کے لیے ۵ میں سے ۴ درست۔",qz_best:"بہترین",qz_next:"اگلا سوال",qz_done:"ختم",qz_again:"دوبارہ کوشش",qz_back:"واپس",qz_pass:"پاس",qz_fail:"اسباق دوبارہ دیکھیں اور پھر کوشش کریں",qz_q:"سوال",qz_new:"۵ سوالات",
+ lp_title:"آپ کی پیش رفت",lp_watched:"دیکھی گئیں",mark:"دیکھی ہوئی نشان لگائیں"
+});
+const tA = k => (T[S.lang][k] ?? T.en[k]);
+const tf = (k,o) => t(k).replace(/\{(\w)\}/g,(_,x)=>o[x]);
+
+/* ============ QUIZZES (EN + UR) ============ */
+const QZ=[
+ {id:"risk",en:"Risk management",ur:"رسک مینجمنٹ",qs:[
+  {en:"Your account is $1,000 and you risk 1% per trade. What is your maximum loss on one trade?",ur:"آپ کا اکاؤنٹ $1,000 ہے اور فی ٹریڈ ۱٪ رسک۔ ایک ٹریڈ میں زیادہ سے زیادہ نقصان کتنا ہوگا؟",
+   o:[["$1","$1"],["$10","$10"],["$50","$50"],["$100","$100"]],a:1,w:["1% of 1,000 = 10. The stop loss and lot size are set so a loss costs only $10.","1,000 کا ۱٪ = 10۔ اسٹاپ لاس اور لاٹ ایسے رکھے جاتے ہیں کہ نقصان صرف $10 ہو۔"]},
+  {en:"An account loses 50%. What gain is needed to get back to the starting balance?",ur:"اکاؤنٹ ۵۰٪ نقصان میں چلا جائے تو واپس ابتدائی بیلنس تک آنے کے لیے کتنا منافع چاہیے؟",
+   o:[["25%","25%"],["50%","50%"],["100%","100%"],["150%","150%"]],a:2,w:["$1,000 → $500. Doubling $500 back to $1,000 needs +100%.","$1,000 سے $500۔ دوبارہ $1,000 بنانے کے لیے $500 کو دُگنا یعنی +100% چاہیے۔"]},
+  {en:"Every trade has a 1:2 risk:reward. What win rate is needed just to break even?",ur:"ہر ٹریڈ کا رسک ریوارڈ 1:2 ہے۔ صرف بریک ایون کے لیے کتنی جیت کی شرح چاہیے؟",
+   o:[["About 25%","تقریباً ۲۵٪"],["About 33%","تقریباً ۳۳٪"],["50%","۵۰٪"],["About 66%","تقریباً ۶۶٪"]],a:1,w:["1 win (+2R) pays for 2 losses (−2R). 1 out of 3 = 33%.","ایک جیت (+2R) دو نقصانوں (−2R) کو پورا کرتی ہے۔ تین میں سے ایک = ۳۳٪۔"]},
+  {en:"You hold 1 lot of XAUUSD (100 oz) and price moves $5 against you. What is the loss?",ur:"آپ کے پاس XAUUSD کا 1 لاٹ (100 اونس) ہے اور قیمت $5 خلاف چلی گئی۔ نقصان کتنا؟",
+   o:[["$5","$5"],["$50","$50"],["$500","$500"],["$5,000","$5,000"]],a:2,w:["100 oz × $5 = $500. At 0.01 lot the same move costs $5.","100 اونس × $5 = $500۔ 0.01 لاٹ پر یہی حرکت $5 کی ہوگی۔"]},
+  {en:"What is the main job of a stop loss?",ur:"اسٹاپ لاس کا اصل کام کیا ہے؟",
+   o:[["Make the trade win more often","ٹریڈ کو زیادہ جتوانا"],["Keep a loss at the amount you planned","نقصان کو منصوبے کی رقم تک محدود رکھنا"],["Avoid paying spread","اسپریڈ سے بچنا"],["Increase the lot size","لاٹ سائز بڑھانا"]],a:1,w:["A stop loss does not improve accuracy. It caps the loss so one bad trade can't damage the account.","اسٹاپ لاس درستگی نہیں بڑھاتا۔ یہ نقصان کی حد مقرر کرتا ہے تاکہ ایک بری ٹریڈ اکاؤنٹ کو نقصان نہ پہنچائے۔"]}]},
+ {id:"pa",en:"Price action basics",ur:"پرائس ایکشن کی بنیاد",qs:[
+  {en:"What structure defines an uptrend?",ur:"اپ ٹرینڈ کس اسٹرکچر سے پہچانا جاتا ہے؟",
+   o:[["Lower highs and lower lows","لوئر ہائیز اور لوئر لوز"],["Higher highs and higher lows","ہائر ہائیز اور ہائر لوز"],["Equal highs and lows","برابر ہائیز اور لوز"],["One big green candle","ایک بڑی سبز کینڈل"]],a:1,w:["Each swing high and swing low is above the previous one.","ہر سوئنگ ہائی اور سوئنگ لو پچھلے سے اوپر بنتا ہے۔"]},
+  {en:"What is support?",ur:"سپورٹ کیا ہے؟",
+   o:[["A level where buyers stopped the price falling before","وہ لیول جہاں پہلے خریداروں نے قیمت کو گرنے سے روکا"],["Any round number","کوئی بھی راؤنڈ نمبر"],["The highest price of the day","دن کی سب سے اونچی قیمت"],["A moving average","موونگ ایوریج"]],a:0,w:["Support is an area of past buying pressure. The more clean reactions, the stronger it is.","سپورٹ ماضی میں خریداری کے دباؤ کا علاقہ ہے۔ جتنے واضح ردعمل، اتنی مضبوط۔"]},
+  {en:"What is a bullish engulfing pattern?",ur:"بُلش اینگلفنگ پیٹرن کیا ہے؟",
+   o:[["A small candle inside the previous one","پچھلی کینڈل کے اندر چھوٹی کینڈل"],["A bullish candle whose body covers the previous bearish body","ایسی سبز کینڈل جس کی باڈی پچھلی سرخ باڈی کو مکمل ڈھانپ لے"],["Two candles with long upper wicks","لمبی اوپری وِک والی دو کینڈلز"],["A gap up at the open","اوپن پر گیپ اپ"]],a:1,w:["Buyers took over the whole previous candle. It matters most at support.","خریداروں نے پوری پچھلی کینڈل پر قبضہ کر لیا۔ سپورٹ پر یہ سب سے اہم ہے۔"]},
+  {en:"What is a false breakout?",ur:"فالس بریک آؤٹ کیا ہے؟",
+   o:[["Price breaks a level and quickly returns inside","قیمت لیول توڑ کر جلدی واپس اندر آ جائے"],["Price breaks a level and keeps going","قیمت لیول توڑ کر آگے چلتی رہے"],["A breakout during news","خبر کے دوران بریک آؤٹ"],["A breakout on the daily chart","ڈیلی چارٹ پر بریک آؤٹ"]],a:0,w:["Waiting for a candle close and a retest filters many false breakouts.","کینڈل کلوز اور ری ٹیسٹ کا انتظار بہت سے فالس بریک آؤٹ سے بچاتا ہے۔"]},
+  {en:"In multi-timeframe analysis, what does the higher timeframe tell you?",ur:"ملٹی ٹائم فریم تجزیے میں بڑا ٹائم فریم کیا بتاتا ہے؟",
+   o:[["The exact entry candle","بالکل انٹری کینڈل"],["The main direction and key levels","اصل سمت اور اہم لیولز"],["The spread","اسپریڈ"],["Nothing useful","کچھ مفید نہیں"]],a:1,w:["Take direction and levels from the higher timeframe, and the entry signal from the lower one.","سمت اور لیولز بڑے ٹائم فریم سے، انٹری سگنل چھوٹے سے۔"]}]},
+ {id:"gold",en:"Gold & news",ur:"گولڈ اور خبریں",qs:[
+  {en:"Gold (XAUUSD) usually rises when the US dollar…",ur:"گولڈ (XAUUSD) عموماً تب اوپر جاتا ہے جب امریکی ڈالر…",
+   o:[["Weakens","کمزور ہو"],["Strengthens","مضبوط ہو"],["Stays flat","ایک جگہ رہے"],["The dollar has no effect","ڈالر کا کوئی اثر نہیں"]],a:0,w:["Gold is priced in dollars, so a weaker dollar usually means a higher gold price. It is a tendency, not a rule.","گولڈ کی قیمت ڈالر میں ہے، اس لیے کمزور ڈالر کا مطلب عموماً اونچا گولڈ۔ یہ رجحان ہے، قانون نہیں۔"]},
+  {en:"Which hours usually bring Gold's biggest moves?",ur:"گولڈ کی سب سے بڑی حرکت عموماً کن اوقات میں ہوتی ہے؟",
+   o:[["Sydney session","سڈنی سیشن"],["Asian lunch hours","ایشیائی دوپہر"],["London–New York overlap","لندن–نیویارک اوورلیپ"],["Friday night after close","جمعہ رات بند ہونے کے بعد"]],a:2,w:["Both big markets are open, so volume and volatility peak.","دونوں بڑی مارکیٹیں کھلی ہوتی ہیں، اس لیے والیوم اور ہلچل عروج پر۔"]},
+  {en:"US CPI comes in higher than forecast. The usual first reaction is…",ur:"امریکی CPI توقع سے زیادہ آئے تو عموماً پہلا ردعمل…",
+   o:[["USD up, Gold down","ڈالر اوپر، گولڈ نیچے"],["USD down, Gold up","ڈالر نیچے، گولڈ اوپر"],["No movement","کوئی حرکت نہیں"],["Market closes","مارکیٹ بند"]],a:0,w:["Higher inflation can keep US rates high, which supports the dollar and pressures Gold.","زیادہ مہنگائی امریکی شرح سود کو بلند رکھ سکتی ہے، جو ڈالر کو سہارا اور گولڈ پر دباؤ دیتی ہے۔"]},
+  {en:"Five minutes before NFP or an FOMC decision, a professional usually…",ur:"NFP یا FOMC فیصلے سے پانچ منٹ پہلے پروفیشنل عموماً…",
+   o:[["Opens a big position","بڑی پوزیشن کھولتا ہے"],["Avoids new entries; spreads widen","نئی انٹری سے بچتا ہے؛ اسپریڈ بڑھ جاتا ہے"],["Removes the stop loss","اسٹاپ لاس ہٹا دیتا ہے"],["Doubles the lot","لاٹ دُگنا کرتا ہے"]],a:1,w:["Price can jump both ways and slippage is common. Wait for the dust to settle.","قیمت دونوں طرف جھٹکا کھا سکتی ہے اور سلپیج عام ہے۔ ہلچل تھمنے کا انتظار کریں۔"]},
+  {en:"In summer, the forex week opens on Sunday 5 PM New York time. In Pakistan that is…",ur:"گرمیوں میں فاریکس ہفتہ اتوار شام ۵ بجے نیویارک وقت کھلتا ہے۔ پاکستان میں یہ ہے…",
+   o:[["Sunday 5 PM","اتوار شام ۵ بجے"],["Monday about 2 AM","پیر تقریباً رات ۲ بجے"],["Monday 9 AM","پیر صبح ۹ بجے"],["Saturday night","ہفتہ کی رات"]],a:1,w:["New York in summer is UTC−4 and Pakistan is UTC+5: 9 hours ahead. In winter it is about 3 AM.","گرمیوں میں نیویارک UTC−4 اور پاکستان UTC+5 ہے: ۹ گھنٹے آگے۔ سردیوں میں تقریباً ۳ بجے۔"]}]},
+ {id:"psy",en:"Trading psychology",ur:"ٹریڈنگ سائیکالوجی",qs:[
+  {en:"You just lost two trades in a row. The professional next step is…",ur:"آپ نے لگاتار دو ٹریڈز ہاریں۔ پروفیشنل اگلا قدم ہے…",
+   o:[["Double the lot to recover","نقصان پورا کرنے کے لیے لاٹ دُگنا"],["Stop, take a break and review","رکیں، وقفہ لیں اور جائزہ لیں"],["Trade a new pair","نیا پیئر ٹریڈ کریں"],["Remove the stop loss","اسٹاپ لاس ہٹا دیں"]],a:1,w:["A daily loss limit protects you when emotions are strongest.","روزانہ نقصان کی حد آپ کو تب بچاتی ہے جب جذبات سب سے تیز ہوں۔"]},
+  {en:"What is revenge trading?",ur:"ریوینج ٹریڈنگ کیا ہے؟",
+   o:[["Trading against the trend","ٹرینڈ کے خلاف ٹریڈ"],["Rushing into trades to win back a loss","نقصان واپس لینے کے لیے جلدی میں ٹریڈز"],["Copying another trader","کسی اور کی نقل"],["Trading only on Fridays","صرف جمعہ کو ٹریڈ"]],a:1,w:["It usually comes with bigger lots and no setup, and it turns a small loss into a big one.","اس میں عموماً بڑا لاٹ اور بغیر سیٹ اپ انٹری ہوتی ہے، اور چھوٹا نقصان بڑا بن جاتا ہے۔"]},
+  {en:"What is FOMO in trading?",ur:"ٹریڈنگ میں FOMO کیا ہے؟",
+   o:[["Chasing a move you missed without a setup","چھوٹی ہوئی حرکت کا بغیر سیٹ اپ پیچھا"],["A type of order","آرڈر کی ایک قسم"],["A news event","ایک خبر"],["A chart pattern","چارٹ پیٹرن"]],a:0,w:["Fear of missing out. Late entries have poor risk:reward.","کچھ چھوٹ جانے کا خوف۔ دیر سے انٹری کا رسک ریوارڈ خراب ہوتا ہے۔"]},
+  {en:"Why keep a trading journal?",ur:"ٹریڈنگ جرنل کیوں رکھیں؟",
+   o:[["To show others","دوسروں کو دکھانے کے لیے"],["To find your real mistakes and edge from data","ڈیٹا سے اپنی اصل غلطیاں اور طاقت تلاش کرنے کے لیے"],["Brokers require it","بروکر کی شرط ہے"],["It is not useful","یہ مفید نہیں"]],a:1,w:["Memory is biased. Numbers show which setups and habits actually make money.","یادداشت جانبدار ہوتی ہے۔ اعداد دکھاتے ہیں کون سے سیٹ اپ اور عادتیں واقعی کماتی ہیں۔"]},
+  {en:"A trade followed every rule of your plan but hit the stop loss. It was…",ur:"ایک ٹریڈ نے پلان کے ہر اصول پر عمل کیا مگر اسٹاپ لاس لگ گیا۔ یہ تھی…",
+   o:[["A bad trade","بری ٹریڈ"],["A good trade with a losing outcome","اچھی ٹریڈ جس کا نتیجہ نقصان رہا"],["Proof the strategy is broken","ثبوت کہ اسٹریٹجی ٹوٹ گئی"],["A reason to change the plan today","آج ہی پلان بدلنے کی وجہ"]],a:1,w:["Single results are random. Judge the process over 20–50 trades, not one.","ایک نتیجہ اتفاقی ہوتا ہے۔ ایک ٹریڈ نہیں، ۲۰ سے ۵۰ ٹریڈز پر عمل کو پرکھیں۔"]}]}
+];
+
+/* ============ JOURNAL (pure stats, testable) ============ */
+const J = {
+ r(tr){ const risk=Math.abs(tr.entry-tr.sl); if(!(risk>0)) return NaN; const sgn=tr.dir==="buy"?1:-1; return (tr.exit-tr.entry)*sgn/risk; },
+ stats(list){ const rs=list.slice().sort((a,b)=>new Date(a.date)-new Date(b.date)).map(J.r).filter(isFinite); const n=rs.length;
+  const wins=rs.filter(r=>r>0), losses=rs.filter(r=>r<0); const sum=a=>a.reduce((x,y)=>x+y,0);
+  let streak=0,worst=0; rs.forEach(r=>{ if(r<0){streak++;worst=Math.max(worst,streak);} else streak=0; });
+  const usd=list.filter(x=>typeof x.pnl==="number"&&isFinite(x.pnl)).map(x=>x.pnl);
+  const grp=(key)=>{ const g={}; list.forEach(x=>{const r=J.r(x); if(!isFinite(r)) return; const k=String(x[key]); (g[k]=g[k]||{n:0,w:0,tot:0}); g[k].n++; g[k].tot+=r; if(r>0) g[k].w++;}); return g; };
+  const lossEmo={}; list.forEach(x=>{ if(J.r(x)<0) lossEmo[x.emo]=(lossEmo[x.emo]||0)+1; });
+  let eq=0; const curve=[0].concat(rs.map(r=>eq+=r));
+  return {n,wins:wins.length,losses:losses.length,winRate:n?wins.length/n*100:0,avgR:n?sum(rs)/n:0,totR:sum(rs),
+   pf:losses.length?sum(wins)/Math.abs(sum(losses)):(wins.length?Infinity:0),worst,usd:usd.length?sum(usd):null,
+   bySetup:grp("setup"),byPlan:grp("plan"),lossEmo,curve}; },
+ today(list,now=new Date()){ const k=d=>{const x=new Date(d);return x.getFullYear()+"-"+x.getMonth()+"-"+x.getDate();}; const tk=k(now);
+  const td=list.filter(x=>k(x.date)===tk); return {n:td.length,losses:td.filter(x=>J.r(x)<0).length,r:td.map(J.r).filter(isFinite).reduce((a,b)=>a+b,0)}; }
+};
+window.QFT_J=J;
+let TRADES = store.get("trades",[]);
+const saveTrades=()=>store.set("trades",TRADES);
+function exampleTrades(){ const d=n=>{const x=new Date(); x.setDate(x.getDate()-n); x.setHours(15,30,0,0); return x.toISOString();};
+ return [
+  {date:d(13),sym:"XAUUSD",dir:"buy",entry:4050,sl:4042,exit:4074,pnl:24,setup:0,emo:0,plan:true},
+  {date:d(12),sym:"XAUUSD",dir:"sell",entry:4081,sl:4089,exit:4089,pnl:-8,setup:2,emo:1,plan:true},
+  {date:d(11),sym:"EURUSD",dir:"buy",entry:1.1610,sl:1.1590,exit:1.1650,pnl:20,setup:1,emo:0,plan:true},
+  {date:d(10),sym:"XAUUSD",dir:"buy",entry:4102,sl:4094,exit:4094,pnl:-8,setup:4,emo:4,plan:false},
+  {date:d(10),sym:"XAUUSD",dir:"sell",entry:4090,sl:4097,exit:4097,pnl:-7,setup:5,emo:5,plan:false},
+  {date:d(7),sym:"GBPUSD",dir:"sell",entry:1.3320,sl:1.3345,exit:1.3270,pnl:20,setup:0,emo:0,plan:true},
+  {date:d(6),sym:"XAUUSD",dir:"buy",entry:4060,sl:4052,exit:4076,pnl:16,setup:3,emo:1,plan:true},
+  {date:d(5),sym:"XAUUSD",dir:"buy",entry:4071,sl:4063,exit:4063,pnl:-8,setup:0,emo:2,plan:true},
+  {date:d(3),sym:"USDJPY",dir:"buy",entry:150.20,sl:149.90,exit:150.80,pnl:13,setup:2,emo:0,plan:true},
+  {date:d(2),sym:"XAUUSD",dir:"sell",entry:4110,sl:4118,exit:4118,pnl:-8,setup:4,emo:3,plan:false},
+  {date:d(1),sym:"XAUUSD",dir:"buy",entry:4095,sl:4087,exit:4119,pnl:24,setup:0,emo:0,plan:true}
+ ].map((x,i)=>Object.assign({id:"ex"+i,ex:true},x)); }
+
+function guardHTML(){ const g=J.today(TRADES); const cls=g.losses>=2?"stop":g.losses===1?"care":"";
+ const h=g.losses>=2?t("g_stop"):g.losses===1?t("g_care"):t("g_ok"); const s=g.losses>=2?t("g_stop_s"):g.losses===1?t("g_care_s"):t("g_ok_s");
+ return `<section class="guard ${cls}"><div class="row between"><h3>${h}</h3><span class="mono small">${t("g_today")}: ${g.n} · <span class="${g.r>=0?'pos':'neg'}">${g.r>=0?"+":""}${fmt(g.r,1)}R</span></span></div>
+  <div class="small">${s}</div><div class="row"><button class="btn ghost" type="button" data-calc="check">${t("checklist")} →</button></div></section>`; }
+
+/* ---------- checklist ---------- */
+S.ck = {sym:"XAUUSD",m:{}};
+const CK_ITEMS=["htf","level","signal","rr","lot","mind"];
+function newsCheck(sym,events,now=Date.now()){ if(!events) return {st:"na"}; const curs=sym==="XAUUSD"?["USD"]:[sym.slice(0,3),sym.slice(3)];
+ const hit=events.filter(e=>e.impact==="High"&&curs.includes(e.country)).find(e=>{const d=new Date(e.date)-now; return d<=30*60000 && d>=-15*60000;});
+ return hit?{st:"bad",ev:hit}:{st:"ok"}; }
+function ckVerdict(done,total,autoBad){ return autoBad||done<4 ? "no" : done===total ? "go" : "wait"; }
+window.QFT_CK={newsCheck,ckVerdict};
+function checklistHTML(){ const c=S.ck; const nw=newsCheck(c.sym,S.sample?null:S.events); const g=J.today(TRADES); const guardBad=g.losses>=2;
+ const done=CK_ITEMS.filter(k=>c.m[k]).length; const v=ckVerdict(done,CK_ITEMS.length,nw.st==="bad"||guardBad);
+ const missing=CK_ITEMS.filter(k=>!c.m[k]).map(k=>t("ck_"+k)).join(" · ");
+ const syms=["XAUUSD"].concat(SYMS);
+ return `<div><h3>${t("ck_title")}</h3><p class="small muted" style="margin:4px 0 0">${t("ck_sub")}</p></div>
+  <label class="f">${t("ck_sym")}<select id="ckSym">${syms.map(s=>`<option ${s===c.sym?"selected":""}>${s}</option>`).join("")}</select></label>
+  <div class="verdict ${v}"><div class="v">${t("v_"+v)}</div><div class="small">${v==="go"?t("v_go_s"):v==="wait"?`${t("v_wait_s")} ${esc(missing)}`:t("v_no_s")}</div></div>
+  <div class="meter" aria-hidden="true"><i style="width:${done/CK_ITEMS.length*100}%"></i></div>
+  <div class="ck">
+   <div class="ck-i auto ${nw.st==="bad"?"bad":""}" role="checkbox" aria-checked="${nw.st==="ok"}"><span class="box">${nw.st==="ok"?"✓":nw.st==="bad"?"!":""}</span>
+    <b>${t("ck_news")}<small>${nw.st==="ok"?t("ck_news_ok"):nw.st==="bad"?`${t("ck_news_bad")} <span dir="ltr">${esc(nw.ev.country)} ${esc(nw.ev.title)} · ${hm(new Date(nw.ev.date))}</span>`:t("ck_news_na")}</small></b><span class="tag">${t("auto")}</span></div>
+   <div class="ck-i auto ${guardBad?"bad":""}" role="checkbox" aria-checked="${!guardBad}"><span class="box">${guardBad?"!":"✓"}</span>
+    <b>${t("ck_guard")}<small>${guardBad?t("ck_guard_bad"):`${t("ck_guard_ok")} ${g.losses}`}</small></b><span class="tag">${t("auto")}</span></div>
+   ${CK_ITEMS.map(k=>`<button type="button" class="ck-i" role="checkbox" data-ck="${k}" aria-checked="${!!c.m[k]}"><span class="box">${c.m[k]?"✓":""}</span><b>${t("ck_"+k)}<small>${t("ck_"+k+"_s")}</small></b><span></span></button>`).join("")}
+  </div>
+  <div class="row"><button class="btn ghost" type="button" id="ckReset">${t("reset")}</button></div>`; }
+
+/* ---------- journal view ---------- */
+S.jForm=false;
+function curveSVG(pts){ if(pts.length<2) return ""; const W=320,H=120,p=8; const mn=Math.min(0,...pts), mx=Math.max(0,...pts); const sp=(mx-mn)||1;
+ const x=i=>p+i*(W-2*p)/(pts.length-1), y=v=>H-p-(v-mn)*(H-2*p)/sp; const d=pts.map((v,i)=>`${i?"L":"M"}${x(i).toFixed(1)},${y(v).toFixed(1)}`).join("");
+ const last=pts[pts.length-1];
+ return `<svg class="curve" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" role="img" aria-label="Equity curve">
+  <line x1="${p}" x2="${W-p}" y1="${y(0)}" y2="${y(0)}" stroke="var(--line)" stroke-dasharray="3 4" vector-effect="non-scaling-stroke"/>
+  <path d="${d} L${x(pts.length-1)},${y(0)} L${x(0)},${y(0)}Z" fill="var(--gold-soft)" stroke="none"/>
+  <path d="${d}" fill="none" stroke="var(--gold)" stroke-width="2" vector-effect="non-scaling-stroke"/>
+  <circle cx="${x(pts.length-1)}" cy="${y(last)}" r="3.5" fill="${last>=0?"var(--up)":"var(--down)"}"/></svg>`; }
+function insightsHTML(s){ if(s.n<5) return `<p>${t("in_need")}</p>`; const out=[]; const pc=v=>fmt(v,0)+"%";
+ const P=s.byPlan["true"], N=s.byPlan["false"];
+ if(P&&N) out.push(tf("in_plan",{a:pc(P.w/P.n*100),b:fmt(P.tot/P.n,2),c:pc(N.w/N.n*100),d:fmt(N.tot/N.n,2)}));
+ const st=Object.entries(s.bySetup).sort((a,b)=>b[1].tot-a[1].tot); const names=tA("setups");
+ if(st.length){ const [k,v]=st[0]; if(v.tot>0) out.push(tf("in_best",{s:names[k]??k,r:"+"+fmt(v.tot,1),n:v.n})); }
+ if(st.length>1){ const [k,v]=st[st.length-1]; if(v.tot<0) out.push(tf("in_worst",{s:names[k]??k,r:fmt(v.tot,1)})); }
+ const le=Object.entries(s.lossEmo).sort((a,b)=>b[1]-a[1]); if(le.length && le[0][1]>=2 && (!le[1]||le[0][1]>le[1][1])) out.push(tf("in_emo",{e:tA("emos")[le[0][0]]??le[0][0]}));
+ return out.map(x=>`<p>${esc(x)}</p>`).join(""); }
+function formHTML(){ const f=S.jDraft||(S.jDraft={sym:"XAUUSD",dir:"buy",entry:"",sl:"",exit:"",pnl:"",setup:0,emo:0,plan:true,note:"",date:new Date().toISOString().slice(0,10)});
+ const opt=(arr,v)=>arr.map((x,i)=>`<option value="${i}" ${+v===i?"selected":""}>${esc(x)}</option>`).join("");
+ const segLbl=`style="display:grid;gap:4px;font-size:13px;font-weight:600;color:var(--muted)"`;
+ return `<section class="card" style="display:grid;gap:12px" id="jForm"><h3>${t("j_add")}</h3><div class="fields">
+  <label class="f">${t("j_sym")}<select id="jf_sym">${["XAUUSD"].concat(SYMS).map(s=>`<option ${s===f.sym?"selected":""}>${s}</option>`).join("")}</select></label>
+  <div ${segLbl}>${t("j_dir")}<div class="seg"><button type="button" data-jdir="buy" aria-pressed="${f.dir==="buy"}">${t("buy")}</button><button type="button" data-jdir="sell" aria-pressed="${f.dir==="sell"}">${t("sell")}</button></div></div>
+  ${["entry","sl","exit"].map(k=>`<label class="f">${t("j_"+k)}<input id="jf_${k}" type="number" step="any" inputmode="decimal" value="${esc(f[k])}"></label>`).join("")}
+  <label class="f">${t("j_pnl")}<input id="jf_pnl" type="number" step="any" inputmode="decimal" value="${esc(f.pnl)}"></label>
+  <label class="f">${t("j_setup")}<select id="jf_setup">${opt(tA("setups"),f.setup)}</select></label>
+  <label class="f">${t("j_emo")}<select id="jf_emo">${opt(tA("emos"),f.emo)}</select></label>
+  <label class="f">${t("j_date")}<input id="jf_date" type="date" value="${esc(f.date)}"></label>
+  <div ${segLbl}>${t("j_plan")}<div class="seg"><button type="button" data-jplan="1" aria-pressed="${f.plan}">${t("yes")}</button><button type="button" data-jplan="0" aria-pressed="${!f.plan}">${t("no")}</button></div></div>
+  <label class="f full">${t("j_note")}<input id="jf_note" type="text" value="${esc(f.note)}" style="font-family:var(--f-body)"></label></div>
+  <div id="jErr"></div>
+  <div class="row"><button class="btn gold" type="button" id="jSave">${t("j_save")}</button><button class="btn ghost" type="button" id="jCancel">${t("j_cancel")}</button></div></section>`; }
+function viewJournal(){ const s=J.stats(TRADES); const hasEx=TRADES.some(x=>x.ex);
+ const list=TRADES.slice().sort((a,b)=>new Date(b.date)-new Date(a.date)); const names=tA("setups"), emos=tA("emos");
+ const head=`<div class="row between"><div><h2>${t("j_title")}</h2><div class="small muted">${t("j_sub")}</div></div>${S.jForm?"":`<button class="btn gold" type="button" id="jAdd">+ ${t("j_add")}</button>`}</div>`;
+ if(!TRADES.length) return head+(S.jForm?formHTML():"")+`<section class="card empty" style="display:grid;gap:12px;justify-items:center"><p style="margin:0;max-width:40ch">${t("j_empty")}</p><button class="btn ghost" type="button" id="jEx">${t("j_example")}</button></section>`;
+ const cls=v=>v>0?"pos":v<0?"neg":"";
+ return head+(hasEx?`<div class="banner">${t("j_ex_tag")}</div>`:"")+(S.jForm?formHTML():"")+
+  `<div class="jstats"><div><span>${t("s_trades")}</span><b>${s.n}</b></div><div><span>${t("s_win")}</span><b>${fmt(s.winRate,0)}%</b></div><div><span>${t("s_avgR")}</span><b class="${cls(s.avgR)}">${s.avgR>0?"+":""}${fmt(s.avgR,2)}</b></div>
+   <div><span>${t("s_totR")}</span><b class="${cls(s.totR)}">${s.totR>0?"+":""}${fmt(s.totR,1)}</b></div><div><span>${t("s_pf")}</span><b>${isFinite(s.pf)?fmt(s.pf,2):"∞"}</b></div><div><span>${s.usd!==null?t("s_usd"):t("s_streak")}</span><b class="${s.usd!==null?cls(s.usd):""}">${s.usd!==null?(s.usd<0?"-$":"$")+fmt(Math.abs(s.usd)):s.worst}</b></div></div>
+  <section class="card" style="display:grid;gap:8px"><div class="row between"><h3>${t("curve")}</h3><span class="small muted">${t("s_streak")}: <b class="mono">${s.worst}</b></span></div>${curveSVG(s.curve)}</section>
+  <section style="display:grid;gap:8px"><h3>${t("insights")}</h3><div class="insight">${insightsHTML(s)}</div></section>
+  <section style="display:grid;gap:8px"><h3>${t("recent")}</h3>${list.map(x=>{const r=J.r(x);
+   return `<div class="trade"><div style="display:grid;gap:2px;justify-items:start"><span class="sym">${esc(x.sym)}</span><span class="dir ${x.dir==="buy"?"buy":"sell"}">${t(x.dir==="buy"?"buy":"sell")}</span></div>
+    <div style="min-width:0"><div class="meta"><span class="mono">${new Date(x.date).toLocaleDateString("en-GB",{day:"numeric",month:"short"})}</span> · ${esc(names[x.setup]??"")} · ${esc(emos[x.emo]??"")}${x.plan?"":` · <span class="neg">✗ plan</span>`}</div>${x.note?`<div class="small" style="overflow-wrap:anywhere">${esc(x.note)}</div>`:""}</div>
+    <div style="display:grid;gap:4px;justify-items:end"><span class="r ${cls(r)}">${r>0?"+":""}${fmt(r,2)}R</span><button class="del" type="button" data-del="${esc(x.id)}">${t("del")}</button></div></div>`}).join("")}</section>
+  <div class="row"><button class="btn ghost" type="button" id="jClear">${t("j_clear")}</button></div>`; }
+
+/* ---------- learn: quiz + progress ---------- */
+let SEEN = new Set(store.get("seen",[])); let QBEST = store.get("qbest",{});
+S.quiz=null;
+function quizHTML(){ const q=S.quiz, Z=QZ.find(z=>z.id===q.id), L=S.lang==="ur"?1:0;
+ if(q.i>=Z.qs.length){ const pass=q.score>=4;
+  return `<section class="card" style="display:grid;gap:14px;justify-items:start"><span class="eyebrow">${L?Z.ur:Z.en}</span>
+   <div class="big">${q.score} / ${Z.qs.length}</div><div class="${pass?"ok":"warn"}">${pass?t("qz_pass"):t("qz_fail")}</div>
+   <div class="row"><button class="btn gold" type="button" id="qzAgain">${t("qz_again")}</button><button class="btn ghost" type="button" id="qzBack">${t("qz_back")}</button></div></section>`; }
+ const Q=Z.qs[q.i]; const picked=q.picked;
+ return `<section class="card" style="display:grid;gap:12px"><div class="row between"><span class="eyebrow">${L?Z.ur:Z.en}</span><span class="mono small">${t("qz_q")} ${q.i+1}/${Z.qs.length}</span></div>
+  <div class="meter"><i style="width:${q.i/Z.qs.length*100}%"></i></div>
+  <h3 style="line-height:1.35">${esc(L?Q.ur:Q.en)}</h3>
+  <div style="display:grid;gap:8px">${Q.o.map((o,i)=>`<button type="button" class="opt ${picked!=null?(i===Q.a?"right":i===picked?"wrong":""):""}" data-opt="${i}" ${picked!=null?"disabled":""}>${esc(o[L])}</button>`).join("")}</div>
+  ${picked!=null?`<div class="note">${esc(Q.w[L])}</div><div class="row"><button class="btn gold" type="button" id="qzNext">${q.i+1<Z.qs.length?t("qz_next"):t("qz_done")}</button></div>`:""}
+  <div class="row"><button class="iconbtn" type="button" id="qzBack">${t("qz_back")}</button></div></section>`; }
+function learnTop(){ const all=C.playlists.reduce((a,p)=>a+p.videos.length,0); const seen=C.playlists.reduce((a,p)=>a+p.videos.filter(v=>SEEN.has(ytId(v.link))).length,0);
+ return `<section class="card prog"><div class="row between"><h3>${t("lp_title")}</h3><span class="mono small">${seen}/${all} ${t("lp_watched")}</span></div><div class="meter"><i style="width:${all?seen/all*100:0}%"></i></div></section>
+  <section style="display:grid;gap:10px"><div><h3>${t("qz_title")}</h3><div class="small muted">${t("qz_sub")}</div></div>
+  <div class="qgrid">${QZ.map(z=>{const b=QBEST[z.id];return `<button type="button" class="qcard" data-quiz="${z.id}"><b>${S.lang==="ur"?z.ur:z.en}</b><span class="sc ${b>=4?"pass":""}">${b!=null?`${t("qz_best")} ${b}/5${b>=4?" ✓":""}`:t("qz_new")}</span></button>`}).join("")}</div></section>`; }
+function vidRow(v,n){ const id=ytId(v.link); return `<div class="vrow">${vidCard(v,n)}<button type="button" class="seen" data-seen="${id}" aria-pressed="${SEEN.has(id)}" aria-label="${t("mark")}" title="${t("mark")}">${SEEN.has(id)?"✓":""}</button></div>`; }
+function bindV2(m){
+ m.querySelectorAll("[data-ck]").forEach(b=>b.onclick=()=>{ const k=b.dataset.ck; S.ck.m[k]=!S.ck.m[k]; award(5,"ck:"+todayKey()); render(); });
+ const ks=$("#ckSym"); if(ks) ks.onchange=()=>{ S.ck.sym=ks.value; render(); };
+ const kr=$("#ckReset"); if(kr) kr.onclick=()=>{ S.ck.m={}; render(); };
+ const ja=$("#jAdd"); if(ja) ja.onclick=()=>{ S.jForm=true; render(); const f=$("#jForm"); if(f) f.scrollIntoView({block:"start"}); };
+ const je=$("#jEx"); if(je) je.onclick=()=>{ TRADES=exampleTrades(); saveTrades(); render(); };
+ const jc=$("#jClear"); if(jc) jc.onclick=()=>{ if(jc.dataset.arm){ TRADES=[]; saveTrades(); render(); } else { jc.dataset.arm="1"; jc.textContent=t("j_clear2"); jc.classList.add("warn"); } };
+ m.querySelectorAll("[data-del]").forEach(b=>b.onclick=()=>{ if(b.classList.contains("arm")){ TRADES=TRADES.filter(x=>x.id!==b.dataset.del); saveTrades(); render(); } else { b.classList.add("arm"); b.textContent=t("del2"); } });
+ const form=$("#jForm"); if(form){ const f=S.jDraft;
+  form.querySelectorAll("input,select").forEach(i=>i.oninput=i.onchange=()=>{ const k=i.id.slice(3); f[k]=i.value; });
+  form.querySelectorAll("[data-jdir]").forEach(b=>b.onclick=()=>{ f.dir=b.dataset.jdir; form.querySelectorAll("[data-jdir]").forEach(x=>x.setAttribute("aria-pressed",String(x===b))); });
+  form.querySelectorAll("[data-jplan]").forEach(b=>b.onclick=()=>{ f.plan=b.dataset.jplan==="1"; form.querySelectorAll("[data-jplan]").forEach(x=>x.setAttribute("aria-pressed",String(x===b))); });
+  $("#jCancel").onclick=()=>{ S.jForm=false; S.jDraft=null; render(); };
+  $("#jSave").onclick=()=>{ const n=k=>parseFloat(f[k]); const tr={id:"t"+Date.now(),date:new Date((f.date||new Date().toISOString().slice(0,10))+"T12:00:00").toISOString(),
+     sym:f.sym,dir:f.dir,entry:n("entry"),sl:n("sl"),exit:n("exit"),pnl:isFinite(n("pnl"))?n("pnl"):null,setup:+f.setup,emo:+f.emo,plan:!!f.plan,note:String(f.note||"").slice(0,200)};
+   if(!isFinite(J.r(tr))){ $("#jErr").innerHTML=`<div class="warn">${t("err_trade")}</div>`; return; }
+   TRADES=TRADES.filter(x=>!x.ex).concat(tr); saveTrades(); award(10); S.jForm=false; S.jDraft=null; render(); };
+ }
+ m.querySelectorAll("[data-quiz]").forEach(b=>b.onclick=()=>{ S.quiz={id:b.dataset.quiz,i:0,score:0,picked:null}; render(); window.scrollTo(0,0); });
+ m.querySelectorAll("[data-opt]").forEach(b=>b.onclick=()=>{ const q=S.quiz, Q=QZ.find(z=>z.id===q.id).qs[q.i]; q.picked=+b.dataset.opt; if(q.picked===Q.a) q.score++; render(); });
+ const qn=$("#qzNext"); if(qn) qn.onclick=()=>{ const q=S.quiz; q.i++; q.picked=null;
+   if(q.i>=QZ.find(z=>z.id===q.id).qs.length){ QBEST[q.id]=Math.max(QBEST[q.id]??0,q.score); store.set("qbest",QBEST); if(q.score>=4) award(50,"quiz:"+q.id); } render(); };
+ const qa=$("#qzAgain"); if(qa) qa.onclick=()=>{ S.quiz={id:S.quiz.id,i:0,score:0,picked:null}; render(); };
+ m.querySelectorAll("#qzBack").forEach(b=>b.onclick=()=>{ S.quiz=null; render(); });
+ m.querySelectorAll("[data-seen]").forEach(b=>b.onclick=()=>{ const id=b.dataset.seen; if(SEEN.has(id)) SEEN.delete(id); else { SEEN.add(id); award(5,"seen:"+id); } store.set("seen",[...SEEN]); render(); });
+}
+
+/* ============ V3 TEXT ============ */
+Object.assign(T.en,{
+ gp_title:"Dr. Qazi's Gold Plan",gp_sample:"Sample plan — in the app, Dr. Qazi publishes a new plan every trading day.",gp_upd:"Updated",
+ bullish:"Bullish",bearish:"Bearish",range:"Range",gp_levels:"Key levels",gp_buy:"Buy scenario",gp_sell:"Sell scenario",gp_zone:"Zone",gp_sl:"SL",gp_tp:"TP",gp_news:"News risk",
+ gp_disc:"Education, not a signal. Wait for your own confirmation and use your own risk.",
+ lv_title:"Trader level",streak:"day streak",xp:"XP",lv_next:"to next level",
+ lv_names:["Rookie","Learner","Practitioner","Disciplined Trader","Consistent Trader","QFT Pro"],
+ lv_how:"Earn XP: journal a trade +10 · checklist +5/day · watch a lesson +5 · pass a quiz +50",
+ c_pivot:"Pivot points",c_prop:"Prop challenge",
+ pv_h:"Yesterday's high",pv_l:"Yesterday's low",pv_c:"Yesterday's close",pv_tip:"Classic floor pivots from the previous day. Price above P leans bullish, below P leans bearish. Treat each level as a zone, and wait for a price-action signal there.",
+ pr_size:"Account size ($)",pr_target:"Profit target %",pr_daily:"Daily loss limit %",pr_dailyOf:"Daily limit is % of",pr_initial:"Initial balance",pr_sod:"Start-of-day balance",
+ pr_basis:"Daily limit counts from",pr_bal:"Start-of-day balance",pr_higher:"Higher of start-of-day balance or equity",pr_max:"Max loss %",pr_maxType:"Max loss type",pr_static:"Static",pr_trail:"Trailing",
+ pr_sodBal:"Today's starting balance ($)",pr_sodEq:"Today's starting equity ($)",pr_eq:"Current equity ($)",pr_high:"Highest balance so far ($)",pr_days:"Trading days done",pr_minDays:"Minimum trading days",
+ pr_room:"You can still lose today",pr_floor:"Account must stay above",pr_dfloor:"Daily floor",pr_mfloor:"Max-loss floor",pr_toTarget:"Left to profit target",pr_safe:"Safe risk per trade",pr_safe_s:"so 3 losses in a row can't breach today",
+ pr_breach:"Breached — equity is below the limit.",pr_pass:"Profit target reached. Complete the minimum trading days.",pr_done:"Target and minimum days done.",
+ pr_tip:"Rules differ by firm: check whether the daily limit is balance or equity based, its reset time, and whether max loss trails. Enter your firm's exact numbers.",
+ al_title:"Smart alerts",al_note:"These alerts run in the installed Android app. Choose what you want; nothing is sent from this preview.",
+ al_news:"High-impact news",al_off:"Off",al_min:"min before",al_lon:"London session opens",al_ny:"New York session opens",al_ov:"London–NY overlap starts (Gold's busiest time)",al_plan:"New Gold Plan published",al_jr:"Evening reminder to journal today's trades",
+ bk_title:"Backup journal",bk_s:"Copy a backup code and keep it in WhatsApp or notes. Paste it here on a new phone to restore.",bk_copy:"Copy backup",bk_restore:"Restore",bk_paste:"Paste backup code here",bk_ok:"Restored {n} trades.",bk_bad:"That code is not a valid backup.",bk_copied:"Backup copied"
+});
+Object.assign(T.ur,{
+ gp_title:"ڈاکٹر قاضی کا گولڈ پلان",gp_sample:"نمونہ پلان — ایپ میں ڈاکٹر قاضی ہر ٹریڈنگ دن نیا پلان شائع کریں گے۔",gp_upd:"اپڈیٹ",
+ bullish:"بُلش",bearish:"بیئرش",range:"رینج",gp_levels:"اہم لیولز",gp_buy:"بائے منظرنامہ",gp_sell:"سیل منظرنامہ",gp_zone:"زون",gp_sl:"SL",gp_tp:"TP",gp_news:"خبروں کا خطرہ",
+ gp_disc:"یہ تعلیم ہے، سگنل نہیں۔ اپنی تصدیق کا انتظار کریں اور اپنا رسک استعمال کریں۔",
+ lv_title:"ٹریڈر لیول",streak:"دن مسلسل",xp:"XP",lv_next:"اگلے لیول تک",
+ lv_names:["نیا","سیکھنے والا","مشق کرنے والا","ڈسپلنڈ ٹریڈر","مستقل مزاج ٹریڈر","QFT پرو"],
+ lv_how:"XP کمائیں: جرنل میں ٹریڈ +10 · چیک لسٹ +5 روزانہ · سبق دیکھیں +5 · کوئز پاس +50",
+ c_pivot:"پیووٹ پوائنٹس",c_prop:"پراپ چیلنج",
+ pv_h:"کل کا ہائی",pv_l:"کل کا لو",pv_c:"کل کا کلوز",pv_tip:"پچھلے دن سے کلاسک پیووٹس۔ قیمت P سے اوپر ہو تو جھکاؤ بُلش، نیچے ہو تو بیئرش۔ ہر لیول کو زون سمجھیں اور وہاں پرائس ایکشن سگنل کا انتظار کریں۔",
+ pr_size:"اکاؤنٹ سائز ($)",pr_target:"پرافٹ ٹارگٹ %",pr_daily:"روزانہ نقصان کی حد %",pr_dailyOf:"روزانہ حد کس کا %",pr_initial:"ابتدائی بیلنس",pr_sod:"دن کے آغاز کا بیلنس",
+ pr_basis:"روزانہ حد کہاں سے گنی جائے",pr_bal:"دن کے آغاز کا بیلنس",pr_higher:"دن کے آغاز کے بیلنس یا ایکویٹی میں سے زیادہ",pr_max:"زیادہ سے زیادہ نقصان %",pr_maxType:"میکس لاس کی قسم",pr_static:"اسٹیٹک",pr_trail:"ٹریلنگ",
+ pr_sodBal:"آج کا ابتدائی بیلنس ($)",pr_sodEq:"آج کی ابتدائی ایکویٹی ($)",pr_eq:"موجودہ ایکویٹی ($)",pr_high:"اب تک کا سب سے زیادہ بیلنس ($)",pr_days:"ٹریڈنگ دن مکمل",pr_minDays:"کم از کم ٹریڈنگ دن",
+ pr_room:"آج آپ مزید اتنا نقصان کر سکتے ہیں",pr_floor:"اکاؤنٹ اس سے اوپر رہنا چاہیے",pr_dfloor:"روزانہ حد",pr_mfloor:"میکس لاس حد",pr_toTarget:"ٹارگٹ میں باقی",pr_safe:"فی ٹریڈ محفوظ رسک",pr_safe_s:"تاکہ لگاتار ۳ نقصان بھی آج حد نہ توڑیں",
+ pr_breach:"حد ٹوٹ گئی — ایکویٹی حد سے نیچے ہے۔",pr_pass:"پرافٹ ٹارگٹ پورا۔ کم از کم ٹریڈنگ دن مکمل کریں۔",pr_done:"ٹارگٹ اور کم از کم دن دونوں مکمل۔",
+ pr_tip:"ہر فرم کے اصول مختلف ہیں: دیکھیں روزانہ حد بیلنس پر ہے یا ایکویٹی پر، کب ری سیٹ ہوتی ہے، اور میکس لاس ٹریل کرتا ہے یا نہیں۔ اپنی فرم کے بالکل درست اعداد لکھیں۔",
+ al_title:"اسمارٹ الرٹس",al_note:"یہ الرٹس انسٹال شدہ اینڈرائیڈ ایپ میں چلیں گے۔ اپنی پسند چنیں؛ اس پریویو سے کچھ نہیں بھیجا جاتا۔",
+ al_news:"ہائی امپیکٹ خبریں",al_off:"بند",al_min:"منٹ پہلے",al_lon:"لندن سیشن کھلنے پر",al_ny:"نیویارک سیشن کھلنے پر",al_ov:"لندن–نیویارک اوورلیپ شروع (گولڈ کا مصروف ترین وقت)",al_plan:"نیا گولڈ پلان شائع ہونے پر",al_jr:"شام کو آج کی ٹریڈز جرنل کرنے کی یاد دہانی",
+ bk_title:"جرنل بیک اپ",bk_s:"بیک اپ کوڈ کاپی کر کے واٹس ایپ یا نوٹس میں رکھیں۔ نئے فون پر یہاں پیسٹ کر کے واپس لائیں۔",bk_copy:"بیک اپ کاپی کریں",bk_restore:"واپس لائیں",bk_paste:"بیک اپ کوڈ یہاں پیسٹ کریں",bk_ok:"{n} ٹریڈز واپس آ گئیں۔",bk_bad:"یہ درست بیک اپ کوڈ نہیں۔",bk_copied:"بیک اپ کاپی ہو گیا"
+});
+
+/* ============ GOLD PLAN (published by Dr. Qazi as JSON on qaziforextips.com) ============ */
+const PLAN_URL="https://qaziforextips.com/gold-plan.json";
+const PLAN_SAMPLE={sample:true,updated:"2026-10-15T08:30:00+05:00",bias:"bullish",
+ headline:{en:"Holding above last week's breakout. Buy dips into support; no chasing highs before US data.",ur:"پچھلے ہفتے کے بریک آؤٹ کے اوپر قائم۔ سپورٹ پر ڈِپ میں بائے؛ امریکی ڈیٹا سے پہلے اونچائی کا پیچھا نہیں۔"},
+ levels:[{n:"R2",p:4148},{n:"R1",p:4126},{n:"Pivot",p:4104},{n:"S1",p:4082},{n:"S2",p:4060}],
+ buy:{zone:"4082 – 4086",sl:"4073",tp:"4110 / 4126",note:{en:"Only after a bullish rejection candle on M15 at S1.",ur:"صرف S1 پر M15 کی بُلش ریجیکشن کینڈل کے بعد۔"}},
+ sell:{zone:"4146 – 4150",sl:"4158",tp:"4126 / 4110",note:{en:"Counter-trend: half risk, only on a clear double top at R2.",ur:"ٹرینڈ کے خلاف: آدھا رسک، صرف R2 پر واضح ڈبل ٹاپ پر۔"}},
+ news:{en:"US Retail Sales and jobless claims today — no new entries 15 min before or after.",ur:"آج امریکی ریٹیل سیلز اور جاب لیس کلیمز — ۱۵ منٹ پہلے اور بعد نئی انٹری نہیں۔"}};
+S.plan=null;
+async function loadPlan(){ const c=store.get("plan",null);
+ try{ const r=await fetch(PLAN_URL,{cache:"no-store"}); if(!r.ok) throw 0; const p=await r.json(); if(!p||!p.levels) throw 0; S.plan=p; store.set("plan",p); }
+ catch(e){ S.plan=c||PLAN_SAMPLE; } }
+function planHTML(){ const p=S.plan; if(!p) return ""; const L=S.lang==="ur"?"ur":"en"; const tx=o=>esc(o?(o[L]||o.en):"");
+ const col={bullish:"var(--up)",bearish:"var(--down)",range:"var(--warn)"}[p.bias]||"var(--muted)";
+ const u=new Date(p.updated);
+ const sc=(k,o)=>o?`<div class="sc-box"><div class="row between"><b>${t(k)}</b><span class="mono small" dir="ltr">${t("gp_zone")} ${esc(o.zone)}</span></div>
+   <div class="kv"><div>${t("gp_sl")}<b>${esc(o.sl)}</b></div><div>${t("gp_tp")}<b>${esc(o.tp)}</b></div></div>${o.note?`<div class="small muted">${tx(o.note)}</div>`:""}</div>`:"";
+ return `<section class="plan"><div class="row between"><span class="eyebrow">${t("gp_title")} · XAUUSD</span><span class="pill" style="border-color:${col};color:${col}">${t(p.bias)}</span></div>
+  ${p.sample?`<div class="banner">${t("gp_sample")}</div>`:""}
+  <p class="plan-h">${tx(p.headline)}</p>
+  <div class="lvls" dir="ltr">${(p.levels||[]).map(l=>`<div class="lv ${/^R/.test(l.n)?"r":/^S/.test(l.n)?"s":"p"}"><span>${esc(l.n)}</span><b>${esc(l.p)}</b></div>`).join("")}</div>
+  <div class="grid2">${sc("gp_buy",p.buy)}${sc("gp_sell",p.sell)}</div>
+  ${p.news?`<div class="note"><b>${t("gp_news")}:</b> ${tx(p.news)}</div>`:""}
+  <div class="row between small muted"><span>${t("gp_upd")} <span class="mono">${isNaN(u)?"":u.toLocaleDateString("en-GB",{day:"numeric",month:"short"})+" "+hm(u)}</span></span><span>${t("gp_disc")}</span></div></section>`; }
+
+/* ============ XP / STREAK ============ */
+let ACT=store.get("act",{xp:0,days:{},once:{}});
+const todayKey=(d=new Date())=>d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+function award(xp,onceKey){ if(onceKey){ if(ACT.once[onceKey]) return; ACT.once[onceKey]=1; } ACT.xp+=xp; ACT.days[todayKey()]=1; store.set("act",ACT); }
+const LV=[0,100,300,600,1000,1500];
+function levelOf(xp){ let i=0; while(i+1<LV.length&&xp>=LV[i+1]) i++; return {i,next:LV[i+1]??null,base:LV[i]}; }
+function streakOf(days,now=new Date()){ let d=new Date(now); if(!days[todayKey(d)]) d.setDate(d.getDate()-1); let n=0; while(days[todayKey(d)]){ n++; d.setDate(d.getDate()-1); } return n; }
+window.QFT_XP={levelOf,streakOf,todayKey};
+function levelHTML(){ const L=levelOf(ACT.xp), s=streakOf(ACT.days); const pct=L.next?((ACT.xp-L.base)/(L.next-L.base)*100):100;
+ return `<section class="card lvl"><div class="flame" aria-hidden="true"><b>${s}</b><span>${t("streak")}</span></div>
+  <div style="display:grid;gap:6px;min-width:0"><div class="row between"><b>${tA("lv_names")[L.i]}</b><span class="mono small">${ACT.xp} ${t("xp")}${L.next?` · ${L.next-ACT.xp} ${t("lv_next")}`:""}</span></div>
+  <div class="meter"><i style="width:${pct}%"></i></div><span class="small muted">${t("lv_how")}</span></div></section>`; }
+
+/* ============ PIVOTS & PROP TRACKER (pure, testable) ============ */
+const P3={
+ pivots({h,l,c}){ const P=(h+l+c)/3; return {R3:h+2*(P-l),R2:P+(h-l),R1:2*P-l,P,S1:2*P-h,S2:P-(h-l),S3:l-2*(h-P)}; },
+ prop(x){ const daily = (x.dailyOf==="sod"? x.sodBal : x.size) * x.daily/100;
+  const base = x.basis==="higher"? Math.max(x.sodBal,x.sodEq) : x.sodBal;
+  const dFloor = base - daily;
+  const mFloor = x.maxType==="trail"? Math.min(x.size, Math.max(x.size,x.high) - x.size*x.max/100) : x.size*(1-x.max/100);
+  const floor = Math.max(dFloor,mFloor); const room = x.eq - floor; const target = x.size*(1+x.target/100);
+  return {daily,dFloor,mFloor,floor,room,target,left:Math.max(0,target-x.eq),prog:Math.max(0,Math.min(100,(x.eq-x.size)/(target-x.size)*100)),
+   safe:Math.max(0,room)/3,breach:room<=0,hit:x.eq>=target,daysOk:x.days>=x.minDays}; }
+};
+window.QFT_P3=P3;
+CS.pivot = CS.pivot || {h:4126,l:4082,c:4104};
+CS.prop = CS.prop || {size:10000,target:10,daily:5,dailyOf:"initial",basis:"higher",max:10,maxType:"static",sodBal:10240,sodEq:10180,eq:10050,high:10240,days:4,minDays:4};
+function pivotBody(c){ const p=P3.pivots(c); const d=c.c>100?2:5;
+ return `<div class="fields">${fld("h",t("pv_h"),c.h)}${fld("l",t("pv_l"),c.l)}${fld("c",t("pv_c"),c.c,"full")}</div>
+  <div class="result"><div class="lvls tall" dir="ltr">${["R3","R2","R1","P","S1","S2","S3"].map(k=>`<div class="lv ${k[0]==="R"?"r":k[0]==="S"?"s":"p"}"><span>${k}</span><b>${fmt(p[k],d)}</b></div>`).join("")}</div></div>
+  <p class="tip">${t("pv_tip")}</p>`; }
+function propBody(c){ const o=P3.prop(c); const sel=(id,lab,opts)=>`<label class="f">${lab}<select id="${id}">${opts.map(([v,l])=>`<option value="${v}" ${c[id]===v?"selected":""}>${l}</option>`).join("")}</select></label>`;
+ const state=o.breach?`<div class="warn">${t("pr_breach")}</div>`:o.hit?`<div class="ok">${o.daysOk?t("pr_done"):t("pr_pass")}</div>`:"";
+ return `<div class="result" style="gap:12px">${state}
+   <span class="muted small">${t("pr_room")}</span><div class="big ${o.room<=0?"neg":""}">$${fmt(Math.max(0,o.room))}</div>
+   <div class="kv"><div>${t("pr_floor")}<b>$${fmt(o.floor)}</b></div><div>${t("pr_safe")}<b>$${fmt(o.safe)}</b></div>
+    <div>${t("pr_dfloor")}<b>$${fmt(o.dFloor)}</b></div><div>${t("pr_mfloor")}<b>$${fmt(o.mFloor)}</b></div>
+    <div>${t("pr_toTarget")}<b>$${fmt(o.left)}</b></div><div>${t("pr_days")}<b>${c.days} / ${c.minDays}</b></div></div>
+   <div class="meter" title="target"><i style="width:${o.prog}%"></i></div><span class="small muted">${t("pr_safe")}: ${t("pr_safe_s")}</span></div>
+  <div class="fields">${fld("eq",t("pr_eq"),c.eq,"full")}${fld("sodBal",t("pr_sodBal"),c.sodBal)}${fld("sodEq",t("pr_sodEq"),c.sodEq)}
+   ${fld("days",t("pr_days"),c.days)}${c.maxType==="trail"?fld("high",t("pr_high"),c.high):fld("minDays",t("pr_minDays"),c.minDays)}</div>
+  <details class="pl-card"><summary><b>${t("pr_size")} · ${t("pr_daily")} · ${t("pr_max")}</b><span class="small muted">$${fmt(c.size,0)} · ${c.daily}% · ${c.max}% ${c.maxType==="trail"?t("pr_trail"):t("pr_static")}</span></summary>
+   <div class="fields" style="padding:12px">${fld("size",t("pr_size"),c.size)}${fld("target",t("pr_target"),c.target)}${fld("daily",t("pr_daily"),c.daily)}${fld("max",t("pr_max"),c.max)}
+    ${sel("dailyOf",t("pr_dailyOf"),[["initial",t("pr_initial")],["sod",t("pr_sod")]])}${sel("maxType",t("pr_maxType"),[["static",t("pr_static")],["trail",t("pr_trail")]])}
+    <div class="full">${sel("basis",t("pr_basis"),[["balance",t("pr_bal")],["higher",t("pr_higher")]])}</div>${c.maxType==="trail"?fld("minDays",t("pr_minDays"),c.minDays):""}</div></details>
+  <p class="tip">${t("pr_tip")}</p>`; }
+
+/* ============ ALERTS & BACKUP (More screen) ============ */
+let AL=store.get("alerts",{news:30,lon:true,ny:false,ov:true,plan:true,jr:true});
+function alertsHTML(){ const tog=(k,lab)=>`<div class="li"><span>${lab}</span><button type="button" class="sw-t" data-al="${k}" aria-pressed="${!!AL[k]}" aria-label="${esc(lab)}"><i></i></button></div>`;
+ return `<section style="display:grid;gap:8px"><h3>${t("al_title")}</h3><div class="small muted">${t("al_note")}</div><div class="list">
+  <div class="li"><span>${t("al_news")}</span><div class="seg">${[0,15,30].map(m=>`<button type="button" data-aln="${m}" aria-pressed="${AL.news===m}">${m?m+" "+t("al_min"):t("al_off")}</button>`).join("")}</div></div>
+  ${tog("lon",t("al_lon"))}${tog("ny",t("al_ny"))}${tog("ov",t("al_ov"))}${tog("plan",t("al_plan"))}${tog("jr",t("al_jr"))}</div></section>`; }
+function backupHTML(){ return `<section class="card" style="display:grid;gap:10px"><h3>${t("bk_title")}</h3><div class="small muted">${t("bk_s")}</div>
+  <div class="row"><button class="btn ghost" type="button" id="bkCopy">${t("bk_copy")} (${TRADES.filter(x=>!x.ex).length})</button></div>
+  <label class="f">${t("bk_paste")}<textarea id="bkIn" rows="3" style="width:100%;background:var(--bg2);border:1px solid var(--line);border-radius:9px;padding:10px;font-family:var(--f-mono);font-size:12px;color:var(--ink);direction:ltr"></textarea></label>
+  <div class="row"><button class="btn gold" type="button" id="bkRestore">${t("bk_restore")}</button><span id="bkMsg" class="small"></span></div></section>`; }
+function backupCode(){ return "QFT1:"+btoa(unescape(encodeURIComponent(JSON.stringify(TRADES.filter(x=>!x.ex))))); }
+function parseBackup(s){ s=String(s||"").trim(); if(!s.startsWith("QFT1:")) return null; try{ const a=JSON.parse(decodeURIComponent(escape(atob(s.slice(5))))); return Array.isArray(a)&&a.every(x=>x&&x.id&&isFinite(x.entry))?a:null; }catch(e){ return null; } }
+window.QFT_BK={parseBackup};
+function bindV3(m){
+ m.querySelectorAll("[data-al]").forEach(b=>b.onclick=()=>{ AL[b.dataset.al]=!AL[b.dataset.al]; store.set("alerts",AL); b.setAttribute("aria-pressed",String(AL[b.dataset.al])); });
+ m.querySelectorAll("[data-aln]").forEach(b=>b.onclick=()=>{ AL.news=+b.dataset.aln; store.set("alerts",AL); render(); });
+ const bc=$("#bkCopy"); if(bc) bc.onclick=()=>{ const code=backupCode(); const ta=$("#bkIn");
+   const done=()=>{ $("#bkMsg").textContent=t("bk_copied"); };
+   if(navigator.clipboard) navigator.clipboard.writeText(code).then(done).catch(()=>{ ta.value=code; ta.select(); }); else { ta.value=code; ta.select(); } };
+ const br=$("#bkRestore"); if(br) br.onclick=()=>{ const a=parseBackup($("#bkIn").value); const msg=$("#bkMsg");
+   if(!a){ msg.textContent=t("bk_bad"); msg.className="small neg"; return; }
+   const ids=new Set(TRADES.map(x=>x.id)); TRADES=TRADES.filter(x=>!x.ex).concat(a.filter(x=>!ids.has(x.id))); saveTrades(); msg.className="small pos"; msg.textContent=tf("bk_ok",{n:a.length}); };
+}
+
+/* ============ V4 TEXT ============ */
+Object.assign(T.en,{
+ lab:"Lab",lab_title:"Strategy Lab",bt:"Auto backtest",rp:"Replay",
+ data:"Market data",ds_demo:"Demo XAUUSD M15 (generated)",tfl:"Timeframe",imp:"Import MT5 data (.csv)",imp_how:"How to export from MT5",
+ imp_steps:"In MT5: View → Symbols (Ctrl+U) → Bars tab → pick the symbol and timeframe → set dates → Request → Export Bars. Then choose that file here. Your broker's own data stays on your phone.",
+ demo_warn:"Demo data is generated by the app, not real market history. Results on it say nothing about live trading — import your own MT5 data for real results.",
+ imp_ok:"Imported {n} candles.",imp_bad:"Could not read candles from this file. Export from MT5's Symbols → Bars window.",bars:"candles",
+ strat:"Strategy",s_ema:"EMA crossover",s_rsi:"RSI reversal",s_brk:"Breakout (N-bar)",s_eng:"Engulfing + trend",s_swp:"Liquidity sweep",
+ d_ema:"Buy when the fast EMA crosses above the slow EMA, sell on the cross below.",
+ d_rsi:"Buy when RSI climbs back above oversold, sell when it falls back below overbought.",
+ d_brk:"Buy a close above the highest high of the last N candles, sell a close below the lowest low.",
+ d_eng:"Engulfing candle in the direction of the trend EMA.",
+ d_swp:"Price takes out the last N-candle low (or high) and closes back inside: a stop hunt, then entry the other way.",
+ p_fast:"Fast EMA",p_slow:"Slow EMA",p_trend:"Trend filter EMA (0 = off)",p_rsi:"RSI period",p_ob:"Overbought",p_os:"Oversold",p_n:"Lookback N candles",
+ rules:"Risk & exit rules",p_dir:"Direction",both:"Both",longs:"Buy only",shorts:"Sell only",p_sl:"Stop loss",sl_atr:"ATR × multiple",sl_candle:"Beyond signal candle",sl_fixed:"Fixed distance",
+ p_atrm:"ATR multiple",p_fix:"SL distance (price)",p_tp:"Take profit (R)",p_risk:"Risk per trade %",p_spread:"Spread + commission (price)",p_h1:"Trade from hour",p_h2:"Until hour",p_max:"Max trades per day",p_bal:"Starting balance $",
+ run:"Run backtest",res:"Results",r_net:"Net profit",r_ret:"Return",r_dd:"Max drawdown",r_exp:"Expectancy",r_aw:"Avg win",r_al:"Avg loss",r_period:"Period tested",r_trades:"Trades",
+ n_few:"Only {n} trades — too few to trust. Aim for 100+ trades across different market conditions.",
+ n_dd:"Drawdown above 10% would break most prop-firm challenges at this risk. Lower the risk % or tighten the rules.",
+ n_good:"Promising. Before real money: test another period you didn't tune on, then practise it in Replay.",
+ n_bad:"Losing after costs. Change one rule at a time — and don't over-tune to this one period.",
+ n_cost:"Costs matter: every trade pays the spread. Entry is at the next candle's open; when SL and TP fall in the same candle, the test assumes SL (the cautious choice).",
+ lastTrades:"Last trades",exitR:"Result",
+ rp_start:"Start point",rp_go:"Start replay here",rp_play:"Play",rp_pause:"Pause",rp_step:"Next candle",rp_speed:"Speed",
+ rp_buy:"Buy",rp_sell:"Sell",rp_close:"Close trade",rp_sl:"SL distance (price)",rp_rr:"TP (R)",rp_bal:"Balance",rp_open:"Open trade",rp_none:"No open trade",rp_lot:"Gold lot for this risk",
+ rp_tip:"Trade bar by bar without seeing the future. Decide like it is live: entry, SL and TP first, then press Next.",rp_end:"End of data reached.",rp_session:"This session"
+});
+Object.assign(T.ur,{
+ lab:"لیب",lab_title:"اسٹریٹجی لیب",bt:"آٹو بیک ٹیسٹ",rp:"ری پلے",
+ data:"مارکیٹ ڈیٹا",ds_demo:"ڈیمو XAUUSD M15 (بنایا گیا)",tfl:"ٹائم فریم",imp:"MT5 ڈیٹا امپورٹ کریں (.csv)",imp_how:"MT5 سے ایکسپورٹ کیسے کریں",
+ imp_steps:"MT5 میں: View → Symbols (Ctrl+U) → Bars ٹیب → سمبل اور ٹائم فریم چنیں → تاریخیں دیں → Request → Export Bars۔ پھر وہ فائل یہاں منتخب کریں۔ آپ کے بروکر کا ڈیٹا آپ کے فون میں ہی رہتا ہے۔",
+ demo_warn:"ڈیمو ڈیٹا ایپ نے بنایا ہے، یہ اصل مارکیٹ کی تاریخ نہیں۔ اس کے نتائج لائیو ٹریڈنگ کے بارے میں کچھ نہیں بتاتے — اصل نتائج کے لیے اپنا MT5 ڈیٹا امپورٹ کریں۔",
+ imp_ok:"{n} کینڈلز امپورٹ ہو گئیں۔",imp_bad:"اس فائل سے کینڈلز نہیں پڑھی جا سکیں۔ MT5 کی Symbols → Bars ونڈو سے ایکسپورٹ کریں۔",bars:"کینڈلز",
+ strat:"اسٹریٹجی",s_ema:"EMA کراس اوور",s_rsi:"RSI ریورسل",s_brk:"بریک آؤٹ (N کینڈل)",s_eng:"اینگلفنگ + ٹرینڈ",s_swp:"لیکویڈیٹی سویپ",
+ d_ema:"تیز EMA سست EMA کو اوپر کاٹے تو بائے، نیچے کاٹے تو سیل۔",
+ d_rsi:"RSI اوور سولڈ سے واپس اوپر آئے تو بائے، اوور بوٹ سے واپس نیچے آئے تو سیل۔",
+ d_brk:"پچھلی N کینڈلز کے سب سے اونچے ہائی کے اوپر کلوز پر بائے، سب سے نچلے لو کے نیچے کلوز پر سیل۔",
+ d_eng:"ٹرینڈ EMA کی سمت میں اینگلفنگ کینڈل۔",
+ d_swp:"قیمت پچھلی N کینڈلز کا لو (یا ہائی) توڑ کر واپس اندر کلوز کرے: اسٹاپ ہنٹ، پھر الٹی سمت انٹری۔",
+ p_fast:"تیز EMA",p_slow:"سست EMA",p_trend:"ٹرینڈ فلٹر EMA (0 = بند)",p_rsi:"RSI پیریڈ",p_ob:"اوور بوٹ",p_os:"اوور سولڈ",p_n:"پچھلی N کینڈلز",
+ rules:"رسک اور ایگزٹ کے اصول",p_dir:"سمت",both:"دونوں",longs:"صرف بائے",shorts:"صرف سیل",p_sl:"اسٹاپ لاس",sl_atr:"ATR × ضرب",sl_candle:"سگنل کینڈل سے آگے",sl_fixed:"مقررہ فاصلہ",
+ p_atrm:"ATR ضرب",p_fix:"SL فاصلہ (قیمت)",p_tp:"ٹیک پرافٹ (R)",p_risk:"فی ٹریڈ رسک %",p_spread:"اسپریڈ + کمیشن (قیمت)",p_h1:"اس گھنٹے سے ٹریڈ",p_h2:"اس گھنٹے تک",p_max:"روزانہ زیادہ سے زیادہ ٹریڈز",p_bal:"ابتدائی بیلنس $",
+ run:"بیک ٹیسٹ چلائیں",res:"نتائج",r_net:"خالص منافع",r_ret:"ریٹرن",r_dd:"زیادہ سے زیادہ ڈرا ڈاؤن",r_exp:"ایکسپیکٹنسی",r_aw:"اوسط جیت",r_al:"اوسط نقصان",r_period:"جانچا گیا عرصہ",r_trades:"ٹریڈز",
+ n_few:"صرف {n} ٹریڈز — بھروسے کے لیے بہت کم۔ مختلف مارکیٹ حالات میں ۱۰۰+ ٹریڈز کا ہدف رکھیں۔",
+ n_dd:"اس رسک پر ۱۰٪ سے زیادہ ڈرا ڈاؤن زیادہ تر پراپ فرم چیلنج توڑ دے گا۔ رسک کم کریں یا اصول سخت کریں۔",
+ n_good:"امید افزا۔ اصل پیسے سے پہلے: کسی اور عرصے پر ٹیسٹ کریں جس پر سیٹنگز نہیں بنائیں، پھر ری پلے میں مشق کریں۔",
+ n_bad:"اخراجات کے بعد نقصان۔ ایک وقت میں ایک اصول بدلیں — اور صرف اسی عرصے کے لیے سیٹنگز نہ گھمائیں۔",
+ n_cost:"اخراجات اہم ہیں: ہر ٹریڈ اسپریڈ دیتی ہے۔ انٹری اگلی کینڈل کے اوپن پر؛ اگر SL اور TP ایک ہی کینڈل میں ہوں تو ٹیسٹ SL مانتا ہے (محتاط انتخاب)۔",
+ lastTrades:"آخری ٹریڈز",exitR:"نتیجہ",
+ rp_start:"شروع کا مقام",rp_go:"یہاں سے ری پلے شروع",rp_play:"چلائیں",rp_pause:"روکیں",rp_step:"اگلی کینڈل",rp_speed:"رفتار",
+ rp_buy:"بائے",rp_sell:"سیل",rp_close:"ٹریڈ بند",rp_sl:"SL فاصلہ (قیمت)",rp_rr:"TP (R)",rp_bal:"بیلنس",rp_open:"کھلی ٹریڈ",rp_none:"کوئی کھلی ٹریڈ نہیں",rp_lot:"اس رسک کے لیے گولڈ لاٹ",
+ rp_tip:"مستقبل دیکھے بغیر کینڈل بہ کینڈل ٹریڈ کریں۔ لائیو کی طرح فیصلہ کریں: پہلے انٹری، SL اور TP، پھر اگلی کینڈل۔",rp_end:"ڈیٹا ختم۔",rp_session:"یہ سیشن"
+});
+
+/* ============ DATA: demo generator, MT5 CSV parser, resample ============ */
+function rng(seed){ return function(){ seed|=0; seed=seed+0x6D2B79F5|0; let t=Math.imul(seed^seed>>>15,1|seed); t=t+Math.imul(t^t>>>7,61|t)^t; return ((t^t>>>14)>>>0)/4294967296; }; }
+function genDemo(n=6000,tf=15,seed=20261015){ const R=rng(seed), gz=()=>{ let u=0,v=0; while(!u) u=R(); while(!v) v=R(); return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v); };
+ const out=[]; let t=Date.UTC(2026,5,1,0,0), p=3900, drift=0;
+ while(out.length<n){ const d=new Date(t); const wd=d.getUTCDay(); if(wd===0||wd===6){ t+=tf*60000; continue; }
+  if(out.length%300===0) drift=(R()-0.5)*0.0003; const h=d.getUTCHours(); const sm=h>=15&&h<20?1.6:h>=9&&h<15?1.1:0.6;
+  const s=0.0011*sm, o=p, c=o*Math.exp(drift+s*gz()); const hi=Math.max(o,c)+Math.abs(gz())*s*o*0.5, lo=Math.min(o,c)-Math.abs(gz())*s*o*0.5;
+  out.push({t,o:+o.toFixed(2),h:+hi.toFixed(2),l:+lo.toFixed(2),c:+c.toFixed(2)}); p=c; t+=tf*60000; }
+ return out; }
+function parseCSV(txt){ const lines=String(txt).replace(/\r/g,"").split("\n").filter(x=>x.trim()); if(lines.length<20) return null;
+ const sp=l=>l.split(/\t|;|,/).map(x=>x.trim().replace(/^"|"$/g,""));
+ let start=0; const head=sp(lines[0]).map(x=>x.toUpperCase().replace(/[<>]/g,"")); let map=null;
+ if(head.some(x=>/OPEN/.test(x))){ start=1; const f=k=>head.findIndex(x=>x===k||x.startsWith(k)); map={d:f("DATE"),t:f("TIME"),o:f("OPEN"),h:f("HIGH"),l:f("LOW"),c:f("CLOSE")}; }
+ const pd=(ds,ts)=>{ let m=String(ds).match(/^(\d{4})[.\-\/]?(\d{2})[.\-\/]?(\d{2})(?:[ T](\d{1,2}):(\d{2})(?::(\d{2}))?)?$/); if(!m) return NaN;
+   let hh=+(m[4]||0), mm=+(m[5]||0); if(ts){ const q=String(ts).match(/^(\d{1,2}):(\d{2})/); if(q){hh=+q[1];mm=+q[2];} } return Date.UTC(+m[1],+m[2]-1,+m[3],hh,mm); };
+ const out=[];
+ for(let i=start;i<lines.length;i++){ const a=sp(lines[i]); let b;
+  if(map&&map.o>=0){ b={t:pd(a[map.d],map.t>=0?a[map.t]:null),o:+a[map.o],h:+a[map.h],l:+a[map.l],c:+a[map.c]}; }
+  else if(/:/.test(a[1]||"")) b={t:pd(a[0],a[1]),o:+a[2],h:+a[3],l:+a[4],c:+a[5]};
+  else b={t:pd(a[0]),o:+a[1],h:+a[2],l:+a[3],c:+a[4]};
+  if(isFinite(b.t)&&b.o>0&&b.h>=b.l&&b.c>0) out.push(b); }
+ out.sort((x,y)=>x.t-y.t); return out.length>=50?out:null; }
+function tfOf(bars){ const d=[]; for(let i=1;i<Math.min(bars.length,300);i++) d.push(bars[i].t-bars[i-1].t); d.sort((a,b)=>a-b); return Math.round((d[Math.floor(d.length/2)]||60000)/60000); }
+function resample(bars,k){ if(k<=1) return bars; const tf=tfOf(bars)*k*60000; const out=[]; let cur=null;
+ for(const b of bars){ const key=Math.floor(b.t/tf); if(!cur||cur.key!==key){ if(cur) out.push(cur.b); cur={key,b:{t:key*tf,o:b.o,h:b.h,l:b.l,c:b.c}}; } else { cur.b.h=Math.max(cur.b.h,b.h); cur.b.l=Math.min(cur.b.l,b.l); cur.b.c=b.c; } }
+ if(cur) out.push(cur.b); return out; }
+const tfName=m=>m>=1440?"D1":m>=60?"H"+(m/60):"M"+m;
+
+/* ============ INDICATORS & BACKTEST ENGINE (pure, testable) ============ */
+const IND={
+ ema(a,n){ const k=2/(n+1), o=new Array(a.length); let e=null; for(let i=0;i<a.length;i++){ e=e==null?a[i]:a[i]*k+e*(1-k); o[i]=i>=n-1?e:NaN; } return o; },
+ rsi(a,n){ const o=new Array(a.length).fill(NaN); let g=0,l=0; for(let i=1;i<a.length;i++){ const ch=a[i]-a[i-1], up=Math.max(ch,0), dn=Math.max(-ch,0);
+   if(i<=n){ g+=up; l+=dn; if(i===n){ g/=n; l/=n; o[i]=l===0?100:100-100/(1+g/l); } } else { g=(g*(n-1)+up)/n; l=(l*(n-1)+dn)/n; o[i]=l===0?100:100-100/(1+g/l); } } return o; },
+ atr(b,n){ const o=new Array(b.length).fill(NaN); let a=0; for(let i=1;i<b.length;i++){ const tr=Math.max(b[i].h-b[i].l,Math.abs(b[i].h-b[i-1].c),Math.abs(b[i].l-b[i-1].c));
+   if(i<=n){ a+=tr; if(i===n){ a/=n; o[i]=a; } } else { a=(a*(n-1)+tr)/n; o[i]=a; } } return o; }
+};
+function signals(bars,s){ const c=bars.map(b=>b.c), n=bars.length, sig=new Array(n).fill(0); const tr=s.trend>0?IND.ema(c,s.trend):null;
+ const okT=(i,d)=>!tr||(isFinite(tr[i])&&(d>0?c[i]>tr[i]:c[i]<tr[i]));
+ if(s.id==="ema"){ const f=IND.ema(c,s.fast), sl=IND.ema(c,s.slow); for(let i=1;i<n;i++){ if(!isFinite(f[i-1])||!isFinite(sl[i-1])) continue;
+   if(f[i-1]<=sl[i-1]&&f[i]>sl[i]&&okT(i,1)) sig[i]=1; else if(f[i-1]>=sl[i-1]&&f[i]<sl[i]&&okT(i,-1)) sig[i]=-1; } }
+ if(s.id==="rsi"){ const r=IND.rsi(c,s.rsi); for(let i=1;i<n;i++){ if(!isFinite(r[i-1])) continue;
+   if(r[i-1]<s.os&&r[i]>=s.os&&okT(i,1)) sig[i]=1; else if(r[i-1]>s.ob&&r[i]<=s.ob&&okT(i,-1)) sig[i]=-1; } }
+ if(s.id==="brk"||s.id==="swp"){ for(let i=s.n;i<n;i++){ let hh=-Infinity,ll=Infinity; for(let j=i-s.n;j<i;j++){ hh=Math.max(hh,bars[j].h); ll=Math.min(ll,bars[j].l); }
+   const b=bars[i]; if(s.id==="brk"){ if(b.c>hh&&okT(i,1)) sig[i]=1; else if(b.c<ll&&okT(i,-1)) sig[i]=-1; }
+   else { if(b.l<ll&&b.c>ll&&okT(i,1)) sig[i]=1; else if(b.h>hh&&b.c<hh&&okT(i,-1)) sig[i]=-1; } } }
+ if(s.id==="eng"){ for(let i=1;i<n;i++){ const p=bars[i-1], b=bars[i];
+   if(p.c<p.o&&b.c>b.o&&b.c>=p.o&&b.o<=p.c&&okT(i,1)) sig[i]=1; else if(p.c>p.o&&b.c<b.o&&b.c<=p.o&&b.o>=p.c&&okT(i,-1)) sig[i]=-1; } }
+ return sig; }
+function tradeStats(trades,bal0){ const rs=trades.map(x=>x.r), n=rs.length; const w=rs.filter(r=>r>0), l=rs.filter(r=>r<=0); const sum=a=>a.reduce((x,y)=>x+y,0);
+ let peak=bal0, dd=0, b=bal0, streak=0, worst=0; const curve=[bal0];
+ trades.forEach(x=>{ b+=x.pnl; curve.push(b); peak=Math.max(peak,b); dd=Math.max(dd,(peak-b)/peak*100); if(x.r<=0){streak++;worst=Math.max(worst,streak);} else streak=0; });
+ const gw=sum(trades.filter(x=>x.pnl>0).map(x=>x.pnl)), gl=Math.abs(sum(trades.filter(x=>x.pnl<=0).map(x=>x.pnl)));
+ return {n,wins:w.length,winRate:n?w.length/n*100:0,pf:gl?gw/gl:(gw?Infinity:0),totR:sum(rs),net:b-bal0,ret:(b-bal0)/bal0*100,dd,
+  expR:n?sum(rs)/n:0,avgW:w.length?sum(w)/w.length:0,avgL:l.length?sum(l)/l.length:0,worst,curve,end:b}; }
+function backtest(bars,s,c){ const sig=signals(bars,s), atr=IND.atr(bars,14), n=bars.length; const trades=[]; let bal=c.bal, pos=null; const perDay={};
+ const dayK=t=>Math.floor(t/86400000);
+ for(let i=1;i<n;i++){ const b=bars[i];
+  if(pos){ const L=pos.d>0; let ex=null, why="";
+   if(L){ if(b.o<=pos.sl){ex=b.o;why="SL";} else if(b.l<=pos.sl){ex=pos.sl;why="SL";} else if(b.o>=pos.tp){ex=b.o;why="TP";} else if(b.h>=pos.tp){ex=pos.tp;why="TP";} }
+   else { if(b.o>=pos.sl){ex=b.o;why="SL";} else if(b.h>=pos.sl){ex=pos.sl;why="SL";} else if(b.o<=pos.tp){ex=b.o;why="TP";} else if(b.l<=pos.tp){ex=pos.tp;why="TP";} }
+   if(ex!=null){ const r=((ex-pos.e)*pos.d - c.spread)/pos.risk; const pnl=r*pos.amt; bal+=pnl;
+    trades.push({d:pos.d,t:bars[pos.i].t,x:b.t,e:pos.e,sl:pos.sl,tp:pos.tp,ex,r,pnl,why}); pos=null; } }
+  if(!pos && i<n-1){ const d=sig[i]; if(!d) continue; if(c.dir==="long"&&d<0||c.dir==="short"&&d>0) continue;
+   const hr=new Date(b.t).getUTCHours(); if(!(c.h1<=c.h2? hr>=c.h1&&hr<c.h2 : hr>=c.h1||hr<c.h2)) continue;
+   const dk=dayK(b.t); if((perDay[dk]||0)>=c.maxDay) continue;
+   const e=bars[i+1].o; let dist = c.sl==="atr"? atr[i]*c.atrm : c.sl==="fixed"? c.fix : (d>0? e-b.l : b.h-e) + (isFinite(atr[i])?atr[i]*0.1:0);
+   if(!(dist>0)||!isFinite(dist)) continue;
+   perDay[dk]=(perDay[dk]||0)+1; pos={d,i:i+1,e,sl:e-d*dist,tp:e+d*dist*c.tp,risk:dist,amt:bal*c.risk/100};} }
+ return {trades,st:tradeStats(trades,c.bal)}; }
+window.QFT_BT={IND,signals,backtest,tradeStats,parseCSV,resample,genDemo,tfOf};
+
+/* ============ LAB STATE ============ */
+const LAB=Object.assign({mode:"bt",ds:"demo",tfk:1,strat:"ema",
+ p:{ema:{fast:9,slow:21,trend:200},rsi:{rsi:14,ob:70,os:30,trend:200},brk:{n:20,trend:0},eng:{trend:50},swp:{n:20,trend:0}},
+ c:{dir:"both",sl:"atr",atrm:1.5,fix:5,tp:2,risk:1,spread:0.3,h1:0,h2:24,maxDay:3,bal:10000}}, store.get("lab",{}));
+const saveLab=()=>store.set("lab",{ds:LAB.ds,tfk:LAB.tfk,strat:LAB.strat,p:LAB.p,c:LAB.c,mode:LAB.mode});
+let DS={demo:null,imp:store.get("data",null)}; let BT_RES=null; const barCache={};
+function baseBars(){ if(LAB.ds==="imp"&&DS.imp) return DS.imp.bars; if(!DS.demo) DS.demo=genDemo(); return DS.demo; }
+function getBars(){ const key=LAB.ds+":"+LAB.tfk+":"+(LAB.ds==="imp"&&DS.imp?DS.imp.at:0); return barCache[key]||(barCache[key]=resample(baseBars(),LAB.tfk)); }
+function dataCard(){ const base=baseBars(), tf=tfOf(base);
+ return `<section class="card" style="display:grid;gap:10px"><div class="row between"><h3>${t("data")}</h3><span class="mono small">${getBars().length} ${t("bars")}</span></div>
+  <div class="fields"><label class="f">${t("data")}<select id="labDs"><option value="demo" ${LAB.ds==="demo"?"selected":""}>${t("ds_demo")}</option>${DS.imp?`<option value="imp" ${LAB.ds==="imp"?"selected":""}>${esc(DS.imp.name)} (${tfName(tfOf(DS.imp.bars))})</option>`:""}</select></label>
+   <label class="f">${t("tfl")}<select id="labTf">${[1,4,16].map(k=>`<option value="${k}" ${LAB.tfk===k?"selected":""}>${tfName(tf*k)}</option>`).join("")}</select></label></div>
+  ${LAB.ds==="demo"?`<div class="banner">${t("demo_warn")}</div>`:""}
+  <div class="row"><label class="btn ghost" for="labFile" style="cursor:pointer">${t("imp")}</label><input id="labFile" type="file" accept=".csv,.txt,text/csv,text/plain" hidden><span id="labMsg" class="small"></span></div>
+  <details><summary class="small" style="cursor:pointer;color:var(--gold)">${t("imp_how")}</summary><p class="small muted" style="margin:6px 0 0">${t("imp_steps")}</p></details></section>`; }
+
+/* ---------- backtest view ---------- */
+const STRATS=["ema","rsi","brk","eng","swp"];
+const PARAMS={ema:[["fast","p_fast"],["slow","p_slow"],["trend","p_trend"]],rsi:[["rsi","p_rsi"],["ob","p_ob"],["os","p_os"],["trend","p_trend"]],brk:[["n","p_n"],["trend","p_trend"]],eng:[["trend","p_trend"]],swp:[["n","p_n"],["trend","p_trend"]]};
+function btView(){ const p=LAB.p[LAB.strat], c=LAB.c; const sel=(id,lab,opts,v)=>`<label class="f">${lab}<select id="${id}">${opts.map(([k,l])=>`<option value="${k}" ${v===k?"selected":""}>${l}</option>`).join("")}</select></label>`;
+ const num=(grp,k,lab,v)=>`<label class="f">${lab}<input data-grp="${grp}" data-k="${k}" type="number" step="any" inputmode="decimal" value="${esc(v)}"></label>`;
+ return `<section style="display:grid;gap:10px"><h3>${t("strat")}</h3>
+   <div class="chips" role="group">${STRATS.map(s=>`<button type="button" class="chip" data-st="${s}" aria-pressed="${LAB.strat===s}">${t("s_"+s)}</button>`).join("")}</div>
+   <p class="small muted" style="margin:0">${t("d_"+LAB.strat)}</p>
+   <div class="fields">${PARAMS[LAB.strat].map(([k,l])=>num("p",k,t(l),p[k])).join("")}</div></section>
+  <details class="pl-card" open><summary><b>${t("rules")}</b></summary><div class="fields" style="padding:12px">
+   ${sel("cDir",t("p_dir"),[["both",t("both")],["long",t("longs")],["short",t("shorts")]],c.dir)}
+   ${sel("cSl",t("p_sl"),[["atr",t("sl_atr")],["candle",t("sl_candle")],["fixed",t("sl_fixed")]],c.sl)}
+   ${c.sl==="atr"?num("c","atrm",t("p_atrm"),c.atrm):c.sl==="fixed"?num("c","fix",t("p_fix"),c.fix):""}
+   ${num("c","tp",t("p_tp"),c.tp)}${num("c","risk",t("p_risk"),c.risk)}${num("c","spread",t("p_spread"),c.spread)}
+   ${num("c","h1",t("p_h1"),c.h1)}${num("c","h2",t("p_h2"),c.h2)}${num("c","maxDay",t("p_max"),c.maxDay)}${num("c","bal",t("p_bal"),c.bal)}</div></details>
+  <button class="btn gold" type="button" id="btRun">${t("run")}</button>
+  <div id="btOut">${BT_RES?btResults():""}</div>`; }
+function btResults(){ const {trades,st}=BT_RES.r, bars=BT_RES.bars; const cls=v=>v>0?"pos":v<0?"neg":""; const pf=isFinite(st.pf)?fmt(st.pf,2):"∞";
+ const notes=[]; if(LAB.ds==="demo") notes.push(t("demo_warn")); if(st.n<30) notes.push(tf("n_few",{n:st.n}));
+ if(st.dd>10) notes.push(t("n_dd")); if(st.n>=30) notes.push(st.pf>=1.3&&st.net>0?t("n_good"):st.net<=0?t("n_bad"):""); notes.push(t("n_cost"));
+ const d0=bars.length?new Date(bars[0].t):null, d1=bars.length?new Date(bars[bars.length-1].t):null; const dt=d=>d.toLocaleDateString("en-GB",{day:"numeric",month:"short",year:"2-digit",timeZone:"UTC"});
+ return `<section style="display:grid;gap:10px"><div class="row between"><h3>${t("res")} · ${esc(BT_RES.name)}</h3><span class="small muted">${t("r_period")}: <span class="mono">${d0?dt(d0)+" – "+dt(d1):""}</span></span></div>
+  <div class="jstats"><div><span>${t("r_net")}</span><b class="${cls(st.net)}">${st.net<0?"-$":"$"}${fmt(Math.abs(st.net),0)}</b></div><div><span>${t("r_ret")}</span><b class="${cls(st.ret)}">${fmt(st.ret,1)}%</b></div><div><span>${t("r_trades")}</span><b>${st.n}</b></div>
+   <div><span>${t("s_win")}</span><b>${fmt(st.winRate,0)}%</b></div><div><span>${t("s_pf")}</span><b>${pf}</b></div><div><span>${t("r_dd")}</span><b class="${st.dd>10?"neg":""}">${fmt(st.dd,1)}%</b></div>
+   <div><span>${t("r_exp")}</span><b class="${cls(st.expR)}">${st.expR>0?"+":""}${fmt(st.expR,2)}R</b></div><div><span>${t("r_aw")} / ${t("r_al")}</span><b>${fmt(st.avgW,2)} / ${fmt(st.avgL,2)}</b></div><div><span>${t("s_streak")}</span><b>${st.worst}</b></div></div>
+  <section class="card" style="display:grid;gap:6px"><h3>${t("curve").replace(/\(.*\)/,"($)")}</h3>${curveSVG(st.curve)}</section>
+  <div class="insight">${notes.filter(Boolean).map(x=>`<p>${esc(x)}</p>`).join("")}</div>
+  <section style="display:grid;gap:6px"><h3>${t("lastTrades")}</h3><div class="tw"><table class="t"><thead><tr><th></th><th>${t("j_date")}</th><th>${t("j_entry")}</th><th>${t("j_exit")}</th><th>${t("exitR")}</th></tr></thead><tbody>
+   ${trades.slice(-40).reverse().map(x=>`<tr><td><span class="dir ${x.d>0?"buy":"sell"}">${x.d>0?t("buy"):t("sell")}</span></td><td>${new Date(x.t).toLocaleString("en-GB",{day:"numeric",month:"short",hour:"2-digit",minute:"2-digit",timeZone:"UTC"})}</td><td>${fmt(x.e,2)}</td><td>${fmt(x.ex,2)} ${x.why}</td><td class="${cls(x.r)}">${x.r>0?"+":""}${fmt(x.r,2)}R</td></tr>`).join("")}</tbody></table></div></section></section>`; }
+
+/* ---------- replay ---------- */
+const RP={i:0,started:false,playing:false,speed:2,bal:10000,risk:1,sld:5,rr:2,pos:null,trades:[],timer:null,pct:20};
+Object.assign(RP,store.get("rp",{}),{playing:false,timer:null,pos:null,started:false,trades:[]});
+const saveRp=()=>store.set("rp",{speed:RP.speed,risk:RP.risk,sld:RP.sld,rr:RP.rr,pct:RP.pct});
+function rpStart(){ const b=getBars(); RP.i=Math.max(60,Math.min(b.length-2,Math.floor(b.length*RP.pct/100))); RP.bal=10000; RP.pos=null; RP.trades=[]; RP.started=true; rpStop(); }
+function rpStop(){ RP.playing=false; if(RP.timer){ clearInterval(RP.timer); RP.timer=null; } }
+function rpCheck(){ const p=RP.pos; if(!p) return; const b=getBars()[RP.i]; let ex=null,why="";
+ if(p.d>0){ if(b.l<=p.sl){ex=Math.min(b.o,p.sl);why="SL";} else if(b.h>=p.tp){ex=Math.max(b.o,p.tp);why="TP";} }
+ else { if(b.h>=p.sl){ex=Math.max(b.o,p.sl);why="SL";} else if(b.l<=p.tp){ex=Math.min(b.o,p.tp);why="TP";} }
+ if(ex!=null) rpExit(ex,why); }
+function rpExit(ex,why){ const p=RP.pos; const r=(ex-p.e)*p.d/p.risk; const pnl=r*p.amt; RP.bal+=pnl; RP.trades.push({d:p.d,t:p.t,x:getBars()[RP.i].t,e:p.e,ex,r,pnl,why}); RP.pos=null; }
+function rpStep(){ const b=getBars(); if(RP.i>=b.length-1){ rpStop(); rpUI(); return; } RP.i++; rpCheck(); rpUI(); }
+function rpOpen(d){ if(RP.pos) return; const b=getBars()[RP.i]; const dist=RP.sld; if(!(dist>0)) return;
+ RP.pos={d,e:b.c,sl:b.c-d*dist,tp:b.c+d*dist*RP.rr,risk:dist,amt:RP.bal*RP.risk/100,t:b.t}; rpUI(); }
+function rpView(){ if(!RP.started) rpStart();
+ return `<section class="card" style="display:grid;gap:10px;padding:12px"><div class="row between"><b class="mono small" id="rpTime"></b><span class="mono small" id="rpPx"></span></div>
+   <canvas id="rpCv" style="width:100%;height:280px;display:block;touch-action:pan-y" aria-label="Replay chart"></canvas>
+   <div class="row" style="justify-content:space-between"><div class="row"><button class="btn ghost" type="button" id="rpPlay">${RP.playing?t("rp_pause"):t("rp_play")}</button><button class="btn ghost" type="button" id="rpStep">${t("rp_step")} ›</button></div>
+    <div class="seg" role="group" aria-label="${t("rp_speed")}">${[1,2,5,10].map(s=>`<button type="button" data-sp="${s}" aria-pressed="${RP.speed===s}">${s}×</button>`).join("")}</div></div></section>
+  <section class="card" style="display:grid;gap:10px"><div class="fields">
+    <label class="f">${t("rp_sl")}<input id="rp_sld" type="number" step="any" inputmode="decimal" value="${RP.sld}"></label>
+    <label class="f">${t("rp_rr")}<input id="rp_rr" type="number" step="any" inputmode="decimal" value="${RP.rr}"></label>
+    <label class="f">${t("p_risk")}<input id="rp_risk" type="number" step="any" inputmode="decimal" value="${RP.risk}"></label>
+    <div class="f" style="display:grid;gap:4px;font-size:13px;font-weight:600;color:var(--muted)">${t("rp_lot")}<b class="mono" id="rpLot" style="font-size:16px;color:var(--ink)"></b></div></div>
+   <div class="row"><button class="btn" type="button" id="rpBuy" style="background:var(--up);color:#fff">${t("rp_buy")}</button><button class="btn" type="button" id="rpSell" style="background:var(--down);color:#fff">${t("rp_sell")}</button><button class="btn ghost" type="button" id="rpClose">${t("rp_close")}</button></div>
+   <div id="rpInfo"></div></section>
+  <section class="card" style="display:grid;gap:10px"><label class="f">${t("rp_start")} <input id="rp_pct" type="range" min="5" max="95" value="${RP.pct}" style="padding:0"></label><button class="btn ghost" type="button" id="rpGo">${t("rp_go")}</button><p class="small muted" style="margin:0">${t("rp_tip")}</p></section>`; }
+function rpUI(){ drawReplay(); const b=getBars()[RP.i]; const tt=$("#rpTime"); if(!tt) return;
+ tt.textContent=new Date(b.t).toLocaleString("en-GB",{weekday:"short",day:"numeric",month:"short",hour:"2-digit",minute:"2-digit",timeZone:"UTC"});
+ $("#rpPx").textContent=fmt(b.c,2); const amt=RP.bal*RP.risk/100; $("#rpLot").textContent=RP.sld>0?fmt(Math.floor(amt/(RP.sld*100)*100)/100,2)+" lot":"—";
+ const p=RP.pos; const st=tradeStats(RP.trades,10000); const cls=v=>v>0?"pos":v<0?"neg":"";
+ const openR=p?(b.c-p.e)*p.d/p.risk:0;
+ $("#rpInfo").innerHTML=`<div class="kv"><div>${t("rp_bal")}<b>$${fmt(RP.bal)}</b></div><div>${t("rp_open")}<b class="${cls(openR)}">${p?`${p.d>0?t("buy"):t("sell")} ${openR>0?"+":""}${fmt(openR,2)}R`:t("rp_none")}</b></div>
+  <div>${t("rp_session")}: ${t("r_trades")}<b>${st.n} · ${fmt(st.winRate,0)}%</b></div><div>${t("s_totR")}<b class="${cls(st.totR)}">${st.totR>0?"+":""}${fmt(st.totR,2)}R</b></div></div>
+  ${RP.i>=getBars().length-1?`<div class="warn">${t("rp_end")}</div>`:""}`;
+ const pl=$("#rpPlay"); if(pl) pl.textContent=RP.playing?t("rp_pause"):t("rp_play"); }
+function drawReplay(){ const cv=$("#rpCv"); if(!cv||!cv.getContext) return; let ctx=null; try{ ctx=cv.getContext("2d"); }catch(e){} if(!ctx) return;
+ const dpr=window.devicePixelRatio||1, W=cv.clientWidth||340, H=cv.clientHeight||280; cv.width=W*dpr; cv.height=H*dpr; ctx.setTransform(dpr,0,0,dpr,0,0);
+ const cs=getComputedStyle(document.body), col=k=>cs.getPropertyValue(k).trim(); const bars=getBars(); const bw=7, axis=58;
+ const n=Math.max(10,Math.min(RP.i+1,Math.floor((W-axis)/bw))), s=RP.i-n+1; const vis=bars.slice(s,RP.i+1);
+ let hi=Math.max(...vis.map(b=>b.h)), lo=Math.min(...vis.map(b=>b.l)); const p=RP.pos; if(p){ hi=Math.max(hi,p.sl,p.tp); lo=Math.min(lo,p.sl,p.tp); }
+ const pad=(hi-lo)*0.06||1; hi+=pad; lo-=pad; const y=v=>6+(hi-v)/(hi-lo)*(H-12);
+ ctx.clearRect(0,0,W,H); ctx.font="10px "+col("--f-mono"); ctx.textBaseline="middle";
+ for(let g=0;g<=4;g++){ const v=lo+(hi-lo)*g/4, yy=y(v); ctx.strokeStyle=col("--line"); ctx.lineWidth=1; ctx.beginPath(); ctx.moveTo(0,yy); ctx.lineTo(W-axis,yy); ctx.stroke(); ctx.fillStyle=col("--muted"); ctx.fillText(v.toFixed(2),W-axis+4,yy); }
+ vis.forEach((b,k)=>{ const x=k*bw+bw/2, up=b.c>=b.o; ctx.strokeStyle=ctx.fillStyle=up?col("--up"):col("--down");
+  ctx.beginPath(); ctx.moveTo(x,y(b.h)); ctx.lineTo(x,y(b.l)); ctx.stroke(); const yo=y(b.o), yc=y(b.c); ctx.fillRect(x-(bw-2)/2,Math.min(yo,yc),bw-2,Math.max(1,Math.abs(yc-yo))); });
+ const line=(v,c,lab,dash)=>{ const yy=y(v); ctx.strokeStyle=c; ctx.setLineDash(dash?[4,3]:[]); ctx.beginPath(); ctx.moveTo(0,yy); ctx.lineTo(W-axis,yy); ctx.stroke(); ctx.setLineDash([]);
+  ctx.fillStyle=c; ctx.fillRect(W-axis,yy-8,axis,16); ctx.fillStyle=col("--bg"); ctx.fillText(lab+" "+v.toFixed(2),W-axis+3,yy); };
+ if(p){ line(p.tp,col("--up"),"TP",true); line(p.sl,col("--down"),"SL",true); line(p.e,col("--gold"),"E",false); }
+ else line(bars[RP.i].c,col("--gold"),"",false); }
+function bindLab(m){
+ m.querySelectorAll("[data-lm]").forEach(b=>b.onclick=()=>{ LAB.mode=b.dataset.lm; saveLab(); rpStop(); render(); });
+ const ds=$("#labDs"); if(ds) ds.onchange=()=>{ LAB.ds=ds.value; saveLab(); BT_RES=null; RP.started=false; rpStop(); render(); };
+ const tfs=$("#labTf"); if(tfs) tfs.onchange=()=>{ LAB.tfk=+tfs.value; saveLab(); BT_RES=null; RP.started=false; rpStop(); render(); };
+ const fi=$("#labFile"); if(fi) fi.onchange=()=>{ const f=fi.files&&fi.files[0]; if(!f) return; const rd=new FileReader();
+   rd.onload=()=>{ const bars=parseCSV(rd.result); const msg=$("#labMsg"); if(!bars){ msg.className="small neg"; msg.textContent=t("imp_bad"); return; }
+    const keep=bars.slice(-60000); DS.imp={name:f.name.replace(/\.(csv|txt)$/i,"").slice(0,30),bars:keep,at:Date.now()}; try{ store.set("data",DS.imp); }catch(e){}
+    LAB.ds="imp"; LAB.tfk=1; saveLab(); BT_RES=null; RP.started=false; render(); const m2=$("#labMsg"); if(m2){ m2.className="small pos"; m2.textContent=tf("imp_ok",{n:keep.length}); } };
+   rd.readAsText(f); };
+ m.querySelectorAll("[data-st]").forEach(b=>b.onclick=()=>{ LAB.strat=b.dataset.st; saveLab(); render(); });
+ m.querySelectorAll("[data-grp]").forEach(i=>i.oninput=()=>{ const v=parseFloat(i.value); if(!isFinite(v)) return; (i.dataset.grp==="p"?LAB.p[LAB.strat]:LAB.c)[i.dataset.k]=v; saveLab(); });
+ [["cDir","dir"],["cSl","sl"]].forEach(([id,k])=>{ const s=$("#"+id); if(s) s.onchange=()=>{ LAB.c[k]=s.value; saveLab(); render(); }; });
+ const run=$("#btRun"); if(run) run.onclick=()=>{ const bars=getBars(); const s=Object.assign({id:LAB.strat},LAB.p[LAB.strat]);
+   BT_RES={r:backtest(bars,s,LAB.c),bars,name:t("s_"+LAB.strat)}; $("#btOut").innerHTML=btResults(); $("#btOut").scrollIntoView({block:"start"}); };
+ if($("#rpCv")){ rpUI();
+  $("#rpPlay").onclick=()=>{ if(RP.playing) rpStop(); else { RP.playing=true; RP.timer=setInterval(rpStep,1000/RP.speed); } rpUI(); };
+  $("#rpStep").onclick=()=>{ rpStop(); rpStep(); };
+  m.querySelectorAll("[data-sp]").forEach(b=>b.onclick=()=>{ RP.speed=+b.dataset.sp; saveRp(); m.querySelectorAll("[data-sp]").forEach(x=>x.setAttribute("aria-pressed",String(x===b))); if(RP.playing){ rpStop(); RP.playing=true; RP.timer=setInterval(rpStep,1000/RP.speed); } });
+  [["rp_sld","sld"],["rp_rr","rr"],["rp_risk","risk"]].forEach(([id,k])=>{ const i=$("#"+id); i.oninput=()=>{ const v=parseFloat(i.value); if(isFinite(v)&&v>0){ RP[k]=v; saveRp(); rpUI(); } }; });
+  $("#rpBuy").onclick=()=>rpOpen(1); $("#rpSell").onclick=()=>rpOpen(-1);
+  $("#rpClose").onclick=()=>{ if(RP.pos){ rpExit(getBars()[RP.i].c,"Manual"); rpUI(); } };
+  const pc=$("#rp_pct"); pc.oninput=()=>{ RP.pct=+pc.value; saveRp(); };
+  $("#rpGo").onclick=()=>{ rpStart(); rpUI(); }; }
+}
+function viewLab(){ return `<div><h2>${t("lab_title")}</h2></div>
+  <div class="seg" role="group" style="justify-self:start">${[["live","lv_tab"],["bt","bt"],["rp","rp"]].map(([k,l])=>`<button type="button" data-lm="${k}" aria-pressed="${LAB.mode===k}">${t(l)}</button>`).join("")}</div>
+  ${LAB.mode==="live"?liveView():dataCard()+(LAB.mode==="bt"?btView():rpView())}`; }
+window.addEventListener("resize",()=>{ if($("#rpCv")) drawReplay(); });
+
+
+/* ============ LIVE CHART (TradingView Advanced Chart widget) ============ */
+Object.assign(T.en,{lv_tab:"Live chart",lv_fail:"The live chart loads in the installed app. This preview can't load TradingView's chart.",lv_note:"Chart and data by TradingView. Gold Plan levels are shown below the chart."});
+Object.assign(T.ur,{lv_tab:"لائیو چارٹ",lv_fail:"لائیو چارٹ انسٹال شدہ ایپ میں چلے گا۔ یہ پریویو TradingView کا چارٹ لوڈ نہیں کر سکتا۔",lv_note:"چارٹ اور ڈیٹا TradingView کا۔ گولڈ پلان کے لیولز چارٹ کے نیچے ہیں۔"});
+const LV_SYMS=[["OANDA:XAUUSD","Gold"],["OANDA:XAGUSD","Silver"],["TVC:DXY","DXY"],["OANDA:EURUSD","EURUSD"],["OANDA:GBPUSD","GBPUSD"],["OANDA:USDJPY","USDJPY"],["BITSTAMP:BTCUSD","BTC"]];
+const LV_TFS=[["5","M5"],["15","M15"],["60","H1"],["240","H4"],["D","D1"]];
+const LIVE=Object.assign({sym:"OANDA:XAUUSD",tf:"15"},store.get("live",{}));
+function liveView(){ const p=S.plan;
+ return `<div class="chips" role="group">${LV_SYMS.map(([v,l])=>`<button type="button" class="chip" data-lsym="${v}" aria-pressed="${LIVE.sym===v}">${l}</button>`).join("")}</div>
+  <div class="chips" role="group">${LV_TFS.map(([v,l])=>`<button type="button" class="chip" data-ltf="${v}" aria-pressed="${LIVE.tf===v}">${l}</button>`).join("")}</div>
+  <div id="tvBox" style="height:62vh;min-height:360px;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--surface);position:relative"></div>
+  ${LIVE.sym==="OANDA:XAUUSD"&&p?`<div class="lvls" dir="ltr">${(p.levels||[]).map(l=>`<div class="lv ${/^R/.test(l.n)?"r":/^S/.test(l.n)?"s":"p"}"><span>${esc(l.n)}</span><b>${esc(l.p)}</b></div>`).join("")}</div>`:""}
+  <p class="small muted" style="margin:0">${t("lv_note")}</p>`; }
+function mountLive(){ const box=$("#tvBox"); if(!box) return; box.innerHTML="";
+ const dark=document.documentElement.getAttribute("data-theme")!=="light" && !(S.theme==="system"&&matchMedia("(prefers-color-scheme: light)").matches);
+ const c=document.createElement("div"); c.className="tradingview-widget-container"; c.style.cssText="height:100%;width:100%";
+ const w=document.createElement("div"); w.className="tradingview-widget-container__widget"; w.style.cssText="height:calc(100% - 32px);width:100%";
+ const cr=document.createElement("div"); cr.className="tradingview-widget-copyright small"; cr.style.cssText="line-height:32px;text-align:center";
+ const nm=(LV_SYMS.find(x=>x[0]===LIVE.sym)||[0,LIVE.sym])[1];
+ cr.innerHTML=`<a href="https://www.tradingview.com/symbols/${LIVE.sym.replace(":","-")}/" rel="noopener nofollow" target="_blank">${esc(nm)} chart</a> by TradingView`;
+ const sc=document.createElement("script"); sc.async=true; sc.src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js";
+ sc.innerHTML=JSON.stringify({autosize:true,symbol:LIVE.sym,interval:LIVE.tf,timezone:Intl.DateTimeFormat().resolvedOptions().timeZone||"Etc/UTC",theme:dark?"dark":"light",style:"1",locale:"en",
+  backgroundColor:dark?"rgba(21,29,48,1)":"rgba(255,255,255,1)",withdateranges:true,hide_side_toolbar:false,allow_symbol_change:true,save_image:false,calendar:false,
+  studies:["MAExp@tv-basicstudies","RSI@tv-basicstudies"],support_host:"https://www.tradingview.com"});
+ const fail=()=>{ if(box.querySelector(".lv-fail")) return; const d=document.createElement("div"); d.className="empty lv-fail"; d.style.cssText="position:absolute;inset:0;display:grid;place-items:center;padding:20px"; d.textContent=t("lv_fail"); box.appendChild(d); };
+ sc.onerror=fail; c.append(w,cr,sc); box.appendChild(c); setTimeout(()=>{ if($("#tvBox")===box && !box.querySelector("iframe")) fail(); },8000); }
+function bindLive(m){ m.querySelectorAll("[data-lsym]").forEach(b=>b.onclick=()=>{ LIVE.sym=b.dataset.lsym; store.set("live",LIVE); render(); });
+ m.querySelectorAll("[data-ltf]").forEach(b=>b.onclick=()=>{ LIVE.tf=b.dataset.ltf; store.set("live",LIVE); render(); }); if($("#tvBox")) mountLive(); }
+/* ============ RENDER & EVENTS ============ */
+function render(){ const v={home:viewHome,news:viewNews,calc:viewCalc,journal:viewJournal,lab:viewLab,learn:viewLearn,more:viewMore}[S.tab]();
+  $("#main").innerHTML=`<div class="view">${v}</div>`; bind(); tick(); }
+function bind(){ const m=$("#main");
+  m.querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>go(b.dataset.go));
+  m.querySelectorAll("[data-golive]").forEach(b=>b.onclick=()=>{ LAB.mode="live"; saveLab(); go("lab"); });
+  m.querySelectorAll("[data-calc]").forEach(b=>b.onclick=()=>go("calc",{calc:b.dataset.calc}));
+  m.querySelectorAll("[data-imp]").forEach(b=>b.onclick=()=>{S.impact=b.dataset.imp;store.set("impact",S.impact);render();});
+  m.querySelectorAll("[data-cur]").forEach(b=>b.onclick=()=>{S.cur=b.dataset.cur;store.set("cur",S.cur);render();});
+  m.querySelectorAll(".ev").forEach(b=>b.onclick=()=>{const n=b.querySelector(".note");if(n){n.hidden=!n.hidden;b.setAttribute("aria-expanded",String(!n.hidden));}});
+  m.querySelectorAll("[data-c]").forEach(b=>b.onclick=()=>{S.calc=b.dataset.c;render();});
+  m.querySelectorAll("[data-lang]").forEach(b=>b.onclick=()=>{S.lang=b.dataset.lang;store.set("lang",S.lang);applyLang();renderTabs();render();});
+  m.querySelectorAll("[data-theme-set]").forEach(b=>b.onclick=()=>{S.theme=b.dataset.themeSet;store.set("theme",S.theme);applyTheme();render();});
+  const cw=$("#copyWa"); if(cw) cw.onclick=()=>{ const ok=()=>cw.textContent=t("copied");
+    if(navigator.clipboard) navigator.clipboard.writeText(WA).then(ok).catch(()=>selectText($("#waNum"))); else selectText($("#waNum")); };
+  const cb=$("#calcBody"); if(cb&&S.calc!=="check") bindCalc(cb); bindV2(m); bindV3(m); bindLab(m); bindLive(m); }
+function selectText(el){ const r=document.createRange(); r.selectNodeContents(el); const s=getSelection(); s.removeAllRanges(); s.addRange(r); }
+function bindCalc(cb){ const c=CS[S.calc];
+  cb.querySelectorAll("[data-rm]").forEach(b=>b.onclick=()=>{ if(c.riskMode===b.dataset.rm) return;
+    c.riskMode=b.dataset.rm; c.risk = c.riskMode==="usd"? +(c.bal*c.risk/100).toFixed(2) : +(c.risk/c.bal*100).toFixed(2); save(); });
+  cb.querySelectorAll("input").forEach(i=>i.oninput=()=>{ const v=parseFloat(i.value); c[i.id]=isFinite(v)?v:0; store.set("calc",CS); refreshResult(); });
+  cb.querySelectorAll("select").forEach(s=>s.onchange=()=>{ c[s.id]=s.value;
+    if(s.id==="sym"){ const q=s.value.slice(3); if(q!=="USD") c.rate = (s.value.startsWith("USD")&&q==="JPY")?c.rate||150:RATE_DEF[q]; }
+    if(s.id==="kind"){ c.price = s.value==="gold"?4100 : s.value==="usdq"?1.16 : s.value==="cross"?1.16 : c.price; }
+    save(); });
+  function save(){ store.set("calc",CS); $("#calcBody").innerHTML=calcBody(); bindCalc($("#calcBody")); }
+  function refreshResult(){ // keep focus in the field: only swap result + tip
+    const tmp=document.createElement("div"); tmp.innerHTML=calcBody(); const r=tmp.querySelector(".result"); if(r) cb.querySelector(".result").replaceWith(r); } }
+
+let lastSess=0;
+function tick(){ const cd=$("#countdown"); if(cd){ const ms=+cd.dataset.at-Date.now(); if(ms<=0){ render(); return; }
+   const s=Math.floor(ms/1000), d=Math.floor(s/86400), h=Math.floor(s%86400/3600), mi=Math.floor(s%3600/60), se=s%60;
+   cd.textContent=(d?d+"d ":"")+[h,mi,se].map(x=>String(x).padStart(2,"0")).join(":"); }
+  const se=$("#sess"); if(se && Date.now()-lastSess>30000){ lastSess=Date.now(); se.innerHTML=sessionsHTML(); } }
+setInterval(tick,1000);
+
+applyTheme(); applyLang(); renderTabs(); render();
+loadCalendar().then(()=>{ if(S.tab==="home"||S.tab==="news") render(); });
+loadPlan().then(()=>{ if(S.tab==="home") render(); });
+</script>
+
+</body>
+</html>
