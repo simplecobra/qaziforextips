@@ -436,7 +436,7 @@ const ICONS={home:'<path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M
  journal:'<path d="M6 3h11a2 2 0 0 1 2 2v16l-3-2-3 2-3-2-3 2V5a2 2 0 0 1 1-2z"/><path d="M9 8h7M9 12h7M9 16h4"/>'};
 function renderTabs(){ $("#tabs").innerHTML = ["home","news","lab","calc","journal","learn"].map(k=>
   `<button type="button" data-tab="${k}" ${S.tab===k?'aria-current="page"':''}><svg viewBox="0 0 24 24" aria-hidden="true">${ICONS[k]}</svg>${t(k)}</button>`).join("");
-  $("#tabs").querySelectorAll("button").forEach(b=>b.onclick=()=>go(b.dataset.tab)); }
+  $("#tabs").querySelectorAll("button").forEach(b=>b.onclick=()=>{ if(b.dataset.tab==="lab"&&S.tab!=="lab"&&typeof LAB!=="undefined") LAB.mode="live"; go(b.dataset.tab); }); }
 function go(tab,opt){ if(typeof rpStop==="function") rpStop(); S.tab=tab; if(opt&&opt.calc) S.calc=opt.calc; renderTabs(); render(); window.scrollTo(0,0); }
 
 /* ============ MARKET SESSIONS ============ */
@@ -1175,10 +1175,10 @@ function backtest(bars,s,c){ const sig=signals(bars,s), atr=IND.atr(bars,14), n=
 window.QFT_BT={IND,signals,backtest,tradeStats,parseCSV,resample,genDemo,tfOf};
 
 /* ============ LAB STATE ============ */
-const LAB=Object.assign({mode:"bt",ds:"demo",tfk:1,strat:"ema",
+const LAB=Object.assign({ds:"demo",tfk:1,strat:"ema",
  p:{ema:{fast:9,slow:21,trend:200},rsi:{rsi:14,ob:70,os:30,trend:200},brk:{n:20,trend:0},eng:{trend:50},swp:{n:20,trend:0}},
- c:{dir:"both",sl:"atr",atrm:1.5,fix:5,tp:2,risk:1,spread:0.3,h1:0,h2:24,maxDay:3,bal:10000}}, store.get("lab",{}));
-const saveLab=()=>store.set("lab",{ds:LAB.ds,tfk:LAB.tfk,strat:LAB.strat,p:LAB.p,c:LAB.c,mode:LAB.mode});
+ c:{dir:"both",sl:"atr",atrm:1.5,fix:5,tp:2,risk:1,spread:0.3,h1:0,h2:24,maxDay:3,bal:10000}}, store.get("lab",{}), {mode:"live"}); // Lab always opens on the live chart
+const saveLab=()=>store.set("lab",{ds:LAB.ds,tfk:LAB.tfk,strat:LAB.strat,p:LAB.p,c:LAB.c});
 let DS={demo:null,imp:store.get("data",null)}; let BT_RES=null; const barCache={};
 function baseBars(){ if(LAB.ds==="imp"&&DS.imp) return DS.imp.bars; if(!DS.demo) DS.demo=genDemo(); return DS.demo; }
 function getBars(){ const key=LAB.ds+":"+LAB.tfk+":"+(LAB.ds==="imp"&&DS.imp?DS.imp.at:0); return barCache[key]||(barCache[key]=resample(baseBars(),LAB.tfk)); }
