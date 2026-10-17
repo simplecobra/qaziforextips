@@ -51,8 +51,8 @@ window.SITE = {
     {
       name: "QFT Trade Assistant",
       type: "EA",
-      badge: "v3.11",
-      text: "Risk management trade panel for MT5: set risk in money or %, drag Entry / SL / TP lines, the lot size is calculated for you.",
+      badge: "v3.12",
+      text: "Risk management trade panel for MT5 and MT4: set risk in money or %, drag Entry / SL / TP lines, the lot size is calculated for you.",
       points: ["Lot size from your risk", "Drag Entry / SL / TP on the chart", "One-click market & pending orders"],
       image: "",
       link: "trade-assistant.html",
@@ -77,13 +77,17 @@ window.SITE = {
                Nayi khabar par "id" zaroor badlein (warna jis ne band ki thi usay nazar nahi aayegi).
      versions: Simulator / Trade Assistant pages par "Version history". Naya version = list mein sab se upar 1 line. */
   announce: {
-    id: "ta-311-download",
-    text: "Trade Assistant v3.11 can now be downloaded from the website, and it updates itself online.",
+    id: "ta-312-mt4",
+    text: "Trade Assistant 3.12 is out, and now also for MetaTrader 4.",
     link: "trade-assistant.html#download", linkText: "Download",
-    until: "2026-11-15"
+    until: "2026-11-30"
   },
 
   updates: [
+    { date: "2026-10-17", type: "new", products: ["trade-assistant"],
+      title: "Trade Assistant 3.12, now also for MetaTrader 4",
+      text: "The full panel now runs on MT4 too, with the same licence rules. Version 3.12 adds an About page (licence, key, updates, theme, size, website and WhatsApp in one place), panel size from 75% to 150%, every tradeable symbol of your broker in the symbol list with a scroll bar, and clearer messages for DLL, connection and broker problems.",
+      link: "trade-assistant.html#download", linkText: "Download MT5 or MT4" },
     { date: "2026-10-14", type: "new", products: ["trade-assistant", "simulator", "courses"],
       title: "New video tutorials: Trade Assistant and Replay Simulator",
       text: "A full 28-minute Trade Assistant tutorial (setup, chart patterns, signals, lot calculator and Prop Firm Guard), now playing on the Trade Assistant page, and a new video on practising like the real market with the Replay Simulator's Prop Firm Challenge mode.",
@@ -128,7 +132,8 @@ window.SITE = {
       { v: "2.99", items: ["Risk in $: the lot size is calculated from your SL", "Moving the SL line re-sizes the lot, the loss never goes above your risk", "Import CSV: M1 data from HistData or Dukascopy", "Clearer messages for tick downloads"] }
     ],
     tradeAssistant: [
-      { v: "3.11", current: true, items: ["Online self-update tested and working: Update on the License page installs the new version"] },
+      { v: "3.12", current: true, items: ["First MetaTrader 4 version (same panel and licence rules)", "Info > About page: licence, key, updates, theme, panel size, website and WhatsApp; new users start here", "Panel size 75% – 150%, and the panel shrinks itself to stay above indicator windows", "Symbol list: every tradeable symbol of your broker, with a scroll bar", "Symbol details moved to Market > Symbol", "Lines close after an order (Lines button brings them back)", "Update progress in %, restart prompt and What's new after an update", "Clear messages: DLL missing, old MetaTrader, connection, broker EA trading off"] },
+      { v: "3.11", items: ["Online self-update tested and working: Update on the License page installs the new version"] },
       { v: "3.10", items: ["A clear message for every problem: DLL off, internet, antivirus, file in use"] },
       { v: "3.09", items: ["Clock shows your country (e.g. PK time)", "'Candle closes in' countdown"] },
       { v: "3.08", items: ["All screenshots in one folder, with a Folder button"] },
@@ -147,7 +152,8 @@ window.SITE = {
      2) yahan version aur size badal dein. Link kabhi nahi badalta.            */
   downloads: {
     simulator:      { file: "downloads/QFT-Replay-Simulator.zip", version: "3.01", size: "5.3 MB" },
-    tradeAssistant: { file: "downloads/QFT-Trade-Assistant.zip",  version: "3.11", size: "3.9 MB" }
+    tradeAssistant: { file: "downloads/QFT-Trade-Assistant.zip",  version: "3.12", size: "4.0 MB" },
+    tradeAssistantMT4: { file: "downloads/QFT-Trade-Assistant-MT4.zip", version: "3.12", size: "3.8 MB" }
   },
 
   /* ---------- 3b. QFT TRADE ASSISTANT (trade-assistant.html + Home showcase) ----------
@@ -156,7 +162,7 @@ window.SITE = {
               website khud dikha degi. Jo tasveer nahi mili woh khud chhup jati hai.
      video:   YouTube tutorial ka link (Trade Assistant page par chalti hai).    */
   tradeAssistant: {
-    version: "3.11",
+    version: "3.12",
     video: "https://youtu.be/lAOFQHaCszA",
     shots: [
       { file: "ta-1.png", caption: "Main panel: risk, lot size and one-click orders" },
