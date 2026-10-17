@@ -205,6 +205,18 @@ section{padding-block:88px}
   .tm-ini b{width:70%;font-size:26px;box-shadow:none}
 }
 
+/* announcement bar (content.js → announce) */
+.ann{background:linear-gradient(90deg,color-mix(in srgb,var(--gold) 16%,var(--bg2)),var(--bg2));border-bottom:1px solid var(--line);font-size:15px}
+.ann .wrap{display:flex;align-items:center;gap:10px 14px;padding-block:9px;flex-wrap:wrap;padding-right:44px;position:relative}
+.ann-k{font:700 11px/1 var(--f-mono);letter-spacing:1.4px;text-transform:uppercase;background:var(--gold);color:var(--gold-ink);padding:5px 8px;border-radius:12px}
+.ann-t{color:var(--ink)}
+.ann-l{color:var(--gold);font-weight:700;text-decoration:none;white-space:nowrap}
+.ann-l::after{content:" →"}
+.ann-all{color:var(--muted);font-size:14px;white-space:nowrap}
+.ann-x{position:absolute;right:12px;top:50%;transform:translateY(-50%);width:30px;height:30px;border-radius:50%;border:1px solid var(--line);background:transparent;color:var(--muted);font-size:18px;line-height:1;cursor:pointer}
+.ann-x:hover{color:var(--ink);border-color:var(--ink)}
+@media (max-width:600px){.ann{font-size:14px}.ann-all{display:none}}
+
 /* simulator showcase */
 .sim{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:56px;align-items:center}
 @media (max-width:960px){.sim{grid-template-columns:1fr;gap:34px}}
@@ -315,6 +327,8 @@ footer a:hover{color:var(--ink)}
 </style>
 </head>
 <body>
+<div class="ann" id="ann" hidden><div class="wrap"><span class="ann-k">New</span><span class="ann-t" id="annT"></span><a class="ann-l" id="annL" href="updates.html">See what's new</a><a class="ann-all" href="updates.html">All updates</a><button class="ann-x" id="annX" type="button" aria-label="Close this message">×</button></div></div>
+
 
 <header class="top"><div class="wrap">
   <a class="brand" href="#top"><img src="logo.png" alt="Qazi Forex Tips logo"><b>Qazi Forex Tips</b></a>
@@ -429,7 +443,7 @@ footer a:hover{color:var(--ink)}
 </main>
 
 <footer><div class="wrap">
-  <div class="row"><span id="fname"></span><nav aria-label="Footer"><a href="youtube.html">Courses</a><a href="simulator.html">Simulator</a><a href="trade-assistant.html">Trade Assistant</a><a href="about.html">About</a><a href="about.html#team">Team</a><a href="feedback.html">Feedback</a><a href="#faq">FAQ</a></nav></div>
+  <div class="row"><span id="fname"></span><nav aria-label="Footer"><a href="youtube.html">Courses</a><a href="simulator.html">Simulator</a><a href="trade-assistant.html">Trade Assistant</a><a href="about.html">About</a><a href="about.html#team">Team</a><a href="feedback.html">Feedback</a><a href="updates.html">What's new</a><a href="#faq">FAQ</a></nav></div>
   <p class="disc" id="disc"></p>
 </div></footer>
 
@@ -459,6 +473,20 @@ footer a:hover{color:var(--ink)}
   $("path").innerHTML = (S.path || []).map(function(p, i){
     return '<a class="step" href="' + esc(p.link) + '"><span class="n">0' + (i + 1) + '</span><h3>' + esc(p.title) + '</h3><p>' + esc(p.text) + '</p><span class="go">' + esc(p.button || "Open") + ' →</span></a>';
   }).join("");
+
+
+  /* announcement bar: one item, closes for good, hides itself after "until" */
+  (function(){
+    var N = S.announce || {}, box = $("ann");
+    if (!N.id || !N.text || !box) return;
+    var today = new Date().toISOString().slice(0, 10);
+    if (N.until && today > N.until) return;
+    try { if (localStorage.getItem("qft-ann") === N.id) return; } catch (e) {}
+    $("annT").textContent = N.text;
+    if (N.link) { $("annL").href = N.link; $("annL").textContent = N.linkText || "Learn more"; }
+    box.hidden = false;
+    $("annX").addEventListener("click", function(){ box.hidden = true; try { localStorage.setItem("qft-ann", N.id); } catch (e) {} });
+  })();
 
   /* about */
   var since = (S.stats || []).filter(function(s){ return /since/i.test(s.label); })[0];

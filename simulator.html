@@ -225,6 +225,9 @@ footer .wrap{display:grid;gap:8px}
 .dl-steps span{color:var(--muted);font-size:15px}
 .dl-steps code{font:600 13px var(--f-mono);color:var(--gold);background:rgba(231,185,79,.1);padding:1px 6px;border-radius:4px}
 #download{scroll-margin-top:70px}
+.vh ul{margin:0;padding:0 18px 16px 38px;color:var(--muted);display:grid;gap:6px}
+.vh p{padding:0 18px 16px}
+.vh .cur{font:600 11px/1 var(--f-mono);font-style:normal;letter-spacing:1px;color:#1a1405;background:var(--gold);padding:4px 7px;border-radius:4px;margin-left:8px;vertical-align:2px}
 </style>
 </head>
 <body>
@@ -364,6 +367,12 @@ footer .wrap{display:grid;gap:8px}
   </div>
 </div></section>
 
+<section id="versions" hidden><div class="wrap">
+  <div class="axis">Version history</div>
+  <div class="sechead"><h2>What changed in each version</h2><p>Licensed users get every new version inside the simulator: Main Menu → Updates. <a href="updates.html?p=simulator" style="color:var(--gold)">All updates →</a></p></div>
+  <div class="faq vh" id="vhList"></div>
+</div></section>
+
 <section id="reviews"><div class="wrap" id="rvMount"></div></section>
 
 <section id="plans"><div class="wrap">
@@ -423,6 +432,18 @@ if (window.QFTFeedback && window.SITE) QFTFeedback.mountReviews(window.SITE, { m
   if (D.version) g("dlVer").textContent = D.version;
   if (D.size) g("dlSize").textContent = D.size;
   g("waKey").href = "https://wa.me/923236700010?text=" + encodeURIComponent("Assalam o Alaikum, I downloaded QFT Replay Simulator v" + (D.version || "3.01") + ". Please send me a licence key. My MT5 account number is: ");
+})();
+
+/* version history (content.js → versions) */
+(function(){
+  var V = ((window.SITE || {}).versions || {})['simulator'] || [], box = document.getElementById("vhList");
+  if (!V.length || !box) return;
+  var e = function(s){ return String(s == null ? "" : s).replace(/[&<>"]/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); };
+  box.innerHTML = V.slice(0, 6).map(function(v, i){
+    return '<details' + (i === 0 ? ' open' : '') + '><summary><span>Version ' + e(v.v) + (v.current ? ' <em class="cur">Current</em>' : '') + '</span></summary>' +
+      ((v.items || []).length ? '<ul>' + v.items.map(function(t){ return '<li>' + e(t) + '</li>'; }).join("") + '</ul>' : '<p>This is the version you download today.</p>') + '</details>';
+  }).join("");
+  document.getElementById("versions").hidden = false;
 })();
 document.getElementById('copy').addEventListener('click', async () => {
   const t = document.getElementById('wa'), ok = document.getElementById('ok');
