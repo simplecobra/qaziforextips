@@ -292,6 +292,9 @@ footer a:hover{color:var(--ink)}
 .plan p{color:var(--muted);font-size:16px}
 .video{aspect-ratio:16/9;border-radius:14px;overflow:hidden;border:1px solid var(--line)}
 .video iframe{width:100%;height:100%;border:0;display:block}
+.vh ul{margin:0 0 20px;padding-left:20px;color:var(--muted);display:grid;gap:6px}
+.vh p{padding:0 2px 20px;color:var(--muted)}
+.vh .cur{font:600 11px/1 var(--f-mono);font-style:normal;letter-spacing:1px;text-transform:uppercase;color:var(--gold-ink);background:var(--gold);padding:4px 7px;border-radius:12px;margin-left:8px;vertical-align:2px}
 /* download */
 .dl-ic{width:18px;height:18px;flex:none}
 .btn:has(.dl-ic){display:inline-flex;align-items:center;gap:9px}
@@ -403,6 +406,11 @@ footer a:hover{color:var(--ink)}
   </div>
 </div></section>
 
+<section id="versions" hidden style="padding-top:0"><div class="wrap faq-wrap">
+  <div class="head" style="align-content:start"><div class="eyebrow">Version history</div><h2>What changed in each version</h2><p>Licensed users get every new version from the panel itself: License page → Update.</p><a class="btn sm" href="updates.html?p=trade-assistant" style="justify-self:start">All updates →</a></div>
+  <div class="faq vh" id="vhList"></div>
+</div></section>
+
 <section id="screens" hidden><div class="wrap">
   <div class="head"><div class="eyebrow">Screenshots</div><h2>See the panel</h2></div>
   <div class="gallery" id="gallery"></div>
@@ -439,7 +447,7 @@ footer a:hover{color:var(--ink)}
 </main>
 
 <footer><div class="wrap">
-  <div class="row"><span id="fname"></span><nav aria-label="Footer"><a href="youtube.html">Courses</a><a href="simulator.html">Simulator</a><a href="about.html">About</a><a href="trade-assistant.html">Trade Assistant</a><a href="feedback.html">Feedback</a><a href="index.html#faq">FAQ</a></nav></div>
+  <div class="row"><span id="fname"></span><nav aria-label="Footer"><a href="youtube.html">Courses</a><a href="simulator.html">Simulator</a><a href="about.html">About</a><a href="trade-assistant.html">Trade Assistant</a><a href="feedback.html">Feedback</a><a href="updates.html">What's new</a><a href="index.html#faq">FAQ</a></nav></div>
   <p class="disc" id="disc"></p>
 </div></footer>
 
@@ -521,6 +529,19 @@ footer a:hover{color:var(--ink)}
   }
   /* user reviews: only Trade Assistant feedback, with its own form */
   if (window.QFTFeedback) QFTFeedback.mountReviews(S, { mount: "rvMount", product: "trade-assistant", title: "What traders say about the Trade Assistant", waUrl: wa });
+
+
+  /* version history (content.js → versions) */
+  (function(){
+    var V = ((window.SITE || {}).versions || {})['tradeAssistant'] || [], box = document.getElementById("vhList");
+    if (!V.length || !box) return;
+    var e = function(s){ return String(s == null ? "" : s).replace(/[&<>"]/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); };
+    box.innerHTML = V.slice(0, 6).map(function(v, i){
+      return '<details' + (i === 0 ? ' open' : '') + '><summary><span>Version ' + e(v.v) + (v.current ? ' <em class="cur">Current</em>' : '') + '</span></summary>' +
+        ((v.items || []).length ? '<ul>' + v.items.map(function(t){ return '<li>' + e(t) + '</li>'; }).join("") + '</ul>' : '<p>This is the version you download today.</p>') + '</details>';
+    }).join("");
+    document.getElementById("versions").hidden = false;
+  })();
 
   $("fname").textContent = "© " + new Date().getFullYear() + " " + (B.name || "Qazi Forex Tips") + " · WhatsApp " + (B.whatsapp || "");
   $("disc").textContent = S.disclaimer || "";

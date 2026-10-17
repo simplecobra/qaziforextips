@@ -70,6 +70,77 @@ window.SITE = {
     }
   ],
 
+  /* ---------- WHAT'S NEW (updates.html + home patti + software pages) ----------
+     updates:  sab se NAYI sab se UPAR. date "2026-10-14" (pata ho) ya "" (na pata ho, tab version dikhta hai).
+               type: "new" / "improved" / "fixed".   products: "simulator", "trade-assistant", "courses", "website".
+     announce: home page ki chhoti patti. Sirf 1 khabar. "until" ke baad khud chhup jati hai.
+               Nayi khabar par "id" zaroor badlein (warna jis ne band ki thi usay nazar nahi aayegi).
+     versions: Simulator / Trade Assistant pages par "Version history". Naya version = list mein sab se upar 1 line. */
+  announce: {
+    id: "ta-311-download",
+    text: "Trade Assistant v3.11 can now be downloaded from the website, and it updates itself online.",
+    link: "trade-assistant.html#download", linkText: "Download",
+    until: "2026-11-15"
+  },
+
+  updates: [
+    { date: "2026-10-14", type: "new", products: ["trade-assistant", "simulator", "courses"],
+      title: "New video tutorials: Trade Assistant and Replay Simulator",
+      text: "A full 28-minute Trade Assistant tutorial (setup, chart patterns, signals, lot calculator and Prop Firm Guard), now playing on the Trade Assistant page, and a new video on practising like the real market with the Replay Simulator's Prop Firm Challenge mode.",
+      link: "trade-assistant.html#video", linkText: "Watch the tutorial" },
+    { date: "2026-10-14", type: "new", products: ["website"],
+      title: "Meet the team behind Qazi Forex Tips",
+      text: "A new About page with Dr. Qazi Abdul Basit's story, how we teach, and the four team members who work with him on analysis, education and our MT5 tools.",
+      link: "about.html", linkText: "Meet the team" },
+    { date: "2026-10-13", type: "new", products: ["simulator", "trade-assistant"],
+      title: "Download the Simulator and the Trade Assistant from the website",
+      text: "Both tools now download in one click, with the version, file size and three install steps on their pages. The licence key for a live account comes on WhatsApp.",
+      link: "trade-assistant.html#download", linkText: "Go to downloads" },
+    { date: "2026-10-13", type: "new", products: ["website", "courses"],
+      title: "Student feedback page",
+      text: "Read real feedback from our students and from traders who use our tools, filter it by course, batch or tool, and write your own in one minute.",
+      link: "feedback.html", linkText: "Read the feedback" },
+    { date: "", version: "Trade Assistant 3.10 – 3.11", type: "improved", products: ["trade-assistant"],
+      title: "The Trade Assistant now updates itself",
+      text: "Open the License page and press Update: the new version downloads and installs, and your settings and licence stay the same. Every problem now shows a clear message (DLL off, internet, antivirus, file in use).",
+      link: "trade-assistant.html#download", linkText: "Get v3.11" },
+    { date: "", version: "Trade Assistant 3.05 – 3.09", type: "new", products: ["trade-assistant"],
+      title: "Professional trading journal report",
+      text: "An HTML report with equity curve, day journal, streaks, setups and feelings, a money management plan and a Monte Carlo test, for any period you choose. Plus a full week of news with a scrollbar, a 'Candle closes in' countdown and one folder for all screenshots." },
+    { date: "", version: "Replay Simulator 3.00", type: "new", products: ["simulator"],
+      title: "Prop Firm Challenge mode and a new pro report",
+      text: "Practise the exact rules of your prop firm (profit target, daily loss, max loss) with a live dashboard that shows PASSED or FAILED. The new report adds a trading journal, streaks, R-multiple statistics, a Monte Carlo test and your own money plan. Keyboard shortcuts: Space, N / P, B / S.",
+      link: "simulator.html#challenge", linkText: "See the challenge mode" },
+    { date: "", version: "Replay Simulator 2.99", type: "new", products: ["simulator"],
+      title: "Risk in $: the lot size is calculated for you",
+      text: "Type your risk in dollars and drag the SL line. The lot follows the SL distance, so the loss at the stop never goes above your risk. Also: import years of M1 data from HistData or Dukascopy CSV files.",
+      link: "simulator.html#features", linkText: "See all features" },
+    { date: "2026-10-10", type: "new", products: ["website", "courses"],
+      title: "The new Qazi Forex Tips website",
+      text: "A new home for our free Urdu and Hindi courses: every YouTube playlist on one page with the videos playing right here, our MT5 tools, and a light and a dark theme.",
+      link: "youtube.html", linkText: "Open the courses" }
+  ],
+
+  versions: {
+    simulator: [
+      { v: "3.01", current: true, items: [] },
+      { v: "3.00", items: ["Prop Firm Challenge mode: target, daily loss and max loss with a live dashboard", "New pro report: journal, streaks, money plan, charts", "R-multiple statistics and Monte Carlo risk test", "Keyboard shortcuts: Space, N / P, B / S, + / −", "Online licence check"] },
+      { v: "2.99", items: ["Risk in $: the lot size is calculated from your SL", "Moving the SL line re-sizes the lot, the loss never goes above your risk", "Import CSV: M1 data from HistData or Dukascopy", "Clearer messages for tick downloads"] }
+    ],
+    tradeAssistant: [
+      { v: "3.11", current: true, items: ["Online self-update tested and working: Update on the License page installs the new version"] },
+      { v: "3.10", items: ["A clear message for every problem: DLL off, internet, antivirus, file in use"] },
+      { v: "3.09", items: ["Clock shows your country (e.g. PK time)", "'Candle closes in' countdown"] },
+      { v: "3.08", items: ["All screenshots in one folder, with a Folder button"] },
+      { v: "3.07", items: ["Journal report for any period: 7 / 30 days, 3 / 6 months, this year, all history"] },
+      { v: "3.06", items: ["News for the whole week and the next 7 days, with a scrollbar"] },
+      { v: "3.05", items: ["Professional HTML journal report: equity, streaks, setups, money plan, Monte Carlo"] },
+      { v: "3.04", items: ["Smoother panel while dragging lines"] },
+      { v: "3.03", items: ["ATR on / off with SL / TP restore", "News filter (High / Medium / Low) and news lines on the chart"] },
+      { v: "3.01 – 3.02", items: ["5 panel themes", "News, clock and journal in your PC time", "Order retry"] }
+    ]
+  },
+
   /* ---------- 3a. DOWNLOADS (simulator.html + trade-assistant.html) ----------
      Zip files GitHub ke "downloads" folder mein hain. Naya version aaye to:
      1) nayi zip ISI NAAM se downloads folder mein upload karein (purani replace ho jayegi),
