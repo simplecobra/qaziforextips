@@ -22,7 +22,7 @@
 <meta name="twitter:title" content="QFT Replay Simulator – MT5 Market Replay & Backtesting Software">
 <meta name="twitter:description" content="QFT Replay Simulator by Qazi Forex Tips: MT5 market replay and manual backtesting software with Prop Firm Challenge mode, risk-in-$ lot sizing and a professional backtest report.">
 <meta name="twitter:image" content="https://qaziforextips.com/simulator.jpg">
-<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "SoftwareApplication", "name": "QFT Replay Simulator", "applicationCategory": "FinanceApplication", "operatingSystem": "Windows (MetaTrader 5)", "softwareVersion": "3.01", "url": "https://qaziforextips.com/simulator.html", "downloadUrl": "https://qaziforextips.com/downloads/QFT-Replay-Simulator.zip", "fileSize": "5.3 MB", "image": "https://qaziforextips.com/simulator.jpg", "publisher": {"@id": "https://qaziforextips.com/#org"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://qaziforextips.com/"}, {"@type": "ListItem", "position": 2, "name": "QFT Replay Simulator", "item": "https://qaziforextips.com/simulator.html"}]}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "SoftwareApplication", "name": "QFT Replay Simulator", "applicationCategory": "FinanceApplication", "operatingSystem": "Windows (MetaTrader 5)", "softwareVersion": "3.02", "url": "https://qaziforextips.com/simulator.html", "downloadUrl": "https://qaziforextips.com/downloads/QFT-Replay-Simulator.zip", "fileSize": "5.3 MB", "image": "https://qaziforextips.com/simulator.jpg", "publisher": {"@id": "https://qaziforextips.com/#org"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://qaziforextips.com/"}, {"@type": "ListItem", "position": 2, "name": "QFT Replay Simulator", "item": "https://qaziforextips.com/simulator.html"}]}]}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@600;800&family=Source+Sans+3:wght@400;600;700&family=IBM+Plex+Mono:wght@400;600&family=Noto+Nastaliq+Urdu:wght@600&display=swap">
@@ -225,6 +225,27 @@ footer .wrap{display:grid;gap:8px}
 .dl-steps span{color:var(--muted);font-size:15px}
 .dl-steps code{font:600 13px var(--f-mono);color:var(--gold);background:rgba(231,185,79,.1);padding:1px 6px;border-radius:4px}
 #download{scroll-margin-top:70px}
+/* new in 3.02 */
+.newpill{display:inline-flex;align-items:center;gap:10px;margin-top:14px;padding:7px 14px 7px 7px;border:1px solid var(--line);border-radius:30px;background:var(--panel);font-size:14px;color:var(--text);text-decoration:none}
+.newpill b{font:700 11px/1 var(--f-mono);letter-spacing:1px;background:var(--gold);color:#1a1405;padding:6px 9px;border-radius:20px}
+.newpill:hover{border-color:var(--gold)}
+.nv-hero{margin:0 0 22px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px}
+.nv-hero img{border-radius:6px;width:100%}
+.nv-hero figcaption,.nv-grid figcaption{font-size:15px;color:var(--muted);padding:12px 4px 2px}
+.nv-hero figcaption b,.nv-grid figcaption b{color:var(--text)}
+.nv-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+@media (max-width:900px){.nv-grid{grid-template-columns:1fr}}
+.nv-grid figure{margin:0;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px;display:grid;align-content:start}
+.nv-img{background:#fff;border-radius:6px;display:grid;place-items:center;aspect-ratio:4/3;overflow:hidden;padding:8px}
+.nv-img img{max-height:100%;width:auto;max-width:100%;object-fit:contain}
+.nv-cta{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;margin-top:26px}
+.dl-note{font-size:14px;color:var(--gold)}
+.nv-wide{margin:18px 0 0;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px}
+.nv-wide figcaption{font-size:15px;color:var(--muted);padding:12px 4px 2px}
+.nv-wide figcaption b{color:var(--text)}
+.nv-img.wide{aspect-ratio:auto;padding:14px}
+.nv-img.wide img{width:100%;max-height:none}
+
 .vh ul{margin:0;padding:0 18px 16px 38px;color:var(--muted);display:grid;gap:6px}
 .vh p{padding:0 18px 16px}
 .vh .cur{font:600 11px/1 var(--f-mono);font-style:normal;letter-spacing:1px;color:#1a1405;background:var(--gold);padding:4px 7px;border-radius:4px;margin-left:8px;vertical-align:2px}
@@ -252,6 +273,7 @@ footer .wrap{display:grid;gap:8px}
 <div class="hero"><div class="wrap grid">
   <div>
     <div class="eyebrow">MT5 market replay &amp; manual backtesting</div>
+    <a class="newpill" href="#new"><b>NEW 3.02</b> Smart Panel: all replay controls in one slim bar →</a>
     <h1>Trade the past.<br><span>Pass the future.</span></h1>
     <p class="ur">اپنی اسٹریٹجی کو پیسہ لگانے سے پہلے ٹیسٹ کریں</p>
     <p class="lead">QFT Replay Simulator turns MetaTrader 5 into a market replay machine. Pick any day, play it candle by candle, trade it like live and get a professional report that tells you how much to risk.</p>
@@ -267,6 +289,23 @@ footer .wrap{display:grid;gap:8px}
   </div>
 </div></div>
 
+<section id="new"><div class="wrap">
+  <div class="axis">New in version 3.02</div>
+  <div class="sechead"><h2>A clear chart.<br><span style="color:var(--gold)">Every control in one slim bar.</span></h2>
+  <p>The big simulator window now shrinks into the <b style="color:var(--text)">Smart Panel</b>: Prev, Play, Next, speed, lot, Buy, Sell, Close All, floating P/L and the replay time. Put it below the price and keep your eyes on the candles.</p></div>
+  <figure class="nv-hero"><img src="v302_smartpanel.jpg" alt="Gold replay chart with the challenge dashboard and the Smart Panel bar at the bottom" loading="lazy" width="1000" height="472">
+    <figcaption><b>Smart Panel</b> on a replay chart. Drag it anywhere, the simulator remembers the place. (Picture made from real screens of the simulator.)</figcaption></figure>
+  <div class="nv-grid">
+    <figure><div class="nv-img"><img src="v302_window.png" alt="Simulator window with the SMART PANEL button next to Buy and Sell" loading="lazy" width="588" height="390"></div>
+      <figcaption><b>One click.</b> The SMART PANEL button sits next to Buy and Sell, or simply minimize the window during a replay.</figcaption></figure>
+    <figure><div class="nv-img"><img src="v302_update.png" alt="Software update window: new version 3.02 available with the list of what is new" loading="lazy" width="476" height="447"></div>
+      <figcaption><b>Updates inside the software.</b> Licensed users press Update now: the new version installs, licence, data and settings stay.</figcaption></figure>
+  </div>
+  <figure class="nv-wide"><div class="nv-img wide"><img src="v302_cleanstart.png" alt="Before 3.02 two charts overlap; with 3.02 only the replay chart is open" loading="lazy" width="1715" height="492"></div>
+      <figcaption><b>Clean start.</b> The chart that runs the simulator is minimized when the replay starts, and replay charts open zoomed out with more candles, so you read the structure first.</figcaption></figure>
+  <div class="nv-cta"><a class="btn gold" href="#download">Download free demo</a><span class="muted">Already a user? Main Menu → Updates installs 3.02 in one click.</span></div>
+</div></section>
+
 <section id="features"><div class="wrap">
   <div class="axis">Features</div>
   <div class="sechead"><h2>Everything a manual trader needs to backtest honestly</h2>
@@ -280,7 +319,7 @@ footer .wrap{display:grid;gap:8px}
     <div class="feat"><span class="k">CHARTS</span><h3>All timeframes</h3><p>M1 to MN1 plus Renko and Range, moving together. Drawings sync across every replay chart.</p></div>
     <div class="feat"><span class="k">SESSIONS</span><h3>Sessions &amp; killzones</h3><p>Asia, London, New York and ICT killzones as chart background, with previous-day levels.</p></div>
     <div class="feat"><span class="k">NEWS</span><h3>Economic calendar</h3><p>High-impact news as lines on the chart, with optional auto-pause before the release.</p></div>
-    <div class="feat"><span class="k">SPEED</span><h3>Keyboard shortcuts</h3><p>Space to play, N / P for bars, B / S to buy and sell, + / − for speed. Many more trades per hour.</p></div>
+    <div class="feat"><span class="k">SPEED</span><h3>Smart Panel &amp; shortcuts</h3><p>One slim bar with Play, Next, speed, Buy, Sell and live P/L. Space to play, N / P for bars, B / S to buy and sell. Many more trades per hour.</p></div>
   </div>
 </div></section>
 
@@ -430,6 +469,12 @@ if (window.QFTFeedback && window.SITE) QFTFeedback.mountReviews(window.SITE, { m
 (function(){ var D = ((window.SITE || {}).downloads || {}).simulator || {}, g = function(i){ return document.getElementById(i); };
   if (D.file) { g("dlBtn").href = D.file; g("dlHero").href = D.file; }
   if (D.version) g("dlVer").textContent = D.version;
+  var VS = ((window.SITE || {}).versions || {}).simulator || [];
+  if (VS[0] && D.version && VS[0].v !== D.version) {
+    var n = document.createElement("p"); n.className = "dl-note";
+    n.textContent = "Newest version: " + VS[0].v + ". After you install, open Main Menu → Updates and it installs in one click.";
+    g("dlBtn").parentNode.insertAdjacentElement("afterend", n);
+  }
   if (D.size) g("dlSize").textContent = D.size;
   g("waKey").href = "https://wa.me/923236700010?text=" + encodeURIComponent("Assalam o Alaikum, I downloaded QFT Replay Simulator v" + (D.version || "3.01") + ". Please send me a licence key. My MT5 account number is: ");
 })();

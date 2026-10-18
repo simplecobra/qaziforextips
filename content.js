@@ -84,6 +84,10 @@ window.SITE = {
   },
 
   updates: [
+    { date: "2026-10-18", type: "new", products: ["simulator"],
+      title: "Replay Simulator 3.02: the Smart Panel",
+      text: "The big simulator window now shrinks into one slim bar with Prev, Play, Next, speed, lot, Buy, Sell, Close All, floating P/L and the replay time, so the chart stays clear. The chart that runs the simulator steps aside when the replay starts, and replay charts open zoomed out with more candles. Your licence, data and settings stay when you update.",
+      link: "simulator.html#new", linkText: "See the Smart Panel" },
     { date: "2026-10-17", type: "new", products: ["trade-assistant"],
       title: "Trade Assistant 3.12, now also for MetaTrader 4",
       text: "The full panel now runs on MT4 too, with the same licence rules. Version 3.12 adds an About page (licence, key, updates, theme, size, website and WhatsApp in one place), panel size from 75% to 150%, every tradeable symbol of your broker in the symbol list with a scroll bar, and clearer messages for DLL, connection and broker problems.",
@@ -127,7 +131,7 @@ window.SITE = {
 
   versions: {
     simulator: [
-      { v: "3.01", current: true, items: [] },
+      { v: "3.02", current: true, items: ["Smart Panel: Prev / Play / Next, speed, lot, Buy, Sell, Close All, P/L and time in one slim bar", "SMART PANEL button next to Buy / Sell, or minimize the window during a replay", "The chart that runs the simulator is minimized during the replay and comes back after", "Replay charts open one zoom step further out (more candles, better structure)", "Website and WhatsApp links in every window and in the backtest report"] },
       { v: "3.00", items: ["Prop Firm Challenge mode: target, daily loss and max loss with a live dashboard", "New pro report: journal, streaks, money plan, charts", "R-multiple statistics and Monte Carlo risk test", "Keyboard shortcuts: Space, N / P, B / S, + / −", "Online licence check"] },
       { v: "2.99", items: ["Risk in $: the lot size is calculated from your SL", "Moving the SL line re-sizes the lot, the loss never goes above your risk", "Import CSV: M1 data from HistData or Dukascopy", "Clearer messages for tick downloads"] }
     ],
