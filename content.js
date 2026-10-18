@@ -155,7 +155,7 @@ window.SITE = {
      1) nayi zip ISI NAAM se downloads folder mein upload karein (purani replace ho jayegi),
      2) yahan version aur size badal dein. Link kabhi nahi badalta.            */
   downloads: {
-    simulator:      { file: "downloads/QFT-Replay-Simulator.zip", version: "3.01", size: "5.3 MB" },
+    simulator:      { file: "downloads/QFT-Replay-Simulator.zip", version: "3.02", size: "4.8 MB" },
     tradeAssistant: { file: "downloads/QFT-Trade-Assistant.zip",  version: "3.12", size: "4.0 MB" },
     tradeAssistantMT4: { file: "downloads/QFT-Trade-Assistant-MT4.zip", version: "3.12", size: "3.8 MB" }
   },
