@@ -77,13 +77,17 @@ window.SITE = {
                Nayi khabar par "id" zaroor badlein (warna jis ne band ki thi usay nazar nahi aayegi).
      versions: Simulator / Trade Assistant pages par "Version history". Naya version = list mein sab se upar 1 line. */
   announce: {
-    id: "ta-312-mt4",
-    text: "Trade Assistant 3.12 is out, and now also for MetaTrader 4.",
-    link: "trade-assistant.html#download", linkText: "Download",
-    until: "2026-11-30"
+    id: "sim-303",
+    text: "Replay Simulator 3.03 is out with an important fix. Download the new version, or press Updates in the simulator.",
+    link: "simulator.html#download", linkText: "Download 3.03",
+    until: "2026-11-15"
   },
 
   updates: [
+    { date: "2026-10-18", type: "fixed", products: ["simulator"],
+      title: "Replay Simulator 3.03 is out: please download or update now",
+      text: "Version 3.03 fixes a problem in 3.02: the simulator window could open empty after the simulator was attached to a chart again, the chart timeframe was changed or a template was applied. It keeps everything new in 3.02 (Smart Panel, clean start, zoomed-out charts). Download the new version from the Simulator page, or in the simulator open Main Menu → Updates → Update now, then restart MetaTrader 5. Your licence, data and settings stay.",
+      link: "simulator.html#download", linkText: "Download 3.03" },
     { date: "2026-10-18", type: "new", products: ["simulator"],
       title: "Replay Simulator 3.02: the Smart Panel",
       text: "The big simulator window now shrinks into one slim bar with Prev, Play, Next, speed, lot, Buy, Sell, Close All, floating P/L and the replay time, so the chart stays clear. The chart that runs the simulator steps aside when the replay starts, and replay charts open zoomed out with more candles. Your licence, data and settings stay when you update.",
@@ -131,7 +135,8 @@ window.SITE = {
 
   versions: {
     simulator: [
-      { v: "3.02", current: true, items: ["Smart Panel: Prev / Play / Next, speed, lot, Buy, Sell, Close All, P/L and time in one slim bar", "SMART PANEL button next to Buy / Sell, or minimize the window during a replay", "The chart that runs the simulator is minimized during the replay and comes back after", "Replay charts open one zoom step further out (more candles, better structure)", "Website and WhatsApp links in every window and in the backtest report"] },
+      { v: "3.03", current: true, items: ["Fix: the simulator window could be empty after the simulator was attached again, the chart timeframe was changed or a template was applied", "Includes everything from 3.02: Smart Panel, clean start, zoomed-out replay charts, website links"] },
+      { v: "3.02", items: ["Smart Panel: Prev / Play / Next, speed, lot, Buy, Sell, Close All, P/L and time in one slim bar", "SMART PANEL button next to Buy / Sell, or minimize the window during a replay", "The chart that runs the simulator is minimized during the replay and comes back after", "Replay charts open one zoom step further out (more candles, better structure)", "Website and WhatsApp links in every window and in the backtest report"] },
       { v: "3.00", items: ["Prop Firm Challenge mode: target, daily loss and max loss with a live dashboard", "New pro report: journal, streaks, money plan, charts", "R-multiple statistics and Monte Carlo risk test", "Keyboard shortcuts: Space, N / P, B / S, + / −", "Online licence check"] },
       { v: "2.99", items: ["Risk in $: the lot size is calculated from your SL", "Moving the SL line re-sizes the lot, the loss never goes above your risk", "Import CSV: M1 data from HistData or Dukascopy", "Clearer messages for tick downloads"] }
     ],
@@ -155,7 +160,7 @@ window.SITE = {
      1) nayi zip ISI NAAM se downloads folder mein upload karein (purani replace ho jayegi),
      2) yahan version aur size badal dein. Link kabhi nahi badalta.            */
   downloads: {
-    simulator:      { file: "downloads/QFT-Replay-Simulator.zip", version: "3.02", size: "4.8 MB" },
+    simulator:      { file: "downloads/QFT-Replay-Simulator.zip", version: "3.03", size: "4.6 MB" },
     tradeAssistant: { file: "downloads/QFT-Trade-Assistant.zip",  version: "3.12", size: "4.0 MB" },
     tradeAssistantMT4: { file: "downloads/QFT-Trade-Assistant-MT4.zip", version: "3.12", size: "3.8 MB" }
   },
