@@ -384,8 +384,9 @@ footer a:hover{color:var(--ink)}
   menu.addEventListener("click", function(){ var o = nav.classList.toggle("open"); menu.setAttribute("aria-expanded", o); });
 
   /* latest versions (content.js → downloads) */
-  var D = S.downloads || {};
-  $("latest").innerHTML += [["QFT Replay Simulator", D.simulator, "simulator.html#download"], ["QFT Trade Assistant", D.tradeAssistant, "trade-assistant.html#download"]]
+  var D = S.downloads || {}, VV = S.versions || {};
+  var newest = function(k, d){ var v = (VV[k] || [])[0]; return v ? { version: v.v } : d; };
+  $("latest").innerHTML += [["QFT Replay Simulator", newest("simulator", D.simulator), "simulator.html#download"], ["QFT Trade Assistant", newest("tradeAssistant", D.tradeAssistant), "trade-assistant.html#download"]]
     .filter(function(x){ return x[1]; }).map(function(x){ return '<a href="' + x[2] + '">' + x[0] + '<span>v' + esc(x[1].version) + ' ↓</span></a>'; }).join("");
 
   /* timeline (content.js → updates, newest first) */
