@@ -182,15 +182,18 @@ window.SITE = {
       { file: "ta-6.png", caption: "License & Updates screen" }
     ],
     features: [
-      { title: "Risk in money or %", text: "Set risk in $ or as % of balance, equity, free margin, a custom amount, or the previous day, week or month. No hidden risk cap: you decide." },
-      { title: "Automatic lot size", text: "Move your SL and the lot size follows your risk. The lot turns red if the broker would not accept it." },
-      { title: "Drag Entry, SL and TP", text: "Compact lines at the right edge of the chart. Drag the entry to make a pending order, lock SL or TP with L, flip Buy/Sell with R." },
-      { title: "One-click orders", text: "Market and pending orders go straight in, with no confirmation popup. Clear English messages only when something is wrong, such as margin." },
-      { title: "Manage open trades", text: "Close tab for partial and full closes. SL and TP stay draggable on the chart after entry." },
-      { title: "Patterns & Strategies", text: "Toggle buttons mark chart patterns and strategy signals with Entry, SL and TP, each with a history score so you can judge it yourself." },
-      { title: "News on the panel", text: "Upcoming high-impact news shown in your own PC time, so you are not caught by NFP or CPI." },
-      { title: "Remembers everything", text: "Risk, RR and other settings survive an MT5 restart. Hotkeys for the main buttons and selectable panel themes." },
-      { title: "Online updates & licence", text: "Update to the newest version from inside the panel. Licence key tied to your account number." }
+      { title: "Exact lot from your risk", text: "8 risk modes: $, % of balance, equity, free margin or a custom value, or % of the day, week or month start. Commission included, rounded to your broker's lot step. The lot turns red if the broker would not accept it." },
+      { title: "Drag Entry, SL and TP", text: "See the loss and profit in USD and points before you click. L locks SL or TP, R flips Buy and Sell, and dragging the entry turns it into a Stop or Limit order by itself." },
+      { title: "One click, always with SL and TP", text: "Buy, Sell, Buy/Sell Stop and Buy/Sell Limit, sent with SL and TP at once, no confirmation popup. ATR stop loss button, Risk:Reward auto TP, spread limit and split orders." },
+      { title: "Prop Firm Guard", text: "Set your daily loss limit, max drawdown, daily target and trades per day. The panel blocks new trades before a rule is broken, the way FTMO-style firms check you." },
+      { title: "News lock and calendar", text: "The whole week of high, medium and low impact news in your own PC time, with a countdown and news lines on the chart. Lock trading around big events like NFP and CPI." },
+      { title: "Partial close, break-even, trailing", text: "Up to 10 TP and 10 SL levels, break-even with offset, 6 trailing methods (points, Fractals, MA, Parabolic SAR, ATR, High/Low bar), profit lock, OCO and hidden SL/TP." },
+      { title: "Close everything in one click", text: "Close Buy, Sell, Profit, Loss or All, delete pending orders by type, and auto-close at a profit or loss target or at a set time, such as Friday close." },
+      { title: "Patterns, Smart Money and strategies", text: "18 patterns including FVG, Order Blocks, BOS/CHoCH and liquidity sweeps, plus 9 strategies with Entry, SL and TP. Each has a history score on your own chart. Closed candles only, no repainting." },
+      { title: "Journal and professional report", text: "Note the setup, feeling and lesson for every trade, then open a colourful report with equity curve, win rate, drawdown and Monte Carlo, so you see what to repeat and what to stop." },
+      { title: "Sessions and market info", text: "Sydney, Tokyo, London and New York coloured on the chart with daylight saving handled. Account, symbol and trading statistics in one tab." },
+      { title: "Push alerts to your phone", text: "Alerts on the MT5 app when a trade opens or closes, break-even is set, a guard limit or news lock is hit, a signal appears or a price is reached." },
+      { title: "Your panel, your way", text: "5 themes, panel size 75–150%, hotkeys, presets, and settings remembered after a restart. Update in one click from the panel. One licence key works on MT5 and MT4." }
     ]
   },
 
