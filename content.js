@@ -85,8 +85,8 @@ window.SITE = {
 
   updates: [
     { date: "2026-10-20", type: "new", products: ["website"],
-      title: "Lesson notes: 10 lessons with video and written notes",
-      text: "Ten of our most important lectures now have their own page with the video, the rules in writing, common mistakes and a short Roman Urdu summary: support and resistance, trendlines, stop loss and take profit, false breakouts, Fibonacci, multi-timeframe analysis, head and shoulders, triangles, money management and RSI divergence. More lessons are coming.",
+      title: "Lesson notes: 54 lessons with video, written notes and questions",
+      text: "54 of our lectures now have their own page with the video, the rules in writing, common mistakes, a short Roman Urdu summary and the questions traders ask most: price action basics, market analysis, chart patterns, strategies, risk and lot size, and platform and broker guides.",
       link: "youtube.html#lessons", linkText: "Read the lessons" },
     { date: "2026-10-18", type: "fixed", products: ["simulator"],
       title: "Replay Simulator 3.03 is out: please download or update now",
