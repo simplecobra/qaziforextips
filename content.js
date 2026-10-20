@@ -84,6 +84,10 @@ window.SITE = {
   },
 
   updates: [
+    { date: "2026-10-20", type: "new", products: ["website"],
+      title: "Lesson notes: 10 lessons with video and written notes",
+      text: "Ten of our most important lectures now have their own page with the video, the rules in writing, common mistakes and a short Roman Urdu summary: support and resistance, trendlines, stop loss and take profit, false breakouts, Fibonacci, multi-timeframe analysis, head and shoulders, triangles, money management and RSI divergence. More lessons are coming.",
+      link: "youtube.html#lessons", linkText: "Read the lessons" },
     { date: "2026-10-18", type: "fixed", products: ["simulator"],
       title: "Replay Simulator 3.03 is out: please download or update now",
       text: "Version 3.03 fixes a problem in 3.02: the simulator window could open empty after the simulator was attached to a chart again, the chart timeframe was changed or a template was applied. It keeps everything new in 3.02 (Smart Panel, clean start, zoomed-out charts). Download the new version from the Simulator page, or in the simulator open Main Menu → Updates → Update now, then restart MetaTrader 5. Your licence, data and settings stay.",
