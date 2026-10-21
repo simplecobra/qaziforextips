@@ -77,13 +77,17 @@ window.SITE = {
                Nayi khabar par "id" zaroor badlein (warna jis ne band ki thi usay nazar nahi aayegi).
      versions: Simulator / Trade Assistant pages par "Version history". Naya version = list mein sab se upar 1 line. */
   announce: {
-    id: "sim-303",
-    text: "Replay Simulator 3.03 is out with an important fix. Download the new version, or press Updates in the simulator.",
-    link: "simulator.html#download", linkText: "Download 3.03",
-    until: "2026-11-15"
+    id: "sim-mt4-303",
+    text: "QFT Replay Simulator is now also available for MetaTrader 4 (version 3.03).",
+    link: "simulator.html#download", linkText: "Download for MT4",
+    until: "2026-12-15"
   },
 
   updates: [
+    { date: "2026-10-21", type: "new", products: ["simulator"],
+      title: "Replay Simulator for MetaTrader 4 is released (version 3.03)",
+      text: "The QFT Replay Simulator now runs on MetaTrader 4 too, with the same tools as MT5 3.03: market replay with Prev Bar, Prop Firm Challenge mode and dashboard, lot size from your $ risk, the Smart Panel, sessions and killzones, drawings sync and the full backtest report. Download the MT4 zip from the Simulator page. MT4 differences: the replay runs on an offline chart, data comes from M1 history (History Center) or a CSV file because MT4 has no tick history, and there are no news lines because MT4 has no economic calendar. Each MT4 account needs its own licence key.",
+      link: "simulator.html#download", linkText: "Download for MT4" },
     { date: "2026-10-20", type: "new", products: ["website"],
       title: "Lesson notes: 54 lessons with video, written notes and questions",
       text: "54 of our lectures now have their own page with the video, the rules in writing, common mistakes, a short Roman Urdu summary and the questions traders ask most: price action basics, market analysis, chart patterns, strategies, risk and lot size, and platform and broker guides.",
@@ -139,7 +143,7 @@ window.SITE = {
 
   versions: {
     simulator: [
-      { v: "3.03", current: true, items: ["Fix: the simulator window could be empty after the simulator was attached again, the chart timeframe was changed or a template was applied", "Includes everything from 3.02: Smart Panel, clean start, zoomed-out replay charts, website links"] },
+      { v: "3.03", current: true, items: ["Now also available for MetaTrader 4 (separate download, own licence key per MT4 account)", "Fix: the simulator window could be empty after the simulator was attached again, the chart timeframe was changed or a template was applied", "Includes everything from 3.02: Smart Panel, clean start, zoomed-out replay charts, website links"] },
       { v: "3.02", items: ["Smart Panel: Prev / Play / Next, speed, lot, Buy, Sell, Close All, P/L and time in one slim bar", "SMART PANEL button next to Buy / Sell, or minimize the window during a replay", "The chart that runs the simulator is minimized during the replay and comes back after", "Replay charts open one zoom step further out (more candles, better structure)", "Website and WhatsApp links in every window and in the backtest report"] },
       { v: "3.00", items: ["Prop Firm Challenge mode: target, daily loss and max loss with a live dashboard", "New pro report: journal, streaks, money plan, charts", "R-multiple statistics and Monte Carlo risk test", "Keyboard shortcuts: Space, N / P, B / S, + / −", "Online licence check"] },
       { v: "2.99", items: ["Risk in $: the lot size is calculated from your SL", "Moving the SL line re-sizes the lot, the loss never goes above your risk", "Import CSV: M1 data from HistData or Dukascopy", "Clearer messages for tick downloads"] }
@@ -165,6 +169,7 @@ window.SITE = {
      2) yahan version aur size badal dein. Link kabhi nahi badalta.            */
   downloads: {
     simulator:      { file: "downloads/QFT-Replay-Simulator.zip", version: "3.03", size: "4.6 MB" },
+    simulatorMT4:   { file: "downloads/QFT-Replay-Simulator-MT4.zip", version: "3.03", size: "6.3 MB" },
     tradeAssistant: { file: "downloads/QFT-Trade-Assistant.zip",  version: "3.12", size: "4.0 MB" },
     tradeAssistantMT4: { file: "downloads/QFT-Trade-Assistant-MT4.zip", version: "3.12", size: "3.8 MB" }
   },
