@@ -731,6 +731,15 @@ footer a:hover{color:var(--ink)}
 .covers ul{list-style:none;padding:0!important}
 .covers li{padding-left:28px;position:relative;font-size:17px!important}
 .covers li:before{content:"✓";position:absolute;left:0;top:0;color:var(--gold);font-weight:800}
+.take{margin-top:28px;border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:0 12px 12px 0;background:var(--surface);padding:22px 24px}
+.take .th{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.take .th img{width:48px;height:48px;border-radius:50%;object-fit:cover;object-position:top;border:2px solid var(--gold)}
+.take .th b{display:block;font:800 22px/1.1 var(--f-display);text-transform:uppercase;color:var(--ink)}
+.take .th span{font-size:14px;color:var(--muted)}
+.take blockquote{margin:0;padding:12px 0;border-top:1px solid var(--line)}
+.take blockquote:first-of-type{border-top:0;padding-top:0}
+.take blockquote p{color:var(--ink)!important;font-size:18px;line-height:1.65}
+.take blockquote cite{display:block;margin-top:6px;font:600 11px/1.3 var(--f-mono);letter-spacing:1px;text-transform:uppercase;color:var(--gold);font-style:normal}
 .urdu{margin-top:36px;border-left:4px solid var(--gold);background:var(--surface);border-radius:0 12px 12px 0;padding:20px 24px}
 .urdu h2{font-size:22px!important;margin:0 0 10px!important}
 .urdu ul{padding-left:20px}
@@ -786,6 +795,7 @@ footer a:hover{color:var(--ink)}
 <div class="wrap ls-body">
   <article class="ls-art">
     <div class="covers"><h2>In this lecture</h2><ul><li>What lot sizes are in forex</li><li>Position size calculation for risk management</li><li>Calculating lot size in MetaTrader</li></ul></div>
+    <div class="take"><div class="th"><img src="dr-qazi.jpg" alt="Dr. Qazi Abdul Basit" width="48" height="48" loading="lazy"><div><b>Dr. Qazi's take</b><span>In his own words, from his lectures and teaching</span></div></div><blockquote><p>Managing the lot size on every trade is the habit this lecture is about: the right lot for your risk, on every single trade.</p><cite>From the lecture</cite></blockquote><blockquote><p>A fixed risk on every trade and a stop loss you place first. Protecting the account comes before everything else.</p><cite>How Dr. Qazi teaches</cite></blockquote><blockquote><p>Learn and practise on a demo account first. When you go live, use only money you can afford to lose and keep the risk on each trade small, for example 1% of the account.</p><cite>From our FAQ</cite></blockquote></div>
     <h2>Lesson notes</h2>
     <h2>Lot sizes</h2><ul><li><b>1.00 standard lot</b> = 100,000 units of the base currency.</li><li><b>0.10 mini lot</b> = 10,000 units.</li><li><b>0.01 micro lot</b> = 1,000 units.</li></ul><p>On EURUSD, 1 standard lot is about <b>$10 per pip</b>, so 0.01 lot is about $0.10 per pip. On Gold, most brokers use 100 ounces per lot, so <b>0.01 lot moves about $1 for every $1 move</b> in price. Always check your broker's contract size.</p><h2>The formula</h2><p><b>Lot size = money at risk ÷ (stop loss in pips × pip value per lot)</b>.</p><p>Example: $1,000 account, 1% risk = $10. EURUSD stop loss 25 pips. 25 × $10 = $250 per standard lot, so $10 ÷ $250 = <b>0.04 lot</b>.</p><h2>Do it the same way every time</h2><p>A fixed lot (always 0.10, say) means your risk changes with every stop loss. Calculate from the stop each time, or let a tool do it: <a href="trade-assistant.html">QFT Trade Assistant</a> calculates the lot from your risk and SL line in MT5 and MT4.</p>
     <div class="urdu"><h2>Khulasa (Roman Urdu)</h2><ul><li>1 lot = 100,000; 0.10 = 10,000; 0.01 = 1,000 units.</li><li>EURUSD: 1 lot ≈ $10/pip. Gold: 0.01 lot ≈ $1 per $1 move.</li><li>Lot = risk $ ÷ (SL pips × pip value).</li><li>Har trade ka lot SL se nikalein, fixed lot nahi.</li></ul></div>

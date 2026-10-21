@@ -731,6 +731,15 @@ footer a:hover{color:var(--ink)}
 .covers ul{list-style:none;padding:0!important}
 .covers li{padding-left:28px;position:relative;font-size:17px!important}
 .covers li:before{content:"✓";position:absolute;left:0;top:0;color:var(--gold);font-weight:800}
+.take{margin-top:28px;border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:0 12px 12px 0;background:var(--surface);padding:22px 24px}
+.take .th{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.take .th img{width:48px;height:48px;border-radius:50%;object-fit:cover;object-position:top;border:2px solid var(--gold)}
+.take .th b{display:block;font:800 22px/1.1 var(--f-display);text-transform:uppercase;color:var(--ink)}
+.take .th span{font-size:14px;color:var(--muted)}
+.take blockquote{margin:0;padding:12px 0;border-top:1px solid var(--line)}
+.take blockquote:first-of-type{border-top:0;padding-top:0}
+.take blockquote p{color:var(--ink)!important;font-size:18px;line-height:1.65}
+.take blockquote cite{display:block;margin-top:6px;font:600 11px/1.3 var(--f-mono);letter-spacing:1px;text-transform:uppercase;color:var(--gold);font-style:normal}
 .urdu{margin-top:36px;border-left:4px solid var(--gold);background:var(--surface);border-radius:0 12px 12px 0;padding:20px 24px}
 .urdu h2{font-size:22px!important;margin:0 0 10px!important}
 .urdu ul{padding-left:20px}
@@ -786,6 +795,7 @@ footer a:hover{color:var(--ink)}
 <div class="wrap ls-body">
   <article class="ls-art">
     <div class="covers"><h2>In this lecture</h2><ul><li>Why missing backtests make traders fail</li><li>Writing your strategy down first</li><li>Choosing backtesting software</li><li>Testing on the hours you really trade</li></ul></div>
+    <div class="take"><div class="th"><img src="dr-qazi.jpg" alt="Dr. Qazi Abdul Basit" width="48" height="48" loading="lazy"><div><b>Dr. Qazi's take</b><span>In his own words, from his lectures and teaching</span></div></div><blockquote><p>Not backtesting is one of the main reasons traders fail. Write your strategy down, choose your backtesting software, and test on data from the same hours you normally trade; many traders make mistakes here.</p><cite>From the lecture</cite></blockquote><blockquote><p>A written plan you follow, and the patience to skip a trade when the setup is not there.</p><cite>How Dr. Qazi teaches</cite></blockquote></div>
     <h2>Lesson notes</h2>
     <h2>Step 1: write the strategy down</h2><p>Entry, stop loss, take profit, timeframe, pairs, trading hours and risk per trade. If a rule is not written, you will change it during the test without noticing.</p><h2>Step 2: test like it is live</h2><ul><li>Use software that hides the future candles, such as a replay simulator.</li><li>Test on the <b>hours you really trade</b>. Forex trades around the clock on weekdays, and Asian, London and New York sessions behave differently.</li><li>Record every trade: date, setup, result in R.</li><li>Test at least 100 trades across different market conditions.</li></ul><h2>Step 3: read the results honestly</h2><p>Look at win rate together with average reward, maximum losing streak and drawdown. A strategy with 40% winners can be good with 1:2 trades; one with 70% winners can lose money with poor exits.</p>
     <div class="urdu"><h2>Khulasa (Roman Urdu)</h2><ul><li>Pehle strategy likhein: entry, SL, TP, waqt, risk.</li><li>Future chhupa kar test karein (replay simulator).</li><li>Wohi ghante test karein jin mein aap trade karte hain.</li><li>Kam az kam 100 trades, losing streak aur drawdown dekhein.</li></ul></div>
