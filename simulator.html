@@ -9,7 +9,7 @@
 <meta name="description" content="QFT Replay Simulator: forex market replay and backtesting inside MT5 and MT4, a Soft4FX, FX Replay and Forex Tester alternative. Bar replay, prop firm challenge mode, lot size from your risk, sessions and a full backtest report. Free demo.">
 <link rel="canonical" href="https://qaziforextips.com/simulator.html">
 <meta name="robots" content="index, follow, max-image-preview:large">
-<meta name="author" content="Dr. Qazi Abdul Basit">
+<meta name="author" content="Qazi Abdul Basit">
 <meta name="theme-color" content="#0d1220">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Qazi Forex Tips">
@@ -29,18 +29,18 @@
 <style>
 /* Layout: a trading terminal at night — one wide chart stage, sections ruled like a price axis, gold used only for the call to act */
 :root{
-  --ink:#0d1220;        /* page */
-  --panel:#141e2d;      /* raised surfaces */
-  --line:#24324a;       /* grid / rules */
-  --text:#e6ebf2;
-  --muted:#93a1b5;
-  --gold:#e7b94f;       /* brand accent (QFT gold) */
-  --up:#22c55e; --down:#ef4444; --info:#60a5fa;
-  --f-display:"Saira Condensed","Arial Narrow",Arial,sans-serif;
-  --f-body:"Source Sans 3","Segoe UI",Arial,sans-serif;
-  --f-mono:"IBM Plex Mono",Consolas,"Courier New",monospace;
-  --f-ur:"Noto Nastaliq Urdu","Jameel Noori Nastaleeq","Urdu Typesetting",serif;
-  color-scheme:dark;
+  --ink:#0d1220;        /* page */
+  --panel:#141e2d;      /* raised surfaces */
+  --line:#24324a;       /* grid / rules */
+  --text:#e6ebf2;
+  --muted:#93a1b5;
+  --gold:#e7b94f;       /* brand accent (QFT gold) */
+  --up:#22c55e; --down:#ef4444; --info:#60a5fa;
+  --f-display:"Saira Condensed","Arial Narrow",Arial,sans-serif;
+  --f-body:"Source Sans 3","Segoe UI",Arial,sans-serif;
+  --f-mono:"IBM Plex Mono",Consolas,"Courier New",monospace;
+  --f-ur:"Noto Nastaliq Urdu","Jameel Noori Nastaleeq","Urdu Typesetting",serif;
+  color-scheme:dark;
 }
 *{box-sizing:border-box}
 html,body{background:var(--ink);color:var(--text)}
@@ -302,38 +302,33 @@ footer .wrap{display:grid;gap:8px}
 
 
 <header class="top">
-  <div class="wrap">
-    <a class="brand" href="index.html"><img src="logo.png" alt="Qazi Forex Tips logo"><span><b>QFT Replay Simulator</b><small>QAZI FOREX TIPS</small></span></a>
-    <nav class="nav" aria-label="Sections">
-      <a href="index.html">Home</a><a href="about.html">About</a><a href="#features">Features</a><a href="#challenge">Prop Firm</a><a href="#report">Report</a><a href="#reviews">Reviews</a><a href="#plans">Plans</a><a href="#faq">FAQ</a>
-    </nav>
-    <a class="btn gold sm" href="#download">Get the demo</a>
-  </div>
+  <div class="wrap">
+    <a class="brand" href="index.html"><img src="logo.png" alt="Qazi Forex Tips logo"><span><b>QFT Replay Simulator</b><small>QAZI FOREX TIPS</small></span></a>
+    <nav class="nav" aria-label="Sections">
+      <a href="index.html">Home</a><a href="about.html">About</a><a href="#features">Features</a><a href="#challenge">Prop Firm</a><a href="#report">Report</a><a href="#reviews">Reviews</a><a href="#plans">Plans</a><a href="#faq">FAQ</a>
+    </nav>
+    <a class="btn gold sm" href="#download">Get the demo</a>
+  </div>
 </header>
 
 <div class="ticker" aria-hidden="true"><div>
-  <span>XAUUSD.r <em>&#9650; replay</em></span><span>M1 · M5 · M15 · H1 synced</span><span>Speed 2.5 candles/sec</span><span>Challenge: Target 8% · Daily 5% · Max 10%</span><span>Risk $10 → lot follows SL</span><span>Expectancy +0.20R</span><span>Max DD <i>-4.61%</i></span><span>GBPUSD.r <em>&#9650; replay</em></span>
-  <span>XAUUSD.r <em>&#9650; replay</em></span><span>M1 · M5 · M15 · H1 synced</span><span>Speed 2.5 candles/sec</span><span>Challenge: Target 8% · Daily 5% · Max 10%</span><span>Risk $10 → lot follows SL</span><span>Expectancy +0.20R</span><span>Max DD <i>-4.61%</i></span><span>GBPUSD.r <em>&#9650; replay</em></span>
+  <span>XAUUSD.r <em>&#9650; replay</em></span><span>M1 · M5 · M15 · H1 synced</span><span>Speed 2.5 candles/sec</span><span>Challenge: Target 8% · Daily 5% · Max 10%</span><span>Risk $10 → lot follows SL</span><span>Expectancy +0.20R</span><span>Max DD <i>-4.61%</i></span><span>GBPUSD.r <em>&#9650; replay</em></span>
+  <span>XAUUSD.r <em>&#9650; replay</em></span><span>M1 · M5 · M15 · H1 synced</span><span>Speed 2.5 candles/sec</span><span>Challenge: Target 8% · Daily 5% · Max 10%</span><span>Risk $10 → lot follows SL</span><span>Expectancy +0.20R</span><span>Max DD <i>-4.61%</i></span><span>GBPUSD.r <em>&#9650; replay</em></span>
 </div></div>
 
 <main id="top">
 <div class="hero"><div class="wrap grid">
-  <div>
-    <a class="newpill" href="#download"><b>NEW</b> Now also for MetaTrader 4: download version 3.03 →</a>
-    <h1><small class="eyebrow h1k">MT5 &amp; MT4 Replay Simulator · market replay &amp; backtesting</small>Trade the past.<br><span>Pass the future.</span></h1>
-    <p class="ur">اپنی اسٹریٹجی کو پیسہ لگانے سے پہلے ٹیسٹ کریں</p>
-    <p class="lead">QFT Replay Simulator turns MetaTrader 5 and MetaTrader 4 into a forex market replay and backtesting simulator. Pick any day, play it candle by candle, trade it like live and get a professional report that tells you how much to risk.</p>
-    <div class="cta">
-      <a class="btn gold" id="dlHero" href="downloads/QFT-Replay-Simulator.zip" download><svg class="dl-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></svg>Download free demo</a>
-      <a class="btn" href="#compare">Compare with Soft4FX &amp; FX Replay</a>
-    </div>
-    <div class="facts"><span><b>MT5 &amp; MT4</b> · any broker</span><span><b>Ticks or M1</b> data</span><span><b>21</b> timeframes (MT5)</span><span><b>Demo</b> · 5 trades</span></div>
-  </div>
-  <div class="stage">
-    <img class="chart" src="v3_dash_chart.jpg" alt="XAUUSD H1 replay chart in MT5 with the challenge dashboard in the lower left corner">
-    <img class="pass" src="v3_dash_pass.png" alt="Challenge dashboard showing PASSED">
-  </div>
-</div></div>
-</main>
-</body>
-</html>
+  <div>
+    <a class="newpill" href="#download"><b>NEW</b> Now also for MetaTrader 4: download version 3.03 →</a>
+    <h1><small class="eyebrow h1k">MT5 &amp; MT4 Replay Simulator · market replay &amp; backtesting</small>Trade the past.<br><span>Pass the future.</span></h1>
+    <p class="ur">اپنی اسٹریٹجی کو پیسہ لگانے سے پہلے ٹیسٹ کریں</p>
+    <p class="lead">QFT Replay Simulator turns MetaTrader 5 and MetaTrader 4 into a forex market replay and backtesting simulator. Pick any day, play it candle by candle, trade it like live and get a professional report that tells you how much to risk.</p>
+    <div class="cta">
+      <a class="btn gold" id="dlHero" href="downloads/QFT-Replay-Simulator.zip" download><svg class="dl-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></svg>Download free demo</a>
+      <a class="btn" href="#compare">Compare with Soft4FX &amp; FX Replay</a>
+    </div>
+    <div class="facts"><span><b>MT5 &amp; MT4</b> · any broker</span><span><b>Ticks or M1</b> data</span><span><b>21</b> timeframes (MT5)</span><span><b>Demo</b> · 5 trades</span></div>
+  </div>
+  <div class="stage">
+    <img class="chart" src="v3_dash_chart.jpg" alt="XAUUSD H1 replay chart in MT5 with the challenge dashboard in the lower left corner">
+    <img class="pass" src="v3_dash_pass.png" alt="Challenge dashboard showing PASSED, +8
