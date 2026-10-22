@@ -1,0 +1,25 @@
+name: Feedback page - write reviews into the HTML
+on:
+  schedule:
+    - cron: "23 */6 * * *"   # every 6 hours
+  workflow_dispatch:          # "Run workflow" button on GitHub
+permissions:
+  contents: write
+concurrency: bake-feedback
+jobs:
+  bake:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - run: node .github/scripts/bake-feedback.js
+      - name: Commit if the reviews changed
+        run: |
+          if git diff --quiet; then echo "No change"; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -am "Feedback page: refresh reviews from the Public sheet"
+          git pull --rebase -q origin main
+          git push

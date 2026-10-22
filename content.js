@@ -25,7 +25,7 @@ window.SITE = {
 
   /* ---------- 2. SHURU KA HISSA (HERO) ---------- */
   hero: {
-    title: "Learn to trade like a professional.",
+    title: "Free Forex & Gold Trading Course in Urdu & Hindi",
     urdu: "پروفیشنل ٹریڈر کی طرح ٹریڈنگ سیکھیں",
     text: "Price action, Gold (XAUUSD) analysis, risk and money management – explained in Urdu and Hindi, with tools built for MetaTrader 5 and 4."
   },
@@ -84,6 +84,10 @@ window.SITE = {
   },
 
   updates: [
+    { date: "2026-10-22", type: "new", products: ["courses", "website"],
+      title: "Free course pages and the Forex Guide (Urdu & Hindi)",
+      text: "Each free course now has its own page with every lecture in order: Price Action Mastery Basic (11 lectures), Advance (9) and Trading Strategies (10). The new Forex Guide explains pips, leverage, spread, risk:reward, Smart Money Concepts, Gold, MT4 vs MT5 and prop firm challenges, with diagrams and a Roman Urdu / Hindi summary.",
+      link: "course-price-action-basic.html", linkText: "Start the basic course" },
     { date: "2026-10-21", type: "new", products: ["simulator"],
       title: "Replay Simulator for MetaTrader 4 is released (version 3.03)",
       text: "The QFT Replay Simulator now runs on MetaTrader 4 too, with the same tools as MT5 3.03: market replay with Prev Bar, Prop Firm Challenge mode and dashboard, lot size from your $ risk, the Smart Panel, sessions and killzones, drawings sync and the full backtest report. Download the MT4 zip from the Simulator page. MT4 differences: the replay runs on an offline chart, data comes from M1 history (History Center) or a CSV file because MT4 has no tick history, and there are no news lines because MT4 has no economic calendar. Each MT4 account needs its own licence key.",
@@ -379,9 +383,9 @@ window.SITE = {
 
   /* ---------- 8. YAHAN SE SHURU KAREIN (learning path) ---------- */
   path: [
-    { title: "Learn the basics", text: "Price Action Mastery – Basic Level. 11 lectures, from support & resistance to multi-timeframe analysis.", link: "youtube.html#pl-1", button: "Start Lecture 1" },
-    { title: "Go advanced", text: "Price Action Mastery – Advance Level. Market structure, swing levels and chart patterns with entry, SL and TP rules.", link: "youtube.html#pl-2", button: "Open the course" },
-    { title: "Pick a strategy", text: "Complete strategies with rules: divergence, breakout, price action scalping and Gold scalping.", link: "youtube.html#pl-3", button: "See strategies" },
+    { title: "Learn the basics", text: "Price Action Mastery – Basic Level. 11 lectures, from support & resistance to multi-timeframe analysis.", link: "course-price-action-basic.html", button: "Open the course" },
+    { title: "Go advanced", text: "Price Action Mastery – Advance Level. Market structure, swing levels and chart patterns with entry, SL and TP rules.", link: "course-price-action-advanced.html", button: "Open the course" },
+    { title: "Pick a strategy", text: "Complete strategies with rules: divergence, breakout, price action scalping and Gold scalping.", link: "course-trading-strategies.html", button: "See strategies" },
     { title: "Practise before you risk money", text: "Replay past markets candle by candle in the QFT Replay Simulator and build your own track record.", link: "simulator.html", button: "See the simulator" }
   ],
 
