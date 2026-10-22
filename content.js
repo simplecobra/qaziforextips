@@ -16,7 +16,7 @@ window.SITE = {
   /* ---------- 1. AAP KI MALOOMAT ---------- */
   brand: {
     name: "Qazi Forex Tips",
-    tagline: "Gold, Price Action & Risk Management – in Urdu",
+    tagline: "Gold, Price Action & Risk Management – in Urdu & Hindi",
     whatsapp: "+92-323-6700010",
     youtube: "https://www.youtube.com/@QaziForexTips",
     facebook: "https://www.facebook.com/groups/qaziforextips",
@@ -27,7 +27,7 @@ window.SITE = {
   hero: {
     title: "Learn to trade like a professional.",
     urdu: "پروفیشنل ٹریڈر کی طرح ٹریڈنگ سیکھیں",
-    text: "Price action, Gold (XAUUSD) analysis, risk and money management – explained in Urdu, with tools built for MetaTrader 5."
+    text: "Price action, Gold (XAUUSD) analysis, risk and money management – explained in Urdu and Hindi, with tools built for MetaTrader 5 and 4."
   },
 
   /* ---------- 3. SOFTWARE, EA, INDICATORS ----------
