@@ -366,12 +366,12 @@ footer a:hover{color:var(--ink)}
     <p class="lead">Real feedback from students of our courses and from traders who use our tools, shared with their permission and shown in their own words.</p>
     <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:26px"><a class="btn gold" href="#share">Share your experience</a><a class="btn" href="youtube.html">See the courses</a></div>
   </div>
-  <div class="score" id="score"><span>Overall rating</span><b>–</b><div class="stars" style="opacity:.3">★★★★★</div><span id="scoreTxt">Loading feedback…</span></div>
+  <div class="score" id="score"><!--FB-SCORE--><span>Overall rating</span><b>–</b><div class="stars" style="opacity:.3">★★★★★</div><span id="scoreTxt">Loading feedback…</span><!--/FB-SCORE--></div>
 </div></section>
 
 <section id="list" style="padding-top:24px"><div class="wrap">
   <div class="fbar" id="fbar" hidden><div class="fchips" id="fchips" role="group" aria-label="Filter feedback"></div><label class="fbatch" id="fbatchW" hidden><span class="sr">Filter by batch</span><select id="fbatch"></select></label></div>
-  <div class="fb-grid" id="tstList" style="margin-bottom:22px"></div>
+  <div class="fb-grid" id="tstList" style="margin-bottom:22px"><!--FB-STATIC--><!--/FB-STATIC--></div>
   <div id="tstMoreWrap" hidden><button class="btn sm" type="button" id="tstMore">Show more feedback</button></div>
   <div class="fb-empty" id="fbEmpty" hidden><b style="color:var(--ink);font-size:20px" id="fbEmptyT">Be the first to share your experience.</b><span>Your feedback will appear here within a few minutes.</span><a class="btn gold sm" href="#share">Write feedback</a></div>
 </div></section>
@@ -435,6 +435,7 @@ footer a:hover{color:var(--ink)}
   }
   function draw(final){
     var list = view();
+    if (!final && !list.length && $("tstList").querySelector(".tst")) return;   /* keep the written-in reviews until the live list arrives */
     $("tstList").innerHTML = list.slice(0, shown).map(function(t){ return Q.card(t); }).join("");
     $("tstList").hidden = !list.length;
     $("tstMoreWrap").hidden = list.length <= shown;
