@@ -12,7 +12,7 @@ const PAGES = {
   "about.html":           ["photo", "abRole", "abStory", "abSkills", "stats", "teamList", "#team", "fname", "disc"],
   "index.html":           ["stats", "path", "photo", "story", "vids", "fbSum", "tstList", "fname", "disc", "waNum"],
   "updates.html":         ["ufil", "tl", "fname", "disc"],
-  "trade-assistant.html": ["videoBox", "#video", "vhList", "#versions", "rvMount", "fname", "disc"],
+  "trade-assistant.html": ["taVisual", "gallery", "#screens", "videoBox", "#video", "vhList", "#versions", "rvMount", "fname", "disc"],
   "simulator.html":       ["vhList", "#versions", "rvMount"],
 };
 
@@ -44,6 +44,7 @@ function patch(html, id, inner, hidden) {
     for (const g of got) {
       if (g.missing) { console.warn("  " + file + ": #" + g.id + " not on page"); continue; }
       if (!g.only && !g.html.trim()) continue;              // nothing rendered (e.g. Sheet offline): keep what is there
+      if ((g.id === "rvMount" || g.id === "tstList") && !g.html.includes('class="tst"')) continue;   // reviews did not load: keep the last written ones
       html = patch(html, g.id, g.only ? null : g.html, g.hidden);
     }
     if (html !== before) { fs.writeFileSync(src, html); changed++; console.log("updated " + file); } else console.log("no change " + file);
