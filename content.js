@@ -336,7 +336,7 @@ window.SITE = {
       },
       {
         name: "Important Forex Videos",
-        text: "Practical guides: brokers, deposits & withdrawals, TradingView, backtesting software, lot size, news and the best time to trade.",
+        text: "Practical guides: TradingView, backtesting software, broker selection, lot size, news and the best time to trade.",
         course: false,
         link: "https://www.youtube.com/playlist?list=PLae00y7sDib7ZXxHWIHzlkcmcAU992IUw",
         videos: [
@@ -346,17 +346,13 @@ window.SITE = {
           { title: "Weekly Analysis GBPUSD, GBPAUD, GBPNZD, GBPCHF. GBPCAD for 21 June to 25 June 2021", link: "https://youtu.be/bGJysA4XgT8", time: "14:33" },
           { title: "Simple method to Read and Analyze NFP News Data in Urdu/Hindi", link: "https://youtu.be/jU96IJBXrSE", time: "13:10" },
           { title: "Thinktrader Tutorial + Download Link: Best Free Software for Backtesting Forex/ Stock Market", link: "https://youtu.be/PwWmz-5S4qE", time: "13:01" },
-          { title: "IC Markets Broker Review and Account Opening", link: "https://youtu.be/H4KgkxaiKSQ", time: "36:46" },
           { title: "Best Broker Selection Guide. very simple steps in Urdu & Hindi I How to Select Top Broker for Forex", link: "https://youtu.be/JeUpNZjti5Q", time: "15:28" },
           { title: "Chart Pattern Dashboard: Autochartist: Get Daily Forex/Stock Chart Pattern Signals on Mobile", link: "https://youtu.be/dOYz8pONVa0", time: "12:10" },
           { title: "Must Watch this Video before Starting Forex Trading l Trading Myths VS Realities", link: "https://youtu.be/UnSphPChym8", time: "12:19" },
           { title: "Strategy Optimization Tips – Improve Your Strategy Step by Step", link: "https://youtu.be/o0KRYx2WOmw", time: "13:06" },
-          { title: "IC Markets Account Opening & Verification – Step by Step", link: "https://youtu.be/Ud6u5BLeKt0", time: "16:57" },
           { title: "Best time to trade Forex/Gold for Scalping in Pakistan/ India", link: "https://youtu.be/ULqqAMzAKhg", time: "12:35" },
           { title: "Soft4FX Tutorial: FOREX, Stock, Crypto Best Backtesting Software (Bar Reply Forex Simulator for MT4)", link: "https://youtu.be/wHBg7w9ws-Y", time: "24:07" },
-          { title: "IC Markets | How to deposit and withdraw from IC Markets | Local Bank | Skrill l Pakistan & India", link: "https://youtu.be/0aYu58CE4Fo", time: "12:04" },
           { title: "Trade Assistant for mt4 : Automatic Risk/Lot Size calculator: Manage your trades with just 1 click", link: "https://youtu.be/1uMbc43V_tk", time: "16:18" },
-          { title: "FP Markets Account Opening & Verification – Step by Step", link: "https://youtu.be/KBmSAZsrRa0", time: "9:36" },
           { title: "Managing Lot Size in Forex – The Right Lot Size on Every Trade", link: "https://youtu.be/4c9gtnO5_48", time: "9:39" },
           { title: "Best MT5 Replay Tool for Backtesting | Prop Firm Challenge Mode | Practice Like Real Market", link: "https://youtu.be/U1bCUislVJ4", time: "28:40" },
           { title: "Trade Assistant MT5 Tutorial | Setup, Chart Patterns, Signals, Lot Calculator & Prop Firm Guard", link: "https://youtu.be/lAOFQHaCszA", time: "28:10" }
