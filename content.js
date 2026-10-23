@@ -192,15 +192,16 @@ window.SITE = {
     version: "3.13",
     video: "https://youtu.be/lAOFQHaCszA",
     shots: [
-      { file: "ta-hero.png", caption: "QFT Trade Assistant on a Gold chart: the panel and the Entry, SL and TP lines" },
-      { file: "ta-1.png", caption: "Trade tab: risk in USD, R/TP and R/SL, ATR stop, lot calculator, market and pending orders" },
-      { file: "ta-2.png", caption: "Chart lines: drag Entry, SL and TP, see the loss and profit in USD; L locks a line, R flips Buy and Sell" },
-      { file: "ta-3.png", caption: "Close tab: close buys, sells, profits or losses, delete pending orders, auto close by profit, loss or time" },
-      { file: "ta-8.png", caption: "Protect tab: Prop Firm Guard with daily loss and max drawdown limits, news lock and open risk" },
-      { file: "ta-5.png", caption: "Market tab: economic calendar with high, medium and low impact news in your PC time" },
+      { file: "ta-hero.png", caption: "QFT Trade Assistant 3.13 on a Gold (XAUUSD) M5 chart in the Navy Blue theme: risk 1,000 USD, lot 1.24 calculated, Entry, SL and TP lines with money at risk and reward" },
+      { file: "ta-1.png", caption: "Trade tab: risk in USD or %, R/TP and R/SL ratio, ATR stop, lot calculator, market, stop and limit orders" },
+      { file: "ta-2.png", caption: "Chart lines: drag Entry, SL and TP and see the loss and profit in USD; L locks a line, R flips Buy and Sell" },
+      { file: "ta-3.png", caption: "Close tab: close buys, sells, profits or losses, delete pending orders, auto close by profit, loss or time (e.g. Friday 23:30)" },
+      { file: "ta-8.png", caption: "Protect tab: Prop Firm Guard with daily loss and max drawdown limits, news lock, open risk and the maximum lot" },
+      { file: "ta-5.png", caption: "Market tab: economic calendar for the whole week with high, medium and low impact news and a countdown, in your PC time" },
       { file: "ta-6.png", caption: "Signals, Patterns: chart and candlestick patterns plus Smart Money zones (FVG, order block, BOS/CHoCH, liquidity sweep) with history scores" },
-      { file: "ta-7.png", caption: "Signals, Strategies: 11 strategy signals including ICT OTE and the ICT 2022 Model, with Entry, SL and TP and history scores; no auto trading" },
-      { file: "ta-4.png", caption: "Licence and updates: plan, time left, change key and one-click update" }
+      { file: "ta-7.png", caption: "Signals, Strategies: 11 strategies including ICT OTE 79% and the ICT 2022 Model, with the Best and Use setup buttons; no auto trading" },
+      { file: "ta-9.png", caption: "Journal tab: every trade with its setup, feeling and note, report period, screenshots and a full HTML report (amounts blurred)" },
+      { file: "ta-4.png", caption: "Info, About: licence status, version 3.13 up to date, check for updates, Navy Blue theme and panel size 75–150%" }
     ],
     features: [
       { title: "Exact lot from your risk", text: "8 risk modes: $, % of balance, equity, free margin or a custom value, or % of the day, week or month start. Commission included, rounded to your broker's lot step. The lot turns red if the broker would not accept it." },
