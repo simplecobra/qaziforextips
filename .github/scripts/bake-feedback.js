@@ -19,6 +19,20 @@ Q.load(S, (list, final) => {
   let html = fs.readFileSync(FILE, "utf8"), before = html;
   html = html.replace(/<!--FB-STATIC-->[\s\S]*?<!--\/FB-STATIC-->/, "<!--FB-STATIC-->" + cards + "<!--/FB-STATIC-->");
   if (score) html = html.replace(/<!--FB-SCORE-->[\s\S]*?<!--\/FB-SCORE-->/, "<!--FB-SCORE-->" + score + "<!--/FB-SCORE-->");
-  if (html === before) { console.log("No change (" + list.length + " reviews)."); return; }
-  fs.writeFileSync(FILE, html); console.log("feedback.html updated: " + list.length + " reviews, average " + s.avg.toFixed(1));
+  if (html === before) console.log("feedback.html: no change (" + list.length + " reviews).");
+  else { fs.writeFileSync(FILE, html); console.log("feedback.html updated: " + list.length + " reviews, average " + s.avg.toFixed(1)); }
+
+  /* star rating in Google: AggregateRating on each tool's SoftwareApplication, from that tool's real reviews
+     (shown on the same page). Allowed for software; never added to the Organization. */
+  [["simulator", "simulator.html"], ["trade-assistant", "trade-assistant.html"]].forEach(([key, file]) => {
+    const own = list.filter(t => t.product === key), r = Q.summary(own), fp = path.join(ROOT, file);
+    let page = fs.readFileSync(fp, "utf8"); const old = page;
+    const m = page.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/); if (!m) return;
+    const d = JSON.parse(m[1]), nodes = d["@graph"] || [d];
+    const app = nodes.find(n => n["@type"] === "SoftwareApplication"); if (!app) return;
+    if (r.rated >= 3) app.aggregateRating = { "@type": "AggregateRating", ratingValue: Number(r.avg.toFixed(1)), ratingCount: r.rated, bestRating: 5, worstRating: 1 };
+    else delete app.aggregateRating;
+    page = page.replace(m[1], JSON.stringify(d));
+    if (page !== old) { fs.writeFileSync(fp, page); console.log(file + ": rating " + (app.aggregateRating ? r.avg.toFixed(1) + " from " + r.rated : "removed")); }
+  });
 });

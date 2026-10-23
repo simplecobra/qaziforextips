@@ -164,7 +164,7 @@
         '<fieldset class="fld rate full"><legend>Your rating</legend><div class="row">' +
           [5, 4, 3, 2, 1].map(function (n) { return '<input type="radio" name="rating" id="rv' + n + '" value="' + n + '"><label for="rv' + n + '" title="' + n + (n > 1 ? " stars" : " star") + '">★</label>'; }).join("") +
         '</div></fieldset>' +
-        '<div class="fld full"><label for="rvText">Your review (English, Urdu or Roman Urdu)</label><textarea id="rvText" required></textarea></div>' +
+        '<div class="fld full"><label for="rvText">Your review (English, Urdu, Hindi or Roman Urdu)</label><textarea id="rvText" required></textarea></div>' +
         '<label class="chk full"><input type="checkbox" id="rvAllow"> I allow Qazi Forex Tips to show my name, city and review on the website.</label>' +
         '<p class="fb-err full" id="rvErr" role="alert" hidden></p>' +
         '<input type="text" id="rvHp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">' +

@@ -1,8 +1,13 @@
 name: Feedback page - write reviews into the HTML
+# Writes the live reviews (Public sheet), the tools' star ratings and the text that pages build
+# from content.js into the HTML, so Google can read everything without running JavaScript.
 on:
   schedule:
     - cron: "23 */6 * * *"   # every 6 hours
   workflow_dispatch:          # "Run workflow" button on GitHub
+  push:
+    branches: [main]
+    paths: ["content.js", "feedback.js"]   # when the owner edits content, refresh the written-in text
 permissions:
   contents: write
 concurrency: bake-feedback
@@ -14,12 +19,22 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
-      - run: node .github/scripts/bake-feedback.js
-      - name: Commit if the reviews changed
+      - name: Reviews into feedback.html + star ratings
+        run: node .github/scripts/bake-feedback.js
+      - name: Install the browser used to read the pages
+        run: |
+          mkdir -p /tmp/pw && cd /tmp/pw && npm init -y >/dev/null && npm install --no-audit --no-fund playwright@1.48.2 >/dev/null
+          npx playwright install --with-deps chromium
+      - name: Write page text into the HTML
+        run: |
+          python3 -m http.server 8765 >/dev/null 2>&1 &
+          sleep 2
+          NODE_PATH=/tmp/pw/node_modules PORT=8765 node .github/scripts/bake-static.js
+      - name: Commit if anything changed
         run: |
           if git diff --quiet; then echo "No change"; exit 0; fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -am "Feedback page: refresh reviews from the Public sheet"
+          git commit -am "Write reviews and page text into the HTML (automatic)"
           git pull --rebase -q origin main
           git push
