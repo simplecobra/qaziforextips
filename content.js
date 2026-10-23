@@ -41,7 +41,7 @@ window.SITE = {
     {
       name: "QFT Replay Simulator",
       type: "Software",
-      badge: "v3.01",
+      badge: "v3.03",
       text: "MT5 market replay and manual backtesting with Prop Firm Challenge mode and a professional backtest report.",
       points: ["Replay any day, candle by candle", "Risk in $ – lot follows your SL", "Money management plan from your results"],
       image: "simulator.jpg",
