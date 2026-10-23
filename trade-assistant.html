@@ -461,9 +461,9 @@ footer a:hover{color:var(--ink)}
   </div>
 </div></section>
 
-<section id="versions" hidden style="padding-top:0"><div class="wrap faq-wrap">
+<section id="versions" style="padding-top:0"><div class="wrap faq-wrap">
   <div class="head" style="align-content:start"><div class="eyebrow">Version history</div><h2>What changed in each version</h2><p>Licensed users get every new version from the panel itself: Info → About → Update.</p><a class="btn sm" href="updates.html?p=trade-assistant" style="justify-self:start">All updates →</a></div>
-  <div class="faq vh" id="vhList"></div>
+  <div class="faq vh" id="vhList"><details open=""><summary><span>Version 3.12 <em class="cur">Current</em></span></summary><ul><li>First MetaTrader 4 version (same panel and licence rules)</li><li>Info &gt; About page: licence, key, updates, theme, panel size, website and WhatsApp; new users start here</li><li>Panel size 75% – 150%, and the panel shrinks itself to stay above indicator windows</li><li>Symbol list: every tradeable symbol of your broker, with a scroll bar</li><li>Symbol details moved to Market &gt; Symbol</li><li>Lines close after an order (Lines button brings them back)</li><li>Update progress in %, restart prompt and What's new after an update</li><li>Clear messages: DLL missing, old MetaTrader, connection, broker EA trading off</li></ul></details><details><summary><span>Version 3.11</span></summary><ul><li>Online self-update tested and working: Update on the License page installs the new version</li></ul></details><details><summary><span>Version 3.10</span></summary><ul><li>A clear message for every problem: DLL off, internet, antivirus, file in use</li></ul></details><details><summary><span>Version 3.09</span></summary><ul><li>Clock shows your country (e.g. PK time)</li><li>'Candle closes in' countdown</li></ul></details><details><summary><span>Version 3.08</span></summary><ul><li>All screenshots in one folder, with a Folder button</li></ul></details><details><summary><span>Version 3.07</span></summary><ul><li>Journal report for any period: 7 / 30 days, 3 / 6 months, this year, all history</li></ul></details></div>
 </div></section>
 
 <section id="screens" hidden><div class="wrap">
@@ -471,12 +471,12 @@ footer a:hover{color:var(--ink)}
   <div class="gallery" id="gallery"></div>
 </div></section>
 
-<section id="video" hidden style="padding-top:0"><div class="wrap">
+<section id="video" style="padding-top:0"><div class="wrap">
   <div class="head"><div class="eyebrow">Video</div><h2>Watch the full tutorial</h2></div>
-  <div class="video" id="videoBox"></div>
+  <div class="video" id="videoBox"><iframe src="https://www.youtube-nocookie.com/embed/lAOFQHaCszA?rel=0" title="QFT Trade Assistant tutorial" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen="" loading="lazy"></iframe></div>
 </div></section>
 
-<section id="reviews" style="padding-top:0"><div class="wrap" id="rvMount"></div></section>
+<section id="reviews" style="padding-top:0"><div class="wrap" id="rvMount"><div class="rv-head"><div class="rv-intro"><div class="eyebrow">User reviews</div><h2>What traders say about the Trade Assistant</h2><p class="rv-sum" id="rvSum">Real reviews from traders who use the QFT Trade Assistant, shared with their permission.</p></div><div class="rv-actions"><button class="btn gold" type="button" id="rvOpen" aria-expanded="false" aria-controls="rvBox">Write a review</button><a class="btn" id="rvAll" href="feedback.html?about=trade-assistant">All feedback</a></div></div><div class="rv-grid" id="rvList" hidden=""></div><p class="rv-empty" id="rvEmpty">No reviews yet. Already using the QFT Trade Assistant? Be the first to share your experience.</p><div class="rv-box" id="rvBox" hidden=""><form id="rvForm" novalidate=""><div class="rv-note full">Tell other traders how the software works for you: what helps, what could be better. Please do not write profit amounts or results.</div><div class="fld"><label for="rvName">Your name</label><input id="rvName" autocomplete="name" required=""></div><div class="fld"><label for="rvCity">City</label><input id="rvCity" autocomplete="address-level2"></div><fieldset class="fld rate full"><legend>Your rating</legend><div class="row"><input type="radio" name="rating" id="rv5" value="5"><label for="rv5" title="5 stars">★</label><input type="radio" name="rating" id="rv4" value="4"><label for="rv4" title="4 stars">★</label><input type="radio" name="rating" id="rv3" value="3"><label for="rv3" title="3 stars">★</label><input type="radio" name="rating" id="rv2" value="2"><label for="rv2" title="2 stars">★</label><input type="radio" name="rating" id="rv1" value="1"><label for="rv1" title="1 star">★</label></div></fieldset><div class="fld full"><label for="rvText">Your review (English, Urdu or Roman Urdu)</label><textarea id="rvText" required=""></textarea></div><label class="chk full"><input type="checkbox" id="rvAllow"> I allow Qazi Forex Tips to show my name, city and review on the website.</label><p class="fb-err full" id="rvErr" role="alert" hidden=""></p><input type="text" id="rvHp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0"><div class="full"><button class="btn gold" type="submit" id="rvSend">Send review</button></div><p class="full fb-ok" id="rvOk" role="status" hidden=""></p></form></div></div></section>
 
 <section id="licence" style="padding-top:0"><div class="wrap">
   <div class="head"><div class="eyebrow">Licence</div><h2>Try it free, then choose a plan</h2><p>The licence key is tied to your MT5 or MT4 account number. Message us on WhatsApp for prices and your key.</p></div>
@@ -510,9 +510,9 @@ footer a:hover{color:var(--ink)}
 </main>
 
 <footer><div class="wrap">
-  <div class="row"><span id="fname"></span><nav aria-label="Footer"><a href="youtube.html">Courses</a><a href="simulator.html">Simulator</a><a href="about.html">About</a><a href="trade-assistant.html">Trade Assistant</a><a href="feedback.html">Feedback</a><a href="updates.html">What's new</a><a href="index.html#faq">FAQ</a></nav></div>
-  <p class="disc" id="disc"></p>
-</div></footer>
+  <div class="row"><span id="fname">© 2026 Qazi Forex Tips · WhatsApp +92-323-6700010</span><nav aria-label="Footer"><a href="youtube.html">Courses</a><a href="simulator.html">Simulator</a><a href="about.html">About</a><a href="trade-assistant.html">Trade Assistant</a><a href="feedback.html">Feedback</a><a href="updates.html">What's new</a><a href="index.html#faq">FAQ</a></nav></div>
+  <p class="disc" id="disc">Trading forex and gold involves high risk. Content is for education only and is not financial advice. Past or backtest results do not guarantee future results.</p>
+<!--LEGAL--><p class="legal" style="font-size:13px;color:var(--muted);margin-top:10px"><a href="privacy.html" style="color:inherit">Privacy Policy</a> · <a href="terms.html" style="color:inherit">Terms of Use</a> · <a href="risk-disclaimer.html" style="color:inherit">Risk Disclaimer</a></p><!--/LEGAL--></div></footer>
 
 <a class="wa-float" id="waFloat" href="#contact" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z"/></svg></a>
 
