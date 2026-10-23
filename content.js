@@ -187,12 +187,15 @@ window.SITE = {
     version: "3.12",
     video: "https://youtu.be/lAOFQHaCszA",
     shots: [
-      { file: "ta-1.png", caption: "Main panel: risk, lot size and one-click orders" },
-      { file: "ta-2.png", caption: "Entry, SL and TP lines on the chart" },
-      { file: "ta-3.png", caption: "Close tab: manage open trades" },
-      { file: "ta-4.png", caption: "Info tab: account, symbol and statistics" },
-      { file: "ta-5.png", caption: "Patterns & Strategies tabs" },
-      { file: "ta-6.png", caption: "License & Updates screen" }
+      { file: "ta-hero.png", caption: "QFT Trade Assistant on a Gold chart: the panel and the Entry, SL and TP lines" },
+      { file: "ta-1.png", caption: "Trade tab: risk in USD, R/TP and R/SL, ATR stop, lot calculator, market and pending orders" },
+      { file: "ta-2.png", caption: "Chart lines: drag Entry, SL and TP, see the loss and profit in USD; L locks a line, R flips Buy and Sell" },
+      { file: "ta-3.png", caption: "Close tab: close buys, sells, profits or losses, delete pending orders, auto close by profit, loss or time" },
+      { file: "ta-8.png", caption: "Protect tab: Prop Firm Guard with daily loss and max drawdown limits, news lock and open risk" },
+      { file: "ta-5.png", caption: "Market tab: economic calendar with high, medium and low impact news in your PC time" },
+      { file: "ta-6.png", caption: "Signals, Patterns: chart and candlestick patterns plus Smart Money zones (FVG, order block, BOS/CHoCH, liquidity sweep) with history scores" },
+      { file: "ta-7.png", caption: "Signals, Strategies: 9 strategy signals with Entry, SL and TP arrows and history scores; no auto trading" },
+      { file: "ta-4.png", caption: "Licence and updates: plan, time left, change key and one-click update" }
     ],
     features: [
       { title: "Exact lot from your risk", text: "8 risk modes: $, % of balance, equity, free margin or a custom value, or % of the day, week or month start. Commission included, rounded to your broker's lot step. The lot turns red if the broker would not accept it." },
