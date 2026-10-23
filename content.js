@@ -51,7 +51,7 @@ window.SITE = {
     {
       name: "QFT Trade Assistant",
       type: "EA",
-      badge: "v3.12",
+      badge: "v3.13",
       text: "Risk management trade panel for MT5 and MT4: set risk in money or %, drag Entry / SL / TP lines, the lot size is calculated for you.",
       points: ["Lot size from your risk", "Drag Entry / SL / TP on the chart", "One-click market & pending orders"],
       image: "",
@@ -77,13 +77,17 @@ window.SITE = {
                Nayi khabar par "id" zaroor badlein (warna jis ne band ki thi usay nazar nahi aayegi).
      versions: Simulator / Trade Assistant pages par "Version history". Naya version = list mein sab se upar 1 line. */
   announce: {
-    id: "sim-mt4-303",
-    text: "QFT Replay Simulator is now also available for MetaTrader 4 (version 3.03).",
-    link: "simulator.html#download", linkText: "Download for MT4",
+    id: "ta-313",
+    text: "QFT Trade Assistant 3.13: compact view, Start here help, risk warning colours and 2 ICT strategies.",
+    link: "trade-assistant.html#new", linkText: "See what's new",
     until: "2026-12-15"
   },
 
   updates: [
+    { date: "2026-10-23", type: "new", products: ["trade-assistant"],
+      title: "Trade Assistant 3.13: compact view, Start here help and 2 ICT strategies",
+      text: "Version 3.13 for MT5 and MT4 adds a compact view (only risk, lot, Lines and Sell / Buy, made for scalping and small screens), a 3-step Start here help for new users, a risk box that turns yellow above 2% and red above 5% of your balance, and two ICT strategies in Signals: ICT OTE 79% and the ICT 2022 Model. New Best button keeps only the strategies that beat break-even on your chart, and Use setup copies a signal's Entry, SL and TP to the Trade tab for you to check. Navy Blue is the new default theme. Installed panels update themselves; new users can download 3.13.",
+      link: "trade-assistant.html#new", linkText: "See what's new" },
     { date: "2026-10-22", type: "new", products: ["courses", "website"],
       title: "Free course pages and the Forex Guide (Urdu & Hindi)",
       text: "Each free course now has its own page with every lecture in order: Price Action Mastery Basic (11 lectures), Advance (9) and Trading Strategies (10). The new Forex Guide explains pips, leverage, spread, risk:reward, Smart Money Concepts, Gold, MT4 vs MT5 and prop firm challenges, with diagrams and a Roman Urdu / Hindi summary.",
@@ -153,7 +157,8 @@ window.SITE = {
       { v: "2.99", items: ["Risk in $: the lot size is calculated from your SL", "Moving the SL line re-sizes the lot, the loss never goes above your risk", "Import CSV: M1 data from HistData or Dukascopy", "Clearer messages for tick downloads"] }
     ],
     tradeAssistant: [
-      { v: "3.12", current: true, items: ["First MetaTrader 4 version (same panel and licence rules)", "Info > About page: licence, key, updates, theme, panel size, website and WhatsApp; new users start here", "Panel size 75% – 150%, and the panel shrinks itself to stay above indicator windows", "Symbol list: every tradeable symbol of your broker, with a scroll bar", "Symbol details moved to Market > Symbol", "Lines close after an order (Lines button brings them back)", "Update progress in %, restart prompt and What's new after an update", "Clear messages: DLL missing, old MetaTrader, connection, broker EA trading off"] },
+      { v: "3.13", current: true, items: ["Compact view: one button shrinks the panel to risk, lot, Lines and Sell / R / Buy", "Start here: 3 short steps guide a new user through risk, SL / TP and the order", "Risk box turns yellow above 2% and red above 5% of the balance", "2 new ICT strategies in Signals: ICT OTE 79% and ICT 2022 Model (11 strategies)", "Best button: keeps only the strategies that beat break-even on your chart", "Use setup: copies a signal's Entry, SL and TP to the Trade tab (you place the order)", "Navy Blue default theme, cleaner panel without the bottom box"] },
+      { v: "3.12", items: ["First MetaTrader 4 version (same panel and licence rules)", "Info > About page: licence, key, updates, theme, panel size, website and WhatsApp; new users start here", "Panel size 75% – 150%, and the panel shrinks itself to stay above indicator windows", "Symbol list: every tradeable symbol of your broker, with a scroll bar", "Symbol details moved to Market > Symbol", "Lines close after an order (Lines button brings them back)", "Update progress in %, restart prompt and What's new after an update", "Clear messages: DLL missing, old MetaTrader, connection, broker EA trading off"] },
       { v: "3.11", items: ["Online self-update tested and working: Update on the License page installs the new version"] },
       { v: "3.10", items: ["A clear message for every problem: DLL off, internet, antivirus, file in use"] },
       { v: "3.09", items: ["Clock shows your country (e.g. PK time)", "'Candle closes in' countdown"] },
@@ -174,8 +179,8 @@ window.SITE = {
   downloads: {
     simulator:      { file: "downloads/QFT-Replay-Simulator.zip", version: "3.03", size: "4.6 MB" },
     simulatorMT4:   { file: "downloads/QFT-Replay-Simulator-MT4.zip", version: "3.03", size: "6.3 MB" },
-    tradeAssistant: { file: "downloads/QFT-Trade-Assistant.zip",  version: "3.12", size: "4.0 MB" },
-    tradeAssistantMT4: { file: "downloads/QFT-Trade-Assistant-MT4.zip", version: "3.12", size: "3.8 MB" }
+    tradeAssistant: { file: "downloads/QFT-Trade-Assistant.zip",  version: "3.13", size: "3.9 MB" },
+    tradeAssistantMT4: { file: "downloads/QFT-Trade-Assistant-MT4.zip", version: "3.13", size: "3.8 MB" }
   },
 
   /* ---------- 3b. QFT TRADE ASSISTANT (trade-assistant.html + Home showcase) ----------
@@ -184,7 +189,7 @@ window.SITE = {
               website khud dikha degi. Jo tasveer nahi mili woh khud chhup jati hai.
      video:   YouTube tutorial ka link (Trade Assistant page par chalti hai).    */
   tradeAssistant: {
-    version: "3.12",
+    version: "3.13",
     video: "https://youtu.be/lAOFQHaCszA",
     shots: [
       { file: "ta-hero.png", caption: "QFT Trade Assistant on a Gold chart: the panel and the Entry, SL and TP lines" },
@@ -194,7 +199,7 @@ window.SITE = {
       { file: "ta-8.png", caption: "Protect tab: Prop Firm Guard with daily loss and max drawdown limits, news lock and open risk" },
       { file: "ta-5.png", caption: "Market tab: economic calendar with high, medium and low impact news in your PC time" },
       { file: "ta-6.png", caption: "Signals, Patterns: chart and candlestick patterns plus Smart Money zones (FVG, order block, BOS/CHoCH, liquidity sweep) with history scores" },
-      { file: "ta-7.png", caption: "Signals, Strategies: 9 strategy signals with Entry, SL and TP arrows and history scores; no auto trading" },
+      { file: "ta-7.png", caption: "Signals, Strategies: 11 strategy signals including ICT OTE and the ICT 2022 Model, with Entry, SL and TP and history scores; no auto trading" },
       { file: "ta-4.png", caption: "Licence and updates: plan, time left, change key and one-click update" }
     ],
     features: [
@@ -205,11 +210,11 @@ window.SITE = {
       { title: "News lock and calendar", text: "The whole week of high, medium and low impact news in your own PC time, with a countdown and news lines on the chart. Lock trading around big events like NFP and CPI." },
       { title: "Partial close, break-even, trailing", text: "Up to 10 TP and 10 SL levels, break-even with offset, 6 trailing methods (points, Fractals, MA, Parabolic SAR, ATR, High/Low bar), profit lock, OCO and hidden SL/TP." },
       { title: "Close everything in one click", text: "Close Buy, Sell, Profit, Loss or All, delete pending orders by type, and auto-close at a profit or loss target or at a set time, such as Friday close." },
-      { title: "Patterns, Smart Money and strategies", text: "18 patterns including FVG, Order Blocks, BOS/CHoCH and liquidity sweeps, plus 9 strategies with Entry, SL and TP. Each has a history score on your own chart. Closed candles only, no repainting." },
+      { title: "Patterns, Smart Money and strategies", text: "18 patterns including FVG, Order Blocks, BOS/CHoCH and liquidity sweeps, plus 11 strategies including ICT OTE 79% and the ICT 2022 Model, with Entry, SL and TP. Each has a history score on your own chart, a Best button keeps only the ones that beat break-even there, and Use setup copies a signal to the Trade tab. Closed candles only, no repainting." },
       { title: "Journal and professional report", text: "Note the setup, feeling and lesson for every trade, then open a colourful report with equity curve, win rate, drawdown and Monte Carlo, so you see what to repeat and what to stop." },
       { title: "Sessions and market info", text: "Sydney, Tokyo, London and New York coloured on the chart with daylight saving handled. Account, symbol and trading statistics in one tab." },
       { title: "Push alerts to your phone", text: "Alerts on the MT5 app when a trade opens or closes, break-even is set, a guard limit or news lock is hit, a signal appears or a price is reached." },
-      { title: "Your panel, your way", text: "5 themes, panel size 75–150%, hotkeys, presets, and settings remembered after a restart. Update in one click from the panel. One licence key works on MT5 and MT4." }
+      { title: "Compact view, your way", text: "One button shrinks the panel to risk, lot, Lines and Sell / Buy for scalping. The risk box turns yellow above 2% and red above 5% of your balance. 5 themes (Navy Blue default), size 75–150%, hotkeys, presets, a Start here help for new users, and one-click updates. One licence key works on MT5 and MT4." }
     ]
   },
 
