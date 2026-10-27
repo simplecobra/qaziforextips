@@ -11,7 +11,7 @@
 <title>Qazi Forex Tips App</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@500;600;700&family=Source+Sans+3:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&family=Noto+Nastaliq+Urdu:wght@400;600&display=swap">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@500;600;700&family=Source+Sans+3:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&family=Noto+Nastaliq+Urdu:wght@400;600&display=swap" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@500;600;700&family=Source+Sans+3:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&family=Noto+Nastaliq+Urdu:wght@400;600&display=swap"></noscript>
 <style>
 /* Layout: one-screen phone app — sticky brand header, scrolling view, fixed 5-tab bottom bar. Midnight Gold brand (same as qaziforextips.com). */
 :root{
@@ -616,7 +616,7 @@ function viewCalc(){ const list=[["check","checklist"],["prop","c_prop"],["gold"
 
 function ytId(u){ const m=String(u).match(/(?:youtu\.be\/|v=)([\w-]{11})/); return m?m[1]:""; }
 function vidCard(v,n){ const id=ytId(v.link);
-  return `<a class="vid" href="${esc(v.link)}" target="_blank" rel="noopener"><div class="thumb">${id?`<img src="https://i.ytimg.com/vi/${id}/mqdefault.jpg" alt="" loading="lazy" onerror="this.remove()">`:""}<span class="pl">▶</span>${v.time?`<span class="du">${esc(v.time)}</span>`:""}</div>
+  return `<a class="vid" href="${esc(v.link)}" target="_blank" rel="noopener"><div class="thumb">${id?`<img src="https://i.ytimg.com/vi/${id}/mqdefault.jpg" alt="" loading="lazy" onerror="this.remove()" width="320" height="180">`:""}<span class="pl">▶</span>${v.time?`<span class="du">${esc(v.time)}</span>`:""}</div>
    <div style="min-width:0;display:grid;gap:4px">${n?`<span class="vid-n">${t("lecture")} ${n}</span>`:""}<span class="vid-t">${esc(v.title)}</span></div></a>`; }
 function viewLearn(){
   if(S.quiz) return quizHTML();
