@@ -1,0 +1,28 @@
+name: IndexNow - tell Bing which pages changed
+# After every change to a page, Bing, Yandex and the other IndexNow engines are told which
+# pages changed, so they re-read them quickly (ChatGPT search and Copilot use Bing).
+# "Run workflow" on GitHub sends every page in sitemap.xml.
+on:
+  push:
+    branches: [main]
+    paths: ["*.html", "sitemap.xml"]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency: indexnow
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Wait until GitHub Pages has published the change
+        run: sleep 150
+      - name: Send the changed pages
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] || ! git cat-file -e "${{ github.event.before }}" 2>/dev/null; then
+            python3 .github/scripts/indexnow.py --all
+          else
+            python3 .github/scripts/indexnow.py $(git diff --name-only --diff-filter=AM "${{ github.event.before }}" "${{ github.sha }}")
+          fi
