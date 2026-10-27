@@ -11,7 +11,7 @@ const ROOT = path.resolve(__dirname, "..", ".."), PORT = process.env.PORT || 876
 const PAGES = {
   "about.html":           ["photo", "abRole", "abStory", "abSkills", "stats", "teamList", "#team", "fname", "disc"],
   "index.html":           ["stats", "path", "photo", "story", "vids", "fbSum", "tstList", "fname", "disc", "waNum"],
-  "updates.html":         ["ufil", "tl", "fname", "disc"],
+  "updates.html":         ["ufil", "latest", "tl", "fname", "disc"],
   "trade-assistant.html": ["taVisual", "gallery", "#screens", "videoBox", "#video", "vhList", "#versions", "rvMount", "fname", "disc"],
   "simulator.html":       ["vhList", "#versions", "rvMount"],
 };
