@@ -28,7 +28,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://i.ytimg.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@600;800&family=Source+Sans+3:wght@400;600;700&family=IBM+Plex+Mono:wght@500;600&family=Noto+Nastaliq+Urdu:wght@600&display=swap">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@600;800&family=Source+Sans+3:wght@400;600;700&family=IBM+Plex+Mono:wght@500;600&family=Noto+Nastaliq+Urdu:wght@600&display=swap" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@600;800&family=Source+Sans+3:wght@400;600;700&family=IBM+Plex+Mono:wght@500;600&family=Noto+Nastaliq+Urdu:wght@600&display=swap"></noscript>
 <style>
 /* Same design system as index.html: Midnight Gold — dark navy ground, maroon glow, gold only where you act */
 :root{
@@ -184,7 +184,7 @@ footer a{color:var(--muted)}
 
 <div class="band">
   <header class="top"><div class="wrap">
-    <a class="brand" href="index.html"><img src="logo.png" alt="Qazi Forex Tips logo"><b id="bname">Qazi Forex Tips</b></a>
+    <a class="brand" href="index.html"><img src="logo.png" alt="Qazi Forex Tips logo" width="256" height="256"><b id="bname">Qazi Forex Tips</b></a>
     <nav class="nav" id="nav" aria-label="Main"><a href="index.html">Home</a><a href="youtube.html" aria-current="page">Courses</a><a href="about.html">About</a><a href="simulator.html">Simulator</a><a href="trade-assistant.html">Trade Assistant</a><a href="feedback.html">Feedback</a><a href="index.html#faq">FAQ</a></nav>
     <a class="btn gold sm" id="waTop" href="index.html#contact" target="_blank" rel="noopener">WhatsApp</a>
     <button class="theme-btn" id="themeBtn" type="button" aria-label="Switch to light mode" title="Light / dark"><svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M4.6 4.6l1.6 1.6M17.8 17.8l1.6 1.6M2.5 12h2.2M19.3 12h2.2M4.6 19.4l1.6-1.6M17.8 6.2l1.6-1.6"/></svg><svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a8.5 8.5 0 1 0 10.7 10.7Z"/></svg></button>
@@ -219,7 +219,7 @@ footer a{color:var(--muted)}
 
 <section style="border-bottom:0"><div class="wrap">
   <div class="sub">
-    <img src="logo.png" alt="">
+    <img src="logo.png" alt="" width="256" height="256">
     <div><h3>Never miss a lesson</h3><p>Subscribe on YouTube and join the Facebook group for new videos and live sessions.</p></div>
     <div class="acts" id="subActs"></div>
   </div>
@@ -283,7 +283,7 @@ footer a{color:var(--muted)}
     var id = ytId(v.link); if (!id) return "";
     var k = flat.push({ id: id, title: v.title, list: list.key }) - 1;
     return '<button type="button" class="card" data-k="' + k + '" data-s="' + esc((v.title + " " + list.name).toLowerCase()) + '">' +
-      '<div class="th"><img src="https://i.ytimg.com/vi/' + id + '/hqdefault.jpg" alt="" loading="lazy">' +
+      '<div class="th"><img src="https://i.ytimg.com/vi/' + id + '/hqdefault.jpg" alt="" loading="lazy" width="480" height="360">' +
       '<span class="play"><i></i></span>' + (list.course ? '<span class="no">Lecture ' + String(n).padStart(2, "0") + '</span>' : '') +
       (v.time ? '<span class="dur">' + esc(v.time) + '</span>' : '') + '</div>' +
       '<span class="t"><span>' + esc(v.title) + '</span></span></button>';
@@ -294,7 +294,7 @@ footer a{color:var(--muted)}
   if (fid) {
     var fv = null; lists.forEach(function(l){ l.videos.forEach(function(v){ if (!fv && ytId(v.link) === fid) fv = v; }); });
     var fk = flat.push({ id: fid, title: fv ? fv.title : "", list: "" }) - 1;
-    $("feature").innerHTML = '<button type="button" class="feature-btn" data-k="' + fk + '"><div class="th"><img src="https://i.ytimg.com/vi/' + fid + '/hqdefault.jpg" alt=""><span class="play"><i></i></span>' + (fv && fv.time ? '<span class="dur">' + esc(fv.time) + '</span>' : '') + '</div></button>' +
+    $("feature").innerHTML = '<button type="button" class="feature-btn" data-k="' + fk + '"><div class="th"><img src="https://i.ytimg.com/vi/' + fid + '/hqdefault.jpg" alt="" width="480" height="360"><span class="play"><i></i></span>' + (fv && fv.time ? '<span class="dur">' + esc(fv.time) + '</span>' : '') + '</div></button>' +
       '<div class="cap"><span class="label">New video</span><b>' + esc(fv ? fv.title : "") + '</b></div>';
   } else $("feature").hidden = true;
 
