@@ -10,7 +10,7 @@ const ROOT = path.resolve(__dirname, "..", ".."), PORT = process.env.PORT || 876
 /* page → ids whose inner HTML is written in; "#id" = only copy its hidden/visible state */
 const PAGES = {
   "about.html":           ["photo", "abRole", "abStory", "abSkills", "stats", "teamList", "#team", "fname", "disc"],
-  "index.html":           ["stats", "path", "photo", "story", "vids", "fbSum", "tstList", "fname", "disc", "waNum"],
+  "index.html":           ["ann", "stats", "path", "photo", "story", "vids", "fbSum", "tstList", "fname", "disc", "waNum"],
   "updates.html":         ["ufil", "latest", "tl", "fname", "disc"],
   "trade-assistant.html": ["taVisual", "gallery", "#screens", "videoBox", "#video", "vhList", "#versions", "rvMount", "fname", "disc"],
   "simulator.html":       ["vhList", "#versions", "rvMount"],
