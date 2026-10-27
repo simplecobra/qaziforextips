@@ -41,7 +41,7 @@ window.SITE = {
     {
       name: "QFT Replay Simulator",
       type: "Software",
-      badge: "v3.03",
+      badge: "v3.04",
       text: "MT5 market replay and manual backtesting with Prop Firm Challenge mode and a professional backtest report.",
       points: ["Replay any day, candle by candle", "Risk in $ – lot follows your SL", "Money management plan from your results"],
       image: "simulator.jpg",
@@ -77,13 +77,17 @@ window.SITE = {
                Nayi khabar par "id" zaroor badlein (warna jis ne band ki thi usay nazar nahi aayegi).
      versions: Simulator / Trade Assistant pages par "Version history". Naya version = list mein sab se upar 1 line. */
   announce: {
-    id: "ta-313",
-    text: "QFT Trade Assistant 3.13: compact view, Start here help, risk warning colours and 2 ICT strategies.",
-    link: "trade-assistant.html#new", linkText: "See what's new",
-    until: "2026-12-15"
+    id: "sim-304",
+    text: "QFT Replay Simulator 3.04: start a prop firm challenge at any moment, indicators on all charts, Save as.",
+    link: "simulator.html#new", linkText: "See what's new",
+    until: "2026-12-31"
   },
 
   updates: [
+    { date: "2026-10-27", type: "new", products: ["simulator"],
+      title: "Replay Simulator 3.04: Prop Firm Challenge from the simulator window",
+      text: "Start a prop firm challenge at any moment of the replay with the new Prop Firm button, using ready rules (2-Step Phase 1 and 2, 1-Step, Instant funding) or your own, and show, hide, stop or restart it without leaving the replay. Indicators added on one replay chart now appear on all replay charts (MT5). Save Simulation lets you pick the folder and name, and Load opens a .qsim file from any folder, so you can share a replay with students. New BUY / SELL buttons with the price. Installed simulators update from Main Menu; your licence, data and saved simulations stay.",
+      link: "simulator.html#new", linkText: "See what's new" },
     { date: "2026-10-23", type: "new", products: ["trade-assistant"],
       title: "Trade Assistant 3.13: compact view, Start here help and 2 ICT strategies",
       text: "Version 3.13 for MT5 and MT4 adds a compact view (only risk, lot, Lines and Sell / Buy, made for scalping and small screens), a 3-step Start here help for new users, a risk box that turns yellow above 2% and red above 5% of your balance, and two ICT strategies in Signals: ICT OTE 79% and the ICT 2022 Model. New Best button keeps only the strategies that beat break-even on your chart, and Use setup copies a signal's Entry, SL and TP to the Trade tab for you to check. Navy Blue is the new default theme. Installed panels update themselves; new users can download 3.13.",
@@ -151,7 +155,8 @@ window.SITE = {
 
   versions: {
     simulator: [
-      { v: "3.03", current: true, items: ["Now also available for MetaTrader 4 (separate download, own licence key per MT4 account)", "Fix: the simulator window could be empty after the simulator was attached again, the chart timeframe was changed or a template was applied", "Includes everything from 3.02: Smart Panel, clean start, zoomed-out replay charts, website links"] },
+      { v: "3.04", current: true, items: ["Prop Firm Challenge from the simulator window: start, hide, stop or restart a challenge at any moment of the replay", "Ready challenge types: 2-Step Phase 1 and 2, 1-Step, Instant funding, or Custom rules", "Indicators added on one replay chart appear on all replay charts (MT5)", "Save Simulation: choose your own folder and name; Load: open a .qsim file from any folder", "New BUY / SELL buttons with the price, compact Smart Panel and Prop Firm buttons", "Taller footer and a shorter New Simulation window"] },
+      { v: "3.03", items: ["Now also available for MetaTrader 4 (separate download, own licence key per MT4 account)", "Fix: the simulator window could be empty after the simulator was attached again, the chart timeframe was changed or a template was applied", "Includes everything from 3.02: Smart Panel, clean start, zoomed-out replay charts, website links"] },
       { v: "3.02", items: ["Smart Panel: Prev / Play / Next, speed, lot, Buy, Sell, Close All, P/L and time in one slim bar", "SMART PANEL button next to Buy / Sell, or minimize the window during a replay", "The chart that runs the simulator is minimized during the replay and comes back after", "Replay charts open one zoom step further out (more candles, better structure)", "Website and WhatsApp links in every window and in the backtest report"] },
       { v: "3.00", items: ["Prop Firm Challenge mode: target, daily loss and max loss with a live dashboard", "New pro report: journal, streaks, money plan, charts", "R-multiple statistics and Monte Carlo risk test", "Keyboard shortcuts: Space, N / P, B / S, + / −", "Online licence check"] },
       { v: "2.99", items: ["Risk in $: the lot size is calculated from your SL", "Moving the SL line re-sizes the lot, the loss never goes above your risk", "Import CSV: M1 data from HistData or Dukascopy", "Clearer messages for tick downloads"] }
@@ -177,7 +182,7 @@ window.SITE = {
      1) nayi zip ISI NAAM se downloads folder mein upload karein (purani replace ho jayegi),
      2) yahan version aur size badal dein. Link kabhi nahi badalta.            */
   downloads: {
-    simulator:      { file: "downloads/QFT-Replay-Simulator.zip", version: "3.03", size: "4.6 MB" },
+    simulator:      { file: "downloads/QFT-Replay-Simulator.zip", version: "3.04", size: "4.6 MB" },
     simulatorMT4:   { file: "downloads/QFT-Replay-Simulator-MT4.zip", version: "3.03", size: "6.3 MB" },
     tradeAssistant: { file: "downloads/QFT-Trade-Assistant.zip",  version: "3.13", size: "3.9 MB" },
     tradeAssistantMT4: { file: "downloads/QFT-Trade-Assistant-MT4.zip", version: "3.13", size: "3.8 MB" }
