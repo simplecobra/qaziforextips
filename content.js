@@ -20,7 +20,7 @@ window.SITE = {
     whatsapp: "+92-323-6700010",
     youtube: "https://www.youtube.com/@QaziForexTips",
     facebook: "https://www.facebook.com/groups/qaziforextips",
-    email: ""             // agar ho
+    email: "info@qaziforextips.com"
   },
 
   /* ---------- 2. SHURU KA HISSA (HERO) ---------- */
