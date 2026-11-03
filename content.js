@@ -428,7 +428,7 @@ window.SITE = {
      photo: tasveer ka naam (GitHub par upload). Khali "" = initials dikhenge.
      Tarteeb wahi jo yahan hai. Har shakhs ki ijazat se.                      */
   team: [
-    { name: "Faham Shabeer", role: "EA Developer & Trader", photo: "team-faham.jpg",
+    { name: "Faham Shabbir", role: "EA Developer & Trader", photo: "team-faham.jpg",
       text: "Faham builds and tests Expert Advisors (EAs) for MetaTrader 5 and trades Gold (XAUUSD) himself. In more than two years of trading he has focused on Smart Money Concepts, price action and liquidity, with short-term setups and a fixed risk plan. He believes discipline, patience and control of emotions matter more than any single trade.",
       quote: "Protect your capital, trust your analysis, master your emotions.",
       tags: ["MT5 EAs", "Gold", "SMC", "Price Action"] },
@@ -436,7 +436,7 @@ window.SITE = {
       text: "Irfan began his own trading education under Dr. Qazi Abdul Basit in June 2024 and now teaches as an instructor at Qazi Forex Tips. He helps students read market structure, liquidity, supply and demand zones and shifts in trend (BOS and CHoCH) across several timeframes, and plan every trade with a clear exit and a fixed risk.",
       quote: "",
       tags: ["Teaching", "Price Action", "Market Structure", "Risk Management"] },
-    { name: "Muhammad Anas", role: "SMC & ICT Trader", photo: "",
+    { name: "Anas Khalil", role: "SMC & ICT Trader", photo: "",
       text: "Anas trades with Smart Money Concepts (SMC) and ICT methods, reading market structure and liquidity to plan his entries. He believes good trading is not about predicting every move, but about following a clear plan, respecting risk and staying consistent. At Qazi Forex Tips he keeps building his skills and shares what he learns with our community.",
       quote: "Learn the market, respect risk, follow the strategy, and stay disciplined.",
       tags: ["SMC", "ICT", "Liquidity", "Market Structure"] },
