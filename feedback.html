@@ -726,7 +726,7 @@ Thank you Qazi Sahib for sharing genuine Forex knowledge free of cost. ❤️</p
   Q.load(S, function(list, final){ all = list; draw(final); });
   Q.attachForm(S, { form: "fbForm", name: "fbName", city: "fbCity", batch: "fbBatch", product: "fbAbout", text: "fbText", allow: "fbAllow", hp: "fbHp", send: "fbSend", err: "fbErr", ok: "fbOk" }, wa);
 
-  $("fname").textContent = "© " + new Date().getFullYear() + " " + (B.name || "Qazi Forex Tips") + " · WhatsApp " + (B.whatsapp || "");
+  $("fname").textContent = "© " + new Date().getFullYear() + " " + (B.name || "Qazi Forex Tips") + " · WhatsApp " + (B.whatsapp || "") + (B.email ? " · " + B.email : "");
   $("disc").textContent = S.disclaimer || "";
   /* light / dark switch (dark is the default; the choice is remembered) */
   (function(){

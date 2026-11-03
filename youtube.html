@@ -353,7 +353,7 @@ footer a{color:var(--muted)}
   if (B.facebook) acts += '<a class="btn" href="' + esc(B.facebook) + '" target="_blank" rel="noopener">Facebook group</a>';
   acts += '<a class="btn" href="' + wa + '" target="_blank" rel="noopener">WhatsApp</a>';
   $("subActs").innerHTML = acts;
-  $("fname").textContent = "© " + new Date().getFullYear() + " " + (B.name || "") + " · WhatsApp " + (B.whatsapp || "");
+  $("fname").textContent = "© " + new Date().getFullYear() + " " + (B.name || "") + " · WhatsApp " + (B.whatsapp || "") + (B.email ? " · " + B.email : "");
   $("disc").textContent = S.disclaimer || "";
 
   /* light / dark switch (dark is the default; the choice is remembered) */

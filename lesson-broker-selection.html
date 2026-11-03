@@ -478,7 +478,7 @@ footer a:hover{color:var(--ink)}
 </main>
 
 <footer><div class="wrap">
-  <div class="row"><span id="fname">© 2026 Qazi Forex Tips · WhatsApp +92-323-6700010</span><nav aria-label="Footer"><a href="youtube.html">Courses</a><a href="simulator.html">Simulator</a><a href="about.html">About</a><a href="trade-assistant.html">Trade Assistant</a><a href="feedback.html">Feedback</a><a href="updates.html">What's new</a><a href="index.html#faq">FAQ</a></nav></div>
+  <div class="row"><span id="fname">© 2026 Qazi Forex Tips · WhatsApp +92-323-6700010 · info@qaziforextips.com</span><nav aria-label="Footer"><a href="youtube.html">Courses</a><a href="simulator.html">Simulator</a><a href="about.html">About</a><a href="trade-assistant.html">Trade Assistant</a><a href="feedback.html">Feedback</a><a href="updates.html">What's new</a><a href="index.html#faq">FAQ</a></nav></div>
   <p class="disc" id="disc">Trading forex and gold involves high risk. Content is for education only and is not financial advice. Past or backtest results do not guarantee future results.</p>
 <!--LEGAL--><p class="legal" style="font-size:13px;color:var(--muted);margin-top:10px"><a href="privacy.html" style="color:inherit">Privacy Policy</a> · <a href="terms.html" style="color:inherit">Terms of Use</a> · <a href="risk-disclaimer.html" style="color:inherit">Risk Disclaimer</a></p><!--/LEGAL--></div></footer>
 
@@ -495,7 +495,7 @@ footer a:hover{color:var(--ink)}
   var nav = $("nav"), menu = $("menu");
   menu.addEventListener("click", function(){ var o = nav.classList.toggle("open"); menu.setAttribute("aria-expanded", o); });
 
-    $("fname").textContent = "© " + new Date().getFullYear() + " " + (B.name || "Qazi Forex Tips") + " · WhatsApp " + (B.whatsapp || "");
+    $("fname").textContent = "© " + new Date().getFullYear() + " " + (B.name || "Qazi Forex Tips") + " · WhatsApp " + (B.whatsapp || "") + (B.email ? " · " + B.email : "");
   $("disc").textContent = S.disclaimer || "";
   /* light / dark switch (dark is the default; the choice is remembered) */
   (function(){
