@@ -390,9 +390,9 @@ window.SITE = {
   /* ---------- 7. NUMBERS (sirf SACH figures likhein) ---------- */
   stats: [
     { value: "2013", label: "Trading since" },
-    { value: "64th", label: "Student batch running" },
-    { value: "14K+", label: "YouTube subscribers" },
-    { value: "60+",  label: "Free video lessons" }
+    { value: "65th", label: "Student batch running" },
+    { value: "14.5K+", label: "YouTube subscribers" },
+    { value: "64+",  label: "Free video lessons" }
   ],
 
   /* ---------- 8. YAHAN SE SHURU KAREIN (learning path) ---------- */
@@ -410,7 +410,7 @@ window.SITE = {
     photo: "dr-qazi-2.jpg",
     story: [
       "I have been trading forex and Gold since 2013. Like every trader I went through the ups and downs, and those years taught me what keeps an account alive: clear price action, a fixed risk on every trade, and the discipline to follow a plan.",
-      "I started Qazi Forex Tips so traders in Pakistan and India can learn this in their own language. The YouTube channel has complete free courses in Urdu and Hindi, and our 64th student batch is running now.",
+      "I started Qazi Forex Tips so traders in Pakistan and India can learn this in their own language. The YouTube channel has complete free courses in Urdu and Hindi, and our 65th student batch is running now.",
       "I also build MetaTrader 5 tools for my own trading and teaching, like the QFT Replay Simulator for honest backtesting and the QFT Trade Assistant for risk-based lot sizes."
     ],
     skills: ["Price Action", "Gold (XAUUSD)", "Risk & Money Management", "Trading Psychology"]
