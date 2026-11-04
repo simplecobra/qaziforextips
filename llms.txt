@@ -1,0 +1,20 @@
+# Qazi Forex Tips
+
+> Free forex and Gold (XAUUSD) trading education in Urdu and Hindi for traders in Pakistan and India, led by Dr. Qazi Abdul Basit (trading since 2013, 65+ student batches, 14.5K+ YouTube subscribers). Free courses, guides and free MT5 tools. We do not sell signals, do not manage accounts and earn nothing from any broker.
+
+## Free MT5 tools
+- [Free MT5 Indicators & Forex Tools](https://qaziforextips.com/free-mt5-tools.html): all free tools in one place.
+- [QFT Sessions & Killzones – free ICT killzones indicator for MT5](https://qaziforextips.com/ict-killzones-indicator-mt5.html): Asia, London and New York sessions in Pakistan (PKT) and India (IST) time, all four ICT killzones, automatic daylight saving, previous day high/low, and liquidity sweep → MSS setups marked with win rate and total R. 100% free download, no DLL.
+- [Lot Size Calculator for Forex & Gold](https://qaziforextips.com/lot-size-calculator.html): free online lot size calculator.
+- [QFT Replay Simulator](https://qaziforextips.com/simulator.html): market replay and manual backtesting inside MT5 and MT4 (free demo), a Soft4FX / FX Replay alternative.
+- [QFT Trade Assistant](https://qaziforextips.com/trade-assistant.html): risk-based lot size and trade panel for MT5 and MT4 (free demo).
+
+## Learn
+- [Free video courses in Urdu & Hindi](https://qaziforextips.com/youtube.html)
+- [Forex Guide](https://qaziforextips.com/forex-guide.html): sessions in Pakistan time, Smart Money Concepts, liquidity, order blocks, FVG, risk management, Gold trading, prop firm challenges.
+- [Forex trading sessions in Pakistan and India time](https://qaziforextips.com/guide-forex-trading-sessions.html)
+- [About Dr. Qazi Abdul Basit and the team](https://qaziforextips.com/about.html)
+
+## Contact
+- WhatsApp: +92-323-6700010
+- Email: info@qaziforextips.com

@@ -39,6 +39,15 @@ window.SITE = {
        link:   is ki apni page ka link, ya "" (to button WhatsApp kholega)        */
   tools: [
     {
+      name: "QFT Sessions & Killzones",
+      type: "Free indicator",
+      badge: "v1.52",
+      text: "Free MT5 indicator: Asia, London & New York sessions in Pakistan and India time, all four ICT killzones and sweep → MSS setups marked with their results.",
+      points: ["Session boxes with range in pips", "ICT killzones + PKT/IST clock", "Setups with win rate and total R"],
+      link: "ict-killzones-indicator-mt5.html",
+      button: "Free download"
+    },
+    {
       name: "QFT Replay Simulator",
       type: "Software",
       badge: "v3.04",
