@@ -4,7 +4,7 @@
 
 ## Free MT5 tools
 - [Free MT5 Indicators & Forex Tools](https://qaziforextips.com/free-mt5-tools.html): all free tools in one place.
-- [QFT Sessions & Killzones – free ICT killzones indicator for MT5](https://qaziforextips.com/ict-killzones-indicator-mt5.html): Asia, London and New York sessions in Pakistan (PKT) and India (IST) time, all four ICT killzones, automatic daylight saving, previous day high/low, and liquidity sweep → MSS setups marked with win rate and total R. 100% free download, no DLL.
+- [QFT Sessions & Killzones – free ICT killzones indicator for MT5 and MT4](https://qaziforextips.com/ict-killzones-indicator-mt5.html): Asia, London and New York sessions in Pakistan (PKT) and India (IST) time, all four ICT killzones, automatic daylight saving, previous day high/low, and liquidity sweep → MSS setups marked with win rate and total R. 100% free download, no DLL.
 - [Lot Size Calculator for Forex & Gold](https://qaziforextips.com/lot-size-calculator.html): free online lot size calculator.
 - [QFT Replay Simulator](https://qaziforextips.com/simulator.html): market replay and manual backtesting inside MT5 and MT4 (free demo), a Soft4FX / FX Replay alternative.
 - [QFT Trade Assistant](https://qaziforextips.com/trade-assistant.html): risk-based lot size and trade panel for MT5 and MT4 (free demo).
