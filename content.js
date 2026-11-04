@@ -41,7 +41,7 @@ window.SITE = {
     {
       name: "QFT Sessions & Killzones",
       type: "Free indicator",
-      badge: "v1.52",
+      badge: "v1.53",
       text: "Free MT5 & MT4 indicator: Asia, London & New York sessions in Pakistan and India time, all four ICT killzones and sweep → MSS setups marked with their results.",
       points: ["Session boxes with range in pips", "ICT killzones + PKT/IST clock", "Setups with win rate and total R"],
       link: "ict-killzones-indicator-mt5.html",
