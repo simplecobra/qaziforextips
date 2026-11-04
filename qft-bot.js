@@ -29,11 +29,12 @@
   /* ---------------- styles (site ke colors khud le leta hai) ---------------- */
   var css = document.createElement("style");
   css.textContent = [
-    ".qb-btn{position:fixed;left:18px;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:32;height:58px;min-width:58px;padding:0 18px 0 14px;border-radius:29px;border:0;cursor:pointer;",
-    "background:var(--gold,#e7b94f);color:var(--gold-ink,#1c1405);display:flex;align-items:center;gap:9px;box-shadow:0 10px 30px rgba(0,0,0,.4);font:700 16px/1 var(--f-body,'Segoe UI',sans-serif);transition:transform .15s}",
-    ".qb-btn:hover{transform:translateY(-2px)}.qb-btn svg{width:26px;height:26px;flex:none}",
-    ".qb-btn .qb-ai{font:700 11px/1 var(--f-mono,monospace);background:var(--gold-ink,#1c1405);color:var(--gold,#e7b94f);padding:3px 5px;border-radius:4px;margin-left:-2px}",
-    "@media(max-width:560px){.qb-btn .qb-lbl{display:none}.qb-btn{padding:0 14px}}",
+    ".qb-btn{position:fixed;left:18px;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:32;width:58px;height:58px;padding:0;border-radius:50%;border:0;cursor:pointer;",
+    "background:var(--gold,#e7b94f);color:var(--gold-ink,#1c1405);display:grid;place-items:center;box-shadow:0 10px 30px rgba(0,0,0,.4);transition:transform .15s}",
+    ".qb-btn:hover{transform:scale(1.07)}.qb-btn svg{width:28px;height:28px}",
+    ".qb-btn .qb-ai{position:absolute;top:-4px;right:-6px;font:700 10px/1 var(--f-mono,monospace);background:var(--gold-ink,#1c1405);color:var(--gold,#e7b94f);padding:3px 5px;border-radius:5px;border:1.5px solid var(--gold,#e7b94f)}",
+    ".qb-btn .qb-lbl{position:absolute;left:68px;top:50%;transform:translateY(-50%);white-space:nowrap;background:var(--surface,#151d30);color:var(--ink,#eef1f7);border:1px solid var(--line,#26304a);font:600 14px/1 var(--f-body,'Segoe UI',sans-serif);padding:8px 11px;border-radius:8px;opacity:0;pointer-events:none;transition:opacity .15s}",
+    ".qb-btn:hover .qb-lbl,.qb-btn:focus-visible .qb-lbl{opacity:1}",
     ".qb-panel{position:fixed;left:18px;bottom:calc(88px + env(safe-area-inset-bottom,0px));z-index:33;width:min(390px,calc(100vw - 36px));height:min(580px,calc(100vh - 120px));",
     "display:flex;flex-direction:column;background:var(--surface,#151d30);color:var(--ink,#eef1f7);border:1px solid var(--line,#26304a);border-radius:16px;overflow:hidden;",
     "box-shadow:0 24px 70px rgba(0,0,0,.5);font-family:var(--f-body,'Segoe UI',sans-serif)}",
@@ -73,7 +74,7 @@
   var btn = document.createElement("button");
   btn.className = "qb-btn"; btn.id = "qftBot"; btn.type = "button";
   btn.setAttribute("aria-label", "Open QFT AI Assistant"); btn.setAttribute("aria-expanded", "false");
-  btn.innerHTML = CHAT_ICON + '<span class="qb-lbl">Ask Qazi</span><span class="qb-ai">AI</span>';
+  btn.innerHTML = CHAT_ICON + '<span class="qb-lbl">Ask Qazi – AI se poochein</span><span class="qb-ai">AI</span>';
 
   var panel = document.createElement("div");
   panel.className = "qb-panel"; panel.hidden = true;
