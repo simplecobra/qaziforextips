@@ -642,5 +642,6 @@ document.getElementById('copy').addEventListener('click', async () => {
 </script>
 
 <script>(function(){var btn=document.getElementById("themeBtn"),root=document.documentElement,meta=document.querySelector('meta[name="theme-color"]');if(!btn)return;function sync(){var l=root.getAttribute("data-theme")==="light";btn.setAttribute("aria-label",l?"Switch to dark mode":"Switch to light mode");if(meta)meta.setAttribute("content",l?"#f5f3ee":"#0d1220");}btn.addEventListener("click",function(){var n=root.getAttribute("data-theme")==="light"?"dark":"light";root.setAttribute("data-theme",n);try{localStorage.setItem("qft-theme",n);}catch(e){}sync();});sync();})();</script>
+<script src="qft-bot.js?v=1" defer></script>
 </body>
 </html>

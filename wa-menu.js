@@ -1,3 +1,11 @@
+/* QFT AI Assistant: chat button har us page pe load hota hai jahan yeh file lagi hai. */
+(function () {
+  if (document.getElementById("qftBotLoader")) return;
+  var s = document.createElement("script");
+  s.id = "qftBotLoader"; s.src = "qft-bot.js?v=1"; s.defer = true;
+  (document.body || document.head).appendChild(s);
+})();
+
 /* WhatsApp menu: the round WhatsApp button opens a short "What do you need?" list.
    Each choice opens WhatsApp with a ready message, so the team knows at once what the visitor wants.
    To change the choices or messages, edit the list below. Without JavaScript the button still opens WhatsApp. */
