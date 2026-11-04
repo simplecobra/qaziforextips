@@ -2,7 +2,7 @@
 (function () {
   if (document.getElementById("qftBotLoader")) return;
   var s = document.createElement("script");
-  s.id = "qftBotLoader"; s.src = "qft-bot.js?v=1"; s.defer = true;
+  s.id = "qftBotLoader"; s.src = "qft-bot.js?v=2"; s.defer = true;
   (document.body || document.head).appendChild(s);
 })();
 
