@@ -1,0 +1,329 @@
+# =====================================================================
+#  QFT AI ASSISTANT – CUSTOM ANSWERS  (qft-bot-answers.txt)
+# =====================================================================
+#  Yeh file aap khud edit kar sakte hain. Kisi coding ki zaroorat nahi.
+#
+#  NAYA JAWAB KAISE ADD KAREIN:
+#    Q:  wo alfaaz jo visitor likh sakta hai, "|" se alag karein
+#    A:  aap ka jawab (kai lines ho sakti hain)
+#    Har jawab ke baad ek KHALI line chhorein.
+#
+#  KAISE KAAM KARTA HAI:
+#    1) Agar visitor ke sawal mein Q: wala koi lafz mil jaye, to AAP KA
+#       jawab foran dikhta hai. Is ka koi API kharcha NAHI hota.
+#    2) Agar match na mile, to sawal Claude Haiku ke paas jata hai. Haiku
+#       is poori file ko parh kar AAP KI di hui maloomat se jawab deta hai.
+#
+#  TIPS:
+#    - Q: mein Roman Urdu, English aur Hindi teeno tarah ke alfaaz likhein.
+#    - Bohat aam lafz (jaise "forex", "trade") Q: mein na likhein, warna
+#      har sawal pe wohi jawab aa jayega. Kam az kam 4 harf ka lafz likhein.
+#    - Link aise likhein: [Lot Size Calculator](https://qaziforextips.com/lot-size-calculator.html)
+#    - Bold aise: **zaroori baat**
+#    - "#" se shuru hone wali lines sirf notes hain, bot unhein nahi parhta.
+# =====================================================================
+
+# =====================================================================
+#  BATCH SCHEDULE – yeh hissa KHUD update hota hai, chherne ki zaroorat nahi
+#  Bot aaj ki tareekh dekh kar {BATCH}, {START} waghera khud bhar deta hai:
+#    {BATCH}     = agla batch number      (maslan 66)
+#    {RUNNING}   = chalta hua batch       (maslan 65)
+#    {START}     = agla batch kab shuru   (maslan 1 December 2026)
+#    {OPEN_DATE} = admission kab khulenge (maslan 25 November)
+#    {CLOSE}     = admission kab band     (maslan 1 December shaam 5 baje)
+#    {STATUS}    = abhi admission khule hain ya band – poora jumla
+#  Agar kabhi schedule badle (maslan batch na ho) to qft-bot.js aur
+#  worker.js mein "BATCH_BASE" wali line badalni hogi – mujhe bata dein.
+# =====================================================================
+
+Q: kab shuru | start date | kab start | last date | aakhri tareekh | admission kab | admission open | admission khule | next batch kab | naya batch kab | agla batch
+A: Abhi **Batch-{RUNNING}** chal raha hai. Agla **Batch-{BATCH}** in shaa Allah **{START}** se shuru hoga.
+{STATUS}
+Har mahine admission **25 tareekh** ko khulte hain aur agle mahine ki **1 tareekh shaam 5 baje** band ho jate hain – ya seats poori hone pe pehle hi.
+
+Q: join batch | student batch | batch join | admission | enroll | join course | course join | join karna | shamil hona | pam batch
+A: **Price Action Mastery (PAM) Batch-{BATCH}** – {STATUS}
+Join karne ke liye admission ke dinon mein WhatsApp pe **"PAM Batch-{BATCH}"** likh kar message karein: **0323-6700010**
+Admission pehle aao pehle pao ki bunyaad pe hai aur seats mehdood hain.
+Join karne se pehle yeh zaroor dekh lein:
+- Forex ki **basics aati hon** (yeh bilkul naye logon ke liye nahi)
+- **Laptop** zaroori hai
+- Roz assignment ke liye **waqt** ho
+
+BATCH SCHEDULE (bot ke liye):
+PAM ka matlab Price Action Mastery hai. "PAM", "batch" aur "Price Action Mastery Course" ek hi cheez hain. Har mahine ek naya batch hota hai. Admission har mahine ki 25 tareekh ko khulte hain, 5-6 din khule rehte hain, aur agle mahine ki 1 tareekh shaam 5 baje band ho jate hain (seats poori hon to pehle bhi). Naya batch har mahine ki 1 tareekh se shuru hota hai.
+Aaj ke hisaab se: chalta hua batch = Batch-{RUNNING}. Agla batch = Batch-{BATCH}, shuru {START}. Admission khulenge {OPEN_DATE}, band {CLOSE}. Abhi ki surat-e-haal: {STATUS}
+Join karne ka tareeqa: admission ke dinon mein WhatsApp 0323-6700010 (+92-323-6700010) pe "PAM Batch-{BATCH}" likh kar message.
+
+# =====================================================================
+#  PRICE ACTION MASTERY COURSE – mustaqil maloomat
+# =====================================================================
+
+Q: course fee | fees | fee kitni | kitni fee | price of course | course price | charges | paid course | course free | free hai | is it free | free course | paise lagte
+A: **Price Action Mastery Course bilkul FREE hai** – is ki koi fee nahi.
+Lekin free ka matlab "aasaan" nahi: is mein roz practice aur assignments karni hoti hain, isliye sirf serious log admission lein.
+Join karne ke liye WhatsApp: **0323-6700010**
+
+Q: course mein kya | kya sikhaya | kya sikhate | syllabus | course content | course outline | topics | what will i learn | kitne lecture
+A: **Price Action Mastery Course** mein:
+- **10 Basic lectures** + **10 Advanced lectures**
+- **Money Management** aur **Profitable Strategy** ke lectures
+- Technical Analysis: Market Structure (BOS & CHoCH), Trend Lines & Channels, Support & Resistance, Entry & Exit, SL & TP, Multi Time Frame Analysis, Candlestick aur Chart Patterns
+- Smart Money Concepts: Supply & Demand, Order Blocks, FVG, Liquidity, Fake Outs
+- **Main focus:** Trading Psychology aur Risk Management
+Is course mein theory se zyada **practice** pe zor hai.
+
+Q: kaise hota | course ka tareeqa | kaise parhate | how it works | recording | recorded | daily lecture | roz lecture | video kab | lecture kab | lecture kis time | lecture ka time | video kis time | lecture milta | video milti
+A: Course is tarah chalta hai:
+- **Roz shaam 7 baje** ek recorded video lecture (taqreeban 20-25 minute) ka link aur saath ek **sawalnama** diya jata hai
+- Video kam az kam **2 baar** dekh kar sawalon ke jawab dene hote hain, aur agar video mein koi method ho to use **chart pe mark** kar ke bhejna hota hai
+- Jawab **agle din subah 7 baje se shaam 5 baje** tak bhejne hote hain
+- Dr. Qazi **khud** har practical work check karte hain aur batate hain ke ghalti kahan hai
+- Practice **TradingView** pe hoti hai
+- **Har Itwaar (Sunday)** Google Meet pe live session
+Bilkul **basic level** se shuru kar ke aahista aahista aage barhte hain.
+
+Q: kitne din | duration | kitna arsa | kitne time ka | kitne mahine | how long
+A: Course ka dauraniya taqreeban **1 mahina** hai.
+Is mein roz ek recorded lecture, roz ki assignment aur har Itwaar live session hota hai.
+
+Q: live session | weekly session | live class | sunday | itwaar | google meet | zoom | session timing | session kab
+A: **Har Itwaar (Sunday) ek live session** hota hai, **Google Meet** pe. Is mein pichle hafte ke lectures ke concepts mazeed clear kiye jate hain aur aap ke tamam sawalon ke jawab diye jate hain.
+Session ki **timing badalti rehti hai** – har hafte ki timing batch ke WhatsApp group mein bata di jati hai.
+
+Q: assignment | homework | practice chart | assignment time | assignment kab | jawab kab | deadline | chart check
+A: Roz **shaam 7 baje** lecture ka link aur sawalnama milta hai. Video dekh kar sawalon ke jawab dene aur method ho to **chart pe mark** kar ke bhejna hota hai.
+Assignment bhejne ka waqt: **agle din subah 7 baje se shaam 5 baje tak**. Shaam 5 baje ke baad bheji gayi assignment qabool nahi hoti aur aap **absent** shumar hote hain.
+Dr. Qazi **khud** har assignment check karte hain aur ghaltiyan batate hain – is tarah jo seekha jata hai woh kabhi nahi bhoolta.
+
+Q: mentorship | course ke baad | complete hone ke baad | community | lifetime | support milegi
+A: Jo student course **mukammal** karta hai, us ke liye **mentorship lifetime FREE** hai.
+Course complete karne ke baad aap ko hamari **WhatsApp community** mein add kiya jata hai, jahan learning bhi jari rehti hai aur saath trading bhi hoti hai.
+
+Q: certificate | sanad
+A: Haan, jo students **saari assignments mukammal** karein aur **live sessions attend** karein, unhein course ke aakhir mein **certificate** diya jata hai.
+
+Q: kaun join | kis ke liye | eligibility | requirement | basics nahi | basic nahi aati | kya zaroori | shart
+A: Yeh course **Price Action** ka hai aur in logon ke liye hai:
+- Jo **forex jante hain**, ya
+- Jo trading kar rahe hain lekin **profit mein nahi**
+Agar aap ki **forex basics clear nahi**, to abhi admission na lein – pehle hamara free YouTube course dekhein: [Free Price Action Course](https://qaziforextips.com/course-price-action-basic.html)
+Saath mein **laptop** aur roz assignment ke liye **waqt** zaroori hai.
+
+Q: laptop | mobile se | mobile pe | phone se | computer zaroori
+A: Ji haan, is course mein shamil hone ke liye **laptop zaroori hai**. Practice charts aur assignments mobile pe theek se nahi ho sakti.
+
+Q: pehle batch | previous batch | purana batch | dobara admission | phir se join | dubara join | complete nahi kiya | course chhor diya | readmission
+A: Jo members pehle kisi batch mein shamil thay lekin course **beech mein chhor diya** ya mukammal nahi kiya, unhein **kisi surat dobara admission nahi** diya jata – chahe woh fee dene ko bhi tayyar hon.
+Isliye admission tabhi lein jab poora mahina mehnat ka pakka irada ho.
+
+Q: job karta | job hai | time nahi | waqt nahi | exams | busy | student hoon | study ke saath
+A: Admission sirf woh lein jin ke paas **roz waqt** ho: shaam 7 baje lecture aata hai (20-25 minute, kam az kam 2 baar dekhna), aur jawab agle din **subah 7 se shaam 5 baje** tak bhejne hote hain.
+Agar job, ghar ki masroofiyat ya exams ki wajah se aap roz assignment nahi kar sakte, to abhi admission na lein – kyunke **2 assignments miss** hone pe group se nikal diya jata hai, aur beech mein chhorne walon ko dobara admission nahi milta.
+
+Q: rules | group rules | qawaid | remove | nikal dete | miss ho jaye | miss ho jayein | assignment miss | assignments miss | absent | chutti | leave
+A: Group ke rules sakht hain:
+- **Saari assignments** mukammal karna lazmi hai
+- Jis member ki **2 assignments lagatar miss** hon, use group se **remove** kar diya jata hai
+- Koi majboori ho to assignment ka waqt **khatam hone se pehle** (shaam 5 baje se pehle) inform karein. 5 baje ke baad chutti ya assignment qabool nahi – aap **absent** shumar honge
+- Group ki **har post** tawajjoh se parhein – "post nahi parhi" ka bahana qabool nahi
+- Beech mein course chhorne walon ko academy mein **dobara kabhi admission nahi** milta
+Course free hai, lekin is ka matlab yeh nahi ke yahan rules nahi.
+
+Q: tradingview | kaunsa software | kis software | software | konsa software | platform kaunsa | chart kahan
+A: Course ki practice **TradingView** pe hoti hai. Shuru mein TradingView ki basics ki video di jati hai taake practice ke waqt koi pareshani na ho:
+[TradingView Tutorial](https://qaziforextips.com/lesson-tradingview-tutorial.html)
+
+Q: advance level | advanced course | advance course | agla level
+A: Jo students **saari assignments** mukammal karte hain, unhein phir **Advanced level** course mein shamil kiya jata hai.
+
+Q: seats | kitne students | limited | jagah hai
+A: Seats **mehdood** hain kyunke Dr. Qazi har student ki assignment **khud check** karte hain. Admission **pehle aao pehle pao** ki bunyaad pe hota hai.
+
+PRICE ACTION MASTERY COURSE – DETAILS (bot ke liye maloomat):
+Qazi Forex Tips ka flagship course "Price Action Mastery Course" (PAM) hai aur yeh bilkul FREE hai – koi fee nahi. Is mein Price Action sikhayi jati hai: 10 basic lectures, 10 advanced lectures, Money Management aur Profitable Strategy ke lectures. Dauraniya taqreeban 1 mahina.
+Kis ke liye: jo forex jante hain, ya jo trading kar rahe hain lekin profit mein nahi. Jin ki forex basics clear nahi woh admission na lein – woh pehle free YouTube course (Price Action Mastery – Basic Level) dekhein.
+Shartein: laptop zaroori hai. Roz assignment ke liye waqt hona chahiye – job, ghar ke masail ya exams ki wajah se jo assignment nahi kar sakte woh admission na lein, taake serious logon ko mauqa mile. Jo log pehle kisi batch mein thay magar mukammal nahi kiya, woh admission ke ahl nahi. Group rules: saari assignments lazmi; 2 assignments lagatar miss karne wala group se remove; majboori ho to assignment ka waqt khatam hone (shaam 5 baje) se pehle inform karna; 5 baje ke baad chutti ya assignment qabool nahi; group ki har post parhna zaroori, koi bahana qabool nahi; beech mein chhorne wale ko academy mein dobara kabhi admission nahi, chahe 1000 dollar fee bhi dene ko tayyar ho. Rules ke maamle mein Dr. Qazi sakht hain.
+Tareeqa: shuru mein Forex book parhni hoti hai aur TradingView ki basic video dekhni hoti hai, phir Price Action basics. Roz shaam 7 baje ek recorded video lecture (taqreeban 20-25 minute) ka link aur sawalnama diya jata hai. Video kam az kam 2 baar dekhni hai, koi hissa skip nahi karna. Sawalon ke jawab dene hote hain aur agar video mein method ho to chart pe mark kar ke bhejna hota hai. Assignment bhejne ka waqt agle din subah 7 baje se shaam 5 baje tak; 5 baje ke baad bheji gayi assignment qabool nahi, member absent shumar hota hai. Dr. Qazi khud har practical work check karte hain aur ghaltiyon ki nishandahi karte hain. Practice TradingView pe hoti hai. Saath mein weekly assignments. Bilkul basic level se tarteeb ke saath shuru ho kar aahista aahista aage barhte hain. Saari assignments mukammal karne walon ko Advanced level course mein shamil kiya jata hai. Theory se zyada practice pe focus. Course mukammal karne walon ko WhatsApp community mein shamil kiya jata hai.
+Har Itwaar (Sunday) live session: pichle hafte ke concepts mazeed clear kiye jate hain aur sawalon ke jawab diye jate hain. Live session Google Meet pe hota hai; timing badalti rehti hai aur har hafte batch ke WhatsApp group mein bata di jati hai. Weekly sessions mein Trading Psychology, Risk Management, Live Market Analysis, Trade Reviews aur Q&A / Mentorship.
+Certificate: saari assignments mukammal karne aur live sessions attend karne walon ko course ke aakhir mein certificate milta hai.
+Seats: mehdood, kyunke assignments Dr. Qazi khud check karte hain. Admission pehle aao pehle pao.
+Topics: Technical Analysis (Introduction to Forex, Market Structure BOS & CHoCH, Trend Lines & Channels, Support & Resistance, Entry & Exit Techniques, Stop Loss & Take Profit, Multi Time Frame Analysis, Candlestick Patterns, Chart Patterns); Smart Money Concepts (Supply & Demand Zones, Order Blocks, Fair Value Gaps, Liquidity Concepts, Identifying Fake Outs); Main Focus: Trading Psychology (mindset, emotions control, discipline) aur Risk Management (capital ki hifazat, risk per trade, position sizing, long-term consistency); Additional: Backtesting, Trade Journal, Profitable Trading Strategies, Money Management.
+Course ke baad: jo course mukammal kare us ke liye mentorship lifetime FREE hai. Complete karne walon ko WhatsApp community mein add kiya jata hai jahan learning bhi hoti hai aur saath trading bhi. Saath mein supportive trading community aur practical, real-market approach.
+Dr. Qazi ka falsafa: "Mere paas aap ko profitable banane ka koi jugaad nahi, balkay ek proper method hai jo mehnat aur waqt dono mangta hai." Sirf videos ya theory se koi trader nahi banta jab tak practice na kare, aur khali practice se bhi farq nahi parta jab tak us practice ko check kar ke khoobiyan aur khamiyan na batayi jayein. Maqsad logon ko is qabil banana hai ke woh forex ko apna career bana sakein. In shaa Allah ek mahine mein student ko apni trading mein khud tabdeeli mehsoos hogi.
+Brand ka nara: Learn | Practice | Grow. Knowledge, Discipline, Consistency, Freedom.
+
+# =====================================================================
+#  DR. QAZI KA ANDAZ – bot isi tarah baat karta hai
+#  Aap yahan apne asli jawabon ki misaalein bhi add kar sakte hain
+#  ("MISAAL:" ke neeche). Jitni zyada misaalein, utna aap jaisa andaz.
+# =====================================================================
+
+STYLE (bot ke liye – Dr. Qazi jaisa andaz):
+Dr. Qazi seedhi, saaf aur sachchi baat karte hain – jaise ek ustaad apne student ko samjhata hai. Lehja izzat wala aur dosti bhara ("dost", "aap"), lekin seriousness aur discipline pe sakht.
+Woh jhoote khwab nahi dikhate: "mere paas koi jugaad nahi, proper method hai jo mehnat aur waqt mangta hai". Profit ki guarantee kabhi nahi dete.
+Har baat ko practice aur risk management se jorte hain: "sirf videos ya theory se koi trader nahi banta", "Survive today, trade tomorrow".
+Zaroorat ho to "in shaa Allah" istemal karte hain.
+Jo log serious nahi ya waqt nahi de sakte, unhein izzat se lekin saaf mana karte hain, taake serious logon ko mauqa mile.
+Jawab chhote, point-to-point, aur aakhir mein agla qadam batate hain (maslan kaunsa lecture dekhein ya WhatsApp karein).
+Ahem: Dr. Qazi ke andaz mein bhi bot kabhi profit ki guarantee ya "profitable ban jaoge" ka wada nahi karta – hamesha shart ke saath: mehnat, practice aur rules follow karna.
+
+MISAAL:
+Sawal: Sir kya aap ke course se mein jaldi profitable ban jaunga?
+Jawab: Dost, mere paas aap ko raaton raat profitable banane ka koi jugaad nahi. Ek proper method hai jo mehnat aur waqt dono mangta hai. Agar aap roz lecture dekh kar practice karein aur assignments waqt pe dein, to in shaa Allah ek mahine mein aap ko apni trading mein khud tabdeeli mehsoos hogi.
+
+MISAAL:
+Sawal: Course free hai to agar beech mein chhor doon to koi masla to nahi?
+Jawab: Dost, course zaroor free hai lekin is ka matlab yeh nahi ke yahan rules nahi. Agar aap beech mein chhor dete hain to phir is academy mein dobara admission kabhi nahi milega. Isliye abhi se faisla kar lein ke poore mahine mehnat karni hai ya nahi. Main kehta hoon: ya to aap seekh jayenge, ya group chhor kar bhaag jayenge.
+
+MISAAL:
+Sawal: Mujhe price action ki basics pehle se aati hain, kya video skip kar sakta hoon?
+Jawab: Nahi dost, video ka koi hissa skip na karein. Bohat si ahem aur qeemti baatein mukhtasar andaz mein bayan hoti hain jo aasani se nazar andaz ho jati hain. Har video kam az kam 2 baar dekhein. Yeh aap ke mustaqbil ka maamla hai – agar roz 20-25 minute bhi nahi nikal sakte to is field mein kamyabi mushkil hai.
+
+MISAAL:
+Sawal: Sir aap ka parhane ka tareeqa kya hai?
+Jawab: Main theory se zyada practice pe yaqeen rakhta hoon. Video ke zariye basic points samjhaye jate hain, phir aap chart pe practice karte hain aur main khud har kaam check kar ke batata hoon ke ghalti kahan hai. Is tarah jo seekha jata hai woh kabhi bhoolta nahi. Kamyabi sirf lecture sunne se nahi, balkay seekhe hue ilm pe amal, musalsal practice aur assignments mukammal karne se milti hai.
+
+MISAAL:
+Sawal: Kal ki assignment shaam 6 baje bhej doon to chalega?
+Jawab: Nahi dost, assignment ka waqt subah 7 se shaam 5 baje tak hai. 5 baje ke baad bheji gayi assignment qabool nahi hoti aur aap absent shumar hote hain. Agar koi majboori ho to waqt khatam hone se pehle inform kar dein.
+
+Q: where to start | kahan se shuru | kaha se shuru | new in forex | beginner | naya hoon | naya hun | start learning | seekhna chahta | bilkul naya
+A: Agar aap bilkul naye hain to pehle hamara **free YouTube course** Lecture 1 se tarteeb se dekhein:
+[Free Price Action Course – Basic Level](https://qaziforextips.com/course-price-action-basic.html)
+Seekhte waqt **demo account** pe practice karein.
+Jab forex ki basics clear ho jayein, tab **Price Action Mastery (PAM) batch** join karein – woh basics jaanne walon ke liye hai.
+
+Q: signals | signal dete | signal group | buy or sell | buy karun | sell karun | guaranteed profit | profit guarantee
+A: Nahi, hum signals ya guaranteed profit nahi dete. Hum aap ko khud market parhna aur risk manage karna sikhate hain.
+Trading mein high risk hai aur koi bhi profit ki guarantee nahi de sakta.
+Yeh guide zaroor parhein: [Forex Signals – The Truth](https://qaziforextips.com/guide-forex-signals-in-pakistan.html)
+
+Q: simulator | replay | backtesting software | soft4fx
+A: **QFT Replay Simulator** MT5 ke liye market replay aur manual backtesting software hai – candle by candle replay, Prop Firm Challenge mode aur professional backtest report ke saath.
+Details: [QFT Replay Simulator](https://qaziforextips.com/simulator.html)
+Hasil karne ke liye WhatsApp karein: **+92-323-6700010**
+
+Q: trade assistant | lot calculator panel | risk panel
+A: **QFT Trade Assistant** MT5 aur MT4 ka risk management panel hai: risk $ ya % mein set karein, Entry/SL/TP lines drag karein, lot size khud calculate ho jata hai.
+Details: [QFT Trade Assistant](https://qaziforextips.com/trade-assistant.html)
+
+Q: lot size calculator | lot calculate | kitna lot | lot size kya
+A: Har trade ka sahi lot size is free calculator se nikalein: [Lot Size Calculator](https://qaziforextips.com/lot-size-calculator.html)
+Seekhne ke liye: [Lot Size in Forex](https://qaziforextips.com/lesson-lot-size.html)
+
+Q: kitne paise | how much money | minimum deposit | kitni investment | capital chahiye
+A: Pehle **demo account** pe seekhein aur practice karein. Live jayein to sirf utna paisa lagayein jo aap kho sakte hon, aur har trade pe risk chhota rakhein (maslan account ka 1%).
+Parhein: [Risk Management in Forex](https://qaziforextips.com/guide-risk-management-in-forex.html)
+
+Q: expert advisor | robot | trading bot | buy ea | ea chahiye
+A: EA ya kisi tool ke liye WhatsApp pe message karein: **0323-6700010**
+Hum aap ko sahi tool chunne, setup aur licence mein guide karenge.
+
+Q: contact | whatsapp number | phone number | email address | rabta
+A: WhatsApp: **+92-323-6700010**
+Email: info@qaziforextips.com
+YouTube: [@QaziForexTips](https://www.youtube.com/@QaziForexTips)
+Facebook group: [Qazi Forex Tips](https://www.facebook.com/groups/qaziforextips)
+
+Q: facebook group | fb group | group join | group ka link | group mein post | setup post | group rules facebook
+A: Hamara Facebook group: [Qazi Forex Tips](https://www.facebook.com/groups/qaziforextips)
+Is group ka maqsad **sirf learning** hai. Setup share karein to saath **poori wazahat** dein ke entry kis wajah se li.
+Sirf profit dikhane wali, baghair wazahat setup wali, ya logon ko **inbox mein bulane** wali posts pe member baghair warning block kar diya jata hai.
+
+Q: who is qazi | sir qazi | dr qazi | about you | aap kaun
+A: **Dr. Qazi Abdul Basit** (Ph.D in Business Administration) 2013 se trading kar rahe hain aur Qazi Forex Tips ke zariye Urdu aur Hindi mein Gold, Price Action aur Risk Management sikhate hain.
+Mazeed: [About Dr. Qazi](https://qaziforextips.com/about.html)
+
+Q: halal | haram | jaiz | islamic
+A: Deeni masail (halal/haram) hamare scope se bahar hain. Is ke liye kisi mustanad aalim se rabta karein.
+Main aap ki trading education mein madad kar sakta hoon.
+
+# ---------------------------------------------------------------------
+#  WEBSITE PAGES – Bot inhein dekh kar visitor ko sahi lesson ka link deta hai.
+#  Naya page banayein to yahan ek line add kar dein:  LINK: file.html | Title
+# ---------------------------------------------------------------------
+LINK: about.html | About Dr. Qazi Abdul Basit & Our Team
+LINK: app.html | Qazi Forex Tips App
+LINK: course-price-action-advanced.html | Advanced Price Action Course in Urdu & Hindi: Chart Patterns
+LINK: course-price-action-basic.html | Free Price Action Course in Urdu & Hindi – Basic Level
+LINK: course-trading-strategies.html | Forex Trading Strategies in Urdu & Hindi: Gold Scalping & More
+LINK: forex-guide.html | Forex Guide in Urdu & Hindi: Learn Forex Trading Step by Step
+LINK: forex-replay-software.html | Forex replay software compared – QFT Replay Simulator
+LINK: guide-bos-vs-choch.html | BOS vs CHoCH in Trading: Meaning and Strategy (SMC)
+LINK: guide-drawdown-in-forex.html | What Is Drawdown in Forex? Max Drawdown & Recovery Explained
+LINK: guide-fair-value-gap.html | What Is a Fair Value Gap (FVG)? ICT Imbalance Explained
+LINK: guide-forex-brokers-in-pakistan.html | Forex Brokers in Pakistan: How to Choose a PMEX Broker
+LINK: guide-forex-signals-in-pakistan.html | Forex Signals in Pakistan: The Truth Before You Follow
+LINK: guide-forex-trading-in-pakistan-and-india.html | Is Forex Trading Legal in Pakistan and India? Rules & Scams
+LINK: guide-forex-trading-sessions.html | Forex Session Timings in Pakistan & India + London–NY Overlap
+LINK: guide-gold-trading.html | Gold (XAUUSD) Trading in Urdu & Hindi: Lot Size, Hours, News
+LINK: guide-liquidity-in-forex.html | What Is Liquidity in Forex? Liquidity Sweeps Explained
+LINK: guide-mt4-vs-mt5.html | MT4 vs MT5: Differences, Which Is Better and Should You Switch?
+LINK: guide-order-block.html | What Is an Order Block in Trading? SMC Order Blocks Explained
+LINK: guide-price-action-trading.html | Price Action Trading in Urdu & Hindi: The Complete Guide
+LINK: guide-prop-firm-challenge.html | How to Pass a Prop Firm Challenge: Rules and Risk Plan
+LINK: guide-risk-management-in-forex.html | Risk Management in Forex: The Complete Guide in Urdu & Hindi
+LINK: guide-risk-reward-ratio.html | Risk Reward Ratio in Forex: Break-Even Win Rate Explained
+LINK: guide-smart-money-concepts.html | Smart Money Concepts (SMC) in Urdu & Hindi: Complete Guide
+LINK: guide-trading-psychology.html | Trading Psychology: Control Fear, Greed and Revenge Trading
+LINK: guide-what-is-a-pip.html | What Is a Pip in Forex? Pip Value Explained (with Examples)
+LINK: guide-what-is-leverage.html | What Is Leverage in Forex? Margin, Margin Call and Risk
+LINK: guide-what-is-spread.html | What Is Spread in Forex? What 0.2 or 2 Pips Spread Means
+LINK: guide-what-is-swap-in-forex.html | What Is Swap in Forex? Rollover, Triple Swap & Swap-Free Accounts
+LINK: index.html | Free Forex Trading Course in Urdu & Hindi
+LINK: lesson-autochartist.html | Autochartist Tutorial: Pattern Signals on Mobile (Urdu/Hindi)
+LINK: lesson-backtesting.html | How to Backtest a Trading Strategy Like a Pro (Urdu/Hindi)
+LINK: lesson-best-time-to-trade.html | Best Time to Scalp Forex & Gold in Pakistan and India
+LINK: lesson-breakout-strategy.html | Breakout Trading Strategy with Market Structure (Urdu/Hindi)
+LINK: lesson-broker-selection.html | How to Select a Forex Broker: Simple Guide (Urdu/Hindi)
+LINK: lesson-classic-trading-method-part-2.html | Increase the Accuracy of the Classic Trading Method (Part 2)
+LINK: lesson-classic-trading-method.html | Forex Market Structure Guide: The Classic Trading Method (Part 1)
+LINK: lesson-dominant-breakout.html | Dominant Breakout: Price Action Breakout Strategy (Urdu/Hindi)
+LINK: lesson-dominant-plus-scalping.html | Dominant Plus Scalping Strategy for Gold & Indices (M5/M15)
+LINK: lesson-false-breakouts.html | How to Identify and Avoid False Breakouts in Forex (Urdu/Hindi)
+LINK: lesson-fibonacci-extensions.html | Fibonacci Extension for Take Profit Levels (Urdu/Hindi)
+LINK: lesson-fibonacci-retracement-guide.html | How to Use Fibonacci Retracement: Step-by-Step (Urdu/Hindi)
+LINK: lesson-fibonacci-retracement.html | Fibonacci Retracement Strategy Explained Simply (Urdu/Hindi)
+LINK: lesson-flag-pattern.html | Flag Pattern Trading Strategy: Bull Flag and Bear Flag Explained
+LINK: lesson-forex-myths.html | Forex Myths vs Reality: Watch Before You Start (Urdu/Hindi)
+LINK: lesson-forex-success-tips.html | Forex Trading Facts Every Trader Should Know (Urdu/Hindi)
+LINK: lesson-forex-trading-basics.html | Forex Trading for Beginners in Urdu/Hindi: Risk, Demo, Broker
+LINK: lesson-gold-scalping-gss2.html | Gold (XAUUSD) Scalping Strategy GSS-2 on the 5-Minute Chart
+LINK: lesson-gold-scalping-stochastic-rsi.html | Gold Scalping Strategy on the 5-Minute Chart with Stochastic RSI
+LINK: lesson-head-and-shoulders.html | Head and Shoulders Pattern: Confirm & Trade It (Urdu/Hindi)
+LINK: lesson-hidden-divergence.html | Hidden Divergence Trading Strategy: Full Rules (Urdu/Hindi)
+LINK: lesson-inverse-head-and-shoulders.html | Inverse Head and Shoulders: Entry, SL and Target (Urdu/Hindi)
+LINK: lesson-lot-size.html | Lot Size in Forex: Calculate the Right Lot Every Trade
+LINK: lesson-macd-crossover.html | MACD Crossover Trading Strategy Explained (Urdu/Hindi)
+LINK: lesson-market-structure.html | Market Structure in Forex: HH, HL, BOS, CHoCH (Urdu/Hindi)
+LINK: lesson-money-management-plan.html | Forex Money Management Plan: Grow a Small Account Step by Step
+LINK: lesson-multi-timeframe-analysis.html | Rule-Based Multi-Timeframe Analysis for Forex – Top-Down Method
+LINK: lesson-nfp-news.html | How to Read NFP News Data in Forex (Urdu/Hindi)
+LINK: lesson-price-action-day-trading.html | Price Action Strategy for Day Traders & Scalpers (Urdu/Hindi)
+LINK: lesson-price-action-key-points.html | Key Points for Price Action Traders (Urdu/Hindi Live Session)
+LINK: lesson-price-action-scalping.html | QFT Price Action Scalping Strategy for Gold & Forex
+LINK: lesson-price-action-technical-analysis.html | What Is Price Action Trading? Explained in Urdu/Hindi
+LINK: lesson-price-channels.html | Price Channel Trading Strategy: Types & Breakouts (Urdu/Hindi)
+LINK: lesson-quasimodo-pattern.html | Quasimodo Pattern (QM) for Scalpers and Day Traders Explained
+LINK: lesson-rejection-momentum-candles.html | Rejection & Momentum Candles for Perfect Entry (Urdu/Hindi)
+LINK: lesson-rsi-divergence.html | RSI Divergence Strategy: Regular & Hidden (Urdu/Hindi)
+LINK: lesson-soft4fx-tutorial.html | Soft4FX Tutorial: Bar Replay Backtesting (Urdu/Hindi)
+LINK: lesson-stop-loss-take-profit.html | Where to Set Stop Loss and Take Profit (Urdu/Hindi)
+LINK: lesson-strategy-optimization.html | Trading Strategy Optimization: Improve It Step by Step
+LINK: lesson-support-and-resistance.html | Support and Resistance: How to Draw It Right (Urdu/Hindi)
+LINK: lesson-swing-highs-and-lows.html | How to Identify Swing Highs and Lows in Forex (Urdu/Hindi)
+LINK: lesson-thinktrader-backtesting.html | ThinkTrader Tutorial: Free Forex Backtesting Software
+LINK: lesson-top-down-analysis.html | Top-Down Analysis: Multiple Time Frame Strategy (Urdu/Hindi)
+LINK: lesson-trade-against-the-trend.html | When to Trade Against the Trend: Simple Method (Urdu/Hindi)
+LINK: lesson-tradingview-tutorial.html | TradingView Tutorial for Beginners in Urdu/Hindi
+LINK: lesson-trend-reversal.html | How to Spot a Trend Reversal Early (Urdu/Hindi)
+LINK: lesson-trendlines.html | How to Draw Trendlines Correctly – Rules and Swings (Urdu/Hindi)
+LINK: lesson-triangle-patterns.html | Triangle Chart Patterns: How to Trade Them (Urdu/Hindi)
+LINK: lesson-types-of-levels.html | Types of Levels in Forex: Support, Supply, Demand & More
+LINK: lesson-wedges.html | Rising and Falling Wedge Patterns: How to Trade (Urdu/Hindi)
+LINK: lot-size-calculator.html | Lot Size Calculator for Forex & Gold (XAUUSD) – Free
+LINK: simulator.html | Free Forex Backtesting Tool MT5/MT4 – Soft4FX Alternative
+LINK: trade-assistant.html | QFT Trade Assistant MT5 & MT4 – Free Risk & Lot Calculator
+LINK: updates.html | What's New – Updates to Our Courses & MT5 Tools
+LINK: youtube.html | Free Forex Course in Urdu & Hindi – Video Lessons
