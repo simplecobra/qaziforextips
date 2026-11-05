@@ -50,7 +50,7 @@ cBPR      = input.color(color.rgb(150, 110, 230), "Balanced price range", group 
 
 G6 = "Panel and alerts"
 showPanel = input.bool(true, "Show statistics panel", group = G6)
-panelPos  = input.string("Top left", "Panel position", options = ["Top left", "Top right", "Bottom left", "Bottom right"], group = G6)
+panelPos  = input.string("Top right", "Panel position", options = ["Top left", "Top right", "Bottom left", "Bottom right"], group = G6)
 alNew     = input.bool(false, "Alert: new FVG", group = G6)
 alEnter   = input.bool(true, "Alert: price enters an open FVG", group = G6)
 alCE      = input.bool(false, "Alert: price touches the 50% (CE)", group = G6)
@@ -491,9 +491,8 @@ if barstate.islast
                 color ic = g.bull ? cIBear : cIBull
                 int te = g.invState == 0 ? right : g.tInvEnd
                 string itip = (g.bull ? "Bearish" : "Bullish") + " inversion FVG: the old " + (g.bull ? "bullish" : "bearish") + " gap was closed through, so it now works the other way" + (g.bull ? " (resistance)." : " (support).") + (g.invState == 0 ? " Active." : " Invalidated.")
-                dB.push(box.new(g.tInv, g.top, te, g.bot, color.new(ic, g.invState == 0 ? 25 : 70), 1, line.style_dashed, xloc = xloc.bar_time, bgcolor = color.new(ic, g.invState == 0 ? fillT : math.min(95, fillT + 8))))
-                if showLbl and g.invState == 0
-                    dT.push(label.new(te, (g.top + g.bot) / 2.0, (g.bull ? "Bearish Inversion FVG " : "Bullish Inversion FVG "), xloc.bar_time, yloc.price, color.new(color.black, 100), label.style_label_right, ic, size.small, tooltip = itip))
+                string itxt = showLbl and g.invState == 0 ? "  " + (g.bull ? "Bearish Inversion FVG" : "Bullish Inversion FVG") : ""
+                dB.push(box.new(g.tInv, g.top, te, g.bot, color.new(ic, g.invState == 0 ? 25 : 70), 1, line.style_dashed, xloc = xloc.bar_time, bgcolor = color.new(ic, g.invState == 0 ? fillT : math.min(95, fillT + 8)), text = itxt, text_size = size.normal, text_color = ic, text_halign = text.align_left, text_valign = text.align_center))
             bool draw = isOpen ? showG.get(k) : showFilled and (g.bull ? fb < maxFilled : fs < maxFilled)
             if not isOpen and draw
                 if g.bull
@@ -513,12 +512,10 @@ if barstate.islast
                         fbm := g.fill
                 if ft > fbm
                     dB.push(box.new(g.t1, ft, t2, fbm, na, 0, xloc = xloc.bar_time, bgcolor = color.new(base, isOpen ? fillT : math.min(95, fillT + 8))))
-                dB.push(box.new(g.t1, g.top, t2, g.bot, color.new(base, isOpen ? 25 : 70), 1, isOpen ? line.style_solid : line.style_dotted, xloc = xloc.bar_time, bgcolor = color.new(base, 100)))
+                string txt = showLbl and isOpen ? "  " + (g.bull ? "Bullish FVG · " : "Bearish FVG · ") + sz + " pips" + (g.trend == 1 ? " · with " + htfName + " trend" : "") + (g.kz > 0 ? " · Kill Zone FVG" : "") : ""
+                dB.push(box.new(g.t1, g.top, t2, g.bot, color.new(base, isOpen ? 25 : 70), 1, isOpen ? line.style_solid : line.style_dotted, xloc = xloc.bar_time, bgcolor = color.new(base, 100), text = txt, text_size = size.normal, text_color = base, text_halign = text.align_left, text_valign = text.align_center))
                 if showCE and isOpen
                     dL.push(line.new(g.t1, (g.top + g.bot) / 2.0, t2, (g.top + g.bot) / 2.0, xloc.bar_time, color = color.new(base, 30), style = line.style_dotted))
-                if showLbl and isOpen
-                    string txt = (g.bull ? "Bullish FVG · " : "Bearish FVG · ") + sz + " pips" + (g.trend == 1 ? " · with " + htfName + " trend" : "") + (g.kz > 0 ? " · Kill Zone FVG" : "") + " "
-                    dT.push(label.new(t2, (g.top + g.bot) / 2.0, txt, xloc.bar_time, yloc.price, color.new(color.black, 100), label.style_label_right, base, size.small, tooltip = tip))
     // balanced price range
     if bprF and N > 1
         int nb = 0
@@ -539,7 +536,7 @@ if barstate.islast
                 int ts = math.max(A.t1, B.t1)
                 dB.push(box.new(ts, t, right, bt, color.new(cBPR, 40), 1, xloc = xloc.bar_time, bgcolor = color.new(cBPR, 75)))
                 if showLbl
-                    dT.push(label.new(ts, t, "Balanced Price Range (BPR)", xloc.bar_time, yloc.price, color.new(color.black, 100), label.style_label_lower_left, cBPR, size.small, tooltip = "Balanced price range: a bullish and a bearish gap overlap here. Price often reacts strongly at this zone."))
+                    dT.push(label.new(ts, t, "Balanced Price Range (BPR)", xloc.bar_time, yloc.price, color.new(color.black, 100), label.style_label_lower_left, cBPR, size.normal, tooltip = "Balanced price range: a bullish and a bearish gap overlap here. Price often reacts strongly at this zone."))
                 nb += 1
                 break
     // higher timeframe gaps nearest to price
@@ -563,7 +560,7 @@ if barstate.islast
                 string tip = htfName + " " + (h.bull ? "bullish" : "bearish") + " FVG (higher timeframe, still open): a strong zone where gaps of this timeframe often react."
                 dB.push(box.new(h.t1, h.top, right, h.bot, color.new(cHTF, 15), 1, line.style_dashed, xloc = xloc.bar_time, bgcolor = color.new(cHTF, 90)))
                 if showLbl
-                    dT.push(label.new(h.t1, h.bull ? h.bot : h.top, " " + htfName + (h.bull ? " Bullish FVG" : " Bearish FVG") + " (higher timeframe)", xloc.bar_time, yloc.price, color.new(color.black, 100), h.bull ? label.style_label_upper_left : label.style_label_lower_left, cHTF, size.small, tooltip = tip))
+                    dT.push(label.new(h.t1, h.bull ? h.bot : h.top, " " + htfName + (h.bull ? " Bullish FVG" : " Bearish FVG") + " (higher timeframe)", xloc.bar_time, yloc.price, color.new(color.black, 100), h.bull ? label.style_label_upper_left : label.style_label_lower_left, cHTF, size.normal, tooltip = tip))
 
 // ───────────────────────────────────────────────────────────── 6) statistics panel
 f_pct(int a, int b) => b > 0 ? str.tostring(100.0 * a / b, "#") + "%" : "-"
@@ -650,23 +647,23 @@ if barstate.islast and showPanel
     for z in zones
         if z.race == -1 and z.tapped and z.tapBar <= last_bar_index - 10
             plN += 1
-    tb.cell(0, 0, "QFT FVG PRO", text_color = gold, text_halign = text.align_left, text_size = size.small)
-    tb.cell(1, 0, syminfo.ticker + " " + timeframe.period, text_color = mut, text_halign = text.align_right, text_size = size.small)
+    tb.cell(0, 0, "QFT FVG PRO", text_color = gold, text_halign = text.align_left, text_size = size.normal)
+    tb.cell(1, 0, syminfo.ticker + " " + timeframe.period, text_color = mut, text_halign = text.align_right, text_size = size.normal)
     tb.cell(0, 1, str.tostring(ob), text_color = cBull, text_halign = text.align_left, text_size = size.large)
     tb.cell(1, 1, str.tostring(os), text_color = cBear, text_halign = text.align_right, text_size = size.large)
-    tb.cell(0, 2, "open bullish", text_color = mut, text_halign = text.align_left, text_size = size.tiny)
-    tb.cell(1, 2, "open bearish", text_color = mut, text_halign = text.align_right, text_size = size.tiny)
-    tb.cell(0, 3, "Nearest below", text_color = mut, text_halign = text.align_left, text_size = size.small)
-    tb.cell(1, 3, na(nb) ? "none" : str.tostring(nb / pip, "#.0") + " pips", text_color = na(nb) ? mut : cBull, text_halign = text.align_right, text_size = size.small)
-    tb.cell(0, 4, "Nearest above", text_color = mut, text_halign = text.align_left, text_size = size.small)
-    tb.cell(1, 4, na(ns) ? "none" : str.tostring(ns / pip, "#.0") + " pips", text_color = na(ns) ? mut : cBear, text_halign = text.align_right, text_size = size.small)
-    tb.cell(0, 5, "Active IFVG", text_color = mut, text_halign = text.align_left, text_size = size.small)
-    tb.cell(1, 5, str.tostring(ifv), text_color = ink, text_halign = text.align_right, text_size = size.small)
-    tb.cell(0, 6, "STATISTICS · LAST " + str.tostring(tot) + " GAPS", text_color = gold, text_halign = text.align_left, text_size = size.small)
-    tb.cell(0, 7, "Filled", text_color = mut, text_halign = text.align_left, text_size = size.small)
-    tb.cell(1, 7, f_pct(filled, tot) + (filled > 0 ? " · avg " + str.tostring(1.0 * sumBars / filled, "#") + " candles" : ""), text_color = ink, text_halign = text.align_right, text_size = size.small)
-    tb.cell(0, 8, "Respected after touch", text_color = mut, text_halign = text.align_left, text_size = size.small)
-    tb.cell(1, 8, f_pctN(resp, tapped), text_color = ink, text_halign = text.align_right, text_size = size.small)
+    tb.cell(0, 2, "open bullish", text_color = mut, text_halign = text.align_left, text_size = size.small)
+    tb.cell(1, 2, "open bearish", text_color = mut, text_halign = text.align_right, text_size = size.small)
+    tb.cell(0, 3, "Nearest below", text_color = mut, text_halign = text.align_left, text_size = size.normal)
+    tb.cell(1, 3, na(nb) ? "none" : str.tostring(nb / pip, "#.0") + " pips", text_color = na(nb) ? mut : cBull, text_halign = text.align_right, text_size = size.normal)
+    tb.cell(0, 4, "Nearest above", text_color = mut, text_halign = text.align_left, text_size = size.normal)
+    tb.cell(1, 4, na(ns) ? "none" : str.tostring(ns / pip, "#.0") + " pips", text_color = na(ns) ? mut : cBear, text_halign = text.align_right, text_size = size.normal)
+    tb.cell(0, 5, "Active IFVG", text_color = mut, text_halign = text.align_left, text_size = size.normal)
+    tb.cell(1, 5, str.tostring(ifv), text_color = ink, text_halign = text.align_right, text_size = size.normal)
+    tb.cell(0, 6, "STATISTICS · LAST " + str.tostring(tot) + " GAPS", text_color = gold, text_halign = text.align_left, text_size = size.normal)
+    tb.cell(0, 7, "Filled", text_color = mut, text_halign = text.align_left, text_size = size.normal)
+    tb.cell(1, 7, f_pct(filled, tot) + (filled > 0 ? " · avg " + str.tostring(1.0 * sumBars / filled, "#") + " candles" : ""), text_color = ink, text_halign = text.align_right, text_size = size.normal)
+    tb.cell(0, 8, "Respected after touch", text_color = mut, text_halign = text.align_left, text_size = size.normal)
+    tb.cell(1, 8, f_pctN(resp, tapped), text_color = ink, text_halign = text.align_right, text_size = size.normal)
     // honest baseline: the same test on random zones of the same shape
     string edge = "-"
     color ec = mut
@@ -677,20 +674,20 @@ if barstate.islast and showPanel
         float se = 100 * math.sqrt(p1 * (1 - p1) / tapped + p2 * (1 - p2) / plN)
         edge := f_pct(plR, plN) + " · FVG " + (d >= 0 ? "+" : "") + str.tostring(d, "#") + " pts"
         ec := se > 0 and d >= 2 * se ? grn : se > 0 and d <= -2 * se ? red : ink
-    tb.cell(0, 9, "Random zone, same shape", text_color = mut, text_halign = text.align_left, text_size = size.small)
-    tb.cell(1, 9, edge, text_color = ec, text_halign = text.align_right, text_size = size.small)
+    tb.cell(0, 9, "Random zone, same shape", text_color = mut, text_halign = text.align_left, text_size = size.normal)
+    tb.cell(1, 9, edge, text_color = ec, text_halign = text.align_right, text_size = size.normal)
     color cc = ink
     if ctN > 0 and ptN > 0
         float q1 = 1.0 * ctW / ctN
         float q2 = 1.0 * ptW / ptN
         float se2 = math.sqrt(q1 * (1 - q1) / ctN + q2 * (1 - q2) / ptN)
         cc := se2 > 0 and q1 - q2 >= 2 * se2 ? grn : se2 > 0 and q2 - q1 >= 2 * se2 ? red : ink
-    tb.cell(0, 10, "CE 1:2 test: FVG / random", text_color = mut, text_halign = text.align_left, text_size = size.small)
-    tb.cell(1, 10, f_pctN(ctW, ctN) + " / " + f_pct(ptW, ptN), text_color = cc, text_halign = text.align_right, text_size = size.small)
-    tb.cell(0, 11, htfName + " trend: with / against", text_color = mut, text_halign = text.align_left, text_size = size.small)
-    tb.cell(1, 11, f_pctN(rT, tT) + " / " + f_pctN(rA, tA), text_color = ink, text_halign = text.align_right, text_size = size.small)
-    tb.cell(0, 12, "Killzone / outside", text_color = mut, text_halign = text.align_left, text_size = size.small)
-    tb.cell(1, 12, f_pctN(rK, tK) + " / " + f_pctN(rO, tO), text_color = ink, text_halign = text.align_right, text_size = size.small)
-    tb.cell(0, 13, "Filled rule", text_color = mut, text_halign = text.align_left, text_size = size.tiny)
-    tb.cell(1, 13, mitRule + " by " + str.lower(mitBy) + " · " + htfName + " EMA" + str.tostring(emaLen), text_color = mut, text_halign = text.align_right, text_size = size.tiny)
-    tb.cell(0, 14, "Green = FVGs beat random zones by more than luck (2 standard errors)", text_color = mut, text_halign = text.align_left, text_size = size.tiny)
+    tb.cell(0, 10, "CE 1:2 test: FVG / random", text_color = mut, text_halign = text.align_left, text_size = size.normal)
+    tb.cell(1, 10, f_pctN(ctW, ctN) + " / " + f_pct(ptW, ptN), text_color = cc, text_halign = text.align_right, text_size = size.normal)
+    tb.cell(0, 11, htfName + " trend: with / against", text_color = mut, text_halign = text.align_left, text_size = size.normal)
+    tb.cell(1, 11, f_pctN(rT, tT) + " / " + f_pctN(rA, tA), text_color = ink, text_halign = text.align_right, text_size = size.normal)
+    tb.cell(0, 12, "Killzone / outside", text_color = mut, text_halign = text.align_left, text_size = size.normal)
+    tb.cell(1, 12, f_pctN(rK, tK) + " / " + f_pctN(rO, tO), text_color = ink, text_halign = text.align_right, text_size = size.normal)
+    tb.cell(0, 13, "Filled rule", text_color = mut, text_halign = text.align_left, text_size = size.small)
+    tb.cell(1, 13, mitRule + " by " + str.lower(mitBy) + " · " + htfName + " EMA" + str.tostring(emaLen), text_color = mut, text_halign = text.align_right, text_size = size.small)
+    tb.cell(0, 14, "Green = FVGs beat random zones by more than luck (2 standard errors)", text_color = mut, text_halign = text.align_left, text_size = size.small)

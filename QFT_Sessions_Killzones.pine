@@ -45,7 +45,7 @@ showPD     = input.bool(true, "Previous day high / low", group = G4)
 cPD        = input.color(color.rgb(231, 185, 79), "Previous day colour", group = G4)
 showPanel  = input.bool(true, "Session clock panel", group = G4)
 clockTZ    = input.string("Pakistan (PKT)", "Clock time zone", options = ["Pakistan (PKT)", "India (IST)", "UTC", "New York", "London"], group = G4)
-panelPos   = input.string("Top left", "Panel position", options = ["Top left", "Top right", "Bottom left", "Bottom right"], group = G4)
+panelPos   = input.string("Top right", "Panel position", options = ["Top left", "Top right", "Bottom left", "Bottom right"], group = G4)
 
 // ───────────────────────────────────────────────────────────── helpers
 int   tfSec   = timeframe.in_seconds()
@@ -518,10 +518,10 @@ if barstate.islast and showPanel
     color gold = color.rgb(231, 185, 79)
     color grn = color.rgb(0, 190, 160)
     string tz = f_tzName()
-    tb.cell(0, 0, "QFT SESSIONS", text_color = gold, text_halign = text.align_left, text_size = size.small)
-    tb.cell(1, 0, str.format_time(timenow, "EEEE", tz), text_color = mut, text_halign = text.align_right, text_size = size.small)
+    tb.cell(0, 0, "QFT SESSIONS", text_color = gold, text_halign = text.align_left, text_size = size.normal)
+    tb.cell(1, 0, str.format_time(timenow, "EEEE", tz), text_color = mut, text_halign = text.align_right, text_size = size.normal)
     tb.cell(0, 1, str.format_time(timenow, "HH:mm", tz) + " " + f_tzShort(), text_color = ink, text_halign = text.align_left, text_size = size.large)
-    tb.cell(1, 1, "", text_size = size.small)
+    tb.cell(1, 1, "", text_size = size.normal)
     array<string> zt = array.from("Asia/Tokyo", "Europe/London", "America/New_York")
     for z = 0 to 2
         [op, sc] = f_status(zt.get(z), z == 0 ? 9.0 : 8.0, z == 0 ? 18.0 : 17.0, false)
@@ -540,8 +540,8 @@ if barstate.islast and showPanel
         else if best >= 0 and sc < best
             best := sc
             kzTxt := "next: " + f_kzName(i) + " in " + f_dur(sc)
-    tb.cell(0, 5, "KILLZONE", text_color = mut, text_halign = text.align_left, text_size = size.small)
-    tb.cell(1, 5, kzTxt, text_color = gold, text_halign = text.align_right, text_size = size.small)
+    tb.cell(0, 5, "KILLZONE", text_color = mut, text_halign = text.align_left, text_size = size.normal)
+    tb.cell(1, 5, kzTxt, text_color = gold, text_halign = text.align_right, text_size = size.normal)
     // setup results of the last N days
     int w = 0
     int l = 0
@@ -555,6 +555,6 @@ if barstate.islast and showPanel
                 l += 1
                 tr -= 1
     string res = showSetups and tfSec <= 1800 ? str.tostring(w) + "W · " + str.tostring(l) + "L" + (w + l > 0 ? " · " + str.tostring(100.0 * w / (w + l), "#") + "%" : "") + " · " + (tr >= 0 ? "+" : "") + str.tostring(tr, "#.0") + "R" : "M1 - M30 only"
-    tb.cell(0, 6, "SETUPS " + str.tostring(setDays) + "D", text_color = mut, text_halign = text.align_left, text_size = size.small)
-    tb.cell(1, 6, res, text_color = tr >= 0 ? grn : color.rgb(240, 84, 104), text_halign = text.align_right, text_size = size.small)
-    tb.cell(0, 7, "Sessions and killzones follow US / UK daylight saving automatically", text_color = mut, text_halign = text.align_left, text_size = size.tiny)
+    tb.cell(0, 6, "SETUPS " + str.tostring(setDays) + "D", text_color = mut, text_halign = text.align_left, text_size = size.normal)
+    tb.cell(1, 6, res, text_color = tr >= 0 ? grn : color.rgb(240, 84, 104), text_halign = text.align_right, text_size = size.normal)
+    tb.cell(0, 7, "Sessions and killzones follow US / UK daylight saving automatically", text_color = mut, text_halign = text.align_left, text_size = size.small)
