@@ -513,7 +513,7 @@ if barstate.islast and showPanel
     if na(tb)
         tb := table.new(f_pos(), 2, 8, bgcolor = color.new(color.rgb(16, 22, 38), 5), border_color = color.rgb(231, 185, 79), border_width = 1, frame_color = color.rgb(231, 185, 79), frame_width = 1)
         tb.merge_cells(0, 7, 1, 7)
-        color ink = color.rgb(238, 241, 247)
+    color ink = color.rgb(238, 241, 247)
     color mut = color.rgb(154, 164, 186)
     color gold = color.rgb(231, 185, 79)
     color grn = color.rgb(0, 190, 160)
