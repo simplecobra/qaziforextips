@@ -1,0 +1,4 @@
+# Comments listed here are never shown on the website.
+# Paste the "View on YouTube" link of the comment (or just its id), one per line.
+# Example:
+# https://www.youtube.com/watch?v=DDaEQcAJIEA&lc=UgxXXXXXXXXXXXXXXXXXXXXX
