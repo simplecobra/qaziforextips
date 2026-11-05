@@ -1,0 +1,696 @@
+// This source code is subject to the terms of the Mozilla Public License 2.0 at https://mozilla.org/MPL/2.0/
+// © QaziForexTips
+
+//@version=6
+indicator("QFT FVG Pro [Self-Test]", "QFT FVG Pro", overlay = true, max_boxes_count = 500, max_lines_count = 500, max_labels_count = 500, max_bars_back = 500)
+
+// ───────────────────────────────────────────────────────────── inputs
+G1 = "Detection"
+lookback  = input.int(5000, "Candles to scan (more = more reliable statistics)", minval = 500, maxval = 20000, group = G1)
+sens      = input.string("Auto", "Sensitivity", options = ["Auto", "Low (0.50 x ATR)", "Normal (0.25 x ATR)", "High (0.10 x ATR)", "Custom"], group = G1, tooltip = "Auto: only gaps bigger than the average of the last 100 gaps.")
+minATR    = input.float(0.20, "Custom minimum size (x ATR 14)", minval = 0.0, step = 0.05, group = G1)
+dispF     = input.bool(true, "Middle candle must be a real impulse (body >= 50% of range)", group = G1)
+sameDir   = input.bool(false, "All 3 candles in the same direction (strict)", group = G1)
+mergeF    = input.bool(true, "Merge overlapping gaps of one move", group = G1)
+
+G2 = "Filled / mitigation"
+mitRule   = input.string("Full", "Gap is filled when price reaches", options = ["Touch", "50% (CE)", "Full"], group = G2)
+mitBy     = input.string("Wick", "...measured by", options = ["Wick", "Candle close"], group = G2)
+dynamicF  = input.bool(true, "Dynamic: box shrinks to the unfilled part", group = G2)
+respATR   = input.float(1.0, "Respected = price moves away N x ATR after the touch", minval = 0.1, step = 0.1, group = G2)
+
+G3 = "Inversion FVG and BPR"
+ifvgF     = input.bool(true, "Inversion FVG (gap closed through flips its role)", group = G3)
+ifvgLife  = input.int(150, "Inversion gap expires after N candles", minval = 10, group = G3)
+bprF      = input.bool(true, "Balanced price range (bull + bear gap overlap)", group = G3)
+bprBars   = input.int(20, "BPR: gaps formed within N candles", minval = 2, group = G3)
+
+G4 = "Context: trend, killzones, higher timeframe"
+htfIn     = input.timeframe("", "Higher timeframe (empty = automatic)", group = G4)
+emaLen    = input.int(50, "Trend: higher timeframe EMA period", minval = 2, group = G4)
+htfGaps   = input.bool(true, "Show higher timeframe FVGs", group = G4)
+htfMax    = input.int(2, "Higher timeframe FVGs per side", minval = 0, maxval = 10, group = G4)
+cHTF      = input.color(color.rgb(231, 185, 79), "Higher timeframe FVG colour", group = G4)
+onlyKZ    = input.bool(false, "Only FVGs formed in a killzone (London, New York, London Close)", group = G4)
+
+G5 = "Display"
+showFilled = input.bool(true, "Show filled gaps (faded)", group = G5)
+maxOpen   = input.int(5, "Open gaps per side (nearest to price)", minval = 0, maxval = 20, group = G5)
+maxFilled = input.int(3, "Filled gaps per side (latest)", minval = 0, maxval = 10, group = G5)
+maxIFVG   = input.int(3, "Active inversion gaps (nearest to price)", minval = 0, maxval = 10, group = G5)
+extendN   = input.int(15, "Extend open gaps (candles to the right)", minval = 1, group = G5)
+showCE    = input.bool(true, "50% (CE) line", group = G5)
+showLbl   = input.bool(true, "Labels (type, size, trend, kill zone)", group = G5)
+opacity   = input.int(16, "Fill strength (5-60 %)", minval = 5, maxval = 60, group = G5)
+cBull     = input.color(color.rgb(0, 166, 147), "Bullish FVG", group = G5)
+cBear     = input.color(color.rgb(224, 72, 94), "Bearish FVG", group = G5)
+cIBull    = input.color(color.rgb(64, 140, 230), "Bullish inversion FVG", group = G5)
+cIBear    = input.color(color.rgb(240, 150, 50), "Bearish inversion FVG", group = G5)
+cBPR      = input.color(color.rgb(150, 110, 230), "Balanced price range", group = G5)
+
+G6 = "Panel and alerts"
+showPanel = input.bool(true, "Show statistics panel", group = G6)
+panelPos  = input.string("Top left", "Panel position", options = ["Top left", "Top right", "Bottom left", "Bottom right"], group = G6)
+alNew     = input.bool(false, "Alert: new FVG", group = G6)
+alEnter   = input.bool(true, "Alert: price enters an open FVG", group = G6)
+alCE      = input.bool(false, "Alert: price touches the 50% (CE)", group = G6)
+alFilled  = input.bool(false, "Alert: FVG filled", group = G6)
+alIFVG    = input.bool(true, "Alert: new inversion FVG", group = G6)
+alTrend   = input.bool(false, "Alerts only for gaps with the higher timeframe trend", group = G6)
+
+// ───────────────────────────────────────────────────────────── helpers
+int   tfSec   = timeframe.in_seconds()
+bool  intraday = tfSec <= 3600
+int   digits  = int(math.round(math.log10(syminfo.pricescale)))
+float pip     = str.contains(syminfo.ticker, "XAU") or str.contains(syminfo.ticker, "GOLD") ? 0.1 : (digits == 3 or digits == 5) ? syminfo.mintick * 10 : syminfo.mintick
+float atr     = ta.sma(ta.tr(true), 14)
+float avgVol  = ta.sma(volume, 20)
+int   scanFrom = last_bar_index - lookback
+
+f_autoHTF() =>
+    int s = tfSec
+    s <= 60 ? "15" : s <= 300 ? "60" : s <= 3600 ? "240" : s <= 14400 ? "D" : s <= 86400 ? "W" : "M"
+string htf = htfIn != "" and timeframe.in_seconds(htfIn) > tfSec ? htfIn : f_autoHTF()
+f_tfName(string tf) =>
+    int s = timeframe.in_seconds(tf)
+    s < 3600 ? "M" + str.tostring(s / 60) : s < 86400 ? "H" + str.tostring(s / 3600) : s < 604800 ? "D1" : s < 2419200 ? "W1" : "MN"
+string htfName = f_tfName(htf)
+
+// higher timeframe trend of the last closed higher timeframe candle (no repaint: offset 1 with lookahead)
+[hC, hE] = request.security(syminfo.tickerid, htf, [close[1], ta.ema(close, emaLen)[1]], lookahead = barmerge.lookahead_on)
+// the last three closed higher timeframe candles, for higher timeframe gaps
+[hH1, hL1, hH3, hL3, hT3] = request.security(syminfo.tickerid, htf, [high[1], low[1], high[3], low[3], time[3]], lookahead = barmerge.lookahead_on)
+
+// killzones (New York time) and sessions; TradingView applies daylight saving automatically
+bool kzL = not na(time(timeframe.period, "0200-0500:23456", "America/New_York"))
+bool kzN = not na(time(timeframe.period, "0700-1000:23456", "America/New_York"))
+bool kzC = not na(time(timeframe.period, "1000-1200:23456", "America/New_York"))
+int  kzNow = kzL ? 1 : kzN ? 2 : kzC ? 3 : 0
+bool sNY = not na(time(timeframe.period, "0800-1700", "America/New_York"))
+bool sLD = not na(time(timeframe.period, "0800-1700", "Europe/London"))
+bool sTK = not na(time(timeframe.period, "0900-1800", "Asia/Tokyo"))
+int  sessNow = sNY ? 3 : sLD ? 2 : sTK ? 1 : 0
+f_kzName(int k) => k == 1 ? "London KZ" : k == 2 ? "New York KZ" : k == 3 ? "London Close KZ" : ""
+f_sessName(int s) => s == 3 ? "New York" : s == 2 ? "London" : s == 1 ? "Asia" : "off-session"
+
+// ───────────────────────────────────────────────────────────── types
+// CE 1:2 trade test: limit at the 50% line, stop beyond the far edge + 0.1 ATR, target 2R
+type CT
+    bool  bull
+    float e
+    float sl
+    float tp
+    int   b0
+    int   st = 0
+    int   res = -1
+    int   eBar = na
+
+f_ct(bool bull, float top, float bot, int b0, float a) =>
+    float e = (top + bot) / 2.0
+    float sl = bull ? bot - 0.1 * a : top + 0.1 * a
+    float tp = bull ? e + 2.0 * (e - sl) : e - 2.0 * (sl - e)
+    CT.new(bull, e, sl, tp, b0)
+
+method step(CT c) =>
+    if c.st == 0
+        if bar_index > c.b0 + 100
+            c.st := 2
+        else if (c.bull and low <= c.e) or (not c.bull and high >= c.e)
+            if (c.bull and low <= c.sl) or (not c.bull and high >= c.sl)
+                c.st := 2
+                c.res := 0
+            else
+                c.st := 1
+                c.eBar := bar_index
+    else if c.st == 1
+        if bar_index > c.eBar + 300
+            c.st := 2
+        else if (c.bull and low <= c.sl) or (not c.bull and high >= c.sl)
+            c.st := 2
+            c.res := 0
+        else if (c.bull and high >= c.tp) or (not c.bull and low <= c.tp)
+            c.st := 2
+            c.res := 1
+    c
+
+type Gap
+    bool  bull
+    int   i3
+    int   t1
+    float top
+    float bot
+    float fill
+    float atr3
+    float dispx
+    float volx
+    int   trend
+    int   kz
+    int   sess
+    bool  tapped = false
+    int   tapBar = na
+    float tapAtr = na
+    float away = na
+    bool  respected = false
+    bool  ce = false
+    bool  full = false
+    int   state = 0
+    int   tMit = na
+    int   bars = 0
+    bool  inv = false
+    int   tInv = na
+    int   iInv = na
+    int   invState = 0
+    int   tInvEnd = na
+    bool  done = false
+    CT    ct = na
+    int   plN = 0
+    int   plR = 0
+    int   ptN = 0
+    int   ptW = 0
+
+// a random zone with the same size and distance (in ATR) as a gap, tested the same way
+type Zone
+    Gap   owner
+    bool  bull
+    float top
+    float bot
+    int   b0
+    bool  tapped = false
+    int   tapBar = na
+    float tapAtr = na
+    float away = na
+    int   race = -1
+    CT    ct = na
+
+type Spawn
+    Gap   owner
+    int   at
+    float distx
+    float sizex
+
+type HGap
+    bool  bull
+    int   t1
+    float top
+    float bot
+    bool  open = true
+
+var array<Gap>   gaps   = array.new<Gap>()
+var array<Gap>   act    = array.new<Gap>()
+var array<Zone>  zones  = array.new<Zone>()
+var array<Spawn> spawns = array.new<Spawn>()
+var array<HGap>  hgaps  = array.new<HGap>()
+var array<float> ring   = array.new<float>()
+
+f_alert(Gap g, string what) =>
+    if barstate.isrealtime and (not alTrend or g.trend == 1)
+        alert("QFT FVG: " + what + (g.bull ? " bullish" : " bearish") + " FVG on " + syminfo.ticker + " " + timeframe.period + (g.trend == 1 ? " (with the " + htfName + " trend)" : "") + (g.kz > 0 ? " [" + f_kzName(g.kz) + "]" : ""), alert.freq_once_per_bar)
+
+bool track = bar_index >= scanFrom - 1500
+
+// ───────────────────────────────────────────────────────────── 1) follow every gap with this candle
+if track and act.size() > 0
+    bool closedBar = barstate.isconfirmed
+    for k = act.size() - 1 to 0
+        Gap g = act.get(k)
+        if bar_index <= g.i3
+            continue
+        float mid = (g.top + g.bot) / 2.0
+        bool wasTap = g.tapped
+        bool wasCE = g.ce
+        int  wasState = g.state
+        bool wasInv = g.inv
+        if not g.done
+            if not g.full and not g.inv
+                if g.tapped and bar_index > g.tapBar and not g.respected
+                    if g.bull
+                        g.away := na(g.away) ? high : math.max(g.away, high)
+                        if g.away >= g.top + respATR * g.tapAtr
+                            g.respected := true
+                    else
+                        g.away := na(g.away) ? low : math.min(g.away, low)
+                        if g.away <= g.bot - respATR * g.tapAtr
+                            g.respected := true
+                if not g.tapped and (g.bull ? low <= g.top : high >= g.bot)
+                    g.tapped := true
+                    g.tapBar := bar_index
+                    g.tapAtr := atr
+                if g.bull ? low <= mid : high >= mid
+                    g.ce := true
+                if g.bull ? low <= g.bot : high >= g.top
+                    g.full := true
+            if g.state == 0
+                g.fill := g.bull ? math.max(g.bot, math.min(g.fill, low)) : math.min(g.top, math.max(g.fill, high))
+                float lvl = mitRule == "50% (CE)" ? mid : g.bull ? (mitRule == "Touch" ? g.top : g.bot) : (mitRule == "Touch" ? g.bot : g.top)
+                bool hit = mitBy == "Wick" ? (g.bull ? low <= lvl : high >= lvl) : closedBar and (g.bull ? close <= lvl : close >= lvl)
+                if hit
+                    g.state := 1
+                    g.tMit := time
+                    g.bars := bar_index - g.i3
+            bool invNow = false
+            if ifvgF and not g.inv and closedBar and bar_index - g.i3 <= 100 and (g.bull ? close < g.bot : close > g.top)
+                g.inv := true
+                g.tInv := time
+                g.iInv := bar_index
+                invNow := true
+                if g.state == 0
+                    g.state := 1
+                    g.tMit := time
+                    g.bars := bar_index - g.i3
+            if not invNow and g.inv and g.invState == 0 and bar_index > g.iInv
+                if closedBar and (g.bull ? close > g.top : close < g.bot)
+                    g.invState := 1
+                    g.tInvEnd := time
+                else if bar_index - g.iInv > ifvgLife
+                    g.invState := 1
+                    g.tInvEnd := time
+            bool trackDone = g.full or g.inv
+            if g.state == 1 and trackDone and (not ifvgF or (g.inv and g.invState == 1) or (not g.inv and bar_index - g.i3 > 100))
+                g.done := true
+        if not na(g.ct) and g.ct.st < 2
+            g.ct.step()
+        // alerts
+        if alEnter and not wasTap and g.tapped
+            f_alert(g, "price entered a")
+        if alCE and not wasCE and g.ce
+            f_alert(g, "price touched the 50% of a")
+        if alFilled and wasState == 0 and g.state == 1
+            f_alert(g, "filled")
+        if alIFVG and not wasInv and g.inv
+            f_alert(g, "new inversion from a")
+        if g.done and (na(g.ct) or g.ct.st == 2)
+            act.remove(k)
+
+// ───────────────────────────────────────────────────────────── 2) random zones
+if track and zones.size() > 0
+    for k = zones.size() - 1 to 0
+        Zone z = zones.get(k)
+        if bar_index <= z.b0
+            continue
+        if z.race == -1
+            if bar_index > z.b0 + 400
+                z.race := z.tapped ? 0 : 9
+            else
+                if z.tapped and bar_index > z.tapBar
+                    if z.bull
+                        z.away := na(z.away) ? high : math.max(z.away, high)
+                        if z.away >= z.top + respATR * z.tapAtr
+                            z.race := 1
+                    else
+                        z.away := na(z.away) ? low : math.min(z.away, low)
+                        if z.away <= z.bot - respATR * z.tapAtr
+                            z.race := 1
+                if z.race == -1
+                    if not z.tapped and (z.bull ? low <= z.top : high >= z.bot)
+                        z.tapped := true
+                        z.tapBar := bar_index
+                        z.tapAtr := atr
+                    if z.bull ? low <= z.bot : high >= z.top
+                        z.race := 0
+                    else if ifvgF and barstate.isconfirmed and bar_index - z.b0 <= 100 and (z.bull ? close < z.bot : close > z.top)
+                        z.race := 0
+            if z.race == 0 or z.race == 1
+                z.owner.plN += 1
+                z.owner.plR += z.race == 1 ? 1 : 0
+                z.race := z.race + 10
+        if z.ct.st < 2
+            z.ct.step()
+            if z.ct.st == 2 and z.ct.res >= 0
+                z.owner.ptN += 1
+                z.owner.ptW += z.ct.res == 1 ? 1 : 0
+        if z.race != -1 and z.ct.st == 2
+            zones.remove(k)
+
+// create the random zones that are due on this candle (same size and distance from price, in ATR)
+if track and spawns.size() > 0 and barstate.isconfirmed
+    for k = spawns.size() - 1 to 0
+        Spawn s = spawns.get(k)
+        if s.at == bar_index
+            Gap o = s.owner
+            float dist = s.distx
+            float sx = s.sizex
+            float zt = o.bull ? close - dist * atr : close + dist * atr + sx * atr
+            float zb = zt - sx * atr
+            Zone z = Zone.new(o, o.bull, zt, zb, bar_index)
+            z.ct := f_ct(o.bull, zt, zb, bar_index, atr)
+            zones.push(z)
+            spawns.remove(k)
+        else if s.at < bar_index
+            spawns.remove(k)
+
+// ───────────────────────────────────────────────────────────── 3) a new gap on this closed candle?
+if track and barstate.isconfirmed and bar_index > 20
+    bool bull = low > high[2]
+    bool bear = high < low[2]
+    if bull or bear
+        float top = bull ? low : low[2]
+        float bot = bull ? high[2] : high
+        float size = top - bot
+        float body = math.abs(close[1] - open[1])
+        float rng = high[1] - low[1]
+        bool ok = size > 0
+        if ok and dispF and rng > 0 and body < 0.5 * rng
+            ok := false
+        if ok and dispF and ((bull and close[1] < open[1]) or (bear and close[1] > open[1]))
+            ok := false
+        if ok and sameDir
+            bool u1 = close[2] > open[2]
+            bool u2 = close[1] > open[1]
+            bool u3 = close > open
+            if (bull and not (u1 and u2 and u3)) or (bear and (u1 or u2 or u3))
+                ok := false
+        if ok
+            float a = atr[1] > 0 ? atr[1] : size
+            if sens == "Auto"
+                float rel = size / math.max(close[1], syminfo.mintick)
+                bool pass = ring.size() < 20 or rel >= ring.avg()
+                ring.push(rel)
+                if ring.size() > 100
+                    ring.shift()
+                ok := pass
+            else
+                float kx = sens == "Low (0.50 x ATR)" ? 0.50 : sens == "Normal (0.25 x ATR)" ? 0.25 : sens == "High (0.10 x ATR)" ? 0.10 : minATR
+                ok := size >= kx * a
+            if ok and bar_index >= scanFrom
+                bool merged = false
+                if mergeF and gaps.size() > 0
+                    Gap p = gaps.last()
+                    if p.bull == bull and p.i3 >= bar_index - 2 and ((bull and bot <= p.top + syminfo.mintick and top >= p.bot) or (not bull and top >= p.bot - syminfo.mintick and bot <= p.top))
+                        p.top := math.max(p.top, top)
+                        p.bot := math.min(p.bot, bot)
+                        p.i3 := bar_index
+                        p.fill := bull ? p.top : p.bot
+                        p.dispx := math.max(p.dispx, a > 0 ? body / a : 0)
+                        p.ct := f_ct(bull, p.top, p.bot, bar_index, atr)
+                        merged := true
+                if not merged
+                    int kz = intraday ? kzNow[1] : 0
+                    if not (onlyKZ and intraday and kz == 0)
+                        int tr = na(hC[1]) or na(hE[1]) ? -1 : (bull ? hC[1] > hE[1] : hC[1] < hE[1]) ? 1 : 0
+                        float vx = avgVol[2] > 0 ? volume[1] / avgVol[2] : 1.0
+                        Gap g = Gap.new(bull, bar_index, time[2], top, bot, bull ? top : bot, atr, a > 0 ? body / a : 0, vx, tr, kz, intraday ? sessNow[1] : 0)
+                        g.ct := f_ct(bull, top, bot, bar_index, atr)
+                        gaps.push(g)
+                        act.push(g)
+                        if gaps.size() > 3000
+                            gaps.shift()
+                        // three random zones for this gap, at pseudo-random later candles (fixed per gap)
+                        int seed = int(time[2] / 60000)
+                        float dX = atr > 0 ? (bull ? close - top : bot - close) / atr : 0.0
+                        float sX = atr > 0 ? (top - bot) / atr : 0.0
+                        for r = 0 to 2
+                            int off = 1 + int((seed * 97 + r * 7919 + (bull ? 7 : 13)) % 397)
+                            spawns.push(Spawn.new(g, bar_index + off, dX, sX))
+                        if alNew
+                            f_alert(g, "new")
+
+// ───────────────────────────────────────────────────────────── 4) higher timeframe gaps
+if htfGaps and timeframe.in_seconds(htf) > tfSec
+    if not na(hT3) and hT3 != hT3[1]
+        bool hb = hL1 > hH3
+        bool hs = hH1 < hL3
+        if hb or hs
+            hgaps.push(HGap.new(hb, hT3, hb ? hL1 : hL3, hb ? hH3 : hH1))
+            if hgaps.size() > 60
+                hgaps.shift()
+    for h in hgaps
+        if h.open and ((h.bull and low <= h.bot) or (not h.bull and high >= h.top))
+            h.open := false
+
+// ───────────────────────────────────────────────────────────── 5) drawing (last candle only)
+var array<box>   dB = array.new<box>()
+var array<line>  dL = array.new<line>()
+var array<label> dT = array.new<label>()
+
+f_dist(float top, float bot) => close > top ? close - top : close < bot ? bot - close : 0.0
+
+if barstate.islast
+    for b in dB
+        b.delete()
+    for l in dL
+        l.delete()
+    for t in dT
+        t.delete()
+    dB.clear()
+    dL.clear()
+    dT.clear()
+    int right = time + extendN * tfSec * 1000
+    int fillT = 100 - opacity
+    int N = gaps.size()
+    // choose what to show
+    array<bool> showG = array.new<bool>(N, false)
+    array<bool> showI = array.new<bool>(N, false)
+    for side = 0 to 1
+        for cnt = 1 to maxOpen
+            if maxOpen == 0 or N == 0
+                break
+            int best = -1
+            float bd = 1e100
+            for k = 0 to N - 1
+                Gap g = gaps.get(k)
+                if not showG.get(k) and g.state == 0 and g.bull == (side == 0)
+                    float d = f_dist(g.top, g.bot)
+                    if d < bd
+                        bd := d
+                        best := k
+            if best < 0
+                break
+            showG.set(best, true)
+    for cnt = 1 to maxIFVG
+        if maxIFVG == 0 or N == 0
+            break
+        int best = -1
+        float bd = 1e100
+        for k = 0 to N - 1
+            Gap g = gaps.get(k)
+            if not showI.get(k) and g.inv and g.invState == 0
+                float d = f_dist(g.top, g.bot)
+                if d < bd
+                    bd := d
+                    best := k
+        if best < 0
+            break
+        showI.set(best, true)
+    int fb = 0
+    int fs = 0
+    int nf = 0
+    if N > 0
+        for k = N - 1 to 0
+            Gap g = gaps.get(k)
+            color base = g.bull ? cBull : cBear
+            string sz = str.tostring((g.top - g.bot) / pip, "#.0")
+            bool isOpen = g.state == 0
+            // inversion zone
+            bool showInv = false
+            if g.inv and g.invState == 0 and showI.get(k)
+                showInv := true
+            else if g.inv and g.invState == 1 and showFilled and nf < 3
+                nf += 1
+                showInv := true
+            if showInv
+                color ic = g.bull ? cIBear : cIBull
+                int te = g.invState == 0 ? right : g.tInvEnd
+                string itip = (g.bull ? "Bearish" : "Bullish") + " inversion FVG: the old " + (g.bull ? "bullish" : "bearish") + " gap was closed through, so it now works the other way" + (g.bull ? " (resistance)." : " (support).") + (g.invState == 0 ? " Active." : " Invalidated.")
+                dB.push(box.new(g.tInv, g.top, te, g.bot, color.new(ic, g.invState == 0 ? 25 : 70), 1, line.style_dashed, xloc = xloc.bar_time, bgcolor = color.new(ic, g.invState == 0 ? fillT : math.min(95, fillT + 8))))
+                if showLbl and g.invState == 0
+                    dT.push(label.new(te, (g.top + g.bot) / 2.0, (g.bull ? "Bearish Inversion FVG " : "Bullish Inversion FVG "), xloc.bar_time, yloc.price, color.new(color.black, 100), label.style_label_right, ic, size.small, tooltip = itip))
+            bool draw = isOpen ? showG.get(k) : showFilled and (g.bull ? fb < maxFilled : fs < maxFilled)
+            if not isOpen and draw
+                if g.bull
+                    fb += 1
+                else
+                    fs += 1
+            if draw
+                int t2 = isOpen ? right : g.tMit
+                string ctx = (g.trend == 1 ? "with the " + htfName + " trend" : g.trend == 0 ? "against the " + htfName + " trend" : "trend loading") + " | " + (g.kz > 0 ? "formed in the " + f_kzName(g.kz) : "formed " + (g.sess > 0 ? "in " + f_sessName(g.sess) : "off-session"))
+                string tip = (g.bull ? "Bullish" : "Bearish") + " FVG | " + ctx + " | " + sz + " pips | impulse " + str.tostring(g.dispx, "#.0") + "x ATR | volume " + str.tostring(g.volx, "#.0") + "x avg | " + (isOpen ? (g.tapped ? "open, touched" : "open, untouched") : "filled after " + str.tostring(g.bars) + " candles") + (g.respected ? " | respected (price reacted)" : "")
+                float ft = g.top
+                float fbm = g.bot
+                if isOpen and dynamicF and g.tapped
+                    if g.bull
+                        ft := g.fill
+                    else
+                        fbm := g.fill
+                if ft > fbm
+                    dB.push(box.new(g.t1, ft, t2, fbm, na, 0, xloc = xloc.bar_time, bgcolor = color.new(base, isOpen ? fillT : math.min(95, fillT + 8))))
+                dB.push(box.new(g.t1, g.top, t2, g.bot, color.new(base, isOpen ? 25 : 70), 1, isOpen ? line.style_solid : line.style_dotted, xloc = xloc.bar_time, bgcolor = color.new(base, 100)))
+                if showCE and isOpen
+                    dL.push(line.new(g.t1, (g.top + g.bot) / 2.0, t2, (g.top + g.bot) / 2.0, xloc.bar_time, color = color.new(base, 30), style = line.style_dotted))
+                if showLbl and isOpen
+                    string txt = (g.bull ? "Bullish FVG · " : "Bearish FVG · ") + sz + " pips" + (g.trend == 1 ? " · with " + htfName + " trend" : "") + (g.kz > 0 ? " · Kill Zone FVG" : "") + " "
+                    dT.push(label.new(t2, (g.top + g.bot) / 2.0, txt, xloc.bar_time, yloc.price, color.new(color.black, 100), label.style_label_right, base, size.small, tooltip = tip))
+    // balanced price range
+    if bprF and N > 1
+        int nb = 0
+        for a1 = N - 1 to 0
+            if nb >= 3
+                break
+            Gap A = gaps.get(a1)
+            if not A.bull
+                continue
+            for b1 = N - 1 to 0
+                Gap B = gaps.get(b1)
+                if B.bull or math.abs(A.i3 - B.i3) > bprBars or (A.state == 1 and B.state == 1)
+                    continue
+                float t = math.min(A.top, B.top)
+                float bt = math.max(A.bot, B.bot)
+                if t <= bt
+                    continue
+                int ts = math.max(A.t1, B.t1)
+                dB.push(box.new(ts, t, right, bt, color.new(cBPR, 40), 1, xloc = xloc.bar_time, bgcolor = color.new(cBPR, 75)))
+                if showLbl
+                    dT.push(label.new(ts, t, "Balanced Price Range (BPR)", xloc.bar_time, yloc.price, color.new(color.black, 100), label.style_label_lower_left, cBPR, size.small, tooltip = "Balanced price range: a bullish and a bearish gap overlap here. Price often reacts strongly at this zone."))
+                nb += 1
+                break
+    // higher timeframe gaps nearest to price
+    if htfGaps and hgaps.size() > 0 and htfMax > 0
+        array<bool> used = array.new<bool>(hgaps.size(), false)
+        for side = 0 to 1
+            for cnt = 1 to htfMax
+                int best = -1
+                float bd = 1e100
+                for q = 0 to hgaps.size() - 1
+                    HGap h = hgaps.get(q)
+                    if not used.get(q) and h.open and h.bull == (side == 0)
+                        float d = f_dist(h.top, h.bot)
+                        if d < bd
+                            bd := d
+                            best := q
+                if best < 0
+                    break
+                used.set(best, true)
+                HGap h = hgaps.get(best)
+                string tip = htfName + " " + (h.bull ? "bullish" : "bearish") + " FVG (higher timeframe, still open): a strong zone where gaps of this timeframe often react."
+                dB.push(box.new(h.t1, h.top, right, h.bot, color.new(cHTF, 15), 1, line.style_dashed, xloc = xloc.bar_time, bgcolor = color.new(cHTF, 90)))
+                if showLbl
+                    dT.push(label.new(h.t1, h.bull ? h.bot : h.top, " " + htfName + (h.bull ? " Bullish FVG" : " Bearish FVG") + " (higher timeframe)", xloc.bar_time, yloc.price, color.new(color.black, 100), h.bull ? label.style_label_upper_left : label.style_label_lower_left, cHTF, size.small, tooltip = tip))
+
+// ───────────────────────────────────────────────────────────── 6) statistics panel
+f_pct(int a, int b) => b > 0 ? str.tostring(100.0 * a / b, "#") + "%" : "-"
+f_pctN(int a, int b) => b > 0 ? str.tostring(100.0 * a / b, "#") + "% (" + str.tostring(b) + ")" : "-"
+f_pos() => panelPos == "Top left" ? position.top_left : panelPos == "Top right" ? position.top_right : panelPos == "Bottom left" ? position.bottom_left : position.bottom_right
+
+var table tb = na
+if barstate.islast and showPanel
+    if na(tb)
+        tb := table.new(f_pos(), 2, 15, bgcolor = color.new(color.rgb(16, 22, 38), 5), frame_color = color.rgb(231, 185, 79), frame_width = 1, border_color = color.new(color.rgb(44, 54, 80), 0), border_width = 0)
+        tb.merge_cells(0, 6, 1, 6)
+        tb.merge_cells(0, 14, 1, 14)
+    color ink = color.rgb(238, 241, 247)
+    color mut = color.rgb(154, 164, 186)
+    color gold = color.rgb(231, 185, 79)
+    color grn = color.rgb(0, 190, 160)
+    color red = color.rgb(240, 84, 104)
+    int ob = 0
+    int os = 0
+    int tot = 0
+    int filled = 0
+    int sumBars = 0
+    int tapped = 0
+    int resp = 0
+    int ifv = 0
+    int tT = 0
+    int rT = 0
+    int tA = 0
+    int rA = 0
+    int tK = 0
+    int rK = 0
+    int tO = 0
+    int rO = 0
+    int plN = 0
+    int plR = 0
+    int ctN = 0
+    int ctW = 0
+    int ptN = 0
+    int ptW = 0
+    float nb = na
+    float ns = na
+    for g in gaps
+        tot += 1
+        if g.state == 1
+            filled += 1
+            sumBars += g.bars
+        bool judged = g.tapped and (g.respected or g.state == 1 or g.tapBar <= last_bar_index - 10)
+        if judged
+            tapped += 1
+            resp += g.respected ? 1 : 0
+            if g.trend == 1
+                tT += 1
+                rT += g.respected ? 1 : 0
+            else if g.trend == 0
+                tA += 1
+                rA += g.respected ? 1 : 0
+            if g.kz > 0
+                tK += 1
+                rK += g.respected ? 1 : 0
+            else
+                tO += 1
+                rO += g.respected ? 1 : 0
+        plN += g.plN
+        plR += g.plR
+        ptN += g.ptN
+        ptW += g.ptW
+        if not na(g.ct) and g.ct.res >= 0
+            ctN += 1
+            ctW += g.ct.res == 1 ? 1 : 0
+        if g.inv and g.invState == 0
+            ifv += 1
+        if g.state == 0
+            if g.bull
+                ob += 1
+                if close >= g.bot
+                    float d = math.max(0, close - g.top)
+                    nb := na(nb) or d < nb ? d : nb
+            else
+                os += 1
+                if close <= g.top
+                    float d = math.max(0, g.bot - close)
+                    ns := na(ns) or d < ns ? d : ns
+    // random zones touched long ago and still open count as "not respected", like the gaps
+    for z in zones
+        if z.race == -1 and z.tapped and z.tapBar <= last_bar_index - 10
+            plN += 1
+    tb.cell(0, 0, "QFT FVG PRO", text_color = gold, text_halign = text.align_left, text_size = size.small)
+    tb.cell(1, 0, syminfo.ticker + " " + timeframe.period, text_color = mut, text_halign = text.align_right, text_size = size.small)
+    tb.cell(0, 1, str.tostring(ob), text_color = cBull, text_halign = text.align_left, text_size = size.large)
+    tb.cell(1, 1, str.tostring(os), text_color = cBear, text_halign = text.align_right, text_size = size.large)
+    tb.cell(0, 2, "open bullish", text_color = mut, text_halign = text.align_left, text_size = size.tiny)
+    tb.cell(1, 2, "open bearish", text_color = mut, text_halign = text.align_right, text_size = size.tiny)
+    tb.cell(0, 3, "Nearest below", text_color = mut, text_halign = text.align_left, text_size = size.small)
+    tb.cell(1, 3, na(nb) ? "none" : str.tostring(nb / pip, "#.0") + " pips", text_color = na(nb) ? mut : cBull, text_halign = text.align_right, text_size = size.small)
+    tb.cell(0, 4, "Nearest above", text_color = mut, text_halign = text.align_left, text_size = size.small)
+    tb.cell(1, 4, na(ns) ? "none" : str.tostring(ns / pip, "#.0") + " pips", text_color = na(ns) ? mut : cBear, text_halign = text.align_right, text_size = size.small)
+    tb.cell(0, 5, "Active IFVG", text_color = mut, text_halign = text.align_left, text_size = size.small)
+    tb.cell(1, 5, str.tostring(ifv), text_color = ink, text_halign = text.align_right, text_size = size.small)
+    tb.cell(0, 6, "STATISTICS · LAST " + str.tostring(tot) + " GAPS", text_color = gold, text_halign = text.align_left, text_size = size.small)
+    tb.cell(0, 7, "Filled", text_color = mut, text_halign = text.align_left, text_size = size.small)
+    tb.cell(1, 7, f_pct(filled, tot) + (filled > 0 ? " · avg " + str.tostring(1.0 * sumBars / filled, "#") + " candles" : ""), text_color = ink, text_halign = text.align_right, text_size = size.small)
+    tb.cell(0, 8, "Respected after touch", text_color = mut, text_halign = text.align_left, text_size = size.small)
+    tb.cell(1, 8, f_pctN(resp, tapped), text_color = ink, text_halign = text.align_right, text_size = size.small)
+    // honest baseline: the same test on random zones of the same shape
+    string edge = "-"
+    color ec = mut
+    if tapped > 0 and plN > 0
+        float p1 = 1.0 * resp / tapped
+        float p2 = 1.0 * plR / plN
+        float d = 100 * (p1 - p2)
+        float se = 100 * math.sqrt(p1 * (1 - p1) / tapped + p2 * (1 - p2) / plN)
+        edge := f_pct(plR, plN) + " · FVG " + (d >= 0 ? "+" : "") + str.tostring(d, "#") + " pts"
+        ec := se > 0 and d >= 2 * se ? grn : se > 0 and d <= -2 * se ? red : ink
+    tb.cell(0, 9, "Random zone, same shape", text_color = mut, text_halign = text.align_left, text_size = size.small)
+    tb.cell(1, 9, edge, text_color = ec, text_halign = text.align_right, text_size = size.small)
+    color cc = ink
+    if ctN > 0 and ptN > 0
+        float q1 = 1.0 * ctW / ctN
+        float q2 = 1.0 * ptW / ptN
+        float se2 = math.sqrt(q1 * (1 - q1) / ctN + q2 * (1 - q2) / ptN)
+        cc := se2 > 0 and q1 - q2 >= 2 * se2 ? grn : se2 > 0 and q2 - q1 >= 2 * se2 ? red : ink
+    tb.cell(0, 10, "CE 1:2 test: FVG / random", text_color = mut, text_halign = text.align_left, text_size = size.small)
+    tb.cell(1, 10, f_pctN(ctW, ctN) + " / " + f_pct(ptW, ptN), text_color = cc, text_halign = text.align_right, text_size = size.small)
+    tb.cell(0, 11, htfName + " trend: with / against", text_color = mut, text_halign = text.align_left, text_size = size.small)
+    tb.cell(1, 11, f_pctN(rT, tT) + " / " + f_pctN(rA, tA), text_color = ink, text_halign = text.align_right, text_size = size.small)
+    tb.cell(0, 12, "Killzone / outside", text_color = mut, text_halign = text.align_left, text_size = size.small)
+    tb.cell(1, 12, f_pctN(rK, tK) + " / " + f_pctN(rO, tO), text_color = ink, text_halign = text.align_right, text_size = size.small)
+    tb.cell(0, 13, "Filled rule", text_color = mut, text_halign = text.align_left, text_size = size.tiny)
+    tb.cell(1, 13, mitRule + " by " + str.lower(mitBy) + " · " + htfName + " EMA" + str.tostring(emaLen), text_color = mut, text_halign = text.align_right, text_size = size.tiny)
+    tb.cell(0, 14, "Green = FVGs beat random zones by more than luck (2 standard errors)", text_color = mut, text_halign = text.align_left, text_size = size.tiny)
