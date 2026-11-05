@@ -119,6 +119,12 @@ section{padding-block:88px}
 .hero .ur{font-family:var(--f-ur);direction:rtl;font-size:23px;line-height:2.3;margin-top:18px;color:color-mix(in srgb,var(--ink) 85%,var(--gold))}
 .hero .txt{font-size:19px;color:var(--muted);max-width:32em;margin-top:4px}
 .hero .cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.btn.lg{font-size:17px;padding:17px 28px}
+.hero .htools{margin-top:18px;font-size:15px;color:var(--muted)}
+.hero .htools span{font-weight:700;color:var(--ink)}
+.hero .htools a{color:var(--gold-t,var(--gold));text-decoration:none;font-weight:600;border-bottom:1px solid color-mix(in srgb,var(--gold) 40%,transparent)}
+.hero .htools a:hover{border-bottom-color:var(--gold)}
+@media (max-width:560px){.hero .cta .btn{flex:1 1 100%}}
 
 /* chart panel */
 .panel{background:linear-gradient(180deg,color-mix(in srgb,var(--surface) 92%,#fff 2%),var(--surface));border:1px solid var(--line);border-radius:16px;box-shadow:0 30px 80px rgba(0,0,0,.45);overflow:hidden}
@@ -349,11 +355,12 @@ footer a:hover{color:var(--ink)}
     <div class="eyebrow rise">Since 2013 · Learn to trade like a professional</div>
     <h1 class="rise d1">Free Forex &amp; Gold Trading Course in <em>Urdu &amp; Hindi</em></h1>
     <p class="ur rise d2" lang="ur">پروفیشنل ٹریڈر کی طرح ٹریڈنگ سیکھیں</p>
-    <p class="txt rise d2">Price action, Gold (XAUUSD) analysis, risk and money management. Free courses in Urdu and Hindi, and MetaTrader 5 tools built for real practice.</p>
+    <p class="txt rise d2">Price action, Gold (XAUUSD) and risk management, from zero to your own written trading plan. 64+ free video lessons and free MT5 &amp; MT4 tools.</p>
     <div class="cta rise d3" id="hcta">
-      <a class="btn gold" href="course-price-action-basic.html">Start the free course</a>
+      <a class="btn gold lg" href="course-price-action-basic.html">Start the free course</a>
       <a class="btn" id="waHero" href="#contact" target="_blank" rel="noopener">Chat on WhatsApp</a>
     </div>
+    <p class="htools rise d3"><span>Free tools:</span> <a href="ict-killzones-indicator-mt5.html">Killzones</a> · <a href="fvg-indicator-mt5.html">FVG Pro</a> · <a href="lot-size-calculator.html">Lot size calculator</a> · <a href="free-mt5-tools.html">All tools →</a></p>
   </div>
   <div class="panel rise d2">
     <div class="panel-head"><span class="dot"></span><b>XAUUSD</b><span class="tf">M15</span><span class="ill">Illustration</span></div>
