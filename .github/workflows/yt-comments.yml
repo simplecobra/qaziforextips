@@ -1,0 +1,31 @@
+name: YouTube comments - lessons and feedback page
+# Brings the best public comments of each lesson video onto the lesson pages and feedback.html.
+# Uses the YouTube Data API when the repository secret YT_API_KEY is set.
+on:
+  schedule:
+    - cron: "41 2 * * *"      # once a day
+  workflow_dispatch:          # "Run workflow" button on GitHub
+  push:
+    branches: [main]
+    paths: ["data/yt-blocklist.txt"]   # hiding a comment takes effect right away
+permissions:
+  contents: write
+concurrency: yt-comments
+jobs:
+  comments:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch comments and write them into the pages
+        env:
+          YT_API_KEY: ${{ secrets.YT_API_KEY }}
+        run: python3 .github/scripts/yt-comments.py
+      - name: Commit if anything changed
+        run: |
+          git add -A data lesson-*.html feedback.html
+          if git diff --cached --quiet; then echo "No change"; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "YouTube comments on lessons and feedback page (automatic)"
+          git pull --rebase -q origin main
+          git push
