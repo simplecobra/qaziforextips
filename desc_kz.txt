@@ -1,0 +1,39 @@
+QFT Sessions & Killzones draws the Asia, London and New York sessions, the four ICT killzones and the previous day high and low, shows a live session clock in your own time zone, and marks every liquidity sweep -> market structure shift (MSS) setup inside a killzone with its entry, stop loss, target and result.
+
+SESSIONS AND KILLZONES
+- Asia (09:00-18:00 Tokyo), London (08:00-17:00 London) and New York (08:00-17:00 New York) as boxes with their high, low and range in pips.
+- ICT killzones in New York time: Asian 20:00-00:00, London 02:00-05:00, New York 07:00-10:00, London Close 10:00-12:00, shown as a colour strip at the bottom of the chart.
+- All session times use each city's own clock, so US and UK daylight saving are applied automatically on the right dates; nothing needs to be changed by hand.
+- Previous day high and low (PDH / PDL) with prices.
+
+THE SETUP MODEL (marked on M1 to M30)
+1. Liquidity: a session high or low (Asia, London, New York, last 36 hours) or a swing high/low that no candle has taken yet.
+2. Sweep: a candle inside an enabled killzone wicks beyond that level and closes back inside.
+3. MSS: within 12 candles (default) a candle with a body of at least 0.3 ATR closes through the last swing on the other side.
+4. Entry at the close of the MSS candle; stop loss beyond the sweep extreme plus 0.1 ATR.
+5. Target: at least 1:2. If the sweep took a session's liquidity, the target is the other side of that same session; otherwise the nearest other side of a recent session, then the next untaken swing, then the minimum 1:2.
+One setup per killzone.
+
+HOW RESULTS ARE COUNTED
+- Stop loss hit before 1:2: LOSS -1R.
+- 1:2 reached, then price returns to the entry before the target: WIN +2R.
+- Target reached: WIN with the target's R.
+- Beyond the target, the move is followed until a candle closes beyond the last 3 candles, and the whole move is counted.
+Each setup is drawn as a position box (green to the target, red to the stop) with one label such as "BUY WIN +3.4R". Hover it for entry, stop, target and the liquidity that was swept.
+
+THE PANEL
+A clock in Pakistan (PKT), India (IST), UTC, New York or London time; which session is open and when it closes or opens; the current or next killzone; and the setup results of the last N days (wins, losses, win rate, total R).
+
+HOW TO USE IT
+Use M5 or M15 for setups. Treat the marked setups as a way to learn and backtest the model on your own symbol before trading it. Gold and indices usually move most in the London and New York killzones; Asia is often a range that later gets swept.
+
+ALERTS
+An alert fires when a new setup is confirmed on a closed candle (entry, stop, target). Create an alert with the condition "Any alert() function call".
+
+LIMITATIONS
+- Setups are confirmed on candle close and do not repaint, but the result of an open setup keeps updating until it closes.
+- Results ignore spread and commission and use the chart's own price data, so they differ between data feeds.
+- Session boxes are drawn up to H1; setups only on M1 to M30.
+- Past results do not guarantee future results.
+
+This script is for education only and is not financial advice.

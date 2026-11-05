@@ -1,0 +1,45 @@
+QFT FVG Pro marks fair value gaps (FVG), inversion FVGs (IFVG), balanced price ranges (BPR) and higher timeframe FVGs, and then tests itself: every gap is compared with random zones of the same size and distance from price, so you can see on your own symbol and timeframe whether fair value gaps really behave better than any other zone.
+
+WHAT IT DRAWS
+- Bullish and bearish fair value gaps (three-candle imbalances). Only meaningful gaps are kept: an automatic size threshold (bigger than the average of the last 100 gaps), an impulse filter (the middle candle body is at least 50% of its range, in the gap's direction) and merging of overlapping gaps from the same move.
+- The 50% line (consequent encroachment, CE) inside every open gap.
+- Dynamic fill: once price enters a gap, the coloured part shrinks to the part that is still unfilled.
+- Filled gaps stay faded for reference (latest 3 per side by default).
+- Inversion FVG: a gap that price closes straight through flips its role (blue = new support, orange = new resistance). It expires after 150 candles or when price closes back through it.
+- Balanced price range: the overlap of a bullish and a bearish gap formed close together.
+- Higher timeframe FVGs: open gaps from the higher timeframe (automatic: M1 to M15, M5 to H1, M15/M30/H1 to H4, H4 to D1) drawn in gold. Only closed higher timeframe candles are used.
+- Plain-English labels, for example "Bullish FVG · 42.7 pips · with H4 trend · Kill Zone FVG". Hover a label for details: impulse strength, volume, trend, session and status.
+- To keep the chart clean, only the gaps nearest to price are drawn (5 per side by default). Every gap is still counted in the statistics.
+
+THE SELF-TEST PANEL
+- Open bullish / bearish gaps and the distance to the nearest gap below and above price.
+- Filled: what share of gaps were completely filled, and after how many candles on average.
+- Respected after touch: after the first touch, how often price moved 1 ATR away in the gap's direction before trading through the whole gap.
+- Random zone, same shape: for every gap, 3 random zones with the same size and the same distance from price (both measured in ATR) are created at pseudo-random later candles and run through exactly the same test. The row shows their rate and the difference in points.
+- CE 1:2 test: a simple trade test on every gap and every random zone: limit at the 50% line, stop 0.1 ATR beyond the far edge, target 2R. It shows the win rate for gaps and for random zones.
+- Trend and killzone rows: the respected rate for gaps formed with or against the higher timeframe EMA 50 trend, and inside or outside the London, New York and London Close killzones (New York time, daylight saving handled by TradingView).
+- A number turns green only when gaps beat random zones by more than two standard errors, and red when they are clearly worse. Otherwise the difference is too small to call.
+
+WHY THIS IS DIFFERENT
+Most FVG scripts only draw boxes, or report how often price "respected" a gap. But any zone near price gets touched and bounces sometimes, so a respect rate alone says little. Comparing each gap with random zones of the same shape gives an honest baseline.
+In our own test of the same logic on XAUUSD (2024, 2025) and EURUSD (2023, 2025), M5 and M15, 23,773 gaps were detected. The "respected after touch" rate of gaps was close to that of random zones (about 42% vs 41%), while a limit entry at the 50% line won more often than the same trade on random zones in all 8 tests (about 31% vs 28% at 1:2). Trend and killzone filters did not add an edge on average in that data. Results differ by market, broker data and period; the panel always shows the live numbers for your chart.
+
+HOW TO USE IT
+1. Add it to M5, M15 or H1 and set "Candles to scan" high (5,000 to 20,000) so the statistics have enough gaps.
+2. Read the panel first: is the CE 1:2 row green on this symbol and timeframe?
+3. Look for context: a higher timeframe FVG nearby, the higher timeframe trend, a liquidity sweep.
+4. Plan at the CE line with the stop beyond the gap; if a candle closes straight through, the gap becomes an inversion FVG and the idea is invalid.
+
+SETTINGS (main)
+Sensitivity (Auto / Low / Normal / High / Custom), impulse filter, merge, filled rule (touch / 50% / full, by wick or close), dynamic fill, respected distance (x ATR), inversion FVG life, BPR window, higher timeframe and EMA period, higher timeframe FVGs per side, killzone-only filter, display counts, colours, panel position.
+
+ALERTS
+New FVG, price enters an open FVG, 50% touched, FVG filled, new inversion FVG, optionally only for gaps with the higher timeframe trend. Create an alert with the condition "Any alert() function call".
+
+LIMITATIONS
+- Gaps are confirmed on candle close; nothing is moved or removed later, only the status (touched, filled, inverted) updates.
+- The random zones are placed at pseudo-random later candles, so the most recent gaps have fewer random zones; the newest candles are not yet judged.
+- The CE 1:2 test ignores spread and commission. A win rate near 33% at 1:2 is roughly break-even before costs.
+- Statistics describe the past on your chart. They are for learning and do not predict future results.
+
+This script is for education only and is not financial advice.
