@@ -470,6 +470,13 @@ footer a:hover{color:var(--ink)}
 .hub .soon{opacity:.75}
 @media (max-width:760px){.hub{grid-template-columns:1fr}}
 </style>
+<style>
+.ft-hero{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:48px;align-items:center}
+.ft-hero-p{margin:0;justify-self:end;width:100%;max-width:360px}
+.ft-hero-p img{display:block;width:100%;height:auto;border-radius:14px;border:1px solid color-mix(in srgb,var(--gold) 55%,var(--line));box-shadow:0 24px 60px rgba(0,0,0,.35)}
+.ft-hero-p figcaption{font-size:13px;color:var(--muted);text-align:center;margin-top:10px}
+@media (max-width:980px){.ft-hero{grid-template-columns:1fr}.ft-hero-p{display:none}}
+</style>
 </head>
 <body>
 <header class="top"><div class="wrap">
@@ -483,11 +490,13 @@ footer a:hover{color:var(--ink)}
 <main id="top">
 <section class="ls-hero"><div class="wrap">
   <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a>›<a href="free-mt5-tools.html">Free Tools</a>›<span>ICT Killzones Indicator</span></nav>
+  <div class="ft-hero"><div class="ft-hero-t">
   <div class="ls-meta">Free MT5 &amp; MT4 indicator · v1.53 · Made for Pakistan &amp; India</div>
   <h1>Free ICT Killzones &amp; Sessions Indicator for MT5 &amp; MT4</h1>
   <p class="ls-lead">QFT Sessions &amp; Killzones is the session indicator we wished existed when we started teaching. It draws the Asia, London and New York sessions, the four ICT killzones and the previous day high and low, shows a live clock in Pakistan or India time, and marks every liquidity sweep → MSS setup inside a killzone with its entry, stop loss, target and result. Free for everyone, for MetaTrader 5 and MetaTrader 4, no DLL, no sign-up.</p>
   <div class="ft-badges"><span class="g">100% Free</span><span>MetaTrader 5 &amp; 4</span><span>No DLL</span><span>PKT &amp; IST clock</span><span>Auto daylight saving</span><span>Gold · Forex · Indices</span><span>No repaint</span></div>
   <div class="ft-cta"><a class="btn gold" href="downloads/QFT-Sessions-Killzones-MT5.zip" download>⬇ Download free for MT5</a><a class="btn gold" href="downloads/QFT-Sessions-Killzones-MT4.zip" download>⬇ Download free for MT4</a><a class="btn" href="#how">How the setups work</a><small>Includes the Install Guide &amp; Features PDF</small></div>
+  </div><figure class="ft-hero-p"><img src="img/tools/qft-sessions-killzones-panel.webp" alt="QFT Sessions panel: Pakistan time clock, Asia, London and New York sessions with countdown, current killzone and setup results" width="338" height="275" fetchpriority="high"><figcaption>Live clock in Pakistan time, sessions and killzone</figcaption></figure></div>
   <figure class="ft-shot"><img src="img/tools/qft-sessions-killzones-mt5-chart.webp" alt="QFT Sessions and Killzones indicator on an MT5 Gold chart: Asia, London and New York session boxes, killzone strip, PDH/PDL and a BUY setup marked WIN +3.4R" width="1647" height="657"><figcaption>XAUUSD M15 in MetaTrader 5 (the MT4 version looks and works the same): session boxes with their range in pips, the killzone strip, previous day high/low and a London sweep → MSS buy setup that reached its target (WIN +3.4R).</figcaption></figure>
 </div></section>
 

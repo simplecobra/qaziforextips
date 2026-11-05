@@ -472,6 +472,13 @@ footer a:hover{color:var(--ink)}
 @media (max-width:760px){.hub{grid-template-columns:1fr}}
 </style>
 <style>
+.ft-hero{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:48px;align-items:center}
+.ft-hero-p{margin:0;justify-self:end;width:100%;max-width:360px}
+.ft-hero-p img{display:block;width:100%;height:auto;border-radius:14px;border:1px solid color-mix(in srgb,var(--gold) 55%,var(--line));box-shadow:0 24px 60px rgba(0,0,0,.35)}
+.ft-hero-p figcaption{font-size:13px;color:var(--muted);text-align:center;margin-top:10px}
+@media (max-width:980px){.ft-hero{grid-template-columns:1fr}.ft-hero-p{display:none}}
+</style>
+<style>
 .ft-ans{margin-top:22px;border:1px solid color-mix(in srgb,var(--gold) 55%,transparent);border-left:4px solid var(--gold);border-radius:12px;background:var(--surface);padding:16px 18px;font-size:16px}
 .ft-res td,.ft-res th{text-align:center}.ft-res td:first-child,.ft-res th:first-child{text-align:left}
 .ft-res td.w{color:var(--gold-t,var(--gold));font-weight:700}
@@ -494,11 +501,13 @@ footer a:hover{color:var(--ink)}
 <main id="top">
 <section class="ls-hero"><div class="wrap">
   <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a>›<a href="free-mt5-tools.html">Free Tools</a>›<span>FVG Indicator</span></nav>
+  <div class="ft-hero"><div class="ft-hero-t">
   <div class="ls-meta">Free MT5 &amp; MT4 indicator · v2.22 · Updated 5 November 2026</div>
   <h1>Free FVG Indicator for MT5 &amp; MT4: the Fair Value Gap Indicator That Proves Itself</h1>
   <p class="ls-lead">QFT FVG Pro marks every important fair value gap on your MetaTrader chart, with its size in pips, the 50% (CE) line, dynamic fill, inversion FVGs, balanced price ranges and higher timeframe gaps. Then it does something no other free FVG indicator does: it tests the gaps against random zones of the same shape, live on your chart, so you can see whether fair value gaps really work on your pair. 100% free for MT5 and MT4, no DLL, no sign-up.</p>
   <div class="ft-badges"><span class="g">100% Free</span><span>MetaTrader 5 &amp; 4</span><span>FVG · IFVG · BPR</span><span>Higher timeframe FVG</span><span>50% CE line</span><span>Self-test vs random</span><span>No repaint</span><span>No DLL</span></div>
   <div class="ft-cta"><a class="btn gold" href="downloads/QFT-FVG-Pro-MT5.zip" download>⬇ Download free for MT5</a><a class="btn gold" href="downloads/QFT-FVG-Pro-MT4.zip" download>⬇ Download free for MT4</a><a class="btn" href="#research">See the 23,773-gap test</a><small>Includes the Install Guide &amp; Features PDF</small></div>
+  </div><figure class="ft-hero-p"><img src="img/tools/qft-fvg-pro-panel.webp" alt="QFT FVG Pro self-test panel: open gaps, fill rate, respected after touch, random zone comparison and CE 1:2 test" width="368" height="408" fetchpriority="high"><figcaption>The self-test panel on XAUUSD M15</figcaption></figure></div>
   <figure class="ft-shot"><img src="img/tools/qft-fvg-pro-mt5-chart.webp" alt="QFT FVG Pro free FVG indicator on an MT5 Gold M15 chart: bullish fair value gaps labelled with size in pips, H4 trend and kill zone, a higher timeframe FVG and the statistics panel" width="1604" height="673"><figcaption>XAUUSD M15 in MetaTrader 5 (the MT4 version looks and works the same): bullish fair value gaps with full-word labels, the 50% CE line, an H4 FVG in gold and the self-test panel.</figcaption></figure>
   <div class="ft-ans"><b>QFT FVG Pro is the best free FVG indicator for MT5 and MT4 in our comparison:</b> it is the only free fair value gap indicator we found that combines FVG, inversion FVG (IFVG), BPR and higher timeframe FVGs in one tool, filters weak gaps by size and impulse, tags each gap with the higher timeframe trend and ICT killzone, and proves its own value with a built-in test against random zones. It is free, works on Gold, forex and indices, and needs no DLL or sign-up.</div>
 </div></section>
