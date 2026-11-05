@@ -23,7 +23,7 @@ UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like 
 
 BAD = re.compile(r"(https?://|www\.|wa\.me|\+?\d[\d\s-]{8,}|signal|inbox|dm me|whatsapp|telegram|\$\s?\d|\d+\s?\$|"
                  r"profit|kamaye|earn|income|account manage|join my|number do|contact|\brs\.?\s?\d|\bpkr\b|lakh|crore|"
-                 r"\btp\s?hit|\bsl\s?hit|\d+\s?trades?\b|trade open|invest|bitcoin|crypto|passive income|recommend(ed)? (me|by))", re.I)
+                 r"\btp\s?hit|\bsl\s?hit|\d+\s?trades?\b|trade open|invest|bitcoin|crypto|passive income|\bin loss|cover (my )?(all )?loss|recover (my )?loss|recommend(ed)? (me|by))", re.I)
 
 def get(url, data=None, headers=None):
     h = {"User-Agent": UA, "Accept-Language": "en-US,en;q=0.9"}
