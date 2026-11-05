@@ -2,3 +2,5 @@
 # Paste the "View on YouTube" link of the comment (or just its id), one per line.
 # Example:
 # https://www.youtube.com/watch?v=DDaEQcAJIEA&lc=UgxXXXXXXXXXXXXXXXXXXXXX
+https://www.youtube.com/watch?v=x&lc=UgzdXf6yb4RuydfdvBR4AaABAg
+https://www.youtube.com/watch?v=x&lc=UgyAmDgNti0EAvk-qcB4AaABAg
