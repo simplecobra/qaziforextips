@@ -20,6 +20,7 @@ window.SITE = {
     whatsapp: "+92-323-6700010",
     youtube: "https://www.youtube.com/@QaziForexTips",
     facebook: "https://www.facebook.com/groups/qaziforextips",
+    x: "https://x.com/qaziforextips",
     email: "info@qaziforextips.com"
   },
 
