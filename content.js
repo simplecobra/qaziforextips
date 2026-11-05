@@ -48,6 +48,15 @@ window.SITE = {
       button: "Free download"
     },
     {
+      name: "QFT FVG Pro",
+      type: "Free indicator",
+      badge: "NEW v2.22",
+      text: "Free FVG indicator for MT5 & MT4: fair value gaps with the 50% CE line, inversion FVG, BPR and higher timeframe FVGs, plus a self-test against random zones.",
+      points: ["FVG, IFVG, BPR and H4 FVG in one tool", "Full-word labels: size, trend, kill zone", "Tested on 23,773 gaps"],
+      link: "fvg-indicator-mt5.html",
+      button: "Free download"
+    },
+    {
       name: "QFT Replay Simulator",
       type: "Software",
       badge: "v3.04",
