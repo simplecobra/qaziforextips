@@ -487,11 +487,11 @@ f_status(string tz, float fromH, float toH, bool asianKZ) =>
     float h = hour(timenow, tz) + minute(timenow, tz) / 60.0 + second(timenow, tz) / 3600.0
     int dw = dayofweek(timenow, tz)
     bool okDay = asianKZ ? (dw >= 1 and dw <= 5) : (dw >= 2 and dw <= 6)
-    float to = toH == 0.0 ? 24.0 : toH
-    bool isOpen = okDay and h >= fromH and h < to
+    float endH = toH == 0.0 ? 24.0 : toH
+    bool isOpen = okDay and h >= fromH and h < endH
     float secs = 0.0
     if isOpen
-        secs := (to - h) * 3600
+        secs := (endH - h) * 3600
     else
         float add = na
         if okDay and h < fromH
