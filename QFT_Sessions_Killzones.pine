@@ -45,7 +45,7 @@ showPD     = input.bool(true, "Previous day high / low", group = G4)
 cPD        = input.color(color.rgb(231, 185, 79), "Previous day colour", group = G4)
 showPanel  = input.bool(true, "Session clock panel", group = G4)
 clockTZ    = input.string("Pakistan (PKT)", "Clock time zone", options = ["Pakistan (PKT)", "India (IST)", "UTC", "New York", "London"], group = G4)
-panelPos   = input.string("Top right", "Panel position", options = ["Top left", "Top right", "Bottom left", "Bottom right"], group = G4)
+panelPos   = input.string("Bottom right", "Panel position", options = ["Top left", "Top right", "Bottom left", "Bottom right"], group = G4)
 
 // ───────────────────────────────────────────────────────────── helpers
 int   tfSec   = timeframe.in_seconds()
