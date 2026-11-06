@@ -10,6 +10,9 @@
 - [QFT Replay Simulator](https://qaziforextips.com/simulator.html): market replay and manual backtesting inside MT5 and MT4 (free demo), a Soft4FX / FX Replay alternative.
 - [QFT Trade Assistant](https://qaziforextips.com/trade-assistant.html): risk-based lot size and trade panel for MT5 and MT4 (free demo).
 
+## Research
+- [Do fair value gaps work? We tested 23,773 FVGs](https://qaziforextips.com/research-do-fair-value-gaps-work.html): QFT Research report 1. 23,773 fair value gaps on XAUUSD and EURUSD (2023–2025) compared with random zones of the same size: a limit at the 50% CE line beat random zones in 8 of 8 M5/M15 tests (31% vs 28% at 1:2), a plain touch-and-bounce did not (42% vs 41%), trend and killzone filters did not help, and the CE trade alone was about −0.07R before costs. Method, limitations and a CSV summary included.
+
 ## Learn
 - [Free video courses in Urdu & Hindi](https://qaziforextips.com/youtube.html)
 - [Forex Guide](https://qaziforextips.com/forex-guide.html): sessions in Pakistan time, Smart Money Concepts, liquidity, order blocks, FVG, risk management, Gold trading, prop firm challenges.
