@@ -1,0 +1,23 @@
+{
+ "ob-stronger": {
+  "page": "guide-order-block.html",
+  "file": "valid-order-block-checklist",
+  "h2": "What makes it stronger",
+  "alt": "Valid order block checklist: the move broke structure (BOS), left a fair value gap, the zone is unmitigated, and it agrees with the higher-timeframe trend",
+  "caption": "A stronger order block ticks all four boxes: break of structure, an imbalance (FVG), unmitigated, and in line with the higher timeframe."
+ },
+ "ob-trading": {
+  "page": "guide-order-block.html",
+  "file": "order-block-entry-stop-loss-target",
+  "h2": "Trading it",
+  "alt": "How to trade an order block: wait for price to return to the zone, confirm with a lower-timeframe change of character, stop loss beyond the order block, target the next liquidity",
+  "caption": "Trading an order block: wait for the return, confirm on a lower timeframe, place the stop beyond the zone and target the next liquidity."
+ },
+ "ob-vs-sd": {
+  "page": "guide-order-block.html",
+  "file": "order-block-vs-supply-and-demand",
+  "h2": "Order block vs supply and demand",
+  "alt": "Order block vs supply and demand zone on the same chart: the order block is one candle and tighter, the demand zone covers the whole base and is wider",
+  "caption": "The same move marked two ways: an order block uses one candle, a supply and demand zone covers the whole base."
+ }
+}
