@@ -278,5 +278,75 @@
   "h2": "Which one should you use?",
   "alt": "MT4 or MT5, which to choose: choose MT5 for a new account; stay on MT4 only if your broker or prop firm offers only MT4 or you need an MT4-only tool",
   "caption": "Choose MT5 for a new account; stay on MT4 only if your broker or prop firm requires it or you depend on an MT4-only tool."
+ },
+ "ses-news": {
+  "page": "guide-forex-trading-sessions.html",
+  "file": "forex-news-time-in-pakistan",
+  "h2": "Big news in Pakistan time",
+  "alt": "Forex news times in Pakistan: US data such as NFP and CPI at 6:30 PM PKT in winter (5:30 PM summer), Fed decisions at midnight (11 PM), UK data at 12 noon (11 AM)",
+  "caption": "Big news in Pakistan time: US data 6:30 PM, Fed decisions midnight and UK data 12 noon in winter; one hour earlier in summer."
+ },
+ "ses-careful": {
+  "page": "guide-forex-trading-sessions.html",
+  "file": "when-not-to-trade-forex-pakistan",
+  "h2": "When to be careful",
+  "alt": "When to be careful trading forex from Pakistan: the daily rollover around 3 AM PKT, Monday open gaps, Friday evening and holidays",
+  "caption": "Times to be careful: the daily rollover, the Monday open, Friday evening and holidays with thin volume."
+ },
+ "br-check": {
+  "page": "guide-forex-brokers-in-pakistan.html",
+  "file": "forex-broker-checklist-pakistan",
+  "h2": "Step 4: visit each broker's own website",
+  "alt": "Forex broker checklist for Pakistan: company name and registration match the PMEX and SECP list, platform, costs, deposits only to the company's bank account, support and documents",
+  "caption": "What to check on each broker's own website before you open an account. Money should go only to the company's bank account."
+ },
+ "br-flags": {
+  "page": "guide-forex-brokers-in-pakistan.html",
+  "file": "fake-forex-broker-red-flags",
+  "h2": "Fake brokers and fake apps: the red flags",
+  "alt": "Fake forex broker red flags in Pakistan: not on the PMEX or SECP list, payment to a personal account or wallet, guaranteed profit, withdrawal fees and WhatsApp-only contact",
+  "caption": "Five red flags of fake brokers and apps. If you see any one of them, walk away."
+ },
+ "demo-steps": {
+  "page": "guide-forex-demo-account-in-pakistan.html",
+  "file": "how-to-open-mt5-demo-account",
+  "h2": "How to open a demo account in MetaTrader 5 (step by step)",
+  "alt": "How to open a demo account in MetaTrader 5 in six steps: install MT5, File then Open an Account, choose a demo server, enter details with a realistic deposit, save the login, place a first trade with a stop loss",
+  "caption": "Open an MT5 demo account in six steps. Use a realistic virtual deposit, such as $500 or $1,000."
+ },
+ "demo-vs-real": {
+  "page": "guide-forex-demo-account-in-pakistan.html",
+  "file": "demo-vs-real-forex-account",
+  "h2": "Demo vs real account",
+  "alt": "Demo vs real forex account: virtual money, no real profit and smooth execution on demo; your own deposit, real results, slippage and strong emotions on a real account",
+  "caption": "Demo and real accounts share live prices; the money, execution and emotions are different."
+ },
+ "sig-missing": {
+  "page": "guide-forex-signals-in-pakistan.html",
+  "file": "what-forex-signals-dont-tell-you",
+  "h2": "What a signal is, and what it does not tell you",
+  "alt": "What a forex signal does not tell you: a message like Buy Gold 4,000 SL 3,990 TP 4,030 gives no reason, no lot size for your account, no plan if price moves and no real record",
+  "caption": "A signal gives an entry, a stop and a target, but not the reason, your lot size, what to do if price moves, or the sender's real record."
+ },
+ "sig-path": {
+  "page": "guide-forex-signals-in-pakistan.html",
+  "file": "learn-forex-trading-yourself",
+  "h2": "A better way: learn it yourself",
+  "alt": "A better way than signals: learn price action, learn risk management, write and test your own rules, and size every trade with a lot size calculator",
+  "caption": "The skill that stays with you: price action, risk management, your own tested rules and correct lot sizes."
+ },
+ "pk-scams": {
+  "page": "guide-forex-trading-in-pakistan-and-india.html",
+  "file": "how-to-spot-forex-scam",
+  "h2": "How to spot a forex scam",
+  "alt": "How to spot a forex scam in Pakistan and India: guaranteed profit, account management by strangers, withdrawal fees, lifestyle screenshots, fake copies of known names and recovery scams",
+  "caption": "Six signs of a forex scam. Real trading has no guarantees."
+ },
+ "pk-gold": {
+  "page": "guide-forex-trading-in-pakistan-and-india.html",
+  "file": "gold-trading-in-pakistan-pmex-vs-xauusd",
+  "h2": "Gold trading in Pakistan",
+  "alt": "Gold trading in Pakistan: PMEX gold futures regulated by the SECP versus XAUUSD with an offshore CFD broker, and the tola price from the ounce price (1 ounce ≈ 2.67 tola)",
+  "caption": "Two things are called Gold trading in Pakistan: PMEX futures and offshore XAUUSD. The tola price follows the ounce price (example rates)."
  }
 }
