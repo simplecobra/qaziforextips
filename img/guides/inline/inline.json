@@ -110,5 +110,103 @@
   "h2": "Which markets and which window?",
   "alt": "Which ICT Silver Bullet window to trade from Pakistan: London 1–2 PM for EURUSD, GBPUSD and Gold; New York AM 8–9 PM for Gold and US indices; New York PM 12–1 AM",
   "caption": "Which window suits which market: London for EURUSD, GBPUSD and Gold; New York AM for Gold and US indices; New York PM is quieter."
+ },
+ "rm-stop": {
+  "page": "guide-risk-management-in-forex.html",
+  "file": "where-to-place-stop-loss-forex",
+  "h2": "Rule 2: place the stop loss first",
+  "alt": "Where to place a stop loss in forex: beyond the swing low for a buy with a small buffer; the stop is a chart decision, then the lot size follows",
+  "caption": "The stop goes where the trade idea is proven wrong, beyond the swing with a buffer. If it is too far, trade a smaller lot or skip."
+ },
+ "rm-lot": {
+  "page": "guide-risk-management-in-forex.html",
+  "file": "lot-size-formula-forex-gold",
+  "h2": "Rule 3: let the lot size come from the risk and the stop",
+  "alt": "Lot size formula: money at risk divided by stop distance times value per lot; $10 risk with a 25 pip stop on EURUSD is 0.04 lot, with a $5 stop on Gold it is 0.02 lot",
+  "caption": "Same $10 risk, different lots: the lot comes from the risk and the stop distance, never the other way round."
+ },
+ "rr-calc": {
+  "page": "guide-risk-reward-ratio.html",
+  "file": "how-to-calculate-risk-reward",
+  "h2": "How to calculate it",
+  "alt": "How to calculate risk:reward: a 40 pip take profit divided by a 20 pip stop loss gives 1:2; a full win is +2R and a full loss is −1R",
+  "caption": "Divide the take-profit distance by the stop-loss distance: 40 ÷ 20 = 1:2. A win is +2R, a loss −1R."
+ },
+ "rr-exp": {
+  "page": "guide-risk-reward-ratio.html",
+  "file": "trading-expectancy-formula",
+  "h2": "Expectancy",
+  "alt": "Trading expectancy example: 100 trades with 40% winners at 1:2 give +80R minus 60R, a net +20R or +0.2R per trade",
+  "caption": "With 40% winners at 1:2, expectancy is +0.2R per trade: about +20% over 100 trades at 1% risk, before costs."
+ },
+ "rr-real": {
+  "page": "guide-risk-reward-ratio.html",
+  "file": "realistic-take-profit-target",
+  "h2": "A big RR is not automatically better",
+  "alt": "Realistic take profit: a 1:2 target placed before strong resistance is reached more often than a 1:5 target beyond it",
+  "caption": "Put the target just before the next real level and accept the RR the chart gives. A 1:5 beyond strong resistance is rarely hit."
+ },
+ "dd-what": {
+  "page": "guide-drawdown-in-forex.html",
+  "file": "what-is-drawdown-example",
+  "h2": "What drawdown is",
+  "alt": "What drawdown is in forex: an account grows from $1,000 to a $1,200 peak and falls to $960, a $240 or 20% drawdown measured from the peak",
+  "caption": "Drawdown is measured from the highest point: $1,200 down to $960 is a 20% drawdown, even though the account is only 4% below its start."
+ },
+ "dd-bal-eq": {
+  "page": "guide-drawdown-in-forex.html",
+  "file": "balance-vs-equity-drawdown",
+  "h2": "Balance and equity drawdown",
+  "alt": "Balance vs equity drawdown: the balance line moves only when trades close, while equity also counts floating losses and shows the deeper real drawdown",
+  "caption": "Balance counts closed trades only. Equity also counts floating losses, so it shows the real drawdown that prop firms and margin calls use."
+ },
+ "dd-streaks": {
+  "page": "guide-drawdown-in-forex.html",
+  "file": "losing-streak-probability-forex",
+  "h2": "Losing streaks are normal",
+  "alt": "Losing streaks in forex: over 100 trades a 50% win rate has about a 55% chance of 6 losses in a row, and 10 losses cost 9.6% at 1% risk but 40.1% at 5% risk",
+  "caption": "Long losing runs are normal even for good strategies. What they cost depends only on your risk per trade."
+ },
+ "pf-math": {
+  "page": "guide-prop-firm-challenge.html",
+  "file": "prop-firm-risk-per-trade-math",
+  "h2": "Do the maths first",
+  "alt": "Prop firm challenge maths: five losses in a row at 1% risk reach the 5% daily loss limit, while at 0.5% risk the same streak costs only 2.5%",
+  "caption": "Five losses at 1% break a 5% daily limit; at 0.5% the same streak costs 2.5%. Passing is about small, steady risk."
+ },
+ "pf-plan": {
+  "page": "guide-prop-firm-challenge.html",
+  "file": "prop-firm-challenge-risk-plan",
+  "h2": "A simple risk plan",
+  "alt": "A simple prop firm challenge risk plan: risk 0.25–0.5% per trade, a personal daily stop of 2–2.5%, stop after 2 losses a day and after 4–5% down in a week",
+  "caption": "A simple plan: tiny risk per trade, your own daily stop at half the firm's limit, and hard stops for the day and the week."
+ },
+ "ps-traps": {
+  "page": "guide-trading-psychology.html",
+  "file": "trading-psychology-four-traps",
+  "h2": "The four common traps",
+  "alt": "The four trading psychology traps: FOMO buying after the run, moving the stop loss, revenge trading with bigger lots, and overtrading without a setup",
+  "caption": "The four traps that break good plans: FOMO, moving the stop, revenge trading and overtrading."
+ },
+ "ps-journal": {
+  "page": "guide-trading-psychology.html",
+  "file": "trading-journal-template-review",
+  "h2": "The routine",
+  "alt": "Trading journal template: date, pair, setup, result in R and emotion for every trade, plus a weekly review that shows which rule breaks cost the most",
+  "caption": "Write every trade in a journal with the setup, the result in R and your emotion, then review it every week."
+ },
+ "gold-drivers": {
+  "page": "guide-gold-trading.html",
+  "file": "what-moves-gold-price",
+  "h2": "What moves Gold",
+  "alt": "What moves the Gold price: the US dollar, Fed interest rates, US data such as NFP and CPI, and risk sentiment as a safe haven",
+  "caption": "Four things that move Gold: the US dollar, the Fed and rates, big US data releases, and the market's risk mood."
+ },
+ "gold-time": {
+  "page": "guide-gold-trading.html",
+  "file": "best-time-to-trade-gold-in-pakistan",
+  "h2": "When to trade it from Pakistan",
+  "alt": "Best time to trade Gold in Pakistan: the London–New York overlap, about 6–10 PM PKT in winter and 5–9 PM PKT in summer",
+  "caption": "Gold moves best in London and the London–New York overlap: about 6–10 PM PKT in winter and 5–9 PM in summer."
  }
 }
