@@ -1,0 +1,94 @@
+{
+ "bos-vs-choch": {
+  "file": "bos-vs-choch-market-structure",
+  "alt": "BOS vs CHoCH on a candlestick chart: higher highs break structure (BOS), then a close below the last higher low marks a change of character (CHoCH)"
+ },
+ "drawdown-in-forex": {
+  "file": "drawdown-in-forex-recovery",
+  "alt": "Drawdown in forex: an equity curve falling 20% from its peak, and the gain needed to recover: 10% needs 11.1%, 20% needs 25%, 50% needs 100%, 75% needs 300%"
+ },
+ "fair-value-gap": {
+  "file": "fair-value-gap-fvg-ict",
+  "alt": "Bullish fair value gap (FVG): the gap between the high of candle 1 and the low of candle 3, with the 50% consequent encroachment line and price returning into the gap"
+ },
+ "forex-brokers-in-pakistan": {
+  "file": "how-to-choose-forex-broker-in-pakistan",
+  "alt": "How to choose a forex broker in Pakistan in six steps: know the rule, get the official list, shortlist 3 to 5, visit each website, read reviews carefully, start small and test a withdrawal"
+ },
+ "forex-demo-account-in-pakistan": {
+  "file": "forex-demo-account-in-pakistan-mt5",
+  "alt": "Forex demo account in Pakistan: a MetaTrader 5 demo with virtual money and a 30-day practice plan, week by week"
+ },
+ "forex-signals-in-pakistan": {
+  "file": "forex-signals-in-pakistan-truth",
+  "alt": "Forex signals in Pakistan, the truth: WhatsApp and Telegram signal groups promise 99% accuracy without proof; learn to read the chart yourself"
+ },
+ "forex-trading-in-pakistan-and-india": {
+  "file": "is-forex-trading-legal-in-pakistan-and-india",
+  "alt": "Forex trading in Pakistan and India: what SBP and SECP in Pakistan and RBI and SEBI in India have said, with Pakistan and India time 30 minutes apart"
+ },
+ "forex-trading-sessions": {
+  "file": "forex-market-timings-in-pakistan",
+  "alt": "Forex market timings in Pakistan time (winter): Sydney 1–10 AM, Tokyo 5 AM–2 PM, London 1–10 PM, New York 6 PM–3 AM, best hours the 6–10 PM London–New York overlap"
+ },
+ "gold-trading": {
+  "file": "gold-xauusd-trading-for-beginners",
+  "alt": "Gold (XAUUSD) trading for beginners: 1 lot is 100 ounces, so a $1 move is $100 per 1.00 lot, $10 per 0.10 lot and $1 per 0.01 lot"
+ },
+ "ict-silver-bullet-time-in-pakistan": {
+  "file": "ict-silver-bullet-time-in-pakistan",
+  "alt": "ICT Silver Bullet time in Pakistan (winter): London 1–2 PM PKT, New York AM 8–9 PM PKT and New York PM 12–1 AM PKT; India add 30 minutes"
+ },
+ "liquidity-in-forex": {
+  "file": "liquidity-sweep-forex",
+  "alt": "Liquidity sweep in forex: stop orders above equal highs, a candle wicks through the level, closes back inside and price reverses"
+ },
+ "mt4-vs-mt5": {
+  "file": "mt4-vs-mt5-difference",
+  "alt": "MT4 vs MT5 difference: MT5 has 21 timeframes (MT4 9), 38 built-in indicators (MT4 30) and 6 pending order types (MT4 4); MT4 from 2005, MT5 from 2010"
+ },
+ "order-block": {
+  "file": "order-block-trading-smc",
+  "alt": "Bullish order block in Smart Money Concepts: the last down candle before a strong move that breaks structure, and price returning to that zone"
+ },
+ "price-action-trading": {
+  "file": "price-action-trading-urdu-hindi",
+  "alt": "Price action trading example on EURUSD: old resistance at 1.0850 becomes support, a bullish engulfing candle gives the entry at 1.0858 with a 20 pip stop and 40 pip target (1:2)"
+ },
+ "prop-firm-challenge": {
+  "file": "how-to-pass-prop-firm-challenge",
+  "alt": "How to pass a prop firm challenge: an equity curve reaching the +10% profit target on a $100,000 account while staying above the 5% daily loss and 10% maximum loss limits"
+ },
+ "risk-management-in-forex": {
+  "file": "risk-management-in-forex",
+  "alt": "Risk management in forex: risk 1% per trade; after 10 losses in a row the account is down 9.6% at 1% risk, 18.3% at 2% and 40.1% at 5%"
+ },
+ "risk-reward-ratio": {
+  "file": "risk-reward-ratio-forex",
+  "alt": "Risk:reward ratio 1:2 on a trade, with the break-even win rate for 1:1 (50%), 1:1.5 (40%), 1:2 (33.3%) and 1:3 (25%)"
+ },
+ "smart-money-concepts": {
+  "file": "smart-money-concepts-smc-urdu-hindi",
+  "alt": "Smart Money Concepts (SMC) checklist on one chart: liquidity at equal lows, a sweep, a change of character (CHoCH), entry at the fair value gap and the target at the next liquidity"
+ },
+ "trading-psychology": {
+  "file": "trading-psychology-fear-greed-discipline",
+  "alt": "Trading psychology gauge: fear on the left, greed on the right and the needle held in the discipline zone – fixed risk, plan, journal and review"
+ },
+ "what-is-a-pip": {
+  "file": "what-is-pip-in-forex",
+  "alt": "What is a pip in forex: on EURUSD the pip is the 4th decimal and the 5th digit is a pipette; pip value is $10 per 1.00 lot, $1 per 0.10 lot and $0.10 per 0.01 lot"
+ },
+ "what-is-leverage": {
+  "file": "what-is-leverage-in-forex-margin",
+  "alt": "What is leverage in forex: at 1:100 a $1,100 margin controls a $110,000 position (1 lot EURUSD at 1.1000); the pip value stays about $10 per pip"
+ },
+ "what-is-spread": {
+  "file": "what-is-spread-in-forex-bid-ask",
+  "alt": "What is spread in forex: EURUSD bid 1.10000 and ask 1.10012 give a 1.2 pip spread; the cost is about $10 per pip on 1.00 lot"
+ },
+ "what-is-swap-in-forex": {
+  "file": "what-is-swap-in-forex-rollover",
+  "alt": "What is swap in forex: swap is charged at each nightly rollover, about 3:00 AM Pakistan time in winter, and most brokers charge three days on Wednesday night"
+ }
+}
