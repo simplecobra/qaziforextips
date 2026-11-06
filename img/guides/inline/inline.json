@@ -19,5 +19,96 @@
   "h2": "Order block vs supply and demand",
   "alt": "Order block vs supply and demand zone on the same chart: the order block is one candle and tighter, the demand zone covers the whole base and is wider",
   "caption": "The same move marked two ways: an order block uses one candle, a supply and demand zone covers the whole base."
+ },
+ "bos-close": {
+  "page": "guide-bos-vs-choch.html",
+  "file": "bos-candle-close-vs-wick",
+  "h2": "Close or wick?",
+  "alt": "Break of structure: a candle body closing beyond the swing high is a real BOS; a wick that pokes through and closes back inside is a liquidity sweep",
+  "caption": "Count a break when the candle body closes beyond the level. A wick through and a close back inside is usually a liquidity sweep."
+ },
+ "bos-internal": {
+  "page": "guide-bos-vs-choch.html",
+  "file": "internal-vs-swing-structure",
+  "h2": "Internal and swing structure",
+  "alt": "Internal vs swing structure: inside a higher-timeframe uptrend the pullback makes its own internal CHoCH, which only ends the pullback before the swing high breaks",
+  "caption": "Swing structure is the big highs and lows. An internal CHoCH inside the pullback often only marks the end of the pullback, not a reversal."
+ },
+ "fvg-test": {
+  "page": "guide-fair-value-gap.html",
+  "file": "fvg-50-percent-ce-test-results",
+  "h2": "Why traders watch it",
+  "alt": "Fair value gap test results: a limit entry at the 50% consequent encroachment level won 31% of trades at 1:2 versus 28% for random zones over 23,773 FVGs on Gold and EURUSD",
+  "caption": "Our test of 23,773 FVGs: a limit order at the 50% level (CE) beat random zones of the same size in 8 of 8 tests; a plain touch-and-bounce did not."
+ },
+ "fvg-plan": {
+  "page": "guide-fair-value-gap.html",
+  "file": "fvg-trading-plan-entry",
+  "h2": "Using it in a plan",
+  "alt": "How to trade a fair value gap: higher-timeframe direction, an FVG left by the move that broke structure, entry on the return into the gap, stop beyond it and target the next liquidity",
+  "caption": "An FVG plan in four steps: direction first, the gap left by the break of structure, the return into it, then stop and target."
+ },
+ "liq-where": {
+  "page": "guide-liquidity-in-forex.html",
+  "file": "where-liquidity-sits-chart",
+  "h2": "Where liquidity sits",
+  "alt": "Where liquidity sits on a forex chart: buy stops above equal highs and the previous day high, sell stops below equal lows and under a trendline",
+  "caption": "Liquidity pools: above equal highs and the previous day's high, below equal lows and along trendlines that many traders draw."
+ },
+ "liq-stop": {
+  "page": "guide-liquidity-in-forex.html",
+  "file": "stop-loss-buffer-liquidity",
+  "h2": "Using it in practice",
+  "alt": "Stop loss placement and liquidity: a stop exactly at the obvious low gets swept, a stop with a buffer below the level survives the sweep",
+  "caption": "Do not place your stop exactly at the obvious level. Give it a buffer so a liquidity sweep does not take you out."
+ },
+ "smc-pd": {
+  "page": "guide-smart-money-concepts.html",
+  "file": "premium-discount-ote-smc",
+  "h2": "4. Premium, discount and OTE",
+  "alt": "Premium and discount in SMC: the range from swing low to swing high split at the 50% equilibrium, with the OTE optimal trade entry zone at 62–79% of the retracement",
+  "caption": "Above 50% of the swing is premium, below is discount. OTE is the deep 62–79% part of the pullback; combine it with an order block or FVG."
+ },
+ "smc-kz": {
+  "page": "guide-smart-money-concepts.html",
+  "file": "ict-killzones-pakistan-time",
+  "h2": "5. Time: sessions and killzones",
+  "alt": "ICT killzones in Pakistan time (winter): London killzone about 12–3 PM PKT and New York killzone about 5–8 PM PKT, after the Asian range",
+  "caption": "Killzones are the busy hours when sweeps and displacement happen most: about 12–3 PM and 5–8 PM PKT in winter."
+ },
+ "pa-candles": {
+  "page": "guide-price-action-trading.html",
+  "file": "candlestick-body-wick-pin-bar-engulfing",
+  "h2": "1. Candles: what each bar tells you",
+  "alt": "Reading candlesticks in price action: a big bullish body, a long lower wick, a pin bar at support and a bullish engulfing candle",
+  "caption": "What each candle says: the body shows who won, the wick shows rejection, a pin bar at a level and an engulfing candle show a shift."
+ },
+ "pa-mtf": {
+  "page": "guide-price-action-trading.html",
+  "file": "multiple-timeframe-analysis-h4-h1-m15",
+  "h2": "4. Multiple timeframes: direction, setup, entry",
+  "alt": "Multiple timeframe analysis in price action: H4 gives the trend and level, H1 shows the pullback to the level, M15 gives the engulfing entry with a tight stop",
+  "caption": "Top-down: the higher timeframe gives direction and levels, the middle timeframe the setup, the lower timeframe the entry candle."
+ },
+ "pa-triggers": {
+  "page": "guide-price-action-trading.html",
+  "file": "price-action-entry-triggers",
+  "h2": "5. Entry triggers",
+  "alt": "Four price action entry triggers at a level: rejection wick, engulfing candle, breakout and retest, and false breakout",
+  "caption": "Four entry triggers at a level: rejection, engulfing, breakout and retest, false breakout. Act only after the candle closes."
+ },
+ "sb-setup": {
+  "page": "guide-ict-silver-bullet-time-in-pakistan.html",
+  "file": "ict-silver-bullet-setup-fvg",
+  "h2": "What the Silver Bullet setup is",
+  "alt": "ICT Silver Bullet setup inside the one-hour window: a sweep of a nearby high, displacement with a market structure shift, entry in the fair value gap, stop beyond the sweep",
+  "caption": "Inside the hour: a sweep of nearby liquidity, a strong move the other way with a structure shift, then an entry in the FVG it leaves."
+ },
+ "sb-markets": {
+  "page": "guide-ict-silver-bullet-time-in-pakistan.html",
+  "file": "silver-bullet-which-window-markets",
+  "h2": "Which markets and which window?",
+  "alt": "Which ICT Silver Bullet window to trade from Pakistan: London 1–2 PM for EURUSD, GBPUSD and Gold; New York AM 8–9 PM for Gold and US indices; New York PM 12–1 AM",
+  "caption": "Which window suits which market: London for EURUSD, GBPUSD and Gold; New York AM for Gold and US indices; New York PM is quieter."
  }
 }
