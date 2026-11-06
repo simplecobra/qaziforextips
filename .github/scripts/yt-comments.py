@@ -134,7 +134,7 @@ def lesson_block(vid, cs):
             '<div class="ytc-grid">' + "".join(card(c, vid, i) for i, c in enumerate(cs)) + '</div></section><!--/YTC-->')
 
 def feedback_block(items):
-    return ('<!--YTC-->' + CSS + '<div class="wrap" style="padding-top:30px"><section class="ytc" aria-label="Comments from YouTube"><div class="ytc-h"><div>'
+    return ('<!--YTC-->' + CSS + '<div class="wrap" style="padding-top:0;padding-bottom:40px"><section class="ytc" aria-label="Comments from YouTube"><div class="ytc-h"><div>'
             '<span class="ytc-yt">▶ From our YouTube channel</span><h2>Comments from our YouTube lectures</h2>'
             '<p>Public comments from students on our free lectures, shown as written.</p></div>'
             '<a class="btn" href="https://www.youtube.com/@QaziForexTips" target="_blank" rel="noopener">Visit the channel</a></div>'
@@ -165,7 +165,7 @@ def build_pages(data):
         seen.add(c["a"]); top.append((c, v))
         if len(top) >= ON_FEEDBACK: break
     p = os.path.join(ROOT, "feedback.html"); s = open(p, encoding="utf-8").read()
-    n = put(s, feedback_block(top) if top else "", r"<main[^>]*>", "after")
+    n = put(s, feedback_block(top) if top else "", r'<section id="share"', "before")
     if n != s: open(p, "w", encoding="utf-8").write(n); changed += 1
     print("pages updated:", changed)
 
