@@ -348,5 +348,19 @@
   "h2": "Gold trading in Pakistan",
   "alt": "Gold trading in Pakistan: PMEX gold futures regulated by the SECP versus XAUUSD with an offshore CFD broker, and the tola price from the ounce price (1 ounce ≈ 2.67 tola)",
   "caption": "Two things are called Gold trading in Pakistan: PMEX futures and offshore XAUUSD. The tola price follows the ounce price (example rates)."
+ },
+ "lot-types": {
+  "page": "lesson-lot-size.html",
+  "file": "lot-size-standard-mini-micro",
+  "h2": "Lot sizes and what they are worth",
+  "alt": "Lot size in forex explained: 1.00 standard lot is 100,000 units and about $10 per pip on EURUSD, 0.10 mini lot about $1 per pip, 0.01 micro lot about $0.10 per pip",
+  "caption": "Standard, mini and micro lots: what 1.00, 0.10 and 0.01 lot are worth per pip on EURUSD and per $1 move on Gold."
+ },
+ "lot-account": {
+  "page": "lesson-lot-size.html",
+  "file": "lot-size-by-account-size",
+  "h2": "Which lot size for your account? (1% risk)",
+  "alt": "Which lot size for your account at 1% risk: $500 account 0.02 lot on EURUSD with a 20 pip stop, $1,000 account 0.05 lot, $5,000 account 0.25 lot; Gold with a $5 stop 0.01 to 0.10 lot",
+  "caption": "Lot size by account size at 1% risk, for EURUSD with a 20-pip stop and Gold with a $5 stop. On $100 even 0.01 lot risks more than 1%."
  }
 }
