@@ -208,5 +208,75 @@
   "h2": "When to trade it from Pakistan",
   "alt": "Best time to trade Gold in Pakistan: the London–New York overlap, about 6–10 PM PKT in winter and 5–9 PM PKT in summer",
   "caption": "Gold moves best in London and the London–New York overlap: about 6–10 PM PKT in winter and 5–9 PM in summer."
+ },
+ "pip-value": {
+  "page": "guide-what-is-a-pip.html",
+  "file": "pip-value-forex-chart",
+  "h2": "Pip value",
+  "alt": "Pip value in forex: $10 per pip for 1.00 lot, $1 for 0.10 lot and $0.10 for 0.01 lot on USD-quoted pairs; on USDJPY at 150 one lot is about $6.67 per pip",
+  "caption": "Pip value: $10, $1 or $0.10 per pip on USD-quoted pairs depending on the lot; on other pairs it changes with the price."
+ },
+ "pip-money": {
+  "page": "guide-what-is-a-pip.html",
+  "file": "pips-to-money-formula",
+  "h2": "From pips to money",
+  "alt": "From pips to money: 25 pips stop loss × $10 pip value per lot × 0.04 lot = $10 at risk, and the same formula turned around gives the lot size",
+  "caption": "Money at risk = stop in pips × pip value × lots. 25 × $10 × 0.04 = $10; turn it around to get the lot size for any risk."
+ },
+ "spread-chart": {
+  "page": "guide-what-is-spread.html",
+  "file": "bid-ask-spread-chart",
+  "h2": "Bid, ask and spread",
+  "alt": "Bid and ask on a forex chart: the chart shows the bid, the ask sits above it by the spread; a buy opens at the ask and closes at the bid",
+  "caption": "The chart shows the bid; the ask is above it by the spread. A buy opens at the ask and closes at the bid, so every trade starts slightly negative."
+ },
+ "spread-widen": {
+  "page": "guide-what-is-spread.html",
+  "file": "when-do-spreads-widen-forex",
+  "h2": "When spreads widen",
+  "alt": "When do forex spreads widen: at the daily rollover around 3 AM Pakistan time in winter, around high-impact US news and in quiet hours",
+  "caption": "Spreads widen at the rollover, around big news and in quiet hours. Illustration of a typical day in Pakistan time."
+ },
+ "swap-mt5": {
+  "page": "guide-what-is-swap-in-forex.html",
+  "file": "swap-calculation-mt5-specification",
+  "h2": "How to find and calculate it in MT5",
+  "alt": "How to find and calculate swap in MT5: the symbol specification shows swap type, swap long and short and the triple swap day; −6.2 points is $6.20 a night per lot",
+  "caption": "Find swap in MT5 under Specification. In points: swap per night = points × value of one point × lots (illustrative numbers)."
+ },
+ "swap-who": {
+  "page": "guide-what-is-swap-in-forex.html",
+  "file": "who-pays-swap-in-forex",
+  "h2": "Who should care about swap",
+  "alt": "Who pays swap in forex: scalpers and day traders who close before rollover pay none, swing traders should count it as a cost, carry traders may earn a positive swap",
+  "caption": "Day traders who close before the rollover never pay swap; swing traders should count it; a carry trade can earn it."
+ },
+ "lev-margin": {
+  "page": "guide-what-is-leverage.html",
+  "file": "margin-level-margin-call-stop-out",
+  "h2": "Margin call and stop out",
+  "alt": "Margin level, margin call and stop out: margin level is equity divided by used margin; as it falls the broker first warns you, then closes trades at the stop out level",
+  "caption": "Margin level = equity ÷ used margin × 100%. As it falls you reach the margin call, then the stop out, where the broker closes trades."
+ },
+ "lev-caps": {
+  "page": "guide-what-is-leverage.html",
+  "file": "leverage-limits-by-regulator",
+  "h2": "Regulators and limits",
+  "alt": "Forex leverage limits by regulator: 1:30 on major pairs in the EU and UK, 1:50 in the US, while offshore brokers often offer 1:500 or more",
+  "caption": "Regulators cap retail leverage (1:30 EU and UK, 1:50 US); offshore brokers offer far more. Size trades from your risk, not the margin."
+ },
+ "mt5-adds": {
+  "page": "guide-mt4-vs-mt5.html",
+  "file": "what-mt5-adds-over-mt4",
+  "h2": "What MT5 adds",
+  "alt": "What MT5 adds over MT4: a built-in economic calendar, depth of market, hedging and netting modes, a 64-bit strategy tester, more timeframes and six pending order types",
+  "caption": "What MT5 adds: calendar, depth of market, hedging and netting, a faster tester, more timeframes and more order types."
+ },
+ "mt-choose": {
+  "page": "guide-mt4-vs-mt5.html",
+  "file": "mt4-or-mt5-which-to-choose",
+  "h2": "Which one should you use?",
+  "alt": "MT4 or MT5, which to choose: choose MT5 for a new account; stay on MT4 only if your broker or prop firm offers only MT4 or you need an MT4-only tool",
+  "caption": "Choose MT5 for a new account; stay on MT4 only if your broker or prop firm requires it or you depend on an MT4-only tool."
  }
 }
