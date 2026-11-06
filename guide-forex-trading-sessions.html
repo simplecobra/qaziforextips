@@ -444,6 +444,21 @@ footer a:hover{color:var(--ink)}
 .hub h2{font-size:clamp(26px,3.2vw,36px);text-transform:uppercase;margin:40px 0 16px}
 @media (max-width:760px){.gcards{grid-template-columns:1fr}}
 </style>
+<style id="lsw-css">.lsw{border:1px solid var(--line);background:var(--surface);border-radius:16px;padding:20px 22px;margin:8px 0 26px}
+.lsw-top{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;align-items:flex-start}
+.lsw-now{font-size:32px;font-weight:800;line-height:1.15;color:var(--ink)}.lsw-now small{display:block;font:600 12px/1.6 var(--f-mono,monospace);letter-spacing:1.5px;color:var(--gold-t,var(--gold));text-transform:uppercase}
+.lsw-sub{color:var(--muted);font-size:14px;margin-top:4px}
+.lsw-tz{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}.lsw-tz button{border:0;background:none;color:var(--muted);padding:7px 14px;font:700 13px/1 inherit;cursor:pointer}.lsw-tz button[aria-pressed=true]{background:var(--gold);color:#111}
+.lsw-badge{margin:14px 0 4px;padding:10px 14px;border-radius:10px;font-weight:700;font-size:15px}
+.lsw-badge.ov{background:color-mix(in srgb,var(--gold) 18%,transparent);border:1px solid var(--gold)}.lsw-badge.cl{background:color-mix(in srgb,#f06470 14%,transparent);border:1px solid #f06470}.lsw-badge.op{background:color-mix(in srgb,#3ad07f 12%,transparent);border:1px solid #3ad07f}
+.lsw-rows{display:grid;gap:8px;margin-top:12px}
+.lsw-row{display:grid;grid-template-columns:110px 1fr 150px;gap:12px;align-items:center;font-size:15px}
+.lsw-row b{font-weight:700}.lsw-bar{position:relative;height:22px;border-radius:6px;background:color-mix(in srgb,var(--muted) 15%,transparent);overflow:hidden}
+.lsw-bar i{position:absolute;top:0;bottom:0;border-radius:6px;opacity:.85}.lsw-bar em{position:absolute;top:-3px;bottom:-3px;width:2px;background:var(--ink)}
+.lsw-st{font-size:13px;text-align:right;color:var(--muted)}.lsw-st.on{color:#3ad07f;font-weight:700}
+.lsw-axis{display:grid;grid-template-columns:110px 1fr 150px;gap:12px;font:500 11px/1 var(--f-mono,monospace);color:var(--muted)}.lsw-axis div{display:flex;justify-content:space-between}
+.ls-art .lsw .lsw-note{font-size:13px;line-height:1.5;color:var(--muted);margin:12px 0 0}
+@media (max-width:640px){.lsw-row,.lsw-axis{grid-template-columns:76px 1fr}.lsw-st{grid-column:2;text-align:left;margin-top:-4px}.lsw-axis span:last-child{display:none}}</style>
 </head>
 <body>
 
@@ -473,7 +488,55 @@ footer a:hover{color:var(--ink)}
 <b class="k">Quick answer · winter timings, November 2026 to March 2027</b>
 <p>The forex market opens on <b>Monday at about 3:00 AM Pakistan time</b> and closes on <b>Saturday at about 3:00 AM PKT</b>. From 1 November 2026 the winter hours apply: <b>London 1:00–10:00 PM</b>, <b>New York 6:00 PM–3:00 AM</b> and the busiest window, the London–New York overlap, is <b>6:00–10:00 PM PKT</b>. In India add 30 minutes.</p>
 </div>
-<h2>Forex market timings in Pakistan today (winter)</h2>
+<h2>Forex market timings in Pakistan today (winter)</h2><!--LSW--><div class="lsw" id="lsw" aria-live="polite">
+  <div class="lsw-top"><div><div class="lsw-now" id="lswNow"><small>Right now</small>—</div><div class="lsw-sub" id="lswSub">Live forex session clock</div></div>
+  <div class="lsw-tz" role="group" aria-label="Time zone"><button type="button" data-tz="pkt" aria-pressed="true">Pakistan (PKT)</button><button type="button" data-tz="ist" aria-pressed="false">India (IST)</button></div></div>
+  <div class="lsw-badge" id="lswBadge">Loading the live session clock…</div>
+  <div class="lsw-rows" id="lswRows"></div>
+  <div class="lsw-axis"><span></span><div id="lswAxis"></div><span></span></div>
+  <p class="lsw-note">Live from your device clock. Summer and winter changes in London, New York and Sydney are handled automatically. Times are approximate session hours; your broker's server time may differ slightly.</p>
+</div><script>
+(function(){
+var S=[{n:"Sydney",z:"Australia/Sydney",o:7,c:16,col:"#a98bff"},{n:"Tokyo",z:"Asia/Tokyo",o:9,c:18,col:"#5b9dff"},
+{n:"London",z:"Europe/London",o:8,c:17,col:"#e8b54a"},{n:"New York",z:"America/New_York",o:8,c:17,col:"#3ad07f"}];
+var TZ={pkt:{off:300,lab:"Pakistan (PKT)",short:"PKT"},ist:{off:330,lab:"India (IST)",short:"IST"}},cur="pkt";
+try{var s=localStorage.getItem("qft-tz");if(s==="ist")cur="ist";}catch(e){}
+function off(zone,d){var p={};new Intl.DateTimeFormat("en-US",{timeZone:zone,hourCycle:"h23",year:"numeric",month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit"}).formatToParts(d).forEach(function(x){p[x.type]=x.value});
+ var u=Date.UTC(+p.year,+p.month-1,+p.day,+p.hour,+p.minute);return Math.round((u-Math.floor(d.getTime()/60000)*60000)/60000);}
+function utcOf(zone,y,m,dd,h){var g=Date.UTC(y,m,dd,h,0);var o=off(zone,new Date(g));var t=g-o*60000;o=off(zone,new Date(t));return g-o*60000;}
+function parts(zone,d){var p={};new Intl.DateTimeFormat("en-US",{timeZone:zone,hourCycle:"h23",weekday:"short",year:"numeric",month:"numeric",day:"numeric",hour:"numeric",minute:"numeric"}).formatToParts(d).forEach(function(x){p[x.type]=x.value});return p;}
+function marketOpen(now){var p=parts("America/New_York",now),h=+p.hour+(+p.minute)/60,w=p.weekday;
+ if(w==="Sat")return false;if(w==="Fri"&&h>=17)return false;if(w==="Sun"&&h<17)return false;return true;}
+function fmt(ms,offm){var d=new Date(ms+offm*60000),h=d.getUTCHours(),m=d.getUTCMinutes();return (h%12||12)+":"+(m<10?"0":"")+m+(h<12?" AM":" PM");}
+function dur(ms){var m=Math.max(0,Math.round(ms/60000)),h=Math.floor(m/60);m%=60;return (h?h+"h ":"")+m+"m";}
+function windows(now){var out=[];S.forEach(function(s){var list=[];for(var k=-1;k<=1;k++){var p=parts(s.z,new Date(now.getTime()+k*864e5));
+ var y=+p.year,mo=+p.month-1,d=+p.day;var st=utcOf(s.z,y,mo,d,s.o),en=utcOf(s.z,y,mo,d,s.c);var wd=new Date(Date.UTC(y,mo,d)).getUTCDay();
+ if(wd>=1&&wd<=5)list.push([st,en]);}out.push({s:s,w:list});});return out;}
+function render(){var now=new Date(),t=TZ[cur],ms=now.getTime(),open=marketOpen(now),W=windows(now);
+ var day=new Date(ms+t.off*60000);var dname=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"][day.getUTCDay()];
+ document.getElementById("lswNow").innerHTML="<small>Right now in "+(cur==="pkt"?"Pakistan":"India")+"</small>"+fmt(ms,t.off)+" <span style=\"font-size:18px;color:var(--muted)\">"+dname+"</span>";
+ document.getElementById("lswSub").textContent=(cur==="pkt"?"India: "+fmt(ms,330)+" IST":"Pakistan: "+fmt(ms,300)+" PKT")+" · London "+new Intl.DateTimeFormat("en-GB",{timeZone:"Europe/London",hour:"numeric",minute:"2-digit",hour12:true}).format(now)+" · New York "+new Intl.DateTimeFormat("en-US",{timeZone:"America/New_York",hour:"numeric",minute:"2-digit"}).format(now);
+ var d0=Date.UTC(day.getUTCFullYear(),day.getUTCMonth(),day.getUTCDate())-t.off*60000,d1=d0+864e5,rows="",openNames=[],next=null;
+ W.forEach(function(x){var on=false,bars="",st="";x.w.forEach(function(w){if(open&&ms>=w[0]&&ms<w[1])on=w;var a=Math.max(w[0],d0),b=Math.min(w[1],d1);if(b>a)bars+="<i style=\"left:"+((a-d0)/864e3).toFixed(2)+"%;width:"+((b-a)/864e3).toFixed(2)+"%;background:"+x.s.col+"\"></i>";
+  if(w[0]>ms&&(!next||w[0]<next.t))next={t:w[0],n:x.s.n};});
+  var tw=x.w.filter(function(w){return w[1]>d0&&w[0]<d1})[0];var hrs=tw?fmt(tw[0],t.off)+" – "+fmt(tw[1],t.off):"closed today";
+  if(on){openNames.push(x.s.n);st="<span class=\"lsw-st on\">Open · closes in "+dur(on[1]-ms)+"</span>";}
+  else{var nx=x.w.filter(function(w){return w[0]>ms})[0];st="<span class=\"lsw-st\">"+(!open?"Closed (weekend)":(nx?"Opens in "+dur(nx[0]-ms):hrs))+"</span>";}
+  rows+="<div class=\"lsw-row\"><b>"+x.s.n+"</b><div class=\"lsw-bar\" title=\""+x.s.n+": "+hrs+" "+t.short+"\">"+bars+"<em style=\"left:"+((ms-d0)/864e3).toFixed(2)+"%\"></em></div>"+st+"</div>";});
+ document.getElementById("lswRows").innerHTML=rows;
+ var ax="";for(var h=0;h<=24;h+=6)ax+="<span>"+((h%12)||12)+(h<12||h===24?"am":"pm")+"</span>";document.getElementById("lswAxis").innerHTML=ax;
+ var b=document.getElementById("lswBadge");
+ if(!open){var p=parts("America/New_York",now);b.className="lsw-badge cl";b.textContent="Forex market is closed for the weekend. It opens on Monday at about "+(cur==="pkt"?"2:00–3:00 AM PKT":"2:30–3:30 AM IST")+".";}
+ else if(openNames.indexOf("London")>-1&&openNames.indexOf("New York")>-1){b.className="lsw-badge ov";b.textContent="London–New York overlap now: the busiest hours for EURUSD, GBPUSD and Gold.";}
+ else if(openNames.length){b.className="lsw-badge op";b.textContent="Open now: "+openNames.join(" + ")+(next?". Next: "+next.n+" opens in "+dur(next.t-ms)+".":".");}
+ else{b.className="lsw-badge";b.textContent="Quiet hours."+(next?" Next: "+next.n+" opens in "+dur(next.t-ms)+".":"");}
+}
+document.querySelectorAll("#lsw .lsw-tz button").forEach(function(btn){btn.addEventListener("click",function(){cur=btn.dataset.tz;try{localStorage.setItem("qft-tz",cur)}catch(e){}
+ document.querySelectorAll("#lsw .lsw-tz button").forEach(function(x){x.setAttribute("aria-pressed",x===btn?"true":"false")});render();});
+ btn.setAttribute("aria-pressed",btn.dataset.tz===cur?"true":"false");});
+render();setInterval(render,30000);
+})();
+</script><!--/LSW-->
 <p>These are the hours that apply now, from 1 November 2026 until the US changes its clocks on 14 March 2027. Times are approximate; your broker's server may differ by a few minutes.</p>
 <div class="tbl"><table><thead><tr><th>Session</th><th>Pakistan time (PKT)</th><th>India time (IST)</th><th>What moves most</th></tr></thead><tbody>
 <tr><td>Sydney</td><td>1:00 AM – 10:00 AM</td><td>1:30 AM – 10:30 AM</td><td>AUD, NZD</td></tr>
