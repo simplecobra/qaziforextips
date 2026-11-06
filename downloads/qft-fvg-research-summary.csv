@@ -1,0 +1,10 @@
+market,year,timeframe,gaps,respected_fvg_pct,respected_random_pct,ce_1to2_win_fvg_pct,ce_1to2_win_random_pct
+XAUUSD,2024,M15,1336,42,44,32,28
+XAUUSD,2024,M5,4571,41,40,31,29
+XAUUSD,2025,M15,1392,43,43,34,30
+XAUUSD,2025,M5,4464,41,40,32,29
+EURUSD,2023,M15,1172,43,42,29,26
+EURUSD,2023,M5,4020,41,41,30,28
+EURUSD,2025,M15,1460,44,42,34,29
+EURUSD,2025,M5,5108,42,41,29,28
+# QFT Research, qaziforextips.com/research-do-fair-value-gaps-work.html . Data: HistData.com M1 bars. Before costs. CC BY 4.0
