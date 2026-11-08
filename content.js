@@ -60,9 +60,9 @@ window.SITE = {
     {
       name: "QFT Replay Simulator",
       type: "Software",
-      badge: "v3.04",
-      text: "MT5 market replay and manual backtesting with Prop Firm Challenge mode and a professional backtest report.",
-      points: ["Replay any day, candle by candle", "Risk in $ – lot follows your SL", "Money management plan from your results"],
+      badge: "v3.05",
+      text: "MT5 & MT4 market replay and manual backtesting: backtest up to 4 pairs at once, Prop Firm Challenge mode and a professional backtest report.",
+      points: ["Backtest 4 pairs at once (SMT, DXY)", "Risk in $ – lot follows your SL", "Money management plan from your results"],
       image: "simulator.jpg",
       link: "simulator.html",
       button: "See the simulator"
@@ -96,13 +96,17 @@ window.SITE = {
                Nayi khabar par "id" zaroor badlein (warna jis ne band ki thi usay nazar nahi aayegi).
      versions: Simulator / Trade Assistant pages par "Version history". Naya version = list mein sab se upar 1 line. */
   announce: {
-    id: "sim-304",
-    text: "QFT Replay Simulator 3.04 for MT5 & MT4: start a prop firm challenge at any moment, indicators on all charts, Save as.",
+    id: "sim-305",
+    text: "Major update: QFT Replay Simulator 3.05 for MT5 & MT4 – backtest up to 4 pairs at the same time (Gold + DXY, EURUSD + GBPUSD).",
     link: "simulator.html#new", linkText: "See what's new",
     until: "2026-12-31"
   },
 
   updates: [
+    { date: "2026-11-08", type: "new", products: ["simulator"],
+      title: "Major update: Replay Simulator 3.05 – backtest 4 pairs at once (MT5 & MT4)",
+      text: "Version 3.05 replays up to 4 symbols together: your main pair plus 3 extra pairs, all on the same second, so you can practise correlation and SMT divergence (Gold with DXY, EURUSD with GBPUSD) and trade every pair from one panel. New Simulation shows the data status of each pair with the start and end date (hover for the full reason), and one Download missing data button gets the history for all extra pairs. Prev Bar is now smooth, the report has a Result per symbol table, and the simulator tells you clearly when Allow DLL imports is off or a second simulator is running. The zip includes the Install Guide, What's New 3.05 and the full Features list (PDF). Installed simulators update from Main Menu → Updates; your licence, data and saved simulations stay.",
+      link: "simulator.html#new", linkText: "See what's new" },
     { date: "2026-10-27", type: "new", products: ["simulator"],
       title: "Replay Simulator 3.04 for MetaTrader 4 is out",
       text: "The MT4 version now has everything new in 3.04: the Prop Firm button to start, hide, stop or restart a challenge at any moment of the replay (2-Step Phase 1 and 2, 1-Step, Instant funding or Custom), the new BUY and SELL buttons with the price, Save Simulation with your own name and folder, and Load from any folder. For MT4 it also warns in New Simulation when a symbol has very little M1 history, and moves the start date so enough candles load before it. The zip includes the User Guide and What's new in 3.04 (PDF). Indicator sync on all replay charts stays MT5 only.",
@@ -178,7 +182,8 @@ window.SITE = {
 
   versions: {
     simulator: [
-      { v: "3.04", current: true, items: ["Now also for MetaTrader 4: the MT4 version gets every 3.04 feature except indicator sync", "MT4: New Simulation warns when a symbol has very little M1 history and moves the start date so enough candles load", "Prop Firm Challenge from the simulator window: start, hide, stop or restart a challenge at any moment of the replay", "Ready challenge types: 2-Step Phase 1 and 2, 1-Step, Instant funding, or Custom rules", "Indicators added on one replay chart appear on all replay charts (MT5)", "Save Simulation: choose your own folder and name; Load: open a .qsim file from any folder", "New BUY / SELL buttons with the price, compact Smart Panel and Prop Firm buttons", "Taller footer and a shorter New Simulation window"] },
+      { v: "3.05", current: true, items: ["Backtest up to 4 pairs at once: main symbol + 3 extra pairs on the same second (correlation, SMT, DXY) – MT5 & MT4", "Trade every replayed pair from one panel; Result per symbol table in the report", "New Simulation: data status of each pair with start and end date, full reason on mouse hover", "One Download missing data button for all extra pairs, with progress and Stop", "Smooth Prev Bar (no jump on the chart)", "Clear message when Allow DLL imports is off; only one simulator per terminal; warning when a pair is chosen twice", "New PDFs in the zip: What's New 3.05 and the full Features list"] },
+      { v: "3.04", items: ["Now also for MetaTrader 4: the MT4 version gets every 3.04 feature except indicator sync", "MT4: New Simulation warns when a symbol has very little M1 history and moves the start date so enough candles load", "Prop Firm Challenge from the simulator window: start, hide, stop or restart a challenge at any moment of the replay", "Ready challenge types: 2-Step Phase 1 and 2, 1-Step, Instant funding, or Custom rules", "Indicators added on one replay chart appear on all replay charts (MT5)", "Save Simulation: choose your own folder and name; Load: open a .qsim file from any folder", "New BUY / SELL buttons with the price, compact Smart Panel and Prop Firm buttons", "Taller footer and a shorter New Simulation window"] },
       { v: "3.03", items: ["Now also available for MetaTrader 4 (separate download, own licence key per MT4 account)", "Fix: the simulator window could be empty after the simulator was attached again, the chart timeframe was changed or a template was applied", "Includes everything from 3.02: Smart Panel, clean start, zoomed-out replay charts, website links"] },
       { v: "3.02", items: ["Smart Panel: Prev / Play / Next, speed, lot, Buy, Sell, Close All, P/L and time in one slim bar", "SMART PANEL button next to Buy / Sell, or minimize the window during a replay", "The chart that runs the simulator is minimized during the replay and comes back after", "Replay charts open one zoom step further out (more candles, better structure)", "Website and WhatsApp links in every window and in the backtest report"] },
       { v: "3.00", items: ["Prop Firm Challenge mode: target, daily loss and max loss with a live dashboard", "New pro report: journal, streaks, money plan, charts", "R-multiple statistics and Monte Carlo risk test", "Keyboard shortcuts: Space, N / P, B / S, + / −", "Online licence check"] },
@@ -205,8 +210,8 @@ window.SITE = {
      1) nayi zip ISI NAAM se downloads folder mein upload karein (purani replace ho jayegi),
      2) yahan version aur size badal dein. Link kabhi nahi badalta.            */
   downloads: {
-    simulator:      { file: "downloads/QFT-Replay-Simulator.zip", version: "3.04", size: "4.6 MB" },
-    simulatorMT4:   { file: "downloads/QFT-Replay-Simulator-MT4.zip", version: "3.04", size: "6.0 MB" },
+    simulator:      { file: "downloads/QFT-Replay-Simulator.zip", version: "3.05", size: "2.6 MB" },
+    simulatorMT4:   { file: "downloads/QFT-Replay-Simulator-MT4.zip", version: "3.05", size: "3.0 MB" },
     tradeAssistant: { file: "downloads/QFT-Trade-Assistant.zip",  version: "3.13", size: "3.9 MB" },
     tradeAssistantMT4: { file: "downloads/QFT-Trade-Assistant-MT4.zip", version: "3.13", size: "3.8 MB" }
   },
