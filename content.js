@@ -416,7 +416,8 @@ window.SITE = {
     { value: "2013", label: "Trading since" },
     { value: "65th", label: "Student batch running" },
     { value: "14.5K+", label: "YouTube subscribers" },
-    { value: "64+",  label: "Free video lessons" }
+    { value: "64+",  label: "Free video lessons" },
+    { value: "75K+", label: "Facebook group members" }
   ],
 
   /* ---------- 8. YAHAN SE SHURU KAREIN (learning path) ---------- */
