@@ -414,10 +414,10 @@ window.SITE = {
   /* ---------- 7. NUMBERS (sirf SACH figures likhein) ---------- */
   stats: [
     { value: "2013", label: "Trading since" },
+    { value: "75K+", label: "Facebook group members" },
     { value: "65th", label: "Student batch running" },
     { value: "14.5K+", label: "YouTube subscribers" },
-    { value: "64+",  label: "Free video lessons" },
-    { value: "75K+", label: "Facebook group members" }
+    { value: "64+",  label: "Free video lessons" }
   ],
 
   /* ---------- 8. YAHAN SE SHURU KAREIN (learning path) ---------- */
