@@ -151,6 +151,7 @@ section{padding-block:88px}
 .stats .wrap{display:grid;grid-template-columns:repeat(5,minmax(0,1fr))}
 .stat{padding:30px 22px;display:grid;gap:6px;border-right:1px solid var(--line)}
 .stat:last-child{border-right:0}
+a.stat{text-decoration:none;color:inherit;transition:background .2s}a.stat:hover{background:color-mix(in srgb,var(--gold) 8%,transparent)}a.stat:hover span{color:var(--gold-t,var(--gold))}
 @media (min-width:761px){.stat:first-child{border-left:1px solid var(--line)}.stat:last-child{border-right:1px solid var(--line)}}
 .stat b{font:800 clamp(38px,4.4vw,54px)/1 var(--f-display);color:var(--ink)}
 .stat span{font:600 12px/1.3 var(--f-mono);letter-spacing:1.4px;text-transform:uppercase;color:var(--muted)}
@@ -370,7 +371,7 @@ footer a:hover{color:var(--ink)}
   </div>
 </div></section>
 
-<div class="stats"><div class="wrap" id="stats"><div class="stat"><b>2013</b><span>Trading since</span></div><div class="stat"><b>75K+</b><span>Facebook group members</span></div><div class="stat"><b>65th</b><span>Student batch running</span></div><div class="stat"><b>14.5K+</b><span>YouTube subscribers</span></div><div class="stat"><b>64+</b><span>Free video lessons</span></div></div></div>
+<div class="stats"><div class="wrap" id="stats"><div class="stat"><b>2013</b><span>Trading since</span></div><a class="stat" href="https://www.facebook.com/groups/qaziforextips" target="_blank" rel="noopener"><b>75K+</b><span>Facebook group members ↗</span></a><div class="stat"><b>65th</b><span>Student batch running</span></div><a class="stat" href="https://www.youtube.com/@QaziForexTips" target="_blank" rel="noopener"><b>14.5K+</b><span>YouTube subscribers ↗</span></a><div class="stat"><b>64+</b><span>Free video lessons</span></div></div></div>
 
 <section id="start"><div class="wrap">
   <div class="head"><div class="eyebrow">Start here</div><h2>Your path from zero to a trading plan</h2><p>New to trading? Follow these four steps in order. Everything up to step three is free on our YouTube channel.</p></div>
@@ -479,7 +480,7 @@ footer a:hover{color:var(--ink)}
   nav.addEventListener("click", function(e){ if (e.target.closest("a")) { nav.classList.remove("open"); menu.setAttribute("aria-expanded", false); } });
 
   /* stats */
-  $("stats").innerHTML = (S.stats || []).map(function(s){ return '<div class="stat"><b>' + esc(s.value) + '</b><span>' + esc(s.label) + '</span></div>'; }).join("");
+  $("stats").innerHTML = (S.stats || []).map(function(s){ var inner = '<b>' + esc(s.value) + '</b><span>' + esc(s.label) + (s.link ? ' ↗' : '') + '</span>'; return s.link ? '<a class="stat" href="' + esc(s.link) + '" target="_blank" rel="noopener">' + inner + '</a>' : '<div class="stat">' + inner + '</div>'; }).join("");
 
   /* learning path */
   $("path").innerHTML = (S.path || []).map(function(p, i){
