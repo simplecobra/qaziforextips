@@ -414,9 +414,9 @@ window.SITE = {
   /* ---------- 7. NUMBERS (sirf SACH figures likhein) ---------- */
   stats: [
     { value: "2013", label: "Trading since" },
-    { value: "75K+", label: "Facebook group members" },
+    { value: "75K+", label: "Facebook group members", link: "https://www.facebook.com/groups/qaziforextips" },
     { value: "65th", label: "Student batch running" },
-    { value: "14.5K+", label: "YouTube subscribers" },
+    { value: "14.5K+", label: "YouTube subscribers", link: "https://www.youtube.com/@QaziForexTips" },
     { value: "64+",  label: "Free video lessons" }
   ],
 
