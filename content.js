@@ -58,6 +58,15 @@ window.SITE = {
       button: "Free download"
     },
     {
+      name: "QFT Trading Coach",
+      type: "Free indicator",
+      badge: "NEW v1.40",
+      text: "Free trading journal for MT5: reads your history by itself, finds 9 trading mistakes and what they cost you, grades every trade and saves English & Urdu reports.",
+      points: ["9 mistakes found automatically", "Discipline score + weekly coach plan", "English & Urdu reports with graphs"],
+      link: "free-trading-journal-mt5.html",
+      button: "Free download"
+    },
+    {
       name: "QFT Replay Simulator",
       type: "Software",
       badge: "v3.05",
