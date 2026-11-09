@@ -112,7 +112,8 @@ CSS = ("<style>.ytc{margin-top:40px;border:1px solid var(--line);border-radius:1
        ".ytc blockquote.ytc-t{margin:0;padding:0;border:0;font-style:normal;quotes:none;font-size:15.5px;line-height:1.6;white-space:pre-line;overflow-wrap:anywhere}"
        ".ytc blockquote.ytc-t[dir=rtl]{font-family:var(--f-ur);font-size:17px;line-height:2.1}"
        ".ytc-f{display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--muted)}.ytc-f a{color:var(--muted)}"
-       ".ytc-yt{display:inline-flex;align-items:center;gap:6px;font:600 12px/1 var(--f-mono);letter-spacing:.8px;text-transform:uppercase;color:#e04848}"
+       ".ytc-yt{display:inline-flex;align-items:center;gap:6px;font:600 12px/1 var(--f-mono);letter-spacing:.8px;text-transform:uppercase;color:#f26d6d}"
+       ":root[data-theme=\"light\"] .ytc-yt{color:#b91c1c}"
        "@media (max-width:760px){.ytc-grid,.ytc-grid.c3{grid-template-columns:1fr}.ytc{padding:18px}}</style>")
 E = lambda s: html.escape(s, quote=True)
 

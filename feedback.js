@@ -60,9 +60,9 @@
     window.__qftMore = 1;
     var st = document.createElement("style");
     st.textContent = ".tst p.clamp{display:-webkit-box;-webkit-line-clamp:6;-webkit-box-orient:vertical;overflow:hidden}" +
-      ".tst .more{justify-self:start;background:none;border:0;padding:0;margin:-6px 0 0;color:var(--gold);font:inherit;font-weight:600;cursor:pointer}" +
-      ".tst .who .note{display:block;margin-top:4px;color:var(--gold);font-weight:600}" +
-      ".tst .tag{justify-self:start;font:600 11px/1 var(--f-mono);letter-spacing:1px;text-transform:uppercase;color:var(--gold);border:1px solid color-mix(in srgb,var(--gold) 45%,transparent);border-radius:20px;padding:5px 9px}";
+      ".tst .more{justify-self:start;background:none;border:0;padding:0;margin:-6px 0 0;color:var(--gold-t,var(--gold));font:inherit;font-weight:600;cursor:pointer}" +
+      ".tst .who .note{display:block;margin-top:4px;color:var(--gold-t,var(--gold));font-weight:600}" +
+      ".tst .tag{justify-self:start;font:600 11px/1 var(--f-mono);letter-spacing:1px;text-transform:uppercase;color:var(--gold-t,var(--gold));border:1px solid color-mix(in srgb,var(--gold) 45%,transparent);border-radius:20px;padding:5px 9px}";
     document.head.appendChild(st);
     document.addEventListener("click", function (e) {
       var b = e.target.closest && e.target.closest(".tst .more"); if (!b) return;
