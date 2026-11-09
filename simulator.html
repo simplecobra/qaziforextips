@@ -42,7 +42,7 @@
   color-scheme:dark;
 }
 :root[data-theme="light"]{
-  color-scheme:light; --gold-t:#8f660a;
+  color-scheme:light; --gold-t:#7d5806;
   --ink:#f5f3ee; --panel:#ffffff; --line:#ddd6ca; --text:#161a26; --muted:#5b6274;
   --gold:#c4911f; --up:#15803d; --down:#c0344c; --info:#2563eb;
 }
@@ -141,7 +141,7 @@ section{padding-block:72px;border-top:1px solid var(--line)}
 .rules{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:22px}
 @media (max-width:560px){.rules{grid-template-columns:1fr}}
 .rule{border:1px solid var(--line);border-radius:6px;padding:14px;background:var(--panel)}
-.rule .v{font:800 34px/1 var(--f-display)}
+.rule .v{font:800 34px/1 var(--f-display)}:root[data-theme="light"] .rule .v[style*="fb923c"]{color:#b4410a!important}
 .rule .l{font:600 12px/1.3 var(--f-mono);color:var(--muted);letter-spacing:.5px;margin-top:6px}
 
 /* report gallery */
@@ -405,7 +405,7 @@ footer .wrap{display:grid;gap:8px}
     <h3 style="margin:0 0 8px;font-size:18px">Smoother and clearer</h3>
     <p class="muted" style="margin:0;line-height:1.6"><b>Prev Bar</b> now goes back one candle in one clean step, with no jump on the chart. If <b>Allow DLL imports</b> is off you get a clear message with the fix, a second simulator in the same MetaTrader is stopped with an explanation, and the zip now has three PDFs: Install Guide, What's New 3.05 and the full Features list.</p>
   </div>
-  <div class="nv-cta"><a class="btn gold" href="#download">Download free demo</a><span class="muted">Already a user (MT5 or MT4)? Main Menu → Updates → Update now installs 3.05; then restart MetaTrader. Licence, data, saved simulations and settings stay.</span></div>
+  <div class="nv-cta"><a class="btn gold" href="#download">Get the free demo</a><span class="muted">Already a user (MT5 or MT4)? Main Menu → Updates → Update now installs 3.05; then restart MetaTrader. Licence, data, saved simulations and settings stay.</span></div>
 </div></section>
 
 <section id="v304"><div class="wrap">
@@ -426,7 +426,7 @@ footer .wrap{display:grid;gap:8px}
     <h3 style="margin:0 0 8px;font-size:18px">Indicators on all replay charts</h3>
     <p class="muted" style="margin:0;line-height:1.6">Add an indicator to one replay chart and the simulator copies it to every other replay chart within about a second, with the same settings; remove it once and it goes from all of them. Each chart calculates it on its own timeframe, so an EMA 50 on H4 is the H4 average, exactly as in live trading. Top-down analysis becomes one click: trend filter once, direction on H4, structure on H1, entry on M5. (MT5 version; switch it off in the Inputs if you want different indicators per chart.)</p>
   </div>
-  <div class="nv-cta"><a class="btn gold" href="#download">Download free demo</a><span class="muted">Every 3.04 feature is included in 3.05.</span></div>
+  <div class="nv-cta"><a class="btn gold" href="#download">Get the free demo</a><span class="muted">Every 3.04 feature is included in 3.05.</span></div>
 </div></section>
 
 <section id="smartpanel"><div class="wrap">
@@ -443,7 +443,7 @@ footer .wrap{display:grid;gap:8px}
   </div>
   <figure class="nv-wide"><div class="nv-img wide multi"><img src="v302_multichart.webp" alt="Four Gold replay charts at once: H1 with the Smart Panel, H1, M30 and H4, each with the challenge bar" loading="lazy" width="1600" height="749"></div>
       <figcaption><b>Every timeframe at once.</b> H1, M30 and H4 replay together, candle by candle, exactly as the market moved. Your drawings copy to every chart (Sync: ON), the challenge bar runs on each one, and one Smart Panel controls them all. Read the trend on H4, time the entry on M30.</figcaption></figure>
-  <div class="nv-cta"><a class="btn gold" href="#download">Download free demo</a><span class="muted">Already a user? Main Menu → Updates installs the newest version in one click.</span></div>
+  <div class="nv-cta"><a class="btn gold" href="#download">Get the free demo</a><span class="muted">Already a user? Main Menu → Updates installs the newest version in one click.</span></div>
 </div></section>
 
 <section id="features"><div class="wrap">

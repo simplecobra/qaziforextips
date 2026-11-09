@@ -42,17 +42,17 @@
 }
 
 :root[data-theme="light"]{
-  color-scheme:light; --gold-t:#8f660a;
+  color-scheme:light; --gold-t:#7d5806;
   --bg:#f5f3ee; --bg2:#ece8e0; --surface:#ffffff; --line:#ddd6ca;
   --ink:#161a26; --muted:#5b6274;
   --gold:#c4911f; --gold-ink:#1c1405; --wine:#a8233f;
 }
 :root[data-theme="light"] .top{background:color-mix(in srgb,var(--bg) 88%,transparent)}
 :root[data-theme="light"] .panel,:root[data-theme="light"] .shot{box-shadow:0 24px 60px rgba(30,25,15,.14)}
-:root[data-theme="light"] .eyebrow{color:#8f660a}
-:root[data-theme="light"] .step .go,:root[data-theme="light"] .plan .k,:root[data-theme="light"] .tool .tag{color:#8f660a}
-:root[data-theme="light"] .photo .badge b{color:#8f660a}
-:root[data-theme="light"] .cta-band code{color:#8f660a}
+:root[data-theme="light"] .eyebrow{color:#7d5806}
+:root[data-theme="light"] .step .go,:root[data-theme="light"] .plan .k,:root[data-theme="light"] .tool .tag{color:#7d5806}
+:root[data-theme="light"] .photo .badge b{color:#7d5806}
+:root[data-theme="light"] .cta-band code{color:#7d5806}
 
 .theme-btn{width:44px;height:44px;border-radius:8px;border:1px solid var(--line);background:transparent;color:var(--ink);cursor:pointer;display:grid;place-items:center;flex:none}
 .theme-btn:hover{border-color:var(--gold)}
@@ -163,7 +163,7 @@ a.stat{text-decoration:none;color:inherit;transition:background .2s}a.stat:hover
 @media (max-width:560px){.path{grid-template-columns:1fr}}
 .step{position:relative;display:grid;grid-template-rows:auto auto 1fr auto;gap:12px;padding:26px 22px 22px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);text-decoration:none;transition:border-color .2s,transform .2s}
 .step:hover{border-color:var(--gold);transform:translateY(-3px)}
-.step .n{font:800 46px/1 var(--f-display);color:transparent;-webkit-text-stroke:1.5px var(--gold)}
+.step .n{font:800 46px/1 var(--f-display);color:transparent;-webkit-text-stroke:1.5px var(--gold-t,var(--gold))}
 .step p{color:var(--muted);font-size:16px}
 .step .go{font:700 15px/1 var(--f-body);color:var(--gold-t,var(--gold))}
 .path-line{height:2px;margin:0 0 22px;background:linear-gradient(90deg,var(--gold),var(--wine),transparent);border-radius:2px;opacity:.7}
@@ -519,7 +519,7 @@ Ap lalach k ic dooor mein bhi bilkul free taleem dey rahy, aour wo Kuch sikha ra
     return '<article class="tool"><span class="tag">' + esc(t.type) + (t.soon ? ' · Coming soon' : '') + '</span><h3>' + esc(t.name) + '</h3><p>' + esc(t.text) + '</p>' +
       ((t.points || []).length ? '<ul>' + t.points.map(function(p){ return '<li>' + esc(p) + '</li>'; }).join("") + '</ul>' : '') +
       (t.soon ? '<span class="btn sm" aria-disabled="true" style="opacity:.55;cursor:default">Coming soon</span>'
-              : '<a class="btn sm" href="' + esc(href) + '"' + ext + '>' + esc(t.button || "Ask on WhatsApp") + '</a>') + '</article>';
+              : '<a class="btn sm" href="' + esc(href) + '"' + ext + ' aria-label="' + esc((t.button || "Ask on WhatsApp") + ': ' + t.name) + '">' + esc(t.button || "Ask on WhatsApp") + '</a>') + '</article>';
   }).join("");
 
 
