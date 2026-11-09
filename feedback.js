@@ -105,9 +105,19 @@
                    text: (r[ix("feedback")] || "").trim(), date: d ? d.label : "", product: prodKey(r[ix("product")]), sort: d ? d.sort : 0 };
         }).filter(function (t) { return t.name && t.text.length >= 3; });
         live.sort(function (a, b) { return b.sort - a.sort; });
-        cb(only(live.concat(manual)), true);
+        cb(only(oneEach(live.concat(manual))), true);
       })
       .catch(function () { cb(only(manual.slice()), true); });
+  }
+
+  /* one review per person per product: if someone sent the form more than once for the same
+     course or tool, only their newest one is shown and counted (the Sheet keeps them all) */
+  function oneEach(list) {
+    var seen = {};
+    return list.filter(function (t) {
+      var k = [t.name, t.city, t.product].map(function (s) { return String(s || "").toLowerCase().replace(/\s+/g, " ").trim(); }).join("|");
+      if (seen[k]) return false; seen[k] = 1; return true;
+    });
   }
 
   function summary(list) {
