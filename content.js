@@ -80,12 +80,13 @@ window.SITE = {
     {
       name: "QFT Smart DCA EA",
       type: "EA",
-      badge: "",
+      badge: "Coming soon",
+      soon: true,          /* true = "Coming soon": no order button. Launch par isay hata dein aur link/button bhar dein */
       text: "Dollar-cost averaging EA with hedge-lock protection for MT5. For experienced traders who understand the risk of averaging.",
       points: ["Universal: any symbol", "Hedge-lock protection", "Basket profit target"],
       image: "",
       link: "",
-      button: "Ask on WhatsApp"
+      button: "Coming soon"
     }
   ],
 

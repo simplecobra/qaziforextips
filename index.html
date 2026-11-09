@@ -516,9 +516,10 @@ Ap lalach k ic dooor mein bhi bilkul free taleem dey rahy, aour wo Kuch sikha ra
   /* tools (simulator has its own section) */
   $("tools-list").innerHTML = (S.tools || []).filter(function(t){ return !/simulator|trade assistant/i.test(t.name); }).map(function(t){
     var href = t.link || wa, ext = t.link ? "" : ' target="_blank" rel="noopener"';
-    return '<article class="tool"><span class="tag">' + esc(t.type) + '</span><h3>' + esc(t.name) + '</h3><p>' + esc(t.text) + '</p>' +
+    return '<article class="tool"><span class="tag">' + esc(t.type) + (t.soon ? ' · Coming soon' : '') + '</span><h3>' + esc(t.name) + '</h3><p>' + esc(t.text) + '</p>' +
       ((t.points || []).length ? '<ul>' + t.points.map(function(p){ return '<li>' + esc(p) + '</li>'; }).join("") + '</ul>' : '') +
-      '<a class="btn sm" href="' + esc(href) + '"' + ext + '>' + esc(t.button || "Ask on WhatsApp") + '</a></article>';
+      (t.soon ? '<span class="btn sm" aria-disabled="true" style="opacity:.55;cursor:default">Coming soon</span>'
+              : '<a class="btn sm" href="' + esc(href) + '"' + ext + '>' + esc(t.button || "Ask on WhatsApp") + '</a>') + '</article>';
   }).join("");
 
 
