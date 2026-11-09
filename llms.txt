@@ -9,6 +9,7 @@
 - [Lot Size Calculator for Forex & Gold](https://qaziforextips.com/lot-size-calculator.html): free online lot size calculator.
 - [QFT Replay Simulator](https://qaziforextips.com/simulator.html): market replay and manual backtesting inside MT5 and MT4 (free demo); version 3.05 backtests up to 4 pairs at once (SMT, DXY, correlation). A Soft4FX / FX Replay alternative.
 - [QFT Trade Assistant](https://qaziforextips.com/trade-assistant.html): risk-based lot size and trade panel for MT5 and MT4 (free demo).
+- [Licence & Refund Policy](https://qaziforextips.com/licence-policy.html): free demo first; 1 licence per MT5/MT4 account; free account move up to 2 times in 12 months; refund within 7 days if a technical problem cannot be fixed; prices on each tool page.
 
 ## Research
 - [Do fair value gaps work? We tested 23,773 FVGs](https://qaziforextips.com/research-do-fair-value-gaps-work.html): QFT Research report 1. 23,773 fair value gaps on XAUUSD and EURUSD (2023–2025) compared with random zones of the same size: a limit at the 50% CE line beat random zones in 8 of 8 M5/M15 tests (31% vs 28% at 1:2), a plain touch-and-bounce did not (42% vs 41%), trend and killzone filters did not help, and the CE trade alone was about −0.07R before costs. Method, limitations and a CSV summary included.
