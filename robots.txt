@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /data/bot/
 
 Sitemap: https://qaziforextips.com/sitemap.xml
