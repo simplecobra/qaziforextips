@@ -136,6 +136,18 @@ section{padding-block:88px}
 .dot{width:8px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 4px color-mix(in srgb,var(--gold) 22%,transparent)}
 #chart{display:block;width:100%;height:330px}
 @media (max-width:520px){#chart{height:240px}}
+.lrates{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--line)}
+.lrate{padding:11px 14px;display:grid;gap:4px;border-right:1px solid var(--line);min-width:0;color:inherit;text-decoration:none}
+.lrate:last-child{border-right:0}
+a.lrate:hover{background:color-mix(in srgb,var(--gold) 7%,transparent)}
+.lrate i{font:600 10px/1.1 var(--f-mono);letter-spacing:1px;text-transform:uppercase;font-style:normal;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lrate b{font:700 16px/1.1 var(--f-body);color:var(--ink);font-variant-numeric:tabular-nums;white-space:nowrap}
+.lrate:first-child b{color:var(--gold)}
+.lrate span{font:500 11.5px/1 var(--f-mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.lrate .up{color:#3fb37f}.lrate .down{color:#e0566b}
+.lrates-more{display:block;padding:9px 14px;border-top:1px solid var(--line);font:600 12.5px/1.4 var(--f-mono);color:var(--gold);text-decoration:none}
+.lrates-more:hover{text-decoration:underline}
+@media (max-width:620px){.lrates{grid-template-columns:repeat(2,minmax(0,1fr))}.lrate:nth-child(2){border-right:0}.lrate:nth-child(-n+2){border-bottom:1px solid var(--line)}}
 .sessions{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--line)}
 .ses{padding:12px 14px;display:grid;gap:4px;border-right:1px solid var(--line);min-width:0}
 .ses:last-child{border-right:0}
@@ -365,8 +377,10 @@ footer a:hover{color:var(--ink)}
     <p class="htools rise d3"><span>Free tools:</span> <a href="ict-killzones-indicator-mt5.html">Killzones</a> · <a href="fvg-indicator-mt5.html">FVG Pro</a> · <a href="free-trading-journal-mt5.html">Trading Journal</a> · <a href="lot-size-calculator.html">Lot size calculator</a> · <a href="free-mt5-tools.html">All tools →</a></p>
   </div>
   <div class="panel rise d2">
-    <div class="panel-head"><span class="dot"></span><b>XAUUSD</b><span class="tf">M15</span><span class="ill">Illustration</span></div>
-    <canvas id="chart" aria-label="Animated illustration of a Gold candlestick chart" role="img"></canvas>
+    <div class="panel-head"><span class="dot"></span><b>XAUUSD</b><span class="tf">M15</span><span class="ill" id="chartTag">Live · <!--R:hometime-->13 Nov 2026, 09:38 PKT<!--/R:hometime--></span></div>
+    <canvas id="chart" aria-label="Gold (XAUUSD) 15-minute candlestick chart" role="img"></canvas>
+    <div class="lrates" id="rates"><!--R:home--><a class="lrate" href="gold-rate-pakistan.html"><i>Gold 24K / tola</i><b>Rs 406,252</b><span class="up">▲ 0.68%</span></a><div class="lrate"><i>Silver / tola</i><b>Rs 5,345</b><span>$51.45/oz</span></div><div class="lrate"><i>USD / PKR</i><b>Rs 277.06</b><span class="up">▲ 0.17%</span></div><div class="lrate"><i>Bitcoin (PKR)</i><b>Rs 1.91 Cr</b><span class="down">▼ 6.51%</span></div><!--/R:home--></div>
+    <a class="lrates-more" href="gold-rate-pakistan.html">Gold rate in Pakistan today: 24K, 22K &amp; 21K per tola →</a>
     <div class="sessions" id="sessions"></div>
     <div class="ses-note" id="sesNote">Market sessions in Pakistan time (PKT)</div>
   </div>
@@ -615,7 +629,8 @@ Ap lalach k ic dooor mein bhi bilkul free taleem dey rahy, aour wo Kuch sikha ra
   }
   drawSessions(); setInterval(drawSessions, 60000);
 
-  /* hero chart: an illustration, not market data */
+  /* hero chart: real Gold 15-minute candles from data/rates.json (written every 30 minutes);
+     until they load, or if they cannot load, it shows an animated illustration */
   var chart = (function(){
     var cv = $("chart"), cx = cv.getContext("2d"), W, H, dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
     var seed = 7; function rnd(){ seed = (seed * 16807) % 2147483647; return seed / 2147483647; }
@@ -650,18 +665,27 @@ Ap lalach k ic dooor mein bhi bilkul free taleem dey rahy, aour wo Kuch sikha ra
       cx.setLineDash([4, 4]); cx.strokeStyle = gold; cx.globalAlpha = .7; cx.beginPath(); cx.moveTo(0, ly); cx.lineTo(W - 50, ly); cx.stroke(); cx.setLineDash([]); cx.globalAlpha = 1;
       cx.fillStyle = gold; cx.beginPath(); cx.arc(W - 40, ly, 5, 0, Math.PI * 2); cx.fill();
       cx.globalAlpha = .25; cx.beginPath(); cx.arc(W - 40, ly, 11, 0, Math.PI * 2); cx.fill(); cx.globalAlpha = 1;
+      if (real) { cx.font = "600 11px 'IBM Plex Mono',monospace"; cx.fillStyle = gold; var lbl = lc.toFixed(2), tw = cx.measureText(lbl).width; cx.fillStyle = css("--surface") || "#111"; cx.globalAlpha = .85; cx.fillRect(W - tw - 14, ly - 27, tw + 10, 16); cx.globalAlpha = 1; cx.fillStyle = gold; cx.fillText(lbl, W - tw - 9, ly - 15); }
     }
     size(); draw();
     window.addEventListener("resize", function(){ size(); draw(); });
     var still = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var real = false, tag = $("chartTag");
     if (!still) {
       var t0 = performance.now();
       (function tick(t){
+        if (real) return;
         prog = Math.min(1, (t - t0) / 2200);
         if (prog >= 1){ candles.push(live); candles.shift(); live = make(live.c); prog = 0; t0 = t; }
         draw(); requestAnimationFrame(tick);
       })(t0);
     } else { prog = 1; draw(); }
+    fetch("data/rates.json?t=" + Math.floor(Date.now() / 300000)).then(function(r){ return r.ok ? r.json() : null; }).then(function(d){
+      if (!d || !d.candles || d.candles.length < 10) { if (tag) tag.textContent = "Illustration"; return; }
+      var k = d.candles.slice(-46).map(function(c){ return { o:c[1], h:c[2], l:c[3], c:c[4] }; });
+      real = true; live = k.pop(); candles = k; prog = 1; draw();
+      if (tag && d.updated) tag.textContent = (d.market_open === false ? "Closed · " : "Live · ") + new Date(d.updated).toLocaleTimeString("en-GB", { timeZone:"Asia/Karachi", hour:"2-digit", minute:"2-digit" }) + " PKT";
+    }).catch(function(){ if (tag) tag.textContent = "Illustration"; });
     return { redraw: draw };
   })();
 
