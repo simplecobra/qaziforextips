@@ -192,6 +192,15 @@ def build(raw, old):
     return r
 
 
+PAGE_IMAGES = {'gold': [['img/gold-rate-pakistan-24k-gold-bars.webp', 600, 420, 'Gold rate in Pakistan today – 24K gold bars with a rising gold price line', '24K gold bars: the price per tola follows XAUUSD and the dollar rate'], ['img/gold-tola-ounce-karat-purity-infographic.webp', 300, 660, 'Gold infographic: 1 tola = 11.664 grams, 1 ounce = 2.67 tola, and 24K, 22K, 21K, 18K gold purity', 'Gold facts: tola, ounce and karat purity']], 'silver': [['img/silver-rate-pakistan-chandi-bars.webp', 600, 420, 'Silver rate in Pakistan today – chandi bars and a silver coin with a price line', 'Fine silver bars: the chandi rate follows XAGUSD and the dollar rate'], ['img/silver-chandi-tola-kg-nisab-infographic.webp', 300, 660, 'Chandi infographic: 1 kg = 85.7 tola, zakat nisab 52.5 tola of silver, 999 and 925 silver purity', 'Silver facts: tola, kg, nisab and purity']], 'btc': [['img/bitcoin-price-pakistan-btc-coin.webp', 600, 420, 'Bitcoin price in Pakistan – BTC coin in front of a rising crypto chart', 'Bitcoin in PKR: global BTC price × the dollar rate'], ['img/bitcoin-supply-satoshi-facts-infographic.webp', 300, 660, 'Bitcoin facts infographic: 21 million maximum supply, 1 BTC = 100 million satoshis, BTC to PKR formula', 'Bitcoin facts: supply, satoshis and how the PKR price is set']], 'usd': [['img/dollar-rate-pakistan-usd-pkr-notes.webp', 600, 420, 'Dollar rate in Pakistan – 100 US dollar note and 5000 rupee note, USD to PKR', 'US dollar to Pakistani rupee: the interbank rate'], ['img/dollar-rate-interbank-open-market-infographic.webp', 300, 660, 'Dollar rate infographic: interbank vs open market rate and what moves the Pakistani rupee', 'Dollar facts: interbank vs open market and what moves the rupee']]}
+
+
+def img_objs(key):
+    return [{"@type": "ImageObject", "url": "https://qaziforextips.com/" + a, "contentUrl": "https://qaziforextips.com/" + a,
+             "width": w * 2, "height": h * 2, "caption": alt, "creator": {"@id": "https://qaziforextips.com/#org"},
+             "creditText": "Qazi Forex Tips", "copyrightNotice": "Qazi Forex Tips"} for a, w, h, alt, cap in PAGE_IMAGES[key]]
+
+
 def save_hist(name, row, keep=400):
     """Upsert today's row (weekdays only unless every_day) in data/<name>.json and return the list."""
     path = os.path.join(ROOT, "data", name + ".json")
@@ -221,10 +230,12 @@ def set_ld(s, ld):
                   lambda m: m.group(1) + json.dumps(ld, ensure_ascii=False) + m.group(2), s, count=1, flags=re.S)
 
 
-def page_ld(url, title, desc, crumb, faq, now, published="2026-11-13"):
+def page_ld(url, title, desc, crumb, faq, now, published="2026-11-13", key=None):
+    imgs = img_objs(key) if key else []
     return {"@context": "https://schema.org", "@graph": [
         {"@type": "WebPage", "@id": url + "#page", "url": url, "name": title, "description": desc, "inLanguage": "en",
          "datePublished": published, "dateModified": now.strftime("%Y-%m-%dT%H:%M:%S+05:00"),
+         **({"primaryImageOfPage": imgs[0], "image": imgs} if imgs else {}),
          "isPartOf": {"@id": "https://qaziforextips.com/#site"}, "publisher": {"@id": "https://qaziforextips.com/#org"}},
         {"@type": "FAQPage", "@id": url + "#faq", "mainEntity": [
             {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in faq]},
@@ -320,7 +331,7 @@ def silver_page(r, hist):
          f"7.5 tola (87.48 grams) of 24K gold is {rs(nis_g)}. Zakat is 2.5% of zakatable wealth that stays above the nisab "
          f"for a lunar year."),
     ]
-    s = set_ld(s, page_ld(url, title, desc, "Silver Rate in Pakistan", faq, now))
+    s = set_ld(s, page_ld(url, title, desc, "Silver Rate in Pakistan", faq, now, key="silver"))
     s = put(s, "faq1", esc(faq[0][1]))
     return path, s
 
@@ -377,7 +388,7 @@ def btc_page(r, hist):
         ("How often is this Bitcoin price updated?",
          "Every 30 minutes on weekdays. Bitcoin trades 24/7, so the price on exchanges can move between updates."),
     ]
-    s = set_ld(s, page_ld(url, title, desc, "Bitcoin Price in Pakistan", faq, now))
+    s = set_ld(s, page_ld(url, title, desc, "Bitcoin Price in Pakistan", faq, now, key="btc"))
     s = put(s, "faq1", esc(faq[0][1]))
     return path, s
 
@@ -436,7 +447,7 @@ def usd_page(r, hist):
         ("How often is this dollar rate updated?",
          "Every 30 minutes on weekdays. Other currencies in the table are daily reference rates."),
     ]
-    s = set_ld(s, page_ld(url, title, desc, "Dollar Rate in Pakistan", faq, now))
+    s = set_ld(s, page_ld(url, title, desc, "Dollar Rate in Pakistan", faq, now, key="usd"))
     s = put(s, "faq1", esc(faq[0][1]))
     return path, s
 
@@ -561,7 +572,7 @@ def gold_page(r, hist):
          "isPartOf": {"@id": "https://qaziforextips.com/#site"},
          "publisher": {"@id": "https://qaziforextips.com/#org"},
          "about": {"@type": "Thing", "name": "Gold price in Pakistan"},
-         "primaryImageOfPage": {"@type": "ImageObject", "url": "https://qaziforextips.com/og-image.jpg"}},
+         "primaryImageOfPage": img_objs("gold")[0], "image": img_objs("gold")},
         {"@type": "FAQPage", "@id": URL + "#faq", "mainEntity": [
             {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in faq]},
         {"@type": "BreadcrumbList", "itemListElement": [
