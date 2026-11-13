@@ -629,7 +629,7 @@ Ap lalach k ic dooor mein bhi bilkul free taleem dey rahy, aour wo Kuch sikha ra
   }
   drawSessions(); setInterval(drawSessions, 60000);
 
-  /* hero chart: real Gold 15-minute candles from data/rates.json (written every 30 minutes);
+  /* hero chart: live Gold 15-minute candles (see refresh() below);
      until they load, or if they cannot load, it shows an animated illustration */
   var chart = (function(){
     var cv = $("chart"), cx = cv.getContext("2d"), W, H, dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
@@ -680,12 +680,39 @@ Ap lalach k ic dooor mein bhi bilkul free taleem dey rahy, aour wo Kuch sikha ra
         draw(); requestAnimationFrame(tick);
       })(t0);
     } else { prog = 1; draw(); }
-    fetch("data/rates.json?t=" + Math.floor(Date.now() / 300000)).then(function(r){ return r.ok ? r.json() : null; }).then(function(d){
-      if (!d || !d.candles || d.candles.length < 10) { if (tag) tag.textContent = "Illustration"; return; }
-      var k = d.candles.slice(-46).map(function(c){ return { o:c[1], h:c[2], l:c[3], c:c[4] }; });
-      real = true; live = k.pop(); candles = k; prog = 1; draw();
-      if (tag && d.updated) tag.textContent = (d.market_open === false ? "Closed · " : "Live · ") + new Date(d.updated).toLocaleTimeString("en-GB", { timeZone:"Asia/Karachi", hour:"2-digit", minute:"2-digit" }) + " PKT";
-    }).catch(function(){ if (tag) tag.textContent = "Illustration"; });
+    /* Live candles: Binance PAXG/USDT 15-minute klines (tokenised gold, CORS-open, no key), shifted to the
+       spot XAU price from gold-api.com so the level matches Gold. Refreshed every 60 seconds while the tab
+       is visible. When gold's market is closed (weekend) or the APIs fail, data/rates.json is used. */
+    function pktTime(ms){ return new Date(ms).toLocaleTimeString("en-GB", { timeZone:"Asia/Karachi", hour:"2-digit", minute:"2-digit" }) + " PKT"; }
+    function goldClosed(){ var n = new Date(), d = n.getUTCDay(), h = n.getUTCHours(); return d === 6 || (d === 0 && h < 22) || (d === 5 && h >= 21); }
+    function getJ(u){ return fetch(u, { cache:"no-store" }).then(function(r){ if (!r.ok) throw 0; return r.json(); }); }
+    function show(k, label){ real = true; live = k.pop(); candles = k; prog = 1; draw(); if (tag) tag.textContent = label; }
+    function fromFile(){
+      return getJ("data/rates.json?t=" + Math.floor(Date.now() / 300000)).then(function(d){
+        if (!d || !d.candles || d.candles.length < 10) { if (!real && tag) tag.textContent = "Illustration"; return; }
+        var k = d.candles.slice(-46).map(function(c){ return { o:c[1], h:c[2], l:c[3], c:c[4] }; });
+        show(k, (d.market_open === false || goldClosed() ? "Closed · " : "Updated · ") + pktTime(new Date(d.updated).getTime()));
+      });
+    }
+    function fromLive(){
+      var kl = getJ("https://data-api.binance.vision/api/v3/klines?symbol=PAXGUSDT&interval=15m&limit=46")
+        .catch(function(){ return getJ("https://api.binance.com/api/v3/klines?symbol=PAXGUSDT&interval=15m&limit=46"); });
+      var spot = getJ("https://api.gold-api.com/price/XAU").then(function(j){ return +j.price; }).catch(function(){ return 0; });
+      return Promise.all([kl, spot]).then(function(r){
+        var rows = r[0], px = r[1];
+        if (!rows || rows.length < 10) throw 0;
+        var k = rows.map(function(x){ return { o:+x[1], h:+x[2], l:+x[3], c:+x[4] }; });
+        var lastC = k[k.length - 1].c, off = (px && Math.abs(px - lastC) < lastC * 0.02) ? px - lastC : 0;
+        k.forEach(function(c){ c.o += off; c.h += off; c.l += off; c.c += off; });
+        show(k, "Live · " + pktTime(Date.now()));
+      });
+    }
+    function refresh(){
+      if (goldClosed()) return fromFile().catch(function(){ if (!real && tag) tag.textContent = "Illustration"; });
+      return fromLive().catch(function(){ return fromFile(); }).catch(function(){ if (!real && tag) tag.textContent = "Illustration"; });
+    }
+    refresh();
+    setInterval(function(){ if (!document.hidden) refresh(); }, 60000);
     return { redraw: draw };
   })();
 

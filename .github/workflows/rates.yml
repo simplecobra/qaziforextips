@@ -4,7 +4,7 @@ name: Live gold rates - write into the site
 # Uses the TWELVEDATA_KEY repository secret when it is set; without it, free keyless sources are used.
 on:
   schedule:
-    - cron: "7,37 * * * 1-5"     # every 30 minutes, Monday to Friday (UTC)
+    - cron: "11,41 * * * 1-5"    # every 30 minutes, Monday to Friday (UTC)
     - cron: "17 4 * * 6"         # Saturday morning: write the final Friday close once
   workflow_dispatch:              # "Run workflow" button on GitHub
 permissions:
