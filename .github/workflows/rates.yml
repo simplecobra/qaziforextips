@@ -1,6 +1,6 @@
 name: Live gold rates - write into the site
 # Every 30 minutes: fetches the Gold, Silver, USD/PKR and Bitcoin rates and writes them into
-# data/rates.json, gold-rate-pakistan.html and the home-page boxes (see .github/scripts/update-rates.py).
+# data/*.json, the gold / silver / bitcoin pages and the home-page boxes (see .github/scripts/update-rates.py).
 # Uses the TWELVEDATA_KEY repository secret when it is set; without it, free keyless sources are used.
 on:
   schedule:
@@ -25,7 +25,7 @@ jobs:
           if git diff --quiet; then echo "No change"; exit 0; fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/rates.json data/gold-history.json gold-rate-pakistan.html index.html sitemap.xml
+          git add data/ gold-rate-pakistan.html silver-rate-pakistan.html bitcoin-price-pakistan.html index.html sitemap.xml
           git commit -m "Update live gold rates (automatic)"
           for i in 1 2 3; do
             if git pull --rebase -q origin main && git push; then exit 0; fi
