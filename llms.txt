@@ -10,6 +10,7 @@
 - [Gold Rate in Pakistan Today](https://qaziforextips.com/gold-rate-pakistan.html): live 24K, 22K, 21K and 18K gold price per tola, 10 gram and gram in PKR, from the international gold price and USD/PKR, updated every 30 minutes; calculator and 30-day trend.
 - [Silver Rate in Pakistan Today](https://qaziforextips.com/silver-rate-pakistan.html): live chandi price per tola, 10 gram, gram and kg for 999 and 925 silver in PKR, calculator and 30-day trend.
 - [Bitcoin Price in Pakistan Today](https://qaziforextips.com/bitcoin-price-pakistan.html): live BTC to PKR price, BTC/USD, converter and 30-day chart.
+- [Dollar Rate in Pakistan Today](https://qaziforextips.com/dollar-rate-pakistan.html): live USD to PKR interbank rate, converter, 30-day trend, and Riyal, Dirham, Pound and Euro rates in rupees.
 - [Lot Size Calculator for Forex & Gold](https://qaziforextips.com/lot-size-calculator.html): free online lot size calculator.
 - [QFT Replay Simulator](https://qaziforextips.com/simulator.html): market replay and manual backtesting inside MT5 and MT4 (free demo); version 3.05 backtests up to 4 pairs at once (SMT, DXY, correlation). A Soft4FX / FX Replay alternative.
 - [QFT Trade Assistant](https://qaziforextips.com/trade-assistant.html): risk-based lot size and trade panel for MT5 and MT4 (free demo).

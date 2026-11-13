@@ -129,6 +129,9 @@ def fetch(old):
                 out["btc_pkr"] = out["btc"] * out["pkr"]
         except Exception as e2:
             print("Binance BTC failed:", e2)
+    if cur:
+        out["fx"] = {k: cur["pkr"] / cur[k] for k in ("eur", "gbp", "sar", "aed", "cny", "cad", "aud", "kwd", "qar", "omr", "myr", "jpy")
+                     if cur.get(k) and cur.get("pkr")}
     out["sources"] = src
     return out
 
@@ -169,6 +172,7 @@ def build(raw, old):
         "candles": raw.get("candles") or old.get("candles") or [],
         "candle_symbol": raw.get("candle_symbol") or old.get("candle_symbol", "XAUUSD"),
         "market_open": raw.get("market_open"),
+        "fx": {k: round(v, 2) for k, v in (raw.get("fx") or old.get("fx") or {}).items()},
         "sources": raw.get("sources", []),
     }
     if raw.get("silver"):
@@ -284,7 +288,16 @@ def silver_page(r, hist):
     s = put(s, "ro", f"Aaj {esc(day_long)} ko Pakistan mein chandi ka rate <b>{rs(v['tola'])} fi tola</b> aur "
                      f"<b>{rs(v['g10'])} fi 10 gram</b> hai.")
     s = put(s, "hist", hist_rows(hist, "tola", rs, lambda h: f'<td>${h["usd"]:,.2f}</td>'))
-    s = put(s, "json", esc(json.dumps({"g1": g1, "hist": [[h["d"], h["tola"]] for h in hist[-60:]]}, separators=(",", ":"))))
+    nis_s = round(v["tola"] * 52.5)
+    nis_g = round(r["gold"]["karats"]["24K"]["tola"] * 7.5)
+    s = put(s, "nisab",
+            f'<div><i>Silver nisab · 52.5 tola</i><b>{rs(nis_s)}</b><span>612.36 g of pure silver</span></div>'
+            f'<div><i>Gold nisab · 7.5 tola</i><b>{rs(nis_g)}</b><span>87.48 g of 24K gold</span></div>'
+            f'<div><i>Zakat on the silver nisab (2.5%)</i><b>{rs(nis_s * 0.025)}</b><span>2.5% of {rs(nis_s)}</span></div>')
+    s = put(s, "nisabtxt", f"At today's market rate ({esc(day_long)}), <b>52.5 tola of silver = {rs(nis_s)}</b> and "
+                           f"<b>7.5 tola of 24K gold = {rs(nis_g)}</b>.")
+    s = put(s, "json", esc(json.dumps({"g1": g1, "nisS": nis_s, "nisG": nis_g,
+                                         "hist": [[h["d"], h["tola"]] for h in hist[-60:]]}, separators=(",", ":"))))
     faq = [
         ("What is the silver rate in Pakistan today?",
          f"On {day_long} pure (999) silver in Pakistan is {rs(v['tola'])} per tola, {rs(v['g10'])} per 10 grams and "
@@ -302,6 +315,10 @@ def silver_page(r, hist):
          "The base rate is the same across Pakistan. Small differences come from local dealer premiums and shop spreads."),
         ("How often is this silver rate updated?",
          "Every 30 minutes on trading days, Monday to Friday. On weekends the last Friday rate stays on the page."),
+        ("What is the nisab amount in Pakistan today?",
+         f"At today's market rate, the silver nisab of 52.5 tola (612.36 grams) is {rs(nis_s)} and the gold nisab of "
+         f"7.5 tola (87.48 grams) of 24K gold is {rs(nis_g)}. Zakat is 2.5% of zakatable wealth that stays above the nisab "
+         f"for a lunar year."),
     ]
     s = set_ld(s, page_ld(url, title, desc, "Silver Rate in Pakistan", faq, now))
     s = put(s, "faq1", esc(faq[0][1]))
@@ -361,6 +378,65 @@ def btc_page(r, hist):
          "Every 30 minutes on weekdays. Bitcoin trades 24/7, so the price on exchanges can move between updates."),
     ]
     s = set_ld(s, page_ld(url, title, desc, "Bitcoin Price in Pakistan", faq, now))
+    s = put(s, "faq1", esc(faq[0][1]))
+    return path, s
+
+
+USD_PAGE = "dollar-rate-pakistan.html"
+FX_NAMES = [("eur", "Euro (EUR)"), ("gbp", "British Pound (GBP)"), ("sar", "Saudi Riyal (SAR)"), ("aed", "UAE Dirham (AED)"),
+            ("qar", "Qatari Riyal (QAR)"), ("kwd", "Kuwaiti Dinar (KWD)"), ("omr", "Omani Rial (OMR)"), ("cny", "Chinese Yuan (CNY)"),
+            ("cad", "Canadian Dollar (CAD)"), ("aud", "Australian Dollar (AUD)"), ("myr", "Malaysian Ringgit (MYR)"), ("jpy", "Japanese Yen (JPY)")]
+
+
+def usd_page(r, hist):
+    url = "https://qaziforextips.com/" + USD_PAGE
+    path = os.path.join(ROOT, USD_PAGE)
+    if not os.path.exists(path):
+        return None
+    s = open(path, encoding="utf-8").read()
+    now = dt.datetime.now(PKT)
+    day, day_long = now.strftime("%-d %b %Y"), now.strftime("%-d %B %Y")
+    u, up = r["usdpkr"], r.get("usdpkr_prev") or r["usdpkr"]
+    chg = u - up
+    title = f"Dollar Rate in Pakistan Today {day} – USD to PKR Live"
+    desc = (f"Dollar rate in Pakistan today ({day}): 1 US dollar = Rs {u:.2f}. Live USD to PKR rate, converter, "
+            f"30-day chart and Riyal, Dirham, Pound and Euro rates in rupees.")
+    s = set_head(s, title, desc)
+    s = put(s, "date", esc(day_long))
+    s = put(s, "time", esc(r["updated_pkt"]))
+    s = put(s, "big", f"Rs {u:.2f}")
+    s = put(s, "chg", f'<span class="gr-chg {"up" if chg >= 0 else "down"}">{"+" if chg >= 0 else "−"}{abs(chg):.2f} '
+                      f'({pct((u / up - 1) * 100 if up else 0)}) vs previous close</span>')
+    fx = r.get("fx") or {}
+    s = put(s, "mini",
+            f'<div><i>100 USD</i><b>{rs(u * 100)}</b></div><div><i>1,000 USD</i><b>{rs(u * 1000)}</b></div>'
+            f'<div><i>Saudi Riyal</i><b>Rs {fx.get("sar", 0):.2f}</b></div><div><i>UAE Dirham</i><b>Rs {fx.get("aed", 0):.2f}</b></div>')
+    amts = [1, 10, 50, 100, 500, 1000, 5000, 10000]
+    s = put(s, "table", "".join(f'<tr><th scope="row">${a:,}</th><td>{rs(a * u)}</td><td>Rs {a * u:,.2f}</td></tr>' for a in amts))
+    s = put(s, "fx", "".join(f'<tr><th scope="row">{n}</th><td>Rs {fx[k]:,.2f}</td><td>{rs(fx[k] * 100)}</td></tr>'
+                              for k, n in FX_NAMES if k in fx))
+    s = put(s, "sent", f"The dollar rate in Pakistan today, {esc(day_long)}, is <b>Rs {u:.2f}</b> for 1 US dollar, so "
+                       f"<b>100 dollars = {rs(u * 100)}</b>.")
+    s = put(s, "ur", "آج " + f"{now.day} {UR_MONTHS[now.month - 1]} {now.year}" + " کو ایک امریکی ڈالر <b>"
+            + f"{u:.2f}" + " روپے</b> کا ہے، یعنی 100 ڈالر <b>" + f"{round(u * 100):,}" + " روپے</b>۔")
+    s = put(s, "ro", f"Aaj {esc(day_long)} ko 1 dollar <b>Rs {u:.2f}</b> ka hai, yaani 100 dollar <b>{rs(u * 100)}</b>.")
+    s = put(s, "hist", hist_rows(hist, "pkr", lambda x: f"Rs {x:,.2f}"))
+    s = put(s, "json", esc(json.dumps({"u": u, "fx": fx, "hist": [[h["d"], h["pkr"]] for h in hist[-31:]]}, separators=(",", ":"))))
+    faq = [
+        ("What is the dollar rate in Pakistan today?",
+         f"On {day_long} one US dollar is Rs {u:.2f} in the market (interbank) rate, so 100 dollars is {rs(u * 100)}."),
+        ("What is the difference between the interbank and open market dollar rate?",
+         "The interbank rate is the rate banks trade at with each other and is the rate shown here. The open market rate is what "
+         "exchange companies charge in cash; it is usually a little higher and has separate buying and selling prices."),
+        ("Why does the dollar rate change in Pakistan?",
+         "The rupee moves with Pakistan's imports and exports, remittances from overseas Pakistanis, foreign exchange reserves, "
+         "IMF and loan inflows, and the State Bank's interest rate policy."),
+        ("How much is 100 dollars in Pakistani rupees?",
+         f"At today's rate of Rs {u:.2f}, 100 US dollars is {rs(u * 100)} and 1,000 dollars is {rs(u * 1000)}."),
+        ("How often is this dollar rate updated?",
+         "Every 30 minutes on weekdays. Other currencies in the table are daily reference rates."),
+    ]
+    s = set_ld(s, page_ld(url, title, desc, "Dollar Rate in Pakistan", faq, now))
     s = put(s, "faq1", esc(faq[0][1]))
     return path, s
 
@@ -510,8 +586,8 @@ def home_page(r):
                  f'<span>${sv["usd_oz"]:,.2f}/oz</span></a>' if sv else
                  '<div class="lrate"><i>Silver / tola</i><b>–</b><span></span></div>')
     chg_p = (r["usdpkr"] / r["usdpkr_prev"] - 1) * 100 if r.get("usdpkr_prev") else None
-    boxes.append(f'<div class="lrate"><i>USD / PKR</i><b>Rs {r["usdpkr"]:.2f}</b>'
-                 f'<span class="{"up" if (chg_p or 0) >= 0 else "down"}">{pct(chg_p)}</span></div>')
+    boxes.append(f'<a class="lrate" href="dollar-rate-pakistan.html"><i>USD / PKR</i><b>Rs {r["usdpkr"]:.2f}</b>'
+                 f'<span class="{"up" if (chg_p or 0) >= 0 else "down"}">{pct(chg_p)}</span></a>')
     b = r.get("btc")
     boxes.append(f'<a class="lrate" href="bitcoin-price-pakistan.html"><i>Bitcoin (PKR)</i><b>{crore(b["pkr"])}</b>'
                  f'<span class="{"up" if (b.get("chg24") or 0) >= 0 else "down"}">{pct(b.get("chg24"))}</span></a>' if b else
@@ -525,7 +601,7 @@ def sitemap():
     path = os.path.join(ROOT, "sitemap.xml")
     s = open(path, encoding="utf-8").read()
     today = dt.datetime.now(PKT).strftime("%Y-%m-%d")
-    for page in (PAGE, SILVER_PAGE, BTC_PAGE):
+    for page in (PAGE, SILVER_PAGE, BTC_PAGE, USD_PAGE):
         u = "https://qaziforextips.com/" + page
         s = re.sub(r"(<loc>" + re.escape(u) + r"</loc>\s*<lastmod>)[^<]*(</lastmod>)",
                    lambda m: m.group(1) + today + m.group(2), s, count=1)
@@ -538,7 +614,7 @@ def main():
         old = json.load(open(rates_path, encoding="utf-8"))
         old_flat = {"gold": old.get("gold", {}), "usdpkr_prev": old.get("usdpkr"),
                     "silver": old.get("silver"), "btc": old.get("btc"),
-                    "candles": old.get("candles"), "candle_symbol": old.get("candle_symbol")}
+                    "candles": old.get("candles"), "candle_symbol": old.get("candle_symbol"), "fx": old.get("fx")}
     except Exception:
         old, old_flat = {}, {}
     try:
@@ -570,7 +646,9 @@ def main():
     else:
         brow = {"d": today.strftime("%Y-%m-%d"), "pkr": r["btc"]["pkr"]} if r.get("btc") else None
         bhist = save_hist("btc-history", brow, keep=60)
-    jobs = [gold_page(r, hist), silver_page(r, shist), btc_page(r, bhist), home_page(r), sitemap()]
+    urow = {"d": today.strftime("%Y-%m-%d"), "pkr": r["usdpkr"]} if today.weekday() < 5 else None
+    uhist = save_hist("usdpkr-history", urow)
+    jobs = [gold_page(r, hist), silver_page(r, shist), btc_page(r, bhist), usd_page(r, uhist), home_page(r), sitemap()]
     for job in jobs:
         if job:
             open(job[0], "w", encoding="utf-8").write(job[1])
