@@ -78,12 +78,6 @@ def fetch(old):
             print("Twelve Data failed, using free sources:", e)
             out = {}
     cur = currency_api()
-    if "gold" not in out and cur and cur.get("xau") and cur.get("pkr"):
-        out["gold"], out["pkr"] = 1 / cur["xau"], cur["pkr"]
-        prev = old.get("gold", {})
-        out["gold_prev"] = prev.get("usd_prev") or out["gold"]
-        out["pkr_prev"] = old.get("usdpkr_prev") or out["pkr"]
-        src.append("Currency-API (daily reference)")
     if not out.get("candles"):
         try:   # PAXG is a token backed 1:1 by a troy ounce of gold; its price follows spot gold closely
             k = get("https://data-api.binance.vision/api/v3/klines?symbol=PAXGUSDT&interval=15m&limit=64")
@@ -92,6 +86,18 @@ def fetch(old):
             out["candle_symbol"] = "PAXGUSDT"
         except Exception as e:
             print("candles fallback failed:", e)
+    if "gold" not in out and cur and cur.get("xau") and cur.get("pkr"):
+        # Without the Twelve Data key: the live gold price comes from the last PAXG candle when there is
+        # one (it updates every minute), otherwise from Currency-API, which updates only once a day.
+        live = out["candles"][-1][4] if out.get("candle_symbol") == "PAXGUSDT" and out.get("candles") else None
+        out["gold"] = live or 1 / cur["xau"]
+        out["pkr"] = cur["pkr"]
+        today = dt.datetime.now(PKT).strftime("%Y-%m-%d")
+        prev = [h for h in old.get("history", []) if h["d"] < today]
+        out["gold_prev"] = prev[-1]["usd"] if prev else out["gold"]
+        out["pkr_prev"] = prev[-1]["pkr"] if prev else out["pkr"]
+        src.append("Binance PAXG/USDT (live gold)" if live else "Currency-API (daily reference)")
+        src.append("Currency-API (USD/PKR, daily)")
     # Silver (daily reference)
     if cur and cur.get("xag"):
         out["silver"] = 1 / cur["xag"]
@@ -342,6 +348,10 @@ def main():
                     "candles": old.get("candles"), "candle_symbol": old.get("candle_symbol")}
     except Exception:
         old, old_flat = {}, {}
+    try:
+        old_flat["history"] = json.load(open(os.path.join(ROOT, "data", "gold-history.json"), encoding="utf-8"))
+    except Exception:
+        old_flat["history"] = []
     seed = os.environ.get("QFT_SEED")          # local testing only: a JSON file with the raw numbers
     raw = json.load(open(seed, encoding="utf-8")) if seed else fetch(old_flat)
     if not (ok(raw.get("gold"), 500, 50000) and ok(raw.get("pkr"), 50, 2000)):
