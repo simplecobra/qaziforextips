@@ -98,14 +98,28 @@ def fetch(old):
         out["pkr_prev"] = prev[-1]["pkr"] if prev else out["pkr"]
         src.append("Binance PAXG/USDT (live gold)" if live else "Currency-API (daily reference)")
         src.append("Currency-API (USD/PKR, daily)")
-    # Silver (daily reference)
-    if cur and cur.get("xag"):
-        out["silver"] = 1 / cur["xag"]
+    # Silver: gold-api.com is live and keyless; Currency-API (once a day) is the fallback
+    try:
+        out["silver"] = float(get("https://api.gold-api.com/price/XAG")["price"])
+        src.append("gold-api.com (XAG)")
+    except Exception as e:
+        print("gold-api silver failed:", e)
+        if cur and cur.get("xag"):
+            out["silver"] = 1 / cur["xag"]
+            src.append("Currency-API (XAG, daily)")
     # Bitcoin
     try:
         c = get("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd,pkr&include_24hr_change=true")["bitcoin"]
         out["btc"], out["btc_pkr"], out["btc_chg"] = c["usd"], c["pkr"], c.get("usd_24h_change")
         src.append("CoinGecko (BTC)")
+        try:
+            m = get("https://api.coingecko.com/api/v3/coins/markets?vs_currency=pkr&ids=bitcoin")[0]
+            out["btc_hi"], out["btc_lo"] = m.get("high_24h"), m.get("low_24h")
+            h = get("https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=pkr&days=30&interval=daily")
+            out["btc_hist"] = [[dt.datetime.fromtimestamp(p[0] / 1000, dt.timezone.utc).strftime("%Y-%m-%d"), round(p[1])]
+                               for p in h.get("prices", [])]
+        except Exception as e:
+            print("CoinGecko extra BTC data failed:", e)
     except Exception as e:
         print("CoinGecko failed:", e)
         try:
@@ -126,10 +140,6 @@ def per_gram_pkr(usd_oz, pkr):
 
 def rs(v):
     return "Rs " + f"{round(v):,}"
-
-
-def crore(v):
-    return "Rs " + f"{v / 1e7:.2f}" + " Cr"
 
 
 def pct(v):
@@ -163,15 +173,196 @@ def build(raw, old):
     }
     if raw.get("silver"):
         sg = per_gram_pkr(raw["silver"], p)
-        r["silver"] = {"usd_oz": round(raw["silver"], 2), "tola": round(sg * TOLA), "g10": round(sg * 10)}
+        r["silver"] = {"usd_oz": round(raw["silver"], 2), "tola": round(sg * TOLA), "g10": round(sg * 10),
+                       "g1": round(sg, 2), "kg": round(sg * 1000), "oz": round(sg * OZ),
+                       "tola925": round(sg * TOLA * 0.925)}
     elif old.get("silver"):
         r["silver"] = old["silver"]
     if raw.get("btc"):
         r["btc"] = {"usd": round(raw["btc"]), "pkr": round(raw.get("btc_pkr") or raw["btc"] * p),
-                    "chg24": round(raw["btc_chg"], 2) if raw.get("btc_chg") is not None else None}
+                    "chg24": round(raw["btc_chg"], 2) if raw.get("btc_chg") is not None else None,
+                    "hi24": round(raw["btc_hi"]) if raw.get("btc_hi") else None,
+                    "lo24": round(raw["btc_lo"]) if raw.get("btc_lo") else None}
     elif old.get("btc"):
         r["btc"] = old["btc"]
     return r
+
+
+def save_hist(name, row, keep=400):
+    """Upsert today's row (weekdays only unless every_day) in data/<name>.json and return the list."""
+    path = os.path.join(ROOT, "data", name + ".json")
+    try:
+        hist = json.load(open(path, encoding="utf-8"))
+    except Exception:
+        hist = []
+    if row:
+        hist = [h for h in hist if h["d"] != row["d"]] + [row]
+        hist.sort(key=lambda h: h["d"])
+        hist = hist[-keep:]
+        json.dump(hist, open(path, "w", encoding="utf-8"), separators=(",", ":"))
+    return hist
+
+
+def set_head(s, title, desc):
+    s = re.sub(r"<title>.*?</title>", "<title>" + esc(title) + "</title>", s, count=1, flags=re.S)
+    for attr, val in (('name="description"', desc), ('property="og:title"', title),
+                      ('property="og:description"', desc), ('name="twitter:title"', title),
+                      ('name="twitter:description"', desc)):
+        s = re.sub(r'(<meta ' + attr + r' content=")[^"]*(")', lambda m: m.group(1) + esc(val) + m.group(2), s, count=1)
+    return s
+
+
+def set_ld(s, ld):
+    return re.sub(r'(<script type="application/ld\+json" id="ld">).*?(</script>)',
+                  lambda m: m.group(1) + json.dumps(ld, ensure_ascii=False) + m.group(2), s, count=1, flags=re.S)
+
+
+def page_ld(url, title, desc, crumb, faq, now, published="2026-11-13"):
+    return {"@context": "https://schema.org", "@graph": [
+        {"@type": "WebPage", "@id": url + "#page", "url": url, "name": title, "description": desc, "inLanguage": "en",
+         "datePublished": published, "dateModified": now.strftime("%Y-%m-%dT%H:%M:%S+05:00"),
+         "isPartOf": {"@id": "https://qaziforextips.com/#site"}, "publisher": {"@id": "https://qaziforextips.com/#org"}},
+        {"@type": "FAQPage", "@id": url + "#faq", "mainEntity": [
+            {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in faq]},
+        {"@type": "BreadcrumbList", "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://qaziforextips.com/"},
+            {"@type": "ListItem", "position": 2, "name": "Forex Guide", "item": "https://qaziforextips.com/forex-guide.html"},
+            {"@type": "ListItem", "position": 3, "name": crumb, "item": url}]}]}
+
+
+def hist_rows(hist, key, fmt, extra=None):
+    last = list(reversed(hist[-8:]))
+    out = []
+    for i, h in enumerate(last[:7]):
+        nxt = last[i + 1] if i + 1 < len(last) else None
+        d = dt.datetime.strptime(h["d"], "%Y-%m-%d").strftime("%a %-d %b")
+        if nxt:
+            c = h[key] - nxt[key]
+            ctxt = f'<span class="{"up" if c >= 0 else "down"}">{"+" if c >= 0 else "−"}{fmt(abs(c))[3:]}</span>'
+        else:
+            ctxt = "–"
+        mid = extra(h) if extra else ""
+        out.append(f"<tr><td>{d}</td><td>{fmt(h[key])}</td>{mid}<td>{ctxt}</td></tr>")
+    return "".join(out)
+
+
+SILVER_PAGE, BTC_PAGE = "silver-rate-pakistan.html", "bitcoin-price-pakistan.html"
+
+
+def silver_page(r, hist):
+    url = "https://qaziforextips.com/" + SILVER_PAGE
+    path = os.path.join(ROOT, SILVER_PAGE)
+    if not os.path.exists(path) or not r.get("silver"):
+        return None
+    s = open(path, encoding="utf-8").read()
+    now = dt.datetime.now(PKT)
+    day, day_long = now.strftime("%-d %b %Y"), now.strftime("%-d %B %Y")
+    v = r["silver"]
+    prev = [h for h in hist if h["d"] < now.strftime("%Y-%m-%d")]
+    chg = v["tola"] - prev[-1]["tola"] if prev else 0
+    title = f"Silver Rate in Pakistan Today {day} – Chandi Price per Tola"
+    desc = (f"Silver (chandi) rate in Pakistan today ({day}): {rs(v['tola'])} per tola, {rs(v['g10'])} per 10 gram, "
+            f"{rs(v['kg'])} per kg. Live rate, calculator and 30-day chart.")
+    s = set_head(s, title, desc)
+    s = put(s, "date", esc(day_long))
+    s = put(s, "time", esc(r["updated_pkt"]))
+    s = put(s, "big", esc(rs(v["tola"])))
+    s = put(s, "chg", f'<span class="gr-chg {"up" if chg >= 0 else "down"}">{"+" if chg >= 0 else "−"}{abs(chg):,} vs previous day</span>' if prev else "")
+    s = put(s, "mini",
+            f'<div><i>10 gram</i><b>{rs(v["g10"])}</b></div><div><i>1 kg</i><b>{rs(v["kg"])}</b></div>'
+            f'<div><i>Silver / ounce</i><b>${v["usd_oz"]:,.2f}</b></div><div><i>USD / PKR</i><b>{r["usdpkr"]:.2f}</b></div>')
+    g1 = v["g1"]
+    rows = [("Pure silver (999)", 1.0), ("Sterling silver (925)", 0.925)]
+    s = put(s, "table", "".join(
+        f'<tr><th scope="row">{n}</th><td>{rs(g1 * f * TOLA)}</td><td>{rs(g1 * f * 10)}</td><td>Rs {g1 * f:,.2f}</td>'
+        f'<td>{rs(g1 * f * 1000)}</td><td>{rs(g1 * f * OZ)}</td></tr>' for n, f in rows))
+    s = put(s, "sent", f"The silver rate in Pakistan today, {esc(day_long)}, is <b>{rs(v['tola'])} per tola</b> and "
+                       f"<b>{rs(v['g10'])} per 10 grams</b> for pure (999) silver, based on the international price of "
+                       f"${v['usd_oz']:,.2f} per ounce and a dollar rate of {r['usdpkr']:.2f} rupees.")
+    s = put(s, "ur", "آج " + f"{now.day} {UR_MONTHS[now.month - 1]} {now.year}" + " کو پاکستان میں چاندی کا ریٹ <b>"
+            + f"{v['tola']:,}" + " روپے فی تولہ</b> اور <b>" + f"{v['g10']:,}" + " روپے فی 10 گرام</b> ہے۔")
+    s = put(s, "ro", f"Aaj {esc(day_long)} ko Pakistan mein chandi ka rate <b>{rs(v['tola'])} fi tola</b> aur "
+                     f"<b>{rs(v['g10'])} fi 10 gram</b> hai.")
+    s = put(s, "hist", hist_rows(hist, "tola", rs, lambda h: f'<td>${h["usd"]:,.2f}</td>'))
+    s = put(s, "json", esc(json.dumps({"g1": g1, "hist": [[h["d"], h["tola"]] for h in hist[-60:]]}, separators=(",", ":"))))
+    faq = [
+        ("What is the silver rate in Pakistan today?",
+         f"On {day_long} pure (999) silver in Pakistan is {rs(v['tola'])} per tola, {rs(v['g10'])} per 10 grams and "
+         f"{rs(v['kg'])} per kilogram, based on ${v['usd_oz']:,.2f} per ounce and USD/PKR {r['usdpkr']:.2f}."),
+        ("How is the silver price per tola calculated?",
+         "Silver price per tola = international silver price per ounce (USD) × USD/PKR ÷ 31.1035 × 11.6638. "
+         "For sterling silver (925) multiply the result by 0.925."),
+        ("Why is the sarafa silver rate different?",
+         "This page shows the market rate from the international price and the live dollar rate. Local bullion dealers "
+         "add their own premium, and jewellers add making charges, so shop prices are usually higher."),
+        ("What is the difference between 999 and 925 silver?",
+         "999 (fine) silver is 99.9% pure and is sold as bars and coins. 925 (sterling) silver is 92.5% silver mixed with "
+         "copper for strength and is common in jewellery."),
+        ("Is the silver rate the same in Karachi, Lahore and Islamabad?",
+         "The base rate is the same across Pakistan. Small differences come from local dealer premiums and shop spreads."),
+        ("How often is this silver rate updated?",
+         "Every 30 minutes on trading days, Monday to Friday. On weekends the last Friday rate stays on the page."),
+    ]
+    s = set_ld(s, page_ld(url, title, desc, "Silver Rate in Pakistan", faq, now))
+    s = put(s, "faq1", esc(faq[0][1]))
+    return path, s
+
+
+def crore(v):
+    return "Rs " + f"{v / 1e7:.2f}" + " Cr"
+
+
+def btc_page(r, hist):
+    url = "https://qaziforextips.com/" + BTC_PAGE
+    path = os.path.join(ROOT, BTC_PAGE)
+    b = r.get("btc")
+    if not os.path.exists(path) or not b:
+        return None
+    s = open(path, encoding="utf-8").read()
+    now = dt.datetime.now(PKT)
+    day, day_long = now.strftime("%-d %b %Y"), now.strftime("%-d %B %Y")
+    title = f"Bitcoin Price in Pakistan Today {day} – BTC to PKR Live"
+    desc = (f"Bitcoin price in Pakistan today ({day}): 1 BTC = {rs(b['pkr'])} ({crore(b['pkr'])}), ${b['usd']:,}. "
+            f"Live BTC to PKR rate, converter and 30-day chart.")
+    s = set_head(s, title, desc)
+    s = put(s, "date", esc(day_long))
+    s = put(s, "time", esc(r["updated_pkt"]))
+    s = put(s, "big", esc(rs(b["pkr"])))
+    c = b.get("chg24") or 0
+    s = put(s, "chg", f'<span class="gr-chg {"up" if c >= 0 else "down"}">{pct(c)} in 24 hours · {crore(b["pkr"])}</span>')
+    s = put(s, "mini",
+            f'<div><i>BTC / USD</i><b>${b["usd"]:,}</b></div>'
+            f'<div><i>24h high</i><b>{crore(b["hi24"]) if b.get("hi24") else "–"}</b></div>'
+            f'<div><i>24h low</i><b>{crore(b["lo24"]) if b.get("lo24") else "–"}</b></div>'
+            f'<div><i>USD / PKR</i><b>{r["usdpkr"]:.2f}</b></div>')
+    amts = [0.0001, 0.001, 0.01, 0.1, 0.5, 1]
+    s = put(s, "table", "".join(f'<tr><th scope="row">{a:g} BTC</th><td>{rs(a * b["pkr"])}</td><td>${a * b["usd"]:,.2f}</td></tr>' for a in amts))
+    s = put(s, "sent", f"The Bitcoin price in Pakistan today, {esc(day_long)}, is <b>{rs(b['pkr'])}</b> "
+                       f"({crore(b['pkr'])}) for 1 BTC, which is ${b['usd']:,} at a dollar rate of {r['usdpkr']:.2f} rupees.")
+    s = put(s, "ur", "آج " + f"{now.day} {UR_MONTHS[now.month - 1]} {now.year}" + " کو ایک بٹ کوائن کی قیمت <b>"
+            + f"{b['pkr']:,}" + " روپے</b> (" + f"{b['pkr'] / 1e7:.2f}" + " کروڑ) ہے۔")
+    s = put(s, "ro", f"Aaj {esc(day_long)} ko 1 Bitcoin ki qeemat <b>{rs(b['pkr'])}</b> ({crore(b['pkr'])}) hai.")
+    s = put(s, "hist", hist_rows(hist, "pkr", rs))
+    s = put(s, "json", esc(json.dumps({"pkr": b["pkr"], "usd": b["usd"], "hist": [[h["d"], h["pkr"]] for h in hist[-31:]]},
+                                      separators=(",", ":"))))
+    faq = [
+        ("What is the Bitcoin price in Pakistan today?",
+         f"On {day_long} 1 Bitcoin is about {rs(b['pkr'])} ({crore(b['pkr'])}), or ${b['usd']:,}, at USD/PKR {r['usdpkr']:.2f}."),
+        ("How is the BTC to PKR price calculated?",
+         "The Bitcoin price in rupees is the global Bitcoin price in US dollars multiplied by the dollar rate. "
+         "Local P2P sellers often quote a little more or less than this market rate."),
+        ("Is Bitcoin legal in Pakistan?",
+         "Pakistan's Parliament passed the Virtual Assets Act in 2026, which made the Pakistan Virtual Assets Regulatory "
+         "Authority (PVARA) the regulator that licenses crypto exchanges and service providers. Use licensed platforms "
+         "and check PVARA and the State Bank for the latest rules."),
+        ("What is a satoshi?",
+         "A satoshi (sat) is the smallest unit of Bitcoin: 1 BTC = 100,000,000 satoshis. You can buy a small part of a Bitcoin."),
+        ("How often is this Bitcoin price updated?",
+         "Every 30 minutes on weekdays. Bitcoin trades 24/7, so the price on exchanges can move between updates."),
+    ]
+    s = set_ld(s, page_ld(url, title, desc, "Bitcoin Price in Pakistan", faq, now))
+    s = put(s, "faq1", esc(faq[0][1]))
+    return path, s
 
 
 def update_history(r):
@@ -315,15 +506,15 @@ def home_page(r):
     boxes = [f'<a class="lrate" href="gold-rate-pakistan.html"><i>Gold 24K / tola</i><b>{rs(k["tola"])}</b>'
              f'<span class="{"up" if r["gold"]["chg_pct"] >= 0 else "down"}">{pct(r["gold"]["chg_pct"])}</span></a>']
     sv = r.get("silver")
-    boxes.append(f'<div class="lrate"><i>Silver / tola</i><b>{rs(sv["tola"]) if sv else "–"}</b>'
-                 f'<span>${sv["usd_oz"]:,.2f}/oz</span></div>' if sv else
+    boxes.append(f'<a class="lrate" href="silver-rate-pakistan.html"><i>Silver / tola</i><b>{rs(sv["tola"])}</b>'
+                 f'<span>${sv["usd_oz"]:,.2f}/oz</span></a>' if sv else
                  '<div class="lrate"><i>Silver / tola</i><b>–</b><span></span></div>')
     chg_p = (r["usdpkr"] / r["usdpkr_prev"] - 1) * 100 if r.get("usdpkr_prev") else None
     boxes.append(f'<div class="lrate"><i>USD / PKR</i><b>Rs {r["usdpkr"]:.2f}</b>'
                  f'<span class="{"up" if (chg_p or 0) >= 0 else "down"}">{pct(chg_p)}</span></div>')
     b = r.get("btc")
-    boxes.append(f'<div class="lrate"><i>Bitcoin (PKR)</i><b>{crore(b["pkr"])}</b>'
-                 f'<span class="{"up" if (b.get("chg24") or 0) >= 0 else "down"}">{pct(b.get("chg24"))}</span></div>' if b else
+    boxes.append(f'<a class="lrate" href="bitcoin-price-pakistan.html"><i>Bitcoin (PKR)</i><b>{crore(b["pkr"])}</b>'
+                 f'<span class="{"up" if (b.get("chg24") or 0) >= 0 else "down"}">{pct(b.get("chg24"))}</span></a>' if b else
                  '<div class="lrate"><i>Bitcoin (PKR)</i><b>–</b><span></span></div>')
     s = put(s, "home", "".join(boxes))
     s = put(s, "hometime", esc(r["updated_pkt"]))
@@ -334,9 +525,11 @@ def sitemap():
     path = os.path.join(ROOT, "sitemap.xml")
     s = open(path, encoding="utf-8").read()
     today = dt.datetime.now(PKT).strftime("%Y-%m-%d")
-    s2 = re.sub(r"(<loc>" + re.escape(URL) + r"</loc>\s*<lastmod>)[^<]*(</lastmod>)",
-                lambda m: m.group(1) + today + m.group(2), s, count=1)
-    return path, s2
+    for page in (PAGE, SILVER_PAGE, BTC_PAGE):
+        u = "https://qaziforextips.com/" + page
+        s = re.sub(r"(<loc>" + re.escape(u) + r"</loc>\s*<lastmod>)[^<]*(</lastmod>)",
+                   lambda m: m.group(1) + today + m.group(2), s, count=1)
+    return path, s
 
 
 def main():
@@ -361,8 +554,26 @@ def main():
     os.makedirs(os.path.dirname(rates_path), exist_ok=True)
     json.dump(r, open(rates_path, "w", encoding="utf-8"), separators=(",", ":"))
     hist = update_history(r)
-    for path, text in (gold_page(r, hist), home_page(r), sitemap()):
-        open(path, "w", encoding="utf-8").write(text)
+    today = dt.datetime.now(PKT)
+    srow = None
+    if r.get("silver") and today.weekday() < 5:
+        srow = {"d": today.strftime("%Y-%m-%d"), "usd": r["silver"]["usd_oz"], "pkr": r["usdpkr"], "tola": r["silver"]["tola"]}
+    shist = save_hist("silver-history", srow)
+    bhist = None
+    if raw.get("btc_hist"):
+        bhist = [{"d": d, "pkr": v} for d, v in raw["btc_hist"]]
+        dedup = {}
+        for h in bhist:
+            dedup[h["d"]] = h            # the last point of a day is the newest
+        bhist = sorted(dedup.values(), key=lambda h: h["d"])
+        json.dump(bhist, open(os.path.join(ROOT, "data", "btc-history.json"), "w", encoding="utf-8"), separators=(",", ":"))
+    else:
+        brow = {"d": today.strftime("%Y-%m-%d"), "pkr": r["btc"]["pkr"]} if r.get("btc") else None
+        bhist = save_hist("btc-history", brow, keep=60)
+    jobs = [gold_page(r, hist), silver_page(r, shist), btc_page(r, bhist), home_page(r), sitemap()]
+    for job in jobs:
+        if job:
+            open(job[0], "w", encoding="utf-8").write(job[1])
     print("Gold 24K tola:", r["gold"]["karats"]["24K"]["tola"], "| USD/PKR:", r["usdpkr"], "| sources:", r["sources"])
     return 0
 
