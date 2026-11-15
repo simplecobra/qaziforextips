@@ -117,6 +117,7 @@ def lesson_page(i, L):
     pn += (f'<a class="nx" href="{next_l["slug"]}"><small>Next lesson ›</small><b>{e(next_l["short"])}</b></a>' if next_l
            else f'<a class="nx" href="{HUB}"><small>Next lesson ›</small><b>{e(L.get("next", "Coming soon: see the course page"))}</b></a>')
     pn += "</nav>"
+    pin = (f'<figure style="margin:28px 0;max-width:540px"><img src="{L["pin"]}" alt="{e(L.get("pin_alt", L["h1"]))}" width="1080" height="1350" loading="lazy" style="width:100%;height:auto;border-radius:14px"><figcaption style="color:var(--muted);font-size:14px;margin-top:6px">Lesson {num} summary card. Save it on Pinterest or share it with a friend who is new to forex.</figcaption></figure>' if L.get("pin") else "")
     rel = ('<div class="rel"><a href="guide-forex-trading-in-pakistan-and-india.html"><small>Guide</small><span>Forex trading in Pakistan and India: rules, brokers, scams, Gold and hours</span></a>'
            '<a href="lesson-forex-trading-basics.html"><small>Price Action Basics</small><img src="https://i.ytimg.com/vi/9JfvsIfslCg/mqdefault.jpg" alt="" loading="lazy" width="320" height="180"><span>Forex trading for beginners: risk, demo or real account, and your broker</span></a>'
            '<a href="lesson-forex-myths.html"><small>Price Action Basics</small><img src="https://i.ytimg.com/vi/UnSphPChym8/mqdefault.jpg" alt="" loading="lazy" width="320" height="180"><span>Forex trading myths vs reality</span></a></div>')
@@ -138,6 +139,7 @@ def lesson_page(i, L):
     <h2>Video chapters</h2><ul>{chap}</ul>
     <h2>Lesson notes</h2>
     {L["notes"]}
+    {pin}
     <div class="urdu"><h2>Khulasa (Roman Urdu / Hindi)</h2><ul>{kh}</ul></div>
     <div class="ls-faq"><h2>Questions</h2>{faq}</div>
     <h2>Related lessons</h2>
