@@ -21,6 +21,8 @@
 - [Do fair value gaps work? We tested 23,773 FVGs](https://qaziforextips.com/research-do-fair-value-gaps-work.html): QFT Research report 1. 23,773 fair value gaps on XAUUSD and EURUSD (2023–2025) compared with random zones of the same size: a limit at the 50% CE line beat random zones in 8 of 8 M5/M15 tests (31% vs 28% at 1:2), a plain touch-and-bounce did not (42% vs 41%), trend and killzone filters did not help, and the CE trade alone was about −0.07R before costs. Method, limitations and a CSV summary included.
 
 ## Learn
+- [Forex Basics: Zero to Hero, free forex course for beginners in Urdu/Hindi](https://qaziforextips.com/forex-basics-course.html): 116 short video lessons from zero (what forex is, pips, lots, leverage and margin, brokers, MT5, charts, sessions, risk, psychology, fundamentals, demo to real), with notes and a Roman Urdu summary for each.
+- [What is forex trading? (Lesson 1)](https://qaziforextips.com/lesson-what-is-forex-trading.html): forex means foreign exchange; about $9.6 trillion traded per day (BIS, April 2025); profit or loss comes from the price difference (money changer example); prices move with demand and supply; learn and use a demo account before real money.
 - [Free video courses in Urdu & Hindi](https://qaziforextips.com/youtube.html)
 - [Forex Guide](https://qaziforextips.com/forex-guide.html): sessions in Pakistan time, Smart Money Concepts, liquidity, order blocks, FVG, risk management, Gold trading, prop firm challenges.
 - [Forex roadmap for beginners](https://qaziforextips.com/forex-roadmap.html): where to start; 6 steps from basics to price action, risk, SMC, checked practice and a small live account, with free Urdu/Hindi lessons for each step.
