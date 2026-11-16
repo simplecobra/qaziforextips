@@ -605,6 +605,7 @@ def home_page(r):
                  '<div class="lrate"><i>Bitcoin (PKR)</i><b>–</b><span></span></div>')
     s = put(s, "home", "".join(boxes))
     s = put(s, "hometime", esc(r["updated_pkt"]))
+    s = put(s, "hometime2", esc(r["updated_pkt"]))
     return path, s
 
 

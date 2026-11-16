@@ -432,10 +432,12 @@ window.SITE = {
 
   /* ---------- 8. YAHAN SE SHURU KAREIN (learning path) ---------- */
   path: [
-    { title: "Learn the basics", text: "Price Action Mastery – Basic Level. 11 lectures, from support & resistance to multi-timeframe analysis.", link: "course-price-action-basic.html", button: "Open the course" },
-    { title: "Go advanced", text: "Price Action Mastery – Advance Level. Market structure, swing levels and chart patterns with entry, SL and TP rules.", link: "course-price-action-advanced.html", button: "Open the course" },
-    { title: "Pick a strategy", text: "Complete strategies with rules: divergence, breakout, price action scalping and Gold scalping.", link: "course-trading-strategies.html", button: "See strategies" },
-    { title: "Practise before you risk money", text: "Replay past markets candle by candle in the QFT Replay Simulator and build your own track record.", link: "simulator.html", button: "See the simulator" }
+    { title: "Forex basics", when: "Week 1", text: "Forex Basics: Zero to Hero. What forex is, pips, lot size, spread, leverage and MT5, in short Urdu/Hindi lessons.", link: "forex-basics-course.html", button: "Start the basics" },
+    { title: "Price Action Basic", when: "Weeks 2–4", text: "11 lectures: candles, support & resistance, trendlines and multi-timeframe analysis.", link: "course-price-action-basic.html", button: "Open the course" },
+    { title: "Risk & psychology", when: "Week 5", text: "1% risk per trade, lot size from your stop loss, drawdown, and the habits that empty accounts.", link: "guide-risk-management-in-forex.html", button: "Read the risk guide" },
+    { title: "Advanced price action & SMC", when: "Weeks 6–10", text: "Market structure, chart patterns, liquidity, order blocks and FVG, with entry, SL and TP rules.", link: "course-price-action-advanced.html", button: "Open the course" },
+    { title: "Practise with checking", when: "Months 3–4", text: "Replay past markets candle by candle in the QFT Replay Simulator and record 100 trades before real money.", link: "simulator.html", button: "See the simulator" },
+    { title: "Your plan & a small live account", when: "Month 5+", text: "Pick one strategy, write your trading plan, then start small with a fixed risk on every trade.", link: "course-trading-strategies.html", button: "See strategies" }
   ],
 
   /* ---------- 9. ABOUT (photo: tasveer ka naam, e.g. "qazi.jpg") ---------- */

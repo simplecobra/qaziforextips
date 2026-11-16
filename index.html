@@ -158,6 +158,8 @@ a.lrate:hover{background:color-mix(in srgb,var(--gold) 7%,transparent)}
 .lrate:first-child b{color:var(--gold)}
 .lrate span{font:500 11.5px/1 var(--f-mono);color:var(--muted);font-variant-numeric:tabular-nums}
 .lrate .up{color:#3fb37f}.lrate .down{color:#e0566b}
+.lrates-src{margin:0;padding:8px 14px;border-top:1px solid var(--line);font:500 11.5px/1.5 var(--f-mono);color:var(--muted)}
+.lrates-src .lv{color:#3fb37f;font-weight:700}.lrates-src .dl{color:var(--gold-t,var(--gold));font-weight:700}
 .lrates-more{display:block;padding:9px 14px;border-top:1px solid var(--line);font:600 12.5px/1.4 var(--f-mono);color:var(--gold);text-decoration:none}
 .lrates-more:hover{text-decoration:underline}
 @media (max-width:620px){.lrates{grid-template-columns:repeat(2,minmax(0,1fr))}.lrate:nth-child(2){border-right:0}.lrate:nth-child(-n+2){border-bottom:1px solid var(--line)}}
@@ -184,10 +186,12 @@ a.stat{text-decoration:none;color:inherit;transition:background .2s}a.stat:hover
 @media (max-width:760px){.stats .wrap{grid-template-columns:repeat(2,minmax(0,1fr))}.stat:nth-child(2n){border-right:0}.stat:nth-child(-n+4){border-bottom:1px solid var(--line)}.stat:nth-child(5){grid-column:1/-1;border-right:0}}
 
 /* learning path */
-.path{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;counter-reset:step}
+.path{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;counter-reset:step}
+.step .when{font:600 12px/1 var(--f-mono);letter-spacing:1px;text-transform:uppercase;color:var(--muted)}
+#start .head p a{color:var(--gold-t,var(--gold))}
 @media (max-width:1000px){.path{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:560px){.path{grid-template-columns:1fr}}
-.step{position:relative;display:grid;grid-template-rows:auto auto 1fr auto;gap:12px;padding:26px 22px 22px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);text-decoration:none;transition:border-color .2s,transform .2s}
+.step{position:relative;display:grid;grid-template-rows:auto auto auto 1fr auto;gap:10px;padding:26px 22px 22px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);text-decoration:none;transition:border-color .2s,transform .2s}
 .step:hover{border-color:var(--gold);transform:translateY(-3px)}
 .step .n{font:800 46px/1 var(--f-display);color:transparent;-webkit-text-stroke:1.5px var(--gold-t,var(--gold))}
 .step p{color:var(--muted);font-size:16px}
@@ -360,33 +364,6 @@ footer a:hover{color:var(--ink)}
 }
 </style>
 <!--RL-CSS--><style>.rlx{padding-block:64px}.rlx .rl-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:16px;margin-bottom:22px}.rlx .rl-head p{color:var(--muted);max-width:62ch;margin-top:10px}.rl-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.rl-card{display:grid;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--surface,var(--panel,transparent));transition:border-color .15s}.rl-card:hover{border-color:var(--gold)}.rl-card img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block}.rl-card small{display:block;padding:12px 14px 0;font:600 11px/1.2 var(--f-mono);letter-spacing:1px;text-transform:uppercase;color:var(--gold-t,var(--gold))}.rl-card b{display:block;padding:6px 14px 14px;font-size:17px;line-height:1.3}.rl-video{aspect-ratio:16/9;width:100%;border-radius:12px;overflow:hidden;border:1px solid var(--line);background:#000}.rl-video iframe{width:100%;height:100%;border:0;display:block}@media (max-width:860px){.rl-grid{grid-template-columns:1fr 1fr}}@media (max-width:560px){.rl-grid{grid-template-columns:1fr;gap:10px}.rl-card{grid-template-columns:120px minmax(0,1fr);grid-template-rows:auto 1fr;align-items:start}.rl-card img{grid-row:1/3;height:100%;aspect-ratio:auto;min-height:68px}.rl-card small{padding:10px 12px 0;font-size:10px}.rl-card b{padding:4px 12px 10px;font-size:15px}}</style><!--/RL-CSS-->
-<style id="rm-css">.rm-prog{position:sticky;top:64px;z-index:5;background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:14px 18px;margin:0 0 22px}
-.rm-prog b{font-size:15px}.rm-bar{height:10px;border-radius:99px;background:color-mix(in srgb,var(--muted) 18%,transparent);margin-top:8px;overflow:hidden}
-.rm-bar i{display:block;height:100%;width:0;background:var(--gold);border-radius:99px;transition:width .3s}
-.rm-dots{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}.rm-dots a{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--line);font-weight:700;font-size:13px;color:var(--ink);text-decoration:none}
-.rm-dots a.on{background:var(--gold);color:#111;border-color:var(--gold)}
-.rm-step{position:relative;border:1px solid var(--line);border-left:4px solid var(--gold);background:var(--surface);border-radius:14px;padding:20px 22px;margin:0 0 18px;scroll-margin-top:150px}
-.rm-step.done{border-left-color:#3ad07f}.rm-step.done .rm-check span{background:#3ad07f;border-color:#3ad07f;color:#111}
-.rm-head{display:flex;gap:14px;align-items:center}.rm-head small{display:block;font:600 12px/1.4 var(--f-mono,monospace);letter-spacing:1.4px;text-transform:uppercase;color:var(--gold-t,var(--gold))}
-.rm-head h2{margin:2px 0 0;font-size:24px}.ls-art .rm-step h2{margin-top:2px}
-.rm-check{flex:none;cursor:pointer;position:relative}.rm-check input{position:absolute;opacity:0;width:44px;height:44px;margin:0;cursor:pointer}
-.rm-check span{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;border:2px solid var(--gold);font-weight:800;font-size:18px;color:var(--ink)}
-.rm-check input:focus-visible+span{outline:2px solid var(--gold);outline-offset:3px}
-.rm-links{columns:2 260px;margin:8px 0 6px}.rm-links li{break-inside:avoid;margin-bottom:6px}
-.rm-done{font-size:15px;border-top:1px dashed var(--line);padding-top:10px}
-.rm-home{border:1px solid var(--line);background:var(--surface);border-radius:16px;padding:22px}
-.rm-home ol{list-style:none;padding:0;margin:14px 0 16px;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px;counter-reset:s}
-.rm-home li{counter-increment:s}.rm-home li a{display:block;height:100%;border:1px solid var(--line);border-radius:12px;padding:12px;text-decoration:none;color:var(--ink);font-size:14px;font-weight:600;line-height:1.35}
-.rm-home li a:before{content:counter(s);display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--gold);color:#111;font-weight:800;margin-bottom:8px}
-.rm-home li a:hover{border-color:var(--gold)}
-.rm-card{border:1px solid var(--line);background:var(--surface);border-radius:18px;padding:22px 24px;box-shadow:0 24px 60px rgba(0,0,0,.18);margin-top:24px}
-.rm-card-h{font:600 12px/1.4 var(--f-mono,monospace);letter-spacing:1.4px;text-transform:uppercase;color:var(--gold-t,var(--gold));margin-bottom:10px}
-.rm-card ol{list-style:none;margin:0;padding:0;counter-reset:c}.rm-card li{counter-increment:c;position:relative;padding:0 0 14px 46px}
-.rm-card li:before{content:counter(c);position:absolute;left:0;top:0;width:32px;height:32px;border-radius:50%;background:var(--gold);color:#111;font-weight:800;display:grid;place-items:center}
-.rm-card li:not(:last-child):after{content:"";position:absolute;left:15px;top:34px;bottom:2px;width:2px;background:var(--line)}
-.rm-card a{text-decoration:none;color:var(--ink);display:block}.rm-card b{display:block;font-size:16px;line-height:1.3}.rm-card small{color:var(--muted);font-size:13px}
-@media (min-width:1000px){.rm-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,400px);gap:48px;align-items:center}.rm-card{margin-top:0}}
-@media (max-width:900px){.rm-home ol{grid-template-columns:repeat(2,minmax(0,1fr))}}</style>
 </head>
 <body>
 <div class="ann" id="ann"><div class="wrap"><span class="ann-k" data-ann="sim-305">New</span><span class="ann-t" id="annT">Major update: QFT Replay Simulator 3.05 for MT5 &amp; MT4 – backtest up to 4 pairs at the same time (Gold + DXY, EURUSD + GBPUSD).</span><a class="ann-l" id="annL" href="simulator.html#new">See what's new</a><a class="ann-all" href="updates.html">All updates</a><button class="ann-x" id="annX" type="button" aria-label="Close this message">×</button></div></div>
@@ -418,9 +395,10 @@ footer a:hover{color:var(--ink)}
     <p class="htools rise d3"><span>Free tools:</span> <a href="ict-killzones-indicator-mt5.html">Killzones</a> · <a href="fvg-indicator-mt5.html">FVG Pro</a> · <a href="free-trading-journal-mt5.html">Trading Journal</a> · <a href="lot-size-calculator.html">Lot size calculator</a> · <a href="free-mt5-tools.html">All tools →</a></p>
   </div>
   <div class="panel rise d2">
-    <div class="panel-head"><span class="dot"></span><b>XAUUSD</b><span class="tf">M15</span><span class="ill" id="chartTag">Live · <!--R:hometime-->16 Nov 2026, 21:22 PKT<!--/R:hometime--></span></div>
+    <div class="panel-head"><span class="dot"></span><b>XAUUSD</b><span class="tf">M15</span><span class="ill" id="chartTag">Updated · <!--R:hometime-->16 Nov 2026, 21:22 PKT<!--/R:hometime--></span></div>
     <canvas id="chart" aria-label="Gold (XAUUSD) 15-minute candlestick chart" role="img"></canvas>
     <div class="lrates" id="rates"><!--R:home--><a class="lrate" href="gold-rate-pakistan.html"><i>Gold 24K / tola</i><b>Rs 400,047</b><span class="down">▼ 0.55%</span></a><a class="lrate" href="silver-rate-pakistan.html"><i>Silver / tola</i><b>Rs 4,908</b><span>$47.35/oz</span></a><a class="lrate" href="dollar-rate-pakistan.html"><i>USD / PKR</i><b>Rs 276.44</b><span class="down">▼ 0.05%</span></a><a class="lrate" href="bitcoin-price-pakistan.html"><i>Bitcoin (PKR)</i><b>Rs 1.78 Cr</b><span class="down">▼ 0.09%</span></a><!--/R:home--></div>
+    <p class="lrates-src" id="ratesSrc">Prices updated <!--R:hometime2-->16 Nov 2026, 21:22 PKT<!--/R:hometime2--> · Sources: Twelve Data, gold-api.com, CoinGecko · For information only</p>
     <a class="lrates-more" href="gold-rate-pakistan.html">Gold rate in Pakistan today: 24K, 22K &amp; 21K per tola →</a>
     <div class="sessions" id="sessions"></div>
     <div class="ses-note" id="sesNote">Market sessions in Pakistan time (PKT)</div>
@@ -430,12 +408,12 @@ footer a:hover{color:var(--ink)}
 <div class="stats"><div class="wrap" id="stats"><div class="stat"><b>2013</b><span>Trading since</span></div><a class="stat" href="https://www.facebook.com/groups/qaziforextips" target="_blank" rel="noopener"><b>75K+</b><span>Facebook group members ↗</span></a><div class="stat"><b>65th</b><span>Student batch running</span></div><a class="stat" href="https://www.youtube.com/@QaziForexTips" target="_blank" rel="noopener"><b>15K+</b><span>YouTube subscribers ↗</span></a><div class="stat"><b>64+</b><span>Free video lessons</span></div></div></div>
 
 <section id="start"><div class="wrap">
-  <div class="head"><div class="eyebrow">Start here</div><h2>Your path from zero to a trading plan</h2><p>New to trading? Follow these four steps in order. Everything up to step three is free on our YouTube channel.</p></div>
+  <div class="head"><div class="eyebrow">Start here · your learning journey</div><h2>From zero to your first live trade in 6 steps</h2><p>The same 6 steps as our <a href="forex-roadmap.html">forex roadmap</a>, in the right order. Every lesson is free in Urdu &amp; Hindi; open the roadmap to tick off each step as you go.</p></div>
   <div class="path-line" aria-hidden="true"></div>
-  <div class="path" id="path"><a class="step" href="course-price-action-basic.html"><span class="n">01</span><h3>Learn the basics</h3><p>Price Action Mastery – Basic Level. 11 lectures, from support &amp; resistance to multi-timeframe analysis.</p><span class="go">Open the course →</span></a><a class="step" href="course-price-action-advanced.html"><span class="n">02</span><h3>Go advanced</h3><p>Price Action Mastery – Advance Level. Market structure, swing levels and chart patterns with entry, SL and TP rules.</p><span class="go">Open the course →</span></a><a class="step" href="course-trading-strategies.html"><span class="n">03</span><h3>Pick a strategy</h3><p>Complete strategies with rules: divergence, breakout, price action scalping and Gold scalping.</p><span class="go">See strategies →</span></a><a class="step" href="simulator.html"><span class="n">04</span><h3>Practise before you risk money</h3><p>Replay past markets candle by candle in the QFT Replay Simulator and build your own track record.</p><span class="go">See the simulator →</span></a></div>
+  <div class="path" id="path"><a class="step" href="forex-basics-course.html"><span class="n">01</span><small class="when">Week 1</small><h3>Forex basics</h3><p>Forex Basics: Zero to Hero. What forex is, pips, lot size, spread, leverage and MT5, in short Urdu/Hindi lessons.</p><span class="go">Start the basics →</span></a><a class="step" href="course-price-action-basic.html"><span class="n">02</span><small class="when">Weeks 2–4</small><h3>Price Action Basic</h3><p>11 lectures: candles, support &amp; resistance, trendlines and multi-timeframe analysis.</p><span class="go">Open the course →</span></a><a class="step" href="guide-risk-management-in-forex.html"><span class="n">03</span><small class="when">Week 5</small><h3>Risk &amp; psychology</h3><p>1% risk per trade, lot size from your stop loss, drawdown, and the habits that empty accounts.</p><span class="go">Read the risk guide →</span></a><a class="step" href="course-price-action-advanced.html"><span class="n">04</span><small class="when">Weeks 6–10</small><h3>Advanced price action &amp; SMC</h3><p>Market structure, chart patterns, liquidity, order blocks and FVG, with entry, SL and TP rules.</p><span class="go">Open the course →</span></a><a class="step" href="simulator.html"><span class="n">05</span><small class="when">Months 3–4</small><h3>Practise with checking</h3><p>Replay past markets candle by candle in the QFT Replay Simulator and record 100 trades before real money.</p><span class="go">See the simulator →</span></a><a class="step" href="course-trading-strategies.html"><span class="n">06</span><small class="when">Month 5+</small><h3>Your plan &amp; a small live account</h3><p>Pick one strategy, write your trading plan, then start small with a fixed risk on every trade.</p><span class="go">See strategies →</span></a></div>
 </div></section>
 
-<!--RM-SEC--><section id="roadmap" style="padding-top:0"><div class="wrap"><!--RM-STRIP--><div class="rm-home"><div class="eyebrow">New to forex? Start here</div><h2>Your forex roadmap: 6 steps</h2><p>Free lessons in Urdu &amp; Hindi in the right order, from the basics to your first live trade. Tick off each step as you go.</p><ol><li><a href="forex-roadmap.html#step-1">Forex basics</a></li><li><a href="forex-roadmap.html#step-2">Price Action Basic</a></li><li><a href="forex-roadmap.html#step-3">Risk management and trading psychology</a></li><li><a href="forex-roadmap.html#step-4">Advanced price action and Smart Money Concepts</a></li><li><a href="forex-roadmap.html#step-5">Practice with checking</a></li><li><a href="forex-roadmap.html#step-6">Your trading plan and a small live account</a></li></ol><a class="btn gold" href="forex-roadmap.html">Open the roadmap</a></div><!--/RM-STRIP--></div></section><!--/RM-SEC--><section class="about" id="about"><div class="wrap">
+<section class="about" id="about"><div class="wrap">
   <div class="photo" id="photo"><img class="p" src="dr-qazi-2.jpg" alt="Dr. Qazi Abdul Basit"><div class="badge"><b>13+ years</b><span>in the markets</span></div></div>
   <div class="story" id="story"><div class="eyebrow">About your teacher</div><h2>Dr. Qazi Abdul Basit</h2><div class="role">Ph.D in Business Administration · Forex &amp; Gold trader since 2013 · Founder, Qazi Forex Tips</div><p>I have been trading forex and Gold since 2013. Like every trader I went through the ups and downs, and those years taught me what keeps an account alive: clear price action, a fixed risk on every trade, and the discipline to follow a plan.</p><p>I started Qazi Forex Tips so traders in Pakistan and India can learn this in their own language. The YouTube channel has complete free courses in Urdu and Hindi, and our 65th student batch is running now.</p><p>I also build MetaTrader 5 tools for my own trading and teaching, like the QFT Replay Simulator for honest backtesting and the QFT Trade Assistant for risk-based lot sizes.</p><div class="chips"><span class="chip">Price Action</span><span class="chip">Gold (XAUUSD)</span><span class="chip">Risk &amp; Money Management</span><span class="chip">Trading Psychology</span></div><div style="margin-top:10px"><a class="btn" href="about.html">More about us &amp; our team →</a></div></div>
 </div></section>
@@ -542,7 +520,7 @@ Ap lalach k ic dooor mein bhi bilkul free taleem dey rahy, aour wo Kuch sikha ra
 
   /* learning path */
   $("path").innerHTML = (S.path || []).map(function(p, i){
-    return '<a class="step" href="' + esc(p.link) + '"><span class="n">0' + (i + 1) + '</span><h3>' + esc(p.title) + '</h3><p>' + esc(p.text) + '</p><span class="go">' + esc(p.button || "Open") + ' →</span></a>';
+    return '<a class="step" href="' + esc(p.link) + '"><span class="n">0' + (i + 1) + '</span>' + (p.when ? '<small class="when">' + esc(p.when) + '</small>' : '') + '<h3>' + esc(p.title) + '</h3><p>' + esc(p.text) + '</p><span class="go">' + esc(p.button || "Open") + ' →</span></a>';
   }).join("");
 
 
@@ -732,7 +710,7 @@ Ap lalach k ic dooor mein bhi bilkul free taleem dey rahy, aour wo Kuch sikha ra
       return getJ("data/rates.json?t=" + Math.floor(Date.now() / 300000)).then(function(d){
         if (!d || !d.candles || d.candles.length < 10) { if (!real && tag) tag.textContent = "Illustration"; return; }
         var k = d.candles.slice(-46).map(function(c){ return { o:c[1], h:c[2], l:c[3], c:c[4] }; });
-        show(k, (d.market_open === false || goldClosed() ? "Closed · " : "Updated · ") + pktTime(new Date(d.updated).getTime()));
+        var age = Date.now() - new Date(d.updated).getTime(); show(k, (d.market_open === false || goldClosed() ? "Closed · last " : (age > 3600000 ? "Delayed · as of " : "Updated · ")) + pktTime(new Date(d.updated).getTime()));
       });
     }
     function fromLive(){
