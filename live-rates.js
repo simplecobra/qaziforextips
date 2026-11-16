@@ -68,6 +68,16 @@
     if (s && box[1]) { box[1].textContent = rs(s * R.usdpkr / OZ * TOLA); if (sp[1]) sp[1].textContent = usd(s) + "/oz"; }
     if (b && box[3]) { box[3].textContent = cr(b.pkr); if (sp[3] && b.usd_24h_change != null) { sp[3].className = cls(b.usd_24h_change); sp[3].textContent = pct(b.usd_24h_change); } }
   }
+  function note(R, g, s, b, now) {
+    var el = document.getElementById("ratesSrc"); if (!el || !R.updated) return;
+    var hm = function (d) { return d.toLocaleTimeString("en-GB", { timeZone: "Asia/Karachi", hour: "2-digit", minute: "2-digit" }) + " PKT"; };
+    var fileT = new Date(R.updated), age = now - fileT, d = now.getUTCDay(), hr = now.getUTCHours();
+    var closed = d === 6 || (d === 0 && hr < 22) || (d === 5 && hr >= 21);
+    var live = [g && "Gold", s && "Silver", b && "Bitcoin"].filter(Boolean);
+    var fileTxt = pkt(fileT) + (closed ? " (market closed)" : age > 3600000 ? ' <span class="dl">(delayed)</span>' : "");
+    el.innerHTML = (live.length ? '<span class="lv">● Live</span> ' + live.join(", ") + " at " + hm(now) + " (gold-api.com, CoinGecko) · " : "")
+      + (live.length === 3 ? "USD/PKR" : live.length ? "Other prices" : "Prices") + " as of " + fileTxt + " (" + (live.length === 3 ? "Twelve Data" : (R.sources || ["Twelve Data"]).map(function (x) { return x.split(" (")[0]; }).join(", ")) + ") · For information only";
+  }
   function refire() { ["cW", "zW"].forEach(function (id) { var e = document.getElementById(id); if (e) e.dispatchEvent(new Event("input")); }); }
 
   function run() {
@@ -89,7 +99,7 @@
         if (isGold && g) { gold(R, g); done = true; }
         if (isSilver && s) { silver(R, s); done = true; }
         if (isBtc && b) { btc(R, b); done = true; }
-        if (isHome) home(R, g, s, b);
+        if (isHome) { home(R, g, s, b); note(R, g, s, b, now); }
         if (done) { setTime(now); refire(); }
       });
     }).catch(function () {});
