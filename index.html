@@ -120,6 +120,19 @@ section{padding-block:88px}
 .hero .ur{font-family:var(--f-ur);direction:rtl;font-size:23px;line-height:2.3;margin-top:18px;color:color-mix(in srgb,var(--ink) 85%,var(--gold))}
 .hero .txt{font-size:19px;color:var(--muted);max-width:32em;margin-top:4px}
 .hero .cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.paths{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:30px}
+.paths .path{display:block;padding:15px 18px;border:1px solid var(--line);border-radius:14px;background:var(--surface);color:var(--ink);text-decoration:none;transition:border-color .2s,transform .2s}
+.paths .path:hover,.paths .path:focus-visible{border-color:var(--gold);transform:translateY(-2px)}
+.paths .path small,.paths .path b,.paths .path i{display:block}
+.paths .path small{font-size:13px;font-weight:600;color:var(--muted)}
+.paths .path b{font-size:17px;line-height:1.3;margin:3px 0 2px}
+.paths .path b::after{content:" \2192";color:var(--gold-t,var(--gold))}
+.paths .path i{font-style:normal;font-size:13px;color:var(--muted)}
+.paths .path.main{grid-column:1/-1;background:var(--gold);border-color:var(--gold);color:var(--gold-ink);box-shadow:0 8px 30px color-mix(in srgb,var(--gold) 30%,transparent)}
+.paths .path.main b{font-size:20px}
+.paths .path.main small,.paths .path.main i{color:var(--gold-ink);opacity:.82}.paths .path.main b::after{color:var(--gold-ink)}
+@media (max-width:520px){.paths{grid-template-columns:1fr}}
+
 .btn.lg{font-size:17px;padding:17px 28px}
 .hero .htools{margin-top:18px;font-size:15px;color:var(--muted)}
 .hero .htools span{font-weight:700;color:var(--ink)}
@@ -397,11 +410,11 @@ footer a:hover{color:var(--ink)}
     <h1 class="rise d1">Free Forex &amp; Gold Trading Course in <em>Urdu &amp; Hindi</em></h1>
     <p class="ur rise d2" lang="ur">پروفیشنل ٹریڈر کی طرح ٹریڈنگ سیکھیں</p>
     <p class="txt rise d2">Price action, Gold (XAUUSD) and risk management, from zero to your own written trading plan. 64+ free video lessons and free MT5 &amp; MT4 tools.</p>
-    <div class="cta rise d3" id="hcta">
-      <a class="btn gold lg" href="course-price-action-basic.html">Start the free course</a>
-      <a class="btn" id="waHero" href="#contact" target="_blank" rel="noopener">Chat on WhatsApp</a>
+    <div class="paths rise d3" id="hcta" role="group" aria-label="Choose where to start">
+      <a class="path main" href="forex-basics-course.html"><small>Completely new to forex?</small><b>Start with Forex Basics</b><i>From zero · 116 short lessons</i></a>
+      <a class="path" href="course-price-action-basic.html"><small>Know pips &amp; lot size?</small><b>Start Price Action Basic</b><i>Charts, trend, support &amp; resistance</i></a>
+      <a class="path" href="forex-roadmap.html"><small>Not sure where to begin?</small><b>Follow the Forex Roadmap</b><i>6 steps, zero to your first trade</i></a>
     </div>
-    <p class="htools rise d3"><span>New to forex?</span> <a href="forex-basics-course.html">Forex Basics: Zero to Hero</a> · a free beginner course from zero, in Urdu/Hindi</p>
     <p class="htools rise d3"><span>Free tools:</span> <a href="ict-killzones-indicator-mt5.html">Killzones</a> · <a href="fvg-indicator-mt5.html">FVG Pro</a> · <a href="free-trading-journal-mt5.html">Trading Journal</a> · <a href="lot-size-calculator.html">Lot size calculator</a> · <a href="free-mt5-tools.html">All tools →</a></p>
   </div>
   <div class="panel rise d2">
