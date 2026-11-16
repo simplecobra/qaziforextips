@@ -59,8 +59,8 @@ Join karne ka tareeqa: admission ke dinon mein WhatsApp 0323-6700010 (+92-323-67
 #  PRICE ACTION MASTERY COURSE – mustaqil maloomat
 # =====================================================================
 
-Q: course fee | fees | fee kitni | kitni fee | price of course | course price | charges | paid course | course free | free hai | is it free | free course | paise lagte
-A: **Price Action Mastery Course bilkul FREE hai** – is ki koi fee nahi.
+Q: course fee | fees | fee kitni | kitni fee | price of course | course price | charges | paid course | course free | free hai | free ha | free hy | free he | free h | fee ha | fee hai | fees ha | is it free | free course | paise lagte | paisay lagte | kitne ka hai | kitne ka course
+A: **Haan, bilkul FREE hai.** Hamare tamam courses – YouTube lessons, Forex Basics aur Price Action Mastery (PAM) batch – free hain. Koi fee nahi, koi IB ya broker ki shart nahi.
 Lekin free ka matlab "aasaan" nahi: is mein roz practice aur assignments karni hoti hain, isliye sirf serious log admission lein.
 Join karne ke liye WhatsApp: **0323-6700010**
 
@@ -188,11 +188,33 @@ MISAAL:
 Sawal: Kal ki assignment shaam 6 baje bhej doon to chalega?
 Jawab: Nahi dost, assignment ka waqt subah 7 se shaam 5 baje tak hai. 5 baje ke baad bheji gayi assignment qabool nahi hoti aur aap absent shumar hote hain. Agar koi majboori ho to waqt khatam hone se pehle inform kar dein.
 
-Q: where to start | kahan se shuru | kaha se shuru | new in forex | beginner | naya hoon | naya hun | start learning | seekhna chahta | bilkul naya
-A: Agar aap bilkul naye hain to pehle hamara **free YouTube course** Lecture 1 se tarteeb se dekhein:
-[Free Price Action Course – Basic Level](https://qaziforextips.com/course-price-action-basic.html)
-Seekhte waqt **demo account** pe practice karein.
-Jab forex ki basics clear ho jayein, tab **Price Action Mastery (PAM) batch** join karein – woh basics jaanne walon ke liye hai.
+Q: where to start | kahan se shuru | kaha se shuru | new in forex | beginner | naya hoon | naya hun | start learning | seekhna chahta | bilkul naya | zero se | shuru kaise
+A: Bilkul naye hain to tarteeb yeh hai:
+1. **Forex Basics: Zero to Hero** – pip, lot, leverage, MT5 waghera chhote lessons mein: [Forex Basics course](https://qaziforextips.com/forex-basics-course.html) (pehla lesson: [How to start forex trading](https://qaziforextips.com/lesson-how-to-start-forex-trading.html))
+2. Phir **Price Action Basic**: [Free Price Action Course](https://qaziforextips.com/course-price-action-basic.html)
+Poora 6 qadam ka raasta yahan hai: [Forex Roadmap](https://qaziforextips.com/forex-roadmap.html)
+Seekhte waqt sirf **demo account** pe practice karein. Basics clear hon to **PAM batch** join karein.
+
+Q: full course | complete course | poora course | pura course | sara course | course kaha | course kahan | course kidhar | course link | course ka link | lectures kahan | videos kahan | video lectures | free lectures | youtube course | playlist
+A: Saare lessons **free** hain, yahan dekhein:
+- Bilkul naye: [Forex Basics: Zero to Hero](https://qaziforextips.com/forex-basics-course.html)
+- [Price Action Basic](https://qaziforextips.com/course-price-action-basic.html) → [Price Action Advanced](https://qaziforextips.com/course-price-action-advanced.html) → [Trading Strategies](https://qaziforextips.com/course-trading-strategies.html)
+- Sab courses ek jagah: [Free courses](https://qaziforextips.com/youtube.html) aur YouTube channel **@QaziForexTips**
+Kahan se shuru karna hai? [Forex Roadmap](https://qaziforextips.com/forex-roadmap.html) dekh lein.
+
+Q: pehla class | pehli class | pahle wala class | pehle wala class | pehla lecture | pehli video | first lecture | first class | first video | lecture 1 | lecture one | purani class | class kidhar | class kahan | class kaha | missed class | class miss
+A: Saare lectures **videos** hain – koi Zoom ya live class link nahi hota.
+- Price Action ka **Lecture 1** se: [Free Price Action Course – Basic](https://qaziforextips.com/course-price-action-basic.html)
+- Bilkul naye hain to: [Forex Basics, Lesson 0.1](https://qaziforextips.com/lesson-how-to-start-forex-trading.html)
+**PAM batch** ke students ko roz ka lecture aur assignment batch ke WhatsApp group mein milta hai. Batch ka koi lecture miss ho gaya ho to WhatsApp **0323-6700010** pe batayein.
+
+Q: link bhejo | link bhejein | link send | link do | link dein | link chahiye | send link | share link
+A: Kis cheez ka link chahiye? Yeh sab se zyada maange jate hain:
+- [Free courses (sab videos)](https://qaziforextips.com/youtube.html)
+- [Forex Basics (bilkul naye)](https://qaziforextips.com/forex-basics-course.html)
+- [Free MT5 tools](https://qaziforextips.com/free-mt5-tools.html)
+- Facebook group: [Qazi ForeX Tips](https://www.facebook.com/groups/qaziforextips)
+**PAM batch** ka admission WhatsApp pe hota hai: **0323-6700010** (admission ke dinon mein "PAM Batch-{BATCH}" likh kar).
 
 Q: signals | signal dete | signal group | buy or sell | buy karun | sell karun | guaranteed profit | profit guarantee
 A: Nahi, hum signals ya guaranteed profit nahi dete. Hum aap ko khud market parhna aur risk manage karna sikhate hain.
@@ -327,3 +349,8 @@ LINK: simulator.html | Free Forex Backtesting Tool MT5/MT4 – Soft4FX Alternati
 LINK: trade-assistant.html | QFT Trade Assistant MT5 & MT4 – Free Risk & Lot Calculator
 LINK: updates.html | What's New – Updates to Our Courses & MT5 Tools
 LINK: youtube.html | Free Forex Course in Urdu & Hindi – Video Lessons
+LINK: forex-basics-course.html | Forex Basics: Zero to Hero – Free Forex Course for Beginners (Urdu/Hindi)
+LINK: lesson-how-to-start-forex-trading.html | How to Start Forex Trading: Free Course Roadmap (Lesson 0.1)
+LINK: lesson-what-is-forex-trading.html | What is Forex Trading? (Lesson 1.1)
+LINK: forex-roadmap.html | Forex Roadmap for Beginners: 6 Steps
+LINK: contact.html | Contact Qazi Forex Tips
