@@ -158,10 +158,15 @@ def lesson_page(i, L):
     title = L["seo_title"] + " | Lesson " + num
     return head(title, L["desc"], url, img, og, ld) + HEADER + body + FOOTER
 
+HERO_ALT = ("Forex Basics: Zero to Hero, free forex trading course for beginners in Urdu/Hindi by Qazi Forex Tips: "
+            "116 short lessons in 14 modules and 3 stages, Foundation (pips, lot size, leverage), Tools (broker, MT4/MT5, charts) and Survival (risk management, psychology)")
+
+
 def hub_page():
     url = SITE + HUB
     first = LESSONS[0]
-    img = f"https://i.ytimg.com/vi/{first['vid']}/maxresdefault.jpg"
+    HERO = "img/forex-basics/forex-basics-zero-to-hero-free-forex-course-roadmap"
+    img = SITE + HERO + ".jpg"
     title = "Free Forex Course for Beginners in Urdu/Hindi: Zero to Hero"
     desc = (f"Free forex trading course for beginners in Urdu/Hindi: {sum(len(m[1]) for m in MODULES)} short video lessons, "
             "from what forex is to pips, lots, leverage, MT5 and risk management.")
@@ -181,7 +186,7 @@ def hub_page():
                  + "</div>")
     css = ('<style>.fbm{border:1px solid var(--line);border-radius:16px;background:var(--surface);padding:20px 22px;margin:0 0 16px}'
            '.fbm h3{margin:0 0 12px;font-size:22px}.fbm h3 span{display:inline-block;font:600 12px/1 var(--f-mono);letter-spacing:.8px;text-transform:uppercase;'
-           'color:var(--gold,#e9b949);border:1px solid var(--line);border-radius:999px;padding:6px 10px;margin-right:8px;vertical-align:middle}'
+           'color:var(--gold-t,var(--gold,#e9b949));border:1px solid var(--line);border-radius:999px;padding:6px 10px;margin-right:8px;vertical-align:middle}'
            '.fbm details summary{cursor:pointer;color:var(--muted);font-size:15px;margin-top:6px}.ls-art .fbm ol{margin:10px 0 0;padding-left:22px;color:var(--muted);columns:2;column-gap:28px}'
            '.ls-art .fbm ol li{break-inside:avoid;margin:0 0 4px;font-size:16px;line-height:1.45}.lngrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px;margin-bottom:6px}'
            '.lnc{display:grid;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--bg);color:var(--ink);text-decoration:none}'
@@ -196,7 +201,7 @@ def hub_page():
            ["What comes after Forex Basics?", "After the basics, continue with the free Price Action Mastery course (Basic, then Advanced) and the strategy lessons on the Courses page."]]
     ld = {"@context": "https://schema.org", "@graph": [
         {"@type": "Course", "@id": url + "#course", "name": f"{HUB_NAME} – Free Forex Course for Beginners (Urdu/Hindi)", "description": desc, "url": url,
-         "inLanguage": ["ur", "hi"], "isAccessibleForFree": True, "educationalLevel": "Beginner", "image": img,
+         "inLanguage": ["ur", "hi"], "isAccessibleForFree": True, "educationalLevel": "Beginner", "image": [{"@type": "ImageObject", "url": img, "width": 1080, "height": 1350, "caption": HERO_ALT}, f"https://i.ytimg.com/vi/{first['vid']}/maxresdefault.jpg"],
          "provider": ORG, "author": PERSON, "teaches": "Forex trading basics, pips, lots, leverage, margin, MT5, risk management, trading psychology",
          "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD", "category": "Free"},
          "hasCourseInstance": {"@type": "CourseInstance", "courseMode": "Online", "courseWorkload": "PT20H", "instructor": PERSON}},
@@ -212,14 +217,18 @@ def hub_page():
               if pl else '<a href="https://www.youtube.com/@QaziForexTips" target="_blank" rel="noopener" style="color:var(--ink)">Watch on YouTube @QaziForexTips</a>')
     faqh = "".join(f"<details><summary>{e(q)}</summary><p>{e(a)}</p></details>" for q, a in faq)
     body = (f'''<main id="top">
-<section class="ls-hero"><div class="wrap">
+<section class="ls-hero"><div class="wrap fb-grid"><div>
   <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a>›<a href="youtube.html">Courses</a>›<span>{HUB_NAME}</span></nav>
   <div class="ls-meta">Free course · {total} lessons · {len(LESSONS)} published · Urdu / Hindi · English subtitles</div>
   <h1>Forex Basics: Zero to Hero – free forex course for beginners in Urdu/Hindi</h1>
   <p class="ls-lead">Never traded before? Start here. Short lessons of 5 to 15 minutes take you step by step from "what is forex?" to pips, lots, leverage, MT5, risk management and your first trade on a demo account. Each lesson has a video, written notes, a Roman Urdu summary and a 10-minute practical task. New lessons are added every day.</p>
   <div class="byline"><img src="dr-qazi-120.webp" alt="Dr. Qazi Abdul Basit" width="46" height="46"><div>Course by <a href="about.html"><b>Dr. Qazi Abdul Basit</b></a>, Ph.D · Forex &amp; Gold trader since 2013<br>Updated {nice_date(max(x.get("modified", x["date"]) for x in LESSONS))}</div></div>
   <div class="ls-vbar"><a class="btn gold" href="{first["slug"]}">Start with Lesson {first["n"]}</a><span>·</span>{pl_btn}</div>
+</div>
+<figure class="fb-art"><img src="{HERO}.webp" srcset="{HERO}-540.webp 540w, {HERO}.webp 1080w" sizes="(min-width:1000px) 420px, 100vw" width="1080" height="1350" alt="{e(HERO_ALT)}" fetchpriority="high" decoding="async"><figcaption>{total} lessons, 14 modules, 3 stages: Foundation, Tools and Survival.</figcaption></figure>
 </div></section>
+<style>.fb-art{{margin:28px 0 0}}.fb-art img{{display:block;width:100%;max-width:440px;height:auto;border-radius:16px;border:1px solid var(--line);box-shadow:0 24px 60px rgba(0,0,0,.35)}}.fb-art figcaption{{font-size:13px;line-height:1.5;color:var(--muted);max-width:440px;margin-top:8px}}
+@media (min-width:1000px){{.fb-grid{{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,420px);gap:48px;align-items:center}}.fb-art{{margin:0}}}}</style>
 
 <div class="wrap ls-body">
   <article class="ls-art">
