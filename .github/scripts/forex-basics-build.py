@@ -191,7 +191,7 @@ def hub_page():
     items = [{"@type": "ListItem", "position": k + 1, "url": SITE + x["slug"], "name": f"Lesson {x['n']}: {x['short']}"} for k, x in enumerate(LESSONS)]
     faq = [["Is this forex course really free?", "Yes. Every lesson is free on YouTube with free written notes on this website. There is no paid upgrade inside the course."],
            ["Which language is the course in?", "The videos are in simple Urdu/Hindi with English trading words (pip, lot, spread), and every video has English subtitles. The notes are in English with a Roman Urdu / Hindi summary."],
-           ["I know nothing about trading. Where do I start?", "Start with Lesson 1, What is forex trading?, and watch the lessons in order. Each lesson is 5 to 15 minutes and ends with a 10-minute practical task."],
+           ["I know nothing about trading. Where do I start?", f"Start with Lesson {first['n']}, {first['short']}, and watch the lessons in order. Each lesson is 5 to 15 minutes and ends with a 10-minute practical task."],
            ["Will this course teach me to make money quickly?", "No. Nobody can promise profit. The course teaches how the market works, how to manage risk and how to practise on a demo account first, so you can decide for yourself."],
            ["What comes after Forex Basics?", "After the basics, continue with the free Price Action Mastery course (Basic, then Advanced) and the strategy lessons on the Courses page."]]
     ld = {"@context": "https://schema.org", "@graph": [
@@ -218,14 +218,14 @@ def hub_page():
   <h1>Forex Basics: Zero to Hero – free forex course for beginners in Urdu/Hindi</h1>
   <p class="ls-lead">Never traded before? Start here. Short lessons of 5 to 15 minutes take you step by step from "what is forex?" to pips, lots, leverage, MT5, risk management and your first trade on a demo account. Each lesson has a video, written notes, a Roman Urdu summary and a 10-minute practical task. New lessons are added every day.</p>
   <div class="byline"><img src="dr-qazi-120.webp" alt="Dr. Qazi Abdul Basit" width="46" height="46"><div>Course by <a href="about.html"><b>Dr. Qazi Abdul Basit</b></a>, Ph.D · Forex &amp; Gold trader since 2013<br>Updated {nice_date(max(x.get("modified", x["date"]) for x in LESSONS))}</div></div>
-  <div class="ls-vbar"><a class="btn gold" href="{first["slug"]}">Start with Lesson 1</a><span>·</span>{pl_btn}</div>
+  <div class="ls-vbar"><a class="btn gold" href="{first["slug"]}">Start with Lesson {first["n"]}</a><span>·</span>{pl_btn}</div>
 </div></section>
 
 <div class="wrap ls-body">
   <article class="ls-art">
     {css}
     <h2>How this course works</h2>
-    <div class="fbsteps"><div><b>1. Watch in order</b>Each lesson builds on the one before. Begin with Module 0 and Lesson 1.</div><div><b>2. Read the notes</b>Every lesson page has notes, examples, chapters and a Roman Urdu khulasa.</div><div><b>3. Do the task</b>A 10-minute practical task after every lesson, on paper or on a demo account.</div><div><b>4. Then Price Action</b>After the basics, move on to the free Price Action Mastery course.</div></div>
+    <div class="fbsteps"><div><b>1. Watch in order</b>Each lesson builds on the one before. Begin with Module 0, Lesson 0.1.</div><div><b>2. Read the notes</b>Every lesson page has notes, examples, chapters and a Roman Urdu khulasa.</div><div><b>3. Do the task</b>A 10-minute practical task after every lesson, on paper or on a demo account.</div><div><b>4. Then Price Action</b>After the basics, move on to the free Price Action Mastery course.</div></div>
     <h2>Course syllabus</h2>
     {mods}
     <div class="ls-faq"><h2>Questions</h2>{faqh}</div>
@@ -234,7 +234,7 @@ def hub_page():
     <p class="ls-disc">Education only, not financial advice. Trading forex, Gold and CFDs carries a high risk of loss. Check the rules of your country and practise on a demo account before using real money.</p>
   </article>
   <aside class="ls-side">
-    <div class="box"><h3>Start here</h3><p>Lesson 1: {e(first["short"])} ({first["len"]}).</p><a class="btn gold" href="{first["slug"]}">Watch Lesson 1</a></div>
+    <div class="box"><h3>Start here</h3><p>Lesson {first["n"]}: {e(first["short"])} ({first["len"]}).</p><a class="btn gold" href="{first["slug"]}">Watch Lesson {first["n"]}</a></div>
     {ASIDE_SIM}
     {ASIDE_GUIDE}
     {ASIDE_WA}

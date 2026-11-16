@@ -22,6 +22,7 @@
 
 ## Learn
 - [Forex Basics: Zero to Hero, free forex course for beginners in Urdu/Hindi](https://qaziforextips.com/forex-basics-course.html): 116 short video lessons from zero (what forex is, pips, lots, leverage and margin, brokers, MT5, charts, sessions, risk, psychology, fundamentals, demo to real), with notes and a Roman Urdu summary for each.
+- [How to start forex trading: the free course roadmap (Lesson 0.1)](https://qaziforextips.com/lesson-how-to-start-forex-trading.html): start here; ESMA found 74–89% of retail CFD accounts lose money; learn in the right order (foundation, tools, survival: 116 lessons, 14 modules); same strategy with 10% vs 1% risk after five losses is −41% vs −5%; 4 rules for using the course; no signals, no guaranteed profit, no broker promotion.
 - [What is forex trading? (Lesson 1)](https://qaziforextips.com/lesson-what-is-forex-trading.html): forex means foreign exchange; about $9.6 trillion traded per day (BIS, April 2025); profit or loss comes from the price difference (money changer example); prices move with demand and supply; learn and use a demo account before real money.
 - [Free video courses in Urdu & Hindi](https://qaziforextips.com/youtube.html)
 - [Forex Guide](https://qaziforextips.com/forex-guide.html): sessions in Pakistan time, Smart Money Concepts, liquidity, order blocks, FVG, risk management, Gold trading, prop firm challenges.
