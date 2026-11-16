@@ -245,7 +245,13 @@ def hub_page():
 
 def main():
     for i, L in enumerate(LESSONS):
-        open(os.path.join(ROOT, L["slug"]), "w", encoding="utf-8").write(lesson_page(i, L))
+        out, page = os.path.join(ROOT, L["slug"]), lesson_page(i, L)
+        if os.path.exists(out):  # keep the YouTube comments block that yt-comments.py added
+            prev = open(out, encoding="utf-8").read()
+            m = re.search(r"<!--YTC-->.*?<!--/YTC-->", prev, re.S)
+            if m and "<!--YTC-->" not in page:
+                page = page.replace("\n    <h2>Related lessons</h2>", m.group(0) + "\n    <h2>Related lessons</h2>", 1)
+        open(out, "w", encoding="utf-8").write(page)
         print("wrote", L["slug"])
     open(os.path.join(ROOT, HUB), "w", encoding="utf-8").write(hub_page())
     print("wrote", HUB)
