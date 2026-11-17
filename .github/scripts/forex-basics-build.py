@@ -92,7 +92,7 @@ def lesson_page(i, L):
                       **({"endOffset": secs(L["chapters"][k + 1][0])} if k + 1 < len(L["chapters"]) else {"endOffset": secs(L["len"])}),
                       "url": f"https://www.youtube.com/watch?v={vid}&t={secs(t)}s"} for k, (t, n) in enumerate(L["chapters"])]},
         {"@type": "Article", "@id": url + "#article", "headline": L["h1"], "description": L["desc"], "url": url,
-         "mainEntityOfPage": url, "image": img, "datePublished": L["date"] + "T00:00:00+05:00",
+         "mainEntityOfPage": url, "image": ([{"@type": "ImageObject", "url": SITE + L["hero"] + ".jpg", "width": 1200, "height": 1200, "caption": L.get("hero_alt", L["h1"])}, img] if L.get("hero") else img), "datePublished": L["date"] + "T00:00:00+05:00",
          "dateModified": L.get("modified", L["date"]) + "T00:00:00+05:00", "inLanguage": "en",
          "articleSection": HUB_NAME, "keywords": L["keywords"], "video": {"@id": url + "#video"},
          "isPartOf": {"@id": SITE + HUB + "#course"}, "author": PERSON, "publisher": ORG},
@@ -121,13 +121,18 @@ def lesson_page(i, L):
     rel = ('<div class="rel"><a href="guide-forex-trading-in-pakistan-and-india.html"><small>Guide</small><span>Forex trading in Pakistan and India: rules, brokers, scams, Gold and hours</span></a>'
            '<a href="lesson-forex-trading-basics.html"><small>Price Action Basics</small><img src="https://i.ytimg.com/vi/9JfvsIfslCg/mqdefault.jpg" alt="" loading="lazy" width="320" height="180"><span>Forex trading for beginners: risk, demo or real account, and your broker</span></a>'
            '<a href="lesson-forex-myths.html"><small>Price Action Basics</small><img src="https://i.ytimg.com/vi/UnSphPChym8/mqdefault.jpg" alt="" loading="lazy" width="320" height="180"><span>Forex trading myths vs reality</span></a></div>')
+    H = L.get("hero")
+    hero_open = '<div class="fb-grid"><div>' if H else ""
+    hero_close = ('</div><figure class="fb-art ls-art3d"><img src="' + H + '.webp" srcset="' + H + '-600.webp 600w, ' + H + '.webp 1200w" sizes="(min-width:1000px) 420px, 100vw" width="1200" height="1200" alt="' + e(L.get("hero_alt", L["h1"])) + '" loading="lazy" decoding="async"></figure></div>'
+                  '<style>.fb-art{margin:28px 0 0}.fb-art img{display:block;width:100%;max-width:440px;height:auto;border-radius:16px;border:1px solid var(--line);box-shadow:0 24px 60px rgba(0,0,0,.35)}'
+                  '@media (max-width:999px){.ls-art3d{display:none}}@media (min-width:1000px){.fb-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,420px);gap:48px;align-items:center}.fb-art{margin:0}}</style>') if H else ""
     body = (f'''<main id="top">
-<section class="ls-hero"><div class="wrap">
+<section class="ls-hero"><div class="wrap">{hero_open}
   <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a>›<a href="youtube.html">Courses</a>›<a href="{HUB}">{HUB_NAME}</a>›<span>Lesson {num}</span></nav>
   <div class="ls-meta">{HUB_NAME} · Module {L["module"]} · Lesson {num} · {L["len"]} video · Urdu / Hindi</div>
   <h1>{e(L["h1"])}</h1>
   <p class="ls-lead">{e(L["lead"])}</p>
-  <div class="byline"><img src="dr-qazi-120.webp" alt="Dr. Qazi Abdul Basit" width="46" height="46"><div>Video lesson by <a href="about.html"><b>Dr. Qazi Abdul Basit</b></a>, Ph.D · Forex &amp; Gold trader since 2013<br>Notes by the Qazi Forex Tips team · Updated {nice_date(L.get("modified", L["date"]))}</div></div>
+  <div class="byline"><img src="dr-qazi-120.webp" alt="Dr. Qazi Abdul Basit" width="46" height="46"><div>Video lesson by <a href="about.html"><b>Dr. Qazi Abdul Basit</b></a>, Ph.D · Forex &amp; Gold trader since 2013<br>Notes by the Qazi Forex Tips team · Updated {nice_date(L.get("modified", L["date"]))}</div></div>{hero_close}
   <div class="ls-video"><iframe src="https://www.youtube.com/embed/{vid}?rel=0" title="{e(L["h1"])} – video lesson" loading="eager" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div>
   <div class="ls-vbar"><span>Watch in Urdu / Hindi · {L["len"]}</span><span>·</span><a href="https://www.youtube.com/watch?v={vid}" target="_blank" rel="noopener" style="color:var(--ink)">Open on YouTube</a></div>
 </div></section>
