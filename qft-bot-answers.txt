@@ -351,6 +351,7 @@ LINK: updates.html | What's New – Updates to Our Courses & MT5 Tools
 LINK: youtube.html | Free Forex Course in Urdu & Hindi – Video Lessons
 LINK: forex-basics-course.html | Forex Basics: Zero to Hero – Free Forex Course for Beginners (Urdu/Hindi)
 LINK: lesson-how-to-start-forex-trading.html | How to Start Forex Trading: Free Course Roadmap (Lesson 0.1)
+LINK: lesson-how-to-make-money-in-forex.html | How to Make Money in Forex: Who Wins, Who Loses (Lesson 0.2)
 LINK: lesson-what-is-forex-trading.html | What is Forex Trading? (Lesson 1.1)
 LINK: forex-roadmap.html | Forex Roadmap for Beginners: 6 Steps
 LINK: contact.html | Contact Qazi Forex Tips
