@@ -504,12 +504,14 @@ window.SITE = {
 
   /* ---------- 10. SAWAL JAWAB (FAQ) ---------- */
   faq: [
-    { q: "I am completely new. Where should I start?", a: "Start with Price Action Mastery – Basic Level on our YouTube page and watch it in order from Lecture 1. Practise on a demo account while you learn." },
+    { q: "I am completely new. Where should I start?", a: "Start with our free Forex Basics: Zero to Hero course in Urdu/Hindi: short lessons from what forex is to pips, lots, leverage, MT5 and risk management, each with notes. Practise every lesson on a demo account, then move on to the free Price Action courses on our YouTube page." },
+    { q: "Is there a free forex trading course in Urdu and Hindi?", a: "Yes. Every Qazi Forex Tips course is free on YouTube in Urdu and Hindi: Forex Basics: Zero to Hero for beginners, Price Action Basic, Price Action Advance and Trading Strategies, with written notes for each lesson on this website." },
+    { q: "Is forex trading legal in Pakistan?", a: "Learning and practising forex is legal. But the State Bank of Pakistan has told banks to stop payments to offshore forex, margin and CFD platforms, and the SECP says such platforms are not licensed in Pakistan. The regulated route for futures such as Gold is PMEX. Our guide on forex trading in Pakistan and India explains the current rules." },
+    { q: "Which free MT5 indicators and tools do you offer?", a: "QFT Sessions & Killzones, QFT FVG Pro and the QFT Trading Coach journal are 100% free downloads; the lot size calculator and the live Gold, Silver, Dollar and Bitcoin rate pages are free online. The QFT Replay Simulator and Trade Assistant have a free demo." },
     { q: "Are the YouTube courses free?", a: "Yes. Every course on the YouTube channel is free to watch, in Urdu and Hindi." },
     { q: "How do I join the next student batch?", a: "Send us a message on WhatsApp at +92-323-6700010 and we will share the details of the next batch." },
     { q: "How much money do I need to start trading?", a: "Learn and practise on a demo account first. When you go live, use only money you can afford to lose and keep the risk on each trade small, for example 1% of the account." },
-    { q: "How can I get the QFT Replay Simulator or an EA?", a: "Message us on WhatsApp. We will help you choose the right tool and guide you through setup and the licence." },
-    { q: "Do you give signals or guaranteed profits?", a: "No. We teach you to read the market and manage risk yourself. Trading carries high risk and nobody can guarantee profit." }
+    { q: "Do you give signals or guaranteed profits?", a: "No. We teach you to read the market and manage risk yourself. We do not sell signals, do not manage accounts and earn nothing from any broker. Trading carries high risk and nobody can guarantee profit." }
   ],
 
   /* ---------- 11. NEECHE KI LINE (FOOTER) ---------- */
