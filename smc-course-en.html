@@ -617,6 +617,24 @@ footer a:hover{color:var(--ink)}
 .smc-prog .st-ok{color:#22a56b;font-weight:600}.smc-prog .st-no{color:#e5535f;font-weight:600}
 .smc-prog td.pc{direction:ltr;text-align:center!important}
 .en-art .qn{margin-right:8px}
+
+.ls-body>.smc-art{min-width:0;max-width:100%}
+.smc-by img{border-radius:50%;object-fit:cover}
+.smc-author{box-sizing:border-box;max-width:100%;overflow-wrap:anywhere;display:flex;gap:18px;align-items:flex-start;margin:34px 0;border:1px solid var(--line);border-top:3px solid var(--gold);border-radius:14px;padding:18px 20px;background:var(--surface)}
+.smc-author>img{width:96px;height:96px;border-radius:50%;object-fit:cover;flex:none;border:2px solid var(--gold)}
+.smc-author>div{min-width:0;flex:1 1 auto;width:100%}
+.smc-author h3{margin:0 0 4px!important;font-size:22px!important}
+.smc-author h3 a{color:var(--ink);text-decoration:none}
+.smc-author .au-k{margin:0!important;font-size:14px;color:var(--gold-t,var(--gold));font-weight:700}
+.smc-author p{margin:0 0 8px!important}
+.smc-author .au-st{list-style:none;padding:0!important;margin:6px 0 10px!important;display:flex!important;flex-direction:row;flex-wrap:wrap;gap:8px}
+.smc-author .au-st b{display:inline-block;direction:ltr;unicode-bidi:isolate}
+.smc-author .au-st li{flex:0 0 auto;width:auto;margin:0!important;border:1px solid var(--line);border-radius:999px;padding:0 12px;font-size:.85em}
+.au-st b{color:var(--gold-t,var(--gold))}
+.au-how{font-size:.9em;color:var(--muted)}
+.au-ln{font-size:.92em}
+.en-au{direction:ltr;text-align:left}
+@media (max-width:640px){.smc-author{flex-direction:column;align-items:center;text-align:center}.au-st{justify-content:center}}
 @media (max-width:760px){.lang-sw{display:flex}.lang-sw a{flex:1;min-width:0}.smc-fig .l{font-size:16px}}
 </style>
 <script>
@@ -667,7 +685,7 @@ document.querySelectorAll('.smc-prog').forEach(function(p){
   <div class="ls-meta">Free course · 38 lessons · 9 phases</div>
   <h1 class="smc-h1e">SMC Course: The Complete Smart Money Concepts Roadmap</h1>
   <p class="smc-leade">This free course takes SMC from zero to a complete trading plan: 9 phases, 38 lessons. Every lesson has chart diagrams to explain it, and ends with a checklist and a practical assignment. Read in order and don&#x27;t move on without passing each phase gate.</p>
-  <div class="byline"><img src="logo-128.webp" alt="Qazi Forex Tips" width="46" height="46"><div>Written by <a href="about.html"><b>Dr. Qazi Abdul Basit</b></a>, Ph.D · Qazi Forex Tips SMC Course<br>Published 19 November 2026</div></div>
+  <div class="byline smc-by"><img src="img/smc/dr-qazi-96.webp" alt="Dr. Qazi Abdul Basit" width="46" height="46"><div>Written by <a href="about.html" rel="author"><b>Dr. Qazi Abdul Basit</b></a>, Ph.D · Forex &amp; Gold trader since 2013<br>Updated 19 November 2026 · <a href="#author">About the author</a></div></div>
   <p style="margin-top:18px"><a class="btn gold" href="smc-kya-hai-en.html">Start the first lesson</a></p>
 </div><figure class="qa-art"><img src="img/smc/smc-course-en.webp" srcset="img/smc/smc-course-en-540.webp 540w, img/smc/smc-course-en.webp 1080w" sizes="(min-width:1000px) 420px, 100vw" width="1080" height="1350" alt="SMC course roadmap: 3D staircase from phase 0 basics through structure, liquidity, POI zones, entry models and risk to a full trading plan" fetchpriority="high" decoding="async"></figure></div></section>
 <div class="wrap ls-body">
@@ -690,6 +708,17 @@ document.querySelectorAll('.smc-prog').forEach(function(p){
   <div class="tbl"><table><thead><tr><th>Lesson</th><th>Best score</th><th>Status</th></tr></thead><tbody></tbody></table></div>
 </section>
     <div class="smc-box"><h2>Before you start: checklist</h2><ul class="ck" data-k="hub"><li><input type="checkbox" id="c0"><label for="c0">I have looked at the whole roadmap</label></li><li><input type="checkbox" id="c1"><label for="c1">I have set a daily time for the course</label></li><li><input type="checkbox" id="c2"><label for="c2">My demo account and charting platform are ready</label></li><li><input type="checkbox" id="c3"><label for="c3">I have started a trading journal (notebook or sheet)</label></li><li><input type="checkbox" id="c4"><label for="c4">I will pass each phase gate before moving on</label></li></ul></div>
+    <section class="smc-author en-au" id="author" aria-label="Author">
+  <img src="img/smc/dr-qazi-192.webp" alt="Dr. Qazi Abdul Basit" width="96" height="96" loading="lazy">
+  <div>
+    <p class="au-k">Who wrote this lesson</p>
+    <h3><a href="about.html" rel="author">Dr. Qazi Abdul Basit</a>, Ph.D</h3>
+    <p>Ph.D in Business Administration and a forex and Gold trader since 2013. Founder of Qazi Forex Tips, which teaches traders in Pakistan and India price action, risk management and trading psychology in their own language: 65 student batches so far, free courses on YouTube, and MT5 tools for traders (QFT Replay Simulator, QFT Trade Assistant).</p>
+    <ul class="au-st"><li><b>2013</b> trading since</li><li><b>75K+</b> Facebook group members</li><li><b>65</b> student batches</li><li><b>15K+</b> YouTube subscribers</li></ul>
+    <p class="au-how"><b>How this lesson was made:</b> the content follows Dr. Qazi's teaching method and years of trading. Real charts are built from Dukascopy Gold (XAUUSD) data, and backtest results are shown as they came out, even when negative. We do not sell signals, manage accounts or take money from any broker. Last updated: 19 November 2026.</p>
+    <p class="au-ln"><a href="about.html">Full profile</a> · <a href="https://www.youtube.com/@QaziForexTips" target="_blank" rel="noopener">YouTube</a> · <a href="https://www.facebook.com/groups/qaziforextips" target="_blank" rel="noopener">Facebook group</a> · <a href="feedback.html">Student feedback</a></p>
+  </div>
+</section>
     <div class="ls-faq en-faq"><h2>Questions</h2><details><summary>What is SMC?</summary><p>Smart Money Concepts is a price action method that uses market structure, liquidity and institutional zones (order blocks, FVGs) to judge where price is likely to go.</p></details><details><summary>Is this SMC course free?</summary><p>Yes. The full course on the website is free, with diagrams, a checklist and an assignment in every lesson.</p></details><details><summary>How long does it take to learn SMC?</summary><p>With one to one and a half hours a day the course takes 4 to 6 months, but skill comes from backtesting and practice.</p></details><details><summary>Are SMC and ICT the same thing?</summary><p>SMC mostly comes from ICT&#x27;s concepts. This course covers the common terms of both (BOS, CHoCH, FVG, OTE, killzone) in a simple order.</p></details><details><summary>What is the best order to learn SMC?</summary><p>Basics, market structure, liquidity, points of interest, time and sessions, entry models, risk, then backtesting and journaling.</p></details><details><summary>Is the course available in Urdu?</summary><p>Yes. Every lesson has an Urdu version; use the Urdu / English button at the top of each page.</p></details></div>
     <p class="ls-disc" dir="ltr" style="text-align:left">Education only, not financial advice. Trading forex, Gold and CFDs carries a high risk of loss.</p>
   </article>
