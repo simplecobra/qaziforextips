@@ -576,11 +576,78 @@ footer a:hover{color:var(--ink)}
 .outline.en-out .n{margin-left:0;margin-right:6px}
 .smc-pn.en-pn{direction:ltr}
 .smc-pn.en-pn .nx{text-align:right}
+
+.smc-quiz{margin:40px 0;border:2px solid var(--gold);border-radius:16px;padding:18px 22px;background:var(--surface)}
+.smc-quiz h2{margin-top:0!important}
+.smc-quiz .qin{color:var(--muted)}
+.qbar{height:10px;border-radius:99px;background:var(--line);overflow:hidden;margin:8px 0}
+.qfill{height:100%;width:0;background:var(--gold);transition:width .3s}
+.qsc{font-weight:600;margin:4px 0 10px}
+.qsc .qs-c{color:#22a56b}
+.qlist{list-style:none;padding:0!important;margin:0}
+.qq{border-top:1px dashed var(--line);padding:12px 0}
+.qt{margin:0 0 8px!important;font-weight:600}
+.qn{display:inline-block;font-size:.78em;color:var(--gold-t,var(--gold));margin-inline-end:8px;font-weight:700}
+.qos{display:grid;gap:8px}
+.qo{all:unset;box-sizing:border-box;display:block;cursor:pointer;border:1px solid var(--line);border-radius:10px;padding:6px 14px;line-height:inherit;font:inherit;font-size:.95em;color:var(--ink);background:var(--bg,transparent)}
+.qo:hover,.qo:focus-visible{border-color:var(--gold);outline:none}
+.qq.done .qo{cursor:default}
+.qq.done .qo:hover{border-color:var(--line)}
+.qo.ok{border-color:#22a56b!important;background:rgba(34,165,107,.14)}
+.qo.bad{border-color:#e5535f!important;background:rgba(229,83,95,.14)}
+.qw{margin:8px 0 0!important;font-size:.92em;color:var(--muted)}
+.qw .qv.y{color:#22a56b}.qw .qv.n{color:#e5535f}
+.qw .qr b{color:var(--ink)}
+.qres{margin-top:16px;border-top:2px solid var(--gold);padding-top:12px;text-align:center}
+.qres h3{margin:0!important}
+.qbig{font:700 54px/1.2 var(--f-display,var(--f-body));color:var(--gold-t,var(--gold));direction:ltr}
+.qbig small{font-size:20px;color:var(--muted);display:block}
+.qgr{font-weight:600}
+.qbest{color:var(--muted);font-size:.9em}
+.qmiss{text-align:start;margin:10px 0}
+.qmiss ol{margin:4px 0 0;font-size:.92em}
+.qmiss a{color:var(--gold-t,var(--gold))}
+.qbtns .btn{margin:4px}
+.smc-prog{margin:34px 0;border:2px solid var(--gold);border-radius:16px;padding:16px 22px;background:var(--surface)}
+.smc-prog h2{margin-top:0!important}
+.qstats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:10px 0 14px}
+.qstats div{border:1px solid var(--line);border-radius:12px;padding:8px;text-align:center}
+.qstats b{display:block;font:700 30px/1.3 var(--f-body);color:var(--gold-t,var(--gold));direction:ltr}
+.qstats span{font-size:.85em;color:var(--muted)}
+.smc-prog .st-ok{color:#22a56b;font-weight:600}.smc-prog .st-no{color:#e5535f;font-weight:600}
+.smc-prog td.pc{direction:ltr;text-align:center!important}
+.en-art .qn{margin-right:8px}
 @media (max-width:760px){.lang-sw{display:flex}.lang-sw a{flex:1;min-width:0}.smc-fig .l{font-size:16px}}
 </style>
 <script>
 document.addEventListener('DOMContentLoaded',function(){document.querySelectorAll('ul.ck').forEach(function(ul){var k='smc-ck-'+ul.dataset.k,s={};try{s=JSON.parse(localStorage.getItem(k)||'{}')}catch(e){}
 ul.querySelectorAll('input').forEach(function(i){if(s[i.id]){i.checked=true;i.closest('li').classList.add('done')}i.addEventListener('change',function(){s[i.id]=i.checked;i.closest('li').classList.toggle('done',i.checked);try{localStorage.setItem(k,JSON.stringify(s))}catch(e){}})})})});
+
+document.addEventListener('DOMContentLoaded',function(){
+var K='smc-quiz';function ld(){try{return JSON.parse(localStorage.getItem(K)||'{}')}catch(e){return{}}}function sv(d){try{localStorage.setItem(K,JSON.stringify(d))}catch(e){}}
+document.querySelectorAll('.smc-quiz').forEach(function(z){
+ var cfg=JSON.parse(z.dataset.q),t=JSON.parse(z.dataset.t),qs=[].slice.call(z.querySelectorAll('.qq')),n=qs.length,ans=0,cor=0,miss=[];
+ function shuf(q){var b=q.querySelector('.qos'),o=[].slice.call(b.children);for(var i=o.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var x=o[i];o[i]=o[j];o[j]=x}o.forEach(function(e){b.appendChild(e)})}
+ function upd(){z.querySelector('.qs-c').textContent=cor;z.querySelector('.qs-a').textContent=ans;z.querySelector('.qfill').style.width=(ans/n*100)+'%'}
+ function fin(){var pc=Math.round(cor/n*100),d=ld(),r=d[cfg.slug]||{best:0,tries:0};r.tries++;r.last=pc;if(pc>r.best)r.best=pc;r.at=Date.now();d[cfg.slug]=r;sv(d);
+  var res=z.querySelector('.qres');res.hidden=false;z.querySelector('.qbig').innerHTML=pc+'%<small>'+cor+' / '+n+'</small>';
+  z.querySelector('.qgr').textContent=pc>=90?t.g1:(pc>=cfg.pass?t.g2:t.g3);
+  z.querySelector('.qbest').innerHTML=t.best+': <bdi dir="ltr">'+r.best+'%</bdi> · '+t.tries+': '+r.tries;
+  var m=z.querySelector('.qmiss'),ol=m.querySelector('ol');ol.innerHTML='';miss.forEach(function(i){var li=document.createElement('li'),a=document.createElement('a');a.href='#q'+cfg.slug+i;var qc=qs[i].querySelector('.qt').cloneNode(true);qc.removeChild(qc.querySelector('.qn'));a.textContent=t.qn+' '+(i+1)+': '+qc.textContent;li.appendChild(a);ol.appendChild(li)});m.hidden=!miss.length;
+  var nx=z.querySelector('.qnx');if(nx)nx.hidden=pc<cfg.pass;res.scrollIntoView({behavior:'smooth',block:'center'})}
+ qs.forEach(function(q,i){q.id='q'+cfg.slug+i;shuf(q);q.querySelectorAll('.qo').forEach(function(b){b.addEventListener('click',function(){if(q.classList.contains('done'))return;q.classList.add('done');ans++;var c=q.querySelector('.qo[data-c]'),w=q.querySelector('.qw'),v=w.querySelector('.qv');c.classList.add('ok');
+  if(b===c){cor++;v.textContent=t.ok+'!';v.className='qv y';w.querySelector('.qr').textContent=''}else{b.classList.add('bad');miss.push(i);v.textContent=t.no+'.';v.className='qv n';w.querySelector('.qr').innerHTML='<b>'+t.right+'</b> '+c.innerHTML+'. '}
+  w.hidden=false;upd();if(ans===n)fin()})})});
+ z.querySelector('.qre').addEventListener('click',function(){ans=0;cor=0;miss=[];qs.forEach(function(q){q.classList.remove('done');q.querySelectorAll('.qo').forEach(function(b){b.classList.remove('ok','bad')});q.querySelector('.qw').hidden=true;shuf(q)});z.querySelector('.qres').hidden=true;upd();qs[0].scrollIntoView({behavior:'smooth',block:'center'})});
+});
+document.querySelectorAll('.smc-prog').forEach(function(p){
+ var L=JSON.parse(p.dataset.l),t=JSON.parse(p.dataset.t),P=+p.dataset.p,d=ld(),tb=p.querySelector('tbody'),done=0,pass=0,sum=0;
+ L.forEach(function(x){var r=d[x[0]],tr=document.createElement('tr'),a='<a href="'+x[3]+'#quiz">'+x[1]+' · '+x[2]+'</a>';
+  if(r){done++;sum+=r.best;if(r.best>=P)pass++}
+  tr.innerHTML='<td>'+a+'</td><td class="pc">'+(r?r.best+'%':'—')+'</td><td>'+(r?(r.best>=P?'<span class="st-ok">✓ '+t.ok+'</span>':'<a class="st-no" href="'+x[3]+'#quiz">'+t.no+'</a>'):'<a href="'+x[3]+'#quiz">'+t.go+'</a>')+'</td>';tb.appendChild(tr)});
+ p.querySelector('.qstats').innerHTML='<div><b>'+done+'/'+L.length+'</b><span>'+t.done+'</span></div><div><b>'+pass+'</b><span>'+t.passed+'</span></div><div><b>'+(done?Math.round(sum/done)+'%':'—')+'</b><span>'+t.avg+'</span></div>';
+});
+});
 </script>
 </head>
 <body>
@@ -646,6 +713,16 @@ ul.querySelectorAll('input').forEach(function(i){if(s[i.id]){i.checked=true;i.cl
 <div class="call warn"><b class="k">Common mistake</b>Treating an outside bar that sweeps both sides as a CRT.</div>
 <h2 id="s38">Summary</h2>
 <ul><li>Model C: a pullback to the OB and FVG after a BOS in a trend.</li><li>Model D: a breaker retest after a sweep and MSS.</li><li>Model E (CRT): candle 2 sweeps one edge of candle 1 and closes inside; the target is the other edge.</li><li>Master one model first.</li></ul>
+    <section class="smc-quiz" id="quiz" data-q="{&quot;slug&quot;:&quot;smc-entry-ob-fvg-breaker-crt&quot;,&quot;pass&quot;:70,&quot;n&quot;:9}" data-t="{&quot;h&quot;: &quot;Test yourself: Lesson {n} quiz&quot;, &quot;intro&quot;: &quot;{c} questions. Pick one answer for each and you will see at once whether it is right and why. Your score and grade appear at the end. You need {p}% to pass.&quot;, &quot;score&quot;: &quot;correct&quot;, &quot;of&quot;: &quot;of&quot;, &quot;ok&quot;: &quot;Correct&quot;, &quot;no&quot;: &quot;Not quite&quot;, &quot;right&quot;: &quot;Correct answer:&quot;, &quot;why&quot;: &quot;Why:&quot;, &quot;res&quot;: &quot;Your result&quot;, &quot;best&quot;: &quot;Best score so far&quot;, &quot;tries&quot;: &quot;Attempts&quot;, &quot;retry&quot;: &quot;Try again&quot;, &quot;g1&quot;: &quot;Excellent! You have mastered this lesson.&quot;, &quot;g2&quot;: &quot;Well done, you passed. Read the explanation for any question you missed.&quot;, &quot;g3&quot;: &quot;Not passed yet. Review the questions you missed below, reread the lesson and try again.&quot;, &quot;wrong&quot;: &quot;Questions you missed:&quot;, &quot;nx&quot;: &quot;Next lesson&quot;, &quot;reread&quot;: &quot;Reread the lesson&quot;, &quot;qn&quot;: &quot;Question&quot;}">
+  <h2>Test yourself: Lesson 5.4 quiz</h2>
+  <p class="qin">9 questions. Pick one answer for each and you will see at once whether it is right and why. Your score and grade appear at the end. You need 70% to pass.</p>
+  <div class="qbar"><div class="qfill"></div></div>
+  <p class="qsc" aria-live="polite"><b class="qs-c">0</b> correct · <span class="qs-a">0</span> / 9</p>
+  <ol class="qlist"><li class="qq"><p class="qt"><span class="qn">Question 1</span>What idea do all SMC models share?</p><div class="qos"><button type="button" class="qo" data-c="1">Liquidity, confirmation and a cheap entry</button><button type="button" class="qo">An indicator cross and an instant entry</button><button type="button" class="qo">Breakouts only, and chasing them</button><button type="button" class="qo">Big news only, and its spike</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">The difference is only the situation: A, B, C, D, E.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 2</span>Which situation is model C for?</p><div class="qos"><button type="button" class="qo" data-c="1">Running trend: pullback to OB/FVG after a BOS</button><button type="button" class="qo">Reversal: MSS after a sweep</button><button type="button" class="qo">Range: trading the edges</button><button type="button" class="qo">News: an FVG after the spike</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">Don&#x27;t take model C when the trend is extended and price is in higher timeframe premium.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 3</span>When models A and D form in the same place, what is the difference?</p><div class="qos"><button type="button" class="qo" data-c="1">Entry spot: FVG in A, breaker zone in D</button><button type="button" class="qo">A is only for sells, D only for buys</button><button type="button" class="qo">D only on Daily, A only on M5</button><button type="button" class="qo">No difference; they are the same</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">Model D: low, high, lower low (sweep), break of the high, then the breaker retest.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 4</span>In a bullish CRT, what must candle 2 do?</p><div class="qos"><button type="button" class="qo" data-c="1">Sweep the low, not the high, close inside</button><button type="button" class="qo">Take both high and low, close inside</button><button type="button" class="qo">Sweep the low and close below it</button><button type="button" class="qo">Not touch candle 1&#x27;s range at all</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">If candle 2 closes below the low the CRT is cancelled; if it takes both sides it is not a CRT.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 5</span>What are the targets of a bullish CRT?</p><div class="qos"><button type="button" class="qo" data-c="1">TP1 candle 1&#x27;s 50%, TP2 candle 1&#x27;s high</button><button type="button" class="qo">TP1 candle 2&#x27;s low, TP2 candle 1&#x27;s low</button><button type="button" class="qo">TP1 candle 1&#x27;s high, TP2 the weekly high</button><button type="button" class="qo">TP1 entry +1 dollar, no TP2</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">The SL goes below candle 2&#x27;s swept low.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 6</span>How does CRT connect to the Power of 3?</p><div class="qos"><button type="button" class="qo" data-c="1">Candle 1 = A, candle 2&#x27;s sweep = M, candle 3 = D</button><button type="button" class="qo">Candle 1 = D, candle 2 = A, candle 3 = M</button><button type="button" class="qo">Candle 1 = M, candle 2 = D, candle 3 = A</button><button type="button" class="qo">The two are not related at all</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">H4 candles work well on Gold; ICT-style H4 candles count from New York midnight.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 7</span>Why is CRT alone weak?</p><div class="qos"><button type="button" class="qo" data-c="1">It happens daily on every chart; filters are needed</button><button type="button" class="qo">It forms very rarely, once or twice a year</button><button type="button" class="qo">It only forms on M1, never on higher timeframes</button><button type="button" class="qo">It isn&#x27;t weak; it is enough on its own</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">Filters: a sweep of significant liquidity, bias agreement, an LTF CHoCH and FVG, a killzone.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 8</span>What is the advice for learning the models?</p><div class="qos"><button type="button" class="qo" data-c="1">One model, 50 backtests, then another</button><button type="button" class="qo">All five at once, for more setups</button><button type="button" class="qo">A new model daily, to learn them all</button><button type="button" class="qo">No backtest; go straight live</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">One model, one instrument, one session.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 9</span>Gold CRT: candle 1 high 4,146, low 4,110; candle 2 drops to 4,103 and closes 4,114. Where is TP1?</p><div class="qos"><button type="button" class="qo" data-c="1">4,128</button><button type="button" class="qo">4,146</button><button type="button" class="qo">4,103</button><button type="button" class="qo">4,110</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">Entry 4,113, SL 4,101; close half at TP1 and move to break-even, TP2 at 4,146 (about 1:2.75).</span></p></li></ol>
+  <div class="qres" hidden aria-live="polite"><h3>Your result</h3><div class="qbig"></div><p class="qgr"></p><p class="qbest"></p>
+    <div class="qmiss" hidden><b>Questions you missed:</b><ol></ol></div>
+    <p class="qbtns"><button type="button" class="btn qre">Try again</button> <a class="btn" href="#top">Reread the lesson</a> <a class="btn gold qnx" href="smc-confirmation-vs-risk-entry-en.html" hidden>Next lesson ›</a></p></div>
+</section>
     <div class="smc-box"><h2>Lesson checklist</h2><p>Tick each point once you understand it. Your ticks are saved in this browser.</p><ul class="ck" data-k="smc-entry-ob-fvg-breaker-crt"><li><input type="checkbox" id="c0"><label for="c0">I take model C only in a clean trend with a discount pullback</label></li><li><input type="checkbox" id="c1"><label for="c1">For model D I look for the sweep and MSS first</label></li><li><input type="checkbox" id="c2"><label for="c2">In CRT I wait for candle 2 to close back inside</label></li><li><input type="checkbox" id="c3"><label for="c3">The CRT targets are the 50% and then candle 1&#x27;s other edge</label></li><li><input type="checkbox" id="c4"><label for="c4">I focus on mastering one model for now</label></li></ul></div>
     <div class="smc-box asg"><h2>Assignment</h2><ol><li>Find every bullish and bearish CRT on Gold H4 last month.</li><li>Check how many reached the 50% and how many reached the other edge.</li><li>Find 10 model C and 10 model D examples on M15.</li><li>Record the win rate and average R of all three models.</li><li>Decide which model you will adopt first and explain why in the group.</li></ol><p>Post your assignment screenshots with your reasons in our free Facebook group, where your charts will be checked.</p><a class="btn gold" href="https://www.facebook.com/groups/qaziforextips" target="_blank" rel="noopener">Join the free group</a></div>
     <div class="ls-faq en-faq"><h2>Questions</h2><details><summary>What is Candle Range Theory?</summary><p>Each candle is a range; when the next candle sweeps one extreme and closes back inside, price often targets the opposite extreme.</p></details><details><summary>When is a CRT cancelled?</summary><p>When candle 2 closes beyond the swept edge, or takes both edges.</p></details><details><summary>Which model should a new trader learn first?</summary><p>Model A or B; add another after 50 backtest trades on the first.</p></details></div>

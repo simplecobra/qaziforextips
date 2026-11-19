@@ -576,11 +576,78 @@ footer a:hover{color:var(--ink)}
 .outline.en-out .n{margin-left:0;margin-right:6px}
 .smc-pn.en-pn{direction:ltr}
 .smc-pn.en-pn .nx{text-align:right}
+
+.smc-quiz{margin:40px 0;border:2px solid var(--gold);border-radius:16px;padding:18px 22px;background:var(--surface)}
+.smc-quiz h2{margin-top:0!important}
+.smc-quiz .qin{color:var(--muted)}
+.qbar{height:10px;border-radius:99px;background:var(--line);overflow:hidden;margin:8px 0}
+.qfill{height:100%;width:0;background:var(--gold);transition:width .3s}
+.qsc{font-weight:600;margin:4px 0 10px}
+.qsc .qs-c{color:#22a56b}
+.qlist{list-style:none;padding:0!important;margin:0}
+.qq{border-top:1px dashed var(--line);padding:12px 0}
+.qt{margin:0 0 8px!important;font-weight:600}
+.qn{display:inline-block;font-size:.78em;color:var(--gold-t,var(--gold));margin-inline-end:8px;font-weight:700}
+.qos{display:grid;gap:8px}
+.qo{all:unset;box-sizing:border-box;display:block;cursor:pointer;border:1px solid var(--line);border-radius:10px;padding:6px 14px;line-height:inherit;font:inherit;font-size:.95em;color:var(--ink);background:var(--bg,transparent)}
+.qo:hover,.qo:focus-visible{border-color:var(--gold);outline:none}
+.qq.done .qo{cursor:default}
+.qq.done .qo:hover{border-color:var(--line)}
+.qo.ok{border-color:#22a56b!important;background:rgba(34,165,107,.14)}
+.qo.bad{border-color:#e5535f!important;background:rgba(229,83,95,.14)}
+.qw{margin:8px 0 0!important;font-size:.92em;color:var(--muted)}
+.qw .qv.y{color:#22a56b}.qw .qv.n{color:#e5535f}
+.qw .qr b{color:var(--ink)}
+.qres{margin-top:16px;border-top:2px solid var(--gold);padding-top:12px;text-align:center}
+.qres h3{margin:0!important}
+.qbig{font:700 54px/1.2 var(--f-display,var(--f-body));color:var(--gold-t,var(--gold));direction:ltr}
+.qbig small{font-size:20px;color:var(--muted);display:block}
+.qgr{font-weight:600}
+.qbest{color:var(--muted);font-size:.9em}
+.qmiss{text-align:start;margin:10px 0}
+.qmiss ol{margin:4px 0 0;font-size:.92em}
+.qmiss a{color:var(--gold-t,var(--gold))}
+.qbtns .btn{margin:4px}
+.smc-prog{margin:34px 0;border:2px solid var(--gold);border-radius:16px;padding:16px 22px;background:var(--surface)}
+.smc-prog h2{margin-top:0!important}
+.qstats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:10px 0 14px}
+.qstats div{border:1px solid var(--line);border-radius:12px;padding:8px;text-align:center}
+.qstats b{display:block;font:700 30px/1.3 var(--f-body);color:var(--gold-t,var(--gold));direction:ltr}
+.qstats span{font-size:.85em;color:var(--muted)}
+.smc-prog .st-ok{color:#22a56b;font-weight:600}.smc-prog .st-no{color:#e5535f;font-weight:600}
+.smc-prog td.pc{direction:ltr;text-align:center!important}
+.en-art .qn{margin-right:8px}
 @media (max-width:760px){.lang-sw{display:flex}.lang-sw a{flex:1;min-width:0}.smc-fig .l{font-size:16px}}
 </style>
 <script>
 document.addEventListener('DOMContentLoaded',function(){document.querySelectorAll('ul.ck').forEach(function(ul){var k='smc-ck-'+ul.dataset.k,s={};try{s=JSON.parse(localStorage.getItem(k)||'{}')}catch(e){}
 ul.querySelectorAll('input').forEach(function(i){if(s[i.id]){i.checked=true;i.closest('li').classList.add('done')}i.addEventListener('change',function(){s[i.id]=i.checked;i.closest('li').classList.toggle('done',i.checked);try{localStorage.setItem(k,JSON.stringify(s))}catch(e){}})})})});
+
+document.addEventListener('DOMContentLoaded',function(){
+var K='smc-quiz';function ld(){try{return JSON.parse(localStorage.getItem(K)||'{}')}catch(e){return{}}}function sv(d){try{localStorage.setItem(K,JSON.stringify(d))}catch(e){}}
+document.querySelectorAll('.smc-quiz').forEach(function(z){
+ var cfg=JSON.parse(z.dataset.q),t=JSON.parse(z.dataset.t),qs=[].slice.call(z.querySelectorAll('.qq')),n=qs.length,ans=0,cor=0,miss=[];
+ function shuf(q){var b=q.querySelector('.qos'),o=[].slice.call(b.children);for(var i=o.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var x=o[i];o[i]=o[j];o[j]=x}o.forEach(function(e){b.appendChild(e)})}
+ function upd(){z.querySelector('.qs-c').textContent=cor;z.querySelector('.qs-a').textContent=ans;z.querySelector('.qfill').style.width=(ans/n*100)+'%'}
+ function fin(){var pc=Math.round(cor/n*100),d=ld(),r=d[cfg.slug]||{best:0,tries:0};r.tries++;r.last=pc;if(pc>r.best)r.best=pc;r.at=Date.now();d[cfg.slug]=r;sv(d);
+  var res=z.querySelector('.qres');res.hidden=false;z.querySelector('.qbig').innerHTML=pc+'%<small>'+cor+' / '+n+'</small>';
+  z.querySelector('.qgr').textContent=pc>=90?t.g1:(pc>=cfg.pass?t.g2:t.g3);
+  z.querySelector('.qbest').innerHTML=t.best+': <bdi dir="ltr">'+r.best+'%</bdi> · '+t.tries+': '+r.tries;
+  var m=z.querySelector('.qmiss'),ol=m.querySelector('ol');ol.innerHTML='';miss.forEach(function(i){var li=document.createElement('li'),a=document.createElement('a');a.href='#q'+cfg.slug+i;var qc=qs[i].querySelector('.qt').cloneNode(true);qc.removeChild(qc.querySelector('.qn'));a.textContent=t.qn+' '+(i+1)+': '+qc.textContent;li.appendChild(a);ol.appendChild(li)});m.hidden=!miss.length;
+  var nx=z.querySelector('.qnx');if(nx)nx.hidden=pc<cfg.pass;res.scrollIntoView({behavior:'smooth',block:'center'})}
+ qs.forEach(function(q,i){q.id='q'+cfg.slug+i;shuf(q);q.querySelectorAll('.qo').forEach(function(b){b.addEventListener('click',function(){if(q.classList.contains('done'))return;q.classList.add('done');ans++;var c=q.querySelector('.qo[data-c]'),w=q.querySelector('.qw'),v=w.querySelector('.qv');c.classList.add('ok');
+  if(b===c){cor++;v.textContent=t.ok+'!';v.className='qv y';w.querySelector('.qr').textContent=''}else{b.classList.add('bad');miss.push(i);v.textContent=t.no+'.';v.className='qv n';w.querySelector('.qr').innerHTML='<b>'+t.right+'</b> '+c.innerHTML+'. '}
+  w.hidden=false;upd();if(ans===n)fin()})})});
+ z.querySelector('.qre').addEventListener('click',function(){ans=0;cor=0;miss=[];qs.forEach(function(q){q.classList.remove('done');q.querySelectorAll('.qo').forEach(function(b){b.classList.remove('ok','bad')});q.querySelector('.qw').hidden=true;shuf(q)});z.querySelector('.qres').hidden=true;upd();qs[0].scrollIntoView({behavior:'smooth',block:'center'})});
+});
+document.querySelectorAll('.smc-prog').forEach(function(p){
+ var L=JSON.parse(p.dataset.l),t=JSON.parse(p.dataset.t),P=+p.dataset.p,d=ld(),tb=p.querySelector('tbody'),done=0,pass=0,sum=0;
+ L.forEach(function(x){var r=d[x[0]],tr=document.createElement('tr'),a='<a href="'+x[3]+'#quiz">'+x[1]+' · '+x[2]+'</a>';
+  if(r){done++;sum+=r.best;if(r.best>=P)pass++}
+  tr.innerHTML='<td>'+a+'</td><td class="pc">'+(r?r.best+'%':'—')+'</td><td>'+(r?(r.best>=P?'<span class="st-ok">✓ '+t.ok+'</span>':'<a class="st-no" href="'+x[3]+'#quiz">'+t.no+'</a>'):'<a href="'+x[3]+'#quiz">'+t.go+'</a>')+'</td>';tb.appendChild(tr)});
+ p.querySelector('.qstats').innerHTML='<div><b>'+done+'/'+L.length+'</b><span>'+t.done+'</span></div><div><b>'+pass+'</b><span>'+t.passed+'</span></div><div><b>'+(done?Math.round(sum/done)+'%':'—')+'</b><span>'+t.avg+'</span></div>';
+});
+});
 </script>
 </head>
 <body>
@@ -645,6 +712,16 @@ ul.querySelectorAll('input').forEach(function(i){if(s[i.id]){i.checked=true;i.cl
 <p><b>نتیجہ: بغیر فلٹر کے CRT ان دو مہینوں میں تھوڑا نقصان میں رہا۔</b> ہم نے RR کا فلٹر (کم از کم 1:1 اور 1:1.5) بھی آزمایا، تب بھی نتیجہ منفی رہا۔ یہی بیک ٹیسٹ کا فائدہ ہے: اصل پیسہ لگانے سے پہلے پتہ چل گیا کہ یہ قاعدہ اکیلا کافی نہیں۔ اگلا قدم: <b>ایک</b> فلٹر (مثلاً صرف H4 بائس کی سمت، یا صرف کل زون میں سویپ) لگا کر دوبارہ ٹیسٹ، اور زیادہ مہینوں کا ڈیٹا۔ دو مہینے اور 62 ٹریڈز ابتدائی اندازہ ہیں، حتمی فیصلہ نہیں۔</p>
 <h2 id="s36">خلاصہ</h2>
 <ul><li>قاعدہ پہلے لکھیں، بیک ٹیسٹ میں نہ بدلیں۔</li><li>ایک انسٹرومنٹ، ایک ٹائم فریم سیٹ، ریپلے میں بغیر آگے دیکھے۔</li><li>کم از کم 50 ٹریڈز، 3 مہینے؛ ون ریٹ، اوسط RR، فی ٹریڈ اوسط، لگاتار لاس اور ڈرا ڈاؤن دیکھیں۔</li><li>ہائنڈ سائٹ، اوور فٹنگ، چنی ہوئی تاریخیں اور سپریڈ بھولنے سے بچیں۔</li></ul>
+    <section class="smc-quiz" id="quiz" data-q="{&quot;slug&quot;:&quot;smc-backtesting&quot;,&quot;pass&quot;:70,&quot;n&quot;:9}" data-t="{&quot;h&quot;: &quot;اپنا ٹیسٹ کریں: سبق {n} کا کوئز&quot;, &quot;intro&quot;: &quot;کل {c} سوال۔ ہر سوال کا ایک جواب چنیں، فوراً پتا چلے گا کہ درست ہے یا نہیں اور کیوں۔ آخر میں آپ کا سکور اور گریڈ آئے گا۔ پاس ہونے کے لیے {p}% چاہیے۔&quot;, &quot;score&quot;: &quot;درست&quot;, &quot;of&quot;: &quot;میں سے&quot;, &quot;ok&quot;: &quot;درست جواب&quot;, &quot;no&quot;: &quot;غلط جواب&quot;, &quot;right&quot;: &quot;درست جواب:&quot;, &quot;why&quot;: &quot;وجہ:&quot;, &quot;res&quot;: &quot;آپ کا نتیجہ&quot;, &quot;best&quot;: &quot;اب تک کا بہترین سکور&quot;, &quot;tries&quot;: &quot;کوششیں&quot;, &quot;retry&quot;: &quot;دوبارہ کوشش کریں&quot;, &quot;g1&quot;: &quot;شاندار! آپ اس سبق کے ماہر ہیں۔&quot;, &quot;g2&quot;: &quot;بہت اچھا! آپ پاس ہیں۔ غلط سوالوں کی وجہ ایک بار پڑھ لیں۔&quot;, &quot;g3&quot;: &quot;ابھی پاس نہیں ہوئے۔ نیچے دیے گئے غلط سوال دیکھیں، سبق دوبارہ پڑھیں اور پھر کوشش کریں۔&quot;, &quot;wrong&quot;: &quot;جن سوالوں پر غلطی ہوئی:&quot;, &quot;nx&quot;: &quot;اگلا سبق&quot;, &quot;reread&quot;: &quot;سبق دوبارہ پڑھیں&quot;, &quot;qn&quot;: &quot;سوال&quot;}">
+  <h2>اپنا ٹیسٹ کریں: سبق 7.1 کا کوئز</h2>
+  <p class="qin">کل 9 سوال۔ ہر سوال کا ایک جواب چنیں، فوراً پتا چلے گا کہ درست ہے یا نہیں اور کیوں۔ آخر میں آپ کا سکور اور گریڈ آئے گا۔ پاس ہونے کے لیے 70% چاہیے۔</p>
+  <div class="qbar"><div class="qfill"></div></div>
+  <p class="qsc" aria-live="polite"><b class="qs-c">0</b> درست · <span class="qs-a">0</span> / 9</p>
+  <ol class="qlist"><li class="qq"><p class="qt"><span class="qn">سوال 1</span>بیک ٹیسٹ کی تین چیزیں کون سی ہیں؟</p><div class="qos"><button type="button" class="qo" data-c="1">ثبوت، نمبر، اور مہارت</button><button type="button" class="qo">پرافٹ، بونس، سگنل</button><button type="button" class="qo">لاٹ، لیوریج، سپریڈ</button><button type="button" class="qo">کچھ نہیں</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">بغیر بیک ٹیسٹ لائیو ٹریڈنگ بغیر نقشے کا سفر ہے۔</span></p></li><li class="qq"><p class="qt"><span class="qn">سوال 2</span>بیک ٹیسٹ کے دوران اصول بدلنا چاہیں تو؟</p><div class="qos"><button type="button" class="qo" data-c="1">نیا بیک ٹیسٹ شروع کریں</button><button type="button" class="qo">درمیان میں بدل دیں</button><button type="button" class="qo">پچھلے نتیجے بدل دیں</button><button type="button" class="qo">بیک ٹیسٹ چھوڑ دیں</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">ہر لاس کے بعد فلٹر لگانا overfitting ہے: اصول ماضی پر فٹ، مستقبل پر نہیں۔</span></p></li><li class="qq"><p class="qt"><span class="qn">سوال 3</span>hindsight bias کیا ہے اور اس سے کیسے بچیں؟</p><div class="qos"><button type="button" class="qo" data-c="1">مستقبل دیکھ کر سیٹ اپ چننا؛ ری پلے میں دایاں حصہ چھپائیں</button><button type="button" class="qo">ایک انڈیکیٹر کی تاخیر؛ اسے چارٹ سے ہٹا دیں</button><button type="button" class="qo">سپریڈ کا مسئلہ؛ کم سپریڈ والا بروکر لیں</button><button type="button" class="qo">کوئی مسئلہ نہیں؛ ماضی دیکھنا ٹھیک ہے</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">TradingView کا Bar Replay یا MT5 کا visual mode استعمال کریں۔</span></p></li><li class="qq"><p class="qt"><span class="qn">سوال 4</span>کتنی ٹریڈز پر &quot;قابلِ اعتماد تصویر&quot; ملتی ہے؟</p><div class="qos"><button type="button" class="qo" data-c="1">100</button><button type="button" class="qo">20 سے کم</button><button type="button" class="qo">5</button><button type="button" class="qo">10</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">20 سے کم: قسمت ہو سکتی ہے؛ 50: ابتدائی اندازہ؛ 200+: مختلف حالات؛ کم از کم 50 ٹریڈ، 3 مہینے کا ڈیٹا۔</span></p></li><li class="qq"><p class="qt"><span class="qn">سوال 5</span>expectancy کا فارمولا کیا ہے؟</p><div class="qos"><button type="button" class="qo" data-c="1">وِن ریٹ × اوسط جیت − لاس ریٹ</button><button type="button" class="qo">جیتیں ÷ کل ٹریڈز × 100</button><button type="button" class="qo">کل پرافٹ − کل سپریڈ</button><button type="button" class="qo">اوسط RR × 100</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">+0.3R یا زیادہ اچھا ہے۔</span></p></li><li class="qq"><p class="qt"><span class="qn">سوال 6</span>بیک ٹیسٹ میں سپریڈ اور سلپیج کیسے شامل کریں؟</p><div class="qos"><button type="button" class="qo" data-c="1">ہر ٹریڈ سے تقریباً 0.1R منہا</button><button type="button" class="qo">انہیں نظر انداز کریں</button><button type="button" class="qo">ہر ٹریڈ میں 1R جمع</button><button type="button" class="qo">صرف جیتوں سے منہا</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">پارشل پرافٹ بھی اسی طرح لکھیں جیسے لائیو میں کرتے ہیں۔</span></p></li><li class="qq"><p class="qt"><span class="qn">سوال 7</span>expectancy صفر کے قریب ہو تو کیا کریں؟</p><div class="qos"><button type="button" class="qo" data-c="1">سب سے کمزور حصہ ڈھونڈیں، ایک تبدیلی، نئی 50 ٹریڈ</button><button type="button" class="qo">فوراً لائیو جائیں، لائیو میں بہتر ہوگا</button><button type="button" class="qo">لاٹ بڑھا دیں تاکہ نتیجہ مثبت ہو</button><button type="button" class="qo">پانچ تبدیلیاں ایک ساتھ کر کے دیکھیں</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">مثبت (+0.3R+) ہو تو ڈیمو فارورڈ ٹیسٹ؛ منفی ہو تو بنیادی چیزیں دیکھیں۔</span></p></li><li class="qq"><p class="qt"><span class="qn">سوال 8</span>ماڈل B کی 50 ٹریڈز: 42% وِن، اوسط جیت +2.6R۔ expectancy کتنی؟</p><div class="qos"><button type="button" class="qo" data-c="1">تقریباً +0.51R</button><button type="button" class="qo">تقریباً +2.6R</button><button type="button" class="qo">تقریباً −0.58R</button><button type="button" class="qo">تقریباً +1.0R</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">0.42 × 2.6 − 0.58 = 0.51؛ سب سے لمبی لاسنگ اسٹریک 6، زیادہ سے زیادہ ڈرا ڈاؤن −7R۔</span></p></li><li class="qq"><p class="qt"><span class="qn">سوال 9</span>ڈرا ڈاؤن اور لاسنگ اسٹریک جاننے کا فائدہ کیا ہے؟</p><div class="qos"><button type="button" class="qo" data-c="1">لائیو میں لاسز پر گھبرا کر سسٹم نہیں چھوڑیں گے</button><button type="button" class="qo">ڈرا ڈاؤن جاننے سے پرافٹ خود بڑھ جاتا ہے</button><button type="button" class="qo">اس سے بروکر کا سپریڈ کم ہو جاتا ہے</button><button type="button" class="qo">کوئی فائدہ نہیں، صرف نمبر ہیں</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">1% رسک پر 7% تک ڈرا ڈاؤن ممکن ہے؛ یہ جان کر ذہنی تیاری رہتی ہے۔</span></p></li></ol>
+  <div class="qres" hidden aria-live="polite"><h3>آپ کا نتیجہ</h3><div class="qbig"></div><p class="qgr"></p><p class="qbest"></p>
+    <div class="qmiss" hidden><b>جن سوالوں پر غلطی ہوئی:</b><ol></ol></div>
+    <p class="qbtns"><button type="button" class="btn qre">دوبارہ کوشش کریں</button> <a class="btn" href="#top">سبق دوبارہ پڑھیں</a> <a class="btn gold qnx" href="smc-trading-journal.html" hidden>اگلا سبق ›</a></p></div>
+</section>
     <div class="smc-box"><h2>اس سبق کی چیک لسٹ</h2><p>جو بات سمجھ آ جائے اس پر نشان لگائیں۔ آپ کے نشان اسی براؤزر میں محفوظ رہتے ہیں۔</p><ul class="ck" data-k="smc-backtesting"><li><input type="checkbox" id="c0"><label for="c0">میں نے بیک ٹیسٹ سے پہلے اپنا قاعدہ لکھا ہے</label></li><li><input type="checkbox" id="c1"><label for="c1">میں TradingView یا MT5 ریپلے میں بغیر آگے دیکھے ٹیسٹ کرتا ہوں</label></li><li><input type="checkbox" id="c2"><label for="c2">میں ہر ٹریڈ شیٹ میں سکرین شاٹ کے ساتھ لکھتا ہوں</label></li><li><input type="checkbox" id="c3"><label for="c3">میرے پاس کم از کم 50 ٹریڈز اور 3 مہینے کا ڈیٹا ہے</label></li><li><input type="checkbox" id="c4"><label for="c4">میں فی ٹریڈ اوسط نتیجہ، لگاتار لاس اور ڈرا ڈاؤن جانتا ہوں</label></li><li><input type="checkbox" id="c5"><label for="c5">میں ایک وقت میں صرف ایک تبدیلی کر کے دوبارہ ٹیسٹ کرتا ہوں</label></li></ul></div>
     <div class="smc-box asg"><h2>اسائنمنٹ</h2><ol><li>بیک ٹیسٹ شیٹ بنائیں (تاریخ، سیشن، ماڈل، سکور، انٹری، SL، TP، R، سکرین شاٹ، نوٹ)۔</li><li>TradingView ریپلے میں گولڈ پر 3 مہینے پہلے کی تاریخ سے شروع کریں۔</li><li>اپنے قاعدے پر 50 ٹریڈز مکمل کریں۔</li><li>ون ریٹ، اوسط RR، فی ٹریڈ اوسط، لگاتار لاس اور ڈرا ڈاؤن نکالیں۔</li><li>اپنا خلاصہ (نمبر) گروپ میں پوسٹ کریں۔</li></ol><p>اپنی اسائنمنٹ کے اسکرین شاٹس وجہ کے ساتھ ہمارے فری فیس بک گروپ میں پوسٹ کریں، وہاں آپ کے چارٹ چیک کیے جائیں گے۔</p><a class="btn gold" href="https://www.facebook.com/groups/qaziforextips" target="_blank" rel="noopener">فری گروپ جوائن کریں</a></div>
     <div class="ls-faq ur" lang="ur" dir="rtl"><h2>اکثر پوچھے جانے والے سوال</h2><details><summary>بیک ٹیسٹنگ کیا ہے؟</summary><p>اپنے لکھے ہوئے قاعدے کو پرانے چارٹ پر کینڈل بہ کینڈل چلا کر دیکھنا کہ وہ ماضی میں کیسا رہا۔</p></details><details><summary>کتنی ٹریڈز کا بیک ٹیسٹ کافی ہے؟</summary><p>کم از کم 50 ٹریڈز اور 3 مہینے؛ 100 یا زیادہ بہتر ہے۔</p></details><details><summary>SMC کا بیک ٹیسٹ کس ٹول سے کریں؟</summary><p>TradingView کا Bar Replay یا MT5 کا ویژول ٹیسٹر یا کوئی مینوئل بیک ٹیسٹنگ سافٹ ویئر۔</p></details><details><summary>ہائنڈ سائٹ بائس کیا ہے؟</summary><p>مستقبل کا چارٹ پہلے دیکھ کر سیٹ اپ چننا، جس سے بیک ٹیسٹ اصل سے بہتر نظر آتا ہے۔</p></details></div>

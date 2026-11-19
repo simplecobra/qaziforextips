@@ -576,11 +576,78 @@ footer a:hover{color:var(--ink)}
 .outline.en-out .n{margin-left:0;margin-right:6px}
 .smc-pn.en-pn{direction:ltr}
 .smc-pn.en-pn .nx{text-align:right}
+
+.smc-quiz{margin:40px 0;border:2px solid var(--gold);border-radius:16px;padding:18px 22px;background:var(--surface)}
+.smc-quiz h2{margin-top:0!important}
+.smc-quiz .qin{color:var(--muted)}
+.qbar{height:10px;border-radius:99px;background:var(--line);overflow:hidden;margin:8px 0}
+.qfill{height:100%;width:0;background:var(--gold);transition:width .3s}
+.qsc{font-weight:600;margin:4px 0 10px}
+.qsc .qs-c{color:#22a56b}
+.qlist{list-style:none;padding:0!important;margin:0}
+.qq{border-top:1px dashed var(--line);padding:12px 0}
+.qt{margin:0 0 8px!important;font-weight:600}
+.qn{display:inline-block;font-size:.78em;color:var(--gold-t,var(--gold));margin-inline-end:8px;font-weight:700}
+.qos{display:grid;gap:8px}
+.qo{all:unset;box-sizing:border-box;display:block;cursor:pointer;border:1px solid var(--line);border-radius:10px;padding:6px 14px;line-height:inherit;font:inherit;font-size:.95em;color:var(--ink);background:var(--bg,transparent)}
+.qo:hover,.qo:focus-visible{border-color:var(--gold);outline:none}
+.qq.done .qo{cursor:default}
+.qq.done .qo:hover{border-color:var(--line)}
+.qo.ok{border-color:#22a56b!important;background:rgba(34,165,107,.14)}
+.qo.bad{border-color:#e5535f!important;background:rgba(229,83,95,.14)}
+.qw{margin:8px 0 0!important;font-size:.92em;color:var(--muted)}
+.qw .qv.y{color:#22a56b}.qw .qv.n{color:#e5535f}
+.qw .qr b{color:var(--ink)}
+.qres{margin-top:16px;border-top:2px solid var(--gold);padding-top:12px;text-align:center}
+.qres h3{margin:0!important}
+.qbig{font:700 54px/1.2 var(--f-display,var(--f-body));color:var(--gold-t,var(--gold));direction:ltr}
+.qbig small{font-size:20px;color:var(--muted);display:block}
+.qgr{font-weight:600}
+.qbest{color:var(--muted);font-size:.9em}
+.qmiss{text-align:start;margin:10px 0}
+.qmiss ol{margin:4px 0 0;font-size:.92em}
+.qmiss a{color:var(--gold-t,var(--gold))}
+.qbtns .btn{margin:4px}
+.smc-prog{margin:34px 0;border:2px solid var(--gold);border-radius:16px;padding:16px 22px;background:var(--surface)}
+.smc-prog h2{margin-top:0!important}
+.qstats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:10px 0 14px}
+.qstats div{border:1px solid var(--line);border-radius:12px;padding:8px;text-align:center}
+.qstats b{display:block;font:700 30px/1.3 var(--f-body);color:var(--gold-t,var(--gold));direction:ltr}
+.qstats span{font-size:.85em;color:var(--muted)}
+.smc-prog .st-ok{color:#22a56b;font-weight:600}.smc-prog .st-no{color:#e5535f;font-weight:600}
+.smc-prog td.pc{direction:ltr;text-align:center!important}
+.en-art .qn{margin-right:8px}
 @media (max-width:760px){.lang-sw{display:flex}.lang-sw a{flex:1;min-width:0}.smc-fig .l{font-size:16px}}
 </style>
 <script>
 document.addEventListener('DOMContentLoaded',function(){document.querySelectorAll('ul.ck').forEach(function(ul){var k='smc-ck-'+ul.dataset.k,s={};try{s=JSON.parse(localStorage.getItem(k)||'{}')}catch(e){}
 ul.querySelectorAll('input').forEach(function(i){if(s[i.id]){i.checked=true;i.closest('li').classList.add('done')}i.addEventListener('change',function(){s[i.id]=i.checked;i.closest('li').classList.toggle('done',i.checked);try{localStorage.setItem(k,JSON.stringify(s))}catch(e){}})})})});
+
+document.addEventListener('DOMContentLoaded',function(){
+var K='smc-quiz';function ld(){try{return JSON.parse(localStorage.getItem(K)||'{}')}catch(e){return{}}}function sv(d){try{localStorage.setItem(K,JSON.stringify(d))}catch(e){}}
+document.querySelectorAll('.smc-quiz').forEach(function(z){
+ var cfg=JSON.parse(z.dataset.q),t=JSON.parse(z.dataset.t),qs=[].slice.call(z.querySelectorAll('.qq')),n=qs.length,ans=0,cor=0,miss=[];
+ function shuf(q){var b=q.querySelector('.qos'),o=[].slice.call(b.children);for(var i=o.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var x=o[i];o[i]=o[j];o[j]=x}o.forEach(function(e){b.appendChild(e)})}
+ function upd(){z.querySelector('.qs-c').textContent=cor;z.querySelector('.qs-a').textContent=ans;z.querySelector('.qfill').style.width=(ans/n*100)+'%'}
+ function fin(){var pc=Math.round(cor/n*100),d=ld(),r=d[cfg.slug]||{best:0,tries:0};r.tries++;r.last=pc;if(pc>r.best)r.best=pc;r.at=Date.now();d[cfg.slug]=r;sv(d);
+  var res=z.querySelector('.qres');res.hidden=false;z.querySelector('.qbig').innerHTML=pc+'%<small>'+cor+' / '+n+'</small>';
+  z.querySelector('.qgr').textContent=pc>=90?t.g1:(pc>=cfg.pass?t.g2:t.g3);
+  z.querySelector('.qbest').innerHTML=t.best+': <bdi dir="ltr">'+r.best+'%</bdi> · '+t.tries+': '+r.tries;
+  var m=z.querySelector('.qmiss'),ol=m.querySelector('ol');ol.innerHTML='';miss.forEach(function(i){var li=document.createElement('li'),a=document.createElement('a');a.href='#q'+cfg.slug+i;var qc=qs[i].querySelector('.qt').cloneNode(true);qc.removeChild(qc.querySelector('.qn'));a.textContent=t.qn+' '+(i+1)+': '+qc.textContent;li.appendChild(a);ol.appendChild(li)});m.hidden=!miss.length;
+  var nx=z.querySelector('.qnx');if(nx)nx.hidden=pc<cfg.pass;res.scrollIntoView({behavior:'smooth',block:'center'})}
+ qs.forEach(function(q,i){q.id='q'+cfg.slug+i;shuf(q);q.querySelectorAll('.qo').forEach(function(b){b.addEventListener('click',function(){if(q.classList.contains('done'))return;q.classList.add('done');ans++;var c=q.querySelector('.qo[data-c]'),w=q.querySelector('.qw'),v=w.querySelector('.qv');c.classList.add('ok');
+  if(b===c){cor++;v.textContent=t.ok+'!';v.className='qv y';w.querySelector('.qr').textContent=''}else{b.classList.add('bad');miss.push(i);v.textContent=t.no+'.';v.className='qv n';w.querySelector('.qr').innerHTML='<b>'+t.right+'</b> '+c.innerHTML+'. '}
+  w.hidden=false;upd();if(ans===n)fin()})})});
+ z.querySelector('.qre').addEventListener('click',function(){ans=0;cor=0;miss=[];qs.forEach(function(q){q.classList.remove('done');q.querySelectorAll('.qo').forEach(function(b){b.classList.remove('ok','bad')});q.querySelector('.qw').hidden=true;shuf(q)});z.querySelector('.qres').hidden=true;upd();qs[0].scrollIntoView({behavior:'smooth',block:'center'})});
+});
+document.querySelectorAll('.smc-prog').forEach(function(p){
+ var L=JSON.parse(p.dataset.l),t=JSON.parse(p.dataset.t),P=+p.dataset.p,d=ld(),tb=p.querySelector('tbody'),done=0,pass=0,sum=0;
+ L.forEach(function(x){var r=d[x[0]],tr=document.createElement('tr'),a='<a href="'+x[3]+'#quiz">'+x[1]+' · '+x[2]+'</a>';
+  if(r){done++;sum+=r.best;if(r.best>=P)pass++}
+  tr.innerHTML='<td>'+a+'</td><td class="pc">'+(r?r.best+'%':'—')+'</td><td>'+(r?(r.best>=P?'<span class="st-ok">✓ '+t.ok+'</span>':'<a class="st-no" href="'+x[3]+'#quiz">'+t.no+'</a>'):'<a href="'+x[3]+'#quiz">'+t.go+'</a>')+'</td>';tb.appendChild(tr)});
+ p.querySelector('.qstats').innerHTML='<div><b>'+done+'/'+L.length+'</b><span>'+t.done+'</span></div><div><b>'+pass+'</b><span>'+t.passed+'</span></div><div><b>'+(done?Math.round(sum/done)+'%':'—')+'</b><span>'+t.avg+'</span></div>';
+});
+});
 </script>
 </head>
 <body>
@@ -649,6 +716,16 @@ ul.querySelectorAll('input').forEach(function(i){if(s[i.id]){i.checked=true;i.cl
 <p>When this is complete, the next phase is <b>entry models</b>, where bias, liquidity, POI and time combine into complete setups.</p>
 <h2 id="s41">Summary</h2>
 <ul><li>News brings wide spreads, slippage and stop hunts; do not trade at the exact release.</li><li>NFP and CPI at 8:30 am New York time (18:30 in Pakistan in winter); FOMC at 2:00 pm (midnight in Pakistan in winter).</li><li>Protect before, wait during, apply SMC after: sweep, MSS, entry from the FVG.</li><li>Do not guess the news; read the structure after it.</li></ul>
+    <section class="smc-quiz" id="quiz" data-q="{&quot;slug&quot;:&quot;smc-news-time&quot;,&quot;pass&quot;:70,&quot;n&quot;:10}" data-t="{&quot;h&quot;: &quot;Test yourself: Lesson {n} quiz&quot;, &quot;intro&quot;: &quot;{c} questions. Pick one answer for each and you will see at once whether it is right and why. Your score and grade appear at the end. You need {p}% to pass.&quot;, &quot;score&quot;: &quot;correct&quot;, &quot;of&quot;: &quot;of&quot;, &quot;ok&quot;: &quot;Correct&quot;, &quot;no&quot;: &quot;Not quite&quot;, &quot;right&quot;: &quot;Correct answer:&quot;, &quot;why&quot;: &quot;Why:&quot;, &quot;res&quot;: &quot;Your result&quot;, &quot;best&quot;: &quot;Best score so far&quot;, &quot;tries&quot;: &quot;Attempts&quot;, &quot;retry&quot;: &quot;Try again&quot;, &quot;g1&quot;: &quot;Excellent! You have mastered this lesson.&quot;, &quot;g2&quot;: &quot;Well done, you passed. Read the explanation for any question you missed.&quot;, &quot;g3&quot;: &quot;Not passed yet. Review the questions you missed below, reread the lesson and try again.&quot;, &quot;wrong&quot;: &quot;Questions you missed:&quot;, &quot;nx&quot;: &quot;Next lesson&quot;, &quot;reread&quot;: &quot;Reread the lesson&quot;, &quot;qn&quot;: &quot;Question&quot;}">
+  <h2>Test yourself: Lesson 4.4 quiz</h2>
+  <p class="qin">10 questions. Pick one answer for each and you will see at once whether it is right and why. Your score and grade appear at the end. You need 70% to pass.</p>
+  <div class="qbar"><div class="qfill"></div></div>
+  <p class="qsc" aria-live="polite"><b class="qs-c">0</b> correct · <span class="qs-a">0</span> / 10</p>
+  <ol class="qlist"><li class="qq"><p class="qt"><span class="qn">Question 1</span>What three things happen within seconds of a big release?</p><div class="qos"><button type="button" class="qo" data-c="1">Spreads widen, slippage, and stop hunts on both sides</button><button type="button" class="qo">The market closes, spread goes to zero, a trend starts</button><button type="button" class="qo">Price only goes up</button><button type="button" class="qo">Nothing happens</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">That is why trading exactly at the release is guessing, however good your analysis.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 2</span>When does NFP come out?</p><div class="qos"><button type="button" class="qo" data-c="1">First Friday, 8:30 am New York</button><button type="button" class="qo">Every Wednesday, 2:00 pm New York</button><button type="button" class="qo">Every Monday, 10:00 am New York</button><button type="button" class="qo">Last day of the month, at night</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">More jobs = a stronger dollar, Gold usually down.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 3</span>When does the FOMC decision come out in New York time?</p><div class="qos"><button type="button" class="qo" data-c="1">2:00 pm, 8 times a year</button><button type="button" class="qo">8:30 am, every month</button><button type="button" class="qo">Midnight, every week</button><button type="button" class="qo">10 am, every day</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">Midnight in Pakistan in winter; the press conference is at 2:30 pm.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 4</span>What should you do in the 30 minutes before a release?</p><div class="qos"><button type="button" class="qo" data-c="1">No new trades, protect profit, cancel pending orders</button><button type="button" class="qo">Open a big position before the news</button><button type="button" class="qo">Tighten the stops on all trades</button><button type="button" class="qo">Enter on a guess about the number</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">On a prop firm account, read its news rules.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 5</span>What do you do in the first 5 to 15 minutes of a release?</p><div class="qos"><button type="button" class="qo" data-c="1">Nothing; watch which liquidity the spike takes</button><button type="button" class="qo">Enter at once in the first candle&#x27;s direction</button><button type="button" class="qo">Double the lot with orders both ways</button><button type="button" class="qo">Remove the SL so the spike can&#x27;t hit it</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">After 15 to 30 minutes, once spreads are normal, start the usual SMC process.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 6</span>Where is the post-news SMC entry often best?</p><div class="qos"><button type="button" class="qo" data-c="1">On the return into the news move&#x27;s FVG</button><button type="button" class="qo">On a break of the first candle&#x27;s high</button><button type="button" class="qo">With a limit one minute before news</button><button type="button" class="qo">Nowhere after news; the day is over</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">The first spike takes one side; if price then makes an MSS the other way, that is the real direction.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 7</span>What is the best plan for newer traders on FOMC night?</p><div class="qos"><button type="button" class="qo" data-c="1">No trades that night; trade London next day</button><button type="button" class="qo">A big position before the decision</button><button type="button" class="qo">Enter on the decision&#x27;s first candle</button><button type="button" class="qo">Hold overnight with a tight stop</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">On FOMC day price often stays in a tight range; the decision and the press conference both spike.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 8</span>NFP example: pre-news range 4,133 to 4,136, the first candle hits 4,162, then 4,133 breaks and an FVG forms at 4,140 to 4,147. The trade?</p><div class="qos"><button type="button" class="qo" data-c="1">Sell 4,143, SL 4,152, target 4,118</button><button type="button" class="qo">Buy 4,162, SL 4,150, target 4,180</button><button type="button" class="qo">Buy 4,150, SL 4,140, target 4,170</button><button type="button" class="qo">Sell 4,133, SL 4,138, target 4,100</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">9 dollars risk for 25, about 1:2.8; emotional buyers at 8:30 got the spread, slippage and stop hunt all at once.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 9</span>Why is holding a trade with a tight stop through news dangerous?</p><div class="qos"><button type="button" class="qo" data-c="1">Wider spreads can hit the stop at a price the chart never shows</button><button type="button" class="qo">Stop-loss orders simply don&#x27;t work during news</button><button type="button" class="qo">The market shuts for a few minutes at news</button><button type="button" class="qo">It isn&#x27;t dangerous; a tight stop is safest</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">Positioning before a release on a guess about the number is gambling, not trading.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 10</span>According to the Phase 4 gate, how many days should you backtest?</p><div class="qos"><button type="button" class="qo" data-c="1">20 days</button><button type="button" class="qo">2 days</button><button type="button" class="qo">5 days</button><button type="button" class="qo">100 days</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">Also: know the killzone and Silver Bullet times, mark the midnight open and Asian range daily, and list the week&#x27;s news every Sunday.</span></p></li></ol>
+  <div class="qres" hidden aria-live="polite"><h3>Your result</h3><div class="qbig"></div><p class="qgr"></p><p class="qbest"></p>
+    <div class="qmiss" hidden><b>Questions you missed:</b><ol></ol></div>
+    <p class="qbtns"><button type="button" class="btn qre">Try again</button> <a class="btn" href="#top">Reread the lesson</a> <a class="btn gold qnx" href="smc-top-down-analysis-en.html" hidden>Next lesson ›</a></p></div>
+</section>
     <div class="smc-box"><h2>Lesson checklist</h2><p>Tick each point once you understand it. Your ticks are saved in this browser.</p><ul class="ck" data-k="smc-news-time"><li><input type="checkbox" id="c0"><label for="c0">Every Sunday I write down the high-impact USD releases in my time zone</label></li><li><input type="checkbox" id="c1"><label for="c1">I do not open new trades 30 minutes before news and I protect open trades</label></li><li><input type="checkbox" id="c2"><label for="c2">I do not chase the first news candle</label></li><li><input type="checkbox" id="c3"><label for="c3">After news I wait for a sweep, MSS and FVG</label></li><li><input type="checkbox" id="c4"><label for="c4">I do not hold large positions on FOMC night</label></li><li><input type="checkbox" id="c5"><label for="c5">I have completed the 20-day Phase 4 backtest</label></li></ul></div>
     <div class="smc-box asg"><h2>Assignment</h2><ol><li>Open the economic calendar, set your time zone and write this week&#x27;s USD high-impact events.</li><li>Look at the last 3 NFP and 3 CPI releases on Gold M5.</li><li>For each, note which way the first spike went, which liquidity it took and the real direction 30 minutes later.</li><li>Where an MSS and FVG formed, write the entry, stop, target and RR.</li><li>Check your broker&#x27;s spread at news time (tick chart or a spread indicator in MT5).</li><li>Post your findings in the group.</li></ol><p>Post your assignment screenshots with your reasons in our free Facebook group, where your charts will be checked.</p><a class="btn gold" href="https://www.facebook.com/groups/qaziforextips" target="_blank" rel="noopener">Join the free group</a></div>
     <div class="ls-faq en-faq"><h2>Questions</h2><details><summary>How should I trade Gold around NFP or CPI?</summary><p>Stay flat into the release, let the first spike and spread widening pass, then trade the structure shift and fair value gap that form after it.</p></details><details><summary>What time is NFP?</summary><p>8:30 am New York time on the first Friday of the month: 6:30 pm in Pakistan in winter and 5:30 pm in summer.</p></details><details><summary>What time is the FOMC decision?</summary><p>2:00 pm New York time: midnight in Pakistan in winter and 11 pm in summer, with the press conference 30 minutes later.</p></details><details><summary>Why do stops get hit at strange prices during news?</summary><p>Spreads and slippage widen sharply at the release, so a stop can be triggered at a price the chart does not show.</p></details></div>

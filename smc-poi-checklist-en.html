@@ -576,11 +576,78 @@ footer a:hover{color:var(--ink)}
 .outline.en-out .n{margin-left:0;margin-right:6px}
 .smc-pn.en-pn{direction:ltr}
 .smc-pn.en-pn .nx{text-align:right}
+
+.smc-quiz{margin:40px 0;border:2px solid var(--gold);border-radius:16px;padding:18px 22px;background:var(--surface)}
+.smc-quiz h2{margin-top:0!important}
+.smc-quiz .qin{color:var(--muted)}
+.qbar{height:10px;border-radius:99px;background:var(--line);overflow:hidden;margin:8px 0}
+.qfill{height:100%;width:0;background:var(--gold);transition:width .3s}
+.qsc{font-weight:600;margin:4px 0 10px}
+.qsc .qs-c{color:#22a56b}
+.qlist{list-style:none;padding:0!important;margin:0}
+.qq{border-top:1px dashed var(--line);padding:12px 0}
+.qt{margin:0 0 8px!important;font-weight:600}
+.qn{display:inline-block;font-size:.78em;color:var(--gold-t,var(--gold));margin-inline-end:8px;font-weight:700}
+.qos{display:grid;gap:8px}
+.qo{all:unset;box-sizing:border-box;display:block;cursor:pointer;border:1px solid var(--line);border-radius:10px;padding:6px 14px;line-height:inherit;font:inherit;font-size:.95em;color:var(--ink);background:var(--bg,transparent)}
+.qo:hover,.qo:focus-visible{border-color:var(--gold);outline:none}
+.qq.done .qo{cursor:default}
+.qq.done .qo:hover{border-color:var(--line)}
+.qo.ok{border-color:#22a56b!important;background:rgba(34,165,107,.14)}
+.qo.bad{border-color:#e5535f!important;background:rgba(229,83,95,.14)}
+.qw{margin:8px 0 0!important;font-size:.92em;color:var(--muted)}
+.qw .qv.y{color:#22a56b}.qw .qv.n{color:#e5535f}
+.qw .qr b{color:var(--ink)}
+.qres{margin-top:16px;border-top:2px solid var(--gold);padding-top:12px;text-align:center}
+.qres h3{margin:0!important}
+.qbig{font:700 54px/1.2 var(--f-display,var(--f-body));color:var(--gold-t,var(--gold));direction:ltr}
+.qbig small{font-size:20px;color:var(--muted);display:block}
+.qgr{font-weight:600}
+.qbest{color:var(--muted);font-size:.9em}
+.qmiss{text-align:start;margin:10px 0}
+.qmiss ol{margin:4px 0 0;font-size:.92em}
+.qmiss a{color:var(--gold-t,var(--gold))}
+.qbtns .btn{margin:4px}
+.smc-prog{margin:34px 0;border:2px solid var(--gold);border-radius:16px;padding:16px 22px;background:var(--surface)}
+.smc-prog h2{margin-top:0!important}
+.qstats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:10px 0 14px}
+.qstats div{border:1px solid var(--line);border-radius:12px;padding:8px;text-align:center}
+.qstats b{display:block;font:700 30px/1.3 var(--f-body);color:var(--gold-t,var(--gold));direction:ltr}
+.qstats span{font-size:.85em;color:var(--muted)}
+.smc-prog .st-ok{color:#22a56b;font-weight:600}.smc-prog .st-no{color:#e5535f;font-weight:600}
+.smc-prog td.pc{direction:ltr;text-align:center!important}
+.en-art .qn{margin-right:8px}
 @media (max-width:760px){.lang-sw{display:flex}.lang-sw a{flex:1;min-width:0}.smc-fig .l{font-size:16px}}
 </style>
 <script>
 document.addEventListener('DOMContentLoaded',function(){document.querySelectorAll('ul.ck').forEach(function(ul){var k='smc-ck-'+ul.dataset.k,s={};try{s=JSON.parse(localStorage.getItem(k)||'{}')}catch(e){}
 ul.querySelectorAll('input').forEach(function(i){if(s[i.id]){i.checked=true;i.closest('li').classList.add('done')}i.addEventListener('change',function(){s[i.id]=i.checked;i.closest('li').classList.toggle('done',i.checked);try{localStorage.setItem(k,JSON.stringify(s))}catch(e){}})})})});
+
+document.addEventListener('DOMContentLoaded',function(){
+var K='smc-quiz';function ld(){try{return JSON.parse(localStorage.getItem(K)||'{}')}catch(e){return{}}}function sv(d){try{localStorage.setItem(K,JSON.stringify(d))}catch(e){}}
+document.querySelectorAll('.smc-quiz').forEach(function(z){
+ var cfg=JSON.parse(z.dataset.q),t=JSON.parse(z.dataset.t),qs=[].slice.call(z.querySelectorAll('.qq')),n=qs.length,ans=0,cor=0,miss=[];
+ function shuf(q){var b=q.querySelector('.qos'),o=[].slice.call(b.children);for(var i=o.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var x=o[i];o[i]=o[j];o[j]=x}o.forEach(function(e){b.appendChild(e)})}
+ function upd(){z.querySelector('.qs-c').textContent=cor;z.querySelector('.qs-a').textContent=ans;z.querySelector('.qfill').style.width=(ans/n*100)+'%'}
+ function fin(){var pc=Math.round(cor/n*100),d=ld(),r=d[cfg.slug]||{best:0,tries:0};r.tries++;r.last=pc;if(pc>r.best)r.best=pc;r.at=Date.now();d[cfg.slug]=r;sv(d);
+  var res=z.querySelector('.qres');res.hidden=false;z.querySelector('.qbig').innerHTML=pc+'%<small>'+cor+' / '+n+'</small>';
+  z.querySelector('.qgr').textContent=pc>=90?t.g1:(pc>=cfg.pass?t.g2:t.g3);
+  z.querySelector('.qbest').innerHTML=t.best+': <bdi dir="ltr">'+r.best+'%</bdi> · '+t.tries+': '+r.tries;
+  var m=z.querySelector('.qmiss'),ol=m.querySelector('ol');ol.innerHTML='';miss.forEach(function(i){var li=document.createElement('li'),a=document.createElement('a');a.href='#q'+cfg.slug+i;var qc=qs[i].querySelector('.qt').cloneNode(true);qc.removeChild(qc.querySelector('.qn'));a.textContent=t.qn+' '+(i+1)+': '+qc.textContent;li.appendChild(a);ol.appendChild(li)});m.hidden=!miss.length;
+  var nx=z.querySelector('.qnx');if(nx)nx.hidden=pc<cfg.pass;res.scrollIntoView({behavior:'smooth',block:'center'})}
+ qs.forEach(function(q,i){q.id='q'+cfg.slug+i;shuf(q);q.querySelectorAll('.qo').forEach(function(b){b.addEventListener('click',function(){if(q.classList.contains('done'))return;q.classList.add('done');ans++;var c=q.querySelector('.qo[data-c]'),w=q.querySelector('.qw'),v=w.querySelector('.qv');c.classList.add('ok');
+  if(b===c){cor++;v.textContent=t.ok+'!';v.className='qv y';w.querySelector('.qr').textContent=''}else{b.classList.add('bad');miss.push(i);v.textContent=t.no+'.';v.className='qv n';w.querySelector('.qr').innerHTML='<b>'+t.right+'</b> '+c.innerHTML+'. '}
+  w.hidden=false;upd();if(ans===n)fin()})})});
+ z.querySelector('.qre').addEventListener('click',function(){ans=0;cor=0;miss=[];qs.forEach(function(q){q.classList.remove('done');q.querySelectorAll('.qo').forEach(function(b){b.classList.remove('ok','bad')});q.querySelector('.qw').hidden=true;shuf(q)});z.querySelector('.qres').hidden=true;upd();qs[0].scrollIntoView({behavior:'smooth',block:'center'})});
+});
+document.querySelectorAll('.smc-prog').forEach(function(p){
+ var L=JSON.parse(p.dataset.l),t=JSON.parse(p.dataset.t),P=+p.dataset.p,d=ld(),tb=p.querySelector('tbody'),done=0,pass=0,sum=0;
+ L.forEach(function(x){var r=d[x[0]],tr=document.createElement('tr'),a='<a href="'+x[3]+'#quiz">'+x[1]+' · '+x[2]+'</a>';
+  if(r){done++;sum+=r.best;if(r.best>=P)pass++}
+  tr.innerHTML='<td>'+a+'</td><td class="pc">'+(r?r.best+'%':'—')+'</td><td>'+(r?(r.best>=P?'<span class="st-ok">✓ '+t.ok+'</span>':'<a class="st-no" href="'+x[3]+'#quiz">'+t.no+'</a>'):'<a href="'+x[3]+'#quiz">'+t.go+'</a>')+'</td>';tb.appendChild(tr)});
+ p.querySelector('.qstats').innerHTML='<div><b>'+done+'/'+L.length+'</b><span>'+t.done+'</span></div><div><b>'+pass+'</b><span>'+t.passed+'</span></div><div><b>'+(done?Math.round(sum/done)+'%':'—')+'</b><span>'+t.avg+'</span></div>';
+});
+});
 </script>
 </head>
 <body>
@@ -639,6 +706,16 @@ ul.querySelectorAll('input').forEach(function(i){if(s[i.id]){i.checked=true;i.cl
 <p>When this is complete, the next phase is <b>time</b>, because the right POI works even better at the right time.</p>
 <h2 id="s31">Summary</h2>
 <ul><li>Fewer but better trades: only POIs where several reasons line up.</li><li>The 10-point scorecard: trade at 8+, be careful at 6 to 7, skip below 6.</li><li>With two zones, check the IDM and discount; the deeper zone after the sweep is better.</li><li>Every POI entry needs confirmation, a stop loss and a proper lot size.</li></ul>
+    <section class="smc-quiz" id="quiz" data-q="{&quot;slug&quot;:&quot;smc-poi-checklist&quot;,&quot;pass&quot;:70,&quot;n&quot;:9}" data-t="{&quot;h&quot;: &quot;Test yourself: Lesson {n} quiz&quot;, &quot;intro&quot;: &quot;{c} questions. Pick one answer for each and you will see at once whether it is right and why. Your score and grade appear at the end. You need {p}% to pass.&quot;, &quot;score&quot;: &quot;correct&quot;, &quot;of&quot;: &quot;of&quot;, &quot;ok&quot;: &quot;Correct&quot;, &quot;no&quot;: &quot;Not quite&quot;, &quot;right&quot;: &quot;Correct answer:&quot;, &quot;why&quot;: &quot;Why:&quot;, &quot;res&quot;: &quot;Your result&quot;, &quot;best&quot;: &quot;Best score so far&quot;, &quot;tries&quot;: &quot;Attempts&quot;, &quot;retry&quot;: &quot;Try again&quot;, &quot;g1&quot;: &quot;Excellent! You have mastered this lesson.&quot;, &quot;g2&quot;: &quot;Well done, you passed. Read the explanation for any question you missed.&quot;, &quot;g3&quot;: &quot;Not passed yet. Review the questions you missed below, reread the lesson and try again.&quot;, &quot;wrong&quot;: &quot;Questions you missed:&quot;, &quot;nx&quot;: &quot;Next lesson&quot;, &quot;reread&quot;: &quot;Reread the lesson&quot;, &quot;qn&quot;: &quot;Question&quot;}">
+  <h2>Test yourself: Lesson 3.7 quiz</h2>
+  <p class="qin">9 questions. Pick one answer for each and you will see at once whether it is right and why. Your score and grade appear at the end. You need 70% to pass.</p>
+  <div class="qbar"><div class="qfill"></div></div>
+  <p class="qsc" aria-live="polite"><b class="qs-c">0</b> correct · <span class="qs-a">0</span> / 9</p>
+  <ol class="qlist"><li class="qq"><p class="qt"><span class="qn">Question 1</span>What does confluence mean?</p><div class="qos"><button type="button" class="qo" data-c="1">Several reasons together; fewer trades, only there</button><button type="button" class="qo">Trade every zone so no move is missed</button><button type="button" class="qo">Stacking many indicators on one chart</button><button type="button" class="qo">Raising the lot on a good zone</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">The professional difference: fewer trades, only where several reasons line up.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 2</span>Which two scorecard questions are worth 2 points?</p><div class="qos"><button type="button" class="qo" data-c="1">HTF bias direction, and a sweep before the POI</button><button type="button" class="qo">An FVG present, and the zone unmitigated</button><button type="button" class="qo">Being in the OTE, and being in discount</button><button type="button" class="qo">A BOS forming, and a clear DOL ahead</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">The other questions are worth one point each; 10 in total.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 3</span>What if a POI scores 8 to 10?</p><div class="qos"><button type="button" class="qo" data-c="1">A+: full risk</button><button type="button" class="qo">B: half risk</button><button type="button" class="qo">Weak: skip it</button><button type="button" class="qo">Best: double risk</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">6 to 7 = B (half risk or strong confirmation); under 6 = skip.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 4</span>A POI scores 5. What is the decision?</p><div class="qos"><button type="button" class="qo" data-c="1">Skip it</button><button type="button" class="qo">Full risk</button><button type="button" class="qo">Half risk</button><button type="button" class="qo">Two trades</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">No trades on POIs that score below 6.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 5</span>When a trend change is possible and liquidity has been swept, which POI is best?</p><div class="qos"><button type="button" class="qo" data-c="1">A breaker block or IFVG</button><button type="button" class="qo">A propulsion block</button><button type="button" class="qo">A mitigation block</button><button type="button" class="qo">Any</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">Running trend: OB + FVG in the OTE or a propulsion block; weakening trend: mitigation; long wicks: rejection.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 6</span>Two bullish zones: a near one (with an unswept IDM nearby) and a deep one. What usually happens?</p><div class="qos"><button type="button" class="qo" data-c="1">The near one is often a trap; price takes the IDM to the deep one</button><button type="button" class="qo">The near one always works; the deep one is never reached</button><button type="button" class="qo">Both fail; don&#x27;t trade there at all</button><button type="button" class="qo">The deep one breaks first, then the near one works</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">If unsure, small risk on the near zone and full risk on the deep one, or wait for the deep one only.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 7</span>Why is the extreme POI the safest?</p><div class="qos"><button type="button" class="qo" data-c="1">It is where the BOS move began; its break changes structure</button><button type="button" class="qo">It is the biggest zone, so it holds more orders</button><button type="button" class="qo">It sits in premium, where big players buy</button><button type="button" class="qo">It forms in Asia, when spreads are low</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">The deeper zone inside the OTE is better.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 8</span>Gold example: zone A (4,138 to 4,143) in premium with an unswept IDM at 4,131 below; zone B (4,118 to 4,124) in the OTE after the IDM. Which was traded?</p><div class="qos"><button type="button" class="qo" data-c="1">Zone B: entry 4,122, SL 4,114, target 4,170</button><button type="button" class="qo">Zone A: entry 4,140, SL 4,136, target 4,170</button><button type="button" class="qo">Both zones, half risk each</button><button type="button" class="qo">Neither; both scored too low</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">Zone A scored 4/10 (skip), zone B 10/10 (A+).</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 9</span>How do you get better with the scorecard?</p><div class="qos"><button type="button" class="qo" data-c="1">Log the score before every trade; compare A+ vs B monthly</button><button type="button" class="qo">Just remember the score; writing wastes time</button><button type="button" class="qo">Log scores for winning trades only</button><button type="button" class="qo">Read the scorecard once and put it away</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">Print the scorecard and keep it next to your screen.</span></p></li></ol>
+  <div class="qres" hidden aria-live="polite"><h3>Your result</h3><div class="qbig"></div><p class="qgr"></p><p class="qbest"></p>
+    <div class="qmiss" hidden><b>Questions you missed:</b><ol></ol></div>
+    <p class="qbtns"><button type="button" class="btn qre">Try again</button> <a class="btn" href="#top">Reread the lesson</a> <a class="btn gold qnx" href="smc-sessions-killzones-en.html" hidden>Next lesson ›</a></p></div>
+</section>
     <div class="smc-box"><h2>Lesson checklist</h2><p>Tick each point once you understand it. Your ticks are saved in this browser.</p><ul class="ck" data-k="smc-poi-checklist"><li><input type="checkbox" id="c0"><label for="c0">I grade every POI with the 10-point scorecard</label></li><li><input type="checkbox" id="c1"><label for="c1">I do not trade POIs scoring below 6</label></li><li><input type="checkbox" id="c2"><label for="c2">With two zones I decide using the IDM and discount</label></li><li><input type="checkbox" id="c3"><label for="c3">I know which POI suits which situation</label></li><li><input type="checkbox" id="c4"><label for="c4">I record every trade score and result in my journal</label></li><li><input type="checkbox" id="c5"><label for="c5">I have completed a 20-POI backtest</label></li></ul></div>
     <div class="smc-box asg"><h2>Assignment</h2><ol><li>Copy or print the scorecard.</li><li>Find 20 POIs on the last two weeks of Gold M15 and score each.</li><li>Compare the results of A+ (8+), B (6 to 7) and weak (below 6) POIs.</li><li>Find 3 cases where the near zone broke because of the IDM and the deep zone worked.</li><li>Write a full plan for one A+ example: bias, DOL, POI, entry, stop, target, lot.</li><li>Post your results in the group: what was your A+ win rate?</li></ol><p>Post your assignment screenshots with your reasons in our free Facebook group, where your charts will be checked.</p><a class="btn gold" href="https://www.facebook.com/groups/qaziforextips" target="_blank" rel="noopener">Join the free group</a></div>
     <div class="ls-faq en-faq"><h2>Questions</h2><details><summary>What is a POI in SMC?</summary><p>A point of interest: a zone such as an order block, fair value gap, breaker or mitigation block where a reaction is expected.</p></details><details><summary>How do you choose the best POI?</summary><p>Score it: higher timeframe bias, discount or premium, OTE, prior liquidity sweep, break of structure, fair value gap, untouched zone and a clear draw on liquidity with at least 1:2 reward.</p></details><details><summary>With two zones, which one should I take?</summary><p>The one after the IDM sweep that sits deeper (in the OTE); the near zone is often a trap.</p></details><details><summary>How many trades a day?</summary><p>Only A+ setups; one or two are usually enough.</p></details></div>

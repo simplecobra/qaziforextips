@@ -576,11 +576,78 @@ footer a:hover{color:var(--ink)}
 .outline.en-out .n{margin-left:0;margin-right:6px}
 .smc-pn.en-pn{direction:ltr}
 .smc-pn.en-pn .nx{text-align:right}
+
+.smc-quiz{margin:40px 0;border:2px solid var(--gold);border-radius:16px;padding:18px 22px;background:var(--surface)}
+.smc-quiz h2{margin-top:0!important}
+.smc-quiz .qin{color:var(--muted)}
+.qbar{height:10px;border-radius:99px;background:var(--line);overflow:hidden;margin:8px 0}
+.qfill{height:100%;width:0;background:var(--gold);transition:width .3s}
+.qsc{font-weight:600;margin:4px 0 10px}
+.qsc .qs-c{color:#22a56b}
+.qlist{list-style:none;padding:0!important;margin:0}
+.qq{border-top:1px dashed var(--line);padding:12px 0}
+.qt{margin:0 0 8px!important;font-weight:600}
+.qn{display:inline-block;font-size:.78em;color:var(--gold-t,var(--gold));margin-inline-end:8px;font-weight:700}
+.qos{display:grid;gap:8px}
+.qo{all:unset;box-sizing:border-box;display:block;cursor:pointer;border:1px solid var(--line);border-radius:10px;padding:6px 14px;line-height:inherit;font:inherit;font-size:.95em;color:var(--ink);background:var(--bg,transparent)}
+.qo:hover,.qo:focus-visible{border-color:var(--gold);outline:none}
+.qq.done .qo{cursor:default}
+.qq.done .qo:hover{border-color:var(--line)}
+.qo.ok{border-color:#22a56b!important;background:rgba(34,165,107,.14)}
+.qo.bad{border-color:#e5535f!important;background:rgba(229,83,95,.14)}
+.qw{margin:8px 0 0!important;font-size:.92em;color:var(--muted)}
+.qw .qv.y{color:#22a56b}.qw .qv.n{color:#e5535f}
+.qw .qr b{color:var(--ink)}
+.qres{margin-top:16px;border-top:2px solid var(--gold);padding-top:12px;text-align:center}
+.qres h3{margin:0!important}
+.qbig{font:700 54px/1.2 var(--f-display,var(--f-body));color:var(--gold-t,var(--gold));direction:ltr}
+.qbig small{font-size:20px;color:var(--muted);display:block}
+.qgr{font-weight:600}
+.qbest{color:var(--muted);font-size:.9em}
+.qmiss{text-align:start;margin:10px 0}
+.qmiss ol{margin:4px 0 0;font-size:.92em}
+.qmiss a{color:var(--gold-t,var(--gold))}
+.qbtns .btn{margin:4px}
+.smc-prog{margin:34px 0;border:2px solid var(--gold);border-radius:16px;padding:16px 22px;background:var(--surface)}
+.smc-prog h2{margin-top:0!important}
+.qstats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:10px 0 14px}
+.qstats div{border:1px solid var(--line);border-radius:12px;padding:8px;text-align:center}
+.qstats b{display:block;font:700 30px/1.3 var(--f-body);color:var(--gold-t,var(--gold));direction:ltr}
+.qstats span{font-size:.85em;color:var(--muted)}
+.smc-prog .st-ok{color:#22a56b;font-weight:600}.smc-prog .st-no{color:#e5535f;font-weight:600}
+.smc-prog td.pc{direction:ltr;text-align:center!important}
+.en-art .qn{margin-right:8px}
 @media (max-width:760px){.lang-sw{display:flex}.lang-sw a{flex:1;min-width:0}.smc-fig .l{font-size:16px}}
 </style>
 <script>
 document.addEventListener('DOMContentLoaded',function(){document.querySelectorAll('ul.ck').forEach(function(ul){var k='smc-ck-'+ul.dataset.k,s={};try{s=JSON.parse(localStorage.getItem(k)||'{}')}catch(e){}
 ul.querySelectorAll('input').forEach(function(i){if(s[i.id]){i.checked=true;i.closest('li').classList.add('done')}i.addEventListener('change',function(){s[i.id]=i.checked;i.closest('li').classList.toggle('done',i.checked);try{localStorage.setItem(k,JSON.stringify(s))}catch(e){}})})})});
+
+document.addEventListener('DOMContentLoaded',function(){
+var K='smc-quiz';function ld(){try{return JSON.parse(localStorage.getItem(K)||'{}')}catch(e){return{}}}function sv(d){try{localStorage.setItem(K,JSON.stringify(d))}catch(e){}}
+document.querySelectorAll('.smc-quiz').forEach(function(z){
+ var cfg=JSON.parse(z.dataset.q),t=JSON.parse(z.dataset.t),qs=[].slice.call(z.querySelectorAll('.qq')),n=qs.length,ans=0,cor=0,miss=[];
+ function shuf(q){var b=q.querySelector('.qos'),o=[].slice.call(b.children);for(var i=o.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var x=o[i];o[i]=o[j];o[j]=x}o.forEach(function(e){b.appendChild(e)})}
+ function upd(){z.querySelector('.qs-c').textContent=cor;z.querySelector('.qs-a').textContent=ans;z.querySelector('.qfill').style.width=(ans/n*100)+'%'}
+ function fin(){var pc=Math.round(cor/n*100),d=ld(),r=d[cfg.slug]||{best:0,tries:0};r.tries++;r.last=pc;if(pc>r.best)r.best=pc;r.at=Date.now();d[cfg.slug]=r;sv(d);
+  var res=z.querySelector('.qres');res.hidden=false;z.querySelector('.qbig').innerHTML=pc+'%<small>'+cor+' / '+n+'</small>';
+  z.querySelector('.qgr').textContent=pc>=90?t.g1:(pc>=cfg.pass?t.g2:t.g3);
+  z.querySelector('.qbest').innerHTML=t.best+': <bdi dir="ltr">'+r.best+'%</bdi> · '+t.tries+': '+r.tries;
+  var m=z.querySelector('.qmiss'),ol=m.querySelector('ol');ol.innerHTML='';miss.forEach(function(i){var li=document.createElement('li'),a=document.createElement('a');a.href='#q'+cfg.slug+i;var qc=qs[i].querySelector('.qt').cloneNode(true);qc.removeChild(qc.querySelector('.qn'));a.textContent=t.qn+' '+(i+1)+': '+qc.textContent;li.appendChild(a);ol.appendChild(li)});m.hidden=!miss.length;
+  var nx=z.querySelector('.qnx');if(nx)nx.hidden=pc<cfg.pass;res.scrollIntoView({behavior:'smooth',block:'center'})}
+ qs.forEach(function(q,i){q.id='q'+cfg.slug+i;shuf(q);q.querySelectorAll('.qo').forEach(function(b){b.addEventListener('click',function(){if(q.classList.contains('done'))return;q.classList.add('done');ans++;var c=q.querySelector('.qo[data-c]'),w=q.querySelector('.qw'),v=w.querySelector('.qv');c.classList.add('ok');
+  if(b===c){cor++;v.textContent=t.ok+'!';v.className='qv y';w.querySelector('.qr').textContent=''}else{b.classList.add('bad');miss.push(i);v.textContent=t.no+'.';v.className='qv n';w.querySelector('.qr').innerHTML='<b>'+t.right+'</b> '+c.innerHTML+'. '}
+  w.hidden=false;upd();if(ans===n)fin()})})});
+ z.querySelector('.qre').addEventListener('click',function(){ans=0;cor=0;miss=[];qs.forEach(function(q){q.classList.remove('done');q.querySelectorAll('.qo').forEach(function(b){b.classList.remove('ok','bad')});q.querySelector('.qw').hidden=true;shuf(q)});z.querySelector('.qres').hidden=true;upd();qs[0].scrollIntoView({behavior:'smooth',block:'center'})});
+});
+document.querySelectorAll('.smc-prog').forEach(function(p){
+ var L=JSON.parse(p.dataset.l),t=JSON.parse(p.dataset.t),P=+p.dataset.p,d=ld(),tb=p.querySelector('tbody'),done=0,pass=0,sum=0;
+ L.forEach(function(x){var r=d[x[0]],tr=document.createElement('tr'),a='<a href="'+x[3]+'#quiz">'+x[1]+' · '+x[2]+'</a>';
+  if(r){done++;sum+=r.best;if(r.best>=P)pass++}
+  tr.innerHTML='<td>'+a+'</td><td class="pc">'+(r?r.best+'%':'—')+'</td><td>'+(r?(r.best>=P?'<span class="st-ok">✓ '+t.ok+'</span>':'<a class="st-no" href="'+x[3]+'#quiz">'+t.no+'</a>'):'<a href="'+x[3]+'#quiz">'+t.go+'</a>')+'</td>';tb.appendChild(tr)});
+ p.querySelector('.qstats').innerHTML='<div><b>'+done+'/'+L.length+'</b><span>'+t.done+'</span></div><div><b>'+pass+'</b><span>'+t.passed+'</span></div><div><b>'+(done?Math.round(sum/done)+'%':'—')+'</b><span>'+t.avg+'</span></div>';
+});
+});
 </script>
 </head>
 <body>
@@ -640,6 +707,16 @@ ul.querySelectorAll('input').forEach(function(i){if(s[i.id]){i.checked=true;i.cl
 <div class="call warn"><b class="k">Common mistake</b>Treating broker server time as session time. Write the Asian and London times in Pakistan time and keep them handy.</div>
 <h2 id="s32">Summary</h2>
 <ul><li>Asian high and low, London high and low, PDH/PDL and PWH/PWL are the most important daily liquidity.</li><li>London often sweeps one edge of the Asian range first, then the real move comes.</li><li>The bias decides which liquidity is the target and which is the sweep zone.</li><li>A 10-minute morning routine gives you the whole day&#x27;s plan.</li></ul>
+    <section class="smc-quiz" id="quiz" data-q="{&quot;slug&quot;:&quot;smc-session-liquidity-pdh-pdl&quot;,&quot;pass&quot;:70,&quot;n&quot;:9}" data-t="{&quot;h&quot;: &quot;Test yourself: Lesson {n} quiz&quot;, &quot;intro&quot;: &quot;{c} questions. Pick one answer for each and you will see at once whether it is right and why. Your score and grade appear at the end. You need {p}% to pass.&quot;, &quot;score&quot;: &quot;correct&quot;, &quot;of&quot;: &quot;of&quot;, &quot;ok&quot;: &quot;Correct&quot;, &quot;no&quot;: &quot;Not quite&quot;, &quot;right&quot;: &quot;Correct answer:&quot;, &quot;why&quot;: &quot;Why:&quot;, &quot;res&quot;: &quot;Your result&quot;, &quot;best&quot;: &quot;Best score so far&quot;, &quot;tries&quot;: &quot;Attempts&quot;, &quot;retry&quot;: &quot;Try again&quot;, &quot;g1&quot;: &quot;Excellent! You have mastered this lesson.&quot;, &quot;g2&quot;: &quot;Well done, you passed. Read the explanation for any question you missed.&quot;, &quot;g3&quot;: &quot;Not passed yet. Review the questions you missed below, reread the lesson and try again.&quot;, &quot;wrong&quot;: &quot;Questions you missed:&quot;, &quot;nx&quot;: &quot;Next lesson&quot;, &quot;reread&quot;: &quot;Reread the lesson&quot;, &quot;qn&quot;: &quot;Question&quot;}">
+  <h2>Test yourself: Lesson 2.3 quiz</h2>
+  <p class="qin">9 questions. Pick one answer for each and you will see at once whether it is right and why. Your score and grade appear at the end. You need 70% to pass.</p>
+  <div class="qbar"><div class="qfill"></div></div>
+  <p class="qsc" aria-live="polite"><b class="qs-c">0</b> correct · <span class="qs-a">0</span> / 9</p>
+  <ol class="qlist"><li class="qq"><p class="qt"><span class="qn">Question 1</span>What are PDH and PDL?</p><div class="qos"><button type="button" class="qo" data-c="1">Previous day high and low</button><button type="button" class="qo">Previous week high and low</button><button type="button" class="qo">The Asian session high and low</button><button type="button" class="qo">The protected high and low</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">Almost every intraday trader watches them, so stops and targets gather there.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 2</span>Roughly when is the Asian session in Pakistan time?</p><div class="qos"><button type="button" class="qo" data-c="1">About 5 am to 12 pm</button><button type="button" class="qo">6 pm to midnight</button><button type="button" class="qo">12 pm to 5 pm</button><button type="button" class="qo">1 am to 4 am</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">Read session times in real time, not broker server time; summer and winter differ by an hour.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 3</span>What is the London Judas swing?</p><div class="qos"><button type="button" class="qo" data-c="1">London sweeping one Asian side, then taking the real direction</button><button type="button" class="qo">London closing and its profit taking</button><button type="button" class="qo">New York&#x27;s first hour and the news move</button><button type="button" class="qo">The first day of the week and Monday&#x27;s range</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">Low Asian volume builds a narrow range with stops on both sides.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 4</span>H4 is bullish. Which side of the Asian range is London more likely to take first?</p><div class="qos"><button type="button" class="qo" data-c="1">The Asian low</button><button type="button" class="qo">The Asian high</button><button type="button" class="qo">Both at once</button><button type="button" class="qo">Neither</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">Still, don&#x27;t trade a guess; let the sweep happen and look for a CHoCH.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 5</span>Price closes above PDH with a strong body and holds there. How do you treat it?</p><div class="qos"><button type="button" class="qo" data-c="1">A break; next target may be PWH</button><button type="button" class="qo">A sweep; sell at once</button><button type="button" class="qo">Nothing happened; just wait</button><button type="button" class="qo">IDM; look for a POI below</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">In a sweep the body comes back inside; here the price was accepted.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 6</span>What is a typical weekly liquidity pattern?</p><div class="qos"><button type="button" class="qo" data-c="1">One side is taken early, then the week heads for the other</button><button type="button" class="qo">The same direction every day, Monday to Friday</button><button type="button" class="qo">All of it happens Friday; the rest is range</button><button type="button" class="qo">PDH and PDL are both taken every day</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">PWH and PWL are the best targets for swing traders; Monday often builds a narrow range.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 7</span>What does the final line of the 10-minute morning routine look like?</p><div class="qos"><button type="button" class="qo" data-c="1">Bias bullish; watch an Asian-low sweep; target PDH</button><button type="button" class="qo">Make 100 dollars today, whatever happens</button><button type="button" class="qo">We&#x27;ll see what happens; no plan needed</button><button type="button" class="qo">Only sells today, because Gold rose yesterday</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">One line with bias, sweep zone and target.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 8</span>Why is trading inside the Asian range a mistake?</p><div class="qos"><button type="button" class="qo" data-c="1">That range often gets swept in London, taking the stops</button><button type="button" class="qo">Because the market is closed in Asia</button><button type="button" class="qo">Because the spread is zero</button><button type="button" class="qo">It is not a mistake</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">The Asian range is liquidity for London.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 9</span>Gold: PDH 4,152, Asian range 4,128 to 4,136, H4 bullish. In London price hits 4,125.40 and M15 closes 4,129.10. What is the target?</p><div class="qos"><button type="button" class="qo" data-c="1">About 4,150.50</button><button type="button" class="qo">About 4,125.40</button><button type="button" class="qo">About 4,118.00</button><button type="button" class="qo">About 4,136.00</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">A sweep of the Asian low, an M5 bullish CHoCH, buy near 4,130, stop 4,124.40; RR about 1:3.6.</span></p></li></ol>
+  <div class="qres" hidden aria-live="polite"><h3>Your result</h3><div class="qbig"></div><p class="qgr"></p><p class="qbest"></p>
+    <div class="qmiss" hidden><b>Questions you missed:</b><ol></ol></div>
+    <p class="qbtns"><button type="button" class="btn qre">Try again</button> <a class="btn" href="#top">Reread the lesson</a> <a class="btn gold qnx" href="smc-liquidity-sweep-vs-break-en.html" hidden>Next lesson ›</a></p></div>
+</section>
     <div class="smc-box"><h2>Lesson checklist</h2><p>Tick each point once you understand it. Your ticks are saved in this browser.</p><ul class="ck" data-k="smc-session-liquidity-pdh-pdl"><li><input type="checkbox" id="c0"><label for="c0">I draw PDH, PDL, PWH, PWL and the Asian high and low every day</label></li><li><input type="checkbox" id="c1"><label for="c1">I know London often sweeps one edge of the Asian range</label></li><li><input type="checkbox" id="c2"><label for="c2">With a bullish bias PDH is the target and a PDL sweep is the opportunity; bearish is the opposite</label></li><li><input type="checkbox" id="c3"><label for="c3">I treat PWH and PWL as swing targets</label></li><li><input type="checkbox" id="c4"><label for="c4">A strong close above PDH that holds on the retest is a break, not a sweep</label></li><li><input type="checkbox" id="c5"><label for="c5">I don&#x27;t trade inside the Asian range</label></li><li><input type="checkbox" id="c6"><label for="c6">I write my plan in one line every morning</label></li></ul></div>
     <div class="smc-box asg"><h2>Assignment</h2><ol><li>Open the last 10 days on Gold M15 and draw each day&#x27;s Asian range, PDH and PDL.</li><li>For each day, write which edge of the Asian range London took first and which way the day went after that.</li><li>Count how many days price touched PDH or PDL, and how many of those were sweeps versus breaks.</li><li>For the next 5 days, write a one-line plan every morning and the result at the end of the day.</li><li>Post your table in the group.</li></ol><p>Post your assignment screenshots with your reasons in our free Facebook group, where your charts will be checked.</p><a class="btn gold" href="https://www.facebook.com/groups/qaziforextips" target="_blank" rel="noopener">Join the free group</a></div>
     <div class="ls-faq en-faq"><h2>Questions</h2><details><summary>What are PDH and PDL?</summary><p>The previous day&#x27;s high and low, key intraday liquidity levels and targets.</p></details><details><summary>Why is the Asian range important?</summary><p>Stops build up above and below it, and London often sweeps one edge soon after it opens.</p></details><details><summary>How do I tell a PDH sweep from a break?</summary><p>In a sweep the wick goes above and the body closes back below; in a break a strong body closes above and holds.</p></details><details><summary>What is the London Judas swing?</summary><p>Price taking one side&#x27;s liquidity at the London open before moving in the day&#x27;s real direction.</p></details><details><summary>Which lines should I draw every morning?</summary><p>PDH, PDL, PWH, PWL and the Asian high and low, plus a one-line bias and plan.</p></details></div>

@@ -576,11 +576,78 @@ footer a:hover{color:var(--ink)}
 .outline.en-out .n{margin-left:0;margin-right:6px}
 .smc-pn.en-pn{direction:ltr}
 .smc-pn.en-pn .nx{text-align:right}
+
+.smc-quiz{margin:40px 0;border:2px solid var(--gold);border-radius:16px;padding:18px 22px;background:var(--surface)}
+.smc-quiz h2{margin-top:0!important}
+.smc-quiz .qin{color:var(--muted)}
+.qbar{height:10px;border-radius:99px;background:var(--line);overflow:hidden;margin:8px 0}
+.qfill{height:100%;width:0;background:var(--gold);transition:width .3s}
+.qsc{font-weight:600;margin:4px 0 10px}
+.qsc .qs-c{color:#22a56b}
+.qlist{list-style:none;padding:0!important;margin:0}
+.qq{border-top:1px dashed var(--line);padding:12px 0}
+.qt{margin:0 0 8px!important;font-weight:600}
+.qn{display:inline-block;font-size:.78em;color:var(--gold-t,var(--gold));margin-inline-end:8px;font-weight:700}
+.qos{display:grid;gap:8px}
+.qo{all:unset;box-sizing:border-box;display:block;cursor:pointer;border:1px solid var(--line);border-radius:10px;padding:6px 14px;line-height:inherit;font:inherit;font-size:.95em;color:var(--ink);background:var(--bg,transparent)}
+.qo:hover,.qo:focus-visible{border-color:var(--gold);outline:none}
+.qq.done .qo{cursor:default}
+.qq.done .qo:hover{border-color:var(--line)}
+.qo.ok{border-color:#22a56b!important;background:rgba(34,165,107,.14)}
+.qo.bad{border-color:#e5535f!important;background:rgba(229,83,95,.14)}
+.qw{margin:8px 0 0!important;font-size:.92em;color:var(--muted)}
+.qw .qv.y{color:#22a56b}.qw .qv.n{color:#e5535f}
+.qw .qr b{color:var(--ink)}
+.qres{margin-top:16px;border-top:2px solid var(--gold);padding-top:12px;text-align:center}
+.qres h3{margin:0!important}
+.qbig{font:700 54px/1.2 var(--f-display,var(--f-body));color:var(--gold-t,var(--gold));direction:ltr}
+.qbig small{font-size:20px;color:var(--muted);display:block}
+.qgr{font-weight:600}
+.qbest{color:var(--muted);font-size:.9em}
+.qmiss{text-align:start;margin:10px 0}
+.qmiss ol{margin:4px 0 0;font-size:.92em}
+.qmiss a{color:var(--gold-t,var(--gold))}
+.qbtns .btn{margin:4px}
+.smc-prog{margin:34px 0;border:2px solid var(--gold);border-radius:16px;padding:16px 22px;background:var(--surface)}
+.smc-prog h2{margin-top:0!important}
+.qstats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:10px 0 14px}
+.qstats div{border:1px solid var(--line);border-radius:12px;padding:8px;text-align:center}
+.qstats b{display:block;font:700 30px/1.3 var(--f-body);color:var(--gold-t,var(--gold));direction:ltr}
+.qstats span{font-size:.85em;color:var(--muted)}
+.smc-prog .st-ok{color:#22a56b;font-weight:600}.smc-prog .st-no{color:#e5535f;font-weight:600}
+.smc-prog td.pc{direction:ltr;text-align:center!important}
+.en-art .qn{margin-right:8px}
 @media (max-width:760px){.lang-sw{display:flex}.lang-sw a{flex:1;min-width:0}.smc-fig .l{font-size:16px}}
 </style>
 <script>
 document.addEventListener('DOMContentLoaded',function(){document.querySelectorAll('ul.ck').forEach(function(ul){var k='smc-ck-'+ul.dataset.k,s={};try{s=JSON.parse(localStorage.getItem(k)||'{}')}catch(e){}
 ul.querySelectorAll('input').forEach(function(i){if(s[i.id]){i.checked=true;i.closest('li').classList.add('done')}i.addEventListener('change',function(){s[i.id]=i.checked;i.closest('li').classList.toggle('done',i.checked);try{localStorage.setItem(k,JSON.stringify(s))}catch(e){}})})})});
+
+document.addEventListener('DOMContentLoaded',function(){
+var K='smc-quiz';function ld(){try{return JSON.parse(localStorage.getItem(K)||'{}')}catch(e){return{}}}function sv(d){try{localStorage.setItem(K,JSON.stringify(d))}catch(e){}}
+document.querySelectorAll('.smc-quiz').forEach(function(z){
+ var cfg=JSON.parse(z.dataset.q),t=JSON.parse(z.dataset.t),qs=[].slice.call(z.querySelectorAll('.qq')),n=qs.length,ans=0,cor=0,miss=[];
+ function shuf(q){var b=q.querySelector('.qos'),o=[].slice.call(b.children);for(var i=o.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var x=o[i];o[i]=o[j];o[j]=x}o.forEach(function(e){b.appendChild(e)})}
+ function upd(){z.querySelector('.qs-c').textContent=cor;z.querySelector('.qs-a').textContent=ans;z.querySelector('.qfill').style.width=(ans/n*100)+'%'}
+ function fin(){var pc=Math.round(cor/n*100),d=ld(),r=d[cfg.slug]||{best:0,tries:0};r.tries++;r.last=pc;if(pc>r.best)r.best=pc;r.at=Date.now();d[cfg.slug]=r;sv(d);
+  var res=z.querySelector('.qres');res.hidden=false;z.querySelector('.qbig').innerHTML=pc+'%<small>'+cor+' / '+n+'</small>';
+  z.querySelector('.qgr').textContent=pc>=90?t.g1:(pc>=cfg.pass?t.g2:t.g3);
+  z.querySelector('.qbest').innerHTML=t.best+': <bdi dir="ltr">'+r.best+'%</bdi> · '+t.tries+': '+r.tries;
+  var m=z.querySelector('.qmiss'),ol=m.querySelector('ol');ol.innerHTML='';miss.forEach(function(i){var li=document.createElement('li'),a=document.createElement('a');a.href='#q'+cfg.slug+i;var qc=qs[i].querySelector('.qt').cloneNode(true);qc.removeChild(qc.querySelector('.qn'));a.textContent=t.qn+' '+(i+1)+': '+qc.textContent;li.appendChild(a);ol.appendChild(li)});m.hidden=!miss.length;
+  var nx=z.querySelector('.qnx');if(nx)nx.hidden=pc<cfg.pass;res.scrollIntoView({behavior:'smooth',block:'center'})}
+ qs.forEach(function(q,i){q.id='q'+cfg.slug+i;shuf(q);q.querySelectorAll('.qo').forEach(function(b){b.addEventListener('click',function(){if(q.classList.contains('done'))return;q.classList.add('done');ans++;var c=q.querySelector('.qo[data-c]'),w=q.querySelector('.qw'),v=w.querySelector('.qv');c.classList.add('ok');
+  if(b===c){cor++;v.textContent=t.ok+'!';v.className='qv y';w.querySelector('.qr').textContent=''}else{b.classList.add('bad');miss.push(i);v.textContent=t.no+'.';v.className='qv n';w.querySelector('.qr').innerHTML='<b>'+t.right+'</b> '+c.innerHTML+'. '}
+  w.hidden=false;upd();if(ans===n)fin()})})});
+ z.querySelector('.qre').addEventListener('click',function(){ans=0;cor=0;miss=[];qs.forEach(function(q){q.classList.remove('done');q.querySelectorAll('.qo').forEach(function(b){b.classList.remove('ok','bad')});q.querySelector('.qw').hidden=true;shuf(q)});z.querySelector('.qres').hidden=true;upd();qs[0].scrollIntoView({behavior:'smooth',block:'center'})});
+});
+document.querySelectorAll('.smc-prog').forEach(function(p){
+ var L=JSON.parse(p.dataset.l),t=JSON.parse(p.dataset.t),P=+p.dataset.p,d=ld(),tb=p.querySelector('tbody'),done=0,pass=0,sum=0;
+ L.forEach(function(x){var r=d[x[0]],tr=document.createElement('tr'),a='<a href="'+x[3]+'#quiz">'+x[1]+' · '+x[2]+'</a>';
+  if(r){done++;sum+=r.best;if(r.best>=P)pass++}
+  tr.innerHTML='<td>'+a+'</td><td class="pc">'+(r?r.best+'%':'—')+'</td><td>'+(r?(r.best>=P?'<span class="st-ok">✓ '+t.ok+'</span>':'<a class="st-no" href="'+x[3]+'#quiz">'+t.no+'</a>'):'<a href="'+x[3]+'#quiz">'+t.go+'</a>')+'</td>';tb.appendChild(tr)});
+ p.querySelector('.qstats').innerHTML='<div><b>'+done+'/'+L.length+'</b><span>'+t.done+'</span></div><div><b>'+pass+'</b><span>'+t.passed+'</span></div><div><b>'+(done?Math.round(sum/done)+'%':'—')+'</b><span>'+t.avg+'</span></div>';
+});
+});
 </script>
 </head>
 <body>
@@ -644,6 +711,16 @@ ul.querySelectorAll('input').forEach(function(i){if(s[i.id]){i.checked=true;i.cl
 <p><b>Result: unfiltered CRT lost slightly over these two months.</b> We also tried an RR filter (at least 1:1 and 1:1.5) and it was still negative. That is the value of a backtest: before risking real money, you learn this rule is not enough on its own. Next step: add <b>one</b> filter (only in the H4 bias direction, or only sweeps in a killzone) and retest on more months. Two months and 62 trades are an early estimate, not a final verdict.</p>
 <h2 id="s36">Summary</h2>
 <ul><li>Write the rule first and do not change it mid-test.</li><li>One instrument, one timeframe set, replay without looking ahead.</li><li>At least 50 trades over 3 months; check win rate, average RR, expectancy, losing streak and drawdown.</li><li>Avoid hindsight, overfitting, chosen dates and forgetting the spread.</li></ul>
+    <section class="smc-quiz" id="quiz" data-q="{&quot;slug&quot;:&quot;smc-backtesting&quot;,&quot;pass&quot;:70,&quot;n&quot;:9}" data-t="{&quot;h&quot;: &quot;Test yourself: Lesson {n} quiz&quot;, &quot;intro&quot;: &quot;{c} questions. Pick one answer for each and you will see at once whether it is right and why. Your score and grade appear at the end. You need {p}% to pass.&quot;, &quot;score&quot;: &quot;correct&quot;, &quot;of&quot;: &quot;of&quot;, &quot;ok&quot;: &quot;Correct&quot;, &quot;no&quot;: &quot;Not quite&quot;, &quot;right&quot;: &quot;Correct answer:&quot;, &quot;why&quot;: &quot;Why:&quot;, &quot;res&quot;: &quot;Your result&quot;, &quot;best&quot;: &quot;Best score so far&quot;, &quot;tries&quot;: &quot;Attempts&quot;, &quot;retry&quot;: &quot;Try again&quot;, &quot;g1&quot;: &quot;Excellent! You have mastered this lesson.&quot;, &quot;g2&quot;: &quot;Well done, you passed. Read the explanation for any question you missed.&quot;, &quot;g3&quot;: &quot;Not passed yet. Review the questions you missed below, reread the lesson and try again.&quot;, &quot;wrong&quot;: &quot;Questions you missed:&quot;, &quot;nx&quot;: &quot;Next lesson&quot;, &quot;reread&quot;: &quot;Reread the lesson&quot;, &quot;qn&quot;: &quot;Question&quot;}">
+  <h2>Test yourself: Lesson 7.1 quiz</h2>
+  <p class="qin">9 questions. Pick one answer for each and you will see at once whether it is right and why. Your score and grade appear at the end. You need 70% to pass.</p>
+  <div class="qbar"><div class="qfill"></div></div>
+  <p class="qsc" aria-live="polite"><b class="qs-c">0</b> correct · <span class="qs-a">0</span> / 9</p>
+  <ol class="qlist"><li class="qq"><p class="qt"><span class="qn">Question 1</span>What three things does a backtest give you?</p><div class="qos"><button type="button" class="qo" data-c="1">Proof, numbers and skill</button><button type="button" class="qo">Profit, bonus, signals</button><button type="button" class="qo">Lot, leverage, spread</button><button type="button" class="qo">Nothing</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">Trading live without a backtest is travelling without a map.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 2</span>If you want to change the rules during a backtest?</p><div class="qos"><button type="button" class="qo" data-c="1">Start a new backtest</button><button type="button" class="qo">Change them midway</button><button type="button" class="qo">Edit past results</button><button type="button" class="qo">Quit the backtest</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">Adding a filter after every loss is overfitting: rules fitted to the past, not the future.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 3</span>What is hindsight bias and how do you avoid it?</p><div class="qos"><button type="button" class="qo" data-c="1">Choosing setups after seeing the future; hide the right side</button><button type="button" class="qo">An indicator&#x27;s lag; remove it from the chart</button><button type="button" class="qo">A spread issue; switch to a low-spread broker</button><button type="button" class="qo">No problem; looking at the past is fine</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">Use TradingView Bar Replay or MT5 visual mode.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 4</span>At how many trades do you get a reliable picture?</p><div class="qos"><button type="button" class="qo" data-c="1">100</button><button type="button" class="qo">Under 20</button><button type="button" class="qo">5</button><button type="button" class="qo">10</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">Under 20 could be luck; 50 is an early estimate; 200+ covers conditions; at least 50 trades over 3 months.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 5</span>What is the expectancy formula?</p><div class="qos"><button type="button" class="qo" data-c="1">Win rate × average win − loss rate</button><button type="button" class="qo">Wins ÷ total trades × 100</button><button type="button" class="qo">Total profit − total spread</button><button type="button" class="qo">Average RR × 100</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">+0.3R or more is good.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 6</span>How do you account for spread and slippage in a backtest?</p><div class="qos"><button type="button" class="qo" data-c="1">Subtract about 0.1R per trade</button><button type="button" class="qo">Ignore them</button><button type="button" class="qo">Add 1R to every trade</button><button type="button" class="qo">Subtract from winners only</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">Record partial profits exactly as you would live.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 7</span>What if expectancy is near zero?</p><div class="qos"><button type="button" class="qo" data-c="1">Find the weakest part, change one thing, test 50 more</button><button type="button" class="qo">Go live at once; it will be better live</button><button type="button" class="qo">Raise the lot so the result turns positive</button><button type="button" class="qo">Make five changes at once and see</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">If positive (+0.3R+), move to a demo forward test; if negative, check the basics.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 8</span>Model B, 50 trades: 42% wins, average win +2.6R. What is the expectancy?</p><div class="qos"><button type="button" class="qo" data-c="1">About +0.51R</button><button type="button" class="qo">About +2.6R</button><button type="button" class="qo">About −0.58R</button><button type="button" class="qo">About +1.0R</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">0.42 × 2.6 − 0.58 = 0.51; longest losing streak 6, maximum drawdown −7R.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 9</span>What is the benefit of knowing your drawdown and losing streak?</p><div class="qos"><button type="button" class="qo" data-c="1">You won&#x27;t quit the system in panic during live losses</button><button type="button" class="qo">Knowing drawdown raises profit by itself</button><button type="button" class="qo">It lowers the broker&#x27;s spread</button><button type="button" class="qo">No benefit; they are just numbers</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">At 1% risk a drawdown of up to 7% is possible; knowing it keeps you prepared.</span></p></li></ol>
+  <div class="qres" hidden aria-live="polite"><h3>Your result</h3><div class="qbig"></div><p class="qgr"></p><p class="qbest"></p>
+    <div class="qmiss" hidden><b>Questions you missed:</b><ol></ol></div>
+    <p class="qbtns"><button type="button" class="btn qre">Try again</button> <a class="btn" href="#top">Reread the lesson</a> <a class="btn gold qnx" href="smc-trading-journal-en.html" hidden>Next lesson ›</a></p></div>
+</section>
     <div class="smc-box"><h2>Lesson checklist</h2><p>Tick each point once you understand it. Your ticks are saved in this browser.</p><ul class="ck" data-k="smc-backtesting"><li><input type="checkbox" id="c0"><label for="c0">I wrote my rule before the backtest</label></li><li><input type="checkbox" id="c1"><label for="c1">I test in TradingView or MT5 replay without looking ahead</label></li><li><input type="checkbox" id="c2"><label for="c2">I log every trade with a screenshot</label></li><li><input type="checkbox" id="c3"><label for="c3">I have at least 50 trades and 3 months of data</label></li><li><input type="checkbox" id="c4"><label for="c4">I know my expectancy, losing streak and drawdown</label></li><li><input type="checkbox" id="c5"><label for="c5">I change only one thing at a time and retest</label></li></ul></div>
     <div class="smc-box asg"><h2>Assignment</h2><ol><li>Build a backtest sheet (date, session, model, score, entry, SL, TP, R, screenshot, note).</li><li>Start TradingView replay on Gold from a date three months ago.</li><li>Complete 50 trades on your rule.</li><li>Calculate win rate, average RR, expectancy, losing streak and drawdown.</li><li>Post your summary numbers in the group.</li></ol><p>Post your assignment screenshots with your reasons in our free Facebook group, where your charts will be checked.</p><a class="btn gold" href="https://www.facebook.com/groups/qaziforextips" target="_blank" rel="noopener">Join the free group</a></div>
     <div class="ls-faq en-faq"><h2>Questions</h2><details><summary>How do you backtest SMC?</summary><p>Write your rules first, use bar replay on one instrument and one timeframe set without looking ahead, log every trade, and test at least 50 trades over three months.</p></details><details><summary>What numbers matter in a backtest?</summary><p>Win rate, average reward to risk, expectancy per trade, longest losing streak and maximum drawdown.</p></details><details><summary>What is hindsight bias?</summary><p>Choosing setups after seeing what price did next, which makes a backtest look better than reality.</p></details></div>

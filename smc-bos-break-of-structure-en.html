@@ -576,11 +576,78 @@ footer a:hover{color:var(--ink)}
 .outline.en-out .n{margin-left:0;margin-right:6px}
 .smc-pn.en-pn{direction:ltr}
 .smc-pn.en-pn .nx{text-align:right}
+
+.smc-quiz{margin:40px 0;border:2px solid var(--gold);border-radius:16px;padding:18px 22px;background:var(--surface)}
+.smc-quiz h2{margin-top:0!important}
+.smc-quiz .qin{color:var(--muted)}
+.qbar{height:10px;border-radius:99px;background:var(--line);overflow:hidden;margin:8px 0}
+.qfill{height:100%;width:0;background:var(--gold);transition:width .3s}
+.qsc{font-weight:600;margin:4px 0 10px}
+.qsc .qs-c{color:#22a56b}
+.qlist{list-style:none;padding:0!important;margin:0}
+.qq{border-top:1px dashed var(--line);padding:12px 0}
+.qt{margin:0 0 8px!important;font-weight:600}
+.qn{display:inline-block;font-size:.78em;color:var(--gold-t,var(--gold));margin-inline-end:8px;font-weight:700}
+.qos{display:grid;gap:8px}
+.qo{all:unset;box-sizing:border-box;display:block;cursor:pointer;border:1px solid var(--line);border-radius:10px;padding:6px 14px;line-height:inherit;font:inherit;font-size:.95em;color:var(--ink);background:var(--bg,transparent)}
+.qo:hover,.qo:focus-visible{border-color:var(--gold);outline:none}
+.qq.done .qo{cursor:default}
+.qq.done .qo:hover{border-color:var(--line)}
+.qo.ok{border-color:#22a56b!important;background:rgba(34,165,107,.14)}
+.qo.bad{border-color:#e5535f!important;background:rgba(229,83,95,.14)}
+.qw{margin:8px 0 0!important;font-size:.92em;color:var(--muted)}
+.qw .qv.y{color:#22a56b}.qw .qv.n{color:#e5535f}
+.qw .qr b{color:var(--ink)}
+.qres{margin-top:16px;border-top:2px solid var(--gold);padding-top:12px;text-align:center}
+.qres h3{margin:0!important}
+.qbig{font:700 54px/1.2 var(--f-display,var(--f-body));color:var(--gold-t,var(--gold));direction:ltr}
+.qbig small{font-size:20px;color:var(--muted);display:block}
+.qgr{font-weight:600}
+.qbest{color:var(--muted);font-size:.9em}
+.qmiss{text-align:start;margin:10px 0}
+.qmiss ol{margin:4px 0 0;font-size:.92em}
+.qmiss a{color:var(--gold-t,var(--gold))}
+.qbtns .btn{margin:4px}
+.smc-prog{margin:34px 0;border:2px solid var(--gold);border-radius:16px;padding:16px 22px;background:var(--surface)}
+.smc-prog h2{margin-top:0!important}
+.qstats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:10px 0 14px}
+.qstats div{border:1px solid var(--line);border-radius:12px;padding:8px;text-align:center}
+.qstats b{display:block;font:700 30px/1.3 var(--f-body);color:var(--gold-t,var(--gold));direction:ltr}
+.qstats span{font-size:.85em;color:var(--muted)}
+.smc-prog .st-ok{color:#22a56b;font-weight:600}.smc-prog .st-no{color:#e5535f;font-weight:600}
+.smc-prog td.pc{direction:ltr;text-align:center!important}
+.en-art .qn{margin-right:8px}
 @media (max-width:760px){.lang-sw{display:flex}.lang-sw a{flex:1;min-width:0}.smc-fig .l{font-size:16px}}
 </style>
 <script>
 document.addEventListener('DOMContentLoaded',function(){document.querySelectorAll('ul.ck').forEach(function(ul){var k='smc-ck-'+ul.dataset.k,s={};try{s=JSON.parse(localStorage.getItem(k)||'{}')}catch(e){}
 ul.querySelectorAll('input').forEach(function(i){if(s[i.id]){i.checked=true;i.closest('li').classList.add('done')}i.addEventListener('change',function(){s[i.id]=i.checked;i.closest('li').classList.toggle('done',i.checked);try{localStorage.setItem(k,JSON.stringify(s))}catch(e){}})})})});
+
+document.addEventListener('DOMContentLoaded',function(){
+var K='smc-quiz';function ld(){try{return JSON.parse(localStorage.getItem(K)||'{}')}catch(e){return{}}}function sv(d){try{localStorage.setItem(K,JSON.stringify(d))}catch(e){}}
+document.querySelectorAll('.smc-quiz').forEach(function(z){
+ var cfg=JSON.parse(z.dataset.q),t=JSON.parse(z.dataset.t),qs=[].slice.call(z.querySelectorAll('.qq')),n=qs.length,ans=0,cor=0,miss=[];
+ function shuf(q){var b=q.querySelector('.qos'),o=[].slice.call(b.children);for(var i=o.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var x=o[i];o[i]=o[j];o[j]=x}o.forEach(function(e){b.appendChild(e)})}
+ function upd(){z.querySelector('.qs-c').textContent=cor;z.querySelector('.qs-a').textContent=ans;z.querySelector('.qfill').style.width=(ans/n*100)+'%'}
+ function fin(){var pc=Math.round(cor/n*100),d=ld(),r=d[cfg.slug]||{best:0,tries:0};r.tries++;r.last=pc;if(pc>r.best)r.best=pc;r.at=Date.now();d[cfg.slug]=r;sv(d);
+  var res=z.querySelector('.qres');res.hidden=false;z.querySelector('.qbig').innerHTML=pc+'%<small>'+cor+' / '+n+'</small>';
+  z.querySelector('.qgr').textContent=pc>=90?t.g1:(pc>=cfg.pass?t.g2:t.g3);
+  z.querySelector('.qbest').innerHTML=t.best+': <bdi dir="ltr">'+r.best+'%</bdi> · '+t.tries+': '+r.tries;
+  var m=z.querySelector('.qmiss'),ol=m.querySelector('ol');ol.innerHTML='';miss.forEach(function(i){var li=document.createElement('li'),a=document.createElement('a');a.href='#q'+cfg.slug+i;var qc=qs[i].querySelector('.qt').cloneNode(true);qc.removeChild(qc.querySelector('.qn'));a.textContent=t.qn+' '+(i+1)+': '+qc.textContent;li.appendChild(a);ol.appendChild(li)});m.hidden=!miss.length;
+  var nx=z.querySelector('.qnx');if(nx)nx.hidden=pc<cfg.pass;res.scrollIntoView({behavior:'smooth',block:'center'})}
+ qs.forEach(function(q,i){q.id='q'+cfg.slug+i;shuf(q);q.querySelectorAll('.qo').forEach(function(b){b.addEventListener('click',function(){if(q.classList.contains('done'))return;q.classList.add('done');ans++;var c=q.querySelector('.qo[data-c]'),w=q.querySelector('.qw'),v=w.querySelector('.qv');c.classList.add('ok');
+  if(b===c){cor++;v.textContent=t.ok+'!';v.className='qv y';w.querySelector('.qr').textContent=''}else{b.classList.add('bad');miss.push(i);v.textContent=t.no+'.';v.className='qv n';w.querySelector('.qr').innerHTML='<b>'+t.right+'</b> '+c.innerHTML+'. '}
+  w.hidden=false;upd();if(ans===n)fin()})})});
+ z.querySelector('.qre').addEventListener('click',function(){ans=0;cor=0;miss=[];qs.forEach(function(q){q.classList.remove('done');q.querySelectorAll('.qo').forEach(function(b){b.classList.remove('ok','bad')});q.querySelector('.qw').hidden=true;shuf(q)});z.querySelector('.qres').hidden=true;upd();qs[0].scrollIntoView({behavior:'smooth',block:'center'})});
+});
+document.querySelectorAll('.smc-prog').forEach(function(p){
+ var L=JSON.parse(p.dataset.l),t=JSON.parse(p.dataset.t),P=+p.dataset.p,d=ld(),tb=p.querySelector('tbody'),done=0,pass=0,sum=0;
+ L.forEach(function(x){var r=d[x[0]],tr=document.createElement('tr'),a='<a href="'+x[3]+'#quiz">'+x[1]+' · '+x[2]+'</a>';
+  if(r){done++;sum+=r.best;if(r.best>=P)pass++}
+  tr.innerHTML='<td>'+a+'</td><td class="pc">'+(r?r.best+'%':'—')+'</td><td>'+(r?(r.best>=P?'<span class="st-ok">✓ '+t.ok+'</span>':'<a class="st-no" href="'+x[3]+'#quiz">'+t.no+'</a>'):'<a href="'+x[3]+'#quiz">'+t.go+'</a>')+'</td>';tb.appendChild(tr)});
+ p.querySelector('.qstats').innerHTML='<div><b>'+done+'/'+L.length+'</b><span>'+t.done+'</span></div><div><b>'+pass+'</b><span>'+t.passed+'</span></div><div><b>'+(done?Math.round(sum/done)+'%':'—')+'</b><span>'+t.avg+'</span></div>';
+});
+});
 </script>
 </head>
 <body>
@@ -649,6 +716,16 @@ ul.querySelectorAll('input').forEach(function(i){if(s[i.id]){i.checked=true;i.cl
 <div class="call warn"><b class="k">Common mistake</b>Treating a lower timeframe BOS as equal to a higher timeframe one.</div>
 <h2 id="s41">Summary</h2>
 <ul><li>BOS = the previous swing broken by a body close in the trend direction.</li><li>Draw the line from the swing to the breaking candle, with the timeframe.</li><li>A strong BOS comes with momentum, an FVG and the bias.</li><li>After a BOS, the entry comes on the pullback from its origin.</li></ul>
+    <section class="smc-quiz" id="quiz" data-q="{&quot;slug&quot;:&quot;smc-bos-break-of-structure&quot;,&quot;pass&quot;:70,&quot;n&quot;:9}" data-t="{&quot;h&quot;: &quot;Test yourself: Lesson {n} quiz&quot;, &quot;intro&quot;: &quot;{c} questions. Pick one answer for each and you will see at once whether it is right and why. Your score and grade appear at the end. You need {p}% to pass.&quot;, &quot;score&quot;: &quot;correct&quot;, &quot;of&quot;: &quot;of&quot;, &quot;ok&quot;: &quot;Correct&quot;, &quot;no&quot;: &quot;Not quite&quot;, &quot;right&quot;: &quot;Correct answer:&quot;, &quot;why&quot;: &quot;Why:&quot;, &quot;res&quot;: &quot;Your result&quot;, &quot;best&quot;: &quot;Best score so far&quot;, &quot;tries&quot;: &quot;Attempts&quot;, &quot;retry&quot;: &quot;Try again&quot;, &quot;g1&quot;: &quot;Excellent! You have mastered this lesson.&quot;, &quot;g2&quot;: &quot;Well done, you passed. Read the explanation for any question you missed.&quot;, &quot;g3&quot;: &quot;Not passed yet. Review the questions you missed below, reread the lesson and try again.&quot;, &quot;wrong&quot;: &quot;Questions you missed:&quot;, &quot;nx&quot;: &quot;Next lesson&quot;, &quot;reread&quot;: &quot;Reread the lesson&quot;, &quot;qn&quot;: &quot;Question&quot;}">
+  <h2>Test yourself: Lesson 1.2 quiz</h2>
+  <p class="qin">9 questions. Pick one answer for each and you will see at once whether it is right and why. Your score and grade appear at the end. You need 70% to pass.</p>
+  <div class="qbar"><div class="qfill"></div></div>
+  <p class="qsc" aria-live="polite"><b class="qs-c">0</b> correct · <span class="qs-a">0</span> / 9</p>
+  <ol class="qlist"><li class="qq"><p class="qt"><span class="qn">Question 1</span>What is a BOS?</p><div class="qos"><button type="button" class="qo" data-c="1">A structure break in the direction of the current trend</button><button type="button" class="qo">The first break against the trend</button><button type="button" class="qo">A wick touching any level</button><button type="button" class="qo">The gap between two candles</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">In a bullish BOS the previous HH breaks; in a bearish BOS the previous LL.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 2</span>What is the key condition for a BOS?</p><div class="qos"><button type="button" class="qo" data-c="1">A candle body closes beyond the level</button><button type="button" class="qo">A wick touches the level</button><button type="button" class="qo">The candle is green</button><button type="button" class="qo">Volume is high</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">If only the wick went beyond and the body closed back inside, it is not a BOS; it is often a sweep.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 3</span>The last HH is 4,152.40. In London a candle reaches 4,156.10 but closes at 4,150.80. What is it?</p><div class="qos"><button type="button" class="qo" data-c="1">Not a BOS, only a wick</button><button type="button" class="qo">A bullish BOS</button><button type="button" class="qo">A bearish CHoCH</button><button type="button" class="qo">An FVG</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">The body closed below the high, so the higher price was not accepted.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 4</span>How do you draw a BOS line?</p><div class="qos"><button type="button" class="qo" data-c="1">From the broken swing to the closing candle, with the timeframe</button><button type="button" class="qo">One long line from the chart&#x27;s start to its end</button><button type="button" class="qo">A separate line on every high, with no label</button><button type="button" class="qo">Only a small mark at the wick tip</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">An M15 BOS and an H4 BOS are not the same, so write the timeframe.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 5</span>Which of these is NOT a benefit of a BOS?</p><div class="qos"><button type="button" class="qo" data-c="1">It guarantees the next candle goes up</button><button type="button" class="qo">Confirming the bias</button><button type="button" class="qo">Finding POIs at the origin of the BOS move</button><button type="button" class="qo">Identifying the protected low</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">A BOS confirms the trend is alive; it guarantees nothing about the next candle.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 6</span>Why do traders who jump on the first pullback after a BOS often get trapped?</p><div class="qos"><button type="button" class="qo" data-c="1">They fall into the IDM trap</button><button type="button" class="qo">Because a BOS is always fake</button><button type="button" class="qo">Because the pullback never comes</button><button type="button" class="qo">Because the spread is high</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">The first small pullback after a BOS is often inducement (lesson 1.6).</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 7</span>Which is a sign of a strong BOS?</p><div class="qos"><button type="button" class="qo" data-c="1">A big momentum candle with an FVG, closing well past the high</button><button type="button" class="qo">Small candles creeping slowly past the high</button><button type="button" class="qo">A break made in the quiet Asian hours</button><button type="button" class="qo">A break against the higher timeframe bias</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">The origin of a strong BOS (order block or FVG) makes a good POI.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 8</span>After a BOS, which is the new important low?</p><div class="qos"><button type="button" class="qo" data-c="1">The low where the BOS move began</button><button type="button" class="qo">The high of the BOS candle</button><button type="button" class="qo">The oldest low on the chart</button><button type="button" class="qo">Any small low</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">In the Gold example the BOS move began at 4,144.50, so that is the new important low.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 9</span>Why is chasing the BOS candle wrong?</p><div class="qos"><button type="button" class="qo" data-c="1">A BOS says the trend is alive; enter on a POI pullback</button><button type="button" class="qo">A reversal always follows a BOS straight away</button><button type="button" class="qo">A BOS only forms on M1, so it is useless</button><button type="button" class="qo">It is the right method; waiting costs money</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">Chasing the BOS candle makes the SL large and the RR poor.</span></p></li></ol>
+  <div class="qres" hidden aria-live="polite"><h3>Your result</h3><div class="qbig"></div><p class="qgr"></p><p class="qbest"></p>
+    <div class="qmiss" hidden><b>Questions you missed:</b><ol></ol></div>
+    <p class="qbtns"><button type="button" class="btn qre">Try again</button> <a class="btn" href="#top">Reread the lesson</a> <a class="btn gold qnx" href="smc-choch-change-of-character-en.html" hidden>Next lesson ›</a></p></div>
+</section>
     <div class="smc-box"><h2>Lesson checklist</h2><p>Tick each point once you understand it. Your ticks are saved in this browser.</p><ul class="ck" data-k="smc-bos-break-of-structure"><li><input type="checkbox" id="c0"><label for="c0">A BOS means the previous high or low breaks in the trend direction</label></li><li><input type="checkbox" id="c1"><label for="c1">I count a BOS only on a body close, not a wick</label></li><li><input type="checkbox" id="c2"><label for="c2">I wait for the candle to close</label></li><li><input type="checkbox" id="c3"><label for="c3">I draw the BOS line to the breaking candle</label></li><li><input type="checkbox" id="c4"><label for="c4">I know the first pullback after a BOS can be a trap</label></li><li><input type="checkbox" id="c5"><label for="c5">I can show the difference between a wick and a body-close break on a chart</label></li><li><input type="checkbox" id="c6"><label for="c6">I write the BOS line with its timeframe</label></li><li><input type="checkbox" id="c7"><label for="c7">I know the difference between a strong and a weak BOS</label></li></ul></div>
     <div class="smc-box asg"><h2>Assignment</h2><ol><li>Find 20 BOS on the Gold H1 chart: 10 bullish and 10 bearish, and draw each line to the breaking candle.</li><li>Find 5 places where a wick broke a high or low but the body closed back inside, and write where price went next.</li><li>For each BOS, note whether the breaking candle was a momentum candle or a weak one.</li><li>Post your cleanest BOS and your most confusing case in the group.</li><li>Mark 10 BOS on Gold H1 and label each strong or weak, with the reason.</li><li>Find 3 places where only a wick went above a high and no BOS formed; see what price did next.</li></ol><p>Post your assignment screenshots with your reasons in our free Facebook group, where your charts will be checked.</p><a class="btn gold" href="https://www.facebook.com/groups/qaziforextips" target="_blank" rel="noopener">Join the free group</a></div>
     <div class="ls-faq en-faq"><h2>Questions</h2><details><summary>What is a break of structure (BOS)?</summary><p>A candle body closing beyond the previous swing high in an uptrend, or the previous swing low in a downtrend, confirming the trend continues.</p></details><details><summary>Does a wick count as a BOS?</summary><p>No. A wick beyond the level with the body closing back inside is usually a liquidity sweep.</p></details><details><summary>Where should the BOS line end?</summary><p>At the candle whose body closed beyond the broken swing.</p></details><details><summary>What is the difference between BOS and CHoCH?</summary><p>BOS breaks structure in the direction of the trend; CHoCH is the first break against it.</p></details><details><summary>Should I enter right after a BOS?</summary><p>No. Wait for a pullback to a valid POI; the first pullback is often inducement.</p></details><details><summary>Is a BOS with momentum more reliable?</summary><p>Yes. A BOS made with displacement candles is more likely to hold than a slow, weak break.</p></details></div>
