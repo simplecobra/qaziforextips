@@ -576,11 +576,78 @@ footer a:hover{color:var(--ink)}
 .outline.en-out .n{margin-left:0;margin-right:6px}
 .smc-pn.en-pn{direction:ltr}
 .smc-pn.en-pn .nx{text-align:right}
+
+.smc-quiz{margin:40px 0;border:2px solid var(--gold);border-radius:16px;padding:18px 22px;background:var(--surface)}
+.smc-quiz h2{margin-top:0!important}
+.smc-quiz .qin{color:var(--muted)}
+.qbar{height:10px;border-radius:99px;background:var(--line);overflow:hidden;margin:8px 0}
+.qfill{height:100%;width:0;background:var(--gold);transition:width .3s}
+.qsc{font-weight:600;margin:4px 0 10px}
+.qsc .qs-c{color:#22a56b}
+.qlist{list-style:none;padding:0!important;margin:0}
+.qq{border-top:1px dashed var(--line);padding:12px 0}
+.qt{margin:0 0 8px!important;font-weight:600}
+.qn{display:inline-block;font-size:.78em;color:var(--gold-t,var(--gold));margin-inline-end:8px;font-weight:700}
+.qos{display:grid;gap:8px}
+.qo{all:unset;box-sizing:border-box;display:block;cursor:pointer;border:1px solid var(--line);border-radius:10px;padding:6px 14px;line-height:inherit;font:inherit;font-size:.95em;color:var(--ink);background:var(--bg,transparent)}
+.qo:hover,.qo:focus-visible{border-color:var(--gold);outline:none}
+.qq.done .qo{cursor:default}
+.qq.done .qo:hover{border-color:var(--line)}
+.qo.ok{border-color:#22a56b!important;background:rgba(34,165,107,.14)}
+.qo.bad{border-color:#e5535f!important;background:rgba(229,83,95,.14)}
+.qw{margin:8px 0 0!important;font-size:.92em;color:var(--muted)}
+.qw .qv.y{color:#22a56b}.qw .qv.n{color:#e5535f}
+.qw .qr b{color:var(--ink)}
+.qres{margin-top:16px;border-top:2px solid var(--gold);padding-top:12px;text-align:center}
+.qres h3{margin:0!important}
+.qbig{font:700 54px/1.2 var(--f-display,var(--f-body));color:var(--gold-t,var(--gold));direction:ltr}
+.qbig small{font-size:20px;color:var(--muted);display:block}
+.qgr{font-weight:600}
+.qbest{color:var(--muted);font-size:.9em}
+.qmiss{text-align:start;margin:10px 0}
+.qmiss ol{margin:4px 0 0;font-size:.92em}
+.qmiss a{color:var(--gold-t,var(--gold))}
+.qbtns .btn{margin:4px}
+.smc-prog{margin:34px 0;border:2px solid var(--gold);border-radius:16px;padding:16px 22px;background:var(--surface)}
+.smc-prog h2{margin-top:0!important}
+.qstats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:10px 0 14px}
+.qstats div{border:1px solid var(--line);border-radius:12px;padding:8px;text-align:center}
+.qstats b{display:block;font:700 30px/1.3 var(--f-body);color:var(--gold-t,var(--gold));direction:ltr}
+.qstats span{font-size:.85em;color:var(--muted)}
+.smc-prog .st-ok{color:#22a56b;font-weight:600}.smc-prog .st-no{color:#e5535f;font-weight:600}
+.smc-prog td.pc{direction:ltr;text-align:center!important}
+.en-art .qn{margin-right:8px}
 @media (max-width:760px){.lang-sw{display:flex}.lang-sw a{flex:1;min-width:0}.smc-fig .l{font-size:16px}}
 </style>
 <script>
 document.addEventListener('DOMContentLoaded',function(){document.querySelectorAll('ul.ck').forEach(function(ul){var k='smc-ck-'+ul.dataset.k,s={};try{s=JSON.parse(localStorage.getItem(k)||'{}')}catch(e){}
 ul.querySelectorAll('input').forEach(function(i){if(s[i.id]){i.checked=true;i.closest('li').classList.add('done')}i.addEventListener('change',function(){s[i.id]=i.checked;i.closest('li').classList.toggle('done',i.checked);try{localStorage.setItem(k,JSON.stringify(s))}catch(e){}})})})});
+
+document.addEventListener('DOMContentLoaded',function(){
+var K='smc-quiz';function ld(){try{return JSON.parse(localStorage.getItem(K)||'{}')}catch(e){return{}}}function sv(d){try{localStorage.setItem(K,JSON.stringify(d))}catch(e){}}
+document.querySelectorAll('.smc-quiz').forEach(function(z){
+ var cfg=JSON.parse(z.dataset.q),t=JSON.parse(z.dataset.t),qs=[].slice.call(z.querySelectorAll('.qq')),n=qs.length,ans=0,cor=0,miss=[];
+ function shuf(q){var b=q.querySelector('.qos'),o=[].slice.call(b.children);for(var i=o.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var x=o[i];o[i]=o[j];o[j]=x}o.forEach(function(e){b.appendChild(e)})}
+ function upd(){z.querySelector('.qs-c').textContent=cor;z.querySelector('.qs-a').textContent=ans;z.querySelector('.qfill').style.width=(ans/n*100)+'%'}
+ function fin(){var pc=Math.round(cor/n*100),d=ld(),r=d[cfg.slug]||{best:0,tries:0};r.tries++;r.last=pc;if(pc>r.best)r.best=pc;r.at=Date.now();d[cfg.slug]=r;sv(d);
+  var res=z.querySelector('.qres');res.hidden=false;z.querySelector('.qbig').innerHTML=pc+'%<small>'+cor+' / '+n+'</small>';
+  z.querySelector('.qgr').textContent=pc>=90?t.g1:(pc>=cfg.pass?t.g2:t.g3);
+  z.querySelector('.qbest').innerHTML=t.best+': <bdi dir="ltr">'+r.best+'%</bdi> · '+t.tries+': '+r.tries;
+  var m=z.querySelector('.qmiss'),ol=m.querySelector('ol');ol.innerHTML='';miss.forEach(function(i){var li=document.createElement('li'),a=document.createElement('a');a.href='#q'+cfg.slug+i;var qc=qs[i].querySelector('.qt').cloneNode(true);qc.removeChild(qc.querySelector('.qn'));a.textContent=t.qn+' '+(i+1)+': '+qc.textContent;li.appendChild(a);ol.appendChild(li)});m.hidden=!miss.length;
+  var nx=z.querySelector('.qnx');if(nx)nx.hidden=pc<cfg.pass;res.scrollIntoView({behavior:'smooth',block:'center'})}
+ qs.forEach(function(q,i){q.id='q'+cfg.slug+i;shuf(q);q.querySelectorAll('.qo').forEach(function(b){b.addEventListener('click',function(){if(q.classList.contains('done'))return;q.classList.add('done');ans++;var c=q.querySelector('.qo[data-c]'),w=q.querySelector('.qw'),v=w.querySelector('.qv');c.classList.add('ok');
+  if(b===c){cor++;v.textContent=t.ok+'!';v.className='qv y';w.querySelector('.qr').textContent=''}else{b.classList.add('bad');miss.push(i);v.textContent=t.no+'.';v.className='qv n';w.querySelector('.qr').innerHTML='<b>'+t.right+'</b> '+c.innerHTML+'. '}
+  w.hidden=false;upd();if(ans===n)fin()})})});
+ z.querySelector('.qre').addEventListener('click',function(){ans=0;cor=0;miss=[];qs.forEach(function(q){q.classList.remove('done');q.querySelectorAll('.qo').forEach(function(b){b.classList.remove('ok','bad')});q.querySelector('.qw').hidden=true;shuf(q)});z.querySelector('.qres').hidden=true;upd();qs[0].scrollIntoView({behavior:'smooth',block:'center'})});
+});
+document.querySelectorAll('.smc-prog').forEach(function(p){
+ var L=JSON.parse(p.dataset.l),t=JSON.parse(p.dataset.t),P=+p.dataset.p,d=ld(),tb=p.querySelector('tbody'),done=0,pass=0,sum=0;
+ L.forEach(function(x){var r=d[x[0]],tr=document.createElement('tr'),a='<a href="'+x[3]+'#quiz">'+x[1]+' · '+x[2]+'</a>';
+  if(r){done++;sum+=r.best;if(r.best>=P)pass++}
+  tr.innerHTML='<td>'+a+'</td><td class="pc">'+(r?r.best+'%':'—')+'</td><td>'+(r?(r.best>=P?'<span class="st-ok">✓ '+t.ok+'</span>':'<a class="st-no" href="'+x[3]+'#quiz">'+t.no+'</a>'):'<a href="'+x[3]+'#quiz">'+t.go+'</a>')+'</td>';tb.appendChild(tr)});
+ p.querySelector('.qstats').innerHTML='<div><b>'+done+'/'+L.length+'</b><span>'+t.done+'</span></div><div><b>'+pass+'</b><span>'+t.passed+'</span></div><div><b>'+(done?Math.round(sum/done)+'%':'—')+'</b><span>'+t.avg+'</span></div>';
+});
+});
 </script>
 </head>
 <body>
@@ -642,6 +709,16 @@ ul.querySelectorAll('input').forEach(function(i){if(s[i.id]){i.checked=true;i.cl
 <p>اس دن ٹریلنگ بہتر رہی، لیکن کئی دن TP1 کے بعد قیمت واپس آتی ہے۔ صحیح طریقہ آپ کا بیک ٹیسٹ بتائے گا۔</p>
 <h2 id="s33">خلاصہ</h2>
 <ul><li>TP لیکویڈیٹی سے، لیول سے تھوڑا پہلے: TP1 قریبی، TP2 DOL۔</li><li>TP1 پر آدھا بند اور SL بریک ایون؛ بہت جلدی بریک ایون نہیں۔</li><li>ٹریلنگ سٹرکچر سے، فکسڈ فاصلے سے نہیں۔</li><li>فی ٹریڈ اوسط نتیجہ = ون ریٹ × جیت − لاس ریٹ؛ اچھا RR کم ون ریٹ میں بھی منافع دیتا ہے۔</li></ul>
+    <section class="smc-quiz" id="quiz" data-q="{&quot;slug&quot;:&quot;smc-take-profit-trade-management&quot;,&quot;pass&quot;:70,&quot;n&quot;:9}" data-t="{&quot;h&quot;: &quot;اپنا ٹیسٹ کریں: سبق {n} کا کوئز&quot;, &quot;intro&quot;: &quot;کل {c} سوال۔ ہر سوال کا ایک جواب چنیں، فوراً پتا چلے گا کہ درست ہے یا نہیں اور کیوں۔ آخر میں آپ کا سکور اور گریڈ آئے گا۔ پاس ہونے کے لیے {p}% چاہیے۔&quot;, &quot;score&quot;: &quot;درست&quot;, &quot;of&quot;: &quot;میں سے&quot;, &quot;ok&quot;: &quot;درست جواب&quot;, &quot;no&quot;: &quot;غلط جواب&quot;, &quot;right&quot;: &quot;درست جواب:&quot;, &quot;why&quot;: &quot;وجہ:&quot;, &quot;res&quot;: &quot;آپ کا نتیجہ&quot;, &quot;best&quot;: &quot;اب تک کا بہترین سکور&quot;, &quot;tries&quot;: &quot;کوششیں&quot;, &quot;retry&quot;: &quot;دوبارہ کوشش کریں&quot;, &quot;g1&quot;: &quot;شاندار! آپ اس سبق کے ماہر ہیں۔&quot;, &quot;g2&quot;: &quot;بہت اچھا! آپ پاس ہیں۔ غلط سوالوں کی وجہ ایک بار پڑھ لیں۔&quot;, &quot;g3&quot;: &quot;ابھی پاس نہیں ہوئے۔ نیچے دیے گئے غلط سوال دیکھیں، سبق دوبارہ پڑھیں اور پھر کوشش کریں۔&quot;, &quot;wrong&quot;: &quot;جن سوالوں پر غلطی ہوئی:&quot;, &quot;nx&quot;: &quot;اگلا سبق&quot;, &quot;reread&quot;: &quot;سبق دوبارہ پڑھیں&quot;, &quot;qn&quot;: &quot;سوال&quot;}">
+  <h2>اپنا ٹیسٹ کریں: سبق 6.2 کا کوئز</h2>
+  <p class="qin">کل 9 سوال۔ ہر سوال کا ایک جواب چنیں، فوراً پتا چلے گا کہ درست ہے یا نہیں اور کیوں۔ آخر میں آپ کا سکور اور گریڈ آئے گا۔ پاس ہونے کے لیے 70% چاہیے۔</p>
+  <div class="qbar"><div class="qfill"></div></div>
+  <p class="qsc" aria-live="polite"><b class="qs-c">0</b> درست · <span class="qs-a">0</span> / 9</p>
+  <ol class="qlist"><li class="qq"><p class="qt"><span class="qn">سوال 1</span>SMC میں ٹارگٹ کہاں سے آتا ہے؟</p><div class="qos"><button type="button" class="qo" data-c="1">لیکویڈیٹی سے</button><button type="button" class="qo">اندازے سے</button><button type="button" class="qo">ہمیشہ 50 پِپ</button><button type="button" class="qo">RSI سے</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">ٹارگٹ لیکویڈیٹی سے ذرا پہلے رکھیں (گولڈ پر 0.5 سے 1 ڈالر)۔</span></p></li><li class="qq"><p class="qt"><span class="qn">سوال 2</span>متوازن مینجمنٹ کا عام طریقہ کیا ہے؟</p><div class="qos"><button type="button" class="qo" data-c="1">TP1 پر آدھا، باقی بریک ایون پر TP2 تک</button><button type="button" class="qo">سب کچھ TP1 پر بند، رنر نہیں</button><button type="button" class="qo">کبھی پرافٹ نہیں، ٹرینڈ کے آخر تک</button><button type="button" class="qo">ہر 5 منٹ بعد سٹاپ قریب کریں</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">TP1 کے بعد واپسی ہو تو بھی نتیجہ پرافٹ؛ DOL تک جائے تو پوری موو۔</span></p></li><li class="qq"><p class="qt"><span class="qn">سوال 3</span>بریک ایون کب کرنا بہتر ہے؟</p><div class="qos"><button type="button" class="qo" data-c="1">TP1 کے بعد، یا نئے BOS پر 1R پر</button><button type="button" class="qo">انٹری کے 5 منٹ بعد</button><button type="button" class="qo">انٹری سے پہلے ہی</button><button type="button" class="qo">کبھی نہیں</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">بہت جلدی بریک ایون سب سے عام غلطی ہے؛ قیمت FVG بھرنے انٹری تک آتی ہے، پھر ٹارگٹ جاتی ہے۔</span></p></li><li class="qq"><p class="qt"><span class="qn">سوال 4</span>رنر کا سٹاپ کیسے ٹریل کریں؟</p><div class="qos"><button type="button" class="qo" data-c="1">ہر BOS کے بعد تازہ HL کے نیچے</button><button type="button" class="qo">ہمیشہ فکسڈ 10 پِپ پیچھے</button><button type="button" class="qo">ہر کینڈل کے لو کے نیچے</button><button type="button" class="qo">ٹریل نہ کریں، ہٹا دیں</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">گولڈ کے نارمل پل بیک بڑے ہوتے ہیں، فکسڈ ٹریلنگ جلدی نکال دیتی ہے۔</span></p></li><li class="qq"><p class="qt"><span class="qn">سوال 5</span>40% وِن ریٹ اور 1:3 RR پر فی ٹریڈ اوسط نتیجہ کیا ہے؟</p><div class="qos"><button type="button" class="qo" data-c="1">+0.6R</button><button type="button" class="qo">+0.2R</button><button type="button" class="qo">−0.6R</button><button type="button" class="qo">+3R</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">0.4 × 3 − 0.6 = 0.6R؛ 100 ٹریڈز پر تقریباً +60R۔</span></p></li><li class="qq"><p class="qt"><span class="qn">سوال 6</span>60% وِن ریٹ اور 1:1 RR پر فی ٹریڈ نتیجہ کیا ہے؟</p><div class="qos"><button type="button" class="qo" data-c="1">+0.2R</button><button type="button" class="qo">+0.6R</button><button type="button" class="qo">+1R</button><button type="button" class="qo">صفر</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">0.6 − 0.4 = 0.2R؛ اسی لیے کم وِن ریٹ پر بھی اچھے RR سے SMC منافع بخش ہو سکتا ہے۔</span></p></li><li class="qq"><p class="qt"><span class="qn">سوال 7</span>ٹریڈ کے دوران کیا نہیں کرنا چاہیے؟</p><div class="qos"><button type="button" class="qo" data-c="1">پرافٹ والی ٹریڈ خبر میں رکھنا اور ہر M1 کینڈل گھورنا</button><button type="button" class="qo">TP1، SL اور invalidation کے الرٹ لگانا</button><button type="button" class="qo">نئی لیکویڈیٹی پر ٹارگٹ بدلنا</button><button type="button" class="qo">خبر سے 30 منٹ پہلے TP1 لینا</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">انٹرا ڈے ٹریڈ کو بغیر پلان کے لندن کلوز کے بعد رات تک نہ رکھیں۔</span></p></li><li class="qq"><p class="qt"><span class="qn">سوال 8</span>گولڈ مثال: انٹری 4,116، SL 4,108، 0.02 لاٹ۔ آدھا 4,131.5 پر، آدھا 4,148.5 پر بند۔ کل نتیجہ؟</p><div class="qos"><button type="button" class="qo" data-c="1">+48 ڈالر</button><button type="button" class="qo">+65 ڈالر</button><button type="button" class="qo">صفر</button><button type="button" class="qo">−16 ڈالر</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">+15.5 اور +32.5؛ اگر TP1 کے بعد قیمت واپس آتی تو بھی +15.5 (تقریباً +1R)۔</span></p></li><li class="qq"><p class="qt"><span class="qn">سوال 9</span>فیز 6 کے گیٹ کی شرطوں میں کون سی شامل ہے؟</p><div class="qos"><button type="button" class="qo" data-c="1">کسی بھی سٹاپ کا لاٹ 30 سیکنڈ میں</button><button type="button" class="qo">100 لائیو ٹریڈز مکمل</button><button type="button" class="qo">ایک پراپ فرم پاس کرنا</button><button type="button" class="qo">روزانہ 10 ٹریڈز کرنا</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">ساتھ: رسک حدیں لکھی ہوں، TP اور بریک ایون کے اصول، اور بیک ٹیسٹ کی مثبت expectancy۔</span></p></li></ol>
+  <div class="qres" hidden aria-live="polite"><h3>آپ کا نتیجہ</h3><div class="qbig"></div><p class="qgr"></p><p class="qbest"></p>
+    <div class="qmiss" hidden><b>جن سوالوں پر غلطی ہوئی:</b><ol></ol></div>
+    <p class="qbtns"><button type="button" class="btn qre">دوبارہ کوشش کریں</button> <a class="btn" href="#top">سبق دوبارہ پڑھیں</a> <a class="btn gold qnx" href="smc-backtesting.html" hidden>اگلا سبق ›</a></p></div>
+</section>
     <div class="smc-box"><h2>اس سبق کی چیک لسٹ</h2><p>جو بات سمجھ آ جائے اس پر نشان لگائیں۔ آپ کے نشان اسی براؤزر میں محفوظ رہتے ہیں۔</p><ul class="ck" data-k="smc-take-profit-trade-management"><li><input type="checkbox" id="c0"><label for="c0">میرے ٹارگٹ لیکویڈیٹی پر ہوتے ہیں، لیول سے تھوڑا پہلے</label></li><li><input type="checkbox" id="c1"><label for="c1">میں TP1 پر جزوی منافع لیتا ہوں اور تبھی بریک ایون کرتا ہوں</label></li><li><input type="checkbox" id="c2"><label for="c2">میں ٹریلنگ سٹرکچر سے کرتا ہوں</label></li><li><input type="checkbox" id="c3"><label for="c3">میں اپنا فی ٹریڈ اوسط نتیجہ (R) جانتا ہوں</label></li><li><input type="checkbox" id="c4"><label for="c4">میں خبر اور رات سے پہلے کھلی ٹریڈ کا فیصلہ پلان کے مطابق کرتا ہوں</label></li></ul></div>
     <div class="smc-box asg"><h2>اسائنمنٹ</h2><ol><li>اپنی پچھلی 20 ٹریڈز (یا بیک ٹیسٹ) کو تین طریقوں سے دوبارہ گنیں: پورا TP2، آدھا TP1 + آدھا TP2، اور پورا TP1۔</li><li>ہر طریقے کا کل R لکھیں۔</li><li>دیکھیں کتنی بار جلدی بریک ایون نے آپ کو جیتنے والی ٹریڈ سے نکالا۔</li><li>اپنا TP اور ٹریڈ مینجمنٹ کا قاعدہ لکھیں۔</li><li>نتیجہ گروپ میں پوسٹ کریں۔</li></ol><p>اپنی اسائنمنٹ کے اسکرین شاٹس وجہ کے ساتھ ہمارے فری فیس بک گروپ میں پوسٹ کریں، وہاں آپ کے چارٹ چیک کیے جائیں گے۔</p><a class="btn gold" href="https://www.facebook.com/groups/qaziforextips" target="_blank" rel="noopener">فری گروپ جوائن کریں</a></div>
     <div class="ls-faq ur" lang="ur" dir="rtl"><h2>اکثر پوچھے جانے والے سوال</h2><details><summary>SMC میں ٹیک پرافٹ کہاں رکھیں؟</summary><p>لیکویڈیٹی پر: TP1 قریبی ہائی یا لو، TP2 ڈرا آن لیکویڈیٹی، اور لیول سے تھوڑا پہلے۔</p></details><details><summary>بریک ایون کب کریں؟</summary><p>TP1 کے بعد، یا جب قیمت نیا BOS کر کے کم از کم 1R دور ہو جائے؛ صرف ڈر سے نہیں۔</p></details><details><summary>کم ون ریٹ میں منافع کیسے ممکن ہے؟</summary><p>اچھے RR سے: 40% ون ریٹ اور 1:3 RR پر فی ٹریڈ اوسطاً +0.6R بنتا ہے۔</p></details><details><summary>کیا جزوی منافع لینا چاہیے؟</summary><p>یہ نفسیاتی سکون دیتا ہے مگر کل RR کم کرتا ہے؛ اپنے بیک ٹیسٹ سے فیصلہ کریں۔</p></details></div>

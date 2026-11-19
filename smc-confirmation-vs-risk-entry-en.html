@@ -576,11 +576,78 @@ footer a:hover{color:var(--ink)}
 .outline.en-out .n{margin-left:0;margin-right:6px}
 .smc-pn.en-pn{direction:ltr}
 .smc-pn.en-pn .nx{text-align:right}
+
+.smc-quiz{margin:40px 0;border:2px solid var(--gold);border-radius:16px;padding:18px 22px;background:var(--surface)}
+.smc-quiz h2{margin-top:0!important}
+.smc-quiz .qin{color:var(--muted)}
+.qbar{height:10px;border-radius:99px;background:var(--line);overflow:hidden;margin:8px 0}
+.qfill{height:100%;width:0;background:var(--gold);transition:width .3s}
+.qsc{font-weight:600;margin:4px 0 10px}
+.qsc .qs-c{color:#22a56b}
+.qlist{list-style:none;padding:0!important;margin:0}
+.qq{border-top:1px dashed var(--line);padding:12px 0}
+.qt{margin:0 0 8px!important;font-weight:600}
+.qn{display:inline-block;font-size:.78em;color:var(--gold-t,var(--gold));margin-inline-end:8px;font-weight:700}
+.qos{display:grid;gap:8px}
+.qo{all:unset;box-sizing:border-box;display:block;cursor:pointer;border:1px solid var(--line);border-radius:10px;padding:6px 14px;line-height:inherit;font:inherit;font-size:.95em;color:var(--ink);background:var(--bg,transparent)}
+.qo:hover,.qo:focus-visible{border-color:var(--gold);outline:none}
+.qq.done .qo{cursor:default}
+.qq.done .qo:hover{border-color:var(--line)}
+.qo.ok{border-color:#22a56b!important;background:rgba(34,165,107,.14)}
+.qo.bad{border-color:#e5535f!important;background:rgba(229,83,95,.14)}
+.qw{margin:8px 0 0!important;font-size:.92em;color:var(--muted)}
+.qw .qv.y{color:#22a56b}.qw .qv.n{color:#e5535f}
+.qw .qr b{color:var(--ink)}
+.qres{margin-top:16px;border-top:2px solid var(--gold);padding-top:12px;text-align:center}
+.qres h3{margin:0!important}
+.qbig{font:700 54px/1.2 var(--f-display,var(--f-body));color:var(--gold-t,var(--gold));direction:ltr}
+.qbig small{font-size:20px;color:var(--muted);display:block}
+.qgr{font-weight:600}
+.qbest{color:var(--muted);font-size:.9em}
+.qmiss{text-align:start;margin:10px 0}
+.qmiss ol{margin:4px 0 0;font-size:.92em}
+.qmiss a{color:var(--gold-t,var(--gold))}
+.qbtns .btn{margin:4px}
+.smc-prog{margin:34px 0;border:2px solid var(--gold);border-radius:16px;padding:16px 22px;background:var(--surface)}
+.smc-prog h2{margin-top:0!important}
+.qstats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:10px 0 14px}
+.qstats div{border:1px solid var(--line);border-radius:12px;padding:8px;text-align:center}
+.qstats b{display:block;font:700 30px/1.3 var(--f-body);color:var(--gold-t,var(--gold));direction:ltr}
+.qstats span{font-size:.85em;color:var(--muted)}
+.smc-prog .st-ok{color:#22a56b;font-weight:600}.smc-prog .st-no{color:#e5535f;font-weight:600}
+.smc-prog td.pc{direction:ltr;text-align:center!important}
+.en-art .qn{margin-right:8px}
 @media (max-width:760px){.lang-sw{display:flex}.lang-sw a{flex:1;min-width:0}.smc-fig .l{font-size:16px}}
 </style>
 <script>
 document.addEventListener('DOMContentLoaded',function(){document.querySelectorAll('ul.ck').forEach(function(ul){var k='smc-ck-'+ul.dataset.k,s={};try{s=JSON.parse(localStorage.getItem(k)||'{}')}catch(e){}
 ul.querySelectorAll('input').forEach(function(i){if(s[i.id]){i.checked=true;i.closest('li').classList.add('done')}i.addEventListener('change',function(){s[i.id]=i.checked;i.closest('li').classList.toggle('done',i.checked);try{localStorage.setItem(k,JSON.stringify(s))}catch(e){}})})})});
+
+document.addEventListener('DOMContentLoaded',function(){
+var K='smc-quiz';function ld(){try{return JSON.parse(localStorage.getItem(K)||'{}')}catch(e){return{}}}function sv(d){try{localStorage.setItem(K,JSON.stringify(d))}catch(e){}}
+document.querySelectorAll('.smc-quiz').forEach(function(z){
+ var cfg=JSON.parse(z.dataset.q),t=JSON.parse(z.dataset.t),qs=[].slice.call(z.querySelectorAll('.qq')),n=qs.length,ans=0,cor=0,miss=[];
+ function shuf(q){var b=q.querySelector('.qos'),o=[].slice.call(b.children);for(var i=o.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var x=o[i];o[i]=o[j];o[j]=x}o.forEach(function(e){b.appendChild(e)})}
+ function upd(){z.querySelector('.qs-c').textContent=cor;z.querySelector('.qs-a').textContent=ans;z.querySelector('.qfill').style.width=(ans/n*100)+'%'}
+ function fin(){var pc=Math.round(cor/n*100),d=ld(),r=d[cfg.slug]||{best:0,tries:0};r.tries++;r.last=pc;if(pc>r.best)r.best=pc;r.at=Date.now();d[cfg.slug]=r;sv(d);
+  var res=z.querySelector('.qres');res.hidden=false;z.querySelector('.qbig').innerHTML=pc+'%<small>'+cor+' / '+n+'</small>';
+  z.querySelector('.qgr').textContent=pc>=90?t.g1:(pc>=cfg.pass?t.g2:t.g3);
+  z.querySelector('.qbest').innerHTML=t.best+': <bdi dir="ltr">'+r.best+'%</bdi> · '+t.tries+': '+r.tries;
+  var m=z.querySelector('.qmiss'),ol=m.querySelector('ol');ol.innerHTML='';miss.forEach(function(i){var li=document.createElement('li'),a=document.createElement('a');a.href='#q'+cfg.slug+i;var qc=qs[i].querySelector('.qt').cloneNode(true);qc.removeChild(qc.querySelector('.qn'));a.textContent=t.qn+' '+(i+1)+': '+qc.textContent;li.appendChild(a);ol.appendChild(li)});m.hidden=!miss.length;
+  var nx=z.querySelector('.qnx');if(nx)nx.hidden=pc<cfg.pass;res.scrollIntoView({behavior:'smooth',block:'center'})}
+ qs.forEach(function(q,i){q.id='q'+cfg.slug+i;shuf(q);q.querySelectorAll('.qo').forEach(function(b){b.addEventListener('click',function(){if(q.classList.contains('done'))return;q.classList.add('done');ans++;var c=q.querySelector('.qo[data-c]'),w=q.querySelector('.qw'),v=w.querySelector('.qv');c.classList.add('ok');
+  if(b===c){cor++;v.textContent=t.ok+'!';v.className='qv y';w.querySelector('.qr').textContent=''}else{b.classList.add('bad');miss.push(i);v.textContent=t.no+'.';v.className='qv n';w.querySelector('.qr').innerHTML='<b>'+t.right+'</b> '+c.innerHTML+'. '}
+  w.hidden=false;upd();if(ans===n)fin()})})});
+ z.querySelector('.qre').addEventListener('click',function(){ans=0;cor=0;miss=[];qs.forEach(function(q){q.classList.remove('done');q.querySelectorAll('.qo').forEach(function(b){b.classList.remove('ok','bad')});q.querySelector('.qw').hidden=true;shuf(q)});z.querySelector('.qres').hidden=true;upd();qs[0].scrollIntoView({behavior:'smooth',block:'center'})});
+});
+document.querySelectorAll('.smc-prog').forEach(function(p){
+ var L=JSON.parse(p.dataset.l),t=JSON.parse(p.dataset.t),P=+p.dataset.p,d=ld(),tb=p.querySelector('tbody'),done=0,pass=0,sum=0;
+ L.forEach(function(x){var r=d[x[0]],tr=document.createElement('tr'),a='<a href="'+x[3]+'#quiz">'+x[1]+' · '+x[2]+'</a>';
+  if(r){done++;sum+=r.best;if(r.best>=P)pass++}
+  tr.innerHTML='<td>'+a+'</td><td class="pc">'+(r?r.best+'%':'—')+'</td><td>'+(r?(r.best>=P?'<span class="st-ok">✓ '+t.ok+'</span>':'<a class="st-no" href="'+x[3]+'#quiz">'+t.no+'</a>'):'<a href="'+x[3]+'#quiz">'+t.go+'</a>')+'</td>';tb.appendChild(tr)});
+ p.querySelector('.qstats').innerHTML='<div><b>'+done+'/'+L.length+'</b><span>'+t.done+'</span></div><div><b>'+pass+'</b><span>'+t.passed+'</span></div><div><b>'+(done?Math.round(sum/done)+'%':'—')+'</b><span>'+t.avg+'</span></div>';
+});
+});
 </script>
 </head>
 <body>
@@ -641,6 +708,16 @@ ul.querySelectorAll('input').forEach(function(i){if(s[i.id]){i.checked=true;i.cl
 <p>Next is <b>risk management</b>, which decides whether your good rule protects your account.</p>
 <h2 id="s33">Summary</h2>
 <ul><li>Risk entry: more trades, bigger stop, full loss if the zone fails. Confirmation: fewer trades, smaller stop, better RR.</li><li>For new traders: confirmation, or a half-and-half split.</li><li>Displacement: big bodies, small wicks, an FVG and a structure break.</li><li>Write your rule and do not go live without 50 backtest trades.</li></ul>
+    <section class="smc-quiz" id="quiz" data-q="{&quot;slug&quot;:&quot;smc-confirmation-vs-risk-entry&quot;,&quot;pass&quot;:70,&quot;n&quot;:9}" data-t="{&quot;h&quot;: &quot;Test yourself: Lesson {n} quiz&quot;, &quot;intro&quot;: &quot;{c} questions. Pick one answer for each and you will see at once whether it is right and why. Your score and grade appear at the end. You need {p}% to pass.&quot;, &quot;score&quot;: &quot;correct&quot;, &quot;of&quot;: &quot;of&quot;, &quot;ok&quot;: &quot;Correct&quot;, &quot;no&quot;: &quot;Not quite&quot;, &quot;right&quot;: &quot;Correct answer:&quot;, &quot;why&quot;: &quot;Why:&quot;, &quot;res&quot;: &quot;Your result&quot;, &quot;best&quot;: &quot;Best score so far&quot;, &quot;tries&quot;: &quot;Attempts&quot;, &quot;retry&quot;: &quot;Try again&quot;, &quot;g1&quot;: &quot;Excellent! You have mastered this lesson.&quot;, &quot;g2&quot;: &quot;Well done, you passed. Read the explanation for any question you missed.&quot;, &quot;g3&quot;: &quot;Not passed yet. Review the questions you missed below, reread the lesson and try again.&quot;, &quot;wrong&quot;: &quot;Questions you missed:&quot;, &quot;nx&quot;: &quot;Next lesson&quot;, &quot;reread&quot;: &quot;Reread the lesson&quot;, &quot;qn&quot;: &quot;Question&quot;}">
+  <h2>Test yourself: Lesson 5.5 quiz</h2>
+  <p class="qin">9 questions. Pick one answer for each and you will see at once whether it is right and why. Your score and grade appear at the end. You need 70% to pass.</p>
+  <div class="qbar"><div class="qfill"></div></div>
+  <p class="qsc" aria-live="polite"><b class="qs-c">0</b> correct · <span class="qs-a">0</span> / 9</p>
+  <ol class="qlist"><li class="qq"><p class="qt"><span class="qn">Question 1</span>What is a risk entry?</p><div class="qos"><button type="button" class="qo" data-c="1">A limit at the POI in advance, SL behind the zone</button><button type="button" class="qo">An entry from the new POI after an LTF CHoCH</button><button type="button" class="qo">A market order on the first news candle</button><button type="button" class="qo">A big position with no SL</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">Confirmation entry: after a sweep and CHoCH in the POI, enter from the new small POI.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 2</span>In the example table, what was the confirmation entry result over 20 opportunities?</p><div class="qos"><button type="button" class="qo" data-c="1">13 trades, 55%, 1:4, so +22R</button><button type="button" class="qo">20 trades, 40%, 1:3, so +12R</button><button type="button" class="qo">Only losses</button><button type="button" class="qo">Exactly equal</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">Only an illustration, but the tendency holds: fewer trades, saved losses on failing zones, better RR.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 3</span>When does a risk entry make sense?</p><div class="qos"><button type="button" class="qo" data-c="1">POI 9 or 10, clear bias, extreme zone</button><button type="button" class="qo">At every zone, so no move is missed</button><button type="button" class="qo">When the bias is unclear, take the risk</button><button type="button" class="qo">Always on the day&#x27;s first trade</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">A middle way: half the position as a risk entry, half on confirmation.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 4</span>Which is NOT a sign of displacement?</p><div class="qos"><button type="button" class="qo" data-c="1">Many small candles with long wicks</button><button type="button" class="qo">A body roughly twice the average of the previous 10 to 20 candles</button><button type="button" class="qo">Small wicks, closing near the high</button><button type="button" class="qo">An FVG and a structure break</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">Small overlapping candles are a weak move; don&#x27;t trust OBs or CHoCHs built from them.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 5</span>A normal Gold M5 candle is 2 to 4 dollars. At the London open, which candle is displacement?</p><div class="qos"><button type="button" class="qo" data-c="1">One with an 8 to 15-dollar body</button><button type="button" class="qo">A 3-dollar one</button><button type="button" class="qo">A 1-dollar doji</button><button type="button" class="qo">One with a long wick and small body</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">These numbers change with conditions; always compare with the previous candles.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 6</span>What should a one-page entry rule contain?</p><div class="qos"><button type="button" class="qo" data-c="1">Model, bias, POI, time, entry, SL, TP, risk</button><button type="button" class="qo">Only the pair name and timeframe</button><button type="button" class="qo">Only the target and a daily profit goal</button><button type="button" class="qo">A favourite indicator and signal group</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">Example: model B, score 8+, killzones only, 30 minutes away from news, 1% risk, max 2 trades a day.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 7</span>Same POI: the risk trader at 4,118 with SL 4,107 (1:3.1), the confirmation trader at 4,118 with SL 4,111 (1:4.9). The next day the zone broke. Then?</p><div class="qos"><button type="button" class="qo" data-c="1">The risk trader was stopped; the other never entered</button><button type="button" class="qo">Both were stopped out for equal losses</button><button type="button" class="qo">Both won because the zone was strong</button><button type="button" class="qo">The confirmation trader was stopped; the risk one won</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">That is the benefit of confirmation: no loss on a failing zone.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 8</span>Why is switching method every trade wrong?</p><div class="qos"><button type="button" class="qo" data-c="1">You&#x27;ll learn nothing; one method for 50 trades</button><button type="button" class="qo">It is best; every trade is a new experiment</button><button type="button" class="qo">The broker doesn&#x27;t allow changing methods</button><button type="button" class="qo">It isn&#x27;t wrong; flexibility is success</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">Chasing price that left without confirmation is also a mistake.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 9</span>How many backtest trades does the Phase 5 gate require?</p><div class="qos"><button type="button" class="qo" data-c="1">At least 50</button><button type="button" class="qo">At least 5</button><button type="button" class="qo">At least 1,000</button><button type="button" class="qo">None</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">And you should know your win rate, average RR and longest losing streak.</span></p></li></ol>
+  <div class="qres" hidden aria-live="polite"><h3>Your result</h3><div class="qbig"></div><p class="qgr"></p><p class="qbest"></p>
+    <div class="qmiss" hidden><b>Questions you missed:</b><ol></ol></div>
+    <p class="qbtns"><button type="button" class="btn qre">Try again</button> <a class="btn" href="#top">Reread the lesson</a> <a class="btn gold qnx" href="smc-risk-rules-stop-loss-en.html" hidden>Next lesson ›</a></p></div>
+</section>
     <div class="smc-box"><h2>Lesson checklist</h2><p>Tick each point once you understand it. Your ticks are saved in this browser.</p><ul class="ck" data-k="smc-confirmation-vs-risk-entry"><li><input type="checkbox" id="c0"><label for="c0">I know the difference between risk and confirmation entries and the drawbacks of each</label></li><li><input type="checkbox" id="c1"><label for="c1">I recognise displacement by big bodies, small wicks, an FVG and a structure break</label></li><li><input type="checkbox" id="c2"><label for="c2">My one-page entry rule is written</label></li><li><input type="checkbox" id="c3"><label for="c3">I do not chase a missed trade</label></li><li><input type="checkbox" id="c4"><label for="c4">I have 50 backtest trades on my rule</label></li></ul></div>
     <div class="smc-box asg"><h2>Assignment</h2><ol><li>Write your one-page entry rule (as in the example).</li><li>For last month&#x27;s 20 POIs, record the result of both a risk entry and a confirmation entry.</li><li>Calculate the win rate, average RR and total R of both.</li><li>Screenshot 10 real displacements and 10 weak moves on Gold M5.</li><li>Post your rule and results in the group.</li></ol><p>Post your assignment screenshots with your reasons in our free Facebook group, where your charts will be checked.</p><a class="btn gold" href="https://www.facebook.com/groups/qaziforextips" target="_blank" rel="noopener">Join the free group</a></div>
     <div class="ls-faq en-faq"><h2>Questions</h2><details><summary>What is displacement in SMC?</summary><p>A fast, forceful move with large bodies and small wicks that leaves a fair value gap and breaks structure, showing institutional intent.</p></details><details><summary>Confirmation entry or limit entry?</summary><p>Limit entries catch more moves but take full losses when zones fail; confirmation entries take fewer trades with smaller stops and usually better reward to risk.</p></details><details><summary>Which entry should a new trader use?</summary><p>Confirmation, or half the position as a risk entry and half on confirmation.</p></details></div>

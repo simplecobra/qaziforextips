@@ -576,11 +576,78 @@ footer a:hover{color:var(--ink)}
 .outline.en-out .n{margin-left:0;margin-right:6px}
 .smc-pn.en-pn{direction:ltr}
 .smc-pn.en-pn .nx{text-align:right}
+
+.smc-quiz{margin:40px 0;border:2px solid var(--gold);border-radius:16px;padding:18px 22px;background:var(--surface)}
+.smc-quiz h2{margin-top:0!important}
+.smc-quiz .qin{color:var(--muted)}
+.qbar{height:10px;border-radius:99px;background:var(--line);overflow:hidden;margin:8px 0}
+.qfill{height:100%;width:0;background:var(--gold);transition:width .3s}
+.qsc{font-weight:600;margin:4px 0 10px}
+.qsc .qs-c{color:#22a56b}
+.qlist{list-style:none;padding:0!important;margin:0}
+.qq{border-top:1px dashed var(--line);padding:12px 0}
+.qt{margin:0 0 8px!important;font-weight:600}
+.qn{display:inline-block;font-size:.78em;color:var(--gold-t,var(--gold));margin-inline-end:8px;font-weight:700}
+.qos{display:grid;gap:8px}
+.qo{all:unset;box-sizing:border-box;display:block;cursor:pointer;border:1px solid var(--line);border-radius:10px;padding:6px 14px;line-height:inherit;font:inherit;font-size:.95em;color:var(--ink);background:var(--bg,transparent)}
+.qo:hover,.qo:focus-visible{border-color:var(--gold);outline:none}
+.qq.done .qo{cursor:default}
+.qq.done .qo:hover{border-color:var(--line)}
+.qo.ok{border-color:#22a56b!important;background:rgba(34,165,107,.14)}
+.qo.bad{border-color:#e5535f!important;background:rgba(229,83,95,.14)}
+.qw{margin:8px 0 0!important;font-size:.92em;color:var(--muted)}
+.qw .qv.y{color:#22a56b}.qw .qv.n{color:#e5535f}
+.qw .qr b{color:var(--ink)}
+.qres{margin-top:16px;border-top:2px solid var(--gold);padding-top:12px;text-align:center}
+.qres h3{margin:0!important}
+.qbig{font:700 54px/1.2 var(--f-display,var(--f-body));color:var(--gold-t,var(--gold));direction:ltr}
+.qbig small{font-size:20px;color:var(--muted);display:block}
+.qgr{font-weight:600}
+.qbest{color:var(--muted);font-size:.9em}
+.qmiss{text-align:start;margin:10px 0}
+.qmiss ol{margin:4px 0 0;font-size:.92em}
+.qmiss a{color:var(--gold-t,var(--gold))}
+.qbtns .btn{margin:4px}
+.smc-prog{margin:34px 0;border:2px solid var(--gold);border-radius:16px;padding:16px 22px;background:var(--surface)}
+.smc-prog h2{margin-top:0!important}
+.qstats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:10px 0 14px}
+.qstats div{border:1px solid var(--line);border-radius:12px;padding:8px;text-align:center}
+.qstats b{display:block;font:700 30px/1.3 var(--f-body);color:var(--gold-t,var(--gold));direction:ltr}
+.qstats span{font-size:.85em;color:var(--muted)}
+.smc-prog .st-ok{color:#22a56b;font-weight:600}.smc-prog .st-no{color:#e5535f;font-weight:600}
+.smc-prog td.pc{direction:ltr;text-align:center!important}
+.en-art .qn{margin-right:8px}
 @media (max-width:760px){.lang-sw{display:flex}.lang-sw a{flex:1;min-width:0}.smc-fig .l{font-size:16px}}
 </style>
 <script>
 document.addEventListener('DOMContentLoaded',function(){document.querySelectorAll('ul.ck').forEach(function(ul){var k='smc-ck-'+ul.dataset.k,s={};try{s=JSON.parse(localStorage.getItem(k)||'{}')}catch(e){}
 ul.querySelectorAll('input').forEach(function(i){if(s[i.id]){i.checked=true;i.closest('li').classList.add('done')}i.addEventListener('change',function(){s[i.id]=i.checked;i.closest('li').classList.toggle('done',i.checked);try{localStorage.setItem(k,JSON.stringify(s))}catch(e){}})})})});
+
+document.addEventListener('DOMContentLoaded',function(){
+var K='smc-quiz';function ld(){try{return JSON.parse(localStorage.getItem(K)||'{}')}catch(e){return{}}}function sv(d){try{localStorage.setItem(K,JSON.stringify(d))}catch(e){}}
+document.querySelectorAll('.smc-quiz').forEach(function(z){
+ var cfg=JSON.parse(z.dataset.q),t=JSON.parse(z.dataset.t),qs=[].slice.call(z.querySelectorAll('.qq')),n=qs.length,ans=0,cor=0,miss=[];
+ function shuf(q){var b=q.querySelector('.qos'),o=[].slice.call(b.children);for(var i=o.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var x=o[i];o[i]=o[j];o[j]=x}o.forEach(function(e){b.appendChild(e)})}
+ function upd(){z.querySelector('.qs-c').textContent=cor;z.querySelector('.qs-a').textContent=ans;z.querySelector('.qfill').style.width=(ans/n*100)+'%'}
+ function fin(){var pc=Math.round(cor/n*100),d=ld(),r=d[cfg.slug]||{best:0,tries:0};r.tries++;r.last=pc;if(pc>r.best)r.best=pc;r.at=Date.now();d[cfg.slug]=r;sv(d);
+  var res=z.querySelector('.qres');res.hidden=false;z.querySelector('.qbig').innerHTML=pc+'%<small>'+cor+' / '+n+'</small>';
+  z.querySelector('.qgr').textContent=pc>=90?t.g1:(pc>=cfg.pass?t.g2:t.g3);
+  z.querySelector('.qbest').innerHTML=t.best+': <bdi dir="ltr">'+r.best+'%</bdi> · '+t.tries+': '+r.tries;
+  var m=z.querySelector('.qmiss'),ol=m.querySelector('ol');ol.innerHTML='';miss.forEach(function(i){var li=document.createElement('li'),a=document.createElement('a');a.href='#q'+cfg.slug+i;var qc=qs[i].querySelector('.qt').cloneNode(true);qc.removeChild(qc.querySelector('.qn'));a.textContent=t.qn+' '+(i+1)+': '+qc.textContent;li.appendChild(a);ol.appendChild(li)});m.hidden=!miss.length;
+  var nx=z.querySelector('.qnx');if(nx)nx.hidden=pc<cfg.pass;res.scrollIntoView({behavior:'smooth',block:'center'})}
+ qs.forEach(function(q,i){q.id='q'+cfg.slug+i;shuf(q);q.querySelectorAll('.qo').forEach(function(b){b.addEventListener('click',function(){if(q.classList.contains('done'))return;q.classList.add('done');ans++;var c=q.querySelector('.qo[data-c]'),w=q.querySelector('.qw'),v=w.querySelector('.qv');c.classList.add('ok');
+  if(b===c){cor++;v.textContent=t.ok+'!';v.className='qv y';w.querySelector('.qr').textContent=''}else{b.classList.add('bad');miss.push(i);v.textContent=t.no+'.';v.className='qv n';w.querySelector('.qr').innerHTML='<b>'+t.right+'</b> '+c.innerHTML+'. '}
+  w.hidden=false;upd();if(ans===n)fin()})})});
+ z.querySelector('.qre').addEventListener('click',function(){ans=0;cor=0;miss=[];qs.forEach(function(q){q.classList.remove('done');q.querySelectorAll('.qo').forEach(function(b){b.classList.remove('ok','bad')});q.querySelector('.qw').hidden=true;shuf(q)});z.querySelector('.qres').hidden=true;upd();qs[0].scrollIntoView({behavior:'smooth',block:'center'})});
+});
+document.querySelectorAll('.smc-prog').forEach(function(p){
+ var L=JSON.parse(p.dataset.l),t=JSON.parse(p.dataset.t),P=+p.dataset.p,d=ld(),tb=p.querySelector('tbody'),done=0,pass=0,sum=0;
+ L.forEach(function(x){var r=d[x[0]],tr=document.createElement('tr'),a='<a href="'+x[3]+'#quiz">'+x[1]+' · '+x[2]+'</a>';
+  if(r){done++;sum+=r.best;if(r.best>=P)pass++}
+  tr.innerHTML='<td>'+a+'</td><td class="pc">'+(r?r.best+'%':'—')+'</td><td>'+(r?(r.best>=P?'<span class="st-ok">✓ '+t.ok+'</span>':'<a class="st-no" href="'+x[3]+'#quiz">'+t.no+'</a>'):'<a href="'+x[3]+'#quiz">'+t.go+'</a>')+'</td>';tb.appendChild(tr)});
+ p.querySelector('.qstats').innerHTML='<div><b>'+done+'/'+L.length+'</b><span>'+t.done+'</span></div><div><b>'+pass+'</b><span>'+t.passed+'</span></div><div><b>'+(done?Math.round(sum/done)+'%':'—')+'</b><span>'+t.avg+'</span></div>';
+});
+});
 </script>
 </head>
 <body>
@@ -642,6 +709,16 @@ ul.querySelectorAll('input').forEach(function(i){if(s[i.id]){i.checked=true;i.cl
 <div class="call warn"><b class="k">Common mistake</b>Calling the trend over the moment a trendline breaks. First check whether structure broke, or only the line.</div>
 <h2 id="s34">Summary</h2>
 <ul><li>EQH, EQL and clean trendlines are the most visible levels, so they hold the most stops.</li><li>Liquidity grows with every touch.</li><li>These levels are both targets and sweep zones.</li><li>After a sweep wait for a lower timeframe CHoCH; after a break wait for the retest.</li></ul>
+    <section class="smc-quiz" id="quiz" data-q="{&quot;slug&quot;:&quot;smc-equal-highs-lows-trendline-liquidity&quot;,&quot;pass&quot;:70,&quot;n&quot;:9}" data-t="{&quot;h&quot;: &quot;Test yourself: Lesson {n} quiz&quot;, &quot;intro&quot;: &quot;{c} questions. Pick one answer for each and you will see at once whether it is right and why. Your score and grade appear at the end. You need {p}% to pass.&quot;, &quot;score&quot;: &quot;correct&quot;, &quot;of&quot;: &quot;of&quot;, &quot;ok&quot;: &quot;Correct&quot;, &quot;no&quot;: &quot;Not quite&quot;, &quot;right&quot;: &quot;Correct answer:&quot;, &quot;why&quot;: &quot;Why:&quot;, &quot;res&quot;: &quot;Your result&quot;, &quot;best&quot;: &quot;Best score so far&quot;, &quot;tries&quot;: &quot;Attempts&quot;, &quot;retry&quot;: &quot;Try again&quot;, &quot;g1&quot;: &quot;Excellent! You have mastered this lesson.&quot;, &quot;g2&quot;: &quot;Well done, you passed. Read the explanation for any question you missed.&quot;, &quot;g3&quot;: &quot;Not passed yet. Review the questions you missed below, reread the lesson and try again.&quot;, &quot;wrong&quot;: &quot;Questions you missed:&quot;, &quot;nx&quot;: &quot;Next lesson&quot;, &quot;reread&quot;: &quot;Reread the lesson&quot;, &quot;qn&quot;: &quot;Question&quot;}">
+  <h2>Test yourself: Lesson 2.2 quiz</h2>
+  <p class="qin">9 questions. Pick one answer for each and you will see at once whether it is right and why. Your score and grade appear at the end. You need 70% to pass.</p>
+  <div class="qbar"><div class="qfill"></div></div>
+  <p class="qsc" aria-live="polite"><b class="qs-c">0</b> correct · <span class="qs-a">0</span> / 9</p>
+  <ol class="qlist"><li class="qq"><p class="qt"><span class="qn">Question 1</span>What is an EQH?</p><div class="qos"><button type="button" class="qo" data-c="1">Two or more highs at almost the same price</button><button type="button" class="qo">One very big candle</button><button type="button" class="qo">The highest high of the day</button><button type="button" class="qo">A trendline break</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">Classic price action calls it a double top or strong resistance.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 2</span>Why does liquidity grow with every touch?</p><div class="qos"><button type="button" class="qo" data-c="1">Each touch, more traders see it and stops pile up</button><button type="button" class="qo">Each touch lowers volume, so orders increase</button><button type="button" class="qo">As the level weakens the broker adds orders</button><button type="button" class="qo">It doesn&#x27;t grow; each touch uses it up</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">By the third touch breakout traders add buy stops too.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 3</span>What do traders say about a very clean double top?</p><div class="qos"><button type="button" class="qo" data-c="1">It often breaks first and only then works</button><button type="button" class="qo">It always works without breaking</button><button type="button" class="qo">It never works</button><button type="button" class="qo">It forms only on Daily</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">The buy orders above fire and fill the big seller, then price comes back down.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 4</span>On Gold H1, how much difference between two highs still counts as equal?</p><div class="qos"><button type="button" class="qo" data-c="1">About 1 to 2 dollars</button><button type="button" class="qo">10 dollars</button><button type="button" class="qo">Exactly zero</button><button type="button" class="qo">It must be under 50 cents</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">The real question: would an ordinary trader see it as one clear level? 3 to 4 dollars on H4, up to 0.5 on M5.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 5</span>A trendline breaks but structure (the protected low) holds. What is it usually?</p><div class="qos"><button type="button" class="qo" data-c="1">A liquidity sweep</button><button type="button" class="qo">The end of the trend</button><button type="button" class="qo">A BOS</button><button type="button" class="qo">An FVG</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">An SMC trader watches structure, not the line.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 6</span>Retail sells the double top. What does an SMC trader do?</p><div class="qos"><button type="button" class="qo" data-c="1">A sweep above the top, then a bearish LTF CHoCH</button><button type="button" class="qo">Sell right there, stop just above the top</button><button type="button" class="qo">Treat it as a breakout and buy at once</button><button type="button" class="qo">Ignore the double top and trade the range</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">No entry after a sweep without a lower timeframe CHoCH.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 7</span>In a bullish bias, what are EQL and trendlines below?</p><div class="qos"><button type="button" class="qo" data-c="1">Sweep chances for buys</button><button type="button" class="qo">Downside targets for sells</button><button type="button" class="qo">Useless levels with no role</button><button type="button" class="qo">Places for a bearish BOS</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">In a bullish bias liquidity below is a sweep zone and EQH above is a target.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 8</span>Why is treating every EQH as an instant sell signal wrong?</p><div class="qos"><button type="button" class="qo" data-c="1">EQH is a target; price often goes there first</button><button type="button" class="qo">Because EQH is always a buy signal</button><button type="button" class="qo">Because EQH is only on M1</button><button type="button" class="qo">It is not wrong</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">Selling below it usually means trading against the target.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 9</span>Gold M15 highs 4,138.50, 4,139.20, 4,138.80; H1 bearish. Price hits 4,142.30, closes 4,137.90, then an M5 bearish CHoCH. Where is the stop?</p><div class="qos"><button type="button" class="qo" data-c="1">4,143.50 (above the wick)</button><button type="button" class="qo">4,139.20 (at the high)</button><button type="button" class="qo">4,126.00</button><button type="button" class="qo">No stop needed</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">Sell near 4,138.00, stop above the wick, target the SSL at 4,126.00; about 1:2.</span></p></li></ol>
+  <div class="qres" hidden aria-live="polite"><h3>Your result</h3><div class="qbig"></div><p class="qgr"></p><p class="qbest"></p>
+    <div class="qmiss" hidden><b>Questions you missed:</b><ol></ol></div>
+    <p class="qbtns"><button type="button" class="btn qre">Try again</button> <a class="btn" href="#top">Reread the lesson</a> <a class="btn gold qnx" href="smc-session-liquidity-pdh-pdl-en.html" hidden>Next lesson ›</a></p></div>
+</section>
     <div class="smc-box"><h2>Lesson checklist</h2><p>Tick each point once you understand it. Your ticks are saved in this browser.</p><ul class="ck" data-k="smc-equal-highs-lows-trendline-liquidity"><li><input type="checkbox" id="c0"><label for="c0">EQH and EQL are equal highs and lows where many stops gather</label></li><li><input type="checkbox" id="c1"><label for="c1">Liquidity grows with every touch</label></li><li><input type="checkbox" id="c2"><label for="c2">I know that &#x27;equal&#x27; on Gold H1 means about 1 to 2 dollars apart</label></li><li><input type="checkbox" id="c3"><label for="c3">A clean trendline also has a row of stops behind it</label></li><li><input type="checkbox" id="c4"><label for="c4">When a trendline breaks I check whether structure broke</label></li><li><input type="checkbox" id="c5"><label for="c5">After a sweep I wait for a lower timeframe CHoCH</label></li><li><input type="checkbox" id="c6"><label for="c6">I don&#x27;t put my stop right behind a double top or trendline</label></li></ul></div>
     <div class="smc-box asg"><h2>Assignment</h2><ol><li>Find 10 EQH and 10 EQL on Gold H1 and H4.</li><li>For each one, write: did price sweep it and reverse, or break it and continue?</li><li>Find 3 clean trendlines with three or more touches and see what happened after the line broke: did structure break?</li><li>On one EQH or EQL sweep, open M5 and mark the CHoCH, entry, stop and target.</li><li>Post your counts in the group.</li></ol><p>Post your assignment screenshots with your reasons in our free Facebook group, where your charts will be checked.</p><a class="btn gold" href="https://www.facebook.com/groups/qaziforextips" target="_blank" rel="noopener">Join the free group</a></div>
     <div class="ls-faq en-faq"><h2>Questions</h2><details><summary>What are equal highs in SMC?</summary><p>Two or more highs at almost the same price; stops cluster above them, making them obvious liquidity.</p></details><details><summary>Is it wrong to sell a double top?</summary><p>Not always, but price often sweeps above the top first. Selling after the sweep and a lower timeframe CHoCH is safer.</p></details><details><summary>What is trendline liquidity?</summary><p>Stops placed just beyond a clean, many-touch trendline, which price often sweeps before continuing.</p></details><details><summary>How many touches make a level liquidity?</summary><p>Two touches make an equal level; three or more add even more liquidity.</p></details><details><summary>Does a broken trendline end the trend?</summary><p>Not necessarily. If the protected low holds, it is often just a liquidity sweep.</p></details></div>

@@ -576,11 +576,78 @@ footer a:hover{color:var(--ink)}
 .outline.en-out .n{margin-left:0;margin-right:6px}
 .smc-pn.en-pn{direction:ltr}
 .smc-pn.en-pn .nx{text-align:right}
+
+.smc-quiz{margin:40px 0;border:2px solid var(--gold);border-radius:16px;padding:18px 22px;background:var(--surface)}
+.smc-quiz h2{margin-top:0!important}
+.smc-quiz .qin{color:var(--muted)}
+.qbar{height:10px;border-radius:99px;background:var(--line);overflow:hidden;margin:8px 0}
+.qfill{height:100%;width:0;background:var(--gold);transition:width .3s}
+.qsc{font-weight:600;margin:4px 0 10px}
+.qsc .qs-c{color:#22a56b}
+.qlist{list-style:none;padding:0!important;margin:0}
+.qq{border-top:1px dashed var(--line);padding:12px 0}
+.qt{margin:0 0 8px!important;font-weight:600}
+.qn{display:inline-block;font-size:.78em;color:var(--gold-t,var(--gold));margin-inline-end:8px;font-weight:700}
+.qos{display:grid;gap:8px}
+.qo{all:unset;box-sizing:border-box;display:block;cursor:pointer;border:1px solid var(--line);border-radius:10px;padding:6px 14px;line-height:inherit;font:inherit;font-size:.95em;color:var(--ink);background:var(--bg,transparent)}
+.qo:hover,.qo:focus-visible{border-color:var(--gold);outline:none}
+.qq.done .qo{cursor:default}
+.qq.done .qo:hover{border-color:var(--line)}
+.qo.ok{border-color:#22a56b!important;background:rgba(34,165,107,.14)}
+.qo.bad{border-color:#e5535f!important;background:rgba(229,83,95,.14)}
+.qw{margin:8px 0 0!important;font-size:.92em;color:var(--muted)}
+.qw .qv.y{color:#22a56b}.qw .qv.n{color:#e5535f}
+.qw .qr b{color:var(--ink)}
+.qres{margin-top:16px;border-top:2px solid var(--gold);padding-top:12px;text-align:center}
+.qres h3{margin:0!important}
+.qbig{font:700 54px/1.2 var(--f-display,var(--f-body));color:var(--gold-t,var(--gold));direction:ltr}
+.qbig small{font-size:20px;color:var(--muted);display:block}
+.qgr{font-weight:600}
+.qbest{color:var(--muted);font-size:.9em}
+.qmiss{text-align:start;margin:10px 0}
+.qmiss ol{margin:4px 0 0;font-size:.92em}
+.qmiss a{color:var(--gold-t,var(--gold))}
+.qbtns .btn{margin:4px}
+.smc-prog{margin:34px 0;border:2px solid var(--gold);border-radius:16px;padding:16px 22px;background:var(--surface)}
+.smc-prog h2{margin-top:0!important}
+.qstats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:10px 0 14px}
+.qstats div{border:1px solid var(--line);border-radius:12px;padding:8px;text-align:center}
+.qstats b{display:block;font:700 30px/1.3 var(--f-body);color:var(--gold-t,var(--gold));direction:ltr}
+.qstats span{font-size:.85em;color:var(--muted)}
+.smc-prog .st-ok{color:#22a56b;font-weight:600}.smc-prog .st-no{color:#e5535f;font-weight:600}
+.smc-prog td.pc{direction:ltr;text-align:center!important}
+.en-art .qn{margin-right:8px}
 @media (max-width:760px){.lang-sw{display:flex}.lang-sw a{flex:1;min-width:0}.smc-fig .l{font-size:16px}}
 </style>
 <script>
 document.addEventListener('DOMContentLoaded',function(){document.querySelectorAll('ul.ck').forEach(function(ul){var k='smc-ck-'+ul.dataset.k,s={};try{s=JSON.parse(localStorage.getItem(k)||'{}')}catch(e){}
 ul.querySelectorAll('input').forEach(function(i){if(s[i.id]){i.checked=true;i.closest('li').classList.add('done')}i.addEventListener('change',function(){s[i.id]=i.checked;i.closest('li').classList.toggle('done',i.checked);try{localStorage.setItem(k,JSON.stringify(s))}catch(e){}})})})});
+
+document.addEventListener('DOMContentLoaded',function(){
+var K='smc-quiz';function ld(){try{return JSON.parse(localStorage.getItem(K)||'{}')}catch(e){return{}}}function sv(d){try{localStorage.setItem(K,JSON.stringify(d))}catch(e){}}
+document.querySelectorAll('.smc-quiz').forEach(function(z){
+ var cfg=JSON.parse(z.dataset.q),t=JSON.parse(z.dataset.t),qs=[].slice.call(z.querySelectorAll('.qq')),n=qs.length,ans=0,cor=0,miss=[];
+ function shuf(q){var b=q.querySelector('.qos'),o=[].slice.call(b.children);for(var i=o.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var x=o[i];o[i]=o[j];o[j]=x}o.forEach(function(e){b.appendChild(e)})}
+ function upd(){z.querySelector('.qs-c').textContent=cor;z.querySelector('.qs-a').textContent=ans;z.querySelector('.qfill').style.width=(ans/n*100)+'%'}
+ function fin(){var pc=Math.round(cor/n*100),d=ld(),r=d[cfg.slug]||{best:0,tries:0};r.tries++;r.last=pc;if(pc>r.best)r.best=pc;r.at=Date.now();d[cfg.slug]=r;sv(d);
+  var res=z.querySelector('.qres');res.hidden=false;z.querySelector('.qbig').innerHTML=pc+'%<small>'+cor+' / '+n+'</small>';
+  z.querySelector('.qgr').textContent=pc>=90?t.g1:(pc>=cfg.pass?t.g2:t.g3);
+  z.querySelector('.qbest').innerHTML=t.best+': <bdi dir="ltr">'+r.best+'%</bdi> · '+t.tries+': '+r.tries;
+  var m=z.querySelector('.qmiss'),ol=m.querySelector('ol');ol.innerHTML='';miss.forEach(function(i){var li=document.createElement('li'),a=document.createElement('a');a.href='#q'+cfg.slug+i;var qc=qs[i].querySelector('.qt').cloneNode(true);qc.removeChild(qc.querySelector('.qn'));a.textContent=t.qn+' '+(i+1)+': '+qc.textContent;li.appendChild(a);ol.appendChild(li)});m.hidden=!miss.length;
+  var nx=z.querySelector('.qnx');if(nx)nx.hidden=pc<cfg.pass;res.scrollIntoView({behavior:'smooth',block:'center'})}
+ qs.forEach(function(q,i){q.id='q'+cfg.slug+i;shuf(q);q.querySelectorAll('.qo').forEach(function(b){b.addEventListener('click',function(){if(q.classList.contains('done'))return;q.classList.add('done');ans++;var c=q.querySelector('.qo[data-c]'),w=q.querySelector('.qw'),v=w.querySelector('.qv');c.classList.add('ok');
+  if(b===c){cor++;v.textContent=t.ok+'!';v.className='qv y';w.querySelector('.qr').textContent=''}else{b.classList.add('bad');miss.push(i);v.textContent=t.no+'.';v.className='qv n';w.querySelector('.qr').innerHTML='<b>'+t.right+'</b> '+c.innerHTML+'. '}
+  w.hidden=false;upd();if(ans===n)fin()})})});
+ z.querySelector('.qre').addEventListener('click',function(){ans=0;cor=0;miss=[];qs.forEach(function(q){q.classList.remove('done');q.querySelectorAll('.qo').forEach(function(b){b.classList.remove('ok','bad')});q.querySelector('.qw').hidden=true;shuf(q)});z.querySelector('.qres').hidden=true;upd();qs[0].scrollIntoView({behavior:'smooth',block:'center'})});
+});
+document.querySelectorAll('.smc-prog').forEach(function(p){
+ var L=JSON.parse(p.dataset.l),t=JSON.parse(p.dataset.t),P=+p.dataset.p,d=ld(),tb=p.querySelector('tbody'),done=0,pass=0,sum=0;
+ L.forEach(function(x){var r=d[x[0]],tr=document.createElement('tr'),a='<a href="'+x[3]+'#quiz">'+x[1]+' · '+x[2]+'</a>';
+  if(r){done++;sum+=r.best;if(r.best>=P)pass++}
+  tr.innerHTML='<td>'+a+'</td><td class="pc">'+(r?r.best+'%':'—')+'</td><td>'+(r?(r.best>=P?'<span class="st-ok">✓ '+t.ok+'</span>':'<a class="st-no" href="'+x[3]+'#quiz">'+t.no+'</a>'):'<a href="'+x[3]+'#quiz">'+t.go+'</a>')+'</td>';tb.appendChild(tr)});
+ p.querySelector('.qstats').innerHTML='<div><b>'+done+'/'+L.length+'</b><span>'+t.done+'</span></div><div><b>'+pass+'</b><span>'+t.passed+'</span></div><div><b>'+(done?Math.round(sum/done)+'%':'—')+'</b><span>'+t.avg+'</span></div>';
+});
+});
 </script>
 </head>
 <body>
@@ -649,6 +716,16 @@ ul.querySelectorAll('input').forEach(function(i){if(s[i.id]){i.checked=true;i.cl
 <div class="call warn"><b class="k">Common mistake</b>Staying in the trade after the zone fails. If a body closes below the order block, the idea is over. Such a zone often becomes a <b>breaker</b> later (lesson 3.3).</div>
 <h2 id="s41">Summary</h2>
 <ul><li>A bullish order block is the last red candle before a strong move that breaks structure; a bearish one is the opposite.</li><li>The large player returns there to protect the position, which is why price reacts.</li><li>Signs of strength: BOS, FVG, a liquidity sweep, unmitigated, and the right side of discount or premium.</li><li>Enter on confirmation, stop loss beyond the zone, target the next liquidity.</li></ul>
+    <section class="smc-quiz" id="quiz" data-q="{&quot;slug&quot;:&quot;smc-order-block&quot;,&quot;pass&quot;:70,&quot;n&quot;:10}" data-t="{&quot;h&quot;: &quot;Test yourself: Lesson {n} quiz&quot;, &quot;intro&quot;: &quot;{c} questions. Pick one answer for each and you will see at once whether it is right and why. Your score and grade appear at the end. You need {p}% to pass.&quot;, &quot;score&quot;: &quot;correct&quot;, &quot;of&quot;: &quot;of&quot;, &quot;ok&quot;: &quot;Correct&quot;, &quot;no&quot;: &quot;Not quite&quot;, &quot;right&quot;: &quot;Correct answer:&quot;, &quot;why&quot;: &quot;Why:&quot;, &quot;res&quot;: &quot;Your result&quot;, &quot;best&quot;: &quot;Best score so far&quot;, &quot;tries&quot;: &quot;Attempts&quot;, &quot;retry&quot;: &quot;Try again&quot;, &quot;g1&quot;: &quot;Excellent! You have mastered this lesson.&quot;, &quot;g2&quot;: &quot;Well done, you passed. Read the explanation for any question you missed.&quot;, &quot;g3&quot;: &quot;Not passed yet. Review the questions you missed below, reread the lesson and try again.&quot;, &quot;wrong&quot;: &quot;Questions you missed:&quot;, &quot;nx&quot;: &quot;Next lesson&quot;, &quot;reread&quot;: &quot;Reread the lesson&quot;, &quot;qn&quot;: &quot;Question&quot;}">
+  <h2>Test yourself: Lesson 3.1 quiz</h2>
+  <p class="qin">10 questions. Pick one answer for each and you will see at once whether it is right and why. Your score and grade appear at the end. You need 70% to pass.</p>
+  <div class="qbar"><div class="qfill"></div></div>
+  <p class="qsc" aria-live="polite"><b class="qs-c">0</b> correct · <span class="qs-a">0</span> / 10</p>
+  <ol class="qlist"><li class="qq"><p class="qt"><span class="qn">Question 1</span>What does POI mean?</p><div class="qos"><button type="button" class="qo" data-c="1">Where we expect a reaction and seek an entry</button><button type="button" class="qo">The highest price level on the chart</button><button type="button" class="qo">An indicator that draws zones itself</button><button type="button" class="qo">The broker server where orders go</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">Point of Interest: Phase 3 answers the question of where to enter.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 2</span>What is the definition of a bullish order block?</p><div class="qos"><button type="button" class="qo" data-c="1">The last red candle before the BOS move up</button><button type="button" class="qo">Any big red candle on the chart</button><button type="button" class="qo">The first green candle after a strong move</button><button type="button" class="qo">The biggest green candle of the BOS move</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">Three parts: the last opposite candle, a strong move (displacement) and a break of structure.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 3</span>Why does the big player buy again when price returns to the order block?</p><div class="qos"><button type="button" class="qo" data-c="1">To defend the first position and fill the rest</button><button type="button" class="qo">Because the broker tells it to buy there</button><button type="button" class="qo">Because the spread is lowest in that zone</button><button type="button" class="qo">It doesn&#x27;t; only retail buys there</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">The order block is like the big player&#x27;s shop where it bought stock.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 4</span>In a strong order block, below which level does price usually not close?</p><div class="qos"><button type="button" class="qo" data-c="1">The 50% (mean threshold)</button><button type="button" class="qo">The top edge of the zone</button><button type="button" class="qo">The 100% Fibonacci</button><button type="button" class="qo">No level</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">Always add the 50% line to the zone.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 5</span>What is the better way for a new trader to draw the zone?</p><div class="qos"><button type="button" class="qo" data-c="1">Full-candle zone, entry on LTF confirmation</button><button type="button" class="qo">Body-only zone, with no confirmation</button><button type="button" class="qo">No zone needed; a single line is enough</button><button type="button" class="qo">Wick-only zone, leaving out the body</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">The full candle misses fewer reactions; confirmation keeps the stop small.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 6</span>Which is NOT one of the five signs of a strong order block?</p><div class="qos"><button type="button" class="qo" data-c="1">The zone has been touched again and again</button><button type="button" class="qo">A BOS</button><button type="button" class="qo">Displacement and an FVG</button><button type="button" class="qo">A liquidity sweep before it</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">The others are being unmitigated and in the right location; each touch uses up the orders there.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 7</span>If fewer than how many of the five signs are present should you skip an order block?</p><div class="qos"><button type="button" class="qo" data-c="1">Three</button><button type="button" class="qo">One</button><button type="button" class="qo">Trade only with all five</button><button type="button" class="qo">Signs are not needed</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">The more signs, the stronger the POI.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 8</span>What is the difference between an aggressive and a conservative entry?</p><div class="qos"><button type="button" class="qo" data-c="1">Aggressive: limit in advance; conservative: wait for a CHoCH</button><button type="button" class="qo">Aggressive: wait for a CHoCH; conservative: limit in advance</button><button type="button" class="qo">They are the same; only the lot differs</button><button type="button" class="qo">Aggressive has no SL; conservative has one</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">Aggressive never misses the move but takes the full stop if the zone fails; conservative sometimes misses the move.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 9</span>Gold M15: order block 4,100 to 4,107, entry 4,107, stop 4,099. What lot at 2% risk on a 1,000-dollar account?</p><div class="qos"><button type="button" class="qo" data-c="1">0.02</button><button type="button" class="qo">0.25</button><button type="button" class="qo">0.05</button><button type="button" class="qo">0.01</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">Risk 20 dollars, stop 8 dollars: 20 ÷ 8 = 2.5, so 0.02 lot (rounded down).</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 10</span>What happens if a body closes below the order block?</p><div class="qos"><button type="button" class="qo" data-c="1">The idea is over; it often becomes a breaker</button><button type="button" class="qo">Buy more; price is cheaper now</button><button type="button" class="qo">Remove the SL; price will come back</button><button type="button" class="qo">Nothing changes; the zone is still fine</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">Staying in the trade after the zone fails is a mistake (lesson 3.3).</span></p></li></ol>
+  <div class="qres" hidden aria-live="polite"><h3>Your result</h3><div class="qbig"></div><p class="qgr"></p><p class="qbest"></p>
+    <div class="qmiss" hidden><b>Questions you missed:</b><ol></ol></div>
+    <p class="qbtns"><button type="button" class="btn qre">Try again</button> <a class="btn" href="#top">Reread the lesson</a> <a class="btn gold qnx" href="smc-fair-value-gap-fvg-en.html" hidden>Next lesson ›</a></p></div>
+</section>
     <div class="smc-box"><h2>Lesson checklist</h2><p>Tick each point once you understand it. Your ticks are saved in this browser.</p><ul class="ck" data-k="smc-order-block"><li><input type="checkbox" id="c0"><label for="c0">I know an order block is the last opposite candle before a BOS</label></li><li><input type="checkbox" id="c1"><label for="c1">I check every order block for a BOS and displacement</label></li><li><input type="checkbox" id="c2"><label for="c2">I draw the zone from high to low and add the 50% level</label></li><li><input type="checkbox" id="c3"><label for="c3">I prefer unmitigated order blocks</label></li><li><input type="checkbox" id="c4"><label for="c4">I do not trade order blocks against the bias</label></li><li><input type="checkbox" id="c5"><label for="c5">I place the stop beyond the zone and target the next liquidity</label></li></ul></div>
     <div class="smc-box asg"><h2>Assignment</h2><ol><li>Mark 10 bullish and 10 bearish order blocks on the last five days of Gold M15.</li><li>Next to each, note: BOS? FVG? sweep? discount or premium?</li><li>See which zones produced a reaction and which failed, and compare with the signs of strength.</li><li>Write the entry, stop loss and target for the best one and work out the RR.</li><li>Calculate the lot size from your risk (for example 1%) and round down.</li><li>Post your chart in the group and say which order block looked strongest and why.</li></ol><p>Post your assignment screenshots with your reasons in our free Facebook group, where your charts will be checked.</p><a class="btn gold" href="https://www.facebook.com/groups/qaziforextips" target="_blank" rel="noopener">Join the free group</a></div>
     <div class="ls-faq en-faq"><h2>Questions</h2><details><summary>What is an order block?</summary><p>The last opposite candle before a strong move that broke structure; large orders sit there.</p></details><details><summary>What is the difference between an order block and a supply or demand zone?</summary><p>An order block is a specific candle that needs a BOS and displacement after it, while a supply or demand zone is usually the wider base area.</p></details><details><summary>Which order block is strong?</summary><p>One followed by a BOS and an FVG, preceded by a liquidity sweep, still untouched, and sitting in discount or premium in the direction of the bias.</p></details><details><summary>Which timeframe should I use for order blocks?</summary><p>H4, H1 or M15 for the POI, and M5 or M1 for entry confirmation.</p></details></div>

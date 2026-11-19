@@ -576,11 +576,78 @@ footer a:hover{color:var(--ink)}
 .outline.en-out .n{margin-left:0;margin-right:6px}
 .smc-pn.en-pn{direction:ltr}
 .smc-pn.en-pn .nx{text-align:right}
+
+.smc-quiz{margin:40px 0;border:2px solid var(--gold);border-radius:16px;padding:18px 22px;background:var(--surface)}
+.smc-quiz h2{margin-top:0!important}
+.smc-quiz .qin{color:var(--muted)}
+.qbar{height:10px;border-radius:99px;background:var(--line);overflow:hidden;margin:8px 0}
+.qfill{height:100%;width:0;background:var(--gold);transition:width .3s}
+.qsc{font-weight:600;margin:4px 0 10px}
+.qsc .qs-c{color:#22a56b}
+.qlist{list-style:none;padding:0!important;margin:0}
+.qq{border-top:1px dashed var(--line);padding:12px 0}
+.qt{margin:0 0 8px!important;font-weight:600}
+.qn{display:inline-block;font-size:.78em;color:var(--gold-t,var(--gold));margin-inline-end:8px;font-weight:700}
+.qos{display:grid;gap:8px}
+.qo{all:unset;box-sizing:border-box;display:block;cursor:pointer;border:1px solid var(--line);border-radius:10px;padding:6px 14px;line-height:inherit;font:inherit;font-size:.95em;color:var(--ink);background:var(--bg,transparent)}
+.qo:hover,.qo:focus-visible{border-color:var(--gold);outline:none}
+.qq.done .qo{cursor:default}
+.qq.done .qo:hover{border-color:var(--line)}
+.qo.ok{border-color:#22a56b!important;background:rgba(34,165,107,.14)}
+.qo.bad{border-color:#e5535f!important;background:rgba(229,83,95,.14)}
+.qw{margin:8px 0 0!important;font-size:.92em;color:var(--muted)}
+.qw .qv.y{color:#22a56b}.qw .qv.n{color:#e5535f}
+.qw .qr b{color:var(--ink)}
+.qres{margin-top:16px;border-top:2px solid var(--gold);padding-top:12px;text-align:center}
+.qres h3{margin:0!important}
+.qbig{font:700 54px/1.2 var(--f-display,var(--f-body));color:var(--gold-t,var(--gold));direction:ltr}
+.qbig small{font-size:20px;color:var(--muted);display:block}
+.qgr{font-weight:600}
+.qbest{color:var(--muted);font-size:.9em}
+.qmiss{text-align:start;margin:10px 0}
+.qmiss ol{margin:4px 0 0;font-size:.92em}
+.qmiss a{color:var(--gold-t,var(--gold))}
+.qbtns .btn{margin:4px}
+.smc-prog{margin:34px 0;border:2px solid var(--gold);border-radius:16px;padding:16px 22px;background:var(--surface)}
+.smc-prog h2{margin-top:0!important}
+.qstats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:10px 0 14px}
+.qstats div{border:1px solid var(--line);border-radius:12px;padding:8px;text-align:center}
+.qstats b{display:block;font:700 30px/1.3 var(--f-body);color:var(--gold-t,var(--gold));direction:ltr}
+.qstats span{font-size:.85em;color:var(--muted)}
+.smc-prog .st-ok{color:#22a56b;font-weight:600}.smc-prog .st-no{color:#e5535f;font-weight:600}
+.smc-prog td.pc{direction:ltr;text-align:center!important}
+.en-art .qn{margin-right:8px}
 @media (max-width:760px){.lang-sw{display:flex}.lang-sw a{flex:1;min-width:0}.smc-fig .l{font-size:16px}}
 </style>
 <script>
 document.addEventListener('DOMContentLoaded',function(){document.querySelectorAll('ul.ck').forEach(function(ul){var k='smc-ck-'+ul.dataset.k,s={};try{s=JSON.parse(localStorage.getItem(k)||'{}')}catch(e){}
 ul.querySelectorAll('input').forEach(function(i){if(s[i.id]){i.checked=true;i.closest('li').classList.add('done')}i.addEventListener('change',function(){s[i.id]=i.checked;i.closest('li').classList.toggle('done',i.checked);try{localStorage.setItem(k,JSON.stringify(s))}catch(e){}})})})});
+
+document.addEventListener('DOMContentLoaded',function(){
+var K='smc-quiz';function ld(){try{return JSON.parse(localStorage.getItem(K)||'{}')}catch(e){return{}}}function sv(d){try{localStorage.setItem(K,JSON.stringify(d))}catch(e){}}
+document.querySelectorAll('.smc-quiz').forEach(function(z){
+ var cfg=JSON.parse(z.dataset.q),t=JSON.parse(z.dataset.t),qs=[].slice.call(z.querySelectorAll('.qq')),n=qs.length,ans=0,cor=0,miss=[];
+ function shuf(q){var b=q.querySelector('.qos'),o=[].slice.call(b.children);for(var i=o.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var x=o[i];o[i]=o[j];o[j]=x}o.forEach(function(e){b.appendChild(e)})}
+ function upd(){z.querySelector('.qs-c').textContent=cor;z.querySelector('.qs-a').textContent=ans;z.querySelector('.qfill').style.width=(ans/n*100)+'%'}
+ function fin(){var pc=Math.round(cor/n*100),d=ld(),r=d[cfg.slug]||{best:0,tries:0};r.tries++;r.last=pc;if(pc>r.best)r.best=pc;r.at=Date.now();d[cfg.slug]=r;sv(d);
+  var res=z.querySelector('.qres');res.hidden=false;z.querySelector('.qbig').innerHTML=pc+'%<small>'+cor+' / '+n+'</small>';
+  z.querySelector('.qgr').textContent=pc>=90?t.g1:(pc>=cfg.pass?t.g2:t.g3);
+  z.querySelector('.qbest').innerHTML=t.best+': <bdi dir="ltr">'+r.best+'%</bdi> · '+t.tries+': '+r.tries;
+  var m=z.querySelector('.qmiss'),ol=m.querySelector('ol');ol.innerHTML='';miss.forEach(function(i){var li=document.createElement('li'),a=document.createElement('a');a.href='#q'+cfg.slug+i;var qc=qs[i].querySelector('.qt').cloneNode(true);qc.removeChild(qc.querySelector('.qn'));a.textContent=t.qn+' '+(i+1)+': '+qc.textContent;li.appendChild(a);ol.appendChild(li)});m.hidden=!miss.length;
+  var nx=z.querySelector('.qnx');if(nx)nx.hidden=pc<cfg.pass;res.scrollIntoView({behavior:'smooth',block:'center'})}
+ qs.forEach(function(q,i){q.id='q'+cfg.slug+i;shuf(q);q.querySelectorAll('.qo').forEach(function(b){b.addEventListener('click',function(){if(q.classList.contains('done'))return;q.classList.add('done');ans++;var c=q.querySelector('.qo[data-c]'),w=q.querySelector('.qw'),v=w.querySelector('.qv');c.classList.add('ok');
+  if(b===c){cor++;v.textContent=t.ok+'!';v.className='qv y';w.querySelector('.qr').textContent=''}else{b.classList.add('bad');miss.push(i);v.textContent=t.no+'.';v.className='qv n';w.querySelector('.qr').innerHTML='<b>'+t.right+'</b> '+c.innerHTML+'. '}
+  w.hidden=false;upd();if(ans===n)fin()})})});
+ z.querySelector('.qre').addEventListener('click',function(){ans=0;cor=0;miss=[];qs.forEach(function(q){q.classList.remove('done');q.querySelectorAll('.qo').forEach(function(b){b.classList.remove('ok','bad')});q.querySelector('.qw').hidden=true;shuf(q)});z.querySelector('.qres').hidden=true;upd();qs[0].scrollIntoView({behavior:'smooth',block:'center'})});
+});
+document.querySelectorAll('.smc-prog').forEach(function(p){
+ var L=JSON.parse(p.dataset.l),t=JSON.parse(p.dataset.t),P=+p.dataset.p,d=ld(),tb=p.querySelector('tbody'),done=0,pass=0,sum=0;
+ L.forEach(function(x){var r=d[x[0]],tr=document.createElement('tr'),a='<a href="'+x[3]+'#quiz">'+x[1]+' · '+x[2]+'</a>';
+  if(r){done++;sum+=r.best;if(r.best>=P)pass++}
+  tr.innerHTML='<td>'+a+'</td><td class="pc">'+(r?r.best+'%':'—')+'</td><td>'+(r?(r.best>=P?'<span class="st-ok">✓ '+t.ok+'</span>':'<a class="st-no" href="'+x[3]+'#quiz">'+t.no+'</a>'):'<a href="'+x[3]+'#quiz">'+t.go+'</a>')+'</td>';tb.appendChild(tr)});
+ p.querySelector('.qstats').innerHTML='<div><b>'+done+'/'+L.length+'</b><span>'+t.done+'</span></div><div><b>'+pass+'</b><span>'+t.passed+'</span></div><div><b>'+(done?Math.round(sum/done)+'%':'—')+'</b><span>'+t.avg+'</span></div>';
+});
+});
 </script>
 </head>
 <body>
@@ -639,6 +706,16 @@ ul.querySelectorAll('input').forEach(function(i){if(s[i.id]){i.checked=true;i.cl
 <div class="call warn"><b class="k">Common mistake</b>Forgetting the winter and summer difference. After November the New York AM window is 8 pm in Pakistan; in summer it is 7 pm.</div>
 <h2 id="s31">Summary</h2>
 <ul><li>Silver Bullet: in a one-hour window, a sweep, displacement, an FVG, and an entry from the FVG.</li><li>Windows: 3 to 4 am, 10 to 11 am and 2 to 3 pm New York time; in Pakistan winter 13 to 14, 20 to 21 and 00 to 01.</li><li>Stop beyond the sweep, target the nearby liquidity, RR at least 1:2.</li><li>Time alone is not enough: bias, liquidity and your own backtest are required.</li></ul>
+    <section class="smc-quiz" id="quiz" data-q="{&quot;slug&quot;:&quot;smc-silver-bullet&quot;,&quot;pass&quot;:70,&quot;n&quot;:9}" data-t="{&quot;h&quot;: &quot;Test yourself: Lesson {n} quiz&quot;, &quot;intro&quot;: &quot;{c} questions. Pick one answer for each and you will see at once whether it is right and why. Your score and grade appear at the end. You need {p}% to pass.&quot;, &quot;score&quot;: &quot;correct&quot;, &quot;of&quot;: &quot;of&quot;, &quot;ok&quot;: &quot;Correct&quot;, &quot;no&quot;: &quot;Not quite&quot;, &quot;right&quot;: &quot;Correct answer:&quot;, &quot;why&quot;: &quot;Why:&quot;, &quot;res&quot;: &quot;Your result&quot;, &quot;best&quot;: &quot;Best score so far&quot;, &quot;tries&quot;: &quot;Attempts&quot;, &quot;retry&quot;: &quot;Try again&quot;, &quot;g1&quot;: &quot;Excellent! You have mastered this lesson.&quot;, &quot;g2&quot;: &quot;Well done, you passed. Read the explanation for any question you missed.&quot;, &quot;g3&quot;: &quot;Not passed yet. Review the questions you missed below, reread the lesson and try again.&quot;, &quot;wrong&quot;: &quot;Questions you missed:&quot;, &quot;nx&quot;: &quot;Next lesson&quot;, &quot;reread&quot;: &quot;Reread the lesson&quot;, &quot;qn&quot;: &quot;Question&quot;}">
+  <h2>Test yourself: Lesson 4.2 quiz</h2>
+  <p class="qin">9 questions. Pick one answer for each and you will see at once whether it is right and why. Your score and grade appear at the end. You need 70% to pass.</p>
+  <div class="qbar"><div class="qfill"></div></div>
+  <p class="qsc" aria-live="polite"><b class="qs-c">0</b> correct · <span class="qs-a">0</span> / 9</p>
+  <ol class="qlist"><li class="qq"><p class="qt"><span class="qn">Question 1</span>What is the Silver Bullet?</p><div class="qos"><button type="button" class="qo" data-c="1">Sweep, FVG and FVG-retrace entry inside one hour</button><button type="button" class="qo">A new indicator that signals every hour</button><button type="button" class="qo">An entry on the break of the day&#x27;s first candle</button><button type="button" class="qo">A trade on the first candle of big news</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">It is nothing new: the same sweep, FVG and DOL, inside a specific time.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 2</span>When is the New York AM Silver Bullet in Pakistan time in winter?</p><div class="qos"><button type="button" class="qo" data-c="1">20:00 to 21:00</button><button type="button" class="qo">13:00 to 14:00</button><button type="button" class="qo">00:00 to 01:00</button><button type="button" class="qo">17:00 to 18:00</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">10 to 11 am New York time; in summer 19:00 to 20:00 PKT.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 3</span>When is the London Silver Bullet in Pakistan time in winter?</p><div class="qos"><button type="button" class="qo" data-c="1">13:00 to 14:00</button><button type="button" class="qo">20:00 to 21:00</button><button type="button" class="qo">12:00 to 13:00</button><button type="button" class="qo">10:00 to 11:00</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">3 to 4 am New York time; in summer 12:00 to 13:00.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 4</span>What is the first condition of the Silver Bullet?</p><div class="qos"><button type="button" class="qo" data-c="1">Bias and DOL already set</button><button type="button" class="qo">Enter as soon as the window opens</button><button type="button" class="qo">A green candle</button><button type="button" class="qo">A news release</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">The Silver Bullet doesn&#x27;t work alone; then a sweep and FVG in the window.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 5</span>The FVG formed outside the window. Is it a Silver Bullet?</p><div class="qos"><button type="button" class="qo" data-c="1">No; it is a normal FVG trade</button><button type="button" class="qo">Yes; timing is not required</button><button type="button" class="qo">Yes, but only in London</button><button type="button" class="qo">Yes, but only for sells</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">The setup must form in the window; the trade can run after it.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 6</span>What is the honest point about testing?</p><div class="qos"><button type="button" class="qo" data-c="1">The clock alone is no edge; the full SMC process is</button><button type="button" class="qo">The Silver Bullet hour is magic; every setup wins</button><button type="button" class="qo">The Silver Bullet never works; tests proved it</button><button type="button" class="qo">No backtest needed; ICT already tested it</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">Treat it as &quot;a time filter + your full SMC process&quot; and backtest it yourself.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 7</span>Which is a sign of a good Silver Bullet?</p><div class="qos"><button type="button" class="qo" data-c="1">A sweep of clear liquidity and RR of 1:2+</button><button type="button" class="qo">A sweep against the bias, for a bigger reversal</button><button type="button" class="qo">Right at news, because moves are fast</button><button type="button" class="qo">A huge FVG, because it holds more orders</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">A weak setup is against the bias, has small candles and no clear target.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 8</span>Gold example: entry 4,126, stop 4,114, target 4,145, so RR about 1:1.6. What should you do?</p><div class="qos"><button type="button" class="qo" data-c="1">Enter lower in the FVG with a tighter stop, or skip</button><button type="button" class="qo">Take it as is at 1:1.6</button><button type="button" class="qo">Double the lot to make up the RR</button><button type="button" class="qo">Remove the stop to enlarge the RR</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">1:2 is the minimum; decide from written rules, not emotion.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 9</span>If no FVG forms in the window?</p><div class="qos"><button type="button" class="qo" data-c="1">No Silver Bullet that day</button><button type="button" class="qo">Look after the window</button><button type="button" class="qo">Trade any FVG</button><button type="button" class="qo">Buy the breakout</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">Doing nothing is also a trading decision.</span></p></li></ol>
+  <div class="qres" hidden aria-live="polite"><h3>Your result</h3><div class="qbig"></div><p class="qgr"></p><p class="qbest"></p>
+    <div class="qmiss" hidden><b>Questions you missed:</b><ol></ol></div>
+    <p class="qbtns"><button type="button" class="btn qre">Try again</button> <a class="btn" href="#top">Reread the lesson</a> <a class="btn gold qnx" href="smc-power-of-3-amd-en.html" hidden>Next lesson ›</a></p></div>
+</section>
     <div class="smc-box"><h2>Lesson checklist</h2><p>Tick each point once you understand it. Your ticks are saved in this browser.</p><ul class="ck" data-k="smc-silver-bullet"><li><input type="checkbox" id="c0"><label for="c0">I know the three Silver Bullet windows in New York and local time</label></li><li><input type="checkbox" id="c1"><label for="c1">I set bias and the draw on liquidity before the window</label></li><li><input type="checkbox" id="c2"><label for="c2">I wait for a sweep inside the window first</label></li><li><input type="checkbox" id="c3"><label for="c3">I count it as a Silver Bullet only if the FVG forms inside the window</label></li><li><input type="checkbox" id="c4"><label for="c4">I place the stop beyond the sweep and require at least 1:2 RR</label></li><li><input type="checkbox" id="c5"><label for="c5">On days with no clean setup, I do not trade</label></li></ul></div>
     <div class="smc-box asg"><h2>Assignment</h2><ol><li>Review the New York AM window (10 to 11 am New York time) on Gold M5 for the last 20 days.</li><li>For each day note: was there a sweep? Did an FVG form? Was the target hit?</li><li>Do the same for the London window (3 to 4 am New York time).</li><li>Work out the win rate and average RR for both windows.</li><li>Compare days that were with the bias against days that were against it.</li><li>Post your results in the group.</li></ol><p>Post your assignment screenshots with your reasons in our free Facebook group, where your charts will be checked.</p><a class="btn gold" href="https://www.facebook.com/groups/qaziforextips" target="_blank" rel="noopener">Join the free group</a></div>
     <div class="ls-faq en-faq"><h2>Questions</h2><details><summary>What is the ICT Silver Bullet?</summary><p>A time-based model: inside a one-hour window, price sweeps liquidity, displaces and leaves a fair value gap; the entry is the retrace into that gap, targeting the next liquidity.</p></details><details><summary>What are the Silver Bullet times?</summary><p>3 to 4 am, 10 to 11 am and 2 to 3 pm New York time; in Pakistan winter time 1 to 2 pm, 8 to 9 pm and midnight to 1 am.</p></details><details><summary>Which timeframe is used for the Silver Bullet?</summary><p>The setup on M1 to M5, with bias from H1 or H4.</p></details><details><summary>Does a Silver Bullet form every day?</summary><p>No. If there is no sweep and clean FVG in the window, there is no trade.</p></details></div>

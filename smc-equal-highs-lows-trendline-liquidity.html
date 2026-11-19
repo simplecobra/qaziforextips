@@ -576,11 +576,78 @@ footer a:hover{color:var(--ink)}
 .outline.en-out .n{margin-left:0;margin-right:6px}
 .smc-pn.en-pn{direction:ltr}
 .smc-pn.en-pn .nx{text-align:right}
+
+.smc-quiz{margin:40px 0;border:2px solid var(--gold);border-radius:16px;padding:18px 22px;background:var(--surface)}
+.smc-quiz h2{margin-top:0!important}
+.smc-quiz .qin{color:var(--muted)}
+.qbar{height:10px;border-radius:99px;background:var(--line);overflow:hidden;margin:8px 0}
+.qfill{height:100%;width:0;background:var(--gold);transition:width .3s}
+.qsc{font-weight:600;margin:4px 0 10px}
+.qsc .qs-c{color:#22a56b}
+.qlist{list-style:none;padding:0!important;margin:0}
+.qq{border-top:1px dashed var(--line);padding:12px 0}
+.qt{margin:0 0 8px!important;font-weight:600}
+.qn{display:inline-block;font-size:.78em;color:var(--gold-t,var(--gold));margin-inline-end:8px;font-weight:700}
+.qos{display:grid;gap:8px}
+.qo{all:unset;box-sizing:border-box;display:block;cursor:pointer;border:1px solid var(--line);border-radius:10px;padding:6px 14px;line-height:inherit;font:inherit;font-size:.95em;color:var(--ink);background:var(--bg,transparent)}
+.qo:hover,.qo:focus-visible{border-color:var(--gold);outline:none}
+.qq.done .qo{cursor:default}
+.qq.done .qo:hover{border-color:var(--line)}
+.qo.ok{border-color:#22a56b!important;background:rgba(34,165,107,.14)}
+.qo.bad{border-color:#e5535f!important;background:rgba(229,83,95,.14)}
+.qw{margin:8px 0 0!important;font-size:.92em;color:var(--muted)}
+.qw .qv.y{color:#22a56b}.qw .qv.n{color:#e5535f}
+.qw .qr b{color:var(--ink)}
+.qres{margin-top:16px;border-top:2px solid var(--gold);padding-top:12px;text-align:center}
+.qres h3{margin:0!important}
+.qbig{font:700 54px/1.2 var(--f-display,var(--f-body));color:var(--gold-t,var(--gold));direction:ltr}
+.qbig small{font-size:20px;color:var(--muted);display:block}
+.qgr{font-weight:600}
+.qbest{color:var(--muted);font-size:.9em}
+.qmiss{text-align:start;margin:10px 0}
+.qmiss ol{margin:4px 0 0;font-size:.92em}
+.qmiss a{color:var(--gold-t,var(--gold))}
+.qbtns .btn{margin:4px}
+.smc-prog{margin:34px 0;border:2px solid var(--gold);border-radius:16px;padding:16px 22px;background:var(--surface)}
+.smc-prog h2{margin-top:0!important}
+.qstats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:10px 0 14px}
+.qstats div{border:1px solid var(--line);border-radius:12px;padding:8px;text-align:center}
+.qstats b{display:block;font:700 30px/1.3 var(--f-body);color:var(--gold-t,var(--gold));direction:ltr}
+.qstats span{font-size:.85em;color:var(--muted)}
+.smc-prog .st-ok{color:#22a56b;font-weight:600}.smc-prog .st-no{color:#e5535f;font-weight:600}
+.smc-prog td.pc{direction:ltr;text-align:center!important}
+.en-art .qn{margin-right:8px}
 @media (max-width:760px){.lang-sw{display:flex}.lang-sw a{flex:1;min-width:0}.smc-fig .l{font-size:16px}}
 </style>
 <script>
 document.addEventListener('DOMContentLoaded',function(){document.querySelectorAll('ul.ck').forEach(function(ul){var k='smc-ck-'+ul.dataset.k,s={};try{s=JSON.parse(localStorage.getItem(k)||'{}')}catch(e){}
 ul.querySelectorAll('input').forEach(function(i){if(s[i.id]){i.checked=true;i.closest('li').classList.add('done')}i.addEventListener('change',function(){s[i.id]=i.checked;i.closest('li').classList.toggle('done',i.checked);try{localStorage.setItem(k,JSON.stringify(s))}catch(e){}})})})});
+
+document.addEventListener('DOMContentLoaded',function(){
+var K='smc-quiz';function ld(){try{return JSON.parse(localStorage.getItem(K)||'{}')}catch(e){return{}}}function sv(d){try{localStorage.setItem(K,JSON.stringify(d))}catch(e){}}
+document.querySelectorAll('.smc-quiz').forEach(function(z){
+ var cfg=JSON.parse(z.dataset.q),t=JSON.parse(z.dataset.t),qs=[].slice.call(z.querySelectorAll('.qq')),n=qs.length,ans=0,cor=0,miss=[];
+ function shuf(q){var b=q.querySelector('.qos'),o=[].slice.call(b.children);for(var i=o.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var x=o[i];o[i]=o[j];o[j]=x}o.forEach(function(e){b.appendChild(e)})}
+ function upd(){z.querySelector('.qs-c').textContent=cor;z.querySelector('.qs-a').textContent=ans;z.querySelector('.qfill').style.width=(ans/n*100)+'%'}
+ function fin(){var pc=Math.round(cor/n*100),d=ld(),r=d[cfg.slug]||{best:0,tries:0};r.tries++;r.last=pc;if(pc>r.best)r.best=pc;r.at=Date.now();d[cfg.slug]=r;sv(d);
+  var res=z.querySelector('.qres');res.hidden=false;z.querySelector('.qbig').innerHTML=pc+'%<small>'+cor+' / '+n+'</small>';
+  z.querySelector('.qgr').textContent=pc>=90?t.g1:(pc>=cfg.pass?t.g2:t.g3);
+  z.querySelector('.qbest').innerHTML=t.best+': <bdi dir="ltr">'+r.best+'%</bdi> · '+t.tries+': '+r.tries;
+  var m=z.querySelector('.qmiss'),ol=m.querySelector('ol');ol.innerHTML='';miss.forEach(function(i){var li=document.createElement('li'),a=document.createElement('a');a.href='#q'+cfg.slug+i;var qc=qs[i].querySelector('.qt').cloneNode(true);qc.removeChild(qc.querySelector('.qn'));a.textContent=t.qn+' '+(i+1)+': '+qc.textContent;li.appendChild(a);ol.appendChild(li)});m.hidden=!miss.length;
+  var nx=z.querySelector('.qnx');if(nx)nx.hidden=pc<cfg.pass;res.scrollIntoView({behavior:'smooth',block:'center'})}
+ qs.forEach(function(q,i){q.id='q'+cfg.slug+i;shuf(q);q.querySelectorAll('.qo').forEach(function(b){b.addEventListener('click',function(){if(q.classList.contains('done'))return;q.classList.add('done');ans++;var c=q.querySelector('.qo[data-c]'),w=q.querySelector('.qw'),v=w.querySelector('.qv');c.classList.add('ok');
+  if(b===c){cor++;v.textContent=t.ok+'!';v.className='qv y';w.querySelector('.qr').textContent=''}else{b.classList.add('bad');miss.push(i);v.textContent=t.no+'.';v.className='qv n';w.querySelector('.qr').innerHTML='<b>'+t.right+'</b> '+c.innerHTML+'. '}
+  w.hidden=false;upd();if(ans===n)fin()})})});
+ z.querySelector('.qre').addEventListener('click',function(){ans=0;cor=0;miss=[];qs.forEach(function(q){q.classList.remove('done');q.querySelectorAll('.qo').forEach(function(b){b.classList.remove('ok','bad')});q.querySelector('.qw').hidden=true;shuf(q)});z.querySelector('.qres').hidden=true;upd();qs[0].scrollIntoView({behavior:'smooth',block:'center'})});
+});
+document.querySelectorAll('.smc-prog').forEach(function(p){
+ var L=JSON.parse(p.dataset.l),t=JSON.parse(p.dataset.t),P=+p.dataset.p,d=ld(),tb=p.querySelector('tbody'),done=0,pass=0,sum=0;
+ L.forEach(function(x){var r=d[x[0]],tr=document.createElement('tr'),a='<a href="'+x[3]+'#quiz">'+x[1]+' · '+x[2]+'</a>';
+  if(r){done++;sum+=r.best;if(r.best>=P)pass++}
+  tr.innerHTML='<td>'+a+'</td><td class="pc">'+(r?r.best+'%':'—')+'</td><td>'+(r?(r.best>=P?'<span class="st-ok">✓ '+t.ok+'</span>':'<a class="st-no" href="'+x[3]+'#quiz">'+t.no+'</a>'):'<a href="'+x[3]+'#quiz">'+t.go+'</a>')+'</td>';tb.appendChild(tr)});
+ p.querySelector('.qstats').innerHTML='<div><b>'+done+'/'+L.length+'</b><span>'+t.done+'</span></div><div><b>'+pass+'</b><span>'+t.passed+'</span></div><div><b>'+(done?Math.round(sum/done)+'%':'—')+'</b><span>'+t.avg+'</span></div>';
+});
+});
 </script>
 </head>
 <body>
@@ -643,6 +710,16 @@ ul.querySelectorAll('input').forEach(function(i){if(s[i.id]){i.checked=true;i.cl
 <div class="call warn"><b class="k">عام غلطی</b>ٹرینڈ لائن ٹوٹتے ہی ٹرینڈ کو ختم سمجھنا۔ پہلے دیکھیں سٹرکچر ٹوٹا یا صرف لائن۔</div>
 <h2 id="s34">خلاصہ</h2>
 <ul><li>EQH، EQL اور صاف ٹرینڈ لائن سب سے زیادہ نظر آنے والے لیولز ہیں، اس لیے یہاں سب سے زیادہ سٹاپ لاس ہوتے ہیں۔</li><li>ہر ٹچ کے ساتھ لیکویڈیٹی بڑھتی ہے۔</li><li>یہ لیولز ٹارگٹ بھی ہیں اور سویپ کی جگہ بھی۔</li><li>سویپ کے بعد LTF CHoCH، بریک کے بعد ری ٹیسٹ: کنفرمیشن کے بغیر انٹری نہیں۔</li></ul>
+    <section class="smc-quiz" id="quiz" data-q="{&quot;slug&quot;:&quot;smc-equal-highs-lows-trendline-liquidity&quot;,&quot;pass&quot;:70,&quot;n&quot;:9}" data-t="{&quot;h&quot;: &quot;اپنا ٹیسٹ کریں: سبق {n} کا کوئز&quot;, &quot;intro&quot;: &quot;کل {c} سوال۔ ہر سوال کا ایک جواب چنیں، فوراً پتا چلے گا کہ درست ہے یا نہیں اور کیوں۔ آخر میں آپ کا سکور اور گریڈ آئے گا۔ پاس ہونے کے لیے {p}% چاہیے۔&quot;, &quot;score&quot;: &quot;درست&quot;, &quot;of&quot;: &quot;میں سے&quot;, &quot;ok&quot;: &quot;درست جواب&quot;, &quot;no&quot;: &quot;غلط جواب&quot;, &quot;right&quot;: &quot;درست جواب:&quot;, &quot;why&quot;: &quot;وجہ:&quot;, &quot;res&quot;: &quot;آپ کا نتیجہ&quot;, &quot;best&quot;: &quot;اب تک کا بہترین سکور&quot;, &quot;tries&quot;: &quot;کوششیں&quot;, &quot;retry&quot;: &quot;دوبارہ کوشش کریں&quot;, &quot;g1&quot;: &quot;شاندار! آپ اس سبق کے ماہر ہیں۔&quot;, &quot;g2&quot;: &quot;بہت اچھا! آپ پاس ہیں۔ غلط سوالوں کی وجہ ایک بار پڑھ لیں۔&quot;, &quot;g3&quot;: &quot;ابھی پاس نہیں ہوئے۔ نیچے دیے گئے غلط سوال دیکھیں، سبق دوبارہ پڑھیں اور پھر کوشش کریں۔&quot;, &quot;wrong&quot;: &quot;جن سوالوں پر غلطی ہوئی:&quot;, &quot;nx&quot;: &quot;اگلا سبق&quot;, &quot;reread&quot;: &quot;سبق دوبارہ پڑھیں&quot;, &quot;qn&quot;: &quot;سوال&quot;}">
+  <h2>اپنا ٹیسٹ کریں: سبق 2.2 کا کوئز</h2>
+  <p class="qin">کل 9 سوال۔ ہر سوال کا ایک جواب چنیں، فوراً پتا چلے گا کہ درست ہے یا نہیں اور کیوں۔ آخر میں آپ کا سکور اور گریڈ آئے گا۔ پاس ہونے کے لیے 70% چاہیے۔</p>
+  <div class="qbar"><div class="qfill"></div></div>
+  <p class="qsc" aria-live="polite"><b class="qs-c">0</b> درست · <span class="qs-a">0</span> / 9</p>
+  <ol class="qlist"><li class="qq"><p class="qt"><span class="qn">سوال 1</span>EQH کیا ہے؟</p><div class="qos"><button type="button" class="qo" data-c="1">دو یا زیادہ ہائی تقریباً ایک ہی قیمت پر</button><button type="button" class="qo">ایک بہت بڑی کینڈل</button><button type="button" class="qo">دن کا سب سے اونچا ہائی</button><button type="button" class="qo">ٹرینڈ لائن کا ٹوٹنا</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">کلاسیک پرائس ایکشن اسے ڈبل ٹاپ یا مضبوط ریزسٹنس کہتا ہے۔</span></p></li><li class="qq"><p class="qt"><span class="qn">سوال 2</span>ہر ٹچ کے ساتھ لیکویڈیٹی کیوں بڑھتی ہے؟</p><div class="qos"><button type="button" class="qo" data-c="1">ہر ٹچ پر زیادہ لوگ لیول دیکھتے ہیں اور سٹاپ جمع ہوتے ہیں</button><button type="button" class="qo">ہر ٹچ پر والیوم کم ہوتا ہے اس لیے آرڈر بڑھتے ہیں</button><button type="button" class="qo">لیول کمزور ہوتا ہے تو بروکر آرڈر ڈال دیتا ہے</button><button type="button" class="qo">لیکویڈیٹی نہیں بڑھتی، ہر ٹچ پر ختم ہوتی ہے</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">تیسرے ٹچ تک بریک آؤٹ والے بھی بائے سٹاپ لگا دیتے ہیں۔</span></p></li><li class="qq"><p class="qt"><span class="qn">سوال 3</span>بہت صاف ڈبل ٹاپ کے بارے میں ٹریڈر کیا کہتے ہیں؟</p><div class="qos"><button type="button" class="qo" data-c="1">اکثر پہلے ٹوٹتا ہے، پھر کام کرتا ہے</button><button type="button" class="qo">ہمیشہ بغیر ٹوٹے کام کرتا ہے</button><button type="button" class="qo">کبھی کام نہیں کرتا</button><button type="button" class="qo">صرف ڈیلی پر بنتا ہے</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">اوپر کے بائے آرڈر ٹرگر ہو کر بڑے سیلر کو بھرتے ہیں، پھر قیمت نیچے آتی ہے۔</span></p></li><li class="qq"><p class="qt"><span class="qn">سوال 4</span>گولڈ H1 پر دو ہائی میں کتنا فرق ہو تو بھی برابر سمجھے جاتے ہیں؟</p><div class="qos"><button type="button" class="qo" data-c="1">تقریباً 1 سے 2 ڈالر</button><button type="button" class="qo">10 ڈالر</button><button type="button" class="qo">بالکل صفر</button><button type="button" class="qo">50 سینٹ سے بھی کم ہی ہونا چاہیے</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">اصل سوال: کیا عام ٹریڈر اسے ایک واضح لیول سمجھے گا؟ H4 پر 3 سے 4 ڈالر، M5 پر 0.5 ڈالر تک۔</span></p></li><li class="qq"><p class="qt"><span class="qn">سوال 5</span>ٹرینڈ لائن ٹوٹ گئی مگر اسٹرکچر (پروٹیکٹڈ لو) محفوظ ہے۔ یہ عموماً کیا ہوتا ہے؟</p><div class="qos"><button type="button" class="qo" data-c="1">لیکویڈیٹی سویپ</button><button type="button" class="qo">ٹرینڈ کا خاتمہ</button><button type="button" class="qo">BOS</button><button type="button" class="qo">FVG</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">SMC ٹریڈر لائن نہیں، اسٹرکچر دیکھتا ہے۔</span></p></li><li class="qq"><p class="qt"><span class="qn">سوال 6</span>ریٹیل ڈبل ٹاپ پر سیل کرتا ہے۔ SMC ٹریڈر کیا کرتا ہے؟</p><div class="qos"><button type="button" class="qo" data-c="1">ٹاپ کے اوپر سویپ، پھر لوئر ٹائم فریم پر بیئرش CHoCH</button><button type="button" class="qo">اسی جگہ سیل، سٹاپ ٹاپ کے بالکل اوپر</button><button type="button" class="qo">ٹاپ کا بریک آؤٹ سمجھ کر فوراً بائے</button><button type="button" class="qo">ڈبل ٹاپ کو نظر انداز کر کے رینج ٹریڈ</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">سویپ کے بعد بغیر لوئر ٹائم فریم CHoCH کے انٹری نہیں۔</span></p></li><li class="qq"><p class="qt"><span class="qn">سوال 7</span>بُلش بائس میں EQL اور نیچے کی ٹرینڈ لائن کیا ہیں؟</p><div class="qos"><button type="button" class="qo" data-c="1">بائے کے لیے سویپ کے مواقع</button><button type="button" class="qo">سیل کے لیے نیچے کے ٹارگٹ</button><button type="button" class="qo">بیکار لیول، کوئی کام نہیں</button><button type="button" class="qo">بیئرش BOS کی جگہیں</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">بُلش بائس میں نیچے کی لیکویڈیٹی سویپ زون اور اوپر کی EQH ٹارگٹ ہے۔</span></p></li><li class="qq"><p class="qt"><span class="qn">سوال 8</span>ہر EQH کو فوری سیل سگنل سمجھنا کیوں غلط ہے؟</p><div class="qos"><button type="button" class="qo" data-c="1">EQH ٹارگٹ ہے؛ قیمت اکثر پہلے وہاں جاتی ہے</button><button type="button" class="qo">کیونکہ EQH ہمیشہ بائے سگنل ہے</button><button type="button" class="qo">کیونکہ EQH صرف M1 پر ہوتا ہے</button><button type="button" class="qo">یہ غلط نہیں</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">اس کے نیچے سیل کرنا اکثر ٹارگٹ کے خلاف ٹریڈ ہے۔</span></p></li><li class="qq"><p class="qt"><span class="qn">سوال 9</span>گولڈ M15: ہائی 4,138.50، 4,139.20، 4,138.80؛ H1 بیئرش۔ قیمت 4,142.30 تک گئی اور 4,137.90 پر بند ہوئی، M5 پر بیئرش CHoCH۔ سٹاپ کہاں؟</p><div class="qos"><button type="button" class="qo" data-c="1">4,143.50 (وِک کے اوپر)</button><button type="button" class="qo">4,139.20 (ہائی پر)</button><button type="button" class="qo">4,126.00</button><button type="button" class="qo">سٹاپ کی ضرورت نہیں</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">سیل تقریباً 4,138.00، سٹاپ وِک کے اوپر، ٹارگٹ SSL 4,126.00؛ تقریباً 1:2۔</span></p></li></ol>
+  <div class="qres" hidden aria-live="polite"><h3>آپ کا نتیجہ</h3><div class="qbig"></div><p class="qgr"></p><p class="qbest"></p>
+    <div class="qmiss" hidden><b>جن سوالوں پر غلطی ہوئی:</b><ol></ol></div>
+    <p class="qbtns"><button type="button" class="btn qre">دوبارہ کوشش کریں</button> <a class="btn" href="#top">سبق دوبارہ پڑھیں</a> <a class="btn gold qnx" href="smc-session-liquidity-pdh-pdl.html" hidden>اگلا سبق ›</a></p></div>
+</section>
     <div class="smc-box"><h2>اس سبق کی چیک لسٹ</h2><p>جو بات سمجھ آ جائے اس پر نشان لگائیں۔ آپ کے نشان اسی براؤزر میں محفوظ رہتے ہیں۔</p><ul class="ck" data-k="smc-equal-highs-lows-trendline-liquidity"><li><input type="checkbox" id="c0"><label for="c0">EQH اور EQL برابر ہائیز اور لوز ہیں جہاں بہت سے سٹاپ لاس جمع ہوتے ہیں</label></li><li><input type="checkbox" id="c1"><label for="c1">ہر ٹچ کے ساتھ لیکویڈیٹی بڑھتی ہے</label></li><li><input type="checkbox" id="c2"><label for="c2">مجھے پتہ ہے گولڈ پر &#x27;برابر&#x27; کا مطلب تقریباً 1 سے 2 ڈالر کا فرق ہے (H1)</label></li><li><input type="checkbox" id="c3"><label for="c3">صاف ٹرینڈ لائن کے پیچھے بھی سٹاپ لاس کی قطار ہوتی ہے</label></li><li><input type="checkbox" id="c4"><label for="c4">ٹرینڈ لائن ٹوٹنے پر میں دیکھتا ہوں کہ سٹرکچر ٹوٹا یا نہیں</label></li><li><input type="checkbox" id="c5"><label for="c5">سویپ کے بعد میں LTF CHoCH کا انتظار کرتا ہوں</label></li><li><input type="checkbox" id="c6"><label for="c6">میں اپنا سٹاپ لاس ڈبل ٹاپ یا ٹرینڈ لائن کے بالکل پیچھے نہیں رکھتا</label></li></ul></div>
     <div class="smc-box asg"><h2>اسائنمنٹ</h2><ol><li>گولڈ کے H1 اور H4 پر 10 EQH اور 10 EQL تلاش کریں۔</li><li>ہر ایک کے لیے لکھیں: قیمت نے اسے سویپ کیا اور پلٹی، یا توڑ کر آگے گئی؟</li><li>3 صاف ٹرینڈ لائنیں ڈھونڈیں جن پر تین یا زیادہ ٹچ ہوں، اور دیکھیں لائن ٹوٹنے کے بعد کیا ہوا: سٹرکچر ٹوٹا یا نہیں؟</li><li>ایک EQH یا EQL سویپ پر M5 کھولیں اور CHoCH، انٹری، سٹاپ لاس اور ٹارگٹ مارک کریں۔</li><li>اپنے نتائج کی گنتی گروپ میں پوسٹ کریں۔</li></ol><p>اپنی اسائنمنٹ کے اسکرین شاٹس وجہ کے ساتھ ہمارے فری فیس بک گروپ میں پوسٹ کریں، وہاں آپ کے چارٹ چیک کیے جائیں گے۔</p><a class="btn gold" href="https://www.facebook.com/groups/qaziforextips" target="_blank" rel="noopener">فری گروپ جوائن کریں</a></div>
     <div class="ls-faq ur" lang="ur" dir="rtl"><h2>اکثر پوچھے جانے والے سوال</h2><details><summary>کتنے ٹچ کے بعد لیول لیکویڈیٹی بنتا ہے؟</summary><p>دو ٹچ سے برابر لیول بن جاتا ہے، تین یا زیادہ ٹچ پر لیکویڈیٹی اور بھی زیادہ ہو جاتی ہے۔</p></details><details><summary>ٹرینڈ لائن ٹوٹے تو کیا ٹرینڈ ختم؟</summary><p>ضروری نہیں۔ اگر پروٹیکٹڈ لو قائم ہے تو اکثر یہ صرف لیکویڈیٹی سویپ ہوتا ہے۔</p></details><details><summary>ایکول ہائیز کیا ہیں؟</summary><p>دو یا زیادہ ہائیز تقریباً ایک ہی قیمت پر، جن کے اوپر بہت سے سٹاپ لاس جمع ہوتے ہیں۔</p></details><details><summary>کیا ڈبل ٹاپ پر سیل کرنا غلط ہے؟</summary><p>ضروری نہیں، مگر اکثر قیمت پہلے ٹاپ کے اوپر سویپ کرتی ہے۔ سویپ اور LTF CHoCH کے بعد سیل زیادہ محفوظ ہے۔</p></details><details><summary>ٹرینڈ لائن لیکویڈیٹی کیا ہے؟</summary><p>صاف ٹرینڈ لائن پر بائے کرنے والوں کے SL جو لائن کے بالکل نیچے قطار میں جمع ہوتے ہیں۔</p></details></div>

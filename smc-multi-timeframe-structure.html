@@ -576,11 +576,78 @@ footer a:hover{color:var(--ink)}
 .outline.en-out .n{margin-left:0;margin-right:6px}
 .smc-pn.en-pn{direction:ltr}
 .smc-pn.en-pn .nx{text-align:right}
+
+.smc-quiz{margin:40px 0;border:2px solid var(--gold);border-radius:16px;padding:18px 22px;background:var(--surface)}
+.smc-quiz h2{margin-top:0!important}
+.smc-quiz .qin{color:var(--muted)}
+.qbar{height:10px;border-radius:99px;background:var(--line);overflow:hidden;margin:8px 0}
+.qfill{height:100%;width:0;background:var(--gold);transition:width .3s}
+.qsc{font-weight:600;margin:4px 0 10px}
+.qsc .qs-c{color:#22a56b}
+.qlist{list-style:none;padding:0!important;margin:0}
+.qq{border-top:1px dashed var(--line);padding:12px 0}
+.qt{margin:0 0 8px!important;font-weight:600}
+.qn{display:inline-block;font-size:.78em;color:var(--gold-t,var(--gold));margin-inline-end:8px;font-weight:700}
+.qos{display:grid;gap:8px}
+.qo{all:unset;box-sizing:border-box;display:block;cursor:pointer;border:1px solid var(--line);border-radius:10px;padding:6px 14px;line-height:inherit;font:inherit;font-size:.95em;color:var(--ink);background:var(--bg,transparent)}
+.qo:hover,.qo:focus-visible{border-color:var(--gold);outline:none}
+.qq.done .qo{cursor:default}
+.qq.done .qo:hover{border-color:var(--line)}
+.qo.ok{border-color:#22a56b!important;background:rgba(34,165,107,.14)}
+.qo.bad{border-color:#e5535f!important;background:rgba(229,83,95,.14)}
+.qw{margin:8px 0 0!important;font-size:.92em;color:var(--muted)}
+.qw .qv.y{color:#22a56b}.qw .qv.n{color:#e5535f}
+.qw .qr b{color:var(--ink)}
+.qres{margin-top:16px;border-top:2px solid var(--gold);padding-top:12px;text-align:center}
+.qres h3{margin:0!important}
+.qbig{font:700 54px/1.2 var(--f-display,var(--f-body));color:var(--gold-t,var(--gold));direction:ltr}
+.qbig small{font-size:20px;color:var(--muted);display:block}
+.qgr{font-weight:600}
+.qbest{color:var(--muted);font-size:.9em}
+.qmiss{text-align:start;margin:10px 0}
+.qmiss ol{margin:4px 0 0;font-size:.92em}
+.qmiss a{color:var(--gold-t,var(--gold))}
+.qbtns .btn{margin:4px}
+.smc-prog{margin:34px 0;border:2px solid var(--gold);border-radius:16px;padding:16px 22px;background:var(--surface)}
+.smc-prog h2{margin-top:0!important}
+.qstats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:10px 0 14px}
+.qstats div{border:1px solid var(--line);border-radius:12px;padding:8px;text-align:center}
+.qstats b{display:block;font:700 30px/1.3 var(--f-body);color:var(--gold-t,var(--gold));direction:ltr}
+.qstats span{font-size:.85em;color:var(--muted)}
+.smc-prog .st-ok{color:#22a56b;font-weight:600}.smc-prog .st-no{color:#e5535f;font-weight:600}
+.smc-prog td.pc{direction:ltr;text-align:center!important}
+.en-art .qn{margin-right:8px}
 @media (max-width:760px){.lang-sw{display:flex}.lang-sw a{flex:1;min-width:0}.smc-fig .l{font-size:16px}}
 </style>
 <script>
 document.addEventListener('DOMContentLoaded',function(){document.querySelectorAll('ul.ck').forEach(function(ul){var k='smc-ck-'+ul.dataset.k,s={};try{s=JSON.parse(localStorage.getItem(k)||'{}')}catch(e){}
 ul.querySelectorAll('input').forEach(function(i){if(s[i.id]){i.checked=true;i.closest('li').classList.add('done')}i.addEventListener('change',function(){s[i.id]=i.checked;i.closest('li').classList.toggle('done',i.checked);try{localStorage.setItem(k,JSON.stringify(s))}catch(e){}})})})});
+
+document.addEventListener('DOMContentLoaded',function(){
+var K='smc-quiz';function ld(){try{return JSON.parse(localStorage.getItem(K)||'{}')}catch(e){return{}}}function sv(d){try{localStorage.setItem(K,JSON.stringify(d))}catch(e){}}
+document.querySelectorAll('.smc-quiz').forEach(function(z){
+ var cfg=JSON.parse(z.dataset.q),t=JSON.parse(z.dataset.t),qs=[].slice.call(z.querySelectorAll('.qq')),n=qs.length,ans=0,cor=0,miss=[];
+ function shuf(q){var b=q.querySelector('.qos'),o=[].slice.call(b.children);for(var i=o.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var x=o[i];o[i]=o[j];o[j]=x}o.forEach(function(e){b.appendChild(e)})}
+ function upd(){z.querySelector('.qs-c').textContent=cor;z.querySelector('.qs-a').textContent=ans;z.querySelector('.qfill').style.width=(ans/n*100)+'%'}
+ function fin(){var pc=Math.round(cor/n*100),d=ld(),r=d[cfg.slug]||{best:0,tries:0};r.tries++;r.last=pc;if(pc>r.best)r.best=pc;r.at=Date.now();d[cfg.slug]=r;sv(d);
+  var res=z.querySelector('.qres');res.hidden=false;z.querySelector('.qbig').innerHTML=pc+'%<small>'+cor+' / '+n+'</small>';
+  z.querySelector('.qgr').textContent=pc>=90?t.g1:(pc>=cfg.pass?t.g2:t.g3);
+  z.querySelector('.qbest').innerHTML=t.best+': <bdi dir="ltr">'+r.best+'%</bdi> · '+t.tries+': '+r.tries;
+  var m=z.querySelector('.qmiss'),ol=m.querySelector('ol');ol.innerHTML='';miss.forEach(function(i){var li=document.createElement('li'),a=document.createElement('a');a.href='#q'+cfg.slug+i;var qc=qs[i].querySelector('.qt').cloneNode(true);qc.removeChild(qc.querySelector('.qn'));a.textContent=t.qn+' '+(i+1)+': '+qc.textContent;li.appendChild(a);ol.appendChild(li)});m.hidden=!miss.length;
+  var nx=z.querySelector('.qnx');if(nx)nx.hidden=pc<cfg.pass;res.scrollIntoView({behavior:'smooth',block:'center'})}
+ qs.forEach(function(q,i){q.id='q'+cfg.slug+i;shuf(q);q.querySelectorAll('.qo').forEach(function(b){b.addEventListener('click',function(){if(q.classList.contains('done'))return;q.classList.add('done');ans++;var c=q.querySelector('.qo[data-c]'),w=q.querySelector('.qw'),v=w.querySelector('.qv');c.classList.add('ok');
+  if(b===c){cor++;v.textContent=t.ok+'!';v.className='qv y';w.querySelector('.qr').textContent=''}else{b.classList.add('bad');miss.push(i);v.textContent=t.no+'.';v.className='qv n';w.querySelector('.qr').innerHTML='<b>'+t.right+'</b> '+c.innerHTML+'. '}
+  w.hidden=false;upd();if(ans===n)fin()})})});
+ z.querySelector('.qre').addEventListener('click',function(){ans=0;cor=0;miss=[];qs.forEach(function(q){q.classList.remove('done');q.querySelectorAll('.qo').forEach(function(b){b.classList.remove('ok','bad')});q.querySelector('.qw').hidden=true;shuf(q)});z.querySelector('.qres').hidden=true;upd();qs[0].scrollIntoView({behavior:'smooth',block:'center'})});
+});
+document.querySelectorAll('.smc-prog').forEach(function(p){
+ var L=JSON.parse(p.dataset.l),t=JSON.parse(p.dataset.t),P=+p.dataset.p,d=ld(),tb=p.querySelector('tbody'),done=0,pass=0,sum=0;
+ L.forEach(function(x){var r=d[x[0]],tr=document.createElement('tr'),a='<a href="'+x[3]+'#quiz">'+x[1]+' · '+x[2]+'</a>';
+  if(r){done++;sum+=r.best;if(r.best>=P)pass++}
+  tr.innerHTML='<td>'+a+'</td><td class="pc">'+(r?r.best+'%':'—')+'</td><td>'+(r?(r.best>=P?'<span class="st-ok">✓ '+t.ok+'</span>':'<a class="st-no" href="'+x[3]+'#quiz">'+t.no+'</a>'):'<a href="'+x[3]+'#quiz">'+t.go+'</a>')+'</td>';tb.appendChild(tr)});
+ p.querySelector('.qstats').innerHTML='<div><b>'+done+'/'+L.length+'</b><span>'+t.done+'</span></div><div><b>'+pass+'</b><span>'+t.passed+'</span></div><div><b>'+(done?Math.round(sum/done)+'%':'—')+'</b><span>'+t.avg+'</span></div>';
+});
+});
 </script>
 </head>
 <body>
@@ -646,6 +713,16 @@ ul.querySelectorAll('input').forEach(function(i){if(s[i.id]){i.checked=true;i.cl
 <h2 id="s36">فیز 1 مکمل: گیٹ</h2>
 <p>اب تک آپ نے سوئنگ، HH اور HL، BOS، CHoCH، انٹرنل اسٹرکچر، پروٹیکٹڈ لو، IDM اور ملٹی ٹائم فریم سیکھ لیے۔ فیز 2 (لیکویڈیٹی) شروع کرنے سے پہلے یہ گیٹ پاس کریں:</p>
 <ul><li>ہر BOS اور CHoCH باڈی کلوز سے کنفرم کرتے ہیں، وک سے نہیں۔</li><li>انٹرنل اور سوئنگ اسٹرکچر الگ پہچان لیتے ہیں۔</li><li>کسی بھی چارٹ کا HTF بائس اور پروٹیکٹڈ لو یا ہائی ایک لائن میں بتا سکتے ہیں۔</li></ul>
+    <section class="smc-quiz" id="quiz" data-q="{&quot;slug&quot;:&quot;smc-multi-timeframe-structure&quot;,&quot;pass&quot;:70,&quot;n&quot;:10}" data-t="{&quot;h&quot;: &quot;اپنا ٹیسٹ کریں: سبق {n} کا کوئز&quot;, &quot;intro&quot;: &quot;کل {c} سوال۔ ہر سوال کا ایک جواب چنیں، فوراً پتا چلے گا کہ درست ہے یا نہیں اور کیوں۔ آخر میں آپ کا سکور اور گریڈ آئے گا۔ پاس ہونے کے لیے {p}% چاہیے۔&quot;, &quot;score&quot;: &quot;درست&quot;, &quot;of&quot;: &quot;میں سے&quot;, &quot;ok&quot;: &quot;درست جواب&quot;, &quot;no&quot;: &quot;غلط جواب&quot;, &quot;right&quot;: &quot;درست جواب:&quot;, &quot;why&quot;: &quot;وجہ:&quot;, &quot;res&quot;: &quot;آپ کا نتیجہ&quot;, &quot;best&quot;: &quot;اب تک کا بہترین سکور&quot;, &quot;tries&quot;: &quot;کوششیں&quot;, &quot;retry&quot;: &quot;دوبارہ کوشش کریں&quot;, &quot;g1&quot;: &quot;شاندار! آپ اس سبق کے ماہر ہیں۔&quot;, &quot;g2&quot;: &quot;بہت اچھا! آپ پاس ہیں۔ غلط سوالوں کی وجہ ایک بار پڑھ لیں۔&quot;, &quot;g3&quot;: &quot;ابھی پاس نہیں ہوئے۔ نیچے دیے گئے غلط سوال دیکھیں، سبق دوبارہ پڑھیں اور پھر کوشش کریں۔&quot;, &quot;wrong&quot;: &quot;جن سوالوں پر غلطی ہوئی:&quot;, &quot;nx&quot;: &quot;اگلا سبق&quot;, &quot;reread&quot;: &quot;سبق دوبارہ پڑھیں&quot;, &quot;qn&quot;: &quot;سوال&quot;}">
+  <h2>اپنا ٹیسٹ کریں: سبق 1.7 کا کوئز</h2>
+  <p class="qin">کل 10 سوال۔ ہر سوال کا ایک جواب چنیں، فوراً پتا چلے گا کہ درست ہے یا نہیں اور کیوں۔ آخر میں آپ کا سکور اور گریڈ آئے گا۔ پاس ہونے کے لیے 70% چاہیے۔</p>
+  <div class="qbar"><div class="qfill"></div></div>
+  <p class="qsc" aria-live="polite"><b class="qs-c">0</b> درست · <span class="qs-a">0</span> / 10</p>
+  <ol class="qlist"><li class="qq"><p class="qt"><span class="qn">سوال 1</span>ہائیر ٹائم فریم پر ڈاؤن ٹرینڈ کا ایک اوپر والا پل بیک M15 پر کیسا دکھتا ہے؟</p><div class="qos"><button type="button" class="qo" data-c="1">HH اور HL والا اپ ٹرینڈ</button><button type="button" class="qo">ڈاؤن ٹرینڈ</button><button type="button" class="qo">ایک کینڈل</button><button type="button" class="qo">کچھ نظر نہیں آتا</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">ہائیر ٹائم فریم کی ہر لہر لوئر ٹائم فریم پر پورا ٹرینڈ ہے۔</span></p></li><li class="qq"><p class="qt"><span class="qn">سوال 2</span>ملٹی ٹائم فریم کا بنیادی اصول کیا ہے؟</p><div class="qos"><button type="button" class="qo" data-c="1">HTF کی سمت میں ٹریڈ، LTF کے CHoCH پر انٹری</button><button type="button" class="qo">LTF کی سمت میں ٹریڈ، HTF پر انٹری</button><button type="button" class="qo">صرف ایک ٹائم فریم</button><button type="button" class="qo">ہر ٹائم فریم کی الگ ٹریڈ</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">اس سے SL چھوٹا (LTF سوئنگ کے پیچھے) اور ٹارگٹ بڑا (HTF لیکویڈیٹی) ملتا ہے۔</span></p></li><li class="qq"><p class="qt"><span class="qn">سوال 3</span>انٹرا ڈے ٹریڈر کے لیے کون سا ٹائم فریم جوڑا ہے؟</p><div class="qos"><button type="button" class="qo" data-c="1">H4 بائس، H1 زون، M15 یا M5 انٹری</button><button type="button" class="qo">ڈیلی بائس، H4 زون، H1 انٹری</button><button type="button" class="qo">H1 بائس، M15 زون، M1 انٹری</button><button type="button" class="qo">صرف M1</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">ڈیلی/H4/H1 سوئنگ کے لیے؛ H1/M15/M1 اسکیلپر کے لیے۔</span></p></li><li class="qq"><p class="qt"><span class="qn">سوال 4</span>تین سے زیادہ ٹائم فریم کیوں نہیں کھولنے چاہییں؟</p><div class="qos"><button type="button" class="qo" data-c="1">کوئی نہ کوئی ٹائم فریم الٹا سگنل دکھائے گا اور فیصلہ نہیں ہوگا</button><button type="button" class="qo">زیادہ ٹائم فریم سے چارٹ سست اور پلیٹ فارم بند ہو جاتا ہے</button><button type="button" class="qo">بروکر تین سے زیادہ ٹائم فریم کی اجازت نہیں دیتا</button><button type="button" class="qo">زیادہ کھولنا بہتر ہے، ہر زاویہ سامنے آتا ہے</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">تین کافی ہیں: بائس، زون، انٹری۔</span></p></li><li class="qq"><p class="qt"><span class="qn">سوال 5</span>HTF بُلش ہے اور LTF بیئرش (پل بیک)۔ کیا کریں؟</p><div class="qos"><button type="button" class="qo" data-c="1">زون پر بُلش LTF CHoCH کا انتظار</button><button type="button" class="qo">LTF بیئرش ہے، فوراً سیل کریں</button><button type="button" class="qo">HTF بُلش ہے، فوراً بائے کریں</button><button type="button" class="qo">دونوں نہیں ملتے، ٹریڈنگ بند</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">LTF کا پل بیک HTF کی سمت میں ختم ہو، تب انٹری۔</span></p></li><li class="qq"><p class="qt"><span class="qn">سوال 6</span>HTF رینج میں ہے۔ فیصلہ کیا ہے؟</p><div class="qos"><button type="button" class="qo" data-c="1">ٹریڈ نہیں، یا صرف کناروں پر</button><button type="button" class="qo">LTF کے ہر سگنل پر ٹریڈ</button><button type="button" class="qo">رینج کے بیچ میں بائے</button><button type="button" class="qo">رینج کے بیچ میں سیل</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">رینج کے بیچ میں ٹریڈ نہیں ہوتی۔</span></p></li><li class="qq"><p class="qt"><span class="qn">سوال 7</span>H1 زون اور M5 CHoCH میں کون کیا بتاتا ہے؟</p><div class="qos"><button type="button" class="qo" data-c="1">H1 بتاتا ہے کہاں، M5 بتاتا ہے کب</button><button type="button" class="qo">M5 بتاتا ہے کہاں، H1 بتاتا ہے کب</button><button type="button" class="qo">دونوں صرف ٹرینڈ کی سمت بتاتے ہیں</button><button type="button" class="qo">دونوں صرف SL کی جگہ بتاتے ہیں</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">اکیلا زون (ٹوٹ سکتا ہے) یا اکیلا CHoCH (ہوا میں) کافی نہیں؛ دونوں مل کر سیٹ اپ۔</span></p></li><li class="qq"><p class="qt"><span class="qn">سوال 8</span>15 منٹ کے روزانہ روٹین میں الرٹ کب لگایا جاتا ہے؟</p><div class="qos"><button type="button" class="qo" data-c="1">H1 پر POI مارک کرنے کے بعد</button><button type="button" class="qo">صبح سب سے پہلے، D1 سے پہلے</button><button type="button" class="qo">ٹریڈ بند ہونے کے بعد</button><button type="button" class="qo">صرف خبر کے وقت</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">ترتیب: D1، H4، H1 (POI)، الرٹ، پھر الرٹ بجنے پر M15/M5 پر CHoCH۔</span></p></li><li class="qq"><p class="qt"><span class="qn">سوال 9</span>ٹریڈ کے دوران ٹائم فریم بدل کر مینیج کرنا کیسا ہے؟</p><div class="qos"><button type="button" class="qo" data-c="1">غلط؛ پلان والے ٹائم فریم پر مینیج کریں</button><button type="button" class="qo">درست؛ چھوٹا ٹائم فریم زیادہ بتاتا ہے</button><button type="button" class="qo">ضروری؛ ہر ٹریڈ M1 پر مینیج ہو</button><button type="button" class="qo">صرف خبر کے وقت بدلنا ٹھیک ہے</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">ٹائم فریم بدلنے سے ہر چھوٹی ہلچل ڈراتی ہے۔</span></p></li><li class="qq"><p class="qt"><span class="qn">سوال 10</span>گولڈ: H4 بُلش، H1 POI 4,112 سے 4,118، M5 پر 4,117 کا LH ٹوٹا۔ ٹریڈ کیسی ہے؟</p><div class="qos"><button type="button" class="qo" data-c="1">4,115 پر بائے، SL 4,110، ٹارگٹ 4,136</button><button type="button" class="qo">4,117 پر سیل، SL 4,121، ٹارگٹ 4,104</button><button type="button" class="qo">4,138 پر بائے، SL 4,130، ٹارگٹ 4,150</button><button type="button" class="qo">ٹریڈ نہیں، H4 اور M5 الگ ہیں</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">زون (کہاں) اور M5 CHoCH (کب) دونوں موجود ہیں؛ ٹارگٹ پچھلے H1 ہائی 4,138 سے ذرا پہلے۔</span></p></li></ol>
+  <div class="qres" hidden aria-live="polite"><h3>آپ کا نتیجہ</h3><div class="qbig"></div><p class="qgr"></p><p class="qbest"></p>
+    <div class="qmiss" hidden><b>جن سوالوں پر غلطی ہوئی:</b><ol></ol></div>
+    <p class="qbtns"><button type="button" class="btn qre">دوبارہ کوشش کریں</button> <a class="btn" href="#top">سبق دوبارہ پڑھیں</a> <a class="btn gold qnx" href="smc-liquidity-bsl-ssl.html" hidden>اگلا سبق ›</a></p></div>
+</section>
     <div class="smc-box"><h2>اس سبق کی چیک لسٹ</h2><p>جو بات سمجھ آ جائے اس پر نشان لگائیں۔ آپ کے نشان اسی براؤزر میں محفوظ رہتے ہیں۔</p><ul class="ck" data-k="smc-multi-timeframe-structure"><li><input type="checkbox" id="c0"><label for="c0">مجھے سمجھ آ گیا کہ HTF کی ایک لہر LTF پر پورا ٹرینڈ ہوتی ہے</label></li><li><input type="checkbox" id="c1"><label for="c1">میں ٹریڈ HTF کی سمت میں اور انٹری LTF کے CHoCH پر لیتا ہوں</label></li><li><input type="checkbox" id="c2"><label for="c2">میں تین سے زیادہ ٹائم فریم استعمال نہیں کرتا</label></li><li><input type="checkbox" id="c3"><label for="c3">میں نے اپنا ٹائم فریم جوڑا چن لیا ہے</label></li><li><input type="checkbox" id="c4"><label for="c4">HTF کے خلاف LTF کے سگنل پر میں ٹریڈ نہیں لیتا</label></li><li><input type="checkbox" id="c5"><label for="c5">میں فیز 1 کا گیٹ پاس کر چکا ہوں</label></li><li><input type="checkbox" id="c6"><label for="c6">میں روز 15 منٹ کا ٹاپ ڈاؤن معمول کرتا ہوں</label></li><li><input type="checkbox" id="c7"><label for="c7">میں POI پر الرٹ لگاتا ہوں اور LTF پر CHoCH کا انتظار کرتا ہوں</label></li><li><input type="checkbox" id="c8"><label for="c8">میں HTF کے خلاف LTF سگنل نہیں لیتا</label></li></ul></div>
     <div class="smc-box asg"><h2>اسائنمنٹ</h2><ol><li>اپنا ٹائم فریم جوڑا چنیں (مثلاً H4، H1، M15)۔</li><li>گولڈ پر 10 ایسے مواقع ڈھونڈیں جہاں HTF کا پل بیک کسی زون تک گیا: ہر ایک کا HTF اور LTF دونوں کا اسکرین شاٹ لیں۔</li><li>LTF پر وہ CHoCH مارک کریں جو HTF کی سمت میں ہوا، اور لکھیں کہ اس کے بعد قیمت کہاں تک گئی۔</li><li>ایک ایسی مثال بھی ڈھونڈیں جہاں LTF کا CHoCH HTF کے خلاف تھا اور ناکام ہوا۔</li><li>اپنا پورا کام (HTF + LTF جوڑے) گروپ میں پوسٹ کریں۔</li><li>اگلے 5 دن روز ٹاپ ڈاؤن معمول لکھیں: D1، H4 بائس، H1 POI، اور اگر LTF CHoCH آیا تو انٹری، سٹاپ لاس اور ٹارگٹ۔</li></ol><p>اپنی اسائنمنٹ کے اسکرین شاٹس وجہ کے ساتھ ہمارے فری فیس بک گروپ میں پوسٹ کریں، وہاں آپ کے چارٹ چیک کیے جائیں گے۔</p><a class="btn gold" href="https://www.facebook.com/groups/qaziforextips" target="_blank" rel="noopener">فری گروپ جوائن کریں</a></div>
     <div class="ls-faq ur" lang="ur" dir="rtl"><h2>اکثر پوچھے جانے والے سوال</h2><details><summary>H4 بیئرش اور M15 بُلش ہو تو کیا کریں؟</summary><p>M15 کا بُلش ٹرینڈ اکثر H4 کا پل بیک ہوتا ہے۔ H4 کے زون پر M15 کے بیئرش CHoCH کا انتظار کریں، پھر سیل۔</p></details><details><summary>SMC میں کتنے ٹائم فریم استعمال کریں؟</summary><p>زیادہ سے زیادہ تین: ایک بائس، ایک زون اور ایک انٹری کے لیے۔</p></details><details><summary>بنیادی ملٹی ٹائم فریم اصول کیا ہے؟</summary><p>ٹریڈ بڑے ٹائم فریم کی سمت میں، انٹری چھوٹے ٹائم فریم کے CHoCH پر۔</p></details></div>

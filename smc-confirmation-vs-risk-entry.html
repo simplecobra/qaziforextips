@@ -576,11 +576,78 @@ footer a:hover{color:var(--ink)}
 .outline.en-out .n{margin-left:0;margin-right:6px}
 .smc-pn.en-pn{direction:ltr}
 .smc-pn.en-pn .nx{text-align:right}
+
+.smc-quiz{margin:40px 0;border:2px solid var(--gold);border-radius:16px;padding:18px 22px;background:var(--surface)}
+.smc-quiz h2{margin-top:0!important}
+.smc-quiz .qin{color:var(--muted)}
+.qbar{height:10px;border-radius:99px;background:var(--line);overflow:hidden;margin:8px 0}
+.qfill{height:100%;width:0;background:var(--gold);transition:width .3s}
+.qsc{font-weight:600;margin:4px 0 10px}
+.qsc .qs-c{color:#22a56b}
+.qlist{list-style:none;padding:0!important;margin:0}
+.qq{border-top:1px dashed var(--line);padding:12px 0}
+.qt{margin:0 0 8px!important;font-weight:600}
+.qn{display:inline-block;font-size:.78em;color:var(--gold-t,var(--gold));margin-inline-end:8px;font-weight:700}
+.qos{display:grid;gap:8px}
+.qo{all:unset;box-sizing:border-box;display:block;cursor:pointer;border:1px solid var(--line);border-radius:10px;padding:6px 14px;line-height:inherit;font:inherit;font-size:.95em;color:var(--ink);background:var(--bg,transparent)}
+.qo:hover,.qo:focus-visible{border-color:var(--gold);outline:none}
+.qq.done .qo{cursor:default}
+.qq.done .qo:hover{border-color:var(--line)}
+.qo.ok{border-color:#22a56b!important;background:rgba(34,165,107,.14)}
+.qo.bad{border-color:#e5535f!important;background:rgba(229,83,95,.14)}
+.qw{margin:8px 0 0!important;font-size:.92em;color:var(--muted)}
+.qw .qv.y{color:#22a56b}.qw .qv.n{color:#e5535f}
+.qw .qr b{color:var(--ink)}
+.qres{margin-top:16px;border-top:2px solid var(--gold);padding-top:12px;text-align:center}
+.qres h3{margin:0!important}
+.qbig{font:700 54px/1.2 var(--f-display,var(--f-body));color:var(--gold-t,var(--gold));direction:ltr}
+.qbig small{font-size:20px;color:var(--muted);display:block}
+.qgr{font-weight:600}
+.qbest{color:var(--muted);font-size:.9em}
+.qmiss{text-align:start;margin:10px 0}
+.qmiss ol{margin:4px 0 0;font-size:.92em}
+.qmiss a{color:var(--gold-t,var(--gold))}
+.qbtns .btn{margin:4px}
+.smc-prog{margin:34px 0;border:2px solid var(--gold);border-radius:16px;padding:16px 22px;background:var(--surface)}
+.smc-prog h2{margin-top:0!important}
+.qstats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:10px 0 14px}
+.qstats div{border:1px solid var(--line);border-radius:12px;padding:8px;text-align:center}
+.qstats b{display:block;font:700 30px/1.3 var(--f-body);color:var(--gold-t,var(--gold));direction:ltr}
+.qstats span{font-size:.85em;color:var(--muted)}
+.smc-prog .st-ok{color:#22a56b;font-weight:600}.smc-prog .st-no{color:#e5535f;font-weight:600}
+.smc-prog td.pc{direction:ltr;text-align:center!important}
+.en-art .qn{margin-right:8px}
 @media (max-width:760px){.lang-sw{display:flex}.lang-sw a{flex:1;min-width:0}.smc-fig .l{font-size:16px}}
 </style>
 <script>
 document.addEventListener('DOMContentLoaded',function(){document.querySelectorAll('ul.ck').forEach(function(ul){var k='smc-ck-'+ul.dataset.k,s={};try{s=JSON.parse(localStorage.getItem(k)||'{}')}catch(e){}
 ul.querySelectorAll('input').forEach(function(i){if(s[i.id]){i.checked=true;i.closest('li').classList.add('done')}i.addEventListener('change',function(){s[i.id]=i.checked;i.closest('li').classList.toggle('done',i.checked);try{localStorage.setItem(k,JSON.stringify(s))}catch(e){}})})})});
+
+document.addEventListener('DOMContentLoaded',function(){
+var K='smc-quiz';function ld(){try{return JSON.parse(localStorage.getItem(K)||'{}')}catch(e){return{}}}function sv(d){try{localStorage.setItem(K,JSON.stringify(d))}catch(e){}}
+document.querySelectorAll('.smc-quiz').forEach(function(z){
+ var cfg=JSON.parse(z.dataset.q),t=JSON.parse(z.dataset.t),qs=[].slice.call(z.querySelectorAll('.qq')),n=qs.length,ans=0,cor=0,miss=[];
+ function shuf(q){var b=q.querySelector('.qos'),o=[].slice.call(b.children);for(var i=o.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var x=o[i];o[i]=o[j];o[j]=x}o.forEach(function(e){b.appendChild(e)})}
+ function upd(){z.querySelector('.qs-c').textContent=cor;z.querySelector('.qs-a').textContent=ans;z.querySelector('.qfill').style.width=(ans/n*100)+'%'}
+ function fin(){var pc=Math.round(cor/n*100),d=ld(),r=d[cfg.slug]||{best:0,tries:0};r.tries++;r.last=pc;if(pc>r.best)r.best=pc;r.at=Date.now();d[cfg.slug]=r;sv(d);
+  var res=z.querySelector('.qres');res.hidden=false;z.querySelector('.qbig').innerHTML=pc+'%<small>'+cor+' / '+n+'</small>';
+  z.querySelector('.qgr').textContent=pc>=90?t.g1:(pc>=cfg.pass?t.g2:t.g3);
+  z.querySelector('.qbest').innerHTML=t.best+': <bdi dir="ltr">'+r.best+'%</bdi> · '+t.tries+': '+r.tries;
+  var m=z.querySelector('.qmiss'),ol=m.querySelector('ol');ol.innerHTML='';miss.forEach(function(i){var li=document.createElement('li'),a=document.createElement('a');a.href='#q'+cfg.slug+i;var qc=qs[i].querySelector('.qt').cloneNode(true);qc.removeChild(qc.querySelector('.qn'));a.textContent=t.qn+' '+(i+1)+': '+qc.textContent;li.appendChild(a);ol.appendChild(li)});m.hidden=!miss.length;
+  var nx=z.querySelector('.qnx');if(nx)nx.hidden=pc<cfg.pass;res.scrollIntoView({behavior:'smooth',block:'center'})}
+ qs.forEach(function(q,i){q.id='q'+cfg.slug+i;shuf(q);q.querySelectorAll('.qo').forEach(function(b){b.addEventListener('click',function(){if(q.classList.contains('done'))return;q.classList.add('done');ans++;var c=q.querySelector('.qo[data-c]'),w=q.querySelector('.qw'),v=w.querySelector('.qv');c.classList.add('ok');
+  if(b===c){cor++;v.textContent=t.ok+'!';v.className='qv y';w.querySelector('.qr').textContent=''}else{b.classList.add('bad');miss.push(i);v.textContent=t.no+'.';v.className='qv n';w.querySelector('.qr').innerHTML='<b>'+t.right+'</b> '+c.innerHTML+'. '}
+  w.hidden=false;upd();if(ans===n)fin()})})});
+ z.querySelector('.qre').addEventListener('click',function(){ans=0;cor=0;miss=[];qs.forEach(function(q){q.classList.remove('done');q.querySelectorAll('.qo').forEach(function(b){b.classList.remove('ok','bad')});q.querySelector('.qw').hidden=true;shuf(q)});z.querySelector('.qres').hidden=true;upd();qs[0].scrollIntoView({behavior:'smooth',block:'center'})});
+});
+document.querySelectorAll('.smc-prog').forEach(function(p){
+ var L=JSON.parse(p.dataset.l),t=JSON.parse(p.dataset.t),P=+p.dataset.p,d=ld(),tb=p.querySelector('tbody'),done=0,pass=0,sum=0;
+ L.forEach(function(x){var r=d[x[0]],tr=document.createElement('tr'),a='<a href="'+x[3]+'#quiz">'+x[1]+' · '+x[2]+'</a>';
+  if(r){done++;sum+=r.best;if(r.best>=P)pass++}
+  tr.innerHTML='<td>'+a+'</td><td class="pc">'+(r?r.best+'%':'—')+'</td><td>'+(r?(r.best>=P?'<span class="st-ok">✓ '+t.ok+'</span>':'<a class="st-no" href="'+x[3]+'#quiz">'+t.no+'</a>'):'<a href="'+x[3]+'#quiz">'+t.go+'</a>')+'</td>';tb.appendChild(tr)});
+ p.querySelector('.qstats').innerHTML='<div><b>'+done+'/'+L.length+'</b><span>'+t.done+'</span></div><div><b>'+pass+'</b><span>'+t.passed+'</span></div><div><b>'+(done?Math.round(sum/done)+'%':'—')+'</b><span>'+t.avg+'</span></div>';
+});
+});
 </script>
 </head>
 <body>
@@ -642,6 +709,16 @@ ul.querySelectorAll('input').forEach(function(i){if(s[i.id]){i.checked=true;i.cl
 <p>یہ مکمل ہو تو اگلا فیز: <b>رسک مینجمنٹ</b>، جو طے کرتا ہے کہ آپ کا اچھا قاعدہ آپ کا اکاؤنٹ بچائے گا یا نہیں۔</p>
 <h2 id="s33">خلاصہ</h2>
 <ul><li>رسک انٹری: زیادہ ٹریڈز، بڑا SL، زون ٹوٹے تو پورا لاس۔ کنفرمیشن: کم ٹریڈز، چھوٹا SL، بہتر RR۔</li><li>نئے ٹریڈر کے لیے کنفرمیشن، یا آدھی آدھی پوزیشن۔</li><li>ڈسپلیسمنٹ: بڑی باڈیز، چھوٹی وکس، FVG اور سٹرکچر بریک۔</li><li>اپنا قاعدہ لکھیں اور 50 بیک ٹیسٹ ٹریڈز کے بغیر لائیو نہ جائیں۔</li></ul>
+    <section class="smc-quiz" id="quiz" data-q="{&quot;slug&quot;:&quot;smc-confirmation-vs-risk-entry&quot;,&quot;pass&quot;:70,&quot;n&quot;:9}" data-t="{&quot;h&quot;: &quot;اپنا ٹیسٹ کریں: سبق {n} کا کوئز&quot;, &quot;intro&quot;: &quot;کل {c} سوال۔ ہر سوال کا ایک جواب چنیں، فوراً پتا چلے گا کہ درست ہے یا نہیں اور کیوں۔ آخر میں آپ کا سکور اور گریڈ آئے گا۔ پاس ہونے کے لیے {p}% چاہیے۔&quot;, &quot;score&quot;: &quot;درست&quot;, &quot;of&quot;: &quot;میں سے&quot;, &quot;ok&quot;: &quot;درست جواب&quot;, &quot;no&quot;: &quot;غلط جواب&quot;, &quot;right&quot;: &quot;درست جواب:&quot;, &quot;why&quot;: &quot;وجہ:&quot;, &quot;res&quot;: &quot;آپ کا نتیجہ&quot;, &quot;best&quot;: &quot;اب تک کا بہترین سکور&quot;, &quot;tries&quot;: &quot;کوششیں&quot;, &quot;retry&quot;: &quot;دوبارہ کوشش کریں&quot;, &quot;g1&quot;: &quot;شاندار! آپ اس سبق کے ماہر ہیں۔&quot;, &quot;g2&quot;: &quot;بہت اچھا! آپ پاس ہیں۔ غلط سوالوں کی وجہ ایک بار پڑھ لیں۔&quot;, &quot;g3&quot;: &quot;ابھی پاس نہیں ہوئے۔ نیچے دیے گئے غلط سوال دیکھیں، سبق دوبارہ پڑھیں اور پھر کوشش کریں۔&quot;, &quot;wrong&quot;: &quot;جن سوالوں پر غلطی ہوئی:&quot;, &quot;nx&quot;: &quot;اگلا سبق&quot;, &quot;reread&quot;: &quot;سبق دوبارہ پڑھیں&quot;, &quot;qn&quot;: &quot;سوال&quot;}">
+  <h2>اپنا ٹیسٹ کریں: سبق 5.5 کا کوئز</h2>
+  <p class="qin">کل 9 سوال۔ ہر سوال کا ایک جواب چنیں، فوراً پتا چلے گا کہ درست ہے یا نہیں اور کیوں۔ آخر میں آپ کا سکور اور گریڈ آئے گا۔ پاس ہونے کے لیے 70% چاہیے۔</p>
+  <div class="qbar"><div class="qfill"></div></div>
+  <p class="qsc" aria-live="polite"><b class="qs-c">0</b> درست · <span class="qs-a">0</span> / 9</p>
+  <ol class="qlist"><li class="qq"><p class="qt"><span class="qn">سوال 1</span>رسک انٹری کیا ہے؟</p><div class="qos"><button type="button" class="qo" data-c="1">POI پر پہلے سے لِمٹ، SL زون کے پیچھے</button><button type="button" class="qo">LTF CHoCH کے بعد نئے POI سے انٹری</button><button type="button" class="qo">خبر کی پہلی کینڈل پر مارکیٹ آرڈر</button><button type="button" class="qo">بغیر SL کے بڑی پوزیشن</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">کنفرمیشن انٹری: POI میں سویپ اور CHoCH کے بعد نئے چھوٹے POI سے انٹری۔</span></p></li><li class="qq"><p class="qt"><span class="qn">سوال 2</span>مثال کی جدول میں 20 مواقع پر کنفرمیشن انٹری کا نتیجہ کیا تھا؟</p><div class="qos"><button type="button" class="qo" data-c="1">13 ٹریڈز، 55%، 1:4، یعنی +22R</button><button type="button" class="qo">20 ٹریڈز، 40%، 1:3، یعنی +12R</button><button type="button" class="qo">صرف نقصان</button><button type="button" class="qo">بالکل برابر</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">یہ صرف مثال ہے، مگر رجحان یہی: کم ٹریڈز، فیل زون پر نقصان سے بچت، بہتر RR۔</span></p></li><li class="qq"><p class="qt"><span class="qn">سوال 3</span>رسک انٹری کب سمجھ میں آتی ہے؟</p><div class="qos"><button type="button" class="qo" data-c="1">POI 9 یا 10، بائس واضح، زون extreme</button><button type="button" class="qo">ہر زون پر، تاکہ کوئی موو نہ چھوٹے</button><button type="button" class="qo">جب بائس واضح نہ ہو، تب رسک لیں</button><button type="button" class="qo">ہمیشہ دن کی پہلی ٹریڈ پر</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">درمیانی راستہ: آدھی پوزیشن رسک انٹری، آدھی کنفرمیشن پر۔</span></p></li><li class="qq"><p class="qt"><span class="qn">سوال 4</span>displacement کی نشانیوں میں کون سی نہیں؟</p><div class="qos"><button type="button" class="qo" data-c="1">بہت سی چھوٹی کینڈلیں اور لمبی وِکس</button><button type="button" class="qo">پچھلی 10 سے 20 کینڈلوں سے تقریباً دو گنا بڑی باڈی</button><button type="button" class="qo">چھوٹی وِکس، ہائی کے پاس کلوز</button><button type="button" class="qo">FVG اور اسٹرکچر بریک</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">چھوٹی، اوورلیپ کرتی کینڈلیں کمزور موو ہیں؛ ان سے بنے OB یا CHoCH پر بھروسہ نہیں۔</span></p></li><li class="qq"><p class="qt"><span class="qn">سوال 5</span>گولڈ M5 پر نارمل کینڈل 2 سے 4 ڈالر ہے۔ لندن اوپن پر کون سی کینڈل displacement ہے؟</p><div class="qos"><button type="button" class="qo" data-c="1">8 سے 15 ڈالر باڈی والی</button><button type="button" class="qo">3 ڈالر والی</button><button type="button" class="qo">1 ڈالر کی ڈوجی</button><button type="button" class="qo">لمبی وِک اور چھوٹی باڈی والی</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">یہ نمبر مارکیٹ کے ساتھ بدلتے ہیں؛ ہمیشہ پچھلی کینڈلوں سے موازنہ کریں۔</span></p></li><li class="qq"><p class="qt"><span class="qn">سوال 6</span>ایک صفحے کے انٹری رول میں کیا ہونا چاہیے؟</p><div class="qos"><button type="button" class="qo" data-c="1">ماڈل، بائس، POI، وقت، انٹری، SL، TP، رسک</button><button type="button" class="qo">صرف پیئر کا نام اور ٹائم فریم</button><button type="button" class="qo">صرف ٹارگٹ اور روز کا پرافٹ ہدف</button><button type="button" class="qo">پسندیدہ انڈیکیٹر اور سگنل گروپ</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">مثال: ماڈل B، 8+ اسکور، صرف کِل زون، خبر سے 30 منٹ دور، 1% رسک، دن میں زیادہ سے زیادہ 2 ٹریڈ۔</span></p></li><li class="qq"><p class="qt"><span class="qn">سوال 7</span>ایک ہی POI: رسک ٹریڈر 4,118 پر SL 4,107 (1:3.1)، کنفرمیشن ٹریڈر 4,118 پر SL 4,111 (1:4.9)۔ اگلے دن زون ٹوٹا تو؟</p><div class="qos"><button type="button" class="qo" data-c="1">رسک والے کا سٹاپ لگا، دوسرے کی ٹریڈ کھلی نہیں</button><button type="button" class="qo">دونوں کا سٹاپ لگ گیا اور نقصان برابر</button><button type="button" class="qo">دونوں جیت گئے کیونکہ زون مضبوط تھا</button><button type="button" class="qo">کنفرمیشن والے کا سٹاپ لگا، رسک والا جیتا</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">یہی کنفرمیشن کا فائدہ ہے: فیل زون پر نقصان نہیں۔</span></p></li><li class="qq"><p class="qt"><span class="qn">سوال 8</span>ہر ٹریڈ پر طریقہ بدلنا کیوں غلط ہے؟</p><div class="qos"><button type="button" class="qo" data-c="1">نتیجوں سے کچھ نہیں سیکھیں گے؛ 50 ٹریڈ ایک طریقہ</button><button type="button" class="qo">یہ بہترین ہے، ہر ٹریڈ نیا تجربہ</button><button type="button" class="qo">بروکر طریقہ بدلنے کی اجازت نہیں دیتا</button><button type="button" class="qo">غلط نہیں، لچک ہی کامیابی ہے</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">بغیر کنفرمیشن نکل جانے والی قیمت کا پیچھا بھی غلطی ہے۔</span></p></li><li class="qq"><p class="qt"><span class="qn">سوال 9</span>فیز 5 کے گیٹ میں کتنی بیک ٹیسٹ ٹریڈز چاہییں؟</p><div class="qos"><button type="button" class="qo" data-c="1">کم از کم 50</button><button type="button" class="qo">کم از کم 5</button><button type="button" class="qo">کم از کم 1000</button><button type="button" class="qo">کوئی نہیں</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">اور اپنا وِن ریٹ، اوسط RR اور سب سے لمبی لاسنگ اسٹریک معلوم ہو۔</span></p></li></ol>
+  <div class="qres" hidden aria-live="polite"><h3>آپ کا نتیجہ</h3><div class="qbig"></div><p class="qgr"></p><p class="qbest"></p>
+    <div class="qmiss" hidden><b>جن سوالوں پر غلطی ہوئی:</b><ol></ol></div>
+    <p class="qbtns"><button type="button" class="btn qre">دوبارہ کوشش کریں</button> <a class="btn" href="#top">سبق دوبارہ پڑھیں</a> <a class="btn gold qnx" href="smc-risk-rules-stop-loss.html" hidden>اگلا سبق ›</a></p></div>
+</section>
     <div class="smc-box"><h2>اس سبق کی چیک لسٹ</h2><p>جو بات سمجھ آ جائے اس پر نشان لگائیں۔ آپ کے نشان اسی براؤزر میں محفوظ رہتے ہیں۔</p><ul class="ck" data-k="smc-confirmation-vs-risk-entry"><li><input type="checkbox" id="c0"><label for="c0">میں رسک اور کنفرمیشن انٹری کا فرق اور دونوں کے نقصان جانتا ہوں</label></li><li><input type="checkbox" id="c1"><label for="c1">میں ڈسپلیسمنٹ کو بڑی باڈی، چھوٹی وک، FVG اور سٹرکچر بریک سے پہچانتا ہوں</label></li><li><input type="checkbox" id="c2"><label for="c2">میرا ایک صفحے کا انٹری قاعدہ لکھا ہوا ہے</label></li><li><input type="checkbox" id="c3"><label for="c3">میں چھوٹی ہوئی ٹریڈ کا پیچھا نہیں کرتا</label></li><li><input type="checkbox" id="c4"><label for="c4">میں نے اپنے قاعدے پر 50 بیک ٹیسٹ ٹریڈز کی ہیں</label></li></ul></div>
     <div class="smc-box asg"><h2>اسائنمنٹ</h2><ol><li>اپنا ایک صفحے کا انٹری قاعدہ لکھیں (اوپر کی مثال کے مطابق)۔</li><li>پچھلے مہینے کے 20 POI پر رسک انٹری اور کنفرمیشن انٹری دونوں کا نتیجہ لکھیں۔</li><li>دونوں کا ون ریٹ، اوسط RR اور کل R نکالیں۔</li><li>گولڈ M5 پر 10 اصل ڈسپلیسمنٹ اور 10 کمزور موومنٹ کی مثالیں سکرین شاٹ کریں۔</li><li>اپنا قاعدہ اور نتیجہ گروپ میں پوسٹ کریں۔</li></ol><p>اپنی اسائنمنٹ کے اسکرین شاٹس وجہ کے ساتھ ہمارے فری فیس بک گروپ میں پوسٹ کریں، وہاں آپ کے چارٹ چیک کیے جائیں گے۔</p><a class="btn gold" href="https://www.facebook.com/groups/qaziforextips" target="_blank" rel="noopener">فری گروپ جوائن کریں</a></div>
     <div class="ls-faq ur" lang="ur" dir="rtl"><h2>اکثر پوچھے جانے والے سوال</h2><details><summary>رسک انٹری کیا ہے؟</summary><p>POI پر پہلے سے لمٹ آرڈر لگانا، بغیر LTF کنفرمیشن کے؛ SL زون کے پیچھے۔</p></details><details><summary>کنفرمیشن انٹری کیا ہے؟</summary><p>POI میں قیمت آنے کے بعد LTF پر سویپ اور CHoCH کا انتظار، پھر نئے چھوٹے POI سے انٹری۔</p></details><details><summary>ڈسپلیسمنٹ کیا ہے؟</summary><p>قیمت کا ایک طرف تیز اور طاقتور جانا: بڑی باڈیز، چھوٹی وکس، FVG اور سٹرکچر کا ٹوٹنا۔</p></details><details><summary>نئے ٹریڈر کو کون سی انٹری لینی چاہیے؟</summary><p>کنفرمیشن انٹری، یا آدھی پوزیشن رسک اور آدھی کنفرمیشن سے۔</p></details></div>

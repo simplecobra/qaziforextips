@@ -576,11 +576,78 @@ footer a:hover{color:var(--ink)}
 .outline.en-out .n{margin-left:0;margin-right:6px}
 .smc-pn.en-pn{direction:ltr}
 .smc-pn.en-pn .nx{text-align:right}
+
+.smc-quiz{margin:40px 0;border:2px solid var(--gold);border-radius:16px;padding:18px 22px;background:var(--surface)}
+.smc-quiz h2{margin-top:0!important}
+.smc-quiz .qin{color:var(--muted)}
+.qbar{height:10px;border-radius:99px;background:var(--line);overflow:hidden;margin:8px 0}
+.qfill{height:100%;width:0;background:var(--gold);transition:width .3s}
+.qsc{font-weight:600;margin:4px 0 10px}
+.qsc .qs-c{color:#22a56b}
+.qlist{list-style:none;padding:0!important;margin:0}
+.qq{border-top:1px dashed var(--line);padding:12px 0}
+.qt{margin:0 0 8px!important;font-weight:600}
+.qn{display:inline-block;font-size:.78em;color:var(--gold-t,var(--gold));margin-inline-end:8px;font-weight:700}
+.qos{display:grid;gap:8px}
+.qo{all:unset;box-sizing:border-box;display:block;cursor:pointer;border:1px solid var(--line);border-radius:10px;padding:6px 14px;line-height:inherit;font:inherit;font-size:.95em;color:var(--ink);background:var(--bg,transparent)}
+.qo:hover,.qo:focus-visible{border-color:var(--gold);outline:none}
+.qq.done .qo{cursor:default}
+.qq.done .qo:hover{border-color:var(--line)}
+.qo.ok{border-color:#22a56b!important;background:rgba(34,165,107,.14)}
+.qo.bad{border-color:#e5535f!important;background:rgba(229,83,95,.14)}
+.qw{margin:8px 0 0!important;font-size:.92em;color:var(--muted)}
+.qw .qv.y{color:#22a56b}.qw .qv.n{color:#e5535f}
+.qw .qr b{color:var(--ink)}
+.qres{margin-top:16px;border-top:2px solid var(--gold);padding-top:12px;text-align:center}
+.qres h3{margin:0!important}
+.qbig{font:700 54px/1.2 var(--f-display,var(--f-body));color:var(--gold-t,var(--gold));direction:ltr}
+.qbig small{font-size:20px;color:var(--muted);display:block}
+.qgr{font-weight:600}
+.qbest{color:var(--muted);font-size:.9em}
+.qmiss{text-align:start;margin:10px 0}
+.qmiss ol{margin:4px 0 0;font-size:.92em}
+.qmiss a{color:var(--gold-t,var(--gold))}
+.qbtns .btn{margin:4px}
+.smc-prog{margin:34px 0;border:2px solid var(--gold);border-radius:16px;padding:16px 22px;background:var(--surface)}
+.smc-prog h2{margin-top:0!important}
+.qstats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:10px 0 14px}
+.qstats div{border:1px solid var(--line);border-radius:12px;padding:8px;text-align:center}
+.qstats b{display:block;font:700 30px/1.3 var(--f-body);color:var(--gold-t,var(--gold));direction:ltr}
+.qstats span{font-size:.85em;color:var(--muted)}
+.smc-prog .st-ok{color:#22a56b;font-weight:600}.smc-prog .st-no{color:#e5535f;font-weight:600}
+.smc-prog td.pc{direction:ltr;text-align:center!important}
+.en-art .qn{margin-right:8px}
 @media (max-width:760px){.lang-sw{display:flex}.lang-sw a{flex:1;min-width:0}.smc-fig .l{font-size:16px}}
 </style>
 <script>
 document.addEventListener('DOMContentLoaded',function(){document.querySelectorAll('ul.ck').forEach(function(ul){var k='smc-ck-'+ul.dataset.k,s={};try{s=JSON.parse(localStorage.getItem(k)||'{}')}catch(e){}
 ul.querySelectorAll('input').forEach(function(i){if(s[i.id]){i.checked=true;i.closest('li').classList.add('done')}i.addEventListener('change',function(){s[i.id]=i.checked;i.closest('li').classList.toggle('done',i.checked);try{localStorage.setItem(k,JSON.stringify(s))}catch(e){}})})})});
+
+document.addEventListener('DOMContentLoaded',function(){
+var K='smc-quiz';function ld(){try{return JSON.parse(localStorage.getItem(K)||'{}')}catch(e){return{}}}function sv(d){try{localStorage.setItem(K,JSON.stringify(d))}catch(e){}}
+document.querySelectorAll('.smc-quiz').forEach(function(z){
+ var cfg=JSON.parse(z.dataset.q),t=JSON.parse(z.dataset.t),qs=[].slice.call(z.querySelectorAll('.qq')),n=qs.length,ans=0,cor=0,miss=[];
+ function shuf(q){var b=q.querySelector('.qos'),o=[].slice.call(b.children);for(var i=o.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var x=o[i];o[i]=o[j];o[j]=x}o.forEach(function(e){b.appendChild(e)})}
+ function upd(){z.querySelector('.qs-c').textContent=cor;z.querySelector('.qs-a').textContent=ans;z.querySelector('.qfill').style.width=(ans/n*100)+'%'}
+ function fin(){var pc=Math.round(cor/n*100),d=ld(),r=d[cfg.slug]||{best:0,tries:0};r.tries++;r.last=pc;if(pc>r.best)r.best=pc;r.at=Date.now();d[cfg.slug]=r;sv(d);
+  var res=z.querySelector('.qres');res.hidden=false;z.querySelector('.qbig').innerHTML=pc+'%<small>'+cor+' / '+n+'</small>';
+  z.querySelector('.qgr').textContent=pc>=90?t.g1:(pc>=cfg.pass?t.g2:t.g3);
+  z.querySelector('.qbest').innerHTML=t.best+': <bdi dir="ltr">'+r.best+'%</bdi> · '+t.tries+': '+r.tries;
+  var m=z.querySelector('.qmiss'),ol=m.querySelector('ol');ol.innerHTML='';miss.forEach(function(i){var li=document.createElement('li'),a=document.createElement('a');a.href='#q'+cfg.slug+i;var qc=qs[i].querySelector('.qt').cloneNode(true);qc.removeChild(qc.querySelector('.qn'));a.textContent=t.qn+' '+(i+1)+': '+qc.textContent;li.appendChild(a);ol.appendChild(li)});m.hidden=!miss.length;
+  var nx=z.querySelector('.qnx');if(nx)nx.hidden=pc<cfg.pass;res.scrollIntoView({behavior:'smooth',block:'center'})}
+ qs.forEach(function(q,i){q.id='q'+cfg.slug+i;shuf(q);q.querySelectorAll('.qo').forEach(function(b){b.addEventListener('click',function(){if(q.classList.contains('done'))return;q.classList.add('done');ans++;var c=q.querySelector('.qo[data-c]'),w=q.querySelector('.qw'),v=w.querySelector('.qv');c.classList.add('ok');
+  if(b===c){cor++;v.textContent=t.ok+'!';v.className='qv y';w.querySelector('.qr').textContent=''}else{b.classList.add('bad');miss.push(i);v.textContent=t.no+'.';v.className='qv n';w.querySelector('.qr').innerHTML='<b>'+t.right+'</b> '+c.innerHTML+'. '}
+  w.hidden=false;upd();if(ans===n)fin()})})});
+ z.querySelector('.qre').addEventListener('click',function(){ans=0;cor=0;miss=[];qs.forEach(function(q){q.classList.remove('done');q.querySelectorAll('.qo').forEach(function(b){b.classList.remove('ok','bad')});q.querySelector('.qw').hidden=true;shuf(q)});z.querySelector('.qres').hidden=true;upd();qs[0].scrollIntoView({behavior:'smooth',block:'center'})});
+});
+document.querySelectorAll('.smc-prog').forEach(function(p){
+ var L=JSON.parse(p.dataset.l),t=JSON.parse(p.dataset.t),P=+p.dataset.p,d=ld(),tb=p.querySelector('tbody'),done=0,pass=0,sum=0;
+ L.forEach(function(x){var r=d[x[0]],tr=document.createElement('tr'),a='<a href="'+x[3]+'#quiz">'+x[1]+' · '+x[2]+'</a>';
+  if(r){done++;sum+=r.best;if(r.best>=P)pass++}
+  tr.innerHTML='<td>'+a+'</td><td class="pc">'+(r?r.best+'%':'—')+'</td><td>'+(r?(r.best>=P?'<span class="st-ok">✓ '+t.ok+'</span>':'<a class="st-no" href="'+x[3]+'#quiz">'+t.no+'</a>'):'<a href="'+x[3]+'#quiz">'+t.go+'</a>')+'</td>';tb.appendChild(tr)});
+ p.querySelector('.qstats').innerHTML='<div><b>'+done+'/'+L.length+'</b><span>'+t.done+'</span></div><div><b>'+pass+'</b><span>'+t.passed+'</span></div><div><b>'+(done?Math.round(sum/done)+'%':'—')+'</b><span>'+t.avg+'</span></div>';
+});
+});
 </script>
 </head>
 <body>
@@ -641,6 +708,16 @@ ul.querySelectorAll('input').forEach(function(i){if(s[i.id]){i.checked=true;i.cl
 <ul><li>کسی بھی چارٹ پر لیکویڈیٹی پولز اور حالیہ سویپ مارک کر سکیں۔</li><li>سویپ اور بریک میں پانچ سوالوں سے فرق کر سکیں۔</li><li>ایک لائن میں بتا سکیں کہ قیمت اگلی کس لیکویڈیٹی کی طرف جا رہی ہے۔</li></ul>
 <h2 id="s32">خلاصہ</h2>
 <ul><li>DOL وہ اگلی لیکویڈیٹی ہے جس کی طرف قیمت کھنچ رہی ہے، یعنی آپ کا ٹارگٹ۔</li><li>ERL رینج کے باہر، IRL رینج کے اندر؛ قیمت ان دونوں کے درمیان چلتی ہے۔</li><li>انٹری IRL پر، ٹارگٹ ERL سے تھوڑا پہلے۔</li><li>ERL لینے کے بعد نئی ٹریڈ نہیں، پہلے نئی DOL۔</li></ul>
+    <section class="smc-quiz" id="quiz" data-q="{&quot;slug&quot;:&quot;smc-draw-on-liquidity&quot;,&quot;pass&quot;:70,&quot;n&quot;:9}" data-t="{&quot;h&quot;: &quot;اپنا ٹیسٹ کریں: سبق {n} کا کوئز&quot;, &quot;intro&quot;: &quot;کل {c} سوال۔ ہر سوال کا ایک جواب چنیں، فوراً پتا چلے گا کہ درست ہے یا نہیں اور کیوں۔ آخر میں آپ کا سکور اور گریڈ آئے گا۔ پاس ہونے کے لیے {p}% چاہیے۔&quot;, &quot;score&quot;: &quot;درست&quot;, &quot;of&quot;: &quot;میں سے&quot;, &quot;ok&quot;: &quot;درست جواب&quot;, &quot;no&quot;: &quot;غلط جواب&quot;, &quot;right&quot;: &quot;درست جواب:&quot;, &quot;why&quot;: &quot;وجہ:&quot;, &quot;res&quot;: &quot;آپ کا نتیجہ&quot;, &quot;best&quot;: &quot;اب تک کا بہترین سکور&quot;, &quot;tries&quot;: &quot;کوششیں&quot;, &quot;retry&quot;: &quot;دوبارہ کوشش کریں&quot;, &quot;g1&quot;: &quot;شاندار! آپ اس سبق کے ماہر ہیں۔&quot;, &quot;g2&quot;: &quot;بہت اچھا! آپ پاس ہیں۔ غلط سوالوں کی وجہ ایک بار پڑھ لیں۔&quot;, &quot;g3&quot;: &quot;ابھی پاس نہیں ہوئے۔ نیچے دیے گئے غلط سوال دیکھیں، سبق دوبارہ پڑھیں اور پھر کوشش کریں۔&quot;, &quot;wrong&quot;: &quot;جن سوالوں پر غلطی ہوئی:&quot;, &quot;nx&quot;: &quot;اگلا سبق&quot;, &quot;reread&quot;: &quot;سبق دوبارہ پڑھیں&quot;, &quot;qn&quot;: &quot;سوال&quot;}">
+  <h2>اپنا ٹیسٹ کریں: سبق 2.5 کا کوئز</h2>
+  <p class="qin">کل 9 سوال۔ ہر سوال کا ایک جواب چنیں، فوراً پتا چلے گا کہ درست ہے یا نہیں اور کیوں۔ آخر میں آپ کا سکور اور گریڈ آئے گا۔ پاس ہونے کے لیے 70% چاہیے۔</p>
+  <div class="qbar"><div class="qfill"></div></div>
+  <p class="qsc" aria-live="polite"><b class="qs-c">0</b> درست · <span class="qs-a">0</span> / 9</p>
+  <ol class="qlist"><li class="qq"><p class="qt"><span class="qn">سوال 1</span>DOL (Draw on Liquidity) کیا ہے؟</p><div class="qos"><button type="button" class="qo" data-c="1">اگلا لیکویڈیٹی پول جہاں قیمت کے جانے کا زیادہ امکان ہو</button><button type="button" class="qo">ایک انڈیکیٹر جو اگلی سمت بتاتا ہے</button><button type="button" class="qo">دن کا اوپن جہاں سے سب شروع ہوتا ہے</button><button type="button" class="qo">ٹرینڈ لائن جس پر قیمت بار بار آتی ہے</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">DOL بتاتا ہے قیمت کتنا دور جا سکتی ہے؛ یہی ٹارگٹ ہے۔</span></p></li><li class="qq"><p class="qt"><span class="qn">سوال 2</span>ERL کیا ہے؟</p><div class="qos"><button type="button" class="qo" data-c="1">رینج کے باہر کی لیکویڈیٹی: سوئنگ ہائی/لو کے پار، PDH، PDL</button><button type="button" class="qo">رینج کے اندر کے FVG اور چھوٹے پل بیک</button><button type="button" class="qo">ایک خاص قسم کا آرڈر بلاک جو باہر بنے</button><button type="button" class="qo">بروکر کا سپریڈ جو باہر کے لیولز پر ہو</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">IRL رینج کے اندر کی جگہیں ہیں: FVG، پل بیک، چھوٹے انٹرنل ہائی لو۔</span></p></li><li class="qq"><p class="qt"><span class="qn">سوال 3</span>IRL اور ERL کے بارے میں اصول کیا ہے؟</p><div class="qos"><button type="button" class="qo" data-c="1">اکثر IRL سے ERL، اور ERL کے بعد واپس IRL</button><button type="button" class="qo">قیمت ہمیشہ ERL پر جا کر وہیں رکتی ہے</button><button type="button" class="qo">IRL کو قیمت کبھی دوبارہ نہیں چھوتی</button><button type="button" class="qo">دونوں کا آپس میں کوئی تعلق نہیں</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">مارکیٹ ان دونوں کے بیچ سانس لیتی رہتی ہے۔</span></p></li><li class="qq"><p class="qt"><span class="qn">سوال 4</span>ابھی نیچے کی SSL سویپ ہوئی ہے۔ اگلا DOL اکثر کیا ہوتا ہے؟</p><div class="qos"><button type="button" class="qo" data-c="1">اوپر کی BSL</button><button type="button" class="qo">مزید نیچے کی SSL</button><button type="button" class="qo">رینج کا بیچ</button><button type="button" class="qo">کچھ نہیں</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">جو لیکویڈیٹی ابھی لی گئی، اس کے مخالف سائیڈ کی لیکویڈیٹی اگلا ہدف بنتی ہے۔</span></p></li><li class="qq"><p class="qt"><span class="qn">سوال 5</span>ٹیک پرافٹ DOL کے بالکل اوپر کیوں نہیں رکھنا چاہیے؟</p><div class="qos"><button type="button" class="qo" data-c="1">قیمت اکثر لیکویڈیٹی پر یا ذرا پہلے پلٹتی ہے</button><button type="button" class="qo">بروکر DOL پر ٹارگٹ لگانے نہیں دیتا</button><button type="button" class="qo">DOL ہمیشہ ٹوٹتا ہے اس لیے آگے رکھیں</button><button type="button" class="qo">بالکل اوپر رکھنا ہی بہترین ہے</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">ٹارگٹ DOL سے ذرا پہلے۔</span></p></li><li class="qq"><p class="qt"><span class="qn">سوال 6</span>DOL لیے جانے کے بعد کا وقت سب سے خطرناک کیوں ہے؟</p><div class="qos"><button type="button" class="qo" data-c="1">بڑا پلیئر وہاں نکل رہا ہوتا ہے اور قیمت IRL کی طرف آتی ہے</button><button type="button" class="qo">ٹرینڈ اور تیز ہو جاتا ہے اور اسٹاپس ٹوٹتے ہیں</button><button type="button" class="qo">اس کے بعد مارکیٹ کچھ دیر کے لیے بند ہو جاتی ہے</button><button type="button" class="qo">یہ خطرناک نہیں، بہترین انٹری کا وقت ہے</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">اس وقت پرافٹ لیں اور نئی ٹریڈ سے پہلے اگلا DOL نکالیں۔</span></p></li><li class="qq"><p class="qt"><span class="qn">سوال 7</span>اگر آپ اپنا DOL ایک لائن میں نہیں لکھ سکتے تو اس کا کیا مطلب ہے؟</p><div class="qos"><button type="button" class="qo" data-c="1">پلان نہیں، صرف اندازہ؛ ٹریڈ نہ کرنا بھی فیصلہ ہے</button><button type="button" class="qo">سب ٹھیک ہے، بس کسی بھی سمت ٹریڈ کریں</button><button type="button" class="qo">لاٹ بڑھا دیں تاکہ جلدی پرافٹ آئے</button><button type="button" class="qo">M1 کھول کر کوئی بھی سگنل لے لیں</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">مثال: بائس بُلش، DOL = PDH، راستے میں H1 FVG سے ممکنہ انٹری۔</span></p></li><li class="qq"><p class="qt"><span class="qn">سوال 8</span>گولڈ: H4 بُلش، لندن نے ایشیا لو سویپ کیا، PDH 4,152 ابھی نہیں لیا گیا۔ قیمت 4,152.30 تک گئی، پھر FVG 4,140 تک واپس آئی۔ کون پھنسا؟</p><div class="qos"><button type="button" class="qo" data-c="1">جس نے PDH لیے جانے کے بعد دوبارہ بائے کیا</button><button type="button" class="qo">جس نے FVG 4,133 سے بائے کیا</button><button type="button" class="qo">جس نے ٹارگٹ 4,150.50 رکھا</button><button type="button" class="qo">کوئی نہیں</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">DOL لیے جانے کے بعد اسی سمت میں نئی ٹریڈ اکثر پل بیک میں پھنستی ہے۔</span></p></li><li class="qq"><p class="qt"><span class="qn">سوال 9</span>فیز 2 کے گیٹ کی شرطوں میں کون سی شامل نہیں؟</p><div class="qos"><button type="button" class="qo" data-c="1">آرڈر بلاک کا اسکور کارڈ بھرنا</button><button type="button" class="qo">کسی بھی چارٹ پر لیکویڈیٹی پولز اور سویپ مارک کرنا</button><button type="button" class="qo">پانچ سوالوں سے سویپ اور بریک الگ کرنا</button><button type="button" class="qo">ایک لائن میں بتانا کہ قیمت اگلی کون سی لیکویڈیٹی لینے جا رہی ہے</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">POI اسکور کارڈ فیز 3 کا حصہ ہے۔</span></p></li></ol>
+  <div class="qres" hidden aria-live="polite"><h3>آپ کا نتیجہ</h3><div class="qbig"></div><p class="qgr"></p><p class="qbest"></p>
+    <div class="qmiss" hidden><b>جن سوالوں پر غلطی ہوئی:</b><ol></ol></div>
+    <p class="qbtns"><button type="button" class="btn qre">دوبارہ کوشش کریں</button> <a class="btn" href="#top">سبق دوبارہ پڑھیں</a> <a class="btn gold qnx" href="smc-order-block.html" hidden>اگلا سبق ›</a></p></div>
+</section>
     <div class="smc-box"><h2>اس سبق کی چیک لسٹ</h2><p>جو بات سمجھ آ جائے اس پر نشان لگائیں۔ آپ کے نشان اسی براؤزر میں محفوظ رہتے ہیں۔</p><ul class="ck" data-k="smc-draw-on-liquidity"><li><input type="checkbox" id="c0"><label for="c0">DOL وہ اگلی لیکویڈیٹی ہے جس کی طرف قیمت جا رہی ہے</label></li><li><input type="checkbox" id="c1"><label for="c1">ERL رینج کے باہر، IRL رینج کے اندر</label></li><li><input type="checkbox" id="c2"><label for="c2">قیمت IRL سے ERL اور ERL سے IRL کی طرف چلتی ہے</label></li><li><input type="checkbox" id="c3"><label for="c3">میں ہر دن بائس کے ساتھ DOL ایک لائن میں لکھتا ہوں</label></li><li><input type="checkbox" id="c4"><label for="c4">انٹری IRL پر، ٹارگٹ DOL سے تھوڑا پہلے</label></li><li><input type="checkbox" id="c5"><label for="c5">DOL لی جانے کے بعد میں اسی سمت میں نئی ٹریڈ نہیں لیتا</label></li><li><input type="checkbox" id="c6"><label for="c6">میں فیز 2 کا گیٹ پاس کر چکا ہوں</label></li></ul></div>
     <div class="smc-box asg"><h2>اسائنمنٹ</h2><ol><li>پانچ دن تک ہر صبح گولڈ کا H4 اور H1 کھولیں اور ایک لائن میں DOL لکھیں (مثلاً: بائس بُلش، DOL = PDH)۔</li><li>دن کے آخر میں دیکھیں کہ DOL لی گئی یا نہیں، اور کیوں۔</li><li>جس دن DOL لی گئی، دیکھیں اس کے بعد قیمت کس IRL تک واپس آئی۔</li><li>پانچ دن کا نتیجہ ایک ٹیبل میں لکھیں: صحیح، غلط، وجہ۔</li><li>اپنا ٹیبل گروپ میں پوسٹ کریں۔</li></ol><p>اپنی اسائنمنٹ کے اسکرین شاٹس وجہ کے ساتھ ہمارے فری فیس بک گروپ میں پوسٹ کریں، وہاں آپ کے چارٹ چیک کیے جائیں گے۔</p><a class="btn gold" href="https://www.facebook.com/groups/qaziforextips" target="_blank" rel="noopener">فری گروپ جوائن کریں</a></div>
     <div class="ls-faq ur" lang="ur" dir="rtl"><h2>اکثر پوچھے جانے والے سوال</h2><details><summary>DOL لے لینے کے بعد کیا کریں؟</summary><p>منافع لیں اور اسی سمت میں نئی ٹریڈ نہ لیں؛ اکثر قیمت IRL کی طرف واپس آتی ہے، پھر نئی DOL طے کریں۔</p></details><details><summary>اگر DOL طے نہ ہو سکے تو؟</summary><p>اس دن ٹریڈ نہ لیں۔ واضح DOL کے بغیر ٹارگٹ بھی اندازہ ہوتا ہے۔</p></details><details><summary>ڈرا آن لیکویڈیٹی کیا ہے؟</summary><p>وہ اگلی لیکویڈیٹی جس کی طرف قیمت کے جانے کا سب سے زیادہ امکان ہے، جیسے PDH یا سوئنگ ہائی کے اوپر BSL۔</p></details><details><summary>IRL اور ERL کیا ہیں؟</summary><p>ERL رینج کے باہر کی لیکویڈیٹی (سوئنگ ہائی لو)، IRL رینج کے اندر کی جگہیں (FVG، پل بیک)۔</p></details><details><summary>DOL کیسے طے کریں؟</summary><p>HTF اسٹرکچر، حال ہی میں لی گئی لیکویڈیٹی، قریب ترین صاف لیکویڈیٹی اور راستے کے POI دیکھ کر۔</p></details></div>

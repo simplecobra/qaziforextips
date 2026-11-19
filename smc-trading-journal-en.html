@@ -576,11 +576,78 @@ footer a:hover{color:var(--ink)}
 .outline.en-out .n{margin-left:0;margin-right:6px}
 .smc-pn.en-pn{direction:ltr}
 .smc-pn.en-pn .nx{text-align:right}
+
+.smc-quiz{margin:40px 0;border:2px solid var(--gold);border-radius:16px;padding:18px 22px;background:var(--surface)}
+.smc-quiz h2{margin-top:0!important}
+.smc-quiz .qin{color:var(--muted)}
+.qbar{height:10px;border-radius:99px;background:var(--line);overflow:hidden;margin:8px 0}
+.qfill{height:100%;width:0;background:var(--gold);transition:width .3s}
+.qsc{font-weight:600;margin:4px 0 10px}
+.qsc .qs-c{color:#22a56b}
+.qlist{list-style:none;padding:0!important;margin:0}
+.qq{border-top:1px dashed var(--line);padding:12px 0}
+.qt{margin:0 0 8px!important;font-weight:600}
+.qn{display:inline-block;font-size:.78em;color:var(--gold-t,var(--gold));margin-inline-end:8px;font-weight:700}
+.qos{display:grid;gap:8px}
+.qo{all:unset;box-sizing:border-box;display:block;cursor:pointer;border:1px solid var(--line);border-radius:10px;padding:6px 14px;line-height:inherit;font:inherit;font-size:.95em;color:var(--ink);background:var(--bg,transparent)}
+.qo:hover,.qo:focus-visible{border-color:var(--gold);outline:none}
+.qq.done .qo{cursor:default}
+.qq.done .qo:hover{border-color:var(--line)}
+.qo.ok{border-color:#22a56b!important;background:rgba(34,165,107,.14)}
+.qo.bad{border-color:#e5535f!important;background:rgba(229,83,95,.14)}
+.qw{margin:8px 0 0!important;font-size:.92em;color:var(--muted)}
+.qw .qv.y{color:#22a56b}.qw .qv.n{color:#e5535f}
+.qw .qr b{color:var(--ink)}
+.qres{margin-top:16px;border-top:2px solid var(--gold);padding-top:12px;text-align:center}
+.qres h3{margin:0!important}
+.qbig{font:700 54px/1.2 var(--f-display,var(--f-body));color:var(--gold-t,var(--gold));direction:ltr}
+.qbig small{font-size:20px;color:var(--muted);display:block}
+.qgr{font-weight:600}
+.qbest{color:var(--muted);font-size:.9em}
+.qmiss{text-align:start;margin:10px 0}
+.qmiss ol{margin:4px 0 0;font-size:.92em}
+.qmiss a{color:var(--gold-t,var(--gold))}
+.qbtns .btn{margin:4px}
+.smc-prog{margin:34px 0;border:2px solid var(--gold);border-radius:16px;padding:16px 22px;background:var(--surface)}
+.smc-prog h2{margin-top:0!important}
+.qstats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:10px 0 14px}
+.qstats div{border:1px solid var(--line);border-radius:12px;padding:8px;text-align:center}
+.qstats b{display:block;font:700 30px/1.3 var(--f-body);color:var(--gold-t,var(--gold));direction:ltr}
+.qstats span{font-size:.85em;color:var(--muted)}
+.smc-prog .st-ok{color:#22a56b;font-weight:600}.smc-prog .st-no{color:#e5535f;font-weight:600}
+.smc-prog td.pc{direction:ltr;text-align:center!important}
+.en-art .qn{margin-right:8px}
 @media (max-width:760px){.lang-sw{display:flex}.lang-sw a{flex:1;min-width:0}.smc-fig .l{font-size:16px}}
 </style>
 <script>
 document.addEventListener('DOMContentLoaded',function(){document.querySelectorAll('ul.ck').forEach(function(ul){var k='smc-ck-'+ul.dataset.k,s={};try{s=JSON.parse(localStorage.getItem(k)||'{}')}catch(e){}
 ul.querySelectorAll('input').forEach(function(i){if(s[i.id]){i.checked=true;i.closest('li').classList.add('done')}i.addEventListener('change',function(){s[i.id]=i.checked;i.closest('li').classList.toggle('done',i.checked);try{localStorage.setItem(k,JSON.stringify(s))}catch(e){}})})})});
+
+document.addEventListener('DOMContentLoaded',function(){
+var K='smc-quiz';function ld(){try{return JSON.parse(localStorage.getItem(K)||'{}')}catch(e){return{}}}function sv(d){try{localStorage.setItem(K,JSON.stringify(d))}catch(e){}}
+document.querySelectorAll('.smc-quiz').forEach(function(z){
+ var cfg=JSON.parse(z.dataset.q),t=JSON.parse(z.dataset.t),qs=[].slice.call(z.querySelectorAll('.qq')),n=qs.length,ans=0,cor=0,miss=[];
+ function shuf(q){var b=q.querySelector('.qos'),o=[].slice.call(b.children);for(var i=o.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var x=o[i];o[i]=o[j];o[j]=x}o.forEach(function(e){b.appendChild(e)})}
+ function upd(){z.querySelector('.qs-c').textContent=cor;z.querySelector('.qs-a').textContent=ans;z.querySelector('.qfill').style.width=(ans/n*100)+'%'}
+ function fin(){var pc=Math.round(cor/n*100),d=ld(),r=d[cfg.slug]||{best:0,tries:0};r.tries++;r.last=pc;if(pc>r.best)r.best=pc;r.at=Date.now();d[cfg.slug]=r;sv(d);
+  var res=z.querySelector('.qres');res.hidden=false;z.querySelector('.qbig').innerHTML=pc+'%<small>'+cor+' / '+n+'</small>';
+  z.querySelector('.qgr').textContent=pc>=90?t.g1:(pc>=cfg.pass?t.g2:t.g3);
+  z.querySelector('.qbest').innerHTML=t.best+': <bdi dir="ltr">'+r.best+'%</bdi> · '+t.tries+': '+r.tries;
+  var m=z.querySelector('.qmiss'),ol=m.querySelector('ol');ol.innerHTML='';miss.forEach(function(i){var li=document.createElement('li'),a=document.createElement('a');a.href='#q'+cfg.slug+i;var qc=qs[i].querySelector('.qt').cloneNode(true);qc.removeChild(qc.querySelector('.qn'));a.textContent=t.qn+' '+(i+1)+': '+qc.textContent;li.appendChild(a);ol.appendChild(li)});m.hidden=!miss.length;
+  var nx=z.querySelector('.qnx');if(nx)nx.hidden=pc<cfg.pass;res.scrollIntoView({behavior:'smooth',block:'center'})}
+ qs.forEach(function(q,i){q.id='q'+cfg.slug+i;shuf(q);q.querySelectorAll('.qo').forEach(function(b){b.addEventListener('click',function(){if(q.classList.contains('done'))return;q.classList.add('done');ans++;var c=q.querySelector('.qo[data-c]'),w=q.querySelector('.qw'),v=w.querySelector('.qv');c.classList.add('ok');
+  if(b===c){cor++;v.textContent=t.ok+'!';v.className='qv y';w.querySelector('.qr').textContent=''}else{b.classList.add('bad');miss.push(i);v.textContent=t.no+'.';v.className='qv n';w.querySelector('.qr').innerHTML='<b>'+t.right+'</b> '+c.innerHTML+'. '}
+  w.hidden=false;upd();if(ans===n)fin()})})});
+ z.querySelector('.qre').addEventListener('click',function(){ans=0;cor=0;miss=[];qs.forEach(function(q){q.classList.remove('done');q.querySelectorAll('.qo').forEach(function(b){b.classList.remove('ok','bad')});q.querySelector('.qw').hidden=true;shuf(q)});z.querySelector('.qres').hidden=true;upd();qs[0].scrollIntoView({behavior:'smooth',block:'center'})});
+});
+document.querySelectorAll('.smc-prog').forEach(function(p){
+ var L=JSON.parse(p.dataset.l),t=JSON.parse(p.dataset.t),P=+p.dataset.p,d=ld(),tb=p.querySelector('tbody'),done=0,pass=0,sum=0;
+ L.forEach(function(x){var r=d[x[0]],tr=document.createElement('tr'),a='<a href="'+x[3]+'#quiz">'+x[1]+' · '+x[2]+'</a>';
+  if(r){done++;sum+=r.best;if(r.best>=P)pass++}
+  tr.innerHTML='<td>'+a+'</td><td class="pc">'+(r?r.best+'%':'—')+'</td><td>'+(r?(r.best>=P?'<span class="st-ok">✓ '+t.ok+'</span>':'<a class="st-no" href="'+x[3]+'#quiz">'+t.no+'</a>'):'<a href="'+x[3]+'#quiz">'+t.go+'</a>')+'</td>';tb.appendChild(tr)});
+ p.querySelector('.qstats').innerHTML='<div><b>'+done+'/'+L.length+'</b><span>'+t.done+'</span></div><div><b>'+pass+'</b><span>'+t.passed+'</span></div><div><b>'+(done?Math.round(sum/done)+'%':'—')+'</b><span>'+t.avg+'</span></div>';
+});
+});
 </script>
 </head>
 <body>
@@ -636,6 +703,16 @@ ul.querySelectorAll('input').forEach(function(i){if(s[i.id]){i.checked=true;i.cl
 <div class="call warn"><b class="k">Common mistake</b>Writing a journal and never reading it. Without a weekly review a journal is just a diary.</div>
 <h2 id="s28">Summary</h2>
 <ul><li>Seven fields and two screenshots per trade; the key one: &quot;100% rule adherence?&quot;</li><li>Record results in R.</li><li>A 30-minute review every Sunday with one goal for the next week.</li><li>After 50 trades, filter to find your most expensive mistake and stop it.</li></ul>
+    <section class="smc-quiz" id="quiz" data-q="{&quot;slug&quot;:&quot;smc-trading-journal&quot;,&quot;pass&quot;:70,&quot;n&quot;:8}" data-t="{&quot;h&quot;: &quot;Test yourself: Lesson {n} quiz&quot;, &quot;intro&quot;: &quot;{c} questions. Pick one answer for each and you will see at once whether it is right and why. Your score and grade appear at the end. You need {p}% to pass.&quot;, &quot;score&quot;: &quot;correct&quot;, &quot;of&quot;: &quot;of&quot;, &quot;ok&quot;: &quot;Correct&quot;, &quot;no&quot;: &quot;Not quite&quot;, &quot;right&quot;: &quot;Correct answer:&quot;, &quot;why&quot;: &quot;Why:&quot;, &quot;res&quot;: &quot;Your result&quot;, &quot;best&quot;: &quot;Best score so far&quot;, &quot;tries&quot;: &quot;Attempts&quot;, &quot;retry&quot;: &quot;Try again&quot;, &quot;g1&quot;: &quot;Excellent! You have mastered this lesson.&quot;, &quot;g2&quot;: &quot;Well done, you passed. Read the explanation for any question you missed.&quot;, &quot;g3&quot;: &quot;Not passed yet. Review the questions you missed below, reread the lesson and try again.&quot;, &quot;wrong&quot;: &quot;Questions you missed:&quot;, &quot;nx&quot;: &quot;Next lesson&quot;, &quot;reread&quot;: &quot;Reread the lesson&quot;, &quot;qn&quot;: &quot;Question&quot;}">
+  <h2>Test yourself: Lesson 7.2 quiz</h2>
+  <p class="qin">8 questions. Pick one answer for each and you will see at once whether it is right and why. Your score and grade appear at the end. You need 70% to pass.</p>
+  <div class="qbar"><div class="qfill"></div></div>
+  <p class="qsc" aria-live="polite"><b class="qs-c">0</b> correct · <span class="qs-a">0</span> / 8</p>
+  <ol class="qlist"><li class="qq"><p class="qt"><span class="qn">Question 1</span>Why is a journal necessary?</p><div class="qos"><button type="button" class="qo" data-c="1">Memory lies; a journal shows truth and patterns</button><button type="button" class="qo">The broker asks for a journal of every trade</button><button type="button" class="qo">Only for working out taxes</button><button type="button" class="qo">Not needed; a good trader remembers</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">In a losing streak it reminds you the system has recovered before.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 2</span>Why record results in R rather than dollars?</p><div class="qos"><button type="button" class="qo" data-c="1">To compare across lots and accounts</button><button type="button" class="qo">R looks like a bigger number</button><button type="button" class="qo">It is a broker rule</button><button type="button" class="qo">No particular reason</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">With changing lots, dollar comparisons are wrong.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 3</span>What is the most important journal field?</p><div class="qos"><button type="button" class="qo" data-c="1">Were the rules followed 100%?</button><button type="button" class="qo">What was the pair name?</button><button type="button" class="qo">What colour was the candle?</button><button type="button" class="qo">Which broker was it?</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">A losing trade that followed the rules is good; a winning trade that broke them is bad.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 4</span>How many screenshots per trade?</p><div class="qos"><button type="button" class="qo" data-c="1">Two: entry and close</button><button type="button" class="qo">None</button><button type="button" class="qo">Ten, every minute</button><button type="button" class="qo">Only on wins</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">Seven fields: date/session, bias/DOL, model/score, entry/SL/TP/lot, R, emotions, lesson.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 5</span>In the weekly review, what is the rule-following target?</p><div class="qos"><button type="button" class="qo" data-c="1">90% or more</button><button type="button" class="qo">50%</button><button type="button" class="qo">10%</button><button type="button" class="qo">No target</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">Sunday, 30 minutes: total R, rules, biggest mistake, one goal for next week, news times.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 6</span>After 50 trades, what do traders usually find?</p><div class="qos"><button type="button" class="qo" data-c="1">Most losses come from a few mistake types</button><button type="button" class="qo">Every trade&#x27;s result is the same</button><button type="button" class="qo">All losses are just luck</button><button type="button" class="qo">Nothing is learned</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">Stopping one or two such mistakes often changes the result.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 7</span>One month: 24 trades, +5.2R; 18 rule-following trades +11.4R, 6 rule-breaking trades −6.2R. The lesson?</p><div class="qos"><button type="button" class="qo" data-c="1">Rule-following trades alone made +11.4R</button><button type="button" class="qo">Rules are useless; breaking them is fine</button><button type="button" class="qo">Increase the number of trades</button><button type="button" class="qo">Double the lot next month</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">Next month&#x27;s goal: no trades 30 minutes before news, and a one-hour break after a loss.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 8</span>What about writing a journal and never reading it?</p><div class="qos"><button type="button" class="qo" data-c="1">Without review a journal is just a diary</button><button type="button" class="qo">Writing is enough; reading isn&#x27;t needed</button><button type="button" class="qo">That is the best method</button><button type="button" class="qo">No journal is needed at all</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">Recording only winners is also a mistake; the biggest lessons are in the losers.</span></p></li></ol>
+  <div class="qres" hidden aria-live="polite"><h3>Your result</h3><div class="qbig"></div><p class="qgr"></p><p class="qbest"></p>
+    <div class="qmiss" hidden><b>Questions you missed:</b><ol></ol></div>
+    <p class="qbtns"><button type="button" class="btn qre">Try again</button> <a class="btn" href="#top">Reread the lesson</a> <a class="btn gold qnx" href="smc-demo-to-live-en.html" hidden>Next lesson ›</a></p></div>
+</section>
     <div class="smc-box"><h2>Lesson checklist</h2><p>Tick each point once you understand it. Your ticks are saved in this browser.</p><ul class="ck" data-k="smc-trading-journal"><li><input type="checkbox" id="c0"><label for="c0">I record every trade, win or loss</label></li><li><input type="checkbox" id="c1"><label for="c1">I record results in R</label></li><li><input type="checkbox" id="c2"><label for="c2">I answer &quot;100% rule adherence?&quot; on every trade</label></li><li><input type="checkbox" id="c3"><label for="c3">I do a weekly review every Sunday</label></li><li><input type="checkbox" id="c4"><label for="c4">I have found my most expensive mistake from the journal</label></li></ul></div>
     <div class="smc-box asg"><h2>Assignment</h2><ol><li>Build a seven-field journal in Google Sheets, plus a &quot;rules followed&quot; field.</li><li>Enter your last 20 trades (or backtest).</li><li>Calculate the total R of rule-following and rule-breaking trades separately.</li><li>Filter by session and POI score.</li><li>Post your most expensive mistake and next week&#x27;s goal in the group.</li></ol><p>Post your assignment screenshots with your reasons in our free Facebook group, where your charts will be checked.</p><a class="btn gold" href="https://www.facebook.com/groups/qaziforextips" target="_blank" rel="noopener">Join the free group</a></div>
     <div class="ls-faq en-faq"><h2>Questions</h2><details><summary>What should a trading journal include?</summary><p>Date and session, bias and draw on liquidity, model and POI score, entry, stop, target and lot, result in R, emotions, a lesson, and before and after screenshots.</p></details><details><summary>Why record results in R?</summary><p>R makes trades comparable regardless of account size and lot size.</p></details><details><summary>How often should I review my journal?</summary><p>Every week, for example 30 minutes on Sunday, plus a detailed filter every 50 trades.</p></details></div>

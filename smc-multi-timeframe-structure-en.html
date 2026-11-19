@@ -576,11 +576,78 @@ footer a:hover{color:var(--ink)}
 .outline.en-out .n{margin-left:0;margin-right:6px}
 .smc-pn.en-pn{direction:ltr}
 .smc-pn.en-pn .nx{text-align:right}
+
+.smc-quiz{margin:40px 0;border:2px solid var(--gold);border-radius:16px;padding:18px 22px;background:var(--surface)}
+.smc-quiz h2{margin-top:0!important}
+.smc-quiz .qin{color:var(--muted)}
+.qbar{height:10px;border-radius:99px;background:var(--line);overflow:hidden;margin:8px 0}
+.qfill{height:100%;width:0;background:var(--gold);transition:width .3s}
+.qsc{font-weight:600;margin:4px 0 10px}
+.qsc .qs-c{color:#22a56b}
+.qlist{list-style:none;padding:0!important;margin:0}
+.qq{border-top:1px dashed var(--line);padding:12px 0}
+.qt{margin:0 0 8px!important;font-weight:600}
+.qn{display:inline-block;font-size:.78em;color:var(--gold-t,var(--gold));margin-inline-end:8px;font-weight:700}
+.qos{display:grid;gap:8px}
+.qo{all:unset;box-sizing:border-box;display:block;cursor:pointer;border:1px solid var(--line);border-radius:10px;padding:6px 14px;line-height:inherit;font:inherit;font-size:.95em;color:var(--ink);background:var(--bg,transparent)}
+.qo:hover,.qo:focus-visible{border-color:var(--gold);outline:none}
+.qq.done .qo{cursor:default}
+.qq.done .qo:hover{border-color:var(--line)}
+.qo.ok{border-color:#22a56b!important;background:rgba(34,165,107,.14)}
+.qo.bad{border-color:#e5535f!important;background:rgba(229,83,95,.14)}
+.qw{margin:8px 0 0!important;font-size:.92em;color:var(--muted)}
+.qw .qv.y{color:#22a56b}.qw .qv.n{color:#e5535f}
+.qw .qr b{color:var(--ink)}
+.qres{margin-top:16px;border-top:2px solid var(--gold);padding-top:12px;text-align:center}
+.qres h3{margin:0!important}
+.qbig{font:700 54px/1.2 var(--f-display,var(--f-body));color:var(--gold-t,var(--gold));direction:ltr}
+.qbig small{font-size:20px;color:var(--muted);display:block}
+.qgr{font-weight:600}
+.qbest{color:var(--muted);font-size:.9em}
+.qmiss{text-align:start;margin:10px 0}
+.qmiss ol{margin:4px 0 0;font-size:.92em}
+.qmiss a{color:var(--gold-t,var(--gold))}
+.qbtns .btn{margin:4px}
+.smc-prog{margin:34px 0;border:2px solid var(--gold);border-radius:16px;padding:16px 22px;background:var(--surface)}
+.smc-prog h2{margin-top:0!important}
+.qstats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:10px 0 14px}
+.qstats div{border:1px solid var(--line);border-radius:12px;padding:8px;text-align:center}
+.qstats b{display:block;font:700 30px/1.3 var(--f-body);color:var(--gold-t,var(--gold));direction:ltr}
+.qstats span{font-size:.85em;color:var(--muted)}
+.smc-prog .st-ok{color:#22a56b;font-weight:600}.smc-prog .st-no{color:#e5535f;font-weight:600}
+.smc-prog td.pc{direction:ltr;text-align:center!important}
+.en-art .qn{margin-right:8px}
 @media (max-width:760px){.lang-sw{display:flex}.lang-sw a{flex:1;min-width:0}.smc-fig .l{font-size:16px}}
 </style>
 <script>
 document.addEventListener('DOMContentLoaded',function(){document.querySelectorAll('ul.ck').forEach(function(ul){var k='smc-ck-'+ul.dataset.k,s={};try{s=JSON.parse(localStorage.getItem(k)||'{}')}catch(e){}
 ul.querySelectorAll('input').forEach(function(i){if(s[i.id]){i.checked=true;i.closest('li').classList.add('done')}i.addEventListener('change',function(){s[i.id]=i.checked;i.closest('li').classList.toggle('done',i.checked);try{localStorage.setItem(k,JSON.stringify(s))}catch(e){}})})})});
+
+document.addEventListener('DOMContentLoaded',function(){
+var K='smc-quiz';function ld(){try{return JSON.parse(localStorage.getItem(K)||'{}')}catch(e){return{}}}function sv(d){try{localStorage.setItem(K,JSON.stringify(d))}catch(e){}}
+document.querySelectorAll('.smc-quiz').forEach(function(z){
+ var cfg=JSON.parse(z.dataset.q),t=JSON.parse(z.dataset.t),qs=[].slice.call(z.querySelectorAll('.qq')),n=qs.length,ans=0,cor=0,miss=[];
+ function shuf(q){var b=q.querySelector('.qos'),o=[].slice.call(b.children);for(var i=o.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var x=o[i];o[i]=o[j];o[j]=x}o.forEach(function(e){b.appendChild(e)})}
+ function upd(){z.querySelector('.qs-c').textContent=cor;z.querySelector('.qs-a').textContent=ans;z.querySelector('.qfill').style.width=(ans/n*100)+'%'}
+ function fin(){var pc=Math.round(cor/n*100),d=ld(),r=d[cfg.slug]||{best:0,tries:0};r.tries++;r.last=pc;if(pc>r.best)r.best=pc;r.at=Date.now();d[cfg.slug]=r;sv(d);
+  var res=z.querySelector('.qres');res.hidden=false;z.querySelector('.qbig').innerHTML=pc+'%<small>'+cor+' / '+n+'</small>';
+  z.querySelector('.qgr').textContent=pc>=90?t.g1:(pc>=cfg.pass?t.g2:t.g3);
+  z.querySelector('.qbest').innerHTML=t.best+': <bdi dir="ltr">'+r.best+'%</bdi> · '+t.tries+': '+r.tries;
+  var m=z.querySelector('.qmiss'),ol=m.querySelector('ol');ol.innerHTML='';miss.forEach(function(i){var li=document.createElement('li'),a=document.createElement('a');a.href='#q'+cfg.slug+i;var qc=qs[i].querySelector('.qt').cloneNode(true);qc.removeChild(qc.querySelector('.qn'));a.textContent=t.qn+' '+(i+1)+': '+qc.textContent;li.appendChild(a);ol.appendChild(li)});m.hidden=!miss.length;
+  var nx=z.querySelector('.qnx');if(nx)nx.hidden=pc<cfg.pass;res.scrollIntoView({behavior:'smooth',block:'center'})}
+ qs.forEach(function(q,i){q.id='q'+cfg.slug+i;shuf(q);q.querySelectorAll('.qo').forEach(function(b){b.addEventListener('click',function(){if(q.classList.contains('done'))return;q.classList.add('done');ans++;var c=q.querySelector('.qo[data-c]'),w=q.querySelector('.qw'),v=w.querySelector('.qv');c.classList.add('ok');
+  if(b===c){cor++;v.textContent=t.ok+'!';v.className='qv y';w.querySelector('.qr').textContent=''}else{b.classList.add('bad');miss.push(i);v.textContent=t.no+'.';v.className='qv n';w.querySelector('.qr').innerHTML='<b>'+t.right+'</b> '+c.innerHTML+'. '}
+  w.hidden=false;upd();if(ans===n)fin()})})});
+ z.querySelector('.qre').addEventListener('click',function(){ans=0;cor=0;miss=[];qs.forEach(function(q){q.classList.remove('done');q.querySelectorAll('.qo').forEach(function(b){b.classList.remove('ok','bad')});q.querySelector('.qw').hidden=true;shuf(q)});z.querySelector('.qres').hidden=true;upd();qs[0].scrollIntoView({behavior:'smooth',block:'center'})});
+});
+document.querySelectorAll('.smc-prog').forEach(function(p){
+ var L=JSON.parse(p.dataset.l),t=JSON.parse(p.dataset.t),P=+p.dataset.p,d=ld(),tb=p.querySelector('tbody'),done=0,pass=0,sum=0;
+ L.forEach(function(x){var r=d[x[0]],tr=document.createElement('tr'),a='<a href="'+x[3]+'#quiz">'+x[1]+' · '+x[2]+'</a>';
+  if(r){done++;sum+=r.best;if(r.best>=P)pass++}
+  tr.innerHTML='<td>'+a+'</td><td class="pc">'+(r?r.best+'%':'—')+'</td><td>'+(r?(r.best>=P?'<span class="st-ok">✓ '+t.ok+'</span>':'<a class="st-no" href="'+x[3]+'#quiz">'+t.no+'</a>'):'<a href="'+x[3]+'#quiz">'+t.go+'</a>')+'</td>';tb.appendChild(tr)});
+ p.querySelector('.qstats').innerHTML='<div><b>'+done+'/'+L.length+'</b><span>'+t.done+'</span></div><div><b>'+pass+'</b><span>'+t.passed+'</span></div><div><b>'+(done?Math.round(sum/done)+'%':'—')+'</b><span>'+t.avg+'</span></div>';
+});
+});
 </script>
 </head>
 <body>
@@ -645,6 +712,16 @@ ul.querySelectorAll('input').forEach(function(i){if(s[i.id]){i.checked=true;i.cl
 <h2 id="s36">Phase 1 complete: the gate</h2>
 <p>You have now learned swings, HH and HL, BOS, CHoCH, internal structure, the protected low, IDM and multi-timeframe structure. Before starting Phase 2 (liquidity), pass this gate:</p>
 <ul><li>You confirm every BOS and CHoCH with a body close, not a wick.</li><li>You can tell internal and swing structure apart.</li><li>You can state any chart&#x27;s HTF bias and protected low or high in one line.</li></ul>
+    <section class="smc-quiz" id="quiz" data-q="{&quot;slug&quot;:&quot;smc-multi-timeframe-structure&quot;,&quot;pass&quot;:70,&quot;n&quot;:10}" data-t="{&quot;h&quot;: &quot;Test yourself: Lesson {n} quiz&quot;, &quot;intro&quot;: &quot;{c} questions. Pick one answer for each and you will see at once whether it is right and why. Your score and grade appear at the end. You need {p}% to pass.&quot;, &quot;score&quot;: &quot;correct&quot;, &quot;of&quot;: &quot;of&quot;, &quot;ok&quot;: &quot;Correct&quot;, &quot;no&quot;: &quot;Not quite&quot;, &quot;right&quot;: &quot;Correct answer:&quot;, &quot;why&quot;: &quot;Why:&quot;, &quot;res&quot;: &quot;Your result&quot;, &quot;best&quot;: &quot;Best score so far&quot;, &quot;tries&quot;: &quot;Attempts&quot;, &quot;retry&quot;: &quot;Try again&quot;, &quot;g1&quot;: &quot;Excellent! You have mastered this lesson.&quot;, &quot;g2&quot;: &quot;Well done, you passed. Read the explanation for any question you missed.&quot;, &quot;g3&quot;: &quot;Not passed yet. Review the questions you missed below, reread the lesson and try again.&quot;, &quot;wrong&quot;: &quot;Questions you missed:&quot;, &quot;nx&quot;: &quot;Next lesson&quot;, &quot;reread&quot;: &quot;Reread the lesson&quot;, &quot;qn&quot;: &quot;Question&quot;}">
+  <h2>Test yourself: Lesson 1.7 quiz</h2>
+  <p class="qin">10 questions. Pick one answer for each and you will see at once whether it is right and why. Your score and grade appear at the end. You need 70% to pass.</p>
+  <div class="qbar"><div class="qfill"></div></div>
+  <p class="qsc" aria-live="polite"><b class="qs-c">0</b> correct · <span class="qs-a">0</span> / 10</p>
+  <ol class="qlist"><li class="qq"><p class="qt"><span class="qn">Question 1</span>How does an up-wave pullback in an H4 downtrend look on M15?</p><div class="qos"><button type="button" class="qo" data-c="1">An uptrend with HHs and HLs</button><button type="button" class="qo">A downtrend</button><button type="button" class="qo">One candle</button><button type="button" class="qo">Nothing is visible</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">Every higher timeframe wave is a complete trend on a lower timeframe.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 2</span>What is the core multi-timeframe rule?</p><div class="qos"><button type="button" class="qo" data-c="1">Trade in the HTF direction; enter on the LTF CHoCH</button><button type="button" class="qo">Trade the LTF direction; enter on the HTF</button><button type="button" class="qo">Use one timeframe only</button><button type="button" class="qo">A separate trade on every timeframe</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">This gives a small SL (beyond the LTF swing) and a large target (HTF liquidity).</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 3</span>Which timeframe set is for an intraday trader?</p><div class="qos"><button type="button" class="qo" data-c="1">H4 bias, H1 zone, M15 or M5 entry</button><button type="button" class="qo">Daily bias, H4 zone, H1 entry</button><button type="button" class="qo">H1 bias, M15 zone, M1 entry</button><button type="button" class="qo">M1 only</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">Daily/H4/H1 is for swing traders; H1/M15/M1 for scalpers.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 4</span>Why not open more than three timeframes?</p><div class="qos"><button type="button" class="qo" data-c="1">Some timeframe always disagrees and you never decide</button><button type="button" class="qo">More timeframes slow the chart and crash the platform</button><button type="button" class="qo">The broker forbids more than three timeframes</button><button type="button" class="qo">More is better; you see every angle</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">Three are enough: bias, zone, entry.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 5</span>The HTF is bullish and the LTF bearish (a pullback). What do you do?</p><div class="qos"><button type="button" class="qo" data-c="1">Wait at the zone for a bullish LTF CHoCH</button><button type="button" class="qo">The LTF is bearish, so sell now</button><button type="button" class="qo">The HTF is bullish, so buy now</button><button type="button" class="qo">They disagree, so stop trading</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">Enter when the LTF pullback ends in the HTF direction.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 6</span>The HTF is in a range. What is the decision?</p><div class="qos"><button type="button" class="qo" data-c="1">No trade, or edges only</button><button type="button" class="qo">Trade every LTF signal</button><button type="button" class="qo">Buy in the middle</button><button type="button" class="qo">Sell in the middle</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">There are no trades in the middle of a range.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 7</span>What do the H1 zone and the M5 CHoCH each tell you?</p><div class="qos"><button type="button" class="qo" data-c="1">H1 says where, M5 says when</button><button type="button" class="qo">M5 says where, H1 says when</button><button type="button" class="qo">Both only give the trend direction</button><button type="button" class="qo">Both only give the SL location</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">A zone alone (it can break) or a CHoCH alone (mid-air) is not enough; together they make a setup.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 8</span>In the 15-minute daily routine, when is the alert set?</p><div class="qos"><button type="button" class="qo" data-c="1">After marking the H1 POI</button><button type="button" class="qo">First thing, before D1</button><button type="button" class="qo">After the trade closes</button><button type="button" class="qo">Only at news time</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">Order: D1, H4, H1 (POI), alert, then a CHoCH on M15/M5 when the alert fires.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 9</span>What about switching timeframes to manage a trade?</p><div class="qos"><button type="button" class="qo" data-c="1">Wrong; manage on the plan&#x27;s timeframe</button><button type="button" class="qo">Right; a smaller timeframe shows more</button><button type="button" class="qo">Required; manage every trade on M1</button><button type="button" class="qo">Fine to switch only during news</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">Switching timeframes makes every small wiggle look scary.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 10</span>Gold: H4 bullish, H1 POI 4,112 to 4,118, the M5 LH at 4,117 breaks. What is the trade?</p><div class="qos"><button type="button" class="qo" data-c="1">Buy 4,115, SL 4,110, target 4,136</button><button type="button" class="qo">Sell 4,117, SL 4,121, target 4,104</button><button type="button" class="qo">Buy 4,138, SL 4,130, target 4,150</button><button type="button" class="qo">No trade; H4 and M5 disagree</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">Both the zone (where) and the M5 CHoCH (when) are present; the target sits just before the previous H1 high at 4,138.</span></p></li></ol>
+  <div class="qres" hidden aria-live="polite"><h3>Your result</h3><div class="qbig"></div><p class="qgr"></p><p class="qbest"></p>
+    <div class="qmiss" hidden><b>Questions you missed:</b><ol></ol></div>
+    <p class="qbtns"><button type="button" class="btn qre">Try again</button> <a class="btn" href="#top">Reread the lesson</a> <a class="btn gold qnx" href="smc-liquidity-bsl-ssl-en.html" hidden>Next lesson ›</a></p></div>
+</section>
     <div class="smc-box"><h2>Lesson checklist</h2><p>Tick each point once you understand it. Your ticks are saved in this browser.</p><ul class="ck" data-k="smc-multi-timeframe-structure"><li><input type="checkbox" id="c0"><label for="c0">I understand that one HTF wave is a full trend on the LTF</label></li><li><input type="checkbox" id="c1"><label for="c1">I trade in the HTF direction and enter on an LTF CHoCH</label></li><li><input type="checkbox" id="c2"><label for="c2">I use no more than three timeframes</label></li><li><input type="checkbox" id="c3"><label for="c3">I have chosen my timeframe pair</label></li><li><input type="checkbox" id="c4"><label for="c4">I don&#x27;t take LTF signals against the HTF</label></li><li><input type="checkbox" id="c5"><label for="c5">I have passed the Phase 1 gate</label></li><li><input type="checkbox" id="c6"><label for="c6">I do a 15-minute top-down routine every day</label></li><li><input type="checkbox" id="c7"><label for="c7">I set alerts at the POI and wait for a lower timeframe CHoCH</label></li><li><input type="checkbox" id="c8"><label for="c8">I don&#x27;t take lower timeframe signals against the higher timeframe</label></li></ul></div>
     <div class="smc-box asg"><h2>Assignment</h2><ol><li>Choose your timeframe pair (for example H4, H1, M15).</li><li>Find 10 situations on Gold where an HTF pullback reached a zone, and screenshot both the HTF and LTF for each.</li><li>Mark the LTF CHoCH in the HTF direction and note how far price went afterwards.</li><li>Also find one example where an LTF CHoCH against the HTF failed.</li><li>Post your full work (HTF + LTF pairs) in the group.</li><li>For the next 5 days, write a daily top-down routine: D1, H4 bias, H1 POI, and if a lower timeframe CHoCH comes, the entry, stop and target.</li></ol><p>Post your assignment screenshots with your reasons in our free Facebook group, where your charts will be checked.</p><a class="btn gold" href="https://www.facebook.com/groups/qaziforextips" target="_blank" rel="noopener">Join the free group</a></div>
     <div class="ls-faq en-faq"><h2>Questions</h2><details><summary>What should I do if H4 is bearish and M15 is bullish?</summary><p>The M15 uptrend is usually an H4 pullback. At the H4 zone, wait for a bearish M15 CHoCH, then sell.</p></details><details><summary>How many timeframes should I use in SMC?</summary><p>At most three: one for bias, one for zones and one for entries.</p></details><details><summary>What is the core multi-timeframe rule?</summary><p>Trade in the higher timeframe&#x27;s direction and enter on the lower timeframe&#x27;s CHoCH.</p></details><details><summary>What is multi-timeframe structure in SMC?</summary><p>Reading bias on a higher timeframe and timing entries with a lower-timeframe CHoCH in the same direction.</p></details><details><summary>Which timeframe combinations work?</summary><p>Daily-H4-H1 for swing trading, H4-H1-M15 for intraday, H1-M15-M1 for scalping.</p></details><details><summary>What if timeframes disagree?</summary><p>Follow the higher timeframe; treat the lower timeframe move as a pullback until it gives a CHoCH in the higher-timeframe direction.</p></details></div>

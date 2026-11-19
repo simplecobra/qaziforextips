@@ -576,11 +576,78 @@ footer a:hover{color:var(--ink)}
 .outline.en-out .n{margin-left:0;margin-right:6px}
 .smc-pn.en-pn{direction:ltr}
 .smc-pn.en-pn .nx{text-align:right}
+
+.smc-quiz{margin:40px 0;border:2px solid var(--gold);border-radius:16px;padding:18px 22px;background:var(--surface)}
+.smc-quiz h2{margin-top:0!important}
+.smc-quiz .qin{color:var(--muted)}
+.qbar{height:10px;border-radius:99px;background:var(--line);overflow:hidden;margin:8px 0}
+.qfill{height:100%;width:0;background:var(--gold);transition:width .3s}
+.qsc{font-weight:600;margin:4px 0 10px}
+.qsc .qs-c{color:#22a56b}
+.qlist{list-style:none;padding:0!important;margin:0}
+.qq{border-top:1px dashed var(--line);padding:12px 0}
+.qt{margin:0 0 8px!important;font-weight:600}
+.qn{display:inline-block;font-size:.78em;color:var(--gold-t,var(--gold));margin-inline-end:8px;font-weight:700}
+.qos{display:grid;gap:8px}
+.qo{all:unset;box-sizing:border-box;display:block;cursor:pointer;border:1px solid var(--line);border-radius:10px;padding:6px 14px;line-height:inherit;font:inherit;font-size:.95em;color:var(--ink);background:var(--bg,transparent)}
+.qo:hover,.qo:focus-visible{border-color:var(--gold);outline:none}
+.qq.done .qo{cursor:default}
+.qq.done .qo:hover{border-color:var(--line)}
+.qo.ok{border-color:#22a56b!important;background:rgba(34,165,107,.14)}
+.qo.bad{border-color:#e5535f!important;background:rgba(229,83,95,.14)}
+.qw{margin:8px 0 0!important;font-size:.92em;color:var(--muted)}
+.qw .qv.y{color:#22a56b}.qw .qv.n{color:#e5535f}
+.qw .qr b{color:var(--ink)}
+.qres{margin-top:16px;border-top:2px solid var(--gold);padding-top:12px;text-align:center}
+.qres h3{margin:0!important}
+.qbig{font:700 54px/1.2 var(--f-display,var(--f-body));color:var(--gold-t,var(--gold));direction:ltr}
+.qbig small{font-size:20px;color:var(--muted);display:block}
+.qgr{font-weight:600}
+.qbest{color:var(--muted);font-size:.9em}
+.qmiss{text-align:start;margin:10px 0}
+.qmiss ol{margin:4px 0 0;font-size:.92em}
+.qmiss a{color:var(--gold-t,var(--gold))}
+.qbtns .btn{margin:4px}
+.smc-prog{margin:34px 0;border:2px solid var(--gold);border-radius:16px;padding:16px 22px;background:var(--surface)}
+.smc-prog h2{margin-top:0!important}
+.qstats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:10px 0 14px}
+.qstats div{border:1px solid var(--line);border-radius:12px;padding:8px;text-align:center}
+.qstats b{display:block;font:700 30px/1.3 var(--f-body);color:var(--gold-t,var(--gold));direction:ltr}
+.qstats span{font-size:.85em;color:var(--muted)}
+.smc-prog .st-ok{color:#22a56b;font-weight:600}.smc-prog .st-no{color:#e5535f;font-weight:600}
+.smc-prog td.pc{direction:ltr;text-align:center!important}
+.en-art .qn{margin-right:8px}
 @media (max-width:760px){.lang-sw{display:flex}.lang-sw a{flex:1;min-width:0}.smc-fig .l{font-size:16px}}
 </style>
 <script>
 document.addEventListener('DOMContentLoaded',function(){document.querySelectorAll('ul.ck').forEach(function(ul){var k='smc-ck-'+ul.dataset.k,s={};try{s=JSON.parse(localStorage.getItem(k)||'{}')}catch(e){}
 ul.querySelectorAll('input').forEach(function(i){if(s[i.id]){i.checked=true;i.closest('li').classList.add('done')}i.addEventListener('change',function(){s[i.id]=i.checked;i.closest('li').classList.toggle('done',i.checked);try{localStorage.setItem(k,JSON.stringify(s))}catch(e){}})})})});
+
+document.addEventListener('DOMContentLoaded',function(){
+var K='smc-quiz';function ld(){try{return JSON.parse(localStorage.getItem(K)||'{}')}catch(e){return{}}}function sv(d){try{localStorage.setItem(K,JSON.stringify(d))}catch(e){}}
+document.querySelectorAll('.smc-quiz').forEach(function(z){
+ var cfg=JSON.parse(z.dataset.q),t=JSON.parse(z.dataset.t),qs=[].slice.call(z.querySelectorAll('.qq')),n=qs.length,ans=0,cor=0,miss=[];
+ function shuf(q){var b=q.querySelector('.qos'),o=[].slice.call(b.children);for(var i=o.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var x=o[i];o[i]=o[j];o[j]=x}o.forEach(function(e){b.appendChild(e)})}
+ function upd(){z.querySelector('.qs-c').textContent=cor;z.querySelector('.qs-a').textContent=ans;z.querySelector('.qfill').style.width=(ans/n*100)+'%'}
+ function fin(){var pc=Math.round(cor/n*100),d=ld(),r=d[cfg.slug]||{best:0,tries:0};r.tries++;r.last=pc;if(pc>r.best)r.best=pc;r.at=Date.now();d[cfg.slug]=r;sv(d);
+  var res=z.querySelector('.qres');res.hidden=false;z.querySelector('.qbig').innerHTML=pc+'%<small>'+cor+' / '+n+'</small>';
+  z.querySelector('.qgr').textContent=pc>=90?t.g1:(pc>=cfg.pass?t.g2:t.g3);
+  z.querySelector('.qbest').innerHTML=t.best+': <bdi dir="ltr">'+r.best+'%</bdi> · '+t.tries+': '+r.tries;
+  var m=z.querySelector('.qmiss'),ol=m.querySelector('ol');ol.innerHTML='';miss.forEach(function(i){var li=document.createElement('li'),a=document.createElement('a');a.href='#q'+cfg.slug+i;var qc=qs[i].querySelector('.qt').cloneNode(true);qc.removeChild(qc.querySelector('.qn'));a.textContent=t.qn+' '+(i+1)+': '+qc.textContent;li.appendChild(a);ol.appendChild(li)});m.hidden=!miss.length;
+  var nx=z.querySelector('.qnx');if(nx)nx.hidden=pc<cfg.pass;res.scrollIntoView({behavior:'smooth',block:'center'})}
+ qs.forEach(function(q,i){q.id='q'+cfg.slug+i;shuf(q);q.querySelectorAll('.qo').forEach(function(b){b.addEventListener('click',function(){if(q.classList.contains('done'))return;q.classList.add('done');ans++;var c=q.querySelector('.qo[data-c]'),w=q.querySelector('.qw'),v=w.querySelector('.qv');c.classList.add('ok');
+  if(b===c){cor++;v.textContent=t.ok+'!';v.className='qv y';w.querySelector('.qr').textContent=''}else{b.classList.add('bad');miss.push(i);v.textContent=t.no+'.';v.className='qv n';w.querySelector('.qr').innerHTML='<b>'+t.right+'</b> '+c.innerHTML+'. '}
+  w.hidden=false;upd();if(ans===n)fin()})})});
+ z.querySelector('.qre').addEventListener('click',function(){ans=0;cor=0;miss=[];qs.forEach(function(q){q.classList.remove('done');q.querySelectorAll('.qo').forEach(function(b){b.classList.remove('ok','bad')});q.querySelector('.qw').hidden=true;shuf(q)});z.querySelector('.qres').hidden=true;upd();qs[0].scrollIntoView({behavior:'smooth',block:'center'})});
+});
+document.querySelectorAll('.smc-prog').forEach(function(p){
+ var L=JSON.parse(p.dataset.l),t=JSON.parse(p.dataset.t),P=+p.dataset.p,d=ld(),tb=p.querySelector('tbody'),done=0,pass=0,sum=0;
+ L.forEach(function(x){var r=d[x[0]],tr=document.createElement('tr'),a='<a href="'+x[3]+'#quiz">'+x[1]+' · '+x[2]+'</a>';
+  if(r){done++;sum+=r.best;if(r.best>=P)pass++}
+  tr.innerHTML='<td>'+a+'</td><td class="pc">'+(r?r.best+'%':'—')+'</td><td>'+(r?(r.best>=P?'<span class="st-ok">✓ '+t.ok+'</span>':'<a class="st-no" href="'+x[3]+'#quiz">'+t.no+'</a>'):'<a href="'+x[3]+'#quiz">'+t.go+'</a>')+'</td>';tb.appendChild(tr)});
+ p.querySelector('.qstats').innerHTML='<div><b>'+done+'/'+L.length+'</b><span>'+t.done+'</span></div><div><b>'+pass+'</b><span>'+t.passed+'</span></div><div><b>'+(done?Math.round(sum/done)+'%':'—')+'</b><span>'+t.avg+'</span></div>';
+});
+});
 </script>
 </head>
 <body>
@@ -637,6 +704,16 @@ ul.querySelectorAll('input').forEach(function(i){if(s[i.id]){i.checked=true;i.cl
 <div class="call warn"><b class="k">Common mistake</b>Trading a breaker after a weak break. If the MSS move had no strength (small candles), the zone is weak.</div>
 <h2 id="s29">Summary</h2>
 <ul><li>A breaker block is an order block that broke after a liquidity sweep and now works in reverse.</li><li>Bullish order: low, high, lower low (sweep), break of the high, retest of the zone.</li><li>Trade the retest, stop beyond the zone or the sweep, target the next liquidity.</li><li>Without a sweep it is a mitigation block.</li></ul>
+    <section class="smc-quiz" id="quiz" data-q="{&quot;slug&quot;:&quot;smc-breaker-block&quot;,&quot;pass&quot;:70,&quot;n&quot;:8}" data-t="{&quot;h&quot;: &quot;Test yourself: Lesson {n} quiz&quot;, &quot;intro&quot;: &quot;{c} questions. Pick one answer for each and you will see at once whether it is right and why. Your score and grade appear at the end. You need {p}% to pass.&quot;, &quot;score&quot;: &quot;correct&quot;, &quot;of&quot;: &quot;of&quot;, &quot;ok&quot;: &quot;Correct&quot;, &quot;no&quot;: &quot;Not quite&quot;, &quot;right&quot;: &quot;Correct answer:&quot;, &quot;why&quot;: &quot;Why:&quot;, &quot;res&quot;: &quot;Your result&quot;, &quot;best&quot;: &quot;Best score so far&quot;, &quot;tries&quot;: &quot;Attempts&quot;, &quot;retry&quot;: &quot;Try again&quot;, &quot;g1&quot;: &quot;Excellent! You have mastered this lesson.&quot;, &quot;g2&quot;: &quot;Well done, you passed. Read the explanation for any question you missed.&quot;, &quot;g3&quot;: &quot;Not passed yet. Review the questions you missed below, reread the lesson and try again.&quot;, &quot;wrong&quot;: &quot;Questions you missed:&quot;, &quot;nx&quot;: &quot;Next lesson&quot;, &quot;reread&quot;: &quot;Reread the lesson&quot;, &quot;qn&quot;: &quot;Question&quot;}">
+  <h2>Test yourself: Lesson 3.3 quiz</h2>
+  <p class="qin">8 questions. Pick one answer for each and you will see at once whether it is right and why. Your score and grade appear at the end. You need 70% to pass.</p>
+  <div class="qbar"><div class="qfill"></div></div>
+  <p class="qsc" aria-live="polite"><b class="qs-c">0</b> correct · <span class="qs-a">0</span> / 8</p>
+  <ol class="qlist"><li class="qq"><p class="qt"><span class="qn">Question 1</span>What is a breaker block?</p><div class="qos"><button type="button" class="qo" data-c="1">A failed OB, broken after a sweep, now working in reverse</button><button type="button" class="qo">An ordinary successful OB in the middle of a trend</button><button type="button" class="qo">A three-candle gap that forms on the break</button><button type="button" class="qo">The day&#x27;s high that breaks in London</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">In a bullish breaker the green-candle zone that built the high is now support.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 2</span>What is the correct sequence of a bullish breaker?</p><div class="qos"><button type="button" class="qo" data-c="1">Low, high, lower low, high breaks, retest</button><button type="button" class="qo">High, low, higher low, low breaks, retest</button><button type="button" class="qo">Low, higher low, high, high breaks, retest</button><button type="button" class="qo">Low, high, higher high, low breaks, retest</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">At the lower low retail sells thinking it is a breakout, and gets trapped.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 3</span>What is the real power of a breaker?</p><div class="qos"><button type="button" class="qo" data-c="1">The sweep: cheap liquidity first, then trapped sellers</button><button type="button" class="qo">The zone&#x27;s large size holding more orders</button><button type="button" class="qo">The green or red colour of the zone&#x27;s candles</button><button type="button" class="qo">Forming in Asia while the market is quiet</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">The trapped sellers&#x27; stops sit above and give price more fuel.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 4</span>When do you trade a breaker?</p><div class="qos"><button type="button" class="qo" data-c="1">On the retest</button><button type="button" class="qo">On the MSS candle</button><button type="button" class="qo">During the sweep</button><button type="button" class="qo">Never</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">At the break price is expensive and the stop is large.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 5</span>What is the main difference between an order block and a breaker?</p><div class="qos"><button type="button" class="qo" data-c="1">OB: a zone that worked; breaker: one that failed and flipped</button><button type="button" class="qo">They are the same, only named differently</button><button type="button" class="qo">Breakers mid-trend, OBs at trend changes</button><button type="button" class="qo">OB after a sweep, breaker without one</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">Breakers appear mostly at trend changes; order blocks mid-trend.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 6</span>A zone broke without a sweep (a higher low formed). What is it?</p><div class="qos"><button type="button" class="qo" data-c="1">A mitigation block</button><button type="button" class="qo">A breaker block</button><button type="button" class="qo">A rejection block</button><button type="button" class="qo">A propulsion block</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">Without a prior sweep it is not a breaker (lesson 3.4).</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 7</span>A bullish breaker forms in H4 premium. What happens to it?</p><div class="qos"><button type="button" class="qo" data-c="1">It often fails</button><button type="button" class="qo">It always works</button><button type="button" class="qo">It is the best setup</button><button type="button" class="qo">It makes no difference</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">Check the higher timeframe; otherwise a small breaker may just be a pullback.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 8</span>Gold M15: Asian low 4,112, green zone 4,116 to 4,124, London sweeps to 4,104, then 4,124 breaks. Entry and stop?</p><div class="qos"><button type="button" class="qo" data-c="1">Entry 4,120 (50%), stop 4,111</button><button type="button" class="qo">Entry 4,128, stop 4,124</button><button type="button" class="qo">Entry 4,104, stop 4,100</button><button type="button" class="qo">Sell at 4,124</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">Target the previous day&#x27;s high at 4,142; 9 dollars risk for 22, about 1:2.4.</span></p></li></ol>
+  <div class="qres" hidden aria-live="polite"><h3>Your result</h3><div class="qbig"></div><p class="qgr"></p><p class="qbest"></p>
+    <div class="qmiss" hidden><b>Questions you missed:</b><ol></ol></div>
+    <p class="qbtns"><button type="button" class="btn qre">Try again</button> <a class="btn" href="#top">Reread the lesson</a> <a class="btn gold qnx" href="smc-mitigation-block-en.html" hidden>Next lesson ›</a></p></div>
+</section>
     <div class="smc-box"><h2>Lesson checklist</h2><p>Tick each point once you understand it. Your ticks are saved in this browser.</p><ul class="ck" data-k="smc-breaker-block"><li><input type="checkbox" id="c0"><label for="c0">I know a breaker is a failed order block that works in reverse</label></li><li><input type="checkbox" id="c1"><label for="c1">I check for a liquidity sweep first</label></li><li><input type="checkbox" id="c2"><label for="c2">I look for an MSS with displacement after the sweep</label></li><li><input type="checkbox" id="c3"><label for="c3">I trade the retest, not the break</label></li><li><input type="checkbox" id="c4"><label for="c4">I check the higher timeframe location (discount or premium)</label></li><li><input type="checkbox" id="c5"><label for="c5">I know the difference between a breaker and a mitigation block</label></li></ul></div>
     <div class="smc-box asg"><h2>Assignment</h2><ol><li>Look at the last 10 London opens on Gold M15 and find breaker blocks.</li><li>Write the sequence for each: which low was swept, which high broke, where the zone is.</li><li>See how many breakers reacted on the retest.</li><li>Make 3 bullish and 3 bearish breaker examples.</li><li>Write the entry, stop loss, target and RR for the best one.</li><li>Post your chart in the group.</li></ol><p>Post your assignment screenshots with your reasons in our free Facebook group, where your charts will be checked.</p><a class="btn gold" href="https://www.facebook.com/groups/qaziforextips" target="_blank" rel="noopener">Join the free group</a></div>
     <div class="ls-faq en-faq"><h2>Questions</h2><details><summary>What is a breaker block?</summary><p>An order block that broke after a liquidity sweep and then acts as support or resistance in the opposite direction.</p></details><details><summary>What is the difference between a breaker and a mitigation block?</summary><p>A breaker comes after a liquidity sweep (lower low or higher high); a mitigation block has no sweep (higher low or lower high).</p></details><details><summary>When should I enter a breaker?</summary><p>After the break, when price returns into the zone, on the retest.</p></details><details><summary>Where is the stop loss on a breaker trade?</summary><p>Below the breaker zone, or more safely below the swept low.</p></details></div>

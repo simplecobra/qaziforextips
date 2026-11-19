@@ -576,11 +576,78 @@ footer a:hover{color:var(--ink)}
 .outline.en-out .n{margin-left:0;margin-right:6px}
 .smc-pn.en-pn{direction:ltr}
 .smc-pn.en-pn .nx{text-align:right}
+
+.smc-quiz{margin:40px 0;border:2px solid var(--gold);border-radius:16px;padding:18px 22px;background:var(--surface)}
+.smc-quiz h2{margin-top:0!important}
+.smc-quiz .qin{color:var(--muted)}
+.qbar{height:10px;border-radius:99px;background:var(--line);overflow:hidden;margin:8px 0}
+.qfill{height:100%;width:0;background:var(--gold);transition:width .3s}
+.qsc{font-weight:600;margin:4px 0 10px}
+.qsc .qs-c{color:#22a56b}
+.qlist{list-style:none;padding:0!important;margin:0}
+.qq{border-top:1px dashed var(--line);padding:12px 0}
+.qt{margin:0 0 8px!important;font-weight:600}
+.qn{display:inline-block;font-size:.78em;color:var(--gold-t,var(--gold));margin-inline-end:8px;font-weight:700}
+.qos{display:grid;gap:8px}
+.qo{all:unset;box-sizing:border-box;display:block;cursor:pointer;border:1px solid var(--line);border-radius:10px;padding:6px 14px;line-height:inherit;font:inherit;font-size:.95em;color:var(--ink);background:var(--bg,transparent)}
+.qo:hover,.qo:focus-visible{border-color:var(--gold);outline:none}
+.qq.done .qo{cursor:default}
+.qq.done .qo:hover{border-color:var(--line)}
+.qo.ok{border-color:#22a56b!important;background:rgba(34,165,107,.14)}
+.qo.bad{border-color:#e5535f!important;background:rgba(229,83,95,.14)}
+.qw{margin:8px 0 0!important;font-size:.92em;color:var(--muted)}
+.qw .qv.y{color:#22a56b}.qw .qv.n{color:#e5535f}
+.qw .qr b{color:var(--ink)}
+.qres{margin-top:16px;border-top:2px solid var(--gold);padding-top:12px;text-align:center}
+.qres h3{margin:0!important}
+.qbig{font:700 54px/1.2 var(--f-display,var(--f-body));color:var(--gold-t,var(--gold));direction:ltr}
+.qbig small{font-size:20px;color:var(--muted);display:block}
+.qgr{font-weight:600}
+.qbest{color:var(--muted);font-size:.9em}
+.qmiss{text-align:start;margin:10px 0}
+.qmiss ol{margin:4px 0 0;font-size:.92em}
+.qmiss a{color:var(--gold-t,var(--gold))}
+.qbtns .btn{margin:4px}
+.smc-prog{margin:34px 0;border:2px solid var(--gold);border-radius:16px;padding:16px 22px;background:var(--surface)}
+.smc-prog h2{margin-top:0!important}
+.qstats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:10px 0 14px}
+.qstats div{border:1px solid var(--line);border-radius:12px;padding:8px;text-align:center}
+.qstats b{display:block;font:700 30px/1.3 var(--f-body);color:var(--gold-t,var(--gold));direction:ltr}
+.qstats span{font-size:.85em;color:var(--muted)}
+.smc-prog .st-ok{color:#22a56b;font-weight:600}.smc-prog .st-no{color:#e5535f;font-weight:600}
+.smc-prog td.pc{direction:ltr;text-align:center!important}
+.en-art .qn{margin-right:8px}
 @media (max-width:760px){.lang-sw{display:flex}.lang-sw a{flex:1;min-width:0}.smc-fig .l{font-size:16px}}
 </style>
 <script>
 document.addEventListener('DOMContentLoaded',function(){document.querySelectorAll('ul.ck').forEach(function(ul){var k='smc-ck-'+ul.dataset.k,s={};try{s=JSON.parse(localStorage.getItem(k)||'{}')}catch(e){}
 ul.querySelectorAll('input').forEach(function(i){if(s[i.id]){i.checked=true;i.closest('li').classList.add('done')}i.addEventListener('change',function(){s[i.id]=i.checked;i.closest('li').classList.toggle('done',i.checked);try{localStorage.setItem(k,JSON.stringify(s))}catch(e){}})})})});
+
+document.addEventListener('DOMContentLoaded',function(){
+var K='smc-quiz';function ld(){try{return JSON.parse(localStorage.getItem(K)||'{}')}catch(e){return{}}}function sv(d){try{localStorage.setItem(K,JSON.stringify(d))}catch(e){}}
+document.querySelectorAll('.smc-quiz').forEach(function(z){
+ var cfg=JSON.parse(z.dataset.q),t=JSON.parse(z.dataset.t),qs=[].slice.call(z.querySelectorAll('.qq')),n=qs.length,ans=0,cor=0,miss=[];
+ function shuf(q){var b=q.querySelector('.qos'),o=[].slice.call(b.children);for(var i=o.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var x=o[i];o[i]=o[j];o[j]=x}o.forEach(function(e){b.appendChild(e)})}
+ function upd(){z.querySelector('.qs-c').textContent=cor;z.querySelector('.qs-a').textContent=ans;z.querySelector('.qfill').style.width=(ans/n*100)+'%'}
+ function fin(){var pc=Math.round(cor/n*100),d=ld(),r=d[cfg.slug]||{best:0,tries:0};r.tries++;r.last=pc;if(pc>r.best)r.best=pc;r.at=Date.now();d[cfg.slug]=r;sv(d);
+  var res=z.querySelector('.qres');res.hidden=false;z.querySelector('.qbig').innerHTML=pc+'%<small>'+cor+' / '+n+'</small>';
+  z.querySelector('.qgr').textContent=pc>=90?t.g1:(pc>=cfg.pass?t.g2:t.g3);
+  z.querySelector('.qbest').innerHTML=t.best+': <bdi dir="ltr">'+r.best+'%</bdi> · '+t.tries+': '+r.tries;
+  var m=z.querySelector('.qmiss'),ol=m.querySelector('ol');ol.innerHTML='';miss.forEach(function(i){var li=document.createElement('li'),a=document.createElement('a');a.href='#q'+cfg.slug+i;var qc=qs[i].querySelector('.qt').cloneNode(true);qc.removeChild(qc.querySelector('.qn'));a.textContent=t.qn+' '+(i+1)+': '+qc.textContent;li.appendChild(a);ol.appendChild(li)});m.hidden=!miss.length;
+  var nx=z.querySelector('.qnx');if(nx)nx.hidden=pc<cfg.pass;res.scrollIntoView({behavior:'smooth',block:'center'})}
+ qs.forEach(function(q,i){q.id='q'+cfg.slug+i;shuf(q);q.querySelectorAll('.qo').forEach(function(b){b.addEventListener('click',function(){if(q.classList.contains('done'))return;q.classList.add('done');ans++;var c=q.querySelector('.qo[data-c]'),w=q.querySelector('.qw'),v=w.querySelector('.qv');c.classList.add('ok');
+  if(b===c){cor++;v.textContent=t.ok+'!';v.className='qv y';w.querySelector('.qr').textContent=''}else{b.classList.add('bad');miss.push(i);v.textContent=t.no+'.';v.className='qv n';w.querySelector('.qr').innerHTML='<b>'+t.right+'</b> '+c.innerHTML+'. '}
+  w.hidden=false;upd();if(ans===n)fin()})})});
+ z.querySelector('.qre').addEventListener('click',function(){ans=0;cor=0;miss=[];qs.forEach(function(q){q.classList.remove('done');q.querySelectorAll('.qo').forEach(function(b){b.classList.remove('ok','bad')});q.querySelector('.qw').hidden=true;shuf(q)});z.querySelector('.qres').hidden=true;upd();qs[0].scrollIntoView({behavior:'smooth',block:'center'})});
+});
+document.querySelectorAll('.smc-prog').forEach(function(p){
+ var L=JSON.parse(p.dataset.l),t=JSON.parse(p.dataset.t),P=+p.dataset.p,d=ld(),tb=p.querySelector('tbody'),done=0,pass=0,sum=0;
+ L.forEach(function(x){var r=d[x[0]],tr=document.createElement('tr'),a='<a href="'+x[3]+'#quiz">'+x[1]+' · '+x[2]+'</a>';
+  if(r){done++;sum+=r.best;if(r.best>=P)pass++}
+  tr.innerHTML='<td>'+a+'</td><td class="pc">'+(r?r.best+'%':'—')+'</td><td>'+(r?(r.best>=P?'<span class="st-ok">✓ '+t.ok+'</span>':'<a class="st-no" href="'+x[3]+'#quiz">'+t.no+'</a>'):'<a href="'+x[3]+'#quiz">'+t.go+'</a>')+'</td>';tb.appendChild(tr)});
+ p.querySelector('.qstats').innerHTML='<div><b>'+done+'/'+L.length+'</b><span>'+t.done+'</span></div><div><b>'+pass+'</b><span>'+t.passed+'</span></div><div><b>'+(done?Math.round(sum/done)+'%':'—')+'</b><span>'+t.avg+'</span></div>';
+});
+});
 </script>
 </head>
 <body>
@@ -642,6 +709,16 @@ ul.querySelectorAll('input').forEach(function(i){if(s[i.id]){i.checked=true;i.cl
 <div class="call warn"><b class="k">Common mistake</b>Forcing every day into AMD. Range days and big news days often do not form the pattern.</div>
 <h2 id="s34">Summary</h2>
 <ul><li>Power of 3: accumulation (range), manipulation (false move and sweep), distribution (real move).</li><li>A bullish day&#x27;s low often forms early below the open; a bearish day&#x27;s high above it.</li><li>The New York midnight open is 10 am in Pakistan in winter and 9 am in summer.</li><li>With a bullish bias buy below the open, with a bearish bias sell above it, with confirmation.</li></ul>
+    <section class="smc-quiz" id="quiz" data-q="{&quot;slug&quot;:&quot;smc-power-of-3-amd&quot;,&quot;pass&quot;:70,&quot;n&quot;:10}" data-t="{&quot;h&quot;: &quot;Test yourself: Lesson {n} quiz&quot;, &quot;intro&quot;: &quot;{c} questions. Pick one answer for each and you will see at once whether it is right and why. Your score and grade appear at the end. You need {p}% to pass.&quot;, &quot;score&quot;: &quot;correct&quot;, &quot;of&quot;: &quot;of&quot;, &quot;ok&quot;: &quot;Correct&quot;, &quot;no&quot;: &quot;Not quite&quot;, &quot;right&quot;: &quot;Correct answer:&quot;, &quot;why&quot;: &quot;Why:&quot;, &quot;res&quot;: &quot;Your result&quot;, &quot;best&quot;: &quot;Best score so far&quot;, &quot;tries&quot;: &quot;Attempts&quot;, &quot;retry&quot;: &quot;Try again&quot;, &quot;g1&quot;: &quot;Excellent! You have mastered this lesson.&quot;, &quot;g2&quot;: &quot;Well done, you passed. Read the explanation for any question you missed.&quot;, &quot;g3&quot;: &quot;Not passed yet. Review the questions you missed below, reread the lesson and try again.&quot;, &quot;wrong&quot;: &quot;Questions you missed:&quot;, &quot;nx&quot;: &quot;Next lesson&quot;, &quot;reread&quot;: &quot;Reread the lesson&quot;, &quot;qn&quot;: &quot;Question&quot;}">
+  <h2>Test yourself: Lesson 4.3 quiz</h2>
+  <p class="qin">10 questions. Pick one answer for each and you will see at once whether it is right and why. Your score and grade appear at the end. You need 70% to pass.</p>
+  <div class="qbar"><div class="qfill"></div></div>
+  <p class="qsc" aria-live="polite"><b class="qs-c">0</b> correct · <span class="qs-a">0</span> / 10</p>
+  <ol class="qlist"><li class="qq"><p class="qt"><span class="qn">Question 1</span>What does AMD stand for?</p><div class="qos"><button type="button" class="qo" data-c="1">Accumulation, Manipulation, Distribution</button><button type="button" class="qo">Asia, Market, Day</button><button type="button" class="qo">Average, Mean, Deviation</button><button type="button" class="qo">Analysis, Model, Direction</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">Any period (day, week, session) usually unfolds in these three parts.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 2</span>What is manipulation?</p><div class="qos"><button type="button" class="qo" data-c="1">A fast move against the real direction sweeping a range edge</button><button type="button" class="qo">The day&#x27;s biggest move in the real direction</button><button type="button" class="qo">A tight, quiet range around the open</button><button type="button" class="qo">A two-sided spike at news time</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">It is also called the Judas swing.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 3</span>When does a bullish daily candle&#x27;s low usually form?</p><div class="qos"><button type="button" class="qo" data-c="1">Early in the day, below the open</button><button type="button" class="qo">Late in the day</button><button type="button" class="qo">Just above the open</button><button type="button" class="qo">Never</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">After the open price first goes down (the lower wick), then rallies and closes near the high.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 4</span>With a bullish bias, where should you look for buys?</p><div class="qos"><button type="button" class="qo" data-c="1">Below the open (cheap)</button><button type="button" class="qo">Above the open</button><button type="button" class="qo">At the day&#x27;s high</button><button type="button" class="qo">Anywhere</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">It is the premium and discount rule applied to the daily open.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 5</span>When is the New York midnight open in Pakistan time in winter?</p><div class="qos"><button type="button" class="qo" data-c="1">10:00 am</button><button type="button" class="qo">9:00 am</button><button type="button" class="qo">Midnight</button><button type="button" class="qo">1:00 pm</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">9:00 am in summer; the broker&#x27;s server open is often different, so draw a separate line.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 6</span>In the AMD map, roughly when is distribution in winter?</p><div class="qos"><button type="button" class="qo" data-c="1">15:00 to 22:00</button><button type="button" class="qo">06:00 to 10:00</button><button type="button" class="qo">10:00 to 15:00</button><button type="button" class="qo">01:00 to 05:00</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">Accumulation in Asia, manipulation mostly in London; these are a guide, not clock hands.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 7</span>In an AMD trade, where does the stop go (bullish)?</p><div class="qos"><button type="button" class="qo" data-c="1">Below the manipulation low</button><button type="button" class="qo">Above the midnight open</button><button type="button" class="qo">Near the Asian high</button><button type="button" class="qo">No stop is needed</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">Enter from the FVG or OB of the displacement after the sweep and CHoCH, below the open.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 8</span>In a bullish week, when does the weekly low often form?</p><div class="qos"><button type="button" class="qo" data-c="1">Monday or Tuesday</button><button type="button" class="qo">Friday</button><button type="button" class="qo">Wednesday night</button><button type="button" class="qo">Saturday</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">The real move runs Wednesday to Friday; it is a tendency, not a law.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 9</span>Why is selling below the open with a bullish bias wrong?</p><div class="qos"><button type="button" class="qo" data-c="1">It mistakes the manipulation for the real move</button><button type="button" class="qo">It is the best setup; below the open is cheap</button><button type="button" class="qo">Because the spread is lower below the open</button><button type="button" class="qo">It isn&#x27;t wrong; the bias can change anytime</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">Without a bias AMD doesn&#x27;t work either, because you can&#x27;t tell which move is false.</span></p></li><li class="qq"><p class="qt"><span class="qn">Question 10</span>Gold example: midnight open 4,124, sweep to 4,112, entry 4,117, stop 4,109. Where is the first partial profit?</p><div class="qos"><button type="button" class="qo" data-c="1">The Asian high, 4,129</button><button type="button" class="qo">The day&#x27;s high, 4,152</button><button type="button" class="qo">The midnight open, 4,124</button><button type="button" class="qo">The sweep low, 4,112</button></div><p class="qw" hidden><b class="qv"></b> <span class="qr"></span><span class="qe">The rest at PDH 4,148 (about 1:3.9); the daily candle: open 4,124, low 4,112, high 4,152, close 4,146.</span></p></li></ol>
+  <div class="qres" hidden aria-live="polite"><h3>Your result</h3><div class="qbig"></div><p class="qgr"></p><p class="qbest"></p>
+    <div class="qmiss" hidden><b>Questions you missed:</b><ol></ol></div>
+    <p class="qbtns"><button type="button" class="btn qre">Try again</button> <a class="btn" href="#top">Reread the lesson</a> <a class="btn gold qnx" href="smc-news-time-en.html" hidden>Next lesson ›</a></p></div>
+</section>
     <div class="smc-box"><h2>Lesson checklist</h2><p>Tick each point once you understand it. Your ticks are saved in this browser.</p><ul class="ck" data-k="smc-power-of-3-amd"><li><input type="checkbox" id="c0"><label for="c0">I can identify all three parts of AMD</label></li><li><input type="checkbox" id="c1"><label for="c1">I draw the midnight open every day</label></li><li><input type="checkbox" id="c2"><label for="c2">With a bullish bias I look for buys below the open, with a bearish bias sells above it</label></li><li><input type="checkbox" id="c3"><label for="c3">I wait for a CHoCH after the manipulation</label></li><li><input type="checkbox" id="c4"><label for="c4">I know not every day forms AMD</label></li></ul></div>
     <div class="smc-box asg"><h2>Assignment</h2><ol><li>Add a midnight open line on Gold (indicator or by hand).</li><li>Look at the last 20 days: how many bullish daily candles made their low below the open early in the day?</li><li>Do the same for the highs of bearish days.</li><li>Mark the A, M and D parts on 5 days and write their times.</li><li>Write a full trade plan for the best day.</li><li>Post your results in the group.</li></ol><p>Post your assignment screenshots with your reasons in our free Facebook group, where your charts will be checked.</p><a class="btn gold" href="https://www.facebook.com/groups/qaziforextips" target="_blank" rel="noopener">Join the free group</a></div>
     <div class="ls-faq en-faq"><h2>Questions</h2><details><summary>What is the Power of 3?</summary><p>Three parts of a day or week: accumulation (range), manipulation (a false move and sweep) and distribution (the real move).</p></details><details><summary>What is the midnight open?</summary><p>New York midnight, treated as the day&#x27;s true open; 10 am in Pakistan in winter and 9 am in summer.</p></details><details><summary>What is a Judas swing?</summary><p>The false manipulation move that goes against the real direction to take liquidity.</p></details><details><summary>Does AMD form every day?</summary><p>No. Range days and big news days often do not show a clean pattern.</p></details></div>
