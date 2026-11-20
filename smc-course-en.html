@@ -700,6 +700,19 @@ document.querySelectorAll('.smc-prac').forEach(function(z){var t=JSON.parse(z.da
 .dl-i img{width:72px;height:auto;border-radius:6px;border:1px solid var(--line);flex:none;background:#fff}
 .dl-i h3{margin:0 0 4px;font-size:17px;line-height:1.6}.dl-i p{margin:0 0 8px!important;font-size:14.5px!important;line-height:1.7!important}
 .dl-i .btn{padding:7px 14px;font-size:14px}.dl-i,.dl-box{scroll-margin-top:90px}.dl-i:target{box-shadow:0 0 0 3px rgba(231,185,79,.7);background:rgba(231,185,79,.12)}.dl-lead a{color:var(--gold-t,var(--gold));font-weight:700}.dl-i .alt{display:block;margin-top:6px;font-size:13px}</style><style>
+.smc-chips{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 4px;padding:0;list-style:none}
+.smc-chips li{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border:1px solid color-mix(in srgb,var(--gold) 55%,transparent);border-radius:999px;background:color-mix(in srgb,var(--gold) 10%,transparent);font:600 14px/1.3 var(--f-body);color:var(--ink)}
+.smc-chips li::before{content:"✓";color:var(--gold);font-weight:800}
+.smc-chips.ur li{font-family:var(--f-ur);font-size:15px;line-height:1.9;padding:2px 14px}
+.smc-cta-wrap{margin:20px 0 6px;display:flex;flex-wrap:wrap;align-items:center;gap:12px 18px}
+.btn.gold.smc-cta{font-size:19px;padding:18px 30px;border-radius:10px;margin:0;width:auto;justify-self:auto}
+.btn.gold.smc-cta:hover{transform:translateY(-2px)}
+.smc-cta-ur{font-family:var(--f-ur)!important;font-size:21px!important;line-height:1.6!important;padding:12px 30px!important}
+.smc-cta-note{font:500 14px/1.5 var(--f-body);color:var(--ink-2,var(--ink));opacity:.85}
+.smc-cta-note a{color:inherit}
+.smc-cta-note.ur{font-family:var(--f-ur);font-size:15px;line-height:1.9}
+@media(max-width:600px){.btn.gold.smc-cta{width:100%}.smc-cta-wrap{flex-direction:column;align-items:stretch;text-align:center}}
+</style><style>
 .smc-road{margin:22px 0 26px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px 18px 10px}
 .smc-road ol{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:34px 44px}
 .smc-road li{position:relative;margin:0}
@@ -737,10 +750,12 @@ document.querySelectorAll('.smc-prac').forEach(function(z){var t=JSON.parse(z.da
   <nav class="lang-sw" aria-label="Language / زبان"><a class="" href="smc-course.html" hreflang="ur" lang="ur">اردو</a><a class="on" href="smc-course-en.html" hreflang="en" lang="en" aria-current="page">English</a></nav>
   <div class="ls-meta">Free course · 38 lessons · 9 phases</div>
   <h1 class="smc-h1e">SMC Course: The Complete Smart Money Concepts Roadmap</h1>
+  <ul class="smc-chips"><li>100% free</li><li>No sign-up, no email</li><li>Every lesson in English and Urdu</li><li>38 lessons with quizzes and chart practice</li></ul>
   <p class="smc-leade">This free course takes SMC from zero to a complete trading plan: 9 phases, 38 lessons. Every lesson has chart diagrams to explain it, and ends with a checklist and a practical assignment. Read in order and don&#x27;t move on without passing each phase gate.</p>
+  <div class="smc-cta-wrap"><a class="btn gold smc-cta" href="smc-kya-hai-en.html">Start Lesson 0.1 →</a><span class="smc-cta-note">First lesson: What Is SMC (Smart Money Concepts)? · about 45 min · <a href="#phase-0">See the full roadmap</a></span></div>
   <p class="smc-leade dl-lead">The course also comes with three free downloads: the <a href="#dl-poi">POI scorecard</a> (printable PDF), the <a href="#dl-mc">master checklist and 15 mistakes</a> (PDF) and the <a href="#dl-jr">trading journal sheet</a> (Excel that does the maths). Click a name to jump straight to its download.</p>
   <div class="byline smc-by"><img src="img/smc/dr-qazi-96.webp" alt="Dr. Qazi Abdul Basit" width="46" height="46"><div>Written by <a href="about.html" rel="author"><b>Dr. Qazi Abdul Basit</b></a>, Ph.D · Forex &amp; Gold trader since 2013<br>Updated 19 November 2026 · <a href="#author">About the author</a></div></div>
-  <p style="margin-top:18px"><a class="btn gold" href="smc-kya-hai-en.html">Start the first lesson</a></p>
+
 </div><figure class="qa-art"><img src="img/smc/smc-course-en.webp" srcset="img/smc/smc-course-en-540.webp 540w, img/smc/smc-course-en.webp 1080w" sizes="(min-width:1000px) 420px, 100vw" width="1080" height="1350" alt="SMC course roadmap: 3D staircase from phase 0 basics through structure, liquidity, POI zones, entry models and risk to a full trading plan" fetchpriority="high" decoding="async"></figure></div></section>
 <div class="wrap ls-body">
   <article class="ls-art smc-art en-art">
