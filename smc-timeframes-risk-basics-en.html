@@ -610,13 +610,14 @@ footer a:hover{color:var(--ink)}
 .qbtns .btn{margin:4px}
 .smc-prog{margin:34px 0;border:2px solid var(--gold);border-radius:16px;padding:16px 22px;background:var(--surface)}
 .smc-prog h2{margin-top:0!important}
-.qstats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:10px 0 14px}
+.qstats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:10px 0 14px}
 .qstats div{border:1px solid var(--line);border-radius:12px;padding:8px;text-align:center}
 .qstats b{display:block;font:700 30px/1.3 var(--f-body);color:var(--gold-t,var(--gold));direction:ltr}
 .qstats span{font-size:.85em;color:var(--muted)}
 .smc-prog .st-ok{color:#22a56b;font-weight:600}.smc-prog .st-no{color:#e5535f;font-weight:600}
 .smc-prog td.pc{direction:ltr;text-align:center!important}
 .en-art .qn{margin-right:8px}
+@media (max-width:600px){.qstats{grid-template-columns:repeat(2,1fr)}}
 
 .ls-body>.smc-art{min-width:0;max-width:100%}
 .smc-by img{border-radius:50%;object-fit:cover}
@@ -635,6 +636,23 @@ footer a:hover{color:var(--ink)}
 .au-ln{font-size:.92em}
 .en-au{direction:ltr;text-align:left}
 @media (max-width:640px){.smc-author{flex-direction:column;align-items:center;text-align:center}.au-st{justify-content:center}}
+
+.smc-prac{margin:40px 0;border:2px solid var(--gold);border-radius:16px;padding:18px 22px;background:var(--surface)}
+.smc-prac h2{margin-top:0!important}
+.smc-prac .pin{color:var(--muted)}
+.smc-prac .pq{margin:12px 0 10px!important}
+.pos{display:grid;gap:8px}
+.pos-l{grid-template-columns:repeat(4,1fr);direction:ltr}
+.po{all:unset;box-sizing:border-box;cursor:pointer;border:1px solid var(--line);border-radius:10px;padding:6px 14px;font:inherit;font-size:.95em;color:var(--ink);text-align:center}
+.po.pl{font:700 20px/1.6 var(--f-body);direction:ltr}
+.po:hover,.po:focus-visible{border-color:var(--gold)}
+.smc-prac.done .po{cursor:default}
+.po.ok{border-color:#22a56b!important;background:rgba(34,165,107,.14)}
+.po.bad{border-color:#e5535f!important;background:rgba(229,83,95,.14)}
+.pres{margin-top:12px}
+.pres .pv{font-weight:700}
+.pres .pv.y{color:#22a56b}.pres .pv.n{color:#e5535f}
+.pres h3{margin:14px 0 6px!important}
 @media (max-width:760px){.lang-sw{display:flex}.lang-sw a{flex:1;min-width:0}.smc-fig .l{font-size:16px}}
 </style>
 <script>
@@ -659,12 +677,22 @@ document.querySelectorAll('.smc-quiz').forEach(function(z){
  z.querySelector('.qre').addEventListener('click',function(){ans=0;cor=0;miss=[];qs.forEach(function(q){q.classList.remove('done');q.querySelectorAll('.qo').forEach(function(b){b.classList.remove('ok','bad')});q.querySelector('.qw').hidden=true;shuf(q)});z.querySelector('.qres').hidden=true;upd();qs[0].scrollIntoView({behavior:'smooth',block:'center'})});
 });
 document.querySelectorAll('.smc-prog').forEach(function(p){
- var L=JSON.parse(p.dataset.l),t=JSON.parse(p.dataset.t),P=+p.dataset.p,d=ld(),tb=p.querySelector('tbody'),done=0,pass=0,sum=0;
+ var L=JSON.parse(p.dataset.l),t=JSON.parse(p.dataset.t),P=+p.dataset.p,d=ld(),tb=p.querySelector('tbody'),done=0,pass=0,sum=0,pd={},pc=0;try{pd=JSON.parse(localStorage.getItem('smc-prac')||'{}')}catch(e){}
  L.forEach(function(x){var r=d[x[0]],tr=document.createElement('tr'),a='<a href="'+x[3]+'#quiz">'+x[1]+' · '+x[2]+'</a>';
   if(r){done++;sum+=r.best;if(r.best>=P)pass++}
-  tr.innerHTML='<td>'+a+'</td><td class="pc">'+(r?r.best+'%':'—')+'</td><td>'+(r?(r.best>=P?'<span class="st-ok">✓ '+t.ok+'</span>':'<a class="st-no" href="'+x[3]+'#quiz">'+t.no+'</a>'):'<a href="'+x[3]+'#quiz">'+t.go+'</a>')+'</td>';tb.appendChild(tr)});
- p.querySelector('.qstats').innerHTML='<div><b>'+done+'/'+L.length+'</b><span>'+t.done+'</span></div><div><b>'+pass+'</b><span>'+t.passed+'</span></div><div><b>'+(done?Math.round(sum/done)+'%':'—')+'</b><span>'+t.avg+'</span></div>';
+  tr.innerHTML='<td>'+a+'</td><td class="pc">'+(r?r.best+'%':'—')+'</td><td>'+(r?(r.best>=P?'<span class="st-ok">✓ '+t.ok+'</span>':'<a class="st-no" href="'+x[3]+'#quiz">'+t.no+'</a>'):'<a href="'+x[3]+'#quiz">'+t.go+'</a>')+'</td><td class="pc">'+(x[0] in pd?(pd[x[0]]?(pc++,'<span class="st-ok">✓</span>'):'<a class="st-no" href="'+x[3]+'#practice">✗</a>'):'<a href="'+x[3]+'#practice">—</a>')+'</td>';tb.appendChild(tr)});
+ p.querySelector('.qstats').innerHTML='<div><b>'+done+'/'+L.length+'</b><span>'+t.done+'</span></div><div><b>'+pass+'</b><span>'+t.passed+'</span></div><div><b>'+(done?Math.round(sum/done)+'%':'—')+'</b><span>'+t.avg+'</span></div><div><b>'+pc+'</b><span>'+t.prd+'</span></div>';
 });
+});
+
+document.addEventListener('DOMContentLoaded',function(){
+var K='smc-prac';function ld(){try{return JSON.parse(localStorage.getItem(K)||'{}')}catch(e){return{}}}
+document.querySelectorAll('.smc-prac').forEach(function(z){var t=JSON.parse(z.dataset.t);
+ z.querySelectorAll('.po').forEach(function(b){b.addEventListener('click',function(){if(z.classList.contains('done'))return;z.classList.add('done');
+  var c=z.querySelector('.po[data-c]'),v=z.querySelector('.pv'),ok=b===c;c.classList.add('ok');if(!ok)b.classList.add('bad');
+  v.className='pv '+(ok?'y':'n');v.textContent=ok?t.ok:(t.no+' '+t.right+' '+c.textContent);
+  var r=z.querySelector('.pres');r.hidden=false;var im=r.querySelector('img');if(im)im.loading='eager';
+  var d=ld();if(!(z.dataset.s in d)){d[z.dataset.s]=ok?1:0;try{localStorage.setItem(K,JSON.stringify(d))}catch(e){}}})})});
 });
 </script>
 </head>
@@ -743,6 +771,14 @@ document.querySelectorAll('.smc-prog').forEach(function(p){
 <div class="call warn"><b class="k">Common mistake</b>Taking big risk on a small account &quot;because it is small anyway&quot;. The small account is where you practise; the habits you build there go with you to a bigger one.</div>
 <h2 id="s50">Summary</h2>
 <ul><li>Higher timeframe for bias, middle for zones, lower for entry.</li><li>At most 1% risk per trade, plus a fixed daily limit.</li><li>Stop in the right place first, then the lot from that distance; always round the lot down.</li><li>At least 1:2 RR; at that ratio one win in three is enough.</li></ul>
+    <section class="smc-prac" id="practice" data-s="smc-timeframes-risk-basics" data-t="{&quot;ok&quot;:&quot;Correct!&quot;,&quot;no&quot;:&quot;Not quite.&quot;,&quot;right&quot;:&quot;Correct answer:&quot;}">
+  <h2>Spot it on the chart: practice</h2>
+  <p class="pin">This is a real Gold chart (Dukascopy data, Pakistan time). Study it and pick an answer. After you answer, the fully marked chart and the explanation appear.</p>
+  <figure class="smc-fig"><img src="img/smc/fig/smc-timeframes-risk-basics-pq-en.webp" width="1440" height="720" alt="Question chart" loading="lazy" decoding="async"><figcaption>Question chart</figcaption></figure>
+  <p class="pq"><b>10,000-dollar account, 1% risk. Sell entry 4,230.8, SL 4,261.0 (a 30.2-dollar distance). What is the Gold lot?</b></p>
+  <div class="pos pos-l"><button type="button" class="po pl" data-c="1">0.03</button><button type="button" class="po pl">0.30</button><button type="button" class="po pl">0.08</button><button type="button" class="po pl">1.00</button></div>
+  <div class="pres" hidden><p class="pv"></p><p class="pw">Risk is 100 dollars. Lot = 100 ÷ (30.2 × 100) = 0.033, rounded down to 0.03. In this trade price reached 4,140.5 on 28 Sep.</p><h3>The marked chart</h3><figure class="smc-fig"><img src="img/smc/fig/smc-timeframes-risk-basics-pa-en.webp" width="1440" height="720" alt="Answer chart" loading="lazy" decoding="async"><figcaption>Answer chart</figcaption></figure></div>
+</section>
     <section class="smc-quiz" id="quiz" data-q="{&quot;slug&quot;:&quot;smc-timeframes-risk-basics&quot;,&quot;pass&quot;:70,&quot;n&quot;:14}" data-t="{&quot;h&quot;: &quot;Test yourself: Lesson {n} quiz&quot;, &quot;intro&quot;: &quot;{c} questions. Pick one answer for each and you will see at once whether it is right and why. Your score and grade appear at the end. You need {p}% to pass.&quot;, &quot;score&quot;: &quot;correct&quot;, &quot;of&quot;: &quot;of&quot;, &quot;ok&quot;: &quot;Correct&quot;, &quot;no&quot;: &quot;Not quite&quot;, &quot;right&quot;: &quot;Correct answer:&quot;, &quot;why&quot;: &quot;Why:&quot;, &quot;res&quot;: &quot;Your result&quot;, &quot;best&quot;: &quot;Best score so far&quot;, &quot;tries&quot;: &quot;Attempts&quot;, &quot;retry&quot;: &quot;Try again&quot;, &quot;g1&quot;: &quot;Excellent! You have mastered this lesson.&quot;, &quot;g2&quot;: &quot;Well done, you passed. Read the explanation for any question you missed.&quot;, &quot;g3&quot;: &quot;Not passed yet. Review the questions you missed below, reread the lesson and try again.&quot;, &quot;wrong&quot;: &quot;Questions you missed:&quot;, &quot;nx&quot;: &quot;Next lesson&quot;, &quot;reread&quot;: &quot;Reread the lesson&quot;, &quot;qn&quot;: &quot;Question&quot;}">
   <h2>Test yourself: Lesson 0.4 quiz</h2>
   <p class="qin">14 questions. Pick one answer for each and you will see at once whether it is right and why. Your score and grade appear at the end. You need 70% to pass.</p>
