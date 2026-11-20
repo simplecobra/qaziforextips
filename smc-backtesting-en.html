@@ -695,7 +695,11 @@ document.querySelectorAll('.smc-prac').forEach(function(z){var t=JSON.parse(z.da
   var d=ld();if(!(z.dataset.s in d)){d[z.dataset.s]=ok?1:0;try{localStorage.setItem(K,JSON.stringify(d))}catch(e){}}})})});
 });
 </script>
-</head>
+<style>.dl-box .dl-g{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;margin-top:10px}
+.dl-i{display:flex;gap:12px;align-items:flex-start;border:1px solid var(--line);border-radius:12px;padding:12px;background:var(--surface);min-width:0}
+.dl-i img{width:72px;height:auto;border-radius:6px;border:1px solid var(--line);flex:none;background:#fff}
+.dl-i h3{margin:0 0 4px;font-size:17px;line-height:1.6}.dl-i p{margin:0 0 8px!important;font-size:14.5px!important;line-height:1.7!important}
+.dl-i .btn{padding:7px 14px;font-size:14px}.dl-i .alt{display:block;margin-top:6px;font-size:13px}</style></head>
 <body>
 
 <header class="top"><div class="wrap">
@@ -757,6 +761,7 @@ document.querySelectorAll('.smc-prac').forEach(function(z){var t=JSON.parse(z.da
 <p><b>Result: unfiltered CRT lost slightly over these two months.</b> We also tried an RR filter (at least 1:1 and 1:1.5) and it was still negative. That is the value of a backtest: before risking real money, you learn this rule is not enough on its own. Next step: add <b>one</b> filter (only in the H4 bias direction, or only sweeps in a killzone) and retest on more months. Two months and 62 trades are an early estimate, not a final verdict.</p>
 <h2 id="s36">Summary</h2>
 <ul><li>Write the rule first and do not change it mid-test.</li><li>One instrument, one timeframe set, replay without looking ahead.</li><li>At least 50 trades over 3 months; check win rate, average RR, expectancy, losing streak and drawdown.</li><li>Avoid hindsight, overfitting, chosen dates and forgetting the spread.</li></ul>
+    <div class="smc-box dl-box"><h2>Free downloads</h2><p>Print them or keep them on your phone. No sign-up, no email.</p><div class="dl-g"><div class="dl-i"><img src="img/smc/dl/smc-trading-journal.webp" width="240" height="339" alt="Trading Journal Sheet (Excel)" loading="lazy" decoding="async"><div><h3>Trading Journal Sheet (Excel)</h3><p>One row per trade with dropdowns and automatic maths: win rate, total R, expectancy, drawdown, results by session and emotion, weekly review. Works in Excel and Google Sheets.</p><a class="btn gold" href="downloads/smc/SMC-Trading-Journal-Qazi-Forex-Tips.xlsx" download>Free download</a><a class="alt" href="downloads/smc/SMC-Trading-Journal-Urdu-Qazi-Forex-Tips.xlsx" download lang="ur" dir="rtl" style="font-family:var(--f-ur);text-align:left">اردو میں</a></div></div></div></div>
     <section class="smc-prac" id="practice" data-s="smc-backtesting" data-t="{&quot;ok&quot;:&quot;Correct!&quot;,&quot;no&quot;:&quot;Not quite.&quot;,&quot;right&quot;:&quot;Correct answer:&quot;}">
   <h2>Spot it on the chart: practice</h2>
   <p class="pin">This is a real Gold chart (Dukascopy data, Pakistan time). Study it and pick an answer. After you answer, the fully marked chart and the explanation appear.</p>

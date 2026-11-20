@@ -695,7 +695,11 @@ document.querySelectorAll('.smc-prac').forEach(function(z){var t=JSON.parse(z.da
   var d=ld();if(!(z.dataset.s in d)){d[z.dataset.s]=ok?1:0;try{localStorage.setItem(K,JSON.stringify(d))}catch(e){}}})})});
 });
 </script>
-</head>
+<style>.dl-box .dl-g{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;margin-top:10px}
+.dl-i{display:flex;gap:12px;align-items:flex-start;border:1px solid var(--line);border-radius:12px;padding:12px;background:var(--surface);min-width:0}
+.dl-i img{width:72px;height:auto;border-radius:6px;border:1px solid var(--line);flex:none;background:#fff}
+.dl-i h3{margin:0 0 4px;font-size:17px;line-height:1.6}.dl-i p{margin:0 0 8px!important;font-size:14.5px!important;line-height:1.7!important}
+.dl-i .btn{padding:7px 14px;font-size:14px}.dl-i .alt{display:block;margin-top:6px;font-size:13px}</style></head>
 <body>
 
 <header class="top"><div class="wrap">
@@ -758,6 +762,7 @@ document.querySelectorAll('.smc-prac').forEach(function(z){var t=JSON.parse(z.da
 <div class="call warn"><b class="k">Common mistake</b>Assuming every FVG must fill. In a strong trend many FVGs stay unfilled.</div>
 <h2 id="s37">Summary</h2>
 <ul><li>An FVG is made of three candles: the gap between the wicks of candle 1 and candle 3.</li><li>The CE, or 50%, is the most important level.</li><li>A strong FVG has displacement, a structure break, the bias behind it, and is still unfilled.</li><li>If a body closes through the whole FVG, it becomes an IFVG and works the other way.</li></ul>
+    
     <section class="smc-prac" id="practice" data-s="smc-fair-value-gap-fvg" data-t="{&quot;ok&quot;:&quot;Correct!&quot;,&quot;no&quot;:&quot;Not quite.&quot;,&quot;right&quot;:&quot;Correct answer:&quot;}">
   <h2>Spot it on the chart: practice</h2>
   <p class="pin">This is a real Gold chart (Dukascopy data, Pakistan time). Study it and pick an answer. After you answer, the fully marked chart and the explanation appear.</p>
