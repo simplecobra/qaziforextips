@@ -130,7 +130,7 @@ A: Group ke rules sakht hain:
 - Beech mein course chhorne walon ko academy mein **dobara kabhi admission nahi** milta
 Course free hai, lekin is ka matlab yeh nahi ke yahan rules nahi.
 
-Q: tradingview | kaunsa software | kis software | software | konsa software | platform kaunsa | chart kahan
+Q: tradingview | trading view | kaunsa software | kis software | software | konsa software | platform kaunsa | chart kahan
 A: Course ki practice **TradingView** pe hoti hai. Shuru mein TradingView ki basics ki video di jati hai taake practice ke waqt koi pareshani na ho:
 [TradingView Tutorial](https://qaziforextips.com/lesson-tradingview-tutorial.html)
 
@@ -355,3 +355,11 @@ LINK: lesson-how-to-make-money-in-forex.html | How to Make Money in Forex: Who W
 LINK: lesson-what-is-forex-trading.html | What is Forex Trading? (Lesson 1.1)
 LINK: forex-roadmap.html | Forex Roadmap for Beginners: 6 Steps
 LINK: contact.html | Contact Qazi Forex Tips
+
+Q: detail kahan | detail kaha | detail kahan se | detail kahan sy | detail kaha sy | detail kahan milegi | poori detail | puri detail | mukammal detail | tafseel | detail mein kahan | main points | notes kahan | full lesson kahan
+A: Jo **main points / khulasa** aap ne parha hai, us ki poori detail usi lesson ke page par hai:
+- Page ke **upar video** hai: poora lecture Urdu/Hindi mein, wahi dekhein
+- Video ke neeche **mukammal notes** hain: tables, misaalein, FAQs aur practical task
+Saare courses aur YouTube playlists (lesson ke notes ke saath) ek jagah: [Free Courses & Playlists](https://qaziforextips.com/youtube.html)
+Bilkul shuru se seekhna ho to: [Forex Basics: Zero to Hero](https://qaziforextips.com/forex-basics-course.html) · SMC ke liye: [SMC Course in Urdu](https://qaziforextips.com/smc-course.html)
+Phir bhi koi point samajh na aaye to WhatsApp par poochein: +92-323-6700010

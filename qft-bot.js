@@ -201,9 +201,21 @@
   function bubble(role, text, extraHtml) {
     var d = document.createElement("div");
     d.className = "qb-m " + (role === "user" ? "me" : "bot");
-    if (role === "user") d.textContent = text; else d.innerHTML = render(text) + (extraHtml || "");
+    if (role === "user") d.textContent = text; else { d.innerHTML = render(text) + (extraHtml || ""); checkLinks(d); }
     log.appendChild(d); log.scrollTop = log.scrollHeight;
     return d;
+  }
+  /* AI kabhi kabhi website ka aisa link bana deta hai jo mojood nahi. Har andar wala link check karo;
+     agar page nahi milta (404) to link hata kar sirf text chhor do, taa ke visitor ghalat page par na jaye. */
+  function checkLinks(el) {
+    if (!window.fetch) return;
+    Array.prototype.forEach.call(el.querySelectorAll('a[href*="qaziforextips.com"]'), function (a) {
+      var u = a.href.split("#")[0];
+      if (location.hostname !== "qaziforextips.com") return;
+      fetch(u.replace(/^https?:\/\/(www\.)?qaziforextips\.com/, ""), { method: "HEAD" }).then(function (r) {
+        if (r.status === 404) { var t = document.createElement("b"); t.textContent = a.textContent; a.parentNode.replaceChild(t, a); }
+      }).catch(function () {});
+    });
   }
   function waButton(question) {
     var msg = "Assalam o Alaikum, mera sawal hai: " + (question || "");
