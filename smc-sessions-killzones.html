@@ -695,7 +695,11 @@ document.querySelectorAll('.smc-prac').forEach(function(z){var t=JSON.parse(z.da
   var d=ld();if(!(z.dataset.s in d)){d[z.dataset.s]=ok?1:0;try{localStorage.setItem(K,JSON.stringify(d))}catch(e){}}})})});
 });
 </script>
-</head>
+<style>.dl-box .dl-g{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;margin-top:10px}
+.dl-i{display:flex;gap:12px;align-items:flex-start;border:1px solid var(--line);border-radius:12px;padding:12px;background:var(--surface);min-width:0}
+.dl-i img{width:72px;height:auto;border-radius:6px;border:1px solid var(--line);flex:none;background:#fff}
+.dl-i h3{margin:0 0 4px;font-size:17px;line-height:1.6}.dl-i p{margin:0 0 8px!important;font-size:14.5px!important;line-height:1.7!important}
+.dl-i .btn{padding:7px 14px;font-size:14px}.dl-i .alt{display:block;margin-top:6px;font-size:13px}</style></head>
 <body>
 
 <header class="top"><div class="wrap">
@@ -755,6 +759,7 @@ document.querySelectorAll('.smc-prac').forEach(function(z){var t=JSON.parse(z.da
 <div class="call warn"><b class="k">عام غلطی</b>لندن کی پہلی موومنٹ کو ہی اصل سمت سمجھ کر بریک آؤٹ میں کودنا۔ اکثر وہی جوڈاس سوئنگ ہوتی ہے۔</div>
 <h2 id="s33">خلاصہ</h2>
 <ul><li>بڑی موومنٹ دن کے خاص گھنٹوں میں آتی ہے: لندن اور نیویارک کے کل زون۔</li><li>پاکستان ٹائم (سردی): ایشیا 06 سے 10، لندن 12 سے 15، نیویارک 17 سے 20، لندن کلوز 20 سے 22۔ گرمی میں ایک گھنٹہ پہلے۔</li><li>عام دن: ایشیا رینج، لندن کا سویپ، نیویارک کی اصل موومنٹ۔</li><li>وقت فلٹر ہے، سگنل نہیں۔ POI اور کنفرمیشن کے ساتھ ہی استعمال کریں۔</li></ul>
+    
     <section class="smc-prac" id="practice" data-s="smc-sessions-killzones" data-t="{&quot;ok&quot;:&quot;درست!&quot;,&quot;no&quot;:&quot;غلط۔&quot;,&quot;right&quot;:&quot;درست جواب:&quot;}">
   <h2>چارٹ پہچانیں: پریکٹس</h2>
   <p class="pin">یہ گولڈ کا اصل چارٹ ہے (Dukascopy ڈیٹا، وقت پاکستان کا)۔ چارٹ غور سے دیکھیں اور جواب چنیں۔ جواب کے بعد مکمل مارک کیا ہوا چارٹ اور وضاحت سامنے آئے گی۔</p>

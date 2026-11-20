@@ -695,7 +695,11 @@ document.querySelectorAll('.smc-prac').forEach(function(z){var t=JSON.parse(z.da
   var d=ld();if(!(z.dataset.s in d)){d[z.dataset.s]=ok?1:0;try{localStorage.setItem(K,JSON.stringify(d))}catch(e){}}})})});
 });
 </script>
-</head>
+<style>.dl-box .dl-g{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;margin-top:10px}
+.dl-i{display:flex;gap:12px;align-items:flex-start;border:1px solid var(--line);border-radius:12px;padding:12px;background:var(--surface);min-width:0}
+.dl-i img{width:72px;height:auto;border-radius:6px;border:1px solid var(--line);flex:none;background:#fff}
+.dl-i h3{margin:0 0 4px;font-size:17px;line-height:1.6}.dl-i p{margin:0 0 8px!important;font-size:14.5px!important;line-height:1.7!important}
+.dl-i .btn{padding:7px 14px;font-size:14px}.dl-i .alt{display:block;margin-top:6px;font-size:13px}</style></head>
 <body>
 
 <header class="top"><div class="wrap">
@@ -752,6 +756,7 @@ document.querySelectorAll('.smc-prac').forEach(function(z){var t=JSON.parse(z.da
 <div class="call warn"><b class="k">Common mistake</b>Forgetting the winter and summer difference. After November the New York AM window is 8 pm in Pakistan; in summer it is 7 pm.</div>
 <h2 id="s31">Summary</h2>
 <ul><li>Silver Bullet: in a one-hour window, a sweep, displacement, an FVG, and an entry from the FVG.</li><li>Windows: 3 to 4 am, 10 to 11 am and 2 to 3 pm New York time; in Pakistan winter 13 to 14, 20 to 21 and 00 to 01.</li><li>Stop beyond the sweep, target the nearby liquidity, RR at least 1:2.</li><li>Time alone is not enough: bias, liquidity and your own backtest are required.</li></ul>
+    
     <section class="smc-prac" id="practice" data-s="smc-silver-bullet" data-t="{&quot;ok&quot;:&quot;Correct!&quot;,&quot;no&quot;:&quot;Not quite.&quot;,&quot;right&quot;:&quot;Correct answer:&quot;}">
   <h2>Spot it on the chart: practice</h2>
   <p class="pin">This is a real Gold chart (Dukascopy data, Pakistan time). Study it and pick an answer. After you answer, the fully marked chart and the explanation appear.</p>

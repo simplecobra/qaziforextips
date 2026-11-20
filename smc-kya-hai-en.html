@@ -695,7 +695,11 @@ document.querySelectorAll('.smc-prac').forEach(function(z){var t=JSON.parse(z.da
   var d=ld();if(!(z.dataset.s in d)){d[z.dataset.s]=ok?1:0;try{localStorage.setItem(K,JSON.stringify(d))}catch(e){}}})})});
 });
 </script>
-</head>
+<style>.dl-box .dl-g{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;margin-top:10px}
+.dl-i{display:flex;gap:12px;align-items:flex-start;border:1px solid var(--line);border-radius:12px;padding:12px;background:var(--surface);min-width:0}
+.dl-i img{width:72px;height:auto;border-radius:6px;border:1px solid var(--line);flex:none;background:#fff}
+.dl-i h3{margin:0 0 4px;font-size:17px;line-height:1.6}.dl-i p{margin:0 0 8px!important;font-size:14.5px!important;line-height:1.7!important}
+.dl-i .btn{padding:7px 14px;font-size:14px}.dl-i .alt{display:block;margin-top:6px;font-size:13px}</style></head>
 <body>
 
 <header class="top"><div class="wrap">
@@ -760,6 +764,7 @@ document.querySelectorAll('.smc-prac').forEach(function(z){var t=JSON.parse(z.da
 <p>That is what SMC teaches you to read: where stops sit, when the large player takes them, and which way the real move goes after that.</p>
 <h2 id="s39">Summary</h2>
 <ul><li>SMC is a structured way to read the footprints of large orders on the chart.</li><li>It has five parts: structure, liquidity, POI, time and entry, with risk management under all of them.</li><li>SMC gives no signals and does not win every trade; patience, backtesting and risk control make the real difference.</li><li>Study this course in order and pass each phase gate before moving on.</li></ul>
+    
     <section class="smc-prac" id="practice" data-s="smc-kya-hai" data-t="{&quot;ok&quot;:&quot;Correct!&quot;,&quot;no&quot;:&quot;Not quite.&quot;,&quot;right&quot;:&quot;Correct answer:&quot;}">
   <h2>Spot it on the chart: practice</h2>
   <p class="pin">This is a real Gold chart (Dukascopy data, Pakistan time). Study it and pick an answer. After you answer, the fully marked chart and the explanation appear.</p>

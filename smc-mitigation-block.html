@@ -695,7 +695,11 @@ document.querySelectorAll('.smc-prac').forEach(function(z){var t=JSON.parse(z.da
   var d=ld();if(!(z.dataset.s in d)){d[z.dataset.s]=ok?1:0;try{localStorage.setItem(K,JSON.stringify(d))}catch(e){}}})})});
 });
 </script>
-</head>
+<style>.dl-box .dl-g{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;margin-top:10px}
+.dl-i{display:flex;gap:12px;align-items:flex-start;border:1px solid var(--line);border-radius:12px;padding:12px;background:var(--surface);min-width:0}
+.dl-i img{width:72px;height:auto;border-radius:6px;border:1px solid var(--line);flex:none;background:#fff}
+.dl-i h3{margin:0 0 4px;font-size:17px;line-height:1.6}.dl-i p{margin:0 0 8px!important;font-size:14.5px!important;line-height:1.7!important}
+.dl-i .btn{padding:7px 14px;font-size:14px}.dl-i .alt{display:block;margin-top:6px;font-size:13px}</style></head>
 <body>
 
 <header class="top"><div class="wrap">
@@ -750,6 +754,7 @@ document.querySelectorAll('.smc-prac').forEach(function(z){var t=JSON.parse(z.da
 <div class="call warn"><b class="k">عام غلطی</b>بہت بڑے زون پر ٹریڈ۔ اگر سبز کینڈلز کا گروپ بہت بڑا ہے تو 50% یا اوپری کینڈل لیں، ورنہ سٹاپ لاس بہت بڑا ہو گا۔</div>
 <h2 id="s28">خلاصہ</h2>
 <ul><li>مٹیگیشن بلاک: فیل ہونے والا آرڈر بلاک جس سے پہلے لیکویڈیٹی سویپ نہیں ہوئی۔</li><li>بُلش ترتیب: ہائی، ہائر لو، ہائی کا بریک، زون کا ری ٹیسٹ۔</li><li>فرق یاد رکھیں: لوئر لو ہو تو بریکر، ہائر لو ہو تو مٹیگیشن۔</li><li>بائس کی سمت میں مٹیگیشن بلاک صاف کنٹینیوئیشن انٹری دیتا ہے۔</li></ul>
+    
     <section class="smc-prac" id="practice" data-s="smc-mitigation-block" data-t="{&quot;ok&quot;:&quot;درست!&quot;,&quot;no&quot;:&quot;غلط۔&quot;,&quot;right&quot;:&quot;درست جواب:&quot;}">
   <h2>چارٹ پہچانیں: پریکٹس</h2>
   <p class="pin">یہ گولڈ کا اصل چارٹ ہے (Dukascopy ڈیٹا، وقت پاکستان کا)۔ چارٹ غور سے دیکھیں اور جواب چنیں۔ جواب کے بعد مکمل مارک کیا ہوا چارٹ اور وضاحت سامنے آئے گی۔</p>
