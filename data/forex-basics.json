@@ -739,6 +739,122 @@
    "next": "Where does your trade go? (interbank, LP, OTC, CFD)",
    "hero": "img/forex-basics/how-forex-market-works-otc-network-3d-lesson-1-2",
    "hero_alt": "3D illustration: a classical exchange building crossed out with a red X, a glowing globe linked by a gold network of trading cities on a stack of gold coins, and green buyer blocks and red seller blocks meeting at a gold price on a balance"
+  },
+  {
+   "n": "1.3",
+   "module": 1,
+   "slug": "lesson-how-forex-brokers-work.html",
+   "vid": "Wq1d4XV4EM8",
+   "title": "How Forex Brokers Work: Where Your Trade Really Goes (Urdu/Hindi) | Lesson 1.3",
+   "seo_title": "How Forex Brokers Work: Where Your Trade Goes",
+   "h1": "How forex brokers work: where your trade really goes after you click Buy (Lesson 1.3)",
+   "short": "Where does your trade go? (interbank, LP, OTC, CFD)",
+   "desc": "How do forex brokers work? What happens in 1 second after you click Buy in MT5: server check, margin, liquidity providers, slippage, A-Book vs B-Book. Urdu/Hindi",
+   "lead": "You press Buy on EURUSD in MT5 and in less than a second your trade is open. This lesson of Forex Basics: Zero to Hero follows that one click step by step: the order slip, ping, the broker's server and margin check, how the broker picks the best rate from many liquidity providers, market execution and slippage, confirmation and closing. Then it explains A-Book vs B-Book brokers, how brokers make money, and how your money stays safe.",
+   "duration": "PT12M48S",
+   "len": "12:48",
+   "date": "2026-11-21",
+   "keywords": "how forex brokers work, where does my forex trade go, a book vs b book broker, liquidity provider forex, market execution, slippage forex, how forex brokers make money, what happens when you click buy in mt5, forex broker kya hai, trade kahan jati hai, forex broker kaise kaam karta hai",
+   "covers": [
+    "The money changer example: your deal is with the broker",
+    "CFD and liquidity providers (LPs)",
+    "Click to confirmation in 6 steps (animated)",
+    "Ping and the broker's trade server",
+    "Margin check: 0.10 lot EURUSD at 1:100 = about $110",
+    "Best rate from many LPs: lowest Ask, highest Bid",
+    "Market execution and slippage (1.1010 to 1.1011)",
+    "Why a new trade starts with a small minus",
+    "A-Book, B-Book and hybrid brokers",
+    "How brokers make money and how your money stays safe"
+   ],
+   "chapters": [
+    [
+     "0:00",
+     "Where does your trade go?"
+    ],
+    [
+     "0:36",
+     "Today's lesson"
+    ],
+    [
+     "1:12",
+     "Money changer example: broker, CFD and LP"
+    ],
+    [
+     "2:33",
+     "One click's journey, step by step"
+    ],
+    [
+     "7:30",
+     "A-Book broker explained"
+    ],
+    [
+     "8:33",
+     "B-Book and hybrid brokers"
+    ],
+    [
+     "9:34",
+     "How forex brokers make money: spread and commission"
+    ],
+    [
+     "10:25",
+     "Is your money safe? Regulation, segregated funds, negative balance protection"
+    ],
+    [
+     "11:27",
+     "Summary and practical task"
+    ]
+   ],
+   "notes": "<h2>Where does your forex trade go? The money changer example</h2><p>Think of the money changer in your local bazaar. You walk into an exchange company's shop and buy dollars. Your deal is with the shopkeeper: you pay him and you get dollars from him. You do not need to know where he got them. But behind him there is a system: he buys from a bigger dealer, and the big dealer buys from banks.</p><p>Forex works the same way, only online and in a fraction of a second. In forex <b>the shopkeeper is your broker</b>, and your deal is with the broker. Technically you open a contract called a <b>CFD</b> (contract for difference): you are not taking euro notes home, you trade on the price going up or down. The broker gets its prices from <b>liquidity providers (LPs)</b>: big banks and financial companies that quote buy and sell rates all the time. Behind the LPs is the interbank market we met in <a href=\"lesson-how-forex-market-works.html\">Lesson 1.2</a>.</p><h2>What happens after you click Buy in MT5: the journey in 6 steps</h2><ol><li><b>Order slip.</b> MT5 prepares a small order on your phone: the pair (EURUSD), Buy or Sell, the volume (say 0.10 lot), and your stop loss and take profit if you set them.</li><li><b>Internet and ping.</b> The slip travels to the broker's trade server, usually in a data centre in London or New York. The travel time is called <b>ping</b>, in milliseconds; desktop MT5 shows it in the bottom-right corner.</li><li><b>Server check.</b> Like a shopkeeper checking the customer has enough money, the server checks: is the account OK, is the market open for this pair, is the lot size within limits, and is there enough <b>free margin</b>?</li><li><b>Best rate from many LPs.</b> A broker is connected to several LPs, and each streams a slightly different rate every moment. The broker's <b>bridge (aggregator)</b> looks at all of them: a Buy goes to the LP with the <b>lowest Ask</b>, a Sell to the LP with the <b>highest Bid</b>.</li><li><b>The deal is done.</b> Either the bridge sends the order straight to an LP (A-Book), or the broker completes the deal inside its own system (B-Book). On your screen the result looks the same: the trade is open.</li><li><b>Confirmation.</b> The confirmation comes back to your phone: the position appears in the Trade tab with a ticket number, open price and volume, and your margin is locked. The whole journey usually takes less than one second.</li></ol><p>Remember five words: <b>click, check, rate, deal, confirmation</b>.</p><h2>The margin check, with real numbers</h2><table class=\"tbl\"><thead><tr><th>Item</th><th>Value</th></tr></thead><tbody><tr><td>Trade</td><td>Buy 0.10 lot EURUSD</td></tr><tr><td>Contract size</td><td>10,000 euros</td></tr><tr><td>Value at 1.1011</td><td>about $11,011</td></tr><tr><td>Leverage</td><td>1:100</td></tr><tr><td>Margin set aside</td><td>about $110.11</td></tr><tr><td>Balance $1,000: free margin after opening</td><td>about $888.89</td></tr></tbody></table><p>If your free margin is less than the margin needed, the order stops at the server and MT5 shows <i>Not enough money</i>. Leverage and margin are explained fully in Module 3 (<a href=\"guide-what-is-leverage.html\">what is leverage?</a>).</p><h2>Market execution and slippage: 1.1010 becomes 1.1011</h2><p>Say the Ask on your screen was 1.1010 when you pressed Buy. By the time the order arrived, nobody was selling at 1.1010 anymore, and the nearest rate available across all LPs was 1.1011. Your order fills there. This is <b>market execution</b>: the order does not stop, it fills at the best rate available at that moment. The difference between your click price and your fill price is <b>slippage</b>. Normally it is zero or tiny; during big news it can be larger, and sometimes it is even in your favour.</p><h2>Why a new trade starts with a small minus</h2><p>You buy at the <b>Ask</b>, but a buy closes at the <b>Bid</b>. The gap between them is the <a href=\"guide-what-is-spread.html\">spread</a>, so right after opening your trade shows a small loss. On every new tick the profit or loss changes. Closing a buy means selling at the Bid: the same journey runs in reverse, the result is added to your balance and the margin is free again.</p><h2>A-Book vs B-Book brokers (and hybrid)</h2><table class=\"tbl\"><thead><tr><th></th><th>A-Book</th><th>B-Book</th></tr></thead><tbody><tr><td>Money changer example</td><td>Keeps no dollar stock: buys the same amount from a big dealer the moment you buy</td><td>Has his own stock: matches buyers and sellers, handles the rest himself</td></tr><tr><td>Your order</td><td>Passed to an LP (hedged)</td><td>Kept in the broker's own book</td></tr><tr><td>Broker's risk</td><td>Almost none</td><td>The broker carries the net risk</td></tr><tr><td>Broker earns from</td><td>Spread mark-up and commission on volume</td><td>Spread, commission and the net result of client trades</td></tr></tbody></table><p>Most big brokers today run both together, the <b>hybrid model</b>. Both are legitimate business methods. As a trader your job is to check that the broker is <b>regulated</b>, so a government regulator watches its systems and accounts.</p><h2>How forex brokers make money</h2><p>Like the money changer's board with one rate to buy and another to sell, every pair in MT5 has a <b>Bid</b> (where you sell) and an <b>Ask</b> (where you buy). The difference is the spread. Some accounts have a very small spread but charge a <b>commission</b> per lot. Whatever it is called, it is the cost of your business, like a shop's rent. Check the spread before you trade, especially around news, when it can widen for a while.</p><h2>Is your money safe? Three things to check</h2><ol><li><b>Regulation:</b> a licence from a reputable regulator, checked on the regulator's own website.</li><li><b>Segregated accounts:</b> client money kept apart from the company's own money.</li><li><b>Negative balance protection:</b> offered by many regulated brokers, so your loss cannot go beyond your deposit.</li></ol><p>The full checklist comes in Module 4; meanwhile read <a href=\"lesson-broker-selection.html\">how to choose a forex broker</a> and <a href=\"guide-forex-brokers-in-pakistan.html\">forex brokers in Pakistan</a>.</p><h2>Practical task (2 minutes)</h2><p>Open <b>Market Watch</b> in your demo MT5 (<a href=\"guide-forex-demo-account-in-pakistan.html\">how to open a demo account</a>), look at the EURUSD Bid and Ask, write down the difference, and post your broker's spread in the YouTube comments.</p>",
+   "takes": [
+    "Your deal is with the broker, like with a money changer; the broker gets prices from many liquidity providers.",
+    "One click travels: order slip, server and margin check, best LP rate, deal, confirmation, usually in under one second.",
+    "A-Book passes your risk to an LP, B-Book keeps it in-house, most brokers are hybrid: what matters is that yours is regulated."
+   ],
+   "khulasa": [
+    "Aap ka sauda broker se hai, bilkul money changer ki tarah. Technically yeh CFD hai: aap price ke upar neeche hone par trade karte hain.",
+    "Broker rate bahut se liquidity providers (LPs) se leta hai, aur un ke peeche interbank market hai.",
+    "Aik click ka safar: order slip, internet aur ping, server check, LP se best rate, deal, confirmation. Yeh sab aam tor par aik second se kam mein.",
+    "Server check mein sab se ahem free margin hai: 0.10 lot EURUSD 1:100 par taqreeban 110 dollar margin.",
+    "Buy sab se kam Ask wale LP ke paas jata hai, Sell sab se zyada Bid wale ke paas.",
+    "Market execution: 1.1010 par click kiya, 1.1011 par fill hua. Yeh farq slippage hai; news mein zyada ho sakta hai.",
+    "Trade khulte hi chhota minus spread ki wajah se hota hai: buy Ask par khulta hai aur Bid par band hota hai.",
+    "A-Book: broker risk LP ko de deta hai. B-Book: broker khud sambhalta hai. Zyada tar broker dono (hybrid).",
+    "Broker spread aur commission se kamata hai. Regulation, segregated account aur negative balance protection aap ke paise ki hifazat hain."
+   ],
+   "faq": [
+    [
+     "Forex mein meri trade kahan jati hai?",
+     "Aap ka order pehle broker ke trade server par jata hai. Wahan margin aur account check hota hai, phir broker ka bridge bahut se liquidity providers ke rates dekh kar best rate par deal karta hai: ya LP ke paas (A-Book) ya broker ke apne system mein (B-Book)."
+    ],
+    [
+     "اے بک اور بی بک بروکر میں کیا فرق ہے؟",
+     "اے بک بروکر آپ کی ٹریڈ اسی وقت لیکویڈیٹی پرووائیڈر کے پاس آگے بھیج دیتا ہے اور خود رسک نہیں لیتا۔ بی بک بروکر کلائنٹس کی ٹریڈز آپس میں ملا کر باقی رسک خود سنبھالتا ہے۔ زیادہ تر بڑے بروکر دونوں طریقے ساتھ چلاتے ہیں۔"
+    ],
+    [
+     "How do forex brokers work?",
+     "A forex broker connects you to the market. When you click Buy or Sell, the broker's server checks your account and margin, then its bridge takes the best price from several liquidity providers and either passes the order to an LP (A-Book) or completes it internally (B-Book). The confirmation returns to your platform, usually in under a second."
+    ],
+    [
+     "What is a liquidity provider in forex?",
+     "A liquidity provider (LP) is a large bank or financial company that continuously quotes buy and sell prices to brokers. A broker connects to several LPs and routes a buy to the lowest Ask and a sell to the highest Bid."
+    ],
+    [
+     "Why did my order fill at a different price?",
+     "With market execution the order fills at the best price available when it reaches the server. If the price moved between your click and the fill, for example from 1.1010 to 1.1011, the difference is slippage. It is usually zero or tiny and can be larger during big news."
+    ],
+    [
+     "How do forex brokers make money?",
+     "Mainly from the spread, the gap between the Bid and Ask, and on some accounts a commission per lot. B-Book brokers can also earn from the net result of client trades they keep in-house."
+    ],
+    [
+     "Is my money safe with a forex broker?",
+     "Choose a broker licensed by a reputable regulator (check on the regulator's own website), that keeps client money in segregated accounts and offers negative balance protection."
+    ]
+   ],
+   "next": "Currencies and their codes",
+   "hero": "img/forex-basics/how-forex-brokers-work-trade-journey-3d-lesson-1-3",
+   "hero_alt": "3D illustration: a phone with a green Buy button sends a gold order path to a broker server stack on gold coins, which routes it to the best of several blue liquidity provider towers, highlighted in gold"
   }
  ]
 }
