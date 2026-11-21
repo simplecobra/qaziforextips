@@ -197,8 +197,8 @@ PAGE_IMAGES = {'gold': [['img/gold-rate-pakistan-24k-gold-bars.webp', 600, 420, 
 
 def img_objs(key):
     return [{"@type": "ImageObject", "url": "https://qaziforextips.com/" + a, "contentUrl": "https://qaziforextips.com/" + a,
-             "width": w * 2, "height": h * 2, "caption": alt, "creator": {"@id": "https://qaziforextips.com/#org"},
-             "creditText": "Qazi Forex Tips", "copyrightNotice": "Qazi Forex Tips"} for a, w, h, alt, cap in PAGE_IMAGES[key]]
+             "width": w * 2, "height": h * 2, "caption": alt, "creator": {"@type": "Organization", "name": "Qazi Forex Tips", "url": "https://qaziforextips.com/"},
+             "creditText": "Qazi Forex Tips", "copyrightNotice": "Qazi Forex Tips", "license": "https://qaziforextips.com/terms.html", "acquireLicensePage": "https://qaziforextips.com/contact.html"} for a, w, h, alt, cap in PAGE_IMAGES[key]]
 
 
 def save_hist(name, row, keep=400):
