@@ -661,6 +661,11 @@ def main():
     urow = {"d": today.strftime("%Y-%m-%d"), "pkr": r["usdpkr"]} if today.weekday() < 5 else None
     uhist = save_hist("usdpkr-history", urow)
     save_hist("usdpkr-daily", urow, keep=100000)   # full daily history for usd-to-pkr-history.html
+    mrow = None
+    if today.weekday() < 5:
+        mrow = {"d": today.strftime("%Y-%m-%d"), "xau": r["gold"]["usd_oz"],
+                "xag": r["silver"]["usd_oz"] if r.get("silver") else None}
+    save_hist("metals-daily", mrow, keep=100000)   # full daily history for gold-rate-history-pakistan.html
     jobs = [gold_page(r, hist), silver_page(r, shist), btc_page(r, bhist), usd_page(r, uhist), home_page(r), sitemap()]
     for job in jobs:
         if job:
