@@ -660,6 +660,7 @@ def main():
         bhist = save_hist("btc-history", brow, keep=60)
     urow = {"d": today.strftime("%Y-%m-%d"), "pkr": r["usdpkr"]} if today.weekday() < 5 else None
     uhist = save_hist("usdpkr-history", urow)
+    save_hist("usdpkr-daily", urow, keep=100000)   # full daily history for usd-to-pkr-history.html
     jobs = [gold_page(r, hist), silver_page(r, shist), btc_page(r, bhist), usd_page(r, uhist), home_page(r), sitemap()]
     for job in jobs:
         if job:
