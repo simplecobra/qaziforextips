@@ -123,7 +123,7 @@ def main():
 <div class="gr-calc" style="border:1px solid var(--line);border-radius:14px;padding:16px;background:var(--surface)"><label for="uhD" style="font-weight:600">Pick a date</label>
 <input type="date" id="uhD" min="1947-08-14" max="{last['d']}" value="{last['d']}" style="display:block;margin:8px 0;padding:10px;border:1px solid var(--line);border-radius:10px;font-size:16px;background:var(--bg);color:var(--ink)">
 <p id="uhR" aria-live="polite" style="font-size:18px;margin:6px 0 0">1 USD = <b>{rs(cur)}</b> on {fd(ld_last)}</p><p style="font-size:13.5px;color:var(--muted);margin:6px 0 0">Daily reference rate from {fd(first_d)}; before that, the yearly average.</p></div>
-<h2 id="chart">USD to PKR from 1947 to {cy}</h2>
+<h2 id="price-chart">USD to PKR from 1947 to {cy}</h2>
 <p>The Pakistani rupee started at <b>Rs 3.31</b> per dollar in 1947. It stayed fixed for long periods, then fell in steps after 1972 and much faster after 2018. By {cy} a dollar costs about <b>{cur / 3.31:.0f} times</b> as many rupees as at independence.</p>
 {svg}
 <h2 id="years">Dollar rate in Pakistan year-wise (1947–{cy})</h2>

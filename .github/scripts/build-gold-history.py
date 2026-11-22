@@ -262,7 +262,7 @@ def main():
 <input type="date" id="ghD" min="1947-08-01" max="{last['d']}" value="{last['d']}" style="display:block;margin:8px 0;padding:10px;border:1px solid var(--line);border-radius:10px;font-size:16px;background:var(--bg);color:var(--ink)">
 <div id="ghR" aria-live="polite" style="font-size:17px;line-height:1.7;margin:6px 0 0">24K: <b>{rs(cur)}</b> per tola · 22K: <b>{rs(cur * 22 / 24)}</b> · silver: <b>{rs(cur_s)}</b> per tola ({fd(ld)})</div>
 <p style="font-size:13.5px;color:var(--muted);margin:6px 0 0">Daily rates from {fd(first_d)}; before that, the monthly average (estimate).</p></div>
-<h2 id="chart">Gold price per tola from 1947 to {cy}</h2>
+<h2 id="price-chart">Gold price per tola from 1947 to {cy}</h2>
 <p>Gold in Pakistan has gone from about <b>{rs(t47)}</b> a tola in 1947 to <b>{rs(cur)}</b> in {cy}, about <b>{cur / t47:,.0f} times</b>. Two engines drive it: the world gold price in dollars, and the dollar rate in rupees (see the <a href="usd-to-pkr-history.html">USD to PKR history</a>). When both rise together, the tola rate jumps.</p>
 {svg1}
 <h2 id="years">Gold rate in Pakistan year-wise (1947–{cy})</h2>
