@@ -579,6 +579,11 @@ def gold_page(r, hist):
          "publisher": {"@id": "https://qaziforextips.com/#org"},
          "about": {"@type": "Thing", "name": "Gold price in Pakistan"},
          "primaryImageOfPage": img_objs("gold")[0], "image": img_objs("gold")},
+        {"@type": "Article", "@id": URL + "#article", "headline": title[:110], "description": desc, "url": URL,
+         "mainEntityOfPage": {"@id": URL + "#page"}, "inLanguage": "en", "datePublished": "2026-11-13",
+         "dateModified": now.strftime("%Y-%m-%dT%H:%M:%S+05:00"), "image": img_objs("gold"),
+         "author": {"@type": "Person", "name": "Dr. Qazi Abdul Basit", "url": "https://qaziforextips.com/about.html"},
+         "publisher": {"@id": "https://qaziforextips.com/#org"}},
         {"@type": "FAQPage", "@id": URL + "#faq", "mainEntity": [
             {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in faq]},
         {"@type": "BreadcrumbList", "itemListElement": [
