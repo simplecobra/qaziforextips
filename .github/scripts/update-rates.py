@@ -237,6 +237,12 @@ def page_ld(url, title, desc, crumb, faq, now, published="2026-11-13", key=None)
          "datePublished": published, "dateModified": now.strftime("%Y-%m-%dT%H:%M:%S+05:00"),
          **({"primaryImageOfPage": imgs[0], "image": imgs} if imgs else {}),
          "isPartOf": {"@id": "https://qaziforextips.com/#site"}, "publisher": {"@id": "https://qaziforextips.com/#org"}},
+        {"@type": "Article", "@id": url + "#article", "headline": title[:110], "description": desc, "url": url,
+         "mainEntityOfPage": {"@id": url + "#page"}, "inLanguage": "en",
+         "datePublished": published, "dateModified": now.strftime("%Y-%m-%dT%H:%M:%S+05:00"),
+         **({"image": imgs} if imgs else {}),
+         "author": {"@type": "Person", "name": "Dr. Qazi Abdul Basit", "url": "https://qaziforextips.com/about.html"},
+         "publisher": {"@id": "https://qaziforextips.com/#org"}},
         {"@type": "FAQPage", "@id": url + "#faq", "mainEntity": [
             {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in faq]},
         {"@type": "BreadcrumbList", "itemListElement": [
