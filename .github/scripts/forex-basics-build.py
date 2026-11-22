@@ -7,7 +7,11 @@ Reads data/forex-basics.json and builds:
 The page shell (head styles, header, footer, scripts) is copied from lesson-forex-trading-basics.html,
 so the new pages always match the rest of the site. Comments from YouTube are added later
 by .github/scripts/yt-comments.py (it looks for "    <h2>Related lessons</h2>").
-Run: python3 .github/scripts/forex-basics-build.py
+Run: python3 .github/scripts/forex-basics-build.py              (new lessons + hub only)
+     python3 .github/scripts/forex-basics-build.py --only lesson-x.html   (rebuild one existing lesson)
+Existing lessons are never rebuilt by default: other scripts and hand edits add blocks to them
+(<!--YTC--> comments, <!--smcx--> SMC box, <!--GRP:..--> group links, data-smcx links). On a rebuild
+carry_over() puts those back, and the page is skipped if anything would still be lost.
 """
 import os, re, json, html, datetime
 
@@ -257,14 +261,82 @@ def hub_page():
 ''')
     return head(title, desc, url, img, og, ld) + HEADER + body + FOOTER
 
+MARK = re.compile(r"<!--([A-Za-z]+)(:[^>]*?)?-->.*?<!--/\1-->", re.S)
+INLINE = re.compile(r'<a [^>]*data-smcx="1"[^>]*>(.*?)</a>', re.S)
+
+
+def carry_over(prev, page):
+    """Put back into a rebuilt page everything other scripts or hand edits added to the old one:
+    marked blocks (<!--YTC-->, <!--smcx-->, <!--GRP:x-->, <!--GI--> ...) at the same spot,
+    and inline course links (data-smcx). Returns (page, list of problems)."""
+    probs = []
+    for m in MARK.finditer(prev):
+        blk = m.group(0)
+        if blk in page:
+            continue
+        name = m.group(1) + (m.group(2) or "")
+        if "<!--" + name + "-->" in page:          # same block exists with new content: keep the new one
+            continue
+        done = False
+        for n in (160, 100, 60, 30):               # anchor = text just before the block in the old page
+            anc = prev[max(0, m.start() - n):m.start()]
+            if anc.strip() and page.count(anc) == 1:
+                i = page.index(anc) + len(anc)
+                nl = "\n" if prev[m.end():m.end() + 1] == "\n" and page[i:i + 1] != "\n" else ""
+                page = page[:i] + blk + nl + page[i:]
+                done = True
+                break
+        if not done:
+            for n in (160, 100, 60, 30):           # or the text just after it
+                anc = prev[m.end():m.end() + n]
+                if anc.strip() and page.count(anc) == 1:
+                    i = page.index(anc)
+                    page = page[:i] + blk + page[i:]
+                    done = True
+                    break
+        if not done and m.group(1) == "YTC" and "    <h2>Related lessons</h2>" in page:
+            page = page.replace("    <h2>Related lessons</h2>", blk + "\n    <h2>Related lessons</h2>", 1)
+            done = True
+        if not done:
+            probs.append("block " + name)
+    for m in INLINE.finditer(prev):
+        link = m.group(0)
+        if link in page:
+            continue
+        before, after = prev[max(0, m.start() - 50):m.start()], prev[m.end():m.end() + 50]
+        plain = before + m.group(1) + after
+        if page.count(plain) == 1:
+            page = page.replace(plain, before + link + after, 1)
+        else:
+            probs.append("link " + re.sub(r"<[^>]+>", "", m.group(1)))
+    lost = [h for h in set(re.findall(r'href="([^"#]+)', prev)) if h not in page]
+    if lost:
+        probs.append("hrefs lost: " + ", ".join(sorted(lost)[:6]))
+    return page, probs
+
+
 def main():
+    """Default: build only lessons whose page does not exist yet, plus the hub.
+    --only slug1,slug2  rebuild those existing lessons (keeping added blocks and links).
+    --all               rebuild every lesson.  --force  write even if something would be lost."""
+    import sys
+    args = sys.argv[1:]
+    only = set()
+    if "--only" in args:
+        only = {x.strip() for x in args[args.index("--only") + 1].split(",") if x.strip()}
+    rebuild_all, force = "--all" in args, "--force" in args
     for i, L in enumerate(LESSONS):
-        out, page = os.path.join(ROOT, L["slug"]), lesson_page(i, L)
-        if os.path.exists(out):  # keep the YouTube comments block that yt-comments.py added
+        out = os.path.join(ROOT, L["slug"])
+        exists = os.path.exists(out)
+        if exists and not rebuild_all and L["slug"] not in only:
+            continue
+        page = lesson_page(i, L)
+        if exists:
             prev = open(out, encoding="utf-8").read()
-            m = re.search(r"<!--YTC-->.*?<!--/YTC-->", prev, re.S)
-            if m and "<!--YTC-->" not in page:
-                page = page.replace("\n    <h2>Related lessons</h2>", m.group(0) + "\n    <h2>Related lessons</h2>", 1)
+            page, probs = carry_over(prev, page)
+            if probs and not force:
+                print("SKIPPED", L["slug"], "- would lose:", "; ".join(probs))
+                continue
         open(out, "w", encoding="utf-8").write(page)
         print("wrote", L["slug"])
     open(os.path.join(ROOT, HUB), "w", encoding="utf-8").write(hub_page())
