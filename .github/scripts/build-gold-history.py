@@ -41,6 +41,7 @@ def main():
     md = sorted(load("metals-daily.json"), key=lambda h: h["d"])
     ann = {a["y"]: a["pkr"] for a in load("usdpkr-annual.json")}
     upd = {h["d"]: h["pkr"] for h in load("usdpkr-daily.json")}
+    bis = {r["m"]: r["pkr"] for r in load("usdpkr-monthly.json")}   # monthly USD/PKR from 1957 (BIS)
     now = dt.datetime.now(PKT)
 
     # ---- daily rows (gold + silver in PKR) ----
@@ -85,8 +86,8 @@ def main():
             t24 = sum(r["t24"] for r in rows) / len(rows)
             pkr = sum(r["pkr"] for r in rows) / len(rows)
             src = "daily"
-        elif k in gm and year_pkr(y):
-            usd, pkr = gm[k], year_pkr(y)
+        elif k in gm and (bis.get(k) or year_pkr(y)):
+            usd, pkr = gm[k], bis.get(k) or year_pkr(y)
             t24, src = tola(usd, pkr), "est"
         else:
             usd = None
@@ -209,7 +210,7 @@ def main():
         ("What is the highest gold rate in Pakistan so far?",
          f"In our daily data the highest 24K reference price was {rs(top['t24'])} per tola on {fd(dt.date.fromisoformat(top['d']))}, when gold was about ${top['xau']:,.0f} an ounce. Sarafa bazaar rates on the same day can be different."),
         ("How is the historical tola price calculated?",
-         "Tola price = gold price in US dollars per ounce × USD/PKR ÷ 31.1035 × 11.6638. Before March 2024 we use the monthly world price and the yearly average dollar rate, so older figures are estimates. 22K is the 24K price × 22/24."),
+         "Tola price = gold price in US dollars per ounce × USD/PKR ÷ 31.1035 × 11.6638. Before March 2024 we use the monthly world price and the monthly average dollar rate (yearly before 1957), so older figures are estimates. 22K is the 24K price × 22/24."),
         ("Why is the sarafa bazaar rate different from this page?",
          "Sarafa associations add a local premium, duties and dealer margins, and they update at their own times. Jewellery also adds making charges. Use this page for history and trends; check your jeweller for a buying price."),
         ("How much has gold gone up since 2000 in Pakistan?",
@@ -265,7 +266,7 @@ def main():
 <section class="gr-ur" lang="ur" dir="rtl" style="font-family:var(--f-ur);line-height:2.1;margin:18px 0"><h2>پاکستان میں سونے کے ریٹ کی تاریخ</h2><p>1947 میں ایک تولہ سونا تقریباً {t47:,.0f} روپے کا تھا۔ 2000 میں اوسط {t00:,.0f} روپے، 2020 میں {t20:,.0f} روپے، اور آج {ld.day} {UR_MON[ld.month - 1]} {ld.year} کو 24 قیراط سونا {cur:,.0f} روپے فی تولہ ہے۔ پرانے ریٹ انٹرنیشنل قیمت اور ڈالر ریٹ سے نکالا گیا اندازہ ہیں، صرافہ بازار کا ریٹ تھوڑا مختلف ہوتا ہے۔</p></section>
 <div class="ls-faq"><h2>Questions</h2>{faq_h}</div>
 <h2>Sources and method</h2>
-<p style="font-size:14.5px">World gold price, monthly average in US dollars per ounce: the open <i>gold-prices</i> dataset (datasets/gold-prices on GitHub). Daily gold from March 2024: reference rates from an open currency data service (one isolated bad day smoothed), and from 21 November 2026 the prices on our <a href="gold-rate-pakistan.html">live gold rate page</a>. Dollar rate: World Bank yearly averages and daily rates, as on our <a href="usd-to-pkr-history.html">USD to PKR history</a>. Formula: USD/oz × USD/PKR ÷ 31.1035 × 11.6638 = price per tola. Figures before March 2024 are estimates, not historical sarafa (APGJSA) rates. Updated {fd(now.date())}.</p>
+<p style="font-size:14.5px">World gold price, monthly average in US dollars per ounce: the open <i>gold-prices</i> dataset (datasets/gold-prices on GitHub). Daily gold from March 2024: reference rates from an open currency data service (one isolated bad day smoothed), and from 21 November 2026 the prices on our <a href="gold-rate-pakistan.html">live gold rate page</a>. Dollar rate: World Bank yearly averages, BIS monthly averages from 1957 and daily rates, as on our <a href="usd-to-pkr-history.html">USD to PKR history</a>. Formula: USD/oz × USD/PKR ÷ 31.1035 × 11.6638 = price per tola. Figures before March 2024 are estimates, not historical sarafa (APGJSA) rates. Updated {fd(now.date())}.</p>
 <nav class="pn" aria-label="Rates"><a href="gold-rate-pakistan.html"><small>‹ Live</small><b>Gold rate in Pakistan today</b></a><a class="nx" href="silver-rate-history-pakistan.html"><small>Next ›</small><b>Silver rate history</b></a></nav>
 <p class="ls-disc">For information only; not an offer to buy or sell gold, and not financial advice. Gold prices can fall as well as rise.</p>
 ''' + hx.JS + hx.YR_JS + f'''<script type="application/json" id="ghData">{{"d":{dj},"m":{mj}}}</script>

@@ -47,15 +47,32 @@ def main():
     def rs(v):
         return f"Rs {v:,.2f}"
 
-    # ---- year-wise table ----
-    yt = ""
-    prev = None
+    # ---- monthly averages: BIS (1957 on), daily data from March 2024 ----
+    bis = {r["m"]: r["pkr"] for r in load("usdpkr-monthly.json")}
+    mall = dict(bis)
+    for k, v in months.items():
+        mall[k] = sum(v) / len(v)
+    # ---- year-wise table; each year opens to show its months ----
+    rows, prev = [], None
     for y in ys:
         a = years[y]
         ch = "–" if prev is None else (f'{(a["pkr"] / prev - 1) * 100:+.1f}%')
         note = {"par": "par value", "pwt": "", "wb": "", "ytd": f"Jan–{MON[ld_last.month - 1][:3]} average"}[a["src"]]
-        yt = f'<tr><th scope="row">{y}</th><td>{rs(a["pkr"])}</td><td>{ch}</td><td>{note}</td></tr>' + yt
+        subs = []
+        for mm in range(12, 0, -1):
+            k = f"{y}-{mm:02d}"
+            if k in months:
+                v = months[k]
+                subs.append(f'<tr><th scope="row">{MON[mm - 1]} {y}</th><td>{rs(sum(v) / len(v))}</td><td>{rs(min(v))}</td><td>{rs(max(v))}</td><td>{rs(sum(v) / len(v) * 100)}</td></tr>')
+            elif k in bis:
+                subs.append(f'<tr><th scope="row">{MON[mm - 1]} {y}</th><td>{rs(bis[k])}</td><td>–</td><td>–</td><td>{rs(bis[k] * 100)}</td></tr>')
+        if not subs:
+            fixed = "Rs 3.31" if y < 1955 else ("Rs 3.31 until July, then Rs 4.76 from August (devaluation)" if y == 1955 else "Rs 4.76")
+            subs = [f'<tr><td colspan="5">Fixed (pegged) rate all year: {fixed}. Monthly data starts in January 1957.</td></tr>']
+        rows.append((str(y), [f'<td>{rs(a["pkr"])}</td>', f"<td>{ch}</td>", f"<td>{note}</td>"], subs))
         prev = a["pkr"]
+    yt = hx.year_table(["Year", "1 USD (average)", "Change", "Note"], list(reversed(rows)),
+                       ["Month", "Average", "Low", "High", "100 USD"])
     # ---- decade summary ----
     dec = ""
     for d0 in range(1950, cy + 1, 10):
@@ -117,18 +134,20 @@ def main():
     faq_h = "".join(f"<details><summary>{E(q)}</summary><p>{E(a)}</p></details>" for q, a in faq)
     dj = json.dumps([[h["d"], h["pkr"]] for h in daily], separators=(",", ":"))
     aj = json.dumps({str(y): years[y]["pkr"] for y in ys}, separators=(",", ":"))
+    mj = json.dumps({k: round(v, 2) for k, v in sorted(bis.items())}, separators=(",", ":"))
 
-    body = hx.CSS + f'''<div class="qa"><b class="k">Quick answer</b><p>One US dollar was <b>Rs 3.31 in 1947</b>, <b>{rs(a00)} in 2000</b>, <b>{rs(a18)} in 2018</b>, <b>{rs(a23)} in 2023</b> (yearly averages) and <b>{rs(cur)}</b> on {fd(ld_last)}. Find any date below: daily rates from {fd(first_d)}, monthly averages, and a year-wise table back to 1947.</p></div>
+    body = hx.CSS + hx.YR_CSS + f'''<div class="qa"><b class="k">Quick answer</b><p>One US dollar was <b>Rs 3.31 in 1947</b>, <b>{rs(a00)} in 2000</b>, <b>{rs(a18)} in 2018</b>, <b>{rs(a23)} in 2023</b> (yearly averages) and <b>{rs(cur)}</b> on {fd(ld_last)}. Find any date below: daily rates from {fd(first_d)}, monthly averages, and a year-wise table back to 1947.</p></div>
 <h2 id="lookup">Dollar rate on any date</h2>
 <div class="gr-calc" style="border:1px solid var(--line);border-radius:14px;padding:16px;background:var(--surface)"><label for="uhD" style="font-weight:600">Pick a date</label>
 <input type="date" id="uhD" min="1947-08-14" max="{last['d']}" value="{last['d']}" style="display:block;margin:8px 0;padding:10px;border:1px solid var(--line);border-radius:10px;font-size:16px;background:var(--bg);color:var(--ink)">
-<p id="uhR" aria-live="polite" style="font-size:18px;margin:6px 0 0">1 USD = <b>{rs(cur)}</b> on {fd(ld_last)}</p><p style="font-size:13.5px;color:var(--muted);margin:6px 0 0">Daily reference rate from {fd(first_d)}; before that, the yearly average.</p></div>
+<p id="uhR" aria-live="polite" style="font-size:18px;margin:6px 0 0">1 USD = <b>{rs(cur)}</b> on {fd(ld_last)}</p><p style="font-size:13.5px;color:var(--muted);margin:6px 0 0">Daily reference rate from {fd(first_d)}; before that, the monthly average (from 1957) or the yearly average.</p></div>
 <h2 id="price-chart">USD to PKR from 1947 to {cy}</h2>
 <p>The Pakistani rupee started at <b>Rs 3.31</b> per dollar in 1947. It stayed fixed for long periods, then fell in steps after 1972 and much faster after 2018. By {cy} a dollar costs about <b>{cur / 3.31:.0f} times</b> as many rupees as at independence.</p>
 {svg}
 <h2 id="years">Dollar rate in Pakistan year-wise (1947–{cy})</h2>
 <p>Yearly average rate of 1 US dollar in Pakistani rupees, newest first. The change column is against the year before.</p>
-<div class="tbl hx-s"><table><thead><tr><th>Year</th><th>1 USD (average)</th><th>Change</th><th>Note</th></tr></thead><tbody>{yt}</tbody></table></div>
+<p class="yr-hint"><b>Click any year</b> to open its month-by-month rates right below it; click again to close. Low and high are shown from March 2024, when our daily data starts.</p>
+{yt}
 <h2 id="decades">Decade by decade</h2>
 <div class="tbl"><table><thead><tr><th>Decade</th><th>Start</th><th>End</th><th>Change</th></tr></thead><tbody>{dec}</tbody></table></div>
 <h2 id="moments">Key moments in the rupee's history</h2>
@@ -140,8 +159,6 @@ def main():
 <li><b>2018–2019:</b> from about Rs 110 to Rs 160 under the IMF programme and a market-based rate.</li>
 <li><b>2022–2023:</b> the biggest fall in history, from about Rs 180 to above Rs 300 at the start of September 2023.</li>
 <li><b>2024–{cy}:</b> a calmer period, mostly between Rs 276 and Rs 285 (highest monthly average {rs(sum(peak_m[1]) / len(peak_m[1]))} in {MON[int(peak_m[0][5:]) - 1]} {peak_m[0][:4]}, lowest {rs(sum(low_m[1]) / len(low_m[1]))} in {MON[int(low_m[0][5:]) - 1]} {low_m[0][:4]}).</li></ul>
-<h2 id="monthly">Monthly average USD to PKR (since March 2024)</h2>
-<div class="tbl hx-s"><table><thead><tr><th>Month</th><th>Average</th><th>Low</th><th>High</th></tr></thead><tbody>{mt}</tbody></table></div>
 <h2 id="daily">Daily dollar rate in Pakistan</h2>
 <p>Every day from {fd(first_d)}, Pick a month (or use ‹ ›) to see each day.</p>
 {dd}
@@ -155,11 +172,11 @@ def main():
 <section class="gr-ur" lang="ur" dir="rtl" style="font-family:var(--f-ur);line-height:2.1;margin:18px 0"><h2>پاکستان میں ڈالر کی تاریخ</h2><p>1947 میں ایک ڈالر 3.31 روپے کا تھا۔ 2023 میں اوسط ریٹ {years[2023]['pkr']:.2f} روپے رہا، اور آج {ld_last.day} {UR_MON[ld_last.month - 1]} {ld_last.year} کو ایک ڈالر {cur:.2f} روپے کا ہے۔</p></section>
 <div class="ls-faq"><h2>Questions</h2>{faq_h}</div>
 <h2>Sources and method</h2>
-<p style="font-size:14.5px">Yearly averages 1960–2025: World Bank, official exchange rate (LCU per US$, period average). 1950–1959: Penn World Table 11.0 via FRED. 1947–1949: the par value of Rs 3.31. Daily rates from March 2024: mid-market reference rates from an open currency data service, with single-day spikes smoothed, and from 21 November 2026 the interbank rate shown on our <a href="dollar-rate-pakistan.html">live dollar rate page</a>. Open-market (cash) rates are usually a little higher. Updated {fd(now.date())}.</p>
+<p style="font-size:14.5px">Yearly averages 1960–2025: World Bank, official exchange rate (LCU per US$, period average). 1950–1959: Penn World Table 11.0 via FRED. 1947–1949: the par value of Rs 3.31. Monthly averages 1957 to February 2024: Bank for International Settlements (BIS) US dollar exchange rates. Daily rates from March 2024: mid-market reference rates from an open currency data service, with single-day spikes smoothed, and from 21 November 2026 the interbank rate shown on our <a href="dollar-rate-pakistan.html">live dollar rate page</a>. Open-market (cash) rates are usually a little higher. Updated {fd(now.date())}.</p>
 <nav class="pn" aria-label="Rates"><a href="dollar-rate-pakistan.html"><small>‹ Live</small><b>Dollar rate in Pakistan today</b></a><a class="nx" href="gold-rate-pakistan.html"><small>Next ›</small><b>Gold rate in Pakistan today</b></a></nav>
 <p class="ls-disc">For information only; not an offer to buy or sell currency, and not financial advice.</p>
-''' + hx.JS + f'''<script type="application/json" id="uhData">{{"d":{dj},"y":{aj}}}</script>
-<script>(function(){{try{{var D=JSON.parse(document.getElementById('uhData').textContent),m={{}};D.d.forEach(function(r){{m[r[0]]=r[1]}});var i=document.getElementById('uhD'),o=document.getElementById('uhR');function f(n){{return 'Rs '+n.toLocaleString('en-US',{{minimumFractionDigits:2,maximumFractionDigits:2}})}}function show(){{var v=i.value;if(!v)return;var d=new Date(v+'T00:00:00'),t=d.toLocaleDateString('en-GB',{{day:'numeric',month:'long',year:'numeric'}});if(m[v]){{o.innerHTML='1 USD = <b>'+f(m[v])+'</b> on '+t+' (100 USD = '+f(m[v]*100)+')';return}}var k=v;for(var j=0;j<6&&!m[k];j++){{d.setDate(d.getDate()-1);k=d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2)}}if(m[k]){{o.innerHTML='1 USD = <b>'+f(m[k])+'</b> (nearest earlier rate, '+k+')';return}}var y=v.slice(0,4);if(D.y[y]){{o.innerHTML='1 USD ≈ <b>'+f(D.y[y])+'</b> (average for '+y+')'}}else o.textContent='No data for this date.'}}i.addEventListener('change',show);}}catch(e){{}}}})();</script>'''
+''' + hx.JS + hx.YR_JS + f'''<script type="application/json" id="uhData">{{"d":{dj},"y":{aj},"m":{mj}}}</script>
+<script>(function(){{try{{var D=JSON.parse(document.getElementById('uhData').textContent),m={{}};D.d.forEach(function(r){{m[r[0]]=r[1]}});var i=document.getElementById('uhD'),o=document.getElementById('uhR');function f(n){{return 'Rs '+n.toLocaleString('en-US',{{minimumFractionDigits:2,maximumFractionDigits:2}})}}function show(){{var v=i.value;if(!v)return;var d=new Date(v+'T00:00:00'),t=d.toLocaleDateString('en-GB',{{day:'numeric',month:'long',year:'numeric'}});if(m[v]){{o.innerHTML='1 USD = <b>'+f(m[v])+'</b> on '+t+' (100 USD = '+f(m[v]*100)+')';return}}var k=v;for(var j=0;j<6&&!m[k];j++){{d.setDate(d.getDate()-1);k=d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2)}}if(m[k]){{o.innerHTML='1 USD = <b>'+f(m[k])+'</b> (nearest earlier rate, '+k+')';return}}var mk=v.slice(0,7);if(D.m[mk]){{o.innerHTML='1 USD ≈ <b>'+f(D.m[mk])+'</b> (monthly average, '+new Date(v+'T00:00:00').toLocaleDateString('en-GB',{{month:'long',year:'numeric'}})+')';return}}var y=v.slice(0,4);if(D.y[y]){{o.innerHTML='1 USD ≈ <b>'+f(D.y[y])+'</b> (average for '+y+')'}}else o.textContent='No data for this date.'}}i.addEventListener('change',show);}}catch(e){{}}}})();</script>'''
 
     T = open(os.path.join(ROOT, "guide-ict-silver-bullet-time-in-pakistan.html"), encoding="utf-8").read()
     s = T
