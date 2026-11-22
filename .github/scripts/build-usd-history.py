@@ -7,7 +7,9 @@ Data:
                            extended every weekday by update-rates.py with the site's own USD/PKR rate.
 Layout (header, footer, sidebar, scripts) is taken from the Silver Bullet guide, so the page matches the site.
 Run: python3 .github/scripts/build-usd-history.py   (called by the rates workflow; safe to run any time)."""
-import json, os, re, html, datetime as dt, statistics
+import json, os, re, html, datetime as dt, statistics, sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import hx
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 SLUG = "usd-to-pkr-history.html"
@@ -65,15 +67,16 @@ def main():
     for k, v in mrows:
         y, m = int(k[:4]), int(k[5:])
         mt += f'<tr><th scope="row">{MON[m - 1]} {y}</th><td>{rs(sum(v) / len(v))}</td><td>{rs(min(v))}</td><td>{rs(max(v))}</td></tr>'
-    # ---- daily tables by month ----
-    dd = ""
-    for i, (k, v) in enumerate(mrows):
+    # ---- daily tables by month, shown one at a time ----
+    dp = []
+    for k, v in mrows:
         y, m = int(k[:4]), int(k[5:])
         rows = [h for h in daily if h["d"].startswith(k)]
         body = "".join(f'<tr id="d{h["d"]}"><th scope="row">{dt.date.fromisoformat(h["d"]).strftime("%a %-d %b %Y")}</th><td>{rs(h["pkr"])}</td><td>{rs(h["pkr"] * 100)}</td></tr>'
                        for h in reversed(rows))
-        dd += (f'<details{" open" if i == 0 else ""}><summary>USD to PKR in {MON[m - 1]} {y} (daily)</summary>'
-               f'<div class="tbl"><table><thead><tr><th>Date</th><th>1 USD</th><th>100 USD</th></tr></thead><tbody>{body}</tbody></table></div></details>')
+        dp.append((k, f"{MON[m - 1]} {y}", f"USD to PKR in {MON[m - 1]} {y} (daily)",
+                   f'<div class="tbl"><table><thead><tr><th>Date</th><th>1 USD</th><th>100 USD</th></tr></thead><tbody>{body}</tbody></table></div>'))
+    dd = hx.explorer("Choose a month", dp, groups=True)
     # ---- chart (annual, inline SVG) ----
     W, H, L, B = 760, 300, 46, 30
     mx = max(years[y]["pkr"] for y in ys)
@@ -115,7 +118,7 @@ def main():
     dj = json.dumps([[h["d"], h["pkr"]] for h in daily], separators=(",", ":"))
     aj = json.dumps({str(y): years[y]["pkr"] for y in ys}, separators=(",", ":"))
 
-    body = f'''<div class="qa"><b class="k">Quick answer</b><p>One US dollar was <b>Rs 3.31 in 1947</b>, <b>{rs(a00)} in 2000</b>, <b>{rs(a18)} in 2018</b>, <b>{rs(a23)} in 2023</b> (yearly averages) and <b>{rs(cur)}</b> on {fd(ld_last)}. Find any date below: daily rates from {fd(first_d)}, monthly averages, and a year-wise table back to 1947.</p></div>
+    body = hx.CSS + f'''<div class="qa"><b class="k">Quick answer</b><p>One US dollar was <b>Rs 3.31 in 1947</b>, <b>{rs(a00)} in 2000</b>, <b>{rs(a18)} in 2018</b>, <b>{rs(a23)} in 2023</b> (yearly averages) and <b>{rs(cur)}</b> on {fd(ld_last)}. Find any date below: daily rates from {fd(first_d)}, monthly averages, and a year-wise table back to 1947.</p></div>
 <h2 id="lookup">Dollar rate on any date</h2>
 <div class="gr-calc" style="border:1px solid var(--line);border-radius:14px;padding:16px;background:var(--surface)"><label for="uhD" style="font-weight:600">Pick a date</label>
 <input type="date" id="uhD" min="1947-08-14" max="{last['d']}" value="{last['d']}" style="display:block;margin:8px 0;padding:10px;border:1px solid var(--line);border-radius:10px;font-size:16px;background:var(--bg);color:var(--ink)">
@@ -125,7 +128,7 @@ def main():
 {svg}
 <h2 id="years">Dollar rate in Pakistan year-wise (1947–{cy})</h2>
 <p>Yearly average rate of 1 US dollar in Pakistani rupees, newest first. The change column is against the year before.</p>
-<div class="tbl"><table><thead><tr><th>Year</th><th>1 USD (average)</th><th>Change</th><th>Note</th></tr></thead><tbody>{yt}</tbody></table></div>
+<div class="tbl hx-s"><table><thead><tr><th>Year</th><th>1 USD (average)</th><th>Change</th><th>Note</th></tr></thead><tbody>{yt}</tbody></table></div>
 <h2 id="decades">Decade by decade</h2>
 <div class="tbl"><table><thead><tr><th>Decade</th><th>Start</th><th>End</th><th>Change</th></tr></thead><tbody>{dec}</tbody></table></div>
 <h2 id="moments">Key moments in the rupee's history</h2>
@@ -138,9 +141,9 @@ def main():
 <li><b>2022–2023:</b> the biggest fall in history, from about Rs 180 to above Rs 300 at the start of September 2023.</li>
 <li><b>2024–{cy}:</b> a calmer period, mostly between Rs 276 and Rs 285 (highest monthly average {rs(sum(peak_m[1]) / len(peak_m[1]))} in {MON[int(peak_m[0][5:]) - 1]} {peak_m[0][:4]}, lowest {rs(sum(low_m[1]) / len(low_m[1]))} in {MON[int(low_m[0][5:]) - 1]} {low_m[0][:4]}).</li></ul>
 <h2 id="monthly">Monthly average USD to PKR (since March 2024)</h2>
-<div class="tbl"><table><thead><tr><th>Month</th><th>Average</th><th>Low</th><th>High</th></tr></thead><tbody>{mt}</tbody></table></div>
+<div class="tbl hx-s"><table><thead><tr><th>Month</th><th>Average</th><th>Low</th><th>High</th></tr></thead><tbody>{mt}</tbody></table></div>
 <h2 id="daily">Daily dollar rate in Pakistan</h2>
-<p>Every day from {fd(first_d)}, newest month first. Open a month to see each day.</p>
+<p>Every day from {fd(first_d)}, Pick a month (or use ‹ ›) to see each day.</p>
 {dd}
 <h2 id="why">Why the rupee keeps falling</h2>
 <p>The rupee weakens when Pakistan needs more dollars than it earns: imports (especially fuel) larger than exports, debt repayments, and low foreign exchange reserves. It steadies when remittances, exports, IMF and other inflows rise, and when inflation and interest rates are under control. For traders this matters because Gold in Pakistan is priced through the dollar: see the <a href="gold-rate-pakistan.html">gold rate in Pakistan</a>, which moves with both the world gold price and USD/PKR, and the <a href="gold-rate-history-pakistan.html">gold rate history since 1947</a>.</p>
@@ -155,7 +158,7 @@ def main():
 <p style="font-size:14.5px">Yearly averages 1960–2025: World Bank, official exchange rate (LCU per US$, period average). 1950–1959: Penn World Table 11.0 via FRED. 1947–1949: the par value of Rs 3.31. Daily rates from March 2024: mid-market reference rates from an open currency data service, with single-day spikes smoothed, and from 21 November 2026 the interbank rate shown on our <a href="dollar-rate-pakistan.html">live dollar rate page</a>. Open-market (cash) rates are usually a little higher. Updated {fd(now.date())}.</p>
 <nav class="pn" aria-label="Rates"><a href="dollar-rate-pakistan.html"><small>‹ Live</small><b>Dollar rate in Pakistan today</b></a><a class="nx" href="gold-rate-pakistan.html"><small>Next ›</small><b>Gold rate in Pakistan today</b></a></nav>
 <p class="ls-disc">For information only; not an offer to buy or sell currency, and not financial advice.</p>
-<script type="application/json" id="uhData">{{"d":{dj},"y":{aj}}}</script>
+''' + hx.JS + f'''<script type="application/json" id="uhData">{{"d":{dj},"y":{aj}}}</script>
 <script>(function(){{try{{var D=JSON.parse(document.getElementById('uhData').textContent),m={{}};D.d.forEach(function(r){{m[r[0]]=r[1]}});var i=document.getElementById('uhD'),o=document.getElementById('uhR');function f(n){{return 'Rs '+n.toLocaleString('en-US',{{minimumFractionDigits:2,maximumFractionDigits:2}})}}function show(){{var v=i.value;if(!v)return;var d=new Date(v+'T00:00:00'),t=d.toLocaleDateString('en-GB',{{day:'numeric',month:'long',year:'numeric'}});if(m[v]){{o.innerHTML='1 USD = <b>'+f(m[v])+'</b> on '+t+' (100 USD = '+f(m[v]*100)+')';return}}var k=v;for(var j=0;j<6&&!m[k];j++){{d.setDate(d.getDate()-1);k=d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2)}}if(m[k]){{o.innerHTML='1 USD = <b>'+f(m[k])+'</b> (nearest earlier rate, '+k+')';return}}var y=v.slice(0,4);if(D.y[y]){{o.innerHTML='1 USD ≈ <b>'+f(D.y[y])+'</b> (average for '+y+')'}}else o.textContent='No data for this date.'}}i.addEventListener('change',show);}}catch(e){{}}}})();</script>'''
 
     T = open(os.path.join(ROOT, "guide-ict-silver-bullet-time-in-pakistan.html"), encoding="utf-8").read()
