@@ -15,19 +15,33 @@
   window.gtag = function () { window.dataLayer.push(arguments); };
   window.gtag("js", new Date());
   window.gtag("config", GA_ID);
-  var g = document.createElement("script");
-  g.async = true;
-  g.src = "https://www.googletagmanager.com/gtag/js?id=" + GA_ID;
-  document.head.appendChild(g);
 
   // Microsoft Clarity (heatmaps + recordings)
   window.clarity = window.clarity || function () {
     (window.clarity.q = window.clarity.q || []).push(arguments);
   };
-  var c = document.createElement("script");
-  c.async = true;
-  c.src = "https://www.clarity.ms/tag/" + CLARITY_ID;
-  document.head.appendChild(c);
+
+  // Speed: dono scripts page load hone ke BAAD (ya pehle scroll/click par) load hon,
+  // taa ke website ki speed (Google PageSpeed score) par asar na pare. Events tab tak queue mein rehte hain.
+  var started = false;
+  function startTracking() {
+    if (started) return;
+    started = true;
+    var g = document.createElement("script");
+    g.async = true;
+    g.src = "https://www.googletagmanager.com/gtag/js?id=" + GA_ID;
+    document.head.appendChild(g);
+    var c = document.createElement("script");
+    c.async = true;
+    c.src = "https://www.clarity.ms/tag/" + CLARITY_ID;
+    document.head.appendChild(c);
+  }
+  ["scroll", "click", "touchstart", "keydown", "mousemove"].forEach(function (ev) {
+    window.addEventListener(ev, startTracking, { once: true, passive: true });
+  });
+  function afterLoad() { setTimeout(startTracking, 2500); }
+  if (document.readyState === "complete") afterLoad();
+  else window.addEventListener("load", afterLoad, { once: true });
 
   // WhatsApp aur download clicks ko "lead" / "download" event ke taur par count karo
   document.addEventListener("click", function (e) {
