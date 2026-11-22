@@ -411,7 +411,7 @@ def usd_page(r, hist):
     chg = u - up
     title = f"Dollar Rate in Pakistan Today {day} – USD to PKR Live"
     desc = (f"Dollar rate in Pakistan today ({day}): 1 US dollar = Rs {u:.2f}. Live USD to PKR rate, converter, "
-            f"30-day chart and Riyal, Dirham, Pound and Euro rates in rupees.")
+            f"30-day chart, Riyal, Dirham and Euro rates.")
     s = set_head(s, title, desc)
     s = put(s, "date", esc(day_long))
     s = put(s, "time", esc(r["updated_pkt"]))
@@ -498,7 +498,7 @@ def gold_page(r, hist):
 
     title = f"Gold Rate in Pakistan Today {day} – 24K Tola Price"
     desc = (f"Gold rate in Pakistan today ({day}): 24K {rs(t24)} per tola, {rs(k['24K']['g10'])} per 10 gram. "
-            f"22K, 21K, 18K rates, calculator and 30-day chart, updated every 30 minutes.")
+            f"22K, 21K, 18K rates, calculator and 30-day chart.")
     s = re.sub(r"<title>.*?</title>", "<title>" + esc(title) + "</title>", s, count=1, flags=re.S)
     for attr, val in (('name="description"', desc), ('property="og:title"', title),
                       ('property="og:description"', desc), ('name="twitter:title"', title),
