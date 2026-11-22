@@ -339,7 +339,12 @@ def main():
                 continue
         open(out, "w", encoding="utf-8").write(page)
         print("wrote", L["slug"])
-    open(os.path.join(ROOT, HUB), "w", encoding="utf-8").write(hub_page())
+    hub, hp = hub_page(), os.path.join(ROOT, HUB)
+    if os.path.exists(hp):   # keep the extra Article schema added for the Ahrefs audit
+        m = re.search(r'<script type="application/ld\+json" id="ld-article">.*?</script>\n?', open(hp, encoding="utf-8").read(), re.S)
+        if m and 'id="ld-article"' not in hub:
+            hub = hub.replace("</head>", m.group(0) + "</head>", 1)
+    open(hp, "w", encoding="utf-8").write(hub)
     print("wrote", HUB)
 
 if __name__ == "__main__":
