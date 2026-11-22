@@ -61,7 +61,7 @@ def main():
     for d0 in range(1950, cy + 1, 10):
         a, b = years.get(d0), years.get(min(d0 + 9, cy))
         if a and b:
-            dec += f"<tr><th scope=\"row\">{d0}s</th><td>{rs(a['pkr'])}</td><td>{rs(b['pkr'])}</td><td>{(b['pkr'] / a['pkr'] - 1) * 100:+.0f}%</td></tr>"
+            dec += f"<tr><th scope=\"row\">{d0}<span class=\"dec-s\">s</span></th><td>{rs(a['pkr'])}</td><td>{rs(b['pkr'])}</td><td>{(b['pkr'] / a['pkr'] - 1) * 100:+.0f}%</td></tr>"
     # ---- monthly table ----
     mt = ""
     for k, v in mrows:
