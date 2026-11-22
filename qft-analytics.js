@@ -36,6 +36,8 @@
     var href = a.getAttribute("href") || "";
     if (/wa\.me|whatsapp/i.test(href)) {
       window.gtag("event", "generate_lead", { method: "whatsapp", link_url: a.href });
+      // qualify_lead pehle se GA4 mein "key event" hai, is liye WhatsApp leads Conversions mein foran dikhenge
+      window.gtag("event", "qualify_lead", { method: "whatsapp", link_url: a.href });
     } else if (/\.(zip|ex5|ex4|mq5|mq4|exe|pdf)(\?|$)/i.test(href)) {
       window.gtag("event", "file_download_click", { link_url: a.href });
     }
