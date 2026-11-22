@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Builds gold-rate-history-pakistan.html: gold (and silver) rate history in Pakistan, per tola, 1947 to today.
+"""Builds gold-rate-history-pakistan.html: gold rate history in Pakistan, per tola, 1947 to today.
 Data:
   data/gold-monthly.json   world gold price, USD per troy ounce, monthly average (datasets/gold-prices, from 1833).
   data/metals-daily.json   daily XAU and XAG in USD/oz from March 2024 (open currency API reference rates, weekdays,
@@ -105,15 +105,8 @@ def main():
     Y = {y: {"usd": sum(r["usd"] for r in v) / len(v), "pkr": sum(r["pkr"] for r in v) / len(v),
              "t24": sum(r["t24"] for r in v) / len(v), "n": len(v)} for y, v in years.items()}
 
-    # ---- silver by month / year (from daily data) ----
-    smon = {k: [r["sv"] for r in v if r["sv"]] for k, v in dmon.items()}
-    smon = {k: v for k, v in smon.items() if v}
-    sy = {}
-    for k, v in smon.items():
-        sy.setdefault(int(k[:4]), []).extend(v)
-
     # ---- facts ----
-    cur, cur_s = last["t24"], last["sv"]
+    cur = last["t24"]
     t47, t00, t10, t20 = Y[1947]["t24"], Y[2000]["t24"], Y[2010]["t24"], Y[2020]["t24"]
     t24y, t25y = Y[2024]["t24"], Y[2025]["t24"]
     top = max(days, key=lambda r: r["t24"])
@@ -127,62 +120,39 @@ def main():
     lakh00 = 100000 * cur / t00
     fd = lambda d: d.strftime("%-d %B %Y")
     fm = lambda x: f"{MON[x['m'] - 1]} {x['y']}"
-    s24 = sum(sy.get(2024, [0])) / max(1, len(sy.get(2024, [])))
-    s25 = sum(sy.get(2025, [0])) / max(1, len(sy.get(2025, [])))
-    stop = max((r for r in days if r["sv"]), key=lambda r: r["sv"])
-    ratio = last["xau"] / last["xag"] if last.get("xag") else None
 
-    # ---- year-wise table (newest first) ----
-    yt, prev = "", None
-    rows = []
+    # ---- year-wise table (newest first); each year opens to show its months ----
+    rows, prev = [], None
     for y in yrs:
         a = Y[y]
         ch = "–" if prev is None else f"{(a['t24'] / prev - 1) * 100:+.1f}%"
-        note = ""
-        if y == 1947:
-            note = "Aug–Dec"
-        elif y == cy:
-            note = f"Jan–{MON[ld.month - 1][:3]}"
-        rows.append(f'<tr><th scope="row">{y}</th><td>{rs(a["t24"])}</td><td>{rs(a["t24"] * 22 / 24)}</td>'
-                    f'<td>${a["usd"]:,.0f}</td><td>{a["pkr"]:,.2f}</td><td>{ch}</td><td>{note}</td></tr>')
+        note = "Aug–Dec" if y == 1947 else (f"Jan–{MON[ld.month - 1][:3]}" if y == cy else "")
+        subs = [f'<tr><th scope="row">{MON[x["m"] - 1]} {y}</th><td>{rs(x["t24"])}</td><td>{rs(x["t24"] * 22 / 24)}</td>'
+                f'<td>${x["usd"]:,.0f}</td><td>{x["pkr"]:,.2f}</td></tr>' for x in reversed(years[y])]
+        rows.append((str(y), [f'<td>{rs(a["t24"])}</td>', f'<td>{rs(a["t24"] * 22 / 24)}</td>', f'<td>${a["usd"]:,.0f}</td>',
+                              f'<td>{a["pkr"]:,.2f}</td>', f'<td>{ch}</td>', f'<td>{note}</td>'], subs))
         prev = a["t24"]
-    yt = "".join(reversed(rows))
+    yt = hx.year_table(["Year", "24K tola", "22K tola", "Gold $/oz", "USD/PKR", "Change", "Note"], list(reversed(rows)),
+                       ["Month", "24K tola", "22K tola", "Gold $/oz", "USD/PKR"])
     # ---- decades ----
     dec = ""
     for d0 in range(1950, cy + 1, 10):
         a, b = Y.get(d0), Y.get(min(d0 + 9, cy))
         if a and b:
-            dec += (f'<tr><th scope="row">{d0}s</th><td>{rs(a["t24"])}</td><td>{rs(b["t24"])}</td>'
+            dec += (f'<tr><th scope="row">{d0}<span class="dec-s">s</span></th><td>{rs(a["t24"])}</td><td>{rs(b["t24"])}</td>'
                     f'<td>{b["t24"] / a["t24"]:.1f}×</td></tr>')
-    # ---- monthly tables, one per year (newest first), shown one at a time ----
-    mp = []
-    for y in reversed(yrs):
-        body = "".join(f'<tr><th scope="row">{MON[x["m"] - 1]} {y}</th><td>{rs(x["t24"])}</td><td>{rs(x["t24"] * 22 / 24)}</td>'
-                       f'<td>${x["usd"]:,.0f}</td><td>{x["pkr"]:,.2f}</td></tr>' for x in reversed(years[y]))
-        mp.append((str(y), str(y), f"Gold rate in {y} month by month",
-                   f'<div class="tbl"><table><thead><tr><th>Month</th><th>24K tola</th><th>22K tola</th><th>Gold $/oz</th><th>USD/PKR</th></tr></thead>'
-                   f'<tbody>{body}</tbody></table></div>'))
-    chips = [(str(y), str(y)) for y in (cy - 1, 2020, 2010, 2000, 1990, 1980, 1971, 1960, 1947) if y in years]
-    mt = hx.explorer("Choose a year", mp, chips=chips)
-    # ---- daily tables (gold + silver), one per month, shown one at a time ----
+    # ---- daily gold tables, one per month, shown one at a time ----
     dp = []
     for k in sorted(dmon, reverse=True):
         y, m = int(k[:4]), int(k[5:])
         body = "".join(f'<tr><th scope="row">{dt.date.fromisoformat(r["d"]).strftime("%a %-d %b")}</th><td>{rs(r["t24"])}</td>'
-                       f'<td>{rs(r["t24"] * 22 / 24)}</td><td>{rs(r["t24"] / TOLA * 10)}</td><td>{rs(r["sv"]) if r["sv"] else "–"}</td>'
+                       f'<td>{rs(r["t24"] * 22 / 24)}</td><td>{rs(r["t24"] * 21 / 24)}</td><td>{rs(r["t24"] / TOLA * 10)}</td><td>${r["xau"]:,.0f}</td>'
                        f'<td>{r["pkr"]:,.2f}</td></tr>'
                        for r in reversed(dmon[k]))
-        dp.append((k, f"{MON[m - 1]} {y}", f"Gold and silver rate in {MON[m - 1]} {y} (daily)",
-                   f'<div class="tbl"><table><thead><tr><th>Date</th><th>24K tola</th><th>22K tola</th><th>24K 10 g</th><th>Silver tola</th><th>USD/PKR</th></tr></thead>'
+        dp.append((k, f"{MON[m - 1]} {y}", f"Gold rate in {MON[m - 1]} {y} (daily)",
+                   f'<div class="tbl"><table><thead><tr><th>Date</th><th>24K tola</th><th>22K tola</th><th>21K tola</th><th>24K 10 g</th><th>Gold $/oz</th><th>USD/PKR</th></tr></thead>'
                    f'<tbody>{body}</tbody></table></div>'))
     dd = hx.explorer("Choose a month", dp, groups=True)
-    # ---- silver monthly table ----
-    st = ""
-    for k in sorted(smon, reverse=True):
-        v = smon[k]
-        st += (f'<tr><th scope="row">{MON[int(k[5:]) - 1]} {k[:4]}</th><td>{rs(sum(v) / len(v))}</td><td>{rs(min(v))}</td>'
-               f'<td>{rs(max(v))}</td><td>{rs(sum(v) / len(v) * 1000 / TOLA)}</td></tr>')
-
     # ---- chart 1: yearly 24K tola, log scale ----
     W, H, L, B = 760, 320, 64, 30
     lo, hi = math.log10(10), math.log10(max(Y[y]["t24"] for y in yrs) * 1.4)
@@ -223,14 +193,11 @@ def main():
                 f'<figcaption style="color:var(--muted);font-size:14px;margin-top:6px">{E(cap)}</figcaption></figure>')
     svg2 = line_chart("t24", "#c9971f", "ghT2", f"Daily 24K gold price per tola in Pakistan since {fd(first_d)}",
                       f"Daily 24K gold price per tola in Pakistan, {fd(first_d)} to {fd(ld)}.", 100000)
-    svg3 = line_chart("sv", "#8a96a8", "ghT3", f"Daily silver price per tola in Pakistan since {fd(first_d)}",
-                      f"Daily pure silver (999) price per tola in Pakistan, {fd(first_d)} to {fd(ld)}.", 2000)
-
     title = f"Gold Rate History in Pakistan: Tola Price 1947–{cy}"
-    desc = (f"Gold rate history in Pakistan: 24K tola from about {rs(t47)} in 1947 to {rs(cur)} now. Year-wise table, "
-            f"monthly rates, daily gold and silver since 2024.")
+    desc = (f"Gold rate history in Pakistan: 24K tola from about {rs(t47)} in 1947 to {rs(cur)} now. Year-wise and month-wise "
+            f"table, daily gold rates since 2024.")
     if len(desc) > 155:
-        desc = f"Gold rate history in Pakistan: 24K tola from about {rs(t47)} in 1947 to {rs(cur)} now. Year-wise, monthly and daily gold and silver rates."
+        desc = f"Gold rate history in Pakistan: 24K tola from about {rs(t47)} in 1947 to {rs(cur)} now. Year-wise, monthly and daily gold rates."
     h1 = f"Gold rate history in Pakistan: tola price from 1947 to {cy}"
     faq = [
         ("What was the gold rate in Pakistan in 1947?",
@@ -247,27 +214,28 @@ def main():
          "Sarafa associations add a local premium, duties and dealer margins, and they update at their own times. Jewellery also adds making charges. Use this page for history and trends; check your jeweller for a buying price."),
         ("How much has gold gone up since 2000 in Pakistan?",
          f"From about {rs(t00)} per tola (2000 average) to {rs(cur)} on {fd(ld)}, about {cur / t00:.0f} times. Two things pushed it: gold rose about {g_mult:.1f} times in dollars and the dollar rose about {d_mult:.1f} times in rupees. Past prices do not tell what gold will do next."),
-        ("What was the silver rate in Pakistan in 2024 and 2025?",
-         f"Pure (999) silver averaged about {rs(s24)} per tola in 2024 (from March) and {rs(s25)} in 2025. On {fd(ld)} it was {rs(cur_s)} per tola."),
+        ("Where can I see the silver (chandi) rate history?",
+         "Silver has its own page: the silver rate history in Pakistan, with daily chandi rates per tola, 10 gram and kg since March 2024, monthly averages and a date lookup."),
         ("Pakistan mein sone ka rate 1947 se ab tak kitna barha?",
          f"1947 mein 1 tola 24K sona taqreeban {rs(t47)} ka tha, 2000 mein {rs(t00)}, 2010 mein {rs(t10)}, 2020 mein {rs(t20)} aur aaj taqreeban {rs(cur)} (international qeemat se andaza)."),
     ]
     faq_h = "".join(f"<details><summary>{E(q)}</summary><p>{E(a)}</p></details>" for q, a in faq)
-    dj = json.dumps([[r["d"], round(r["t24"]), round(r["sv"]) if r["sv"] else 0] for r in days], separators=(",", ":"))
+    dj = json.dumps([[r["d"], round(r["t24"]), 0] for r in days], separators=(",", ":"))
     mj = json.dumps({x["k"]: round(x["t24"]) for x in months}, separators=(",", ":"))
 
-    body = hx.CSS + f'''<div class="qa"><b class="k">Quick answer</b><p>One tola of 24K gold in Pakistan was about <b>{rs(t47)} in 1947</b>, <b>{rs(t00)} in 2000</b>, <b>{rs(t10)} in 2010</b>, <b>{rs(t20)} in 2020</b>, <b>{rs(t25y)} in 2025</b> (yearly averages) and <b>{rs(cur)}</b> on {fd(ld)}. Silver (999) was <b>{rs(cur_s)} per tola</b>. Find any date below: daily gold and silver from {fd(first_d)}, monthly rates and a year-wise table back to 1947.</p></div>
+    body = hx.CSS + hx.YR_CSS + f'''<div class="qa"><b class="k">Quick answer</b><p>One tola of 24K gold in Pakistan was about <b>{rs(t47)} in 1947</b>, <b>{rs(t00)} in 2000</b>, <b>{rs(t10)} in 2010</b>, <b>{rs(t20)} in 2020</b>, <b>{rs(t25y)} in 2025</b> (yearly averages) and <b>{rs(cur)}</b> on {fd(ld)}. Find any date below: daily rates from {fd(first_d)}, and a year-wise table back to 1947 where every year opens to show its 12 months. Looking for chandi? See the <a href="silver-rate-history-pakistan.html">silver rate history</a>.</p></div>
 <h2 id="lookup">Gold rate on any date</h2>
 <div class="gr-calc" style="border:1px solid var(--line);border-radius:14px;padding:16px;background:var(--surface)"><label for="ghD" style="font-weight:600">Pick a date</label>
 <input type="date" id="ghD" min="1947-08-01" max="{last['d']}" value="{last['d']}" style="display:block;margin:8px 0;padding:10px;border:1px solid var(--line);border-radius:10px;font-size:16px;background:var(--bg);color:var(--ink)">
-<div id="ghR" aria-live="polite" style="font-size:17px;line-height:1.7;margin:6px 0 0">24K: <b>{rs(cur)}</b> per tola · 22K: <b>{rs(cur * 22 / 24)}</b> · silver: <b>{rs(cur_s)}</b> per tola ({fd(ld)})</div>
+<div id="ghR" aria-live="polite" style="font-size:17px;line-height:1.7;margin:6px 0 0">24K: <b>{rs(cur)}</b> per tola · 22K: <b>{rs(cur * 22 / 24)}</b> · 21K: <b>{rs(cur * 21 / 24)}</b> ({fd(ld)})</div>
 <p style="font-size:13.5px;color:var(--muted);margin:6px 0 0">Daily rates from {fd(first_d)}; before that, the monthly average (estimate).</p></div>
 <h2 id="price-chart">Gold price per tola from 1947 to {cy}</h2>
 <p>Gold in Pakistan has gone from about <b>{rs(t47)}</b> a tola in 1947 to <b>{rs(cur)}</b> in {cy}, about <b>{cur / t47:,.0f} times</b>. Two engines drive it: the world gold price in dollars, and the dollar rate in rupees (see the <a href="usd-to-pkr-history.html">USD to PKR history</a>). When both rise together, the tola rate jumps.</p>
 {svg1}
 <h2 id="years">Gold rate in Pakistan year-wise (1947–{cy})</h2>
 <p>Yearly average price per tola, newest first. Gold $/oz is the world price; USD/PKR is the average dollar rate of that year. Change is against the year before.</p>
-<div class="tbl hx-s"><table><thead><tr><th>Year</th><th>24K tola</th><th>22K tola</th><th>Gold $/oz</th><th>USD/PKR</th><th>Change</th><th>Note</th></tr></thead><tbody>{yt}</tbody></table></div>
+<p class="yr-hint"><b>Click any year</b> to open its month-by-month rates right below it; click again to close.</p>
+{yt}
 <h2 id="decades">Decade by decade</h2>
 <p>How many times the 24K tola price grew inside each decade (first year average to last year average).</p>
 <div class="tbl"><table><thead><tr><th>Decade</th><th>Start</th><th>End</th><th>Growth</th></tr></thead><tbody>{dec}</tbody></table></div>
@@ -282,33 +250,26 @@ def main():
 <li><b>2024–{cy}:</b> central-bank buying, rate cuts and global tension lifted gold above $3,000 and then $4,000 an ounce. The highest daily reference in our data was <b>${top_usd['xau']:,.0f}</b> on {fd(dt.date.fromisoformat(top_usd['d']))}; the highest tola price was <b>{rs(top['t24'])}</b>.</li></ul>
 <h2 id="growth">What Rs 1 lakh of gold in 2000 is worth today</h2>
 <p>Rs 100,000 (1 lakh) put into 24K gold at the 2000 average price (about {rs(t00)} a tola) would buy about <b>{100000 / t00:.1f} tola</b>. At {fd(ld)}'s rate that gold is worth about <b>{rs(lakh00)}</b>. The same Rs 1 lakh kept in dollars would be worth about {rs(100000 * d_mult)} today. This is a look back, not a forecast: gold also had long flat and falling periods (1980–2001, 2012–2018), and past prices do not tell what it will do next.</p>
-<h2 id="monthly">Monthly gold rate in Pakistan (1947–{cy})</h2>
-<p>Pick a year (or use ‹ ›) to see each month. From March 2024 the month is the average of daily rates; before that it is the world monthly average at that year's average dollar rate.</p>
-{mt}
-<h2 id="daily">Daily gold and silver rate in Pakistan</h2>
-<p>Every weekday from {fd(first_d)}. Pick a month (or use ‹ ›). 10 g = 24K price for 10 grams; USD/PKR is the dollar rate used that day.</p>
+<h2 id="daily">Daily gold rate in Pakistan</h2>
+<p>Every weekday from {fd(first_d)}. Pick a month (or use ‹ ›). 10 g = 24K price for 10 grams; Gold $/oz and USD/PKR are the two numbers behind that day's rate.</p>
 {svg2}
 {dd}
-<h2 id="silver">Silver (chandi) rate history in Pakistan</h2>
-<p>Pure (999) silver per tola, from the world silver price and the daily dollar rate. Silver moves faster than gold: its highest daily reference in our data was <b>{rs(stop['sv'])}</b> per tola on {fd(dt.date.fromisoformat(stop['d']))}, and on {fd(ld)} it was <b>{rs(cur_s)}</b>.{f" One ounce of gold now buys about <b>{ratio:.0f} ounces</b> of silver (the gold/silver ratio)." if ratio else ""} For today's live rate see the <a href="silver-rate-pakistan.html">silver rate in Pakistan</a>.</p>
-{svg3}
-<div class="tbl hx-s"><table><thead><tr><th>Month</th><th>Average tola</th><th>Low</th><th>High</th><th>Average 1 kg</th></tr></thead><tbody>{st}</tbody></table></div>
 <h2 id="why">Why gold keeps rising in rupees</h2>
 <p>A tola in Pakistan is priced from the world gold price in dollars. So the local rate rises when gold rises abroad (inflation, interest-rate cuts, wars, central banks buying), <i>and</i> when the rupee falls. Since 2000 gold rose about <b>{g_mult:.1f} times</b> in dollars while the dollar rose about <b>{d_mult:.1f} times</b> in rupees; together that is about {g_mult * d_mult:.0f} times. Traders follow the same driver on charts as XAUUSD: see the <a href="guide-gold-trading.html">gold trading guide</a> and today's <a href="gold-rate-pakistan.html">gold rate in Pakistan</a>.</p>
 <div class="khulasa"><h2>Khulasa (Roman Urdu / Hindi)</h2><ul>
 <li>1947 mein 1 tola 24K sona taqreeban {rs(t47)} ka tha, 2000 mein {rs(t00)}, 2010 mein {rs(t10)}, 2020 mein {rs(t20)}.</li>
-<li>Aaj ({fd(ld)}) 24K sona {rs(cur)} fi tola aur chandi {rs(cur_s)} fi tola hai.</li>
+<li>Aaj ({fd(ld)}) 24K sona {rs(cur)} fi tola hai.</li>
 <li>Sone ka rate do cheezon se barhta hai: duniya mein gold ki dollar qeemat, aur dollar ka rate.</li>
 <li>2024 se pehle ke rate andaza hain; sarafa bazaar ka rate thora mukhtalif hota hai.</li>
 <li>Kisi bhi tareekh ka rate upar wale date box se dekhein.</li></ul></div>
-<section class="gr-ur" lang="ur" dir="rtl" style="font-family:var(--f-ur);line-height:2.1;margin:18px 0"><h2>پاکستان میں سونے اور چاندی کی تاریخ</h2><p>1947 میں ایک تولہ سونا تقریباً {t47:,.0f} روپے کا تھا۔ 2000 میں اوسط {t00:,.0f} روپے، 2020 میں {t20:,.0f} روپے، اور آج {ld.day} {UR_MON[ld.month - 1]} {ld.year} کو 24 قیراط سونا {cur:,.0f} روپے فی تولہ ہے۔ چاندی آج {cur_s:,.0f} روپے فی تولہ ہے۔ پرانے ریٹ انٹرنیشنل قیمت اور ڈالر ریٹ سے نکالا گیا اندازہ ہیں، صرافہ بازار کا ریٹ تھوڑا مختلف ہوتا ہے۔</p></section>
+<section class="gr-ur" lang="ur" dir="rtl" style="font-family:var(--f-ur);line-height:2.1;margin:18px 0"><h2>پاکستان میں سونے کے ریٹ کی تاریخ</h2><p>1947 میں ایک تولہ سونا تقریباً {t47:,.0f} روپے کا تھا۔ 2000 میں اوسط {t00:,.0f} روپے، 2020 میں {t20:,.0f} روپے، اور آج {ld.day} {UR_MON[ld.month - 1]} {ld.year} کو 24 قیراط سونا {cur:,.0f} روپے فی تولہ ہے۔ پرانے ریٹ انٹرنیشنل قیمت اور ڈالر ریٹ سے نکالا گیا اندازہ ہیں، صرافہ بازار کا ریٹ تھوڑا مختلف ہوتا ہے۔</p></section>
 <div class="ls-faq"><h2>Questions</h2>{faq_h}</div>
 <h2>Sources and method</h2>
-<p style="font-size:14.5px">World gold price, monthly average in US dollars per ounce: the open <i>gold-prices</i> dataset (datasets/gold-prices on GitHub). Daily gold and silver from March 2024: reference rates from an open currency data service (one isolated bad day smoothed), and from 21 November 2026 the prices on our <a href="gold-rate-pakistan.html">live gold rate page</a>. Dollar rate: World Bank yearly averages and daily rates, as on our <a href="usd-to-pkr-history.html">USD to PKR history</a>. Formula: USD/oz × USD/PKR ÷ 31.1035 × 11.6638 = price per tola. Figures before March 2024 are estimates, not historical sarafa (APGJSA) rates. Updated {fd(now.date())}.</p>
-<nav class="pn" aria-label="Rates"><a href="gold-rate-pakistan.html"><small>‹ Live</small><b>Gold rate in Pakistan today</b></a><a class="nx" href="usd-to-pkr-history.html"><small>Next ›</small><b>USD to PKR history</b></a></nav>
-<p class="ls-disc">For information only; not an offer to buy or sell gold or silver, and not financial advice. Gold prices can fall as well as rise.</p>
-''' + hx.JS + f'''<script type="application/json" id="ghData">{{"d":{dj},"m":{mj}}}</script>
-<script>(function(){{try{{var D=JSON.parse(document.getElementById('ghData').textContent),m={{}};D.d.forEach(function(r){{m[r[0]]=r}});var i=document.getElementById('ghD'),o=document.getElementById('ghR');function f(n){{return 'Rs '+Math.round(n).toLocaleString('en-US')}}function out(r,t){{o.innerHTML='24K: <b>'+f(r[1])+'</b> per tola · 22K: <b>'+f(r[1]*22/24)+'</b> · 21K: <b>'+f(r[1]*21/24)+'</b> · 10 g 24K: <b>'+f(r[1]/11.6638*10)+'</b>'+(r[2]?' · silver: <b>'+f(r[2])+'</b> per tola':'')+' ('+t+')'}}function show(){{var v=i.value;if(!v)return;var d=new Date(v+'T00:00:00'),t=d.toLocaleDateString('en-GB',{{day:'numeric',month:'long',year:'numeric'}});if(m[v]){{out(m[v],t);return}}var k=v;for(var j=0;j<6&&!m[k];j++){{d.setDate(d.getDate()-1);k=d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2)}}if(m[k]){{out(m[k],'nearest earlier rate, '+k);return}}var mk=v.slice(0,7);if(D.m[mk]){{var dd=new Date(v+'T00:00:00');o.innerHTML='24K ≈ <b>'+f(D.m[mk])+'</b> per tola · 22K ≈ <b>'+f(D.m[mk]*22/24)+'</b> (estimated average for '+dd.toLocaleDateString('en-GB',{{month:'long',year:'numeric'}})+')'}}else o.textContent='No data for this date.'}}i.addEventListener('change',show);}}catch(e){{}}}})();</script>'''
+<p style="font-size:14.5px">World gold price, monthly average in US dollars per ounce: the open <i>gold-prices</i> dataset (datasets/gold-prices on GitHub). Daily gold from March 2024: reference rates from an open currency data service (one isolated bad day smoothed), and from 21 November 2026 the prices on our <a href="gold-rate-pakistan.html">live gold rate page</a>. Dollar rate: World Bank yearly averages and daily rates, as on our <a href="usd-to-pkr-history.html">USD to PKR history</a>. Formula: USD/oz × USD/PKR ÷ 31.1035 × 11.6638 = price per tola. Figures before March 2024 are estimates, not historical sarafa (APGJSA) rates. Updated {fd(now.date())}.</p>
+<nav class="pn" aria-label="Rates"><a href="gold-rate-pakistan.html"><small>‹ Live</small><b>Gold rate in Pakistan today</b></a><a class="nx" href="silver-rate-history-pakistan.html"><small>Next ›</small><b>Silver rate history</b></a></nav>
+<p class="ls-disc">For information only; not an offer to buy or sell gold, and not financial advice. Gold prices can fall as well as rise.</p>
+''' + hx.JS + hx.YR_JS + f'''<script type="application/json" id="ghData">{{"d":{dj},"m":{mj}}}</script>
+<script>(function(){{try{{var D=JSON.parse(document.getElementById('ghData').textContent),m={{}};D.d.forEach(function(r){{m[r[0]]=r}});var i=document.getElementById('ghD'),o=document.getElementById('ghR');function f(n){{return 'Rs '+Math.round(n).toLocaleString('en-US')}}function out(r,t){{o.innerHTML='24K: <b>'+f(r[1])+'</b> per tola · 22K: <b>'+f(r[1]*22/24)+'</b> · 21K: <b>'+f(r[1]*21/24)+'</b> · 10 g 24K: <b>'+f(r[1]/11.6638*10)+'</b>'+' ('+t+')'}}function show(){{var v=i.value;if(!v)return;var d=new Date(v+'T00:00:00'),t=d.toLocaleDateString('en-GB',{{day:'numeric',month:'long',year:'numeric'}});if(m[v]){{out(m[v],t);return}}var k=v;for(var j=0;j<6&&!m[k];j++){{d.setDate(d.getDate()-1);k=d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2)}}if(m[k]){{out(m[k],'nearest earlier rate, '+k);return}}var mk=v.slice(0,7);if(D.m[mk]){{var dd=new Date(v+'T00:00:00');o.innerHTML='24K ≈ <b>'+f(D.m[mk])+'</b> per tola · 22K ≈ <b>'+f(D.m[mk]*22/24)+'</b> (estimated average for '+dd.toLocaleDateString('en-GB',{{month:'long',year:'numeric'}})+')'}}else o.textContent='No data for this date.'}}i.addEventListener('change',show);}}catch(e){{}}}})();</script>'''
 
     T = open(os.path.join(ROOT, "guide-ict-silver-bullet-time-in-pakistan.html"), encoding="utf-8").read()
     s = T
@@ -318,8 +279,8 @@ def main():
     hero = (f'<section class="ls-hero"><div class="wrap gh-grid"><div class="gh-txt">\n'
             f'  <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a>›<a href="gold-rate-pakistan.html">Gold Rate</a>›<span>Gold rate history</span></nav>\n'
             f'  <div class="ls-meta">Rates · history 1947–{cy}</div>\n  <h1>{E(h1)}</h1>\n'
-            f'  <p class="ur" lang="ur" style="font-family:var(--f-ur);font-size:20px;line-height:2.1;margin:4px 0">پاکستان میں سونے اور چاندی کے ریٹ کی تاریخ: 1947 سے آج تک</p>\n'
-            f'  <p class="ls-lead">What a tola of gold cost in Pakistan in every year since independence, every month since 1947 and every weekday since {fd(first_d)}, with silver rates, a date lookup and the moments that moved the price.</p>\n'
+            f'  <p class="ur" lang="ur" style="font-family:var(--f-ur);font-size:20px;line-height:2.1;margin:4px 0">پاکستان میں سونے کے ریٹ کی تاریخ: 1947 سے آج تک</p>\n'
+            f'  <p class="ls-lead">What a tola of gold cost in Pakistan in every year since independence, every month since 1947 and every weekday since {fd(first_d)}, with a date lookup and the moments that moved the price.</p>\n'
             f'  <div class="byline"><img src="logo-128.webp" alt="Qazi Forex Tips" width="46" height="46"><div>By the <b>Qazi Forex Tips</b> team, led by <a href="about.html"><b>Dr. Qazi Abdul Basit</b></a>, Ph.D<br>Updated {fd(now.date())}</div></div>\n</div>\n'
             f'  <figure class="gh-art"><img src="{HERO}.webp" srcset="{HERO}-800.webp 800w, {HERO}.webp 1600w" sizes="(min-width:1000px) 560px, 100vw" width="1600" height="1280" '
             f'alt="Gold rate history in Pakistan: 3D gold bars rising from about Rs {t47:,.0f} per tola in 1947 to Rs {cur / 1000:,.0f}k in {cy}" fetchpriority="high" decoding="async"></figure>\n</div></section>')
@@ -336,11 +297,11 @@ def main():
          "image": [{"@type": "ImageObject", "url": "https://qaziforextips.com/" + HERO + ".webp", "width": 1600, "height": 1280,
                     "caption": f"Gold rate history in Pakistan: 24K tola price from 1947 to {cy}"}],
          "datePublished": "2026-11-21T00:00:00+05:00", "dateModified": now.strftime("%Y-%m-%dT%H:%M:%S+05:00"), "inLanguage": "en",
-         "keywords": "gold rate history in pakistan, gold price history pakistan, gold rate in pakistan year wise, 1 tola gold price in 2000 in pakistan, gold rate in 1947 in pakistan, silver rate history pakistan",
+         "keywords": "gold rate history in pakistan, gold price history pakistan, gold rate in pakistan year wise, 1 tola gold price in 2000 in pakistan, gold rate in 1947 in pakistan, gold rate in pakistan month wise",
          "author": {"@type": "Organization", "@id": "https://qaziforextips.com/#org", "name": "Qazi Forex Tips", "url": "https://qaziforextips.com/"},
          "publisher": {"@type": "Organization", "@id": "https://qaziforextips.com/#org", "name": "Qazi Forex Tips", "logo": {"@type": "ImageObject", "url": "https://qaziforextips.com/logo.png"}}},
-        {"@type": "Dataset", "name": f"Gold and silver price history in Pakistan (1947–{cy})",
-         "description": f"Estimated 24K gold price per tola in Pakistani rupees: yearly and monthly from 1947, daily gold and silver from {days[0]['d']}.",
+        {"@type": "Dataset", "name": f"Gold price history in Pakistan (1947–{cy})",
+         "description": f"Estimated 24K gold price per tola in Pakistani rupees: yearly and monthly from 1947, daily from {days[0]['d']}.",
          "url": URL, "temporalCoverage": "1947-08/" + last["d"], "creator": {"@type": "Organization", "name": "Qazi Forex Tips", "url": "https://qaziforextips.com/"},
          "isBasedOn": ["https://github.com/datasets/gold-prices", "https://data.worldbank.org/indicator/PA.NUS.FCRF?locations=PK"],
          "distribution": [{"@type": "DataDownload", "encodingFormat": "application/json", "contentUrl": "https://qaziforextips.com/data/metals-daily.json"},

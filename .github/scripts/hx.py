@@ -19,6 +19,7 @@ CSS = """<style>
 .tbl.hx-s thead th{position:sticky;top:0;z-index:1;background:var(--surface)}
 .hx td,.hx th,.hx-s td,.hx-s th{white-space:nowrap}
 @media(max-width:600px){.hx td,.hx th,.hx-s td,.hx-s th{font-size:14px;padding:8px 10px}.hx{padding:10px 8px 2px}}
+.dec-s{text-transform:lowercase;color:var(--ink);opacity:.75}
 .hx-chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0 0}
 .hx-chips button{border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:999px;padding:5px 11px;font:inherit;font-size:13.5px;cursor:pointer}
 .hx-chips button:hover{border-color:var(--gold)}
@@ -49,3 +50,41 @@ def explorer(label, panels, chips=None, groups=False):
     return (f'<div class="hx"><div class="hx-bar"><button type="button" class="hx-b" aria-label="Older">‹</button>'
             f'<select aria-label="{label}">{opts}</select><button type="button" class="hx-b" aria-label="Newer">›</button>'
             f'<span class="hx-n">1 / {len(panels)}</span></div>{ch}{body}</div>')
+
+
+# ---------------- year rows that open to show their months (same table) ----------------
+YR_CSS = """<style>
+.tbl.hx-s{max-height:600px}
+.tbl.hx-s>table>thead th{position:sticky;top:0;z-index:2;background:var(--surface)}
+.tbl.hx-s .yr-m thead th{position:static}
+tr.yr{cursor:pointer}
+tr.yr:hover>th,tr.yr:hover>td{background:rgba(201,151,31,.08)}
+tr.yr.open>th,tr.yr.open>td{background:rgba(201,151,31,.14)}
+.yr-b{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:8px;font:inherit;color:inherit;letter-spacing:inherit}
+.yr-b:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:4px}
+.yr-c{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;border:1px solid currentColor;font-size:10px;transition:transform .2s}
+tr.yr.open .yr-c{transform:rotate(180deg)}
+tr.yr-sub>td{padding:4px 10px 14px !important;background:var(--bg)}
+.yr-m{width:100%;margin:6px 0 0;font-size:14.5px}
+.yr-m th,.yr-m td{padding:7px 10px !important}
+.yr-hint{font-size:14px;color:var(--muted);margin:-4px 0 8px}
+</style>"""
+
+YR_JS = """<script>(function(){document.querySelectorAll('tr.yr').forEach(function(tr){var s=tr.nextElementSibling,b=tr.querySelector('.yr-b');
+tr.addEventListener('click',function(){var o=s.hidden;s.hidden=!o;tr.classList.toggle('open',o);b.setAttribute('aria-expanded',o?'true':'false')})})})();</script>"""
+
+
+def year_table(head, rows, sub_head):
+    """head: list of column names (first is the year column).
+    rows: list of (year_key, [td html strings], [sub row html strings]) in display order.
+    sub_head: column names for the monthly table that opens under a year."""
+    n = len(head)
+    th = "".join(f"<th>{h}</th>" for h in head)
+    sh = "".join(f"<th>{h}</th>" for h in sub_head)
+    body = ""
+    for k, cells, subs in rows:
+        body += (f'<tr class="yr"><th scope="row"><button type="button" class="yr-b" aria-expanded="false" aria-controls="yr-{k}">{k}'
+                 f'<span class="yr-c" aria-hidden="true">▼</span></button></th>{"".join(cells)}</tr>'
+                 f'<tr class="yr-sub" id="yr-{k}" hidden><td colspan="{n}"><table class="yr-m"><thead><tr>{sh}</tr></thead>'
+                 f'<tbody>{"".join(subs)}</tbody></table></td></tr>')
+    return f'<div class="tbl hx-s"><table><thead><tr>{th}</tr></thead><tbody>{body}</tbody></table></div>'
