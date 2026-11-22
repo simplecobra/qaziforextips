@@ -1,3 +1,11 @@
+/* Analytics (GA4 + Clarity): qft-analytics.js har page par load karta hai */
+(function () {
+  if (document.getElementById("qftAnalyticsLoader")) return;
+  var a = document.createElement("script");
+  a.id = "qftAnalyticsLoader"; a.src = "qft-analytics.js?v=1"; a.async = true;
+  document.head.appendChild(a);
+})();
+
 /* =====================================================================
    QFT AI Assistant – website chat widget
    ---------------------------------------------------------------------
