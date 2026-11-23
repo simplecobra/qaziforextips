@@ -1,0 +1,37 @@
+name: Search index
+# Rebuilds the site search index (/pagefind) with Pagefind whenever pages change, and once a day.
+on:
+  push:
+    branches: [main]
+    paths: ["**.html", ".github/scripts/build-search.mjs"]
+  schedule:
+    - cron: "40 21 * * *"   # 02:40 PKT, picks up pages changed by the rates bot
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: search-index
+  cancel-in-progress: true
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Build the search index
+        run: |
+          mkdir -p /tmp/pf && cd /tmp/pf && npm init -y >/dev/null
+          npm i --silent pagefind@1.3.0 node-html-parser@6.1.13
+          cp "$GITHUB_WORKSPACE/.github/scripts/build-search.mjs" .
+          rm -rf "$GITHUB_WORKSPACE/pagefind"
+          SITE_ROOT="$GITHUB_WORKSPACE" node build-search.mjs
+      - name: Commit the index
+        run: |
+          git config user.name "qft-search-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A pagefind
+          if git diff --cached --quiet; then echo "index unchanged"; exit 0; fi
+          git commit -m "Update search index"
+          for i in 1 2 3; do git pull --rebase -q && git push -q && break; sleep 5; done

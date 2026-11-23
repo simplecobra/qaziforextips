@@ -4,6 +4,10 @@
   var s = document.createElement("script");
   s.id = "qftBotLoader"; s.src = "qft-bot.js?v=3"; s.defer = true;
   (document.body || document.head).appendChild(s);
+  if (!document.getElementById("qftSearchLoader")) {   /* site search button (search.js) */
+    var q = document.createElement("script"); q.id = "qftSearchLoader"; q.src = "/search.js?v=1"; q.defer = true;
+    (document.body || document.head).appendChild(q);
+  }
 })();
 
 /* WhatsApp menu: the round WhatsApp button opens a short "What do you need?" list.
