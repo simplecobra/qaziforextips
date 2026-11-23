@@ -855,6 +855,168 @@
    "next": "Currencies and their codes",
    "hero": "img/forex-basics/how-forex-brokers-work-trade-journey-3d-lesson-1-3",
    "hero_alt": "3D illustration: a phone with a green Buy button sends a gold order path to a broker server stack on gold coins, which routes it to the best of several blue liquidity provider towers, highlighted in gold"
+  },
+  {
+   "n": "1.4",
+   "module": 1,
+   "slug": "lesson-currency-pairs-explained.html",
+   "vid": "w50_-oYaTe4",
+   "title": "Currency Pairs Explained: Major, Minor & Exotic Pairs (Urdu/Hindi) | Lesson 1.4",
+   "seo_title": "Currency Pairs Explained: Base, Quote, Major, Minor, Exotic",
+   "h1": "Currency pairs explained: base vs quote, major, minor and exotic pairs (Lesson 1.4)",
+   "short": "Currency pairs: codes, base/quote, major/minor/exotic",
+   "desc": "Currency pairs explained for beginners: currency codes, how to read EURUSD, base vs quote currency, Buy/Sell meaning, and major, minor and exotic pairs.",
+   "lead": "You hear that the dollar is getting stronger and press Buy on EURUSD, thinking you bought dollars. In fact you sold them. This lesson of Forex Basics: Zero to Hero fixes that mistake for good: where currency codes like USD, PKR and XAU come from, how to read any currency pair in three steps with a petrol pump example, what base and quote currency mean, what Buy and Sell really do, the 'dollar left or right' rule, and the three families of pairs (major, minor and exotic) with a simple road analogy and a family test.",
+   "duration": "PT16M32S",
+   "len": "16:32",
+   "date": "2026-11-23",
+   "keywords": "currency pairs, currency pairs explained, how to read currency pairs, how to read forex pairs, base and quote currency, major minor exotic currency pairs, major currency pairs, exotic currency pairs, cross pairs, currency codes iso 4217, best currency pairs for beginners, currency pair kya hai, base aur quote currency",
+   "covers": [
+    "Currency codes (ISO 4217): 2 letters country + 1 letter currency",
+    "Exceptions: CHF, EUR, and why gold is XAU",
+    "Broker suffixes like EURUSDm, .pro, .ecn",
+    "Base and quote currency with a petrol pump example",
+    "Why 1.1011 on EURUSD is not the dollar's price",
+    "Read any pair in 3 steps",
+    "The real meaning of Buy and Sell",
+    "The 'dollar left or right' rule",
+    "Major, minor (cross) and exotic pairs",
+    "Road analogy and an easy family test",
+    "Which pairs a beginner should start with"
+   ],
+   "chapters": [
+    [
+     "0:00",
+     "Why EURUSD Buy = Selling Dollars"
+    ],
+    [
+     "0:46",
+     "Lesson 1.4 Intro"
+    ],
+    [
+     "1:22",
+     "Currency Codes (ISO 4217)"
+    ],
+    [
+     "2:18",
+     "CHF, EUR, XAU, XAG Codes"
+    ],
+    [
+     "3:10",
+     "Broker Suffixes & Specification"
+    ],
+    [
+     "3:38",
+     "Base and Quote Currency"
+    ],
+    [
+     "4:41",
+     "Common Mistake: Is 1.1011 the Dollar Price?"
+    ],
+    [
+     "5:43",
+     "How to Read Any Currency Pair (3 Steps)"
+    ],
+    [
+     "6:48",
+     "Buy and Sell Meaning"
+    ],
+    [
+     "8:01",
+     "Dollar Left or Right Rule"
+    ],
+    [
+     "8:40",
+     "Quiz"
+    ],
+    [
+     "9:11",
+     "Major Currency Pairs"
+    ],
+    [
+     "10:28",
+     "Minor (Cross) Pairs"
+    ],
+    [
+     "10:58",
+     "Exotic Pairs"
+    ],
+    [
+     "11:51",
+     "Road Analogy: Major vs Minor vs Exotic"
+    ],
+    [
+     "12:24",
+     "Family Test"
+    ],
+    [
+     "13:34",
+     "Best Pairs for Beginners"
+    ],
+    [
+     "14:32",
+     "Find Pair Groups in MT5"
+    ],
+    [
+     "14:57",
+     "Summary & Answers"
+    ]
+   ],
+   "notes": "<h2>What is a currency code? ISO 4217 in one minute</h2><p>Every currency in the world has a three-letter code set by the global standard <b>ISO 4217</b>. Banks, airline tickets and MT5 all use the same codes so there is no confusion. The usual pattern: the <b>first two letters are the country</b> and the <b>third is the currency</b>: <b>USD</b> (United States + Dollar), <b>PKR</b> (Pakistan + Rupee), <b>INR</b> (India + Rupee), <b>JPY</b> (Japan + Yen), <b>GBP</b> (Great Britain + Pound), <b>AUD</b>, <b>CAD</b> and <b>NZD</b>.</p><p>It is a pattern, not a formula. <b>CHF</b> is the Swiss franc, from the Latin name Confoederatio Helvetica. <b>EUR</b> is shared by many European countries, so it is built from EU. Gold is <b>XAU</b> and silver <b>XAG</b>: X means not a country's currency, and Au is gold's chemical symbol from the Latin <i>aurum</i>. That is why gold in MT5 is <b>XAUUSD</b>.</p><p>Many brokers add a suffix such as EURUSDm, EURUSD.pro or EURUSD.ecn. The real pair is always the first six letters; the ending usually shows the account type. Right-click the symbol and open <b>Specification</b> to see the full details.</p>\n<h2>Base currency and quote currency: the petrol pump example</h2><p>In forex you never buy one currency alone; you always buy one against another, so two codes are written together as a <b>currency pair</b>. The first is the <b>base currency</b> and the second is the <b>quote currency</b>.</p><p>A petrol pump board says: <b>1 litre = 250 rupees</b> (for example). The litre is always one; the rupees show its price. A pair works the same way: in <b>EURUSD 1.1011</b> the euro is the litre (always 1) and the dollar is the rupees. So the number is the <b>price of one euro in dollars</b>.</p><h3>Common mistake: is 1.1011 the dollar's price?</h3><p>No. In Pakistan we hear \"the dollar is 276\", so the mind thinks every number is the dollar's price. In forex language that is <b>USDPKR 276</b>: the dollar is first, so 276 is the dollar's price in rupees. In <b>EURUSD 1.1011</b> the euro is first, so 1.1011 is the euro's price in dollars: one euro is about one dollar and ten cents, and with one dollar you will not get a full euro.</p>\n<h2>How to read any currency pair in 3 steps</h2><ol><li>Say the first currency with the word <b>one</b>.</li><li>Say <b>equals</b>.</li><li>Say the screen number with the <b>second currency</b>.</li></ol><p>EURUSD 1.1011: one euro equals 1.1011 dollars. GBPUSD 1.27: one pound equals 1.27 dollars. USDJPY 150: one dollar equals 150 yen (here the dollar is first, so the number is the dollar's price).</p>\n<h2>What Buy and Sell really mean</h2><p>Buying EURUSD means <b>buying euros and selling dollars</b>; you expect the euro to strengthen against the dollar. Selling EURUSD means selling euros and buying dollars. The Buy or Sell decision is always about the <b>base currency</b>. If the chart goes up, the base currency is getting stronger: EURUSD from 1.1011 to 1.1050 means one euro now buys more dollars; down to 1.0980 means the euro got cheaper. Profit or loss also depends on spread and lot size, which we calculate in Module 2.</p>\n<h2>The rule: is the dollar on the left or the right?</h2><p>When news says the dollar is getting stronger: in <b>EURUSD</b> the dollar is on the right (quote), so the pair goes <b>down</b>. In <b>USDJPY</b> the dollar is on the left (base), so the pair goes <b>up</b>. One news, two pairs, opposite directions. Always check where the dollar sits before you trade on dollar news.</p>\n<h2>Major, minor and exotic currency pairs</h2><ul><li><b>Major pairs:</b> the US dollar against one of the strongest currencies. Usually seven: EURUSD, USDJPY, GBPUSD, USDCHF, AUDUSD, USDCAD, NZDUSD. The dollar is on one side of about 89% of all trades, and in the BIS 2025 survey EURUSD alone was about 21% of the market, USDJPY about 14% and GBPUSD about 8%. More buyers and sellers mean lower spreads.</li><li><b>Minor (cross) pairs:</b> no dollar, but both currencies are big: EURGBP, EURJPY, GBPJPY, AUDCAD. Spreads are a bit higher, and GBPJPY is famous for fast moves (\"the Beast\").</li><li><b>Exotic pairs:</b> one big currency plus one from an emerging or small economy: USDTRY, USDZAR, USDMXN. USDPKR and USDINR also belong here, but most brokers do not offer them. Few buyers and sellers mean wide spreads, sudden moves and higher swap.</li></ul><p>Road analogy: majors are the <b>motorway</b> (heavy, smooth traffic, small toll), minors are <b>city roads</b> (rush and bumps), exotics are a <b>village dirt road</b> (few cars, potholes).</p><h3>The family test</h3><p>Memorise eight currencies: USD, EUR, JPY, GBP, CHF, AUD, CAD, NZD. If a pair has a currency outside these eight, it is <b>exotic</b>. If both are inside, check for the dollar: dollar = <b>major</b>, no dollar = <b>minor</b>. AUDUSD = major, EURJPY = minor, USDTRY = exotic. Brokers draw these lines slightly differently, and spreads change with the broker, account type and time of day.</p>\n<h2>Which currency pairs should a beginner trade?</h2><p>Start with one or two majors such as EURUSD: low spread, smoother movement, and learning material everywhere. But no pair is safe: a low spread only means a lower cost. Before any trade, check the spread at your broker, check market activity, practise on demo, and decide your maximum loss first. In MT5, right-click Market Watch and open <b>Symbols</b>: most brokers keep Majors, Minors and Exotics in separate folders, where you can compare their spreads.</p>",
+   "takes": [
+    "The first currency in a pair is the base and is always 1; the number is its price in the second currency.",
+    "Buy and Sell are always about the base currency; check if the dollar is on the left or right before trading dollar news.",
+    "Majors have the dollar and a strong currency, minors have no dollar, exotics include a small-economy currency; beginners start with majors."
+   ],
+   "khulasa": [
+    "Har currency ka teen harfi code hai (ISO 4217): pehle do harf mulk, teesra currency. CHF aur EUR exceptions hain, gold XAU aur silver XAG.",
+    "Pair mein pehli currency base hai, hamesha 1; screen ka number usi ki qeemat hai doosri currency mein. Bilkul petrol pump ki tarah: 1 litre = 250 rupay.",
+    "EURUSD 1.1011 dollar ki qeemat nahi, euro ki qeemat hai dollars mein. Dollar ki qeemat USDPKR 276 hai.",
+    "Parhne ka tareeqa: pehli currency + ek, barabar hai, number + doosri currency.",
+    "Buy/Sell ka faisla hamesha base currency ke baare mein hota hai. Chart upar = base mazboot.",
+    "Dollar dayen (EURUSD) to dollar mazboot hone par pair neeche; dollar bayen (USDJPY) to pair upar.",
+    "Major: dollar + mazboot currency. Minor: dollar nahi. Exotic: chhoti maeeshat ki currency, spread zyada.",
+    "Shuru hamesha 1-2 major pairs se, demo par, aur nuqsan ki hadd pehle tay karein."
+   ],
+   "faq": [
+    [
+     "What is a currency pair in forex?",
+     "A currency pair shows the price of one currency in another. In EURUSD 1.1011, the euro is the base currency (always 1) and 1.1011 is its price in US dollars."
+    ],
+    [
+     "What is the difference between base and quote currency?",
+     "The base currency is written first and always counts as one unit; the quote currency is written second and shows the price of that one unit. Buy and Sell decisions are about the base currency."
+    ],
+    [
+     "کرنسی پیئر کیسے پڑھتے ہیں؟",
+     "پہلی کرنسی کا نام ایک کے ساتھ لیں، پھر برابر ہے، پھر اسکرین کا نمبر دوسری کرنسی کے ساتھ۔ یورو یو ایس ڈی ون پوائنٹ ون زیرو ون ون کا مطلب ہے ایک یورو برابر ہے ایک اعشاریہ ایک زیرو ایک ایک ڈالر۔"
+    ],
+    [
+     "What are major, minor and exotic pairs?",
+     "Majors pair the US dollar with a strong currency (EURUSD, USDJPY, GBPUSD, USDCHF, AUDUSD, USDCAD, NZDUSD). Minors or crosses have no dollar (EURJPY, GBPJPY). Exotics include a currency from a smaller or emerging economy (USDTRY, USDZAR) and usually have much wider spreads."
+    ],
+    [
+     "Which currency pair is best for beginners?",
+     "Most educators suggest starting with one or two major pairs such as EURUSD because spreads are low and price movement is smoother. No pair is risk-free, so practise on demo and set your maximum loss first."
+    ],
+    [
+     "Kya USDPKR forex mein trade hota hai?",
+     "USDPKR exotic family mein aata hai, lekin zyada tar forex brokers ise trade ke liye offer nahi karte. Apne broker ke Symbols mein check karein."
+    ]
+   ],
+   "next": "Gold and Silver (XAUUSD)",
+   "hero": "img/forex-basics/currency-pairs-explained-base-quote-3d-lesson-1-4",
+   "hero_alt": "3D petrol pump style board showing 1 EUR = 1.1011 USD, explaining base currency and quote currency in a forex currency pair",
+   "sources": [
+    [
+     "BIS Triennial Central Bank Survey 2025",
+     "https://www.bis.org/statistics/rpfx25.htm"
+    ],
+    [
+     "ISO 4217 currency codes",
+     "https://www.iso.org/iso-4217-currency-codes.html"
+    ]
+   ]
   }
  ]
 }
