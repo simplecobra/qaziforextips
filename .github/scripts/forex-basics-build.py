@@ -24,8 +24,8 @@ T = open(os.path.join(ROOT, "lesson-forex-trading-basics.html"), encoding="utf-8
 e = html.escape
 
 MODULES = [
-    ("Start Here", ["Start here: how to use this course", "How money is made and lost in forex (the $50-100 reality)", "Scams, signal groups and guaranteed profit", "Binary options are not forex", "Is forex halal or haram?"]),
-    ("What is Forex", ["What is forex trading?", "How the forex market works", "Where does your trade go? (interbank, LP, OTC, CFD)", "Currencies and their codes", "Currency pairs: base and quote", "Major, minor and exotic pairs", "Gold and Silver (XAU/USD, XAG/USD)", "Forex vs stocks, crypto, indices and oil", "Buy and Sell explained", "Why forex is open 24/5"]),
+    ("Start Here", ["Start here: how to use this course", "How money is made and lost in forex (the $50-100 reality)", "Scams, signal groups and guaranteed profit", "Binary options are not forex"]),
+    ("What is Forex", ["What is forex trading?", "How the forex market works", "Where does your trade go? (interbank, LP, OTC, CFD)", "Currency pairs: codes, base and quote, major, minor and exotic", "Gold and Silver (XAU/USD, XAG/USD)", "Forex vs stocks, crypto, indices and oil", "Buy and Sell explained", "Why forex is open 24/5"]),
     ("Trading Language and Maths", ["Bid, Ask and Spread", "Pip, point and pipette", "Gold pip, point and tick", "Lot size", "Pip value", "How to calculate profit and loss", "Account currency", "Commission", "Swap and triple swap", "Slippage, requotes and spread widening", "The total cost of a trade", "Risk:Reward introduction"]),
     ("Leverage and Margin", ["What is leverage?", "Margin, free margin and margin level", "Margin call and stop out", "Example: $1,000 at 1:500"]),
     ("Brokers and Accounts", ["What is a forex broker?", "Market maker, STP, ECN and A/B book", "Regulated broker checklist", "IB and affiliate links", "Account types", "How to open a demo account", "Real account and KYC", "Deposits and withdrawals in Pakistan and India", "Legal position in Pakistan and India", "Account security"]),
@@ -168,7 +168,7 @@ def lesson_page(i, L):
     return head(title, L["desc"], url, img, og, ld) + HEADER + body + FOOTER
 
 HERO_ALT = ("Forex Basics: Zero to Hero, free forex trading course for beginners in Urdu/Hindi by Qazi Forex Tips: "
-            "116 short lessons in 14 modules and 3 stages, Foundation (pips, lot size, leverage), Tools (broker, MT4/MT5, charts) and Survival (risk management, psychology)")
+            f"{sum(len(m[1]) for m in MODULES)} short lessons in 14 modules and 3 stages, Foundation (pips, lot size, leverage), Tools (broker, MT4/MT5, charts) and Survival (risk management, psychology)")
 
 
 def hub_page():
