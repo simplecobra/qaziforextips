@@ -194,7 +194,7 @@ def main():
                 f'<figcaption style="color:var(--muted);font-size:14px;margin-top:6px">{E(cap)}</figcaption></figure>')
     svg2 = line_chart("t24", "#c9971f", "ghT2", f"Daily 24K gold price per tola in Pakistan since {fd(first_d)}",
                       f"Daily 24K gold price per tola in Pakistan, {fd(first_d)} to {fd(ld)}.", 100000)
-    title = f"Gold Rate History in Pakistan: Tola Price 1947–{cy}"
+    title = f"Gold Rate History Pakistan: Year-wise Tola Price 1947–{cy}"
     desc = (f"Gold rate history in Pakistan: 24K tola from about {rs(t47)} in 1947 to {rs(cur)} now. Year-wise and month-wise "
             f"table, daily gold rates since 2024.")
     if len(desc) > 155:
