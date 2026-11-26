@@ -1,8 +1,0 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="robots" content="noindex,nofollow"><title>xfer</title></head><body>
-<script>
-// Temporary helper: hands one Shorts video file to the parent upload page (TikTok Studio). Remove after the Shorts batch.
-const f=new URLSearchParams(location.search).get('f')||'';
-if(/^[A-Za-z0-9_.-]+\.mp4$/.test(f)&&window.parent!==window){
- fetch('https://raw.githubusercontent.com/simplecobra/qaziforextips/shorts-media/'+f).then(r=>r.blob()).then(b=>parent.postMessage({qftFile:1,name:f,blob:b},'https://www.tiktok.com')).catch(e=>parent.postMessage({qftErr:String(e)},'https://www.tiktok.com'));
-}
-</script></body></html>
