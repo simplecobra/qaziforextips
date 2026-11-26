@@ -271,7 +271,7 @@ LINK: course-price-action-advanced.html | Advanced Price Action Course in Urdu &
 LINK: course-price-action-basic.html | Free Price Action Course in Urdu & Hindi – Basic Level
 LINK: course-trading-strategies.html | Forex Trading Strategies in Urdu & Hindi: Gold Scalping & More
 LINK: forex-guide.html | Forex Guide in Urdu & Hindi: Learn Forex Trading Step by Step
-LINK: forex-replay-software.html | Forex replay software compared – QFT Replay Simulator
+LINK: simulator.html#compare | Forex replay software compared – QFT Replay Simulator
 LINK: guide-bos-vs-choch.html | BOS vs CHoCH in Trading: Meaning and Strategy (SMC)
 LINK: guide-drawdown-in-forex.html | What Is Drawdown in Forex? Max Drawdown & Recovery Explained
 LINK: guide-fair-value-gap.html | What Is a Fair Value Gap (FVG)? ICT Imbalance Explained
