@@ -1,5 +1,18 @@
 {
- "gold": {"date": "2026-11-26", "tola": 378636, "g10": 324619, "intl_usd": 3561, "source": "All Pakistan Sarafa Gems & Jewellers Association", "url": "https://www.pakistantimes.com/gold-price-in-pakistan-on-november-27-stands-at-rs378636-per-tola-in-latest-confirmed-update-16911/"},
+ "gold": {
+  "date": "2026-11-26",
+  "tola": 378636,
+  "g10": 324619,
+  "intl_usd": 3561,
+  "source": "All Pakistan Sarafa Gems & Jewellers Association",
+  "url": "https://www.pakistantimes.com/gold-price-in-pakistan-on-november-27-stands-at-rs378636-per-tola-in-latest-confirmed-update-16911/"
+ },
  "silver": {},
- "usd_open": {"date": "2026-11-26", "buy": 277.28, "sell": 278.42, "source": "ECAP via State Bank of Pakistan", "url": "https://www.sbp.org.pk/assets/document/open-market-closing-exchange-rates-26-November-2026.pdf"}
+ "usd_open": {
+  "date": "2026-11-27",
+  "buy": 277.25,
+  "sell": 278.4,
+  "source": "ECAP via State Bank of Pakistan",
+  "url": "https://www.sbp.org.pk/assets/document/open-market-closing-exchange-rates-27-November-2026.pdf"
+ }
 }
