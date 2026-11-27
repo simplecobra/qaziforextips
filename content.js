@@ -49,6 +49,15 @@ window.SITE = {
       button: "Free download"
     },
     {
+      name: "QFT TradingView Chart",
+      type: "Free indicator",
+      badge: "NEW v1.55",
+      text: "Free MT5 indicator that makes your chart look and work like TradingView: TV candles, legend and movement, 38 drawing tools and the Long / Short Position tool with lot size.",
+      points: ["TradingView Light & Dark + TV movement", "38 drawing tools, a menu for each", "Long / Short position with lot size"],
+      link: "tradingview-chart-for-mt5.html",
+      button: "Free download"
+    },
+    {
       name: "QFT FVG Pro",
       type: "Free indicator",
       badge: "NEW v2.22",
