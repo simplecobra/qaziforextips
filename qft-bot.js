@@ -23,6 +23,7 @@
   // ↑↑↑
 
   var ANSWERS_FILE = "qft-bot-answers.txt";
+  var VIDEOS_FILE = "qft-bot-videos.txt";      // video lessons ke instant jawab (AI ko nahi jate)
   var MAX_WORDS_FOR_CUSTOM = 25;   // is se lambe sawal seedha AI ko jate hain
   var STORE_KEY = "qft-bot-chat";
 
@@ -111,9 +112,10 @@
   function loadAnswers() {
     if (answers) return Promise.resolve(answers);
     if (!answersLoading) {
-      answersLoading = fetch(ANSWERS_FILE + "?v=" + Math.floor(Date.now() / 300000))
-        .then(function (r) { return r.ok ? r.text() : ""; })
-        .then(function (t) { answers = parseAnswers(fill(t)); return answers; })
+      var v = "?v=" + Math.floor(Date.now() / 300000);
+      function get(f) { return fetch(f + v).then(function (r) { return r.ok ? r.text() : ""; }).catch(function () { return ""; }); }
+      answersLoading = Promise.all([get(ANSWERS_FILE), get(VIDEOS_FILE)])
+        .then(function (t) { answers = parseAnswers(fill(t[0] + "\n\n" + t[1])); return answers; })
         .catch(function () { answers = []; return answers; });
     }
     return answersLoading;
