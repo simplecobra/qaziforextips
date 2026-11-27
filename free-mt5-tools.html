@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<script>try{var t=localStorage.getItem("qft-theme");if(t!=="light"&&t!=="dark")t=window.matchMedia&&matchMedia("(prefers-color-scheme: light)").matches?"light":"";if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
+<script>try{var t=localStorage.getItem("qft-theme");if(t!=="dark")t="light";document.documentElement.setAttribute("data-theme",t);}catch(e){document.documentElement.setAttribute("data-theme","light");}</script>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <link rel="icon" href="logo.png" type="image/png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -10,7 +10,7 @@
 <meta name="description" content="Free MT5 &amp; MT4 tools by Qazi Forex Tips: FVG indicator, ICT killzones, trading journal, lot size calculator, replay simulator and trade assistant.">
 <link rel="canonical" href="https://qaziforextips.com/free-mt5-tools.html">
 <meta name="robots" content="index, follow, max-image-preview:large">
-<meta name="theme-color" content="#0d1220">
+<meta name="theme-color" content="#7a1426">
 <meta name="geo.region" content="PK">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Qazi Forex Tips">
@@ -471,6 +471,24 @@ footer a:hover{color:var(--ink)}
 @media (max-width:760px){.hub{grid-template-columns:1fr}}
 </style>
 <script type="application/ld+json" id="ld-faq">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Are these MT5 indicators really free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. QFT Sessions & Killzones, QFT FVG Pro and the QFT Trading Coach journal are 100% free downloads, and the lot size calculator is free online. The QFT Replay Simulator and QFT Trade Assistant have a free demo first; their licence prices are on each tool page."}}, {"@type": "Question", "name": "Kya yeh MT5 indicators bilkul free hain?", "acceptedAnswer": {"@type": "Answer", "text": "Ji haan. Sessions & Killzones, FVG Pro aur Trading Coach bilkul free download hain. Replay Simulator aur Trade Assistant ka pehle free demo hai, licence ki qeemat har tool ke page par likhi hai."}}, {"@type": "Question", "name": "Do the tools work on MT4 too?", "acceptedAnswer": {"@type": "Answer", "text": "QFT Sessions & Killzones, QFT FVG Pro, the Replay Simulator and the Trade Assistant work on MT5 and MT4. The QFT Trading Coach journal is for MT5."}}, {"@type": "Question", "name": "How do I install an indicator in MT5?", "acceptedAnswer": {"@type": "Answer", "text": "In MT5 open File > Open Data Folder > MQL5 > Indicators, paste the indicator file there, then right-click Indicators in the Navigator and choose Refresh (or restart MT5), and drag the indicator onto a chart. Our Sawal Jawab page on installing MT5 indicators shows each step."}}, {"@type": "Question", "name": "Can I use these indicators on the MT5 mobile app?", "acceptedAnswer": {"@type": "Answer", "text": "No. The MT5 mobile app cannot run custom indicators, so install them in MT5 or MT4 on a Windows PC or laptop. The lot size calculator and the rate pages work on a phone."}}, {"@type": "Question", "name": "Are the tools safe? Do they need a DLL?", "acceptedAnswer": {"@type": "Answer", "text": "The free indicators need no DLL, and the Trading Coach keeps your trade data on your own PC. Download them only from qaziforextips.com."}}, {"@type": "Question", "name": "Do these tools give buy or sell signals?", "acceptedAnswer": {"@type": "Answer", "text": "No. They help you see sessions, fair value gaps, risk and your own mistakes so you can make your own decisions. They are for education and analysis, not financial advice."}}]}</script>
+<style id="qft-theme-e">
+/* Default light theme "Brand Maroon & Gold": white page, logo maroon header/footer, gold buttons */
+:root[data-theme="light"]{--bg:#ffffff;--bg2:#fbf6f0;--surface:#ffffff;--line:#eadfd3;--ink:#1a1214;--muted:#5e5457;--gold:#d4a017;--gold-t:#8a6100;--gold-ink:#1a1214;--wine:#8e1b2e}
+:root[data-theme="light"] .ann{background:#fbf3df}
+:root[data-theme="light"] .top{background:#7a1426;color:#fff;border-bottom:3px solid #d4a017;--ink:#fff;--muted:rgba(255,255,255,.86);--line:rgba(255,255,255,.22);--bg2:#6a1121;backdrop-filter:none;-webkit-backdrop-filter:none}
+:root[data-theme="light"] .top .nav a:hover{color:#ffd76a}
+:root[data-theme="light"] .top .theme-btn,:root[data-theme="light"] .top .menu,:root[data-theme="light"] .top button{color:#fff;border-color:rgba(255,255,255,.3)}
+:root[data-theme="light"] .top .btn.gold{background:#d4a017;border-color:#d4a017;color:#1a1214}
+:root[data-theme="light"] h1 em,:root[data-theme="light"] h1 span{color:#8e1b2e}
+:root[data-theme="light"] .panel,:root[data-theme="light"] .shot{box-shadow:0 20px 50px rgba(122,20,38,.12);border-color:#eadfd3}
+:root[data-theme="light"] .btn.gold{background:#d4a017;border-color:#d4a017;color:#1a1214}
+:root[data-theme="light"] .btn:not(.gold){border-color:#7a1426;color:#7a1426}
+:root[data-theme="light"] .step,:root[data-theme="light"] .tool,:root[data-theme="light"] .rl-card,:root[data-theme="light"] .stat,:root[data-theme="light"] .path{box-shadow:0 6px 20px rgba(122,20,38,.06)}
+:root[data-theme="light"] .cta-band{background:linear-gradient(135deg,#7a1426,#4a0c17);color:#fff;--ink:#fff;--muted:#e9c9cf;--line:#5c1020}
+:root[data-theme="light"] .cta-band .btn:not(.gold){border-color:#fff;color:#fff}
+:root[data-theme="light"] footer{background:#2a0a10;color:#d9b9be;--ink:#fff;--muted:#d9b9be;--line:#4a1a22}
+:root[data-theme="light"] footer a{color:#fff}
+</style>
 </head>
 <body>
 <header class="top"><div class="wrap">
@@ -519,7 +537,7 @@ footer a:hover{color:var(--ink)}
   /* light / dark switch (dark is the default; the choice is remembered) */
   (function(){
     var btn = document.getElementById("themeBtn"), root = document.documentElement, meta = document.querySelector('meta[name="theme-color"]');
-    function sync(){ var light = root.getAttribute("data-theme") === "light"; btn.setAttribute("aria-label", light ? "Switch to dark mode" : "Switch to light mode"); if (meta) meta.setAttribute("content", light ? "#f5f3ee" : "#0d1220"); }
+    function sync(){ var light = root.getAttribute("data-theme") === "light"; btn.setAttribute("aria-label", light ? "Switch to dark mode" : "Switch to light mode"); if (meta) meta.setAttribute("content", light ? "#7a1426" : "#0d1220"); }
     btn.addEventListener("click", function(){
       var next = root.getAttribute("data-theme") === "light" ? "dark" : "light";
       root.setAttribute("data-theme", next);
