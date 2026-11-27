@@ -281,12 +281,13 @@ def silver_page(r, hist):
     v = r["silver"]
     prev = [h for h in hist if h["d"] < now.strftime("%Y-%m-%d")]
     chg = v["tola"] - prev[-1]["tola"] if prev else 0
-    title = f"Silver Rate in Pakistan Today {day} – Chandi Price per Tola"
+    title = f"Silver Rate in Pakistan Today {day} – Chandi per Tola"
     desc = (f"Silver (chandi) rate in Pakistan today ({day}): {rs(v['tola'])} per tola, {rs(v['g10'])} per 10 gram, "
             f"{rs(v['kg'])} per kg. Live rate, calculator and 30-day chart.")
     s = set_head(s, title, desc)
     s = put(s, "date", esc(day_long))
     s = put(s, "time", esc(r["updated_pkt"]))
+    s = put(s, "sarafa", sarafa_box("silver", MARKET, v["tola"], now))
     s = put(s, "big", esc(rs(v["tola"])))
     s = put(s, "chg", f'<span class="gr-chg {"up" if chg >= 0 else "down"}">{"+" if chg >= 0 else "−"}{abs(chg):,} vs previous day</span>' if prev else "")
     s = put(s, "mini",
@@ -355,7 +356,7 @@ def btc_page(r, hist):
     s = open(path, encoding="utf-8").read()
     now = dt.datetime.now(PKT)
     day, day_long = now.strftime("%-d %b %Y"), now.strftime("%-d %B %Y")
-    title = f"Bitcoin Price in Pakistan Today {day} – BTC to PKR Live"
+    title = f"Bitcoin Price in Pakistan Today {day}: BTC to PKR"
     desc = (f"Bitcoin price in Pakistan today ({day}): 1 BTC = {rs(b['pkr'])} ({crore(b['pkr'])}), ${b['usd']:,}. "
             f"Live BTC to PKR rate, converter and 30-day chart.")
     s = set_head(s, title, desc)
@@ -421,6 +422,7 @@ def usd_page(r, hist):
     s = set_head(s, title, desc)
     s = put(s, "date", esc(day_long))
     s = put(s, "time", esc(r["updated_pkt"]))
+    s = put(s, "open", open_market_box(MARKET, u, now))
     s = put(s, "big", f"Rs {u:.2f}")
     s = put(s, "chg", f'<span class="gr-chg {"up" if chg >= 0 else "down"}">{"+" if chg >= 0 else "−"}{abs(chg):.2f} '
                       f'({pct((u / up - 1) * 100 if up else 0)}) vs previous close</span>')
@@ -475,6 +477,129 @@ def update_history(r):
     return hist
 
 
+
+# ------------------------------------------------------------------ sarafa / open-market rates
+# data/market-rates.json holds the rates people hear on the news:
+#   gold / silver: the All Pakistan Sarafa Gems & Jewellers Association (APSGJA) rate. There is no free
+#     machine-readable source, so Claude adds it in the daily routine (date + source link). A rate older
+#     than MARKET_MAX_AGE days is simply not shown, so the page never shows a stale sarafa rate.
+#   usd_open: the Exchange Companies Association of Pakistan (ECAP) open-market closing rate, read
+#     automatically from the PDF the State Bank of Pakistan publishes every working day.
+MARKET_FILE = os.path.join(ROOT, "data", "market-rates.json")
+MARKET_MAX_AGE = 5
+MARKET = {}
+MONTHS_EN = ["January", "February", "March", "April", "May", "June", "July", "August", "September",
+             "October", "November", "December"]
+
+
+def load_market():
+    try:
+        return json.load(open(MARKET_FILE, encoding="utf-8"))
+    except Exception:
+        return {}
+
+
+def pdf_lines(b):
+    """Tiny text extractor for the simple Word-made SBP/ECAP PDF (literal strings + Tm positions)."""
+    import zlib
+    items = []
+    for m in re.finditer(rb"stream\r?\n(.*?)endstream", b, re.S):
+        try:
+            d = zlib.decompress(m.group(1))
+        except Exception:
+            continue
+        for bt in re.finditer(rb"BT(.*?)ET", d, re.S):
+            blk = bt.group(1)
+            tm = re.search(rb"1 0 0 1 ([\d.]+) ([\d.]+) Tm", blk)
+            if not tm:
+                continue
+            txt = b"".join(re.findall(rb"\(((?:\\.|[^\\)])*)\)", blk))
+            txt = re.sub(rb"\\(.)", rb"\1", txt).decode("latin-1")
+            items.append((round(float(tm.group(2))), float(tm.group(1)), txt))
+    rows = {}
+    for y, x, t in items:
+        rows.setdefault(y, []).append((x, t))
+    return [" ".join("".join(t for _, t in sorted(v)).split()) for y, v in sorted(rows.items(), reverse=True)]
+
+
+def refresh_ecap(market):
+    """Read the latest ECAP open-market USD rate from sbp.org.pk (at most once an hour)."""
+    now = dt.datetime.now(PKT)
+    cur = market.get("usd_open") or {}
+    if cur.get("date") == now.strftime("%Y-%m-%d"):
+        return False
+    if now.minute >= 30 or now.hour < 9:      # runs at :11 and :41 -> try once an hour, from 9 am PKT
+        return False
+    for back in range(0, 6):
+        d = now - dt.timedelta(days=back)
+        if d.weekday() > 4 or d.strftime("%Y-%m-%d") <= cur.get("date", ""):
+            continue
+        url = ("https://www.sbp.org.pk/assets/document/open-market-closing-exchange-rates-"
+               f"{d.day:02d}-{MONTHS_EN[d.month - 1]}-{d.year}.pdf")
+        try:
+            req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0 (compatible; " + UA + ")"})
+            with urllib.request.urlopen(req, timeout=25) as resp:
+                b = resp.read()
+            if not b.startswith(b"%PDF"):
+                continue
+            for line in pdf_lines(b):
+                m = re.match(r"USD\s*(\d{2,3}\.\d+)\s+(\d{2,3}\.\d+)", line)
+                if m and ok(float(m.group(1)), 50, 2000) and ok(float(m.group(2)), 50, 2000):
+                    market["usd_open"] = {"date": d.strftime("%Y-%m-%d"), "buy": float(m.group(1)),
+                                          "sell": float(m.group(2)), "source": "ECAP via State Bank of Pakistan",
+                                          "url": url}
+                    print("  ECAP open market USD:", market["usd_open"])
+                    return True
+        except Exception as e:
+            print("  ECAP", d.strftime("%d %b"), "not read:", str(e)[:80])
+    return False
+
+
+def fresh(entry, now):
+    try:
+        return (now.date() - dt.date.fromisoformat(entry["date"])).days <= MARKET_MAX_AGE
+    except Exception:
+        return False
+
+
+def nice_date(iso):
+    return dt.date.fromisoformat(iso).strftime("%-d %b %Y")
+
+
+
+BOX = ('<div class="mk-box" style="border-left:3px solid var(--gold);background:var(--surface);border-radius:0 10px 10px 0;'
+       'padding:12px 16px;margin:14px 0 4px;font-size:15px">{}</div>')
+
+
+def sarafa_box(kind, market, live, now):
+    """kind: gold | silver. live = our live 24K/999 rate per tola."""
+    e = market.get(kind) or {}
+    if not fresh(e, now) or not e.get("tola"):
+        return ""
+    name = "24K gold" if kind == "gold" else "Silver"
+    pct_d = (live / e["tola"] - 1) * 100
+    src = esc(e.get("source", "All Pakistan Sarafa Gems & Jewellers Association"))
+    link = f' (<a href="{esc(e["url"])}" rel="nofollow noopener" target="_blank">source</a>)' if e.get("url") else ""
+    extra = f' · {rs(e["g10"])} per 10 gram' if e.get("g10") else ""
+    return BOX.format(
+        f'<b>Sarafa association rate:</b> {name} <b>{rs(e["tola"])} per tola</b>{extra}, announced {nice_date(e["date"])} by the {src}{link}.<br>'
+        f'Our live market rate above is {rs(live)}, {"higher" if pct_d >= 0 else "lower"} by {rs(abs(live - e["tola"]))[3:]} rupees '
+        f'({abs(pct_d):.1f}%). The sarafa rate is set once or twice a day; the market rate moves every 30 minutes. '
+        f'<a href="#sarafa">Why they differ</a>')
+
+
+def open_market_box(market, interbank, now):
+    e = market.get("usd_open") or {}
+    if not fresh(e, now):
+        return ""
+    gap = e["sell"] - interbank
+    return BOX.format(
+        f'<b>Open market (cash) rate:</b> buying <b>Rs {e["buy"]:.2f}</b>, selling <b>Rs {e["sell"]:.2f}</b> '
+        f'on {nice_date(e["date"])} (Exchange Companies Association of Pakistan, published by the '
+        f'<a href="{esc(e.get("url", "https://www.sbp.org.pk/ecodata/index2.asp"))}" rel="nofollow noopener" target="_blank">State Bank of Pakistan</a>).<br>'
+        f'The cash selling rate is Rs {abs(gap):.2f} {"above" if gap >= 0 else "below"} the interbank rate shown above. '
+        f'<a href="#open">Interbank vs open market</a>')
+
 # ------------------------------------------------------------------ writing into the HTML
 def put(s, name, inner):
     pat = re.compile(r"(<!--R:" + name + r"-->)(.*?)(<!--/R:" + name + r"-->)", re.S)
@@ -513,6 +638,7 @@ def gold_page(r, hist):
 
     s = put(s, "date", esc(day_long))
     s = put(s, "time", esc(r["updated_pkt"]))
+    s = put(s, "sarafa", sarafa_box("gold", MARKET, t24, now))
     s = put(s, "big", esc(rs(t24)))
     s = put(s, "chg", f'<span class="gr-chg {arrow}">{sign}{rs(abs(chg))[3:]} ({pct(r["gold"]["chg_pct"])}) vs previous close</span>')
     s = put(s, "mini",
@@ -554,7 +680,9 @@ def gold_page(r, hist):
         ("What is the gold rate in Pakistan today?",
          f"On {day_long} the 24K gold rate in Pakistan is {rs(t24)} per tola and {rs(k['24K']['g10'])} per 10 grams, "
          f"based on the international price of ${r['gold']['usd_oz']:,.2f} per ounce and USD/PKR {r['usdpkr']:.2f}. "
-         f"22K gold is {rs(k['22K']['tola'])} per tola."),
+         f"22K gold is {rs(k['22K']['tola'])} per tola." + (
+             f" The sarafa association rate announced on {nice_date(MARKET['gold']['date'])} is {rs(MARKET['gold']['tola'])} per tola."
+             if fresh(MARKET.get("gold") or {}, now) else "")),
         ("How is the gold price per tola calculated?",
          "Gold price per tola = international gold price per ounce (USD) × USD/PKR rate ÷ 31.1035 × 11.6638. "
          "One troy ounce is 31.1035 grams and one tola is 11.6638 grams. For 22K multiply by 22/24, for 21K by 21/24 and for 18K by 18/24."),
@@ -677,6 +805,10 @@ def main():
         mrow = {"d": today.strftime("%Y-%m-%d"), "xau": r["gold"]["usd_oz"],
                 "xag": r["silver"]["usd_oz"] if r.get("silver") else None}
     save_hist("metals-daily", mrow, keep=100000)   # full daily history for gold-rate-history-pakistan.html
+    global MARKET
+    MARKET = load_market()
+    if not os.environ.get("QFT_SEED") and refresh_ecap(MARKET):
+        json.dump(MARKET, open(MARKET_FILE, "w", encoding="utf-8"), indent=1, ensure_ascii=False)
     jobs = [gold_page(r, hist), silver_page(r, shist), btc_page(r, bhist), usd_page(r, uhist), home_page(r), sitemap()]
     for job in jobs:
         if job:
