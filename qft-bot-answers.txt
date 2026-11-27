@@ -363,3 +363,68 @@ A: Jo **main points / khulasa** aap ne parha hai, us ki poori detail usi lesson 
 Saare courses aur YouTube playlists (lesson ke notes ke saath) ek jagah: [Free Courses & Playlists](https://qaziforextips.com/youtube.html)
 Bilkul shuru se seekhna ho to: [Forex Basics: Zero to Hero](https://qaziforextips.com/forex-basics-course.html) · SMC ke liye: [SMC Course in Urdu](https://qaziforextips.com/smc-course.html)
 Phir bhi koi point samajh na aaye to WhatsApp par poochein: +92-323-6700010
+
+# >>> VIDEO LESSONS (auto: qft_bot_video_answers.py) >>>
+# Video index (page | YouTube | title) – AI isay parh kar sahi video ka link deta hai
+VIDEO: lesson-autochartist.html | https://youtu.be/dOYz8pONVa0 | Autochartist Tutorial: Pattern Signals on Mobile (Urdu/Hindi)
+VIDEO: lesson-backtesting.html | https://youtu.be/LXhMQmasz7Y | How to Backtest a Trading Strategy Like a Pro (Urdu/Hindi)
+VIDEO: lesson-best-time-to-trade.html | https://youtu.be/ULqqAMzAKhg | Best Time to Scalp Forex & Gold in Pakistan and India
+VIDEO: lesson-bid-ask-spread-pip-point-pipette-gold.html | https://youtu.be/6_r9hTuMSjo | Pip vs Point vs Pipette & Gold Pip (XAUUSD) | Lesson 2.1
+VIDEO: lesson-binary-options-vs-forex.html | https://youtu.be/QdT0kEguT9c | Binary Trading vs Forex: Legal or Scam? (Urdu/Hindi) | Lesson 0.4
+VIDEO: lesson-breakout-strategy.html | https://youtu.be/gsIRSLb1B8Q | Breakout Trading Strategy with Market Structure (Urdu/Hindi)
+VIDEO: lesson-broker-selection.html | https://youtu.be/JeUpNZjti5Q | How to Select a Forex Broker: Simple Guide (Urdu/Hindi)
+VIDEO: lesson-classic-trading-method-part-2.html | https://youtu.be/o1Y-bcvP5mU | Increase the Accuracy of the Classic Trading Method (Part 2)
+VIDEO: lesson-classic-trading-method.html | https://youtu.be/eXbRWN-g8gI | The Classic Trading Method: Market Structure Guide (Part 1)
+VIDEO: lesson-currency-pairs-explained.html | https://youtu.be/w50_-oYaTe4 | Currency Pairs Explained: Base, Quote, Major, Minor, Exotic | Lesson 1.4
+VIDEO: lesson-dominant-breakout.html | https://youtu.be/xHuF_uWFaww | Dominant Breakout: Price Action Breakout Strategy (Urdu/Hindi)
+VIDEO: lesson-dominant-plus-scalping.html | https://youtu.be/vNwv4ZwHVMA | Dominant Plus Scalping Strategy for Gold & Indices (M5/M15)
+VIDEO: lesson-false-breakouts.html | https://youtu.be/7aLG1XgfSYA | How to Avoid False Breakouts in Forex (Urdu/Hindi)
+VIDEO: lesson-fibonacci-extensions.html | https://youtu.be/wQ5GxVGwxww | Fibonacci Extension for Take Profit Levels (Urdu/Hindi)
+VIDEO: lesson-fibonacci-retracement-guide.html | https://youtu.be/3bVuDuiWMvE | How to Use Fibonacci Retracement: Step-by-Step (Urdu/Hindi)
+VIDEO: lesson-fibonacci-retracement.html | https://youtu.be/qLNsCRwyQp0 | Fibonacci Retracement Strategy Explained Simply (Urdu/Hindi)
+VIDEO: lesson-flag-pattern.html | https://youtu.be/oQZz8Ng78XM | Flag Pattern Trading Strategy: Bull Flag & Bear Flag
+VIDEO: lesson-forex-myths.html | https://youtu.be/UnSphPChym8 | Forex Myths vs Reality: Watch Before You Start (Urdu/Hindi)
+VIDEO: lesson-forex-scams-signal-groups.html | https://youtu.be/xZCN5HUZ_Mk | Forex Scams: How to Spot Fake Signal Groups | Lesson 0.3
+VIDEO: lesson-forex-success-tips.html | https://youtu.be/0uPnOhdFIW8 | Forex Trading Facts Every Trader Should Know (Urdu/Hindi)
+VIDEO: lesson-forex-trading-basics.html | https://youtu.be/9JfvsIfslCg | Forex Trading for Beginners in Urdu/Hindi: Risk, Demo, Broker
+VIDEO: lesson-gold-scalping-gss2.html | https://youtu.be/4QHH5V2gsEQ | Gold (XAUUSD) Scalping Strategy GSS-2 on the 5-Minute Chart
+VIDEO: lesson-gold-scalping-stochastic-rsi.html | https://youtu.be/5vrDSC08ox0 | Gold Scalping Strategy on M5 with Stochastic RSI
+VIDEO: lesson-head-and-shoulders.html | https://youtu.be/UXq228TiW6c | Head and Shoulders Pattern: Confirm & Trade It (Urdu/Hindi)
+VIDEO: lesson-hidden-divergence.html | https://youtu.be/rRvvmwV_Km0 | Hidden Divergence Trading Strategy: Full Rules (Urdu/Hindi)
+VIDEO: lesson-how-forex-brokers-work.html | https://youtu.be/Wq1d4XV4EM8 | How Forex Brokers Work: Where Your Trade Goes | Lesson 1.3
+VIDEO: lesson-how-forex-market-works.html | https://youtu.be/dcNuoTZGBeo | How the Forex Market Works: Who Sets the Price | Lesson 1.2
+VIDEO: lesson-how-to-make-money-in-forex.html | https://youtu.be/bqYGz7vDX1U | How to Make Money in Forex: Who Wins, Who Loses | Lesson 0.2
+VIDEO: lesson-how-to-start-forex-trading.html | https://youtu.be/Byevij1jywk | How to Start Forex Trading: Free Course Roadmap | Lesson 0.1
+VIDEO: lesson-inverse-head-and-shoulders.html | https://youtu.be/qF7NSlS-lYU | Inverse Head and Shoulders: Entry, SL and Target (Urdu/Hindi)
+VIDEO: lesson-lot-size-pip-value-calculation.html | https://youtu.be/szP5-vlipFs | How to Calculate Lot Size & Pip Value (10 Pip Rule) | Lesson 2.2
+VIDEO: lesson-lot-size.html | https://youtu.be/4c9gtnO5_48 | What Is Lot Size in Forex? 0.01 Lot & Pip Value (Urdu/Hindi)
+VIDEO: lesson-macd-crossover.html | https://youtu.be/O1sffgWvmwg | MACD Crossover Trading Strategy Explained (Urdu/Hindi)
+VIDEO: lesson-market-structure.html | https://youtu.be/VFo2qCSMPuU | Market Structure in Forex: HH, HL, BOS, CHoCH (Urdu/Hindi)
+VIDEO: lesson-money-management-plan.html | https://youtu.be/558_ymM-hCg | Forex Money Management Plan: Grow a Small Account Step by Step
+VIDEO: lesson-multi-timeframe-analysis.html | https://youtu.be/uVsJgH40mz4 | Multi-Timeframe Analysis in Forex: Top-Down Method
+VIDEO: lesson-nfp-news.html | https://youtu.be/jU96IJBXrSE | How to Read NFP News Data in Forex (Urdu/Hindi)
+VIDEO: lesson-price-action-day-trading.html | https://youtu.be/6ktztQxlCk4 | Price Action Strategy for Day Traders & Scalpers (Urdu/Hindi)
+VIDEO: lesson-price-action-key-points.html | https://youtu.be/wFTDiXOnfN4 | Key Points for Price Action Traders (Urdu/Hindi Live Session)
+VIDEO: lesson-price-action-scalping.html | https://youtu.be/jDDa-sa8X1E | QFT Price Action Scalping Strategy for Gold & Forex
+VIDEO: lesson-price-action-technical-analysis.html | https://youtu.be/787D9bivMGA | What Is Price Action Trading? Explained in Urdu/Hindi
+VIDEO: lesson-price-channels.html | https://youtu.be/53hlwsaW3og | Price Channel Trading Strategy: Types & Breakouts (Urdu/Hindi)
+VIDEO: lesson-quasimodo-pattern.html | https://youtu.be/vqC4EwSmtPE | Quasimodo Pattern (QM) for Scalpers and Day Traders Explained
+VIDEO: lesson-rejection-momentum-candles.html | https://youtu.be/jwOwHVb1nIU | Rejection & Momentum Candles for Perfect Entry (Urdu/Hindi)
+VIDEO: lesson-rsi-divergence.html | https://youtu.be/ZCPiVFEoryw | RSI Divergence Strategy: Regular & Hidden (Urdu/Hindi)
+VIDEO: lesson-soft4fx-tutorial.html | https://youtu.be/wHBg7w9ws-Y | Soft4FX Tutorial (Urdu/Hindi): Bar Replay Backtesting in MT4
+VIDEO: lesson-stop-loss-take-profit.html | https://youtu.be/P4WlWt2Tmjs | Where to Set Stop Loss and Take Profit (Urdu/Hindi)
+VIDEO: lesson-strategy-optimization.html | https://youtu.be/o0KRYx2WOmw | Trading Strategy Optimization: Improve It Step by Step
+VIDEO: lesson-support-and-resistance.html | https://youtu.be/DDaEQcAJIEA | Support and Resistance: How to Draw It Right (Urdu/Hindi)
+VIDEO: lesson-swing-highs-and-lows.html | https://youtu.be/-RVBo8qiJ1Q | Swing High and Swing Low in Forex: How to Find Them (Urdu)
+VIDEO: lesson-thinktrader-backtesting.html | https://youtu.be/PwWmz-5S4qE | ThinkTrader Tutorial: Free Forex Backtesting Software
+VIDEO: lesson-top-down-analysis.html | https://youtu.be/DSXZkL9ygfE | Top-Down Analysis: Multiple Time Frame Strategy (Urdu/Hindi)
+VIDEO: lesson-trade-against-the-trend.html | https://youtu.be/4WyfWJpBXSQ | When to Trade Against the Trend: Simple Method (Urdu/Hindi)
+VIDEO: lesson-tradingview-tutorial.html | https://youtu.be/d4U5FhM6NLU | TradingView Tutorial for Beginners in Urdu/Hindi
+VIDEO: lesson-trend-reversal.html | https://youtu.be/Npav87jvsgE | How to Spot a Trend Reversal Early (Urdu/Hindi)
+VIDEO: lesson-trendlines.html | https://youtu.be/oj6VV-aQyHo | How to Draw Trendlines Correctly: Rules & Swings (Urdu)
+VIDEO: lesson-triangle-patterns.html | https://youtu.be/kCiq33-i7nk | Triangle Chart Patterns: How to Trade Them (Urdu/Hindi)
+VIDEO: lesson-types-of-levels.html | https://youtu.be/P3G1W3-Y_oI | Types of Levels in Forex: Support, Supply, Demand & More
+VIDEO: lesson-wedges.html | https://youtu.be/rWSzRoAk0m4 | Rising and Falling Wedge Patterns: How to Trade (Urdu/Hindi)
+VIDEO: lesson-what-is-forex-trading.html | https://youtu.be/9ryZjAiKZwg | What is Forex Trading? For Beginners in Urdu/Hindi | Lesson 1.1
+VIDEO: lesson-xauusd-gold-buy-sell-forex-hours.html | https://youtu.be/RB0wCB3Q9MQ | XAUUSD Explained: Gold, Markets, Buy & Sell, Forex Hours | Lesson 1.5
+# <<< VIDEO LESSONS <<<
