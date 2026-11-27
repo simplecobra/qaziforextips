@@ -1,0 +1,434 @@
+# QFT chatbot – VIDEO LESSON answers (auto-generated, mat chherein).
+# Sirf browser parhta hai (AI ko nahi jata, is liye koi kharcha nahi).
+
+# >>> VIDEO LESSONS (auto: qft_bot_video_answers.py) >>>
+#  Har lesson ka video + notes. Dobara banane ke liye: D:\Claude Work\Video Brain\README.md
+
+Q: autochartist video | autochartist lesson | autochartist lecture | autochartist ki video
+A: Is par hamara free lesson hai: **Autochartist Tutorial: Pattern Signals on Mobile (Urdu/Hindi)**
+Autochartist on your phone: chart patterns from every pair and timeframe in one place, and how to use its levels with your own analysis.
+Is mein: What Autochartist does, How to get it, Use it as a scanner, not a signal service.
+- Video + mukammal notes: [Autochartist Tutorial](https://qaziforextips.com/lesson-autochartist.html)
+- YouTube: https://youtu.be/dOYz8pONVa0
+
+Q: backtesting video | backtesting lesson | backtesting lecture | backtesting ki video | backtest video | backtest lesson | backtest lecture | backtest ki video
+A: Is par hamara free lesson hai: **How to Backtest a Trading Strategy Like a Pro (Urdu/Hindi)**
+Why skipping backtesting makes traders fail, how to write your strategy down, choose backtesting software and test your trading hours.
+Is mein: Step 1: write the strategy down, Step 2: test like it is live, Step 3: read the results honestly.
+- Video + mukammal notes: [How to Backtest a Trading Strategy Like a Pro](https://qaziforextips.com/lesson-backtesting.html)
+- YouTube: https://youtu.be/LXhMQmasz7Y
+
+Q: best time to trade video | best time to trade lesson | best time to trade lecture | best time to trade ki video | trading time video | trading time lesson | trading time lecture | trading time ki video | scalping time video | scalping time lesson | scalping time lecture | scalping time ki video
+A: Is par hamara free lesson hai: **Best Time to Scalp Forex & Gold in Pakistan and India**
+Best hours to scalp forex and Gold from Pakistan and India, which sessions suit breakouts or ranges, and how to choose your hours.
+Is mein: Sessions in Pakistan time (approximate), Choose by strategy, not by rumour, Times to be careful.
+- Video + mukammal notes: [Best Time to Scalp Forex & Gold in Pakistan and India](https://qaziforextips.com/lesson-best-time-to-trade.html)
+- YouTube: https://youtu.be/ULqqAMzAKhg
+
+Q: pipette video | pipette lesson | pipette lecture | pipette ki video | pip point video | pip point lesson | pip point lecture | pip point ki video | gold pip video | gold pip lesson | gold pip lecture | gold pip ki video | spread video | spread lesson | spread lecture | spread ki video
+A: Is par hamara free lesson hai: **Pip vs Point vs Pipette & Gold Pip (XAUUSD) | Lesson 2.1**
+Pip vs point vs pipette, the gold (XAUUSD) pip and why MT5 points confuse traders, plus bid, ask and spread.
+Is mein: Bid and ask price: why every symbol has two prices, What is spread in forex, and why your trade opens in minus, The MT5 chart shows the bid price.
+- Video + mukammal notes: [Pip vs Point vs Pipette & Gold Pip](https://qaziforextips.com/lesson-bid-ask-spread-pip-point-pipette-gold.html)
+- YouTube: https://youtu.be/6_r9hTuMSjo
+
+Q: binary trading video | binary trading lesson | binary trading lecture | binary trading ki video | binary options video | binary options lesson | binary options lecture | binary options ki video
+A: Is par hamara free lesson hai: **Binary Trading vs Forex: Legal or Scam? (Urdu/Hindi) | Lesson 0.4**
+Binary trading vs forex explained: how binary options apps work, why 5 wins out of 10 still lose, and is binary trading legal in Pakistan and India.
+Is mein: 60 seconds, one question, What is binary trading (binary options)?, Binary options vs forex trading: the real difference.
+- Video + mukammal notes: [Binary Trading vs Forex](https://qaziforextips.com/lesson-binary-options-vs-forex.html)
+- YouTube: https://youtu.be/QdT0kEguT9c
+
+Q: breakout strategy video | breakout strategy lesson | breakout strategy lecture | breakout strategy ki video
+A: Is par hamara free lesson hai: **Breakout Trading Strategy with Market Structure (Urdu/Hindi)**
+A price action breakout strategy: market structure, break of structure and a minor-level breakout method for intraday traders.
+Is mein: Breakouts start with structure, Minor levels, Confirming the breakout.
+- Video + mukammal notes: [Breakout Trading Strategy with Market Structure](https://qaziforextips.com/lesson-breakout-strategy.html)
+- YouTube: https://youtu.be/gsIRSLb1B8Q
+
+Q: broker selection video | broker selection lesson | broker selection lecture | broker selection ki video | broker kaise video | broker kaise lesson | broker kaise lecture | broker kaise ki video | best broker video | best broker lesson | best broker lecture | best broker ki video
+A: Is par hamara free lesson hai: **How to Select a Forex Broker: Simple Guide (Urdu/Hindi)**
+How to choose a forex broker step by step: your country's rules first, then regulation, total cost, execution and avoiding scams.
+Is mein: First: the rules in your country, The checklist, Red flags.
+- Video + mukammal notes: [How to Select a Forex Broker](https://qaziforextips.com/lesson-broker-selection.html)
+- YouTube: https://youtu.be/JeUpNZjti5Q
+
+Q: classic method part 2 video | classic method part 2 lesson | classic method part 2 lecture | classic method part 2 ki video
+A: Is par hamara free lesson hai: **Increase the Accuracy of the Classic Trading Method (Part 2)**
+Part 2 of the classic trading method: filters that raise the accuracy of structure-based trades.
+Is mein: Filters that remove weak trades, Accuracy vs reward, Start with Part 1.
+- Video + mukammal notes: [Increase the Accuracy of the Classic Trading Method](https://qaziforextips.com/lesson-classic-trading-method-part-2.html)
+- YouTube: https://youtu.be/o1Y-bcvP5mU
+
+Q: classic trading method video | classic trading method lesson | classic trading method lecture | classic trading method ki video | classic method video | classic method lesson | classic method lecture | classic method ki video
+A: Is par hamara free lesson hai: **The Classic Trading Method: Market Structure Guide (Part 1)**
+Part 1 of the classic trading method live session: reading market structure step by step and using it to plan trades.
+Is mein: Structure in swings, Planning a trade with structure, Continue with Part 2.
+- Video + mukammal notes: [The Classic Trading Method](https://qaziforextips.com/lesson-classic-trading-method.html)
+- YouTube: https://youtu.be/eXbRWN-g8gI
+
+Q: currency pairs video | currency pairs lesson | currency pairs lecture | currency pairs ki video | major minor exotic video | major minor exotic lesson | major minor exotic lecture | major minor exotic ki video
+A: Is par hamara free lesson hai: **Currency Pairs Explained: Base, Quote, Major, Minor, Exotic | Lesson 1.4**
+Currency pairs explained for beginners: currency codes, how to read EURUSD, base vs quote currency, Buy/Sell meaning, and major, minor and exotic pairs.
+Is mein: What is a currency code? ISO 4217 in one minute, Base currency and quote currency: the petrol pump example, Common mistake: is 1.1011 the dollar's price?.
+- Video + mukammal notes: [Currency Pairs Explained](https://qaziforextips.com/lesson-currency-pairs-explained.html)
+- YouTube: https://youtu.be/w50_-oYaTe4
+
+Q: dominant breakout video | dominant breakout lesson | dominant breakout lecture | dominant breakout ki video
+A: Is par hamara free lesson hai: **Dominant Breakout: Price Action Breakout Strategy (Urdu/Hindi)**
+The Dominant Breakout method by Qazi Forex Tips: a price action breakout strategy for any timeframe and pair, with risk rules.
+Is mein: What the method is about, Principles to apply, Risk first.
+- Video + mukammal notes: [Dominant Breakout](https://qaziforextips.com/lesson-dominant-breakout.html)
+- YouTube: https://youtu.be/xHuF_uWFaww
+
+Q: dominant plus video | dominant plus lesson | dominant plus lecture | dominant plus ki video
+A: Is par hamara free lesson hai: **Dominant Plus Scalping Strategy for Gold & Indices (M5/M15)**
+Dominant Plus scalping, the follow-up to Dominant Breakout, for M5 and M15 on Gold, indices and crypto, and why spread matters.
+Is mein: Why spread matters in scalping, Scalping rules, Indicators & Strategies.
+- Video + mukammal notes: [Dominant Plus Scalping Strategy for Gold & Indices](https://qaziforextips.com/lesson-dominant-plus-scalping.html)
+- YouTube: https://youtu.be/vNwv4ZwHVMA
+
+Q: false breakout video | false breakout lesson | false breakout lecture | false breakout ki video | fake breakout video | fake breakout lesson | fake breakout lecture | fake breakout ki video
+A: Is par hamara free lesson hai: **How to Avoid False Breakouts in Forex (Urdu/Hindi)**
+Why breakouts fail, how to spot a false breakout early, avoid it and trade it.
+Is mein: What a false breakout looks like, Warning signs, How to avoid the trap.
+- Video + mukammal notes: [How to Avoid False Breakouts in Forex](https://qaziforextips.com/lesson-false-breakouts.html)
+- YouTube: https://youtu.be/7aLG1XgfSYA
+
+Q: fibonacci extension video | fibonacci extension lesson | fibonacci extension lecture | fibonacci extension ki video
+A: Is par hamara free lesson hai: **Fibonacci Extension for Take Profit Levels (Urdu/Hindi)**
+How to draw the trend-based Fibonacci extension tool and use 100%, 127.2% and 161.8% as take-profit levels with confluence.
+Is mein: Three points, not two, Levels traders watch, Use with confluence.
+- Video + mukammal notes: [Fibonacci Extension for Take Profit Levels](https://qaziforextips.com/lesson-fibonacci-extensions.html)
+- YouTube: https://youtu.be/wQ5GxVGwxww
+
+Q: fibonacci kaise video | fibonacci kaise lesson | fibonacci kaise lecture | fibonacci kaise ki video | fibonacci retracement guide video | fibonacci retracement guide lesson | fibonacci retracement guide lecture | fibonacci retracement guide ki video
+A: Is par hamara free lesson hai: **How to Use Fibonacci Retracement: Step-by-Step (Urdu/Hindi)**
+Fibonacci retracement step by step: choosing the swing, the golden zone, confluence and stop loss, for forex, Gold and stocks.
+Is mein: Step by step, Choosing the right swing, Confluence makes the level.
+- Video + mukammal notes: [How to Use Fibonacci Retracement](https://qaziforextips.com/lesson-fibonacci-retracement-guide.html)
+- YouTube: https://youtu.be/3bVuDuiWMvE
+
+Q: fibonacci retracement video | fibonacci retracement lesson | fibonacci retracement lecture | fibonacci retracement ki video | fibonacci video | fibonacci lesson | fibonacci lecture | fibonacci ki video
+A: Is par hamara free lesson hai: **Fibonacci Retracement Strategy Explained Simply (Urdu/Hindi)**
+How to draw Fibonacci retracement from swing to swing, what 38.2%, 50% and 61.8% mean, and how to combine them with levels.
+Is mein: How to draw it, Which levels matter most, Use it with price action, not alone.
+- Video + mukammal notes: [Fibonacci Retracement Strategy Explained Simply](https://qaziforextips.com/lesson-fibonacci-retracement.html)
+- YouTube: https://youtu.be/qLNsCRwyQp0
+
+Q: flag pattern video | flag pattern lesson | flag pattern lecture | flag pattern ki video | bull flag video | bull flag lesson | bull flag lecture | bull flag ki video | bear flag video | bear flag lesson | bear flag lecture | bear flag ki video
+A: Is par hamara free lesson hai: **Flag Pattern Trading Strategy: Bull Flag & Bear Flag**
+How bull and bear flags form, which flags to skip, when to enter on the breakout and how to set the target from the flagpole.
+Is mein: Pole and flag, Which flags to trade, Entry, stop and target.
+- Video + mukammal notes: [Flag Pattern Trading Strategy](https://qaziforextips.com/lesson-flag-pattern.html)
+- YouTube: https://youtu.be/oQZz8Ng78XM
+
+Q: forex myths video | forex myths lesson | forex myths lecture | forex myths ki video
+A: Is par hamara free lesson hai: **Forex Myths vs Reality: Watch Before You Start (Urdu/Hindi)**
+Seven forex myths vs reality: easy money, casino, quick wealth, stop losses, win rate vs risk, strategy hopping and raising risk.
+Is mein: Myths 1–3: easy, casino, quick wealth, Myths 4–5: stop loss and win rate, Myths 6–7: strategy hopping and more risk.
+- Video + mukammal notes: [Forex Myths vs Reality](https://qaziforextips.com/lesson-forex-myths.html)
+- YouTube: https://youtu.be/UnSphPChym8
+
+Q: forex scam video | forex scam lesson | forex scam lecture | forex scam ki video | fake signal video | fake signal lesson | fake signal lecture | fake signal ki video
+A: Is par hamara free lesson hai: **Forex Scams: How to Spot Fake Signal Groups | Lesson 0.3**
+Forex scams explained: the 5 steps of every fake signal group scam, the recovery scam, 5 checks before sending money and what to do if scammed.
+Is mein: "Guaranteed profit"? Stop for a second, Where does a forex scammer make money?, The 5 steps of a forex scam.
+- Video + mukammal notes: [Forex Scams](https://qaziforextips.com/lesson-forex-scams-signal-groups.html)
+- YouTube: https://youtu.be/xZCN5HUZ_Mk
+
+Q: forex facts video | forex facts lesson | forex facts lecture | forex facts ki video | success tips video | success tips lesson | success tips lecture | success tips ki video
+A: Is par hamara free lesson hai: **Forex Trading Facts Every Trader Should Know (Urdu/Hindi)**
+What separates the few successful forex traders from the rest: process, risk control, patience and realistic expectations.
+Is mein: What successful traders do differently, Facts beginners rarely hear, Simple tips.
+- Video + mukammal notes: [Forex Trading Facts Every Trader Should Know](https://qaziforextips.com/lesson-forex-success-tips.html)
+- YouTube: https://youtu.be/0uPnOhdFIW8
+
+Q: forex basics video | forex basics lesson | forex basics lecture | forex basics ki video | forex trading basics video | forex trading basics lesson | forex trading basics lecture | forex trading basics ki video
+A: Is par hamara free lesson hai: **Forex Trading for Beginners in Urdu/Hindi: Risk, Demo, Broker**
+Forex trading for beginners, Lecture 1 in
+Is mein: Is forex trading risky?, Demo or real account?, Why your broker matters.
+- Video + mukammal notes: [Forex Trading for Beginners in Urdu/Hindi](https://qaziforextips.com/lesson-forex-trading-basics.html)
+- YouTube: https://youtu.be/9JfvsIfslCg
+
+Q: gss2 video | gss2 lesson | gss2 lecture | gss2 ki video | gss 2 video | gss 2 lesson | gss 2 lecture | gss 2 ki video
+A: Is par hamara free lesson hai: **Gold (XAUUSD) Scalping Strategy GSS-2 on the 5-Minute Chart**
+GSS-2, a Gold (XAUUSD) scalping strategy on the five-minute chart from Qazi Forex Tips, with the risk rules every Gold scalper needs.
+Is mein: About GSS-2, What every Gold scalper should check, Keep results realistic.
+- Video + mukammal notes: [Gold](https://qaziforextips.com/lesson-gold-scalping-gss2.html)
+- YouTube: https://youtu.be/4QHH5V2gsEQ
+
+Q: stochastic rsi video | stochastic rsi lesson | stochastic rsi lecture | stochastic rsi ki video | gold scalping video | gold scalping lesson | gold scalping lecture | gold scalping ki video
+A: Is par hamara free lesson hai: **Gold Scalping Strategy on M5 with Stochastic RSI**
+A Gold (XAUUSD) scalping method on the M5 chart using Stochastic RSI, for scalpers and day traders, with risk rules for Gold.
+Is mein: Stochastic RSI in brief, Gold-specific risk, Rules that keep scalping safe.
+- Video + mukammal notes: [Gold Scalping Strategy on M5 with Stochastic RSI](https://qaziforextips.com/lesson-gold-scalping-stochastic-rsi.html)
+- YouTube: https://youtu.be/5vrDSC08ox0
+
+Q: head and shoulders video | head and shoulders lesson | head and shoulders lecture | head and shoulders ki video | head shoulder video | head shoulder lesson | head shoulder lecture | head shoulder ki video
+A: Is par hamara free lesson hai: **Head and Shoulders Pattern: Confirm & Trade It (Urdu/Hindi)**
+Head and shoulders pattern: how it forms, neckline confirmation, the first pullback entry, target and stop loss.
+Is mein: How the pattern forms, Confirmation: the neckline, Entry, stop loss and target.
+- Video + mukammal notes: [Head and Shoulders Pattern](https://qaziforextips.com/lesson-head-and-shoulders.html)
+- YouTube: https://youtu.be/UXq228TiW6c
+
+Q: hidden divergence video | hidden divergence lesson | hidden divergence lecture | hidden divergence ki video
+A: Is par hamara free lesson hai: **Hidden Divergence Trading Strategy: Full Rules (Urdu/Hindi)**
+How to trade hidden bullish and bearish RSI divergence as a trend-continuation strategy, with confirmation, stop loss and target.
+Is mein: The two signals, A rule set to test, Indicators & Strategies.
+- Video + mukammal notes: [Hidden Divergence Trading Strategy](https://qaziforextips.com/lesson-hidden-divergence.html)
+- YouTube: https://youtu.be/rRvvmwV_Km0
+
+Q: broker kaise kaam video | broker kaise kaam lesson | broker kaise kaam lecture | broker kaise kaam ki video | how brokers work video | how brokers work lesson | how brokers work lecture | how brokers work ki video
+A: Is par hamara free lesson hai: **How Forex Brokers Work: Where Your Trade Goes | Lesson 1.3**
+How do forex brokers work? What happens 1 second after you click Buy in MT5: margin check, liquidity providers, slippage, A-Book vs B-Book.
+Is mein: Where does your forex trade go? The money changer example, What happens after you click Buy in MT5: the journey in 6 steps, The margin check, with real numbers.
+- Video + mukammal notes: [How Forex Brokers Work](https://qaziforextips.com/lesson-how-forex-brokers-work.html)
+- YouTube: https://youtu.be/Wq1d4XV4EM8
+
+Q: forex market kaise video | forex market kaise lesson | forex market kaise lecture | forex market kaise ki video | how forex market works video | how forex market works lesson | how forex market works lecture | how forex market works ki video
+A: Is par hamara free lesson hai: **How the Forex Market Works: Who Sets the Price | Lesson 1.2**
+How does the forex market work? $9.6 trillion a day through an OTC network of banks: who trades, how prices are made, interbank vs open market.
+Is mein: How big is the forex market?, Where does forex trade? No building: the OTC market, Who trades forex? The market pyramid.
+- Video + mukammal notes: [How the Forex Market Works](https://qaziforextips.com/lesson-how-forex-market-works.html)
+- YouTube: https://youtu.be/dcNuoTZGBeo
+
+Q: make money in forex video | make money in forex lesson | make money in forex lecture | make money in forex ki video | paise kaise kamaye video | paise kaise kamaye lesson | paise kaise kamaye lecture | paise kaise kamaye ki video
+A: Is par hamara free lesson hai: **How to Make Money in Forex: Who Wins, Who Loses | Lesson 0.2**
+How to earn money from forex trading: where winners' profit comes from, 4 places losers' money goes, the $100 account truth and risk per trade.
+Is mein: Can $100 really make 10% a day?, Who is in the forex market?, How to earn money from forex trading: where profit comes from.
+- Video + mukammal notes: [How to Make Money in Forex](https://qaziforextips.com/lesson-how-to-make-money-in-forex.html)
+- YouTube: https://youtu.be/bqYGz7vDX1U
+
+Q: how to start forex video | how to start forex lesson | how to start forex lecture | how to start forex ki video | forex start video | forex start lesson | forex start lecture | forex start ki video
+A: Is par hamara free lesson hai: **How to Start Forex Trading: Free Course Roadmap | Lesson 0.1**
+How to start forex trading from zero, in the right order: the roadmap of our free 113-lesson forex course in
+Is mein: Why most beginners lose money, The biggest beginner mistake: the wrong order, Who this course is for.
+- Video + mukammal notes: [How to Start Forex Trading](https://qaziforextips.com/lesson-how-to-start-forex-trading.html)
+- YouTube: https://youtu.be/Byevij1jywk
+
+Q: inverse head and shoulders video | inverse head and shoulders lesson | inverse head and shoulders lecture | inverse head and shoulders ki video | inverse head shoulder video | inverse head shoulder lesson | inverse head shoulder lecture | inverse head shoulder ki video
+A: Is par hamara free lesson hai: **Inverse Head and Shoulders: Entry, SL and Target (Urdu/Hindi)**
+How the inverse head and shoulders forms after a downtrend, the neckline break, the first pullback entry, stop loss and measured target.
+Is mein: How it forms, Entry, stop and target, Chart Patterns.
+- Video + mukammal notes: [Inverse Head and Shoulders](https://qaziforextips.com/lesson-inverse-head-and-shoulders.html)
+- YouTube: https://youtu.be/qF7NSlS-lYU
+
+Q: pip value video | pip value lesson | pip value lecture | pip value ki video | 10 pip rule video | 10 pip rule lesson | 10 pip rule lecture | 10 pip rule ki video | lot size calculation video | lot size calculation lesson | lot size calculation lecture | lot size calculation ki video
+A: Is par hamara free lesson hai: **How to Calculate Lot Size & Pip Value (10 Pip Rule) | Lesson 2.2**
+How to calculate lot size and pip value in forex: standard, mini and micro lots, the 10 pip rule, USDJPY and gold pip value, MT5 tick value, and lot size from risk.
+Is mein: Why the same trade can lose $2 or $200, What is lot size in forex?, What is pip value?.
+- Video + mukammal notes: [How to Calculate Lot Size & Pip Value](https://qaziforextips.com/lesson-lot-size-pip-value-calculation.html)
+- YouTube: https://youtu.be/szP5-vlipFs
+
+Q: lot size video | lot size lesson | lot size lecture | lot size ki video
+A: Is par hamara free lesson hai: **What Is Lot Size in Forex? 0.01 Lot & Pip Value (Urdu/Hindi)**
+What is a lot in forex: 1 lot = 100,000 units, 0.01 lot = 1,000. Pip value per lot, Gold lot size, a table for $100–$1,000 accounts and the formula.
+Is mein: Lesson notes, Lot sizes and what they are worth, Which lot size for your account? (1% risk).
+- Video + mukammal notes: [What Is Lot Size in Forex? 0.01 Lot & Pip Value](https://qaziforextips.com/lesson-lot-size.html)
+- YouTube: https://youtu.be/4c9gtnO5_48
+
+Q: macd video | macd lesson | macd lecture | macd ki video
+A: Is par hamara free lesson hai: **MACD Crossover Trading Strategy Explained (Urdu/Hindi)**
+How the MACD line and signal line crossover works, why it lags, and how to filter MACD signals with price action.
+Is mein: The parts of MACD, The crossover, The weakness and the fix.
+- Video + mukammal notes: [MACD Crossover Trading Strategy Explained](https://qaziforextips.com/lesson-macd-crossover.html)
+- YouTube: https://youtu.be/O1sffgWvmwg
+
+Q: market structure video | market structure lesson | market structure lecture | market structure ki video | bos choch video | bos choch lesson | bos choch lecture | bos choch ki video | choch video | choch lesson | choch lecture | choch ki video
+A: Is par hamara free lesson hai: **Market Structure in Forex: HH, HL, BOS, CHoCH (Urdu/Hindi)**
+Market structure in forex: higher highs, higher lows, break of structure and change of character, and how they set direction and entries.
+Is mein: The three states of the market, BOS and CHoCH, Where Smart Money ideas fit.
+- Video + mukammal notes: [Market Structure in Forex](https://qaziforextips.com/lesson-market-structure.html)
+- YouTube: https://youtu.be/VFo2qCSMPuU
+
+Q: money management video | money management lesson | money management lecture | money management ki video | small account video | small account lesson | small account lecture | small account ki video
+A: Is par hamara free lesson hai: **Forex Money Management Plan: Grow a Small Account Step by Step**
+Build your money management plan: fixed risk per trade, lot size from your stop loss, reward-to-risk and daily limits, with a worked example.
+Is mein: Rule 1: risk a fixed small part of the account, Rule 2: the stop loss decides the lot, Rule 3: reward must be bigger than risk.
+- Video + mukammal notes: [Forex Money Management Plan](https://qaziforextips.com/lesson-money-management-plan.html)
+- YouTube: https://youtu.be/558_ymM-hCg
+
+Q: multi timeframe video | multi timeframe lesson | multi timeframe lecture | multi timeframe ki video | multiple timeframe video | multiple timeframe lesson | multiple timeframe lecture | multiple timeframe ki video
+A: Is par hamara free lesson hai: **Multi-Timeframe Analysis in Forex: Top-Down Method**
+Rule-based top-down analysis: trend and zones on the higher timeframe, setup on the middle one, sniper entry on the lower.
+Is mein: Three timeframes, three jobs, Rules that keep it objective, Common mistakes.
+- Video + mukammal notes: [Multi-Timeframe Analysis in Forex](https://qaziforextips.com/lesson-multi-timeframe-analysis.html)
+- YouTube: https://youtu.be/uVsJgH40mz4
+
+Q: nfp video | nfp lesson | nfp lecture | nfp ki video
+A: Is par hamara free lesson hai: **How to Read NFP News Data in Forex (Urdu/Hindi)**
+What Non-Farm Payrolls (NFP) is, when it is released in Pakistan time, how to read actual vs forecast and how it can move USD and Gold.
+Is mein: What NFP is and when it comes out, Reading actual vs forecast, Protecting your account.
+- Video + mukammal notes: [How to Read NFP News Data in Forex](https://qaziforextips.com/lesson-nfp-news.html)
+- YouTube: https://youtu.be/jU96IJBXrSE
+
+Q: price action day trading video | price action day trading lesson | price action day trading lecture | price action day trading ki video
+A: Is par hamara free lesson hai: **Price Action Strategy for Day Traders & Scalpers (Urdu/Hindi)**
+Price action day trading for forex, Gold, indices and crypto: levels, sessions, entry candles and risk rules, no indicators.
+Is mein: The building blocks, Day trading rules that protect you, Why discipline is part of the strategy.
+- Video + mukammal notes: [Price Action Strategy for Day Traders & Scalpers](https://qaziforextips.com/lesson-price-action-day-trading.html)
+- YouTube: https://youtu.be/6ktztQxlCk4
+
+Q: price action key points video | price action key points lesson | price action key points lecture | price action key points ki video
+A: Is par hamara free lesson hai: **Key Points for Price Action Traders (Urdu/Hindi Live Session)**
+Key points for price action traders: higher-timeframe context, clean levels, structure, entry candles and risk.
+Is mein: Context first, A checklist before every trade, After the entry.
+- Video + mukammal notes: [Key Points for Price Action Traders](https://qaziforextips.com/lesson-price-action-key-points.html)
+- YouTube: https://youtu.be/wFTDiXOnfN4
+
+Q: price action scalping video | price action scalping lesson | price action scalping lecture | price action scalping ki video
+A: Is par hamara free lesson hai: **QFT Price Action Scalping Strategy for Gold & Forex**
+The QFT price action scalping strategy with updated regular-divergence rules for Gold, indices, stocks and forex.
+Is mein: Regular divergence in scalping, Make it a rule set, Indicators & Strategies.
+- Video + mukammal notes: [QFT Price Action Scalping Strategy for Gold & Forex](https://qaziforextips.com/lesson-price-action-scalping.html)
+- YouTube: https://youtu.be/jDDa-sa8X1E
+
+Q: price action video | price action lesson | price action lecture | price action ki video | what is price action video | what is price action lesson | what is price action lecture | what is price action ki video
+A: Is par hamara free lesson hai: **What Is Price Action Trading? Explained in Urdu/Hindi**
+Price action trading explained, Lecture 2 in
+Is mein: Price action in simple words, Technical vs fundamental analysis, Why price action before indicators.
+- Video + mukammal notes: [What Is Price Action Trading? Explained in Urdu/Hindi](https://qaziforextips.com/lesson-price-action-technical-analysis.html)
+- YouTube: https://youtu.be/787D9bivMGA
+
+Q: price channel video | price channel lesson | price channel lecture | price channel ki video | channel trading video | channel trading lesson | channel trading lecture | channel trading ki video
+A: Is par hamara free lesson hai: **Price Channel Trading Strategy: Types & Breakouts (Urdu/Hindi)**
+Bullish, bearish and horizontal price channels: drawing the trendline and channel line, trading inside the channel and breakouts.
+Is mein: Three types, How to draw it, How to trade it.
+- Video + mukammal notes: [Price Channel Trading Strategy](https://qaziforextips.com/lesson-price-channels.html)
+- YouTube: https://youtu.be/53hlwsaW3og
+
+Q: quasimodo video | quasimodo lesson | quasimodo lecture | quasimodo ki video | qm pattern video | qm pattern lesson | qm pattern lecture | qm pattern ki video
+A: Is par hamara free lesson hai: **Quasimodo Pattern (QM) for Scalpers and Day Traders Explained**
+The Quasimodo (QM) reversal pattern: how it forms, where the QM level is, and how scalpers and day traders use it with a tight stop.
+Is mein: How a bearish QM forms, The entry, Filters that help.
+- Video + mukammal notes: [Quasimodo Pattern](https://qaziforextips.com/lesson-quasimodo-pattern.html)
+- YouTube: https://youtu.be/vqC4EwSmtPE
+
+Q: rejection candle video | rejection candle lesson | rejection candle lecture | rejection candle ki video | momentum candle video | momentum candle lesson | momentum candle lecture | momentum candle ki video
+A: Is par hamara free lesson hai: **Rejection & Momentum Candles for Perfect Entry (Urdu/Hindi)**
+How to use rejection and momentum candles at support and resistance for a precise entry, with clear entry and exit rules.
+Is mein: Rejection candles, Momentum candles, Turning candles into rules.
+- Video + mukammal notes: [Rejection & Momentum Candles for Perfect Entry](https://qaziforextips.com/lesson-rejection-momentum-candles.html)
+- YouTube: https://youtu.be/jwOwHVb1nIU
+
+Q: rsi divergence video | rsi divergence lesson | rsi divergence lecture | rsi divergence ki video | divergence video | divergence lesson | divergence lecture | divergence ki video
+A: Is par hamara free lesson hai: **RSI Divergence Strategy: Regular & Hidden (Urdu/Hindi)**
+Regular and hidden RSI divergence: how to spot it, what each signals and how to confirm it before entering.
+Is mein: RSI in one paragraph, Regular divergence: a possible reversal, Hidden divergence: trend continuation.
+- Video + mukammal notes: [RSI Divergence Strategy](https://qaziforextips.com/lesson-rsi-divergence.html)
+- YouTube: https://youtu.be/ZCPiVFEoryw
+
+Q: soft4fx tutorial video | soft4fx tutorial lesson | soft4fx tutorial lecture | soft4fx tutorial ki video | bar replay video | bar replay lesson | bar replay lecture | bar replay ki video
+A: Is par hamara free lesson hai: **Soft4FX Tutorial (Urdu/Hindi): Bar Replay Backtesting in MT4**
+Soft4FX tutorial in
+Is mein: Lesson notes, How bar-replay simulators work, A good backtesting routine.
+- Video + mukammal notes: [Soft4FX Tutorial](https://qaziforextips.com/lesson-soft4fx-tutorial.html)
+- YouTube: https://youtu.be/wHBg7w9ws-Y
+
+Q: stop loss video | stop loss lesson | stop loss lecture | stop loss ki video | take profit video | take profit lesson | take profit lecture | take profit ki video
+A: Is par hamara free lesson hai: **Where to Set Stop Loss and Take Profit (Urdu/Hindi)**
+Place stop loss and take profit using support and resistance, set multiple targets and close half a trade in profit.
+Is mein: Stop loss: where the idea is wrong, Take profit: before the next wall, Multiple targets and closing half.
+- Video + mukammal notes: [Where to Set Stop Loss and Take Profit](https://qaziforextips.com/lesson-stop-loss-take-profit.html)
+- YouTube: https://youtu.be/P4WlWt2Tmjs
+
+Q: strategy optimization video | strategy optimization lesson | strategy optimization lecture | strategy optimization ki video | strategy improve video | strategy improve lesson | strategy improve lecture | strategy improve ki video
+A: Is par hamara free lesson hai: **Trading Strategy Optimization: Improve It Step by Step**
+How to improve a trading strategy step by step with data from your journal and backtests, without over-fitting.
+Is mein: Change one thing at a time, The three parts, Risk & Money Management.
+- Video + mukammal notes: [Trading Strategy Optimization](https://qaziforextips.com/lesson-strategy-optimization.html)
+- YouTube: https://youtu.be/o0KRYx2WOmw
+
+Q: support and resistance video | support and resistance lesson | support and resistance lecture | support and resistance ki video | support resistance video | support resistance lesson | support resistance lecture | support resistance ki video
+A: Is par hamara free lesson hai: **Support and Resistance: How to Draw It Right (Urdu/Hindi)**
+How to draw support and resistance correctly and why so many levels fail. Free Urdu/Hindi video lesson with written notes by Dr. Qazi Abdul Basit.
+Is mein: What support and resistance really are, Why most levels fail, Rules to draw the levels that matter.
+- Video + mukammal notes: [Support and Resistance](https://qaziforextips.com/lesson-support-and-resistance.html)
+- YouTube: https://youtu.be/DDaEQcAJIEA
+
+Q: swing high video | swing high lesson | swing high lecture | swing high ki video | swing low video | swing low lesson | swing low lecture | swing low ki video
+A: Is par hamara free lesson hai: **Swing High and Swing Low in Forex: How to Find Them (Urdu)**
+Swing high and swing low in forex: the 2-candle rule, major vs minor swings, HH/HL/LH/LL and how swings drive structure, BOS and trendlines.
+Is mein: Lesson notes, The definition, Major vs minor swings.
+- Video + mukammal notes: [Swing High and Swing Low in Forex](https://qaziforextips.com/lesson-swing-highs-and-lows.html)
+- YouTube: https://youtu.be/-RVBo8qiJ1Q
+
+Q: thinktrader video | thinktrader lesson | thinktrader lecture | thinktrader ki video
+A: Is par hamara free lesson hai: **ThinkTrader Tutorial: Free Forex Backtesting Software**
+ThinkTrader for free manual backtesting of forex and stock strategies: download, setup and what to look for in backtesting software.
+Is mein: What to look for in backtesting software, Getting started, Other options.
+- Video + mukammal notes: [ThinkTrader Tutorial](https://qaziforextips.com/lesson-thinktrader-backtesting.html)
+- YouTube: https://youtu.be/PwWmz-5S4qE
+
+Q: top down analysis video | top down analysis lesson | top down analysis lecture | top down analysis ki video | top down video | top down lesson | top down lecture | top down ki video
+A: Is par hamara free lesson hai: **Top-Down Analysis: Multiple Time Frame Strategy (Urdu/Hindi)**
+How to do top-down analysis from the monthly or weekly chart down to your entry timeframe, for intraday and swing trading.
+Is mein: From big to small, Why it improves trades, Market Analysis.
+- Video + mukammal notes: [Top-Down Analysis](https://qaziforextips.com/lesson-top-down-analysis.html)
+- YouTube: https://youtu.be/DSXZkL9ygfE
+
+Q: against the trend video | against the trend lesson | against the trend lecture | against the trend ki video | counter trend video | counter trend lesson | counter trend lecture | counter trend ki video
+A: Is par hamara free lesson hai: **When to Trade Against the Trend: Simple Method (Urdu/Hindi)**
+When counter-trend trading makes sense, how to catch a strong trend from its beginning, and the role of market structure.
+Is mein: Counter-trend needs stricter rules, Catching a trend early, Avoid the common trap.
+- Video + mukammal notes: [When to Trade Against the Trend](https://qaziforextips.com/lesson-trade-against-the-trend.html)
+- YouTube: https://youtu.be/4WyfWJpBXSQ
+
+Q: tradingview video | tradingview lesson | tradingview lecture | tradingview ki video
+A: Is par hamara free lesson hai: **TradingView Tutorial for Beginners in Urdu/Hindi**
+TradingView tutorial for technical analysis: charts, timeframes, drawing tools, indicators, templates and alerts, basic to advanced.
+Is mein: The basics, Working faster, Free vs paid.
+- Video + mukammal notes: [TradingView Tutorial for Beginners in Urdu/Hindi](https://qaziforextips.com/lesson-tradingview-tutorial.html)
+- YouTube: https://youtu.be/d4U5FhM6NLU
+
+Q: trend reversal video | trend reversal lesson | trend reversal lecture | trend reversal ki video
+A: Is par hamara free lesson hai: **How to Spot a Trend Reversal Early (Urdu/Hindi)**
+Signs a trend is ending: failed highs, break of structure, reversal patterns at higher-timeframe levels and confirmation.
+Is mein: Early warning signs, Confirmation: structure changes, A safer entry.
+- Video + mukammal notes: [How to Spot a Trend Reversal Early](https://qaziforextips.com/lesson-trend-reversal.html)
+- YouTube: https://youtu.be/Npav87jvsgE
+
+Q: trendline video | trendline lesson | trendline lecture | trendline ki video | trend line video | trend line lesson | trend line lecture | trend line ki video
+A: Is par hamara free lesson hai: **How to Draw Trendlines Correctly: Rules & Swings (Urdu)**
+Simple rules to draw trendlines on swing highs and lows, which points to use and which to ignore.
+Is mein: Start with swings, Rules for a reliable trendline, A trendline break is not a reversal by itself.
+- Video + mukammal notes: [How to Draw Trendlines Correctly](https://qaziforextips.com/lesson-trendlines.html)
+- YouTube: https://youtu.be/oj6VV-aQyHo
+
+Q: triangle pattern video | triangle pattern lesson | triangle pattern lecture | triangle pattern ki video
+A: Is par hamara free lesson hai: **Triangle Chart Patterns: How to Trade Them (Urdu/Hindi)**
+Symmetrical, ascending and descending triangles: how they form, when to trade the breakout, and why shorting resistance is not always right.
+Is mein: The three triangles, Why shorting at resistance can be wrong, Trading the breakout.
+- Video + mukammal notes: [Triangle Chart Patterns](https://qaziforextips.com/lesson-triangle-patterns.html)
+- YouTube: https://youtu.be/kCiq33-i7nk
+
+Q: types of levels video | types of levels lesson | types of levels lecture | types of levels ki video | supply demand video | supply demand lesson | supply demand lecture | supply demand ki video
+A: Is par hamara free lesson hai: **Types of Levels in Forex: Support, Supply, Demand & More**
+Types of price levels: horizontal support and resistance, dynamic levels, supply and demand zones, round numbers and previous day high/low.
+Is mein: The main types, Which levels are strongest, Keep the chart clean.
+- Video + mukammal notes: [Types of Levels in Forex](https://qaziforextips.com/lesson-types-of-levels.html)
+- YouTube: https://youtu.be/P3G1W3-Y_oI
+
+Q: wedge pattern video | wedge pattern lesson | wedge pattern lecture | wedge pattern ki video | rising wedge video | rising wedge lesson | rising wedge lecture | rising wedge ki video | falling wedge video | falling wedge lesson | falling wedge lecture | falling wedge ki video
+A: Is par hamara free lesson hai: **Rising and Falling Wedge Patterns: How to Trade (Urdu/Hindi)**
+Rising and falling wedges: when they are reversal or continuation patterns, where to enter and how to set the target.
+Is mein: Rising wedge (bearish), Falling wedge (bullish), Trading it.
+- Video + mukammal notes: [Rising and Falling Wedge Patterns](https://qaziforextips.com/lesson-wedges.html)
+- YouTube: https://youtu.be/rWSzRoAk0m4
+
+Q: what is forex video | what is forex lesson | what is forex lecture | what is forex ki video | forex kya hai video | forex kya hai lesson | forex kya hai lecture | forex kya hai ki video
+A: Is par hamara free lesson hai: **What is Forex Trading? For Beginners in Urdu/Hindi | Lesson 1.1**
+What is forex trading and how does the forex market work? Lesson 1 of the free Forex Basics course in
+Is mein: What is forex?, How big is the forex market?, A simple example: the money changer.
+- Video + mukammal notes: [What is Forex Trading? For Beginners in Urdu/Hindi](https://qaziforextips.com/lesson-what-is-forex-trading.html)
+- YouTube: https://youtu.be/9ryZjAiKZwg
+
+Q: xauusd video | xauusd lesson | xauusd lecture | xauusd ki video | gold kya hai video | gold kya hai lesson | gold kya hai lecture | gold kya hai ki video | troy ounce video | troy ounce lesson | troy ounce lecture | troy ounce ki video
+A: Is par hamara free lesson hai: **XAUUSD Explained: Gold, Markets, Buy & Sell, Forex Hours | Lesson 1.5**
+XAUUSD explained for beginners: gold price per ounce vs tola, XAGUSD, forex vs stocks, crypto and oil, how buy and sell work, and why forex is open 24/5.
+Is mein: What is XAUUSD? Gold read like a currency pair, Troy ounce vs tola: the gold price per tola calculation, Silver and the gold-silver ratio.
+- Video + mukammal notes: [XAUUSD Explained](https://qaziforextips.com/lesson-xauusd-gold-buy-sell-forex-hours.html)
+- YouTube: https://youtu.be/RB0wCB3Q9MQ
+
+# <<< VIDEO LESSONS <<<
